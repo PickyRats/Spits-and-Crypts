@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\App.cpp" />
+    <ClCompile Include="Source\Log.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp">
+      <Filter>External\PugiXml</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FadeToBlack.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EntityManager.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Input.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Physics.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Render.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Audio.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Timer.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PerfTimer.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Window.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Textures.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Pathfinding.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Map.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ParticleManager.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiControlButton.cpp">
+      <Filter>Modules\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiManager.cpp">
+      <Filter>Modules\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Hud.cpp">
+      <Filter>Modules\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiControlCheckBox.cpp">
+      <Filter>Modules\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiControlSlider.cpp">
+      <Filter>Modules\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene.cpp">
+      <Filter>Modules\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneIntro.cpp">
+      <Filter>Modules\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneMenu.cpp">
+      <Filter>Modules\Scenes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\App.h" />
+    <ClInclude Include="Source\Defs.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DynArray.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\List.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Log.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Point.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SString.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\External\PugiXml\src\pugiconfig.hpp">
+      <Filter>External\PugiXml</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp">
+      <Filter>External\PugiXml</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Queue.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Player.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FadeToBlack.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityManager.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Physics.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Audio.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Timer.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PerfTimer.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Window.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Textures.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Module.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Animation.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Pathfinding.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Map.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PQueue.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ParticleManager.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiControl.h">
+      <Filter>Modules\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiControlButton.h">
+      <Filter>Modules\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiManager.h">
+      <Filter>Modules\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Hud.h">
+      <Filter>Modules\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiControlCheckBox.h">
+      <Filter>Modules\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiControlSlider.h">
+      <Filter>Modules\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene.h">
+      <Filter>Modules\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneIntro.h">
+      <Filter>Modules\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneMenu.h">
+      <Filter>Modules\Scenes</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="External">
+      <UniqueIdentifier>{83a966c7-b4bb-4eff-9c2c-3ff3c7b55a60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{2cad778a-d356-48b0-9fee-587f1bbb187e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External\PugiXml">
+      <UniqueIdentifier>{2855ff7f-53a1-413d-a75b-18b4ade921dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules">
+      <UniqueIdentifier>{6c6fa7aa-4334-4bd2-8b89-9d093ce9e65c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{1e7197c5-8ff3-4d7a-9e36-4eb4cf6f2145}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools">
+      <UniqueIdentifier>{bf5ae1aa-7f9e-4554-b4ea-c6a7d0acf1b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\UI">
+      <UniqueIdentifier>{f9aa26b1-ecc5-4f22-a939-b72f1e34ac76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Scenes">
+      <UniqueIdentifier>{cc3c2733-85b5-4d14-afde-b871962e3ff2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\Output\config.xml" />
+    <Xml Include="..\Output\save_game.xml" />
+  </ItemGroup>
+</Project>

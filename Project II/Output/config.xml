@@ -1,0 +1,111 @@
+<config>
+	<app>
+		<title>Project II</title>
+		<initialMaxFrameDuration value="16"/>
+		<capMaxFrameDuration value="32"/>
+	</app>
+
+	<renderer>
+		<vsync value="true"/>
+	</renderer>
+
+	<window>
+		<resolution width="1280" height="720" scale="1"/>
+		<fullscreen value="false"/>
+		<borderless value="false"/>
+		<resizable value="false"/>
+		<fullscreen_window value="false"/>
+	</window>
+
+	<audio>
+		<music volume="128"/>
+		<fx volume="200"/>
+	</audio>
+
+	<scene>
+		<!-- Scene -->
+		<map path="Assets/Maps/" name="MapTemplate.tmx"/>
+
+		<!-- Music -->
+		<music>
+		</music>
+
+		<!-- Player -->
+		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+	</scene>
+
+	<!-- Menu -->
+	<scenemenu>
+		<background texturepath="Assets/Textures/Screens/background.png"/>
+		<playNormal texturepath="Assets/Textures/Screens/Play/play_normal.png"/>
+		<playHover texturepath="Assets/Textures/Screens/Play/play_hover.png"/>
+		<playClick texturepath="Assets/Textures/Screens/Play/play_click.png"/>
+		<continueDisabled texturepath="Assets/Textures/Screens/Continue/continue_disabled.png"/>
+		<continueNormal texturepath="Assets/Textures/Screens/Continue/continue_normal.png"/>
+		<continueHover texturepath="Assets/Textures/Screens/Continue/continue_hover.png"/>
+		<continueClick texturepath="Assets/Textures/Screens/Continue/continue_click.png"/>
+		<settingsNormal texturepath="Assets/Textures/Screens/Settings/settings_normal.png"/>
+		<settingsHover texturepath="Assets/Textures/Screens/Settings/settings_hover.png"/>
+		<settingsClick texturepath="Assets/Textures/Screens/Settings/settings_click.png"/>
+		<creditsNormal texturepath="Assets/Textures/Screens/Credits/credits_normal.png"/>
+		<creditsHover texturepath="Assets/Textures/Screens/Credits/credits_hover.png"/>
+		<creditsClick texturepath="Assets/Textures/Screens/Credits/credits_click.png"/>
+		<exitNormal texturepath="Assets/Textures/Screens/More/exit_normal.png"/>
+		<exitHover texturepath="Assets/Textures/Screens/More/exit_hover.png"/>
+		<exitClick texturepath="Assets/Textures/Screens/More/exit_click.png"/>
+		<settings texturepath="Assets/Textures/Screens/More/settings.png"/>
+		<credits texturepath="Assets/Textures/Screens/More/credits.png"/>
+		<returnNormal texturepath="Assets/Textures/Screens/More/return_normal.png"/>
+		<returnHover texturepath="Assets/Textures/Screens/More/return_hover.png"/>
+		<returnClick texturepath="Assets/Textures/Screens/More/return_click.png"/>
+		<settingsBoxNormal texturepath="Assets/Textures/Screens/More/settings_box_normal.png"/>
+		<settingsBoxHover texturepath="Assets/Textures/Screens/More/settings_box_hover.png"/>
+		<settingsTick texturepath="Assets/Textures/Screens/More/tick.png"/>
+		<settingsSlider texturepath="Assets/Textures/Screens/More/slider.png"/>
+		<buttonFxHover path="Assets/Audio/Fx/button_hover.wav"/>
+		<buttonFxClick path="Assets/Audio/Fx/button_click.wav"/>
+	</scenemenu>
+
+	<!-- Hud -->
+	<hud>
+		<pause texturepath="Assets/Textures/Screens/Pause/pause.png"/>
+		<exitNormal texturepath="Assets/Textures/Screens/More/exit_normal.png"/>
+		<exitHover texturepath="Assets/Textures/Screens/More/exit_hover.png"/>
+		<exitClick texturepath="Assets/Textures/Screens/More/exit_click.png"/>
+		<resumeNormal texturepath="Assets/Textures/Screens/Pause/resume_normal.png"/>
+		<resumeHover texturepath="Assets/Textures/Screens/Pause/resume_hover.png"/>
+		<resumeClick texturepath="Assets/Textures/Screens/Pause/resume_click.png"/>
+		<settingsNormal texturepath="Assets/Textures/Screens/Pause/settings_normal.png"/>
+		<settingsHover texturepath="Assets/Textures/Screens/Pause/settings_hover.png"/>
+		<settingsClick texturepath="Assets/Textures/Screens/Pause/settings_click.png"/>
+		<backToTitleNormal texturepath="Assets/Textures/Screens/Pause/back_to_title_normal.png"/>
+		<backToTitleHover texturepath="Assets/Textures/Screens/Pause/back_to_title_hover.png"/>
+		<backToTitleClick texturepath="Assets/Textures/Screens/Pause/back_to_title_click.png"/>
+
+		<settingsExitNormal texturepath="Assets/Textures/Screens/More/exit_normal.png"/>
+		<settingsExitHover texturepath="Assets/Textures/Screens/More/exit_hover.png"/>
+		<settingsExitClick texturepath="Assets/Textures/Screens/More/exit_click.png"/>
+		<settingsReturnNormal texturepath="Assets/Textures/Screens/More/return_normal.png"/>
+		<settingsReturnHover texturepath="Assets/Textures/Screens/More/return_hover.png"/>
+		<settingsReturnClick texturepath="Assets/Textures/Screens/More/return_click.png"/>
+		<settingsBoxNormal texturepath="Assets/Textures/Screens/More/settings_box_normal.png"/>
+		<settingsBoxHover texturepath="Assets/Textures/Screens/More/settings_box_hover.png"/>
+		<settingsTick texturepath="Assets/Textures/Screens/More/tick.png"/>
+		<settingsSlider texturepath="Assets/Textures/Screens/More/slider.png"/>
+		<settings texturepath="Assets/Textures/Screens/More/settings.png"/>
+	</hud>
+
+	<animations>
+		<!-- Player Animations-->
+		<player>
+			<idleAnim loop="true" speed="0.1f">
+				<animation x="0" y="0" w="100" h="64"/>
+				<animation x="100" y="0" w="100" h="64"/>
+				<animation x="200" y="0" w="100" h="64"/>
+				<animation x="300" y="0" w="100" h="64"/>
+			</idleAnim>
+		</player>
+
+	</animations>
+</config>
+

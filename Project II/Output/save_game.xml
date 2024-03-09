@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<game_state>
+	<window />
+	<input />
+	<textures />
+	<audio />
+	<physics />
+	<scene>
+		<status status="1" />
+		<player>
+			<playerPosition x="770" y="959" />
+			<playerStates isDead="false" isEquipped="false" wallLeft="false" wallRight="false" ground="true" />
+			<playerItems keys="0" />
+		</player>
+		<sceneConfig>
+			<currentLevel level1="true" level2="false" level3="false" />
+			<cameraProperties cameraX="56" cameraY="310" cameraIdx="0" cameraInitialized="true" cameraIdx="0" />
+		</sceneConfig>
+		<skeleton1>
+			<skeletonPosition x="2168" y="4875" />
+			<skeletonStates isDead="false" health="100" />
+		</skeleton1>
+		<skeleton2>
+			<skeletonPosition x="3745" y="3466" />
+			<skeletonStates isDead="false" health="100" />
+		</skeleton2>
+		<skeleton3>
+			<skeletonPosition x="3318" y="2347" />
+			<skeletonStates isDead="false" health="100" />
+		</skeleton3>
+		<ghost1>
+			<ghostPosition x="3807" y="2976" />
+			<ghostStates isDead="false" health="100" />
+		</ghost1>
+		<ghost2>
+			<ghostPosition x="5919" y="2150" />
+			<ghostStates isDead="false" health="100" />
+		</ghost2>
+	</scene>
+	<:anonymous />
+	<entitymanager />
+	<particlemanager />
+	<hud />
+	<scenemenu />
+	<sceneintro />
+	<guiManager />
+	<fadetoblack />
+	<renderer>
+		<camera x="-32" y="-286" />
+	</renderer>
+</game_state>
