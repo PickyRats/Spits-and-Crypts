@@ -27,7 +27,7 @@ header {
 
 
 header .name {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
 }
 
@@ -42,6 +42,7 @@ header .nav-links {
     position: relative;
     overflow: hidden;
     transition: color 0.3s ease-out;
+    font-size: 24px;
 }
 
 .nav-links a::after {
@@ -51,14 +52,14 @@ header .nav-links {
     left: 50%;
     width: 0;
     height: 2px;
-    background-color: red;
+    background-color: rgba(155, 50, 1, 0.493);
     transition: width 0.3s ease-out, left 0.3s ease-out;
     transform-origin: center;
     transform: scaleX(0);
 }
 
 .nav-links a:hover {
-    color: red;
+    color: rgba(155, 50, 1, 0.493);
 }
 
 .nav-links a:hover::after {
@@ -73,7 +74,6 @@ header .nav-links {
     min-height: 100vh;
     position: relative;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     align-items: center;
     gap: 2rem;
 }
@@ -86,10 +86,28 @@ header .nav-links {
 }
 
 .hero-img img{
-    width: 400px;
+    width: 1000px;
     height: auto;
 }
 
+.hero-img2 img{
+  width: 200px;
+  height: auto;
+}
+
+
+.game{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.game p{
+  text-align: justify;
+  width: 900px;
+  font-size: 22px;
+}
 
 .container {
     position: relative;
@@ -157,7 +175,7 @@ header .nav-links {
   }
   
   .container .card .content .contentBx h3 span {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 300;
     text-transform: initial;
   }
@@ -203,7 +221,7 @@ header .nav-links {
 section h2 {
     margin-top: 60px;
     margin-bottom: 20px;
-    font-size: 24px;
+    font-size: 32px;
     color: #000000;
     font-weight: bold;
 }
@@ -218,7 +236,7 @@ section h2 {
 
 .box-area {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     grid-gap: 40px;
     margin-top: 50px;
 }
@@ -272,6 +290,7 @@ section h2 {
 
 .overlay p {
     margin-top: 10px;
+    font-size: 22px;
 }
 
 .overlay a {
