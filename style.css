@@ -171,10 +171,11 @@ header .nav-links {
     font-size: 16px;
     text-align: center;
     margin: 20px 0 10px;
-    line-height: 1.1em;
+    line-height: 1.5em;
   }
   
   .container .card .content .contentBx h3 span {
+    color: rgba(0, 0, 0, 0.534);
     font-size: 16px;
     font-weight: 300;
     text-transform: initial;
@@ -208,6 +209,11 @@ header .nav-links {
   .container .card .sci li:nth-child(3) {
     transition-delay: 0.2s;
   }
+
+  .container .card .sci li a:hover {
+    color: rgb(138, 57, 10);
+    font-size: 24px;
+  }
   
 
 .home-container {
@@ -227,96 +233,103 @@ section h2 {
 }
 
 .wrapper {
-    padding: 10px 10%;
+  padding: 10px 10%;
 }
 
 #card-area {
-    padding: 50px 0;
+  padding: 50px 0;
 }
 
 .box-area {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    grid-gap: 40px;
-    margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-gap: 40px;
+  margin-top: 50px;
 }
 
 .box {
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
-    transition: transform 0.5s;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  max-width: 300px; /* Establecer el tamaño máximo */
+  margin: 0 auto;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
+  transition: transform 0.5s;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .box img {
-    width: 100%;
-    border-radius: 10px;
-    display: block;
-    transition: transform 0.5s;
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+  transition: transform 0.5s;
 }
 
 .overlay {
-    width: 100%;
-    height: 100%;
-    background: rgba(194, 80, 14, 0.918);
-    position: absolute;
-    left: 0;
-    bottom: -80%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 0 40px;
-    text-align: center;
-    font-size: 14px;
-    transition: transform 0.5s;
+  width: 100%;
+  height: 100%;
+  background: rgba(186, 123, 86, 0.918);
+  position: absolute;
+  left: 0;
+  bottom: -80%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 40px;
+  text-align: center;
+  font-size: 14px;
+  transition: transform 0.5s;
 }
 
 .overlay h3 {
-    font-weight: 500;
-    margin-top: 20px;
-    margin-bottom: 5px;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px;
-    letter-spacing: 2px;
-    white-space: nowrap;
-    overflow: hidden;
+  font-weight: 500;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .overlay p {
-    margin-top: 10px;
-    font-size: 22px;
+  font-size: 22px;
+  opacity: 0;
 }
 
 .overlay a {
-    margin-top: 20px;
-    color: #262626;
-    text-decoration: none;
-    font-size: 14px;
-    background: #fff;   
-    border-radius: 50px;
-    text-align: center;
-    padding: 5px 15px;
-    border: 1px solid #262626;
-    transition: color 0.3s, background 0.3s, border 0.3s;
+  margin-top: 20px;
+  color: #262626;
+  text-decoration: none;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 50px;
+  text-align: center;
+  padding: 5px 15px;
+  border: 1px solid #262626;
+  transition: color 0.3s, background 0.3s, border 0.3s;
+  opacity: 0; 
+}
+
+.overlay:hover p,
+.overlay:hover a {
+  opacity: 1;  /* Mostrar el texto y el enlace al hacer hover */
 }
 
 .overlay a:hover {
-    background: transparent;
-    color: #fff;
-    border-color: #fff;
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
 }
 
 .box:hover .overlay {
-    transform: translateY(-100px);
+  transform: translateY(-100px);
 }
 
 .box:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
-
