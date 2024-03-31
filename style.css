@@ -116,7 +116,8 @@ header .nav-links {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    margin: 40px 0;
+    margin: 40px auto;
+    max-width: calc(200px * 10 + 20px * 10);
   }
   .container .card {
     position: relative;
@@ -124,7 +125,7 @@ header .nav-links {
     height: 280px;
     background: rgba(255, 172, 63, 0.212);
     margin: 20px;
-    box-shadow: 0 15px 35px rgba(155, 50, 1, 0.493);
+    box-shadow: 0 15px 35px rgba(155, 50, 1, 0.317);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -315,9 +316,15 @@ section h2 {
   opacity: 0; 
 }
 
-.overlay:hover p,
-.overlay:hover a {
-  opacity: 1;  /* Mostrar el texto y el enlace al hacer hover */
+.box:hover p,
+.box:hover a {
+  opacity: 1;
+}
+
+.box p,
+.box a {
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
 .overlay a:hover {

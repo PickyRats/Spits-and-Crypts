@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    var overlays = document.querySelectorAll('.overlay');
+    var overlays = document.querySelectorAll('.box');
     overlays.forEach(function(overlay) {
         overlay.addEventListener('mouseenter', function() {
             overlay.querySelector('p').style.display = 'block';
