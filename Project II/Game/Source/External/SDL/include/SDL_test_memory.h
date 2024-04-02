@@ -20,21 +20,44 @@
 */
 
 /**
- *  \file close_code.h
+ *  \file SDL_test_memory.h
  *
- *  This file reverses the effects of begin_code.h and should be included
- *  after you finish any function and structure declarations in your headers
+ *  Include file for SDL test framework.
+ *
+ *  This code is a part of the SDL2_test library, not the main SDL library.
  */
 
-#ifndef SDL_begin_code_h
-#error close_code.h included without matching begin_code.h
-#endif
-#undef SDL_begin_code_h
+#ifndef SDL_test_memory_h_
+#define SDL_test_memory_h_
 
-/* Reset structure packing at previous byte alignment */
-#if defined(_MSC_VER) || defined(__MWERKS__) || defined(__BORLANDC__)
-#ifdef __BORLANDC__
-#pragma nopackwarning
+#include "begin_code.h"
+/* Set up for C function definitions, even when using C++ */
+#ifdef __cplusplus
+extern "C" {
 #endif
-#pragma pack(pop)
-#endif /* Compiler needs structure packing set */
+
+
+/**
+ * \brief Start tracking SDL memory allocations
+ * 
+ * \note This should be called before any other SDL functions for complete tracking coverage
+ */
+int SDLTest_TrackAllocations(void);
+
+/**
+ * \brief Print a log of any outstanding allocations
+ *
+ * \note This can be called after SDL_Quit()
+ */
+void SDLTest_LogAllocations(void);
+
+
+/* Ends C function definitions when using C++ */
+#ifdef __cplusplus
+}
+#endif
+#include "close_code.h"
+
+#endif /* SDL_test_memory_h_ */
+
+/* vi: set ts=4 sw=4 expandtab: */

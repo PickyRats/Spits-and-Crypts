@@ -36,6 +36,14 @@ bool Render::Awake(pugi::xml_node& config)
 
 	renderer = SDL_CreateRenderer(app->win->window, -1, flags);
 
+	if (app->win->window != NULL)
+	{
+		app->win->screenSurface = SDL_GetWindowSurface(app->win->window);
+	}
+
+	//SDL_RenderSetLogicalSize(renderer, app->win->screenSurface->w, app->win->screenSurface->h);
+	//SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
+
 	if (renderer == NULL)
 	{
 		LOG("Could not create the renderer! SDL_Error: %s\n", SDL_GetError());
