@@ -19,11 +19,13 @@ SceneIntro::SceneIntro(bool enabled) : Module(enabled)
 
 SceneIntro::~SceneIntro()
 {}
-
+pugi::xml_node configNode4;
 bool SceneIntro::Awake(pugi::xml_node& config)
 {
-	LOG("Loading SceneMenu");
+	LOG("Loading SceneIntro");
 	bool ret = true;
+
+	configNode4 = config;
 
 	return ret;
 }
@@ -33,7 +35,7 @@ bool SceneIntro::Start()
 	logo = app->tex->Load("Assets/Textures/Screens/logo.png");
 	timer = Timer();
 	timer.Start();
-	logo_audio = app->audio->LoadFx("Assets/Audio/Fx/logo.wav");
+	logo_audio = app->audio->LoadFx(configNode4.child("logoFx").attribute("path").as_string());
 	app->audio->PlayFx(logo_audio);
 	return true;
 }

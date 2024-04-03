@@ -33,7 +33,12 @@
 		<!-- Player -->
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 	</scene>
-
+	
+	<!-- Intro -->
+	<sceneintro>
+		<logoFx path="Assets/Audio/Fx/Logo.wav"/>
+	</sceneintro>
+	
 	<!-- Menu -->
 	<scenemenu>
 		<background texturepath="Assets/Textures/Screens/background.png"/>
