@@ -5,6 +5,7 @@
 #include "Textures.h"
 #include "Render.h"
 #include "Window.h"
+#include "Audio.h"
 
 #include "FadeToBlack.h"
 #include "GuiManager.h"
@@ -32,7 +33,8 @@ bool SceneIntro::Start()
 	logo = app->tex->Load("Assets/Textures/Screens/logo.png");
 	timer = Timer();
 	timer.Start();
-
+	logo_audio = app->audio->LoadFx("Assets/Audio/Fx/logo.wav");
+	app->audio->PlayFx(logo_audio);
 	return true;
 }
 
@@ -52,6 +54,6 @@ bool SceneIntro::CleanUp()
 {
 	LOG("Freeing SceneIntro");
 	app->tex->UnLoad(logo);
-
+	
 	return true;
 }

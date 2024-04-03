@@ -28,6 +28,7 @@ private:
 	SDL_Texture* logo;
 	Timer timer;
 	bool changingScene = false;
+	int logo_audio;
 
 };
 
