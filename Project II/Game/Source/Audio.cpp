@@ -84,6 +84,25 @@ bool Audio::CleanUp()
 	return true;
 }
 
+// Clean Music
+void Audio::CleanMusic(const char* path, float fadeOutTime)
+{
+
+	if (music != NULL)
+	{
+		if (fadeOutTime > 0.0f)
+		{
+			Mix_FadeOutMusic(int(fadeOutTime * 1000.0f));
+		}
+		else
+		{
+			Mix_HaltMusic();
+			Mix_FreeMusic(music);
+			music = NULL;
+		}
+	}
+}
+
 // Play a music file
 bool Audio::PlayMusic(const char* path, float fadeTime)
 {

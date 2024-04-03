@@ -64,6 +64,7 @@
 		<settingsSlider texturepath="Assets/Textures/Screens/More/slider.png"/>
 		<buttonFxHover path="Assets/Audio/Fx/button_hover.wav"/>
 		<buttonFxClick path="Assets/Audio/Fx/button_click.wav"/>
+		<musicMenu path="Assets/Audio/Music/menu_music.ogg" fadeTime="10" fadeOutTime="2"/>
 	</scenemenu>
 
 	<!-- Hud -->

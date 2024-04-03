@@ -93,6 +93,9 @@ private:
 
 	GuiControlButton* creditsReturnButton;
 	GuiControlButton* creditsExitButton;
+
+	//add music to the menu
+	uint MenuMusic;
 	
 	bool onMenu = true;
 	bool onSettings = false;
