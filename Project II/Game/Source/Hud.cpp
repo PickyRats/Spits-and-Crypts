@@ -6,7 +6,7 @@
 #include "Audio.h"
 #include "Render.h"
 #include "Window.h"
-#include "Scene.h"
+#include "SceneVillage.h"
 #include "Map.h"
 #include "FadeToBlack.h"
 #include "GuiManager.h"
@@ -117,7 +117,7 @@ bool Hud::Start()
 bool Hud::Update(float dt)
 {
 	//Pause menu
-	if (app->scene->pause) {
+	if (app->sceneVillage->pause) {
 		//If pause menu is activated, show buttons
 		if (resumeButton->state == GuiControlState::HIDDEN)
 		{
@@ -144,7 +144,7 @@ bool Hud::Update(float dt)
 					app->audio->PlayFx(app->sceneMenu->buttonFxClick);
 					app->sceneMenu->fxClickPlayed = true;
 				}
-				app->scene->pause = false;
+				app->sceneVillage->pause = false;
 			}
 			else if (settingsButton->state == GuiControlState::FOCUSED) {
 				if (app->sceneMenu->fxHoverPlayed == false)
@@ -188,12 +188,12 @@ bool Hud::Update(float dt)
 				settingsButton->state = GuiControlState::HIDDEN;
 				exitButton->state = GuiControlState::HIDDEN;
 
-				app->fade->Fade((Module*)app->scene, (Module*)app->sceneMenu, 30.0f);
+				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneMenu, 30.0f);
 				app->map->Disable();
 				app->particleManager->Disable();
 				app->entityManager->Disable();
 				app->hud->Disable();
-				app->scene->pause = false;
+				app->sceneVillage->pause = false;
 			}
 			else if (exitButton->state == GuiControlState::FOCUSED) {
 				if (app->sceneMenu->fxHoverPlayed == false)

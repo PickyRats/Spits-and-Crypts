@@ -4,7 +4,7 @@
 #include "Audio.h"
 #include "Render.h"
 #include "Window.h"
-#include "Scene.h"
+#include "SceneVillage.h"
 #include "Map.h"
 #include "FadeToBlack.h"
 #include "GuiManager.h"
@@ -16,19 +16,19 @@
 
 using namespace std;
 
-Scene::Scene(bool enabled) : Module(enabled)
+SceneVillage::SceneVillage(bool enabled) : Module(enabled)
 {
-	name.Create("scene");
+	name.Create("sceneVillage");
 }
 
 // Destructor
-Scene::~Scene()
+SceneVillage::~SceneVillage()
 {}
 
 pugi::xml_node configNode;
 
 // Called before render is available
-bool Scene::Awake(pugi::xml_node& config)
+bool SceneVillage::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
@@ -50,7 +50,7 @@ bool Scene::Awake(pugi::xml_node& config)
 }
 
 // Called before the first frame
-bool Scene::Start()
+bool SceneVillage::Start()
 {
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -68,13 +68,13 @@ bool Scene::Start()
 }
 
 // Called each loop iteration
-bool Scene::PreUpdate()
+bool SceneVillage::PreUpdate()
 {
 	return true;
 }
 
 // Called each loop iteration
-bool Scene::Update(float dt)
+bool SceneVillage::Update(float dt)
 {
 	app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);
 
@@ -95,7 +95,7 @@ bool Scene::Update(float dt)
 }
 
 // Called each loop iteration
-bool Scene::PostUpdate()
+bool SceneVillage::PostUpdate()
 {
 	bool ret = true;
 
@@ -108,20 +108,20 @@ bool Scene::PostUpdate()
 }
 
 // Called before quitting
-bool Scene::CleanUp()
+bool SceneVillage::CleanUp()
 {
 	LOG("Freeing scene");
 
 	return true;
 }
 
-void Scene::SetCameraPosition(int x, int y)
+void SceneVillage::SetCameraPosition(int x, int y)
 {
 	cameraX = x;
 	cameraY = y;
 }
 
-void Scene::ClampCamera()
+void SceneVillage::ClampCamera()
 {
 	// Clamp camera
 
@@ -133,7 +133,7 @@ void Scene::ClampCamera()
 	
 }
 
-bool Scene::LoadState(pugi::xml_node node)
+bool SceneVillage::LoadState(pugi::xml_node node)
 {
 	pugi::xml_node status = node.append_child("status");
 	status.attribute("status").as_bool();
@@ -141,7 +141,7 @@ bool Scene::LoadState(pugi::xml_node node)
 	return true;
 }
 
-bool Scene::SaveState(pugi::xml_node node)
+bool SceneVillage::SaveState(pugi::xml_node node)
 {
 	pugi::xml_node status = node.append_child("status");
 	status.append_attribute("status").set_value(1);
@@ -149,7 +149,7 @@ bool Scene::SaveState(pugi::xml_node node)
 	return true;
 }
 
-bool Scene::OnGuiMouseClickEvent(GuiControl* control)
+bool SceneVillage::OnGuiMouseClickEvent(GuiControl* control)
 {
 	LOG("Press Gui Control: %d", control->id);
 

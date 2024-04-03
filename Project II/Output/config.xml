@@ -22,9 +22,9 @@
 		<fx volume="200"/>
 	</audio>
 
-	<scene>
+	<sceneVillage>
 		<!-- Scene -->
-		<map path="Assets/Maps/" name="MapTemplate.tmx"/>
+		<map path="Assets/Maps/" name="Map_Village.tmx"/>
 
 		<!-- Music -->
 		<music>
@@ -32,7 +32,7 @@
 
 		<!-- Player -->
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
-	</scene>
+	</sceneVillage>
 
 	<!-- Menu -->
 	<scenemenu>

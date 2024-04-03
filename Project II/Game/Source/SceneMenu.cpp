@@ -6,7 +6,7 @@
 #include "Audio.h"
 #include "Render.h"
 #include "Window.h"
-#include "Scene.h"
+#include "SceneVillage.h"
 #include "Map.h"
 #include "FadeToBlack.h"
 #include "GuiManager.h"
@@ -139,7 +139,7 @@ bool SceneMenu::Update(float dt)
 				app->audio->PlayFx(buttonFxClick);
 				fxClickPlayed = true;
 			}
-			app->fade->Fade(this, (Module*)app->scene, 60.0f);
+			app->fade->Fade(this, (Module*)app->sceneVillage, 60.0f);
 			app->map->Enable();
 			app->entityManager->Enable();
 			app->hud->Enable();

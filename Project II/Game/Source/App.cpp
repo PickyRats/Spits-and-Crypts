@@ -4,7 +4,7 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Audio.h"
-#include "Scene.h"
+#include "SceneVillage.h"
 #include "Map.h"
 #include "Physics.h"
 #include "FadeToBlack.h"
@@ -36,7 +36,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new Textures();
 	audio = new Audio();
 	physics = new Physics();
-	scene = new Scene(false);
+	sceneVillage = new SceneVillage(false);
 	map = new Map(false);
 	entityManager = new EntityManager(false);
 	fade = new FadeToBlack();
@@ -53,7 +53,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(physics);
-	AddModule(scene);
+	AddModule(sceneVillage);
 	AddModule(map);
 	AddModule(entityManager);
 	AddModule(particleManager);

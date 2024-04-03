@@ -4,7 +4,7 @@
 #include "Textures.h"
 #include "Map.h"
 #include "Physics.h"
-#include "Scene.h"
+#include "SceneVillage.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -500,7 +500,7 @@ void Map::UpdateMapSize()
 
 void Map::UpdateTileLoadSize()
 {
-    iPoint playerPosition = app->scene->player->position;
+    iPoint playerPosition = app->sceneVillage->player->position;
 
     int playerX = playerPosition.x / tilesSize;
     int playerY = playerPosition.y / tilesSize;
