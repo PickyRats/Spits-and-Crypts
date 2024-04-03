@@ -51,7 +51,7 @@ bool PathFinding::CheckBoundaries(const iPoint& pos) const
 bool PathFinding::IsWalkable(const iPoint& pos) const
 {
 	uchar walkId = GetTileAt(pos);
-	bool isWalkable = walkId != INVALID_WALK_CODE && walkId > 0;
+	bool isWalkable = walkId != INVALID_WALK_CODE && walkId == 1;
 	return  isWalkable;
 }
 
@@ -59,7 +59,7 @@ bool PathFinding::IsWalkable(const iPoint& pos) const
 bool PathFinding::IsLadder(const iPoint& pos) const
 {
 	uchar ladderId = GetTileAt(pos);
-	bool isLadder = ladderId != INVALID_WALK_CODE && ladderId > 0;
+	bool isLadder = ladderId != INVALID_WALK_CODE && ladderId == 2;
 	return  isLadder;
 }
 
