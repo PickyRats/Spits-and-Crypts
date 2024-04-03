@@ -102,6 +102,9 @@ bool SceneMenu::Start()
 	creditsReturnButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, NULL, returnNormal, returnHover, returnClick, { 133, 92, 63, 63 }, this);
 	creditsExitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, NULL, exitNormal, exitHover, exitClick, { 1419, 92, 63, 63 }, this);
 
+	//audio
+	app->audio->PlayMusic(configNode2.child("musicMenu").attribute("path").as_string(), configNode2.child("musicMenu").attribute("fadeTime").as_float());
+
 	return true;
 }
 
@@ -431,7 +434,9 @@ bool SceneMenu::CleanUp()
 	app->tex->UnLoad(settingsTick);
 	app->tex->UnLoad(settingsSlider);
 	app->tex->UnLoad(credits);
-
+	//Clean Music
+	app->audio->CleanMusic(configNode2.child("musicMenu").attribute("path").as_string(), configNode2.child("musicMenu").attribute("fadeOutTime").as_float());
+	
 	
 	return true;
 }
