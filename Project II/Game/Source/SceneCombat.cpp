@@ -63,7 +63,7 @@ bool SceneCombat::Start()
 	tileTexture = app->tex->Load("Assets/Textures/tile.png");
 	selectedTileTexture = app->tex->Load("Assets/Textures/selected_tile.png");
 
-	tiles[0].position = { iPoint(96, 96*3) };
+	tiles[0].position = { iPoint(96, 96) };
 	tiles[0].isSelected = true;
 
 	return true;
