@@ -5,7 +5,7 @@
   <property name="Navigation" type="bool" value="true"/>
  </properties>
  <tileset firstgid="1" name="MapMetadata" tilewidth="96" tileheight="96" tilecount="9" columns="3">
-  <image source="../Documents/GitHub/Spits-and-Crypts/Project II/Output/Assets/Maps/MapMetadata.png" width="288" height="288"/>
+  <image source="MapMetadata.png" width="288" height="288"/>
  </tileset>
  <layer id="16" name="Fondo" width="45" height="8" opacity="0.48">
   <properties>
@@ -933,27 +933,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="8"/>
-   <tile gid="8"/>
-   <tile gid="8"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
    <tile/>
    <tile gid="8"/>
    <tile gid="8"/>
@@ -969,17 +948,15 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="8"/>
-   <tile gid="8"/>
    <tile/>
-   <tile gid="8"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile gid="8"/>
-   <tile/>
+   <tile gid="8"/>
    <tile gid="8"/>
    <tile/>
    <tile/>
@@ -992,8 +969,10 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="8"/>
+   <tile gid="8"/>
    <tile/>
-   <tile/>
+   <tile gid="8"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1014,6 +993,27 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="8"/>
+   <tile/>
+   <tile gid="8"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile gid="8"/>
    <tile/>
    <tile/>
@@ -1023,10 +1023,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="8"/>
    <tile/>
    <tile gid="8"/>
    <tile/>
+   <tile gid="8"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1158,6 +1158,7 @@
    <tile gid="2"/>
    <tile gid="2"/>
    <tile gid="2"/>
+   <tile gid="2"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1201,6 +1202,8 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="2"/>
+   <tile gid="2"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1244,6 +1247,8 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="2"/>
+   <tile gid="2"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1287,6 +1292,8 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="2"/>
+   <tile gid="2"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1330,6 +1337,8 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="2"/>
+   <tile gid="4"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1338,7 +1347,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="5"/>
+   <tile gid="4"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1346,7 +1355,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="5"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1360,6 +1368,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="4"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1368,12 +1377,13 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="5"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="4"/>
+   <tile gid="4"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1382,8 +1392,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="5"/>
-   <tile gid="5"/>
+   <tile gid="4"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1391,7 +1400,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="5"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1405,6 +1413,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="4"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1413,21 +1422,12 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="5"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile gid="5"/>
+   <tile gid="4"/>
    <tile gid="2"/>
    <tile gid="2"/>
    <tile gid="2"/>

@@ -421,11 +421,11 @@ bool Map::CreateColliders()
 
                         switch (mapLayerItem->data->Get(x, y))
                         {
-                        /*case 1441:
+                        case 2:
                             c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
                             c1->ctype = ColliderType::PLATFORM;
                             ret = true;
-                            break;*/
+                            break;
                         default:
                             break;
                         }
