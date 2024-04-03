@@ -32,7 +32,7 @@ public:
 	bool vSync = true;
 
 	GuiControlButton* startButton;
-	GuiControlButton* continueButton;
+	GuiControlButton* loadGameButton;
 	GuiControlButton* settingsButton;
 	GuiControlButton* creditsButton;
 	GuiControlButton* exitButton;
@@ -51,10 +51,10 @@ private:
 	SDL_Texture* playHover;
 	SDL_Texture* playClick;
 
-	SDL_Texture* continueDisabled;
-	SDL_Texture* continueNormal;
-	SDL_Texture* continueHover;
-	SDL_Texture* continueClick;
+	SDL_Texture* loadGameDisabled;
+	SDL_Texture* loadGameNormal;
+	SDL_Texture* loadGameHover;
+	SDL_Texture* loadGameClick;
 
 	SDL_Texture* settingsNormal;
 	SDL_Texture* settingsHover;

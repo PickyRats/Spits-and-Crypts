@@ -43,10 +43,10 @@ bool SceneMenu::Start()
 	playNormal = app->tex->Load(configNode2.child("playNormal").attribute("texturepath").as_string());
 	playHover = app->tex->Load(configNode2.child("playHover").attribute("texturepath").as_string());
 	playClick = app->tex->Load(configNode2.child("playClick").attribute("texturepath").as_string());
-	continueDisabled = app->tex->Load(configNode2.child("continueDisabled").attribute("texturepath").as_string());
-	continueNormal = app->tex->Load(configNode2.child("continueNormal").attribute("texturepath").as_string());
-	continueHover = app->tex->Load(configNode2.child("continueHover").attribute("texturepath").as_string());
-	continueClick = app->tex->Load(configNode2.child("continueClick").attribute("texturepath").as_string());
+	loadGameDisabled = app->tex->Load(configNode2.child("loadGameDisabled").attribute("texturepath").as_string());
+	loadGameNormal = app->tex->Load(configNode2.child("loadGameNormal").attribute("texturepath").as_string());
+	loadGameHover = app->tex->Load(configNode2.child("loadGameHover").attribute("texturepath").as_string());
+	loadGameClick = app->tex->Load(configNode2.child("loadGameClick").attribute("texturepath").as_string());
 	settingsNormal = app->tex->Load(configNode2.child("settingsNormal").attribute("texturepath").as_string());
 	settingsHover = app->tex->Load(configNode2.child("settingsHover").attribute("texturepath").as_string());
 	settingsClick = app->tex->Load(configNode2.child("settingsClick").attribute("texturepath").as_string());
@@ -70,13 +70,13 @@ bool SceneMenu::Start()
 
 	//Menu Buttons
 	startButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, NULL, playNormal, playHover, playClick, { 100, 250, 400, 50 }, this);//primer numero la posicion en x, 2ndo la pos en y, 3r el largo del boton y 4t el alto del boton.
-	continueButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, continueDisabled, continueNormal, continueHover, continueClick, { 100, 330, 400, 50 }, this);
+	loadGameButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, loadGameDisabled, loadGameNormal, loadGameHover, loadGameClick, { 100, 330, 400, 50 }, this);
 	settingsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, NULL, settingsNormal, settingsHover, settingsClick, { 100, 410, 400, 50 }, this);
 	creditsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, NULL, creditsNormal, creditsHover, creditsClick, { 100, 490, 400, 50 }, this);
 	exitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, NULL, exitNormal, exitHover, exitClick, { 100, 570, 400, 50 }, this);
 
 	startButton->state = GuiControlState::NORMAL;
-	continueButton->state = GuiControlState::DISABLED;
+	loadGameButton->state = GuiControlState::DISABLED;
 	settingsButton->state = GuiControlState::NORMAL;
 	creditsButton->state = GuiControlState::NORMAL;
 	exitButton->state = GuiControlState::NORMAL;
@@ -147,7 +147,7 @@ bool SceneMenu::Update(float dt)
 			app->entityManager->Enable();
 			app->hud->Enable();
 		}
-		else if (continueButton->state == GuiControlState::FOCUSED)
+		else if (loadGameButton->state == GuiControlState::FOCUSED)
 		{
 			if (fxHoverPlayed == false)
 			{
@@ -155,7 +155,7 @@ bool SceneMenu::Update(float dt)
 				fxHoverPlayed = true;
 			}
 		}
-		else if (continueButton->state == GuiControlState::PRESSED)
+		else if (loadGameButton->state == GuiControlState::PRESSED)
 		{
 			
 			if (fxClickPlayed == false)
@@ -238,7 +238,7 @@ bool SceneMenu::Update(float dt)
 	{
 		//Hide menu buttons
 		startButton->state = GuiControlState::HIDDEN;
-		continueButton->state = GuiControlState::HIDDEN;
+		loadGameButton->state = GuiControlState::HIDDEN;
 		settingsButton->state = GuiControlState::HIDDEN;
 		creditsButton->state = GuiControlState::HIDDEN;
 		exitButton->state = GuiControlState::HIDDEN;
@@ -264,7 +264,7 @@ bool SceneMenu::Update(float dt)
 				onSettings = false;
 				//Show menu buttons
 				startButton->state = GuiControlState::NORMAL;
-				continueButton->state = GuiControlState::DISABLED;
+				loadGameButton->state = GuiControlState::DISABLED;
 				settingsButton->state = GuiControlState::NORMAL;
 				creditsButton->state = GuiControlState::NORMAL;
 				exitButton->state = GuiControlState::NORMAL;
@@ -342,7 +342,7 @@ bool SceneMenu::Update(float dt)
 	{
 		//Hide menu buttons
 		startButton->state = GuiControlState::HIDDEN;
-		continueButton->state = GuiControlState::HIDDEN;
+		loadGameButton->state = GuiControlState::HIDDEN;
 		settingsButton->state = GuiControlState::HIDDEN;
 		creditsButton->state = GuiControlState::HIDDEN;
 		exitButton->state = GuiControlState::HIDDEN;
@@ -367,7 +367,7 @@ bool SceneMenu::Update(float dt)
 				onCredits = false;
 				//Show menu buttons
 				startButton->state = GuiControlState::NORMAL;
-				continueButton->state = GuiControlState::NORMAL;
+				loadGameButton->state = GuiControlState::NORMAL;
 				settingsButton->state = GuiControlState::NORMAL;
 				creditsButton->state = GuiControlState::NORMAL;
 				exitButton->state = GuiControlState::NORMAL;
@@ -412,10 +412,10 @@ bool SceneMenu::CleanUp()
 	app->tex->UnLoad(playNormal);
 	app->tex->UnLoad(playHover);
 	app->tex->UnLoad(playClick);
-	app->tex->UnLoad(continueDisabled);
-	app->tex->UnLoad(continueNormal);
-	app->tex->UnLoad(continueHover);
-	app->tex->UnLoad(continueClick);
+	app->tex->UnLoad(loadGameDisabled);
+	app->tex->UnLoad(loadGameNormal);
+	app->tex->UnLoad(loadGameHover);
+	app->tex->UnLoad(loadGameClick);
 	app->tex->UnLoad(settingsNormal);
 	app->tex->UnLoad(settingsHover);
 	app->tex->UnLoad(settingsClick);
