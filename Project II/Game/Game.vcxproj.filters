@@ -75,6 +75,9 @@
     <ClCompile Include="Source\SceneMenu.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SceneCombat.cpp">
+      <Filter>Modules\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -186,6 +189,10 @@
     <ClInclude Include="Source\SceneMenu.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\SceneCombat.h">
+      <Filter>Modules\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityPlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

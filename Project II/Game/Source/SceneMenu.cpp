@@ -139,7 +139,7 @@ bool SceneMenu::Update(float dt)
 				app->audio->PlayFx(buttonFxClick);
 				fxClickPlayed = true;
 			}
-			app->fade->Fade(this, (Module*)app->scene, 60.0f);
+			app->fade->Fade(this, (Module*)app->sceneCombat, 60.0f);
 			app->map->Enable();
 			app->entityManager->Enable();
 			app->hud->Enable();
