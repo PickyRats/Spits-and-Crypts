@@ -69,17 +69,17 @@ bool SceneMenu::Start()
 	buttonFxClick = app->audio->LoadFx(configNode2.child("buttonFxClick").attribute("path").as_string());
 
 	//Menu Buttons
-	playButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, NULL, playNormal, playHover, playClick, { 657, 315, 285, 64 }, this);
-	continueButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, continueDisabled, continueNormal, continueHover, continueClick, { 657, 397, 285, 64 }, this);
-	settingsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, NULL, settingsNormal, settingsHover, settingsClick, { 657, 479, 285, 64 }, this);
-	creditsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, NULL, creditsNormal, creditsHover, creditsClick, { 657, 561, 285, 64 }, this);
-	exitButtonMenu = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, NULL, exitNormal, exitHover, exitClick, { 1517, 14, 63, 63 }, this);
+	startButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, NULL, playNormal, playHover, playClick, { 100, 250, 400, 50 }, this);//primer numero la posicion en x, 2ndo la pos en y, 3r el largo del boton y 4t el alto del boton.
+	continueButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, continueDisabled, continueNormal, continueHover, continueClick, { 100, 330, 400, 50 }, this);
+	settingsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, NULL, settingsNormal, settingsHover, settingsClick, { 100, 410, 400, 50 }, this);
+	creditsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, NULL, creditsNormal, creditsHover, creditsClick, { 100, 490, 400, 50 }, this);
+	exitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, NULL, exitNormal, exitHover, exitClick, { 100, 570, 400, 50 }, this);
 
-	playButton->state = GuiControlState::NORMAL;
+	startButton->state = GuiControlState::NORMAL;
 	continueButton->state = GuiControlState::DISABLED;
 	settingsButton->state = GuiControlState::NORMAL;
 	creditsButton->state = GuiControlState::NORMAL;
-	exitButtonMenu->state = GuiControlState::NORMAL;
+	exitButton->state = GuiControlState::NORMAL;
 
 	//Settings Buttons
 	settingsReturnButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, NULL, returnNormal, returnHover, returnClick, { 133, 92, 63, 63 }, this);
@@ -124,7 +124,7 @@ bool SceneMenu::Update(float dt)
 		//Render background 
 		app->render->DrawTexture(background, 0, 0, NULL, SDL_FLIP_NONE, 0);
 		//Check if buttons are focused or pressed. If pressed, do the action. With sound effects.
-		if (playButton->state == GuiControlState::FOCUSED)
+		if (startButton->state == GuiControlState::FOCUSED)
 		{
 			if (fxHoverPlayed == false)
 			{
@@ -132,7 +132,7 @@ bool SceneMenu::Update(float dt)
 				fxHoverPlayed = true;
 			}
 		}
-		else if (playButton->state == GuiControlState::PRESSED)
+		else if (startButton->state == GuiControlState::PRESSED)
 		{
 			if (fxClickPlayed == false)
 			{
@@ -206,7 +206,7 @@ bool SceneMenu::Update(float dt)
 
 			}
 		}
-		else if (exitButtonMenu->state == GuiControlState::FOCUSED)
+		else if (exitButton->state == GuiControlState::FOCUSED)
 		{
 			if (fxHoverPlayed == false)
 			{
@@ -214,7 +214,7 @@ bool SceneMenu::Update(float dt)
 				fxHoverPlayed = true;
 			}
 		}
-		else if (exitButtonMenu->state == GuiControlState::PRESSED)
+		else if (exitButton->state == GuiControlState::PRESSED)
 		{
 
 			if (fxClickPlayed == false)
@@ -234,11 +234,11 @@ bool SceneMenu::Update(float dt)
 	else if (onSettings)
 	{
 		//Hide menu buttons
-		playButton->state = GuiControlState::HIDDEN;
+		startButton->state = GuiControlState::HIDDEN;
 		continueButton->state = GuiControlState::HIDDEN;
 		settingsButton->state = GuiControlState::HIDDEN;
 		creditsButton->state = GuiControlState::HIDDEN;
-		exitButtonMenu->state = GuiControlState::HIDDEN;
+		exitButton->state = GuiControlState::HIDDEN;
 
 		if (onMenu) {
 			app->render->DrawTexture(background, 0, 0, NULL, SDL_FLIP_NONE, 0);
@@ -260,11 +260,11 @@ bool SceneMenu::Update(float dt)
 				fxClickPlayed = true;
 				onSettings = false;
 				//Show menu buttons
-				playButton->state = GuiControlState::NORMAL;
+				startButton->state = GuiControlState::NORMAL;
 				continueButton->state = GuiControlState::DISABLED;
 				settingsButton->state = GuiControlState::NORMAL;
 				creditsButton->state = GuiControlState::NORMAL;
-				exitButtonMenu->state = GuiControlState::NORMAL;
+				exitButton->state = GuiControlState::NORMAL;
 			}
 		}
 		else if (settingsExitButton->state == GuiControlState::FOCUSED)
@@ -338,11 +338,11 @@ bool SceneMenu::Update(float dt)
 	else if (onCredits)
 	{
 		//Hide menu buttons
-		playButton->state = GuiControlState::HIDDEN;
+		startButton->state = GuiControlState::HIDDEN;
 		continueButton->state = GuiControlState::HIDDEN;
 		settingsButton->state = GuiControlState::HIDDEN;
 		creditsButton->state = GuiControlState::HIDDEN;
-		exitButtonMenu->state = GuiControlState::HIDDEN;
+		exitButton->state = GuiControlState::HIDDEN;
 
 		//Render background and credits
 		app->render->DrawTexture(background, 0, 0, NULL, SDL_FLIP_NONE, 0);
@@ -363,11 +363,11 @@ bool SceneMenu::Update(float dt)
 				fxClickPlayed = true;
 				onCredits = false;
 				//Show menu buttons
-				playButton->state = GuiControlState::NORMAL;
+				startButton->state = GuiControlState::NORMAL;
 				continueButton->state = GuiControlState::NORMAL;
 				settingsButton->state = GuiControlState::NORMAL;
 				creditsButton->state = GuiControlState::NORMAL;
-				exitButtonMenu->state = GuiControlState::NORMAL;
+				exitButton->state = GuiControlState::NORMAL;
 			}
 		}
 		else if (creditsExitButton->state == GuiControlState::FOCUSED)

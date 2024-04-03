@@ -31,11 +31,11 @@ public:
 	bool fullScreen = false;
 	bool vSync = true;
 
-	GuiControlButton* playButton;
+	GuiControlButton* startButton;
 	GuiControlButton* continueButton;
 	GuiControlButton* settingsButton;
 	GuiControlButton* creditsButton;
-	GuiControlButton* exitButtonMenu;
+	GuiControlButton* exitButton;
 	GuiControlButton* exitButtonSettings;
 	GuiControlButton* exitButtonCredits;
 	GuiControlButton* returnButtonSettings;

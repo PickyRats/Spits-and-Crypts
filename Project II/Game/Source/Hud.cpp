@@ -94,11 +94,12 @@ bool Hud::Start()
 	settingsMusicButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 10, NULL, settingsSlider, settingsSlider, settingsSlider, { 1124, 259, 30, 80 }, this, { 663, 259, 613, 80 });
 	settingsFxButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 11, NULL, settingsSlider, settingsSlider, settingsSlider, { 1124, 376, 30, 80 }, this, { 663, 376, 613, 80 });
 
-	app->sceneMenu->playButton->state = GuiControlState::HIDDEN;
 	app->sceneMenu->continueButton->state = GuiControlState::HIDDEN;
+	app->sceneMenu->startButton->state = GuiControlState::HIDDEN;
+	//app->sceneMenu->continueButton->state = GuiControlState::HIDDEN;
 	app->sceneMenu->settingsButton->state = GuiControlState::HIDDEN;
 	app->sceneMenu->creditsButton->state = GuiControlState::HIDDEN;
-	app->sceneMenu->exitButtonMenu->state = GuiControlState::HIDDEN;
+	app->sceneMenu->exitButton->state = GuiControlState::HIDDEN;
 
 	exitButton->state = GuiControlState::HIDDEN;
 	resumeButton->state = GuiControlState::HIDDEN;
