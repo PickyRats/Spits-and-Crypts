@@ -167,7 +167,7 @@ private:
 	bool mapLoaded;
 	MapLayer* navigationLayer;
 	int blockedGid = 49;
-	int walkableGid = 1448;
+	int walkableGid = 6;
 	int startHeight = 0;
 	int endHeight = 0;
 	int startWidth = 0;

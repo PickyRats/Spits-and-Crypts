@@ -46,6 +46,9 @@ public:
 	// Utility: returns true is the tile is walkable
 	bool IsWalkable(const iPoint& pos) const;
 
+	// Utility: returns true is the tile is a ladder
+	bool IsLadder(const iPoint& pos) const;
+
 	// Utility: return the walkability value of a tile
 	uchar GetTileAt(const iPoint& pos) const;
 

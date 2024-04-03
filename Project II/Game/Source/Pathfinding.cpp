@@ -55,6 +55,14 @@ bool PathFinding::IsWalkable(const iPoint& pos) const
 	return  isWalkable;
 }
 
+// Utility: returns true is the tile is a ladder
+bool PathFinding::IsLadder(const iPoint& pos) const
+{
+	uchar ladderId = GetTileAt(pos);
+	bool isLadder = ladderId != INVALID_WALK_CODE && ladderId > 0;
+	return  isLadder;
+}
+
 // Utility: return the walkability value of a tile
 uchar PathFinding::GetTileAt(const iPoint& pos) const
 {

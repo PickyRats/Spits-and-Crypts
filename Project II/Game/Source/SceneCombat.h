@@ -9,6 +9,12 @@
 
 struct SDL_Texture;
 
+struct Tile
+{
+	iPoint position;
+	bool isSelected = false;
+};
+
 class SceneCombat : public Module
 {
 public:
@@ -43,6 +49,8 @@ public:
 
 	void ClampCamera();
 
+	void SelectTile();
+
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
@@ -55,6 +63,12 @@ public:
 	iPoint lastTorchPos = { 0, 0 };
 	bool notUseChechPoint = false;
 	bool win = false;
+
+	int tileIndex = 0;
+	int movingDirection = 0; //0 = none, 1 = right, 2 = left, 3 = up, 4 = down, 10 right positive, 11 right negative, 12 left positive, 13 left negative
+	bool hasClimbedUp = false;
+	bool hasClimbedDown = false;
+
 
 private:
 	SDL_Texture* backgroundTexture;
@@ -75,7 +89,8 @@ private:
 	int playerX, playerY, cameraX, cameraY;
 	bool changingLevel = false;
 	bool isLoading = false;
-
+	SDL_Texture* pathTexture;
+	Tile tiles[100];
 };
 
 #endif // __SCENECOMBAT_H__
