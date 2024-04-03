@@ -89,7 +89,8 @@ private:
 	int playerX, playerY, cameraX, cameraY;
 	bool changingLevel = false;
 	bool isLoading = false;
-	SDL_Texture* pathTexture;
+	SDL_Texture* tileTexture;
+	SDL_Texture* selectedTileTexture;
 	Tile tiles[100];
 };
 

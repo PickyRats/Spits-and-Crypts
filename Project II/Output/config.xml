@@ -24,7 +24,7 @@
 
 	<scene>
 		<!-- Scene -->
-		<map path="Assets/Maps/" name="MapTemplate.tmx"/>
+		<map path="Assets/Maps/" name="Map_Combat.tmx"/>
 
 		<!-- Music -->
 		<music>

@@ -60,9 +60,10 @@ bool SceneCombat::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	pathTexture = app->tex->Load("Assets/Textures/Path.png");
+	tileTexture = app->tex->Load("Assets/Textures/tile.png");
+	selectedTileTexture = app->tex->Load("Assets/Textures/selected_tile.png");
 
-	tiles[0].position = { iPoint(64, 64) };
+	tiles[0].position = { iPoint(96, 96*3) };
 	tiles[0].isSelected = true;
 
 	return true;
@@ -165,12 +166,12 @@ void SceneCombat::SelectTile()
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
 	{
 		if (tileIndex == 0) movingDirection = 0;
-		if (movingDirection != 11 && (movingDirection != 12 && !tiles[tileIndex + 1].isSelected) || (movingDirection != 13 && !tiles[tileIndex - 1].isSelected) || app->map->pathfinding->IsLadder(iPoint{ tiles[tileIndex].position.x / 32, tiles[tileIndex].position.y / 32 }))
+		if (movingDirection != 11 && (movingDirection != 12 && !tiles[tileIndex + 1].isSelected) || (movingDirection != 13 && !tiles[tileIndex - 1].isSelected) || app->map->pathfinding->IsLadder(iPoint{ tiles[tileIndex].position.x / 96, tiles[tileIndex].position.y / 96 }))
 		{
 			tileIndex++;
 
 			tiles[tileIndex].isSelected = true;
-			tiles[tileIndex].position = { iPoint(tiles[tileIndex - 1].position.x + 32, tiles[tileIndex - 1].position.y) };
+			tiles[tileIndex].position = { iPoint(tiles[tileIndex - 1].position.x + 96, tiles[tileIndex - 1].position.y) };
 			movingDirection = 10;
 		}
 		else
@@ -184,12 +185,12 @@ void SceneCombat::SelectTile()
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
 	{
 		if (tileIndex == 0) movingDirection = 0;
-		if (movingDirection != 13 && (movingDirection != 10 && !tiles[tileIndex + 1].isSelected) || (movingDirection != 11 && !tiles[tileIndex - 1].isSelected) || app->map->pathfinding->IsLadder(iPoint{ tiles[tileIndex].position.x / 32, tiles[tileIndex].position.y / 32 }))
+		if (movingDirection != 13 && (movingDirection != 10 && !tiles[tileIndex + 1].isSelected) || (movingDirection != 11 && !tiles[tileIndex - 1].isSelected) || app->map->pathfinding->IsLadder(iPoint{ tiles[tileIndex].position.x / 96, tiles[tileIndex].position.y / 96 }))
 		{
 			tileIndex++;
 
 			tiles[tileIndex].isSelected = true;
-			tiles[tileIndex].position = { iPoint(tiles[tileIndex - 1].position.x - 32, tiles[tileIndex - 1].position.y) };
+			tiles[tileIndex].position = { iPoint(tiles[tileIndex - 1].position.x - 96, tiles[tileIndex - 1].position.y) };
 			movingDirection = 12;
 		}
 		else
@@ -202,14 +203,14 @@ void SceneCombat::SelectTile()
 	}
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 	{
-		if (!hasClimbedUp && app->map->pathfinding->IsLadder(iPoint{ tiles[tileIndex].position.x / 32, tiles[tileIndex].position.y / 32 }))
+		if (!hasClimbedUp && app->map->pathfinding->IsLadder(iPoint{ tiles[tileIndex].position.x / 96, tiles[tileIndex].position.y / 96 }))
 		{
 			if (movingDirection == 0 || movingDirection == 10 || movingDirection == 11 || movingDirection == 12 || movingDirection == 13 || (movingDirection == 4 && hasClimbedDown))
 			{
 				tileIndex++;
 
 				tiles[tileIndex].isSelected = true;
-				tiles[tileIndex].position = { iPoint(tiles[tileIndex - 1].position.x, tiles[tileIndex - 1].position.y - 64) };
+				tiles[tileIndex].position = { iPoint(tiles[tileIndex - 1].position.x, tiles[tileIndex - 1].position.y - 96 - 96) };
 			}
 			else
 			{
@@ -224,14 +225,14 @@ void SceneCombat::SelectTile()
 	}
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 	{
-		if (!hasClimbedDown && app->map->pathfinding->IsLadder(iPoint{ tiles[tileIndex].position.x / 32, tiles[tileIndex].position.y / 32 }))
+		if (!hasClimbedDown && app->map->pathfinding->IsLadder(iPoint{ tiles[tileIndex].position.x / 96, tiles[tileIndex].position.y / 96 }))
 		{
 			if (movingDirection == 0 || movingDirection == 10 || movingDirection == 11 || movingDirection == 12 || movingDirection == 13 || (movingDirection == 3 && !hasClimbedUp))
 			{
 				tileIndex++;
 
 				tiles[tileIndex].isSelected = true;
-				tiles[tileIndex].position = { iPoint(tiles[tileIndex - 1].position.x, tiles[tileIndex - 1].position.y + 64) };
+				tiles[tileIndex].position = { iPoint(tiles[tileIndex - 1].position.x, tiles[tileIndex - 1].position.y + 96 + 96) };
 			}
 			else
 			{
@@ -245,11 +246,11 @@ void SceneCombat::SelectTile()
 		}
 	}
 
-
 	for (int i = 0; i <= tileIndex; i++)
 	{
-		if (tiles[i].isSelected) app->render->DrawTexture(pathTexture, tiles[i].position.x, tiles[i].position.y);
+		if (i == tileIndex && tiles[i].isSelected) app->render->DrawTexture(selectedTileTexture, tiles[i].position.x, tiles[i].position.y);
+		else if (tiles[i].isSelected) app->render->DrawTexture(tileTexture, tiles[i].position.x, tiles[i].position.y);
 		//printf("\n Tile x: %d Tile y: %d selected: %d", tiles[i].position.x, tiles[i].position.y, tiles[i].isSelected);
 	}
-	printf("\r Tile index: %d Moving Direction: %d Up: %d Down: %d positionX: %d positionY: %d ladder: %d", tileIndex, movingDirection, hasClimbedUp, hasClimbedDown, tiles[tileIndex].position.x, tiles[tileIndex].position.y, app->map->pathfinding->IsLadder(iPoint{ tiles[tileIndex].position.x / 32, tiles[tileIndex].position.y / 32 }));
+	//printf("\r Tile index: %d Moving Direction: %d Up: %d Down: %d positionX: %d positionY: %d ladder: %d", tileIndex, movingDirection, hasClimbedUp, hasClimbedDown, tiles[tileIndex].position.x, tiles[tileIndex].position.y, app->map->pathfinding->IsLadder(iPoint{ tiles[tileIndex].position.x / 96, tiles[tileIndex].position.y / 96 }));
 }
