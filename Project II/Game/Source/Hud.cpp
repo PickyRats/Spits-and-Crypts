@@ -134,7 +134,7 @@ bool Hud::Update(float dt)
 			if (resumeButton->state == GuiControlState::FOCUSED) {
 				if (app->sceneMenu->fxHoverPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxHover);
+					app->audio->PlayFx(app->sceneMenu->FxButton1);
 					app->sceneMenu->fxHoverPlayed = true;
 				}
 			}
@@ -142,7 +142,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxClickPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxClick);
+					app->audio->PlayFx(app->sceneMenu->FxButton2);
 					app->sceneMenu->fxClickPlayed = true;
 				}
 				app->scene->pause = false;
@@ -150,7 +150,7 @@ bool Hud::Update(float dt)
 			else if (settingsButton->state == GuiControlState::FOCUSED) {
 				if (app->sceneMenu->fxHoverPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxHover);
+					app->audio->PlayFx(app->sceneMenu->FxButton1);
 					app->sceneMenu->fxHoverPlayed = true;
 				}
 			}
@@ -158,7 +158,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxClickPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxClick);
+					app->audio->PlayFx(app->sceneMenu->FxButton2);
 					app->sceneMenu->fxClickPlayed = true;
 				}
 				onSettings = true;
@@ -172,7 +172,7 @@ bool Hud::Update(float dt)
 			else if (backToTitleButton->state == GuiControlState::FOCUSED) {
 				if (app->sceneMenu->fxHoverPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxHover);
+					app->audio->PlayFx(app->sceneMenu->FxButton1);
 					app->sceneMenu->fxHoverPlayed = true;
 				}
 			}
@@ -180,7 +180,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxClickPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxClick);
+					app->audio->PlayFx(app->sceneMenu->FxButton2);
 					app->sceneMenu->fxClickPlayed = true;
 				}
 
@@ -199,7 +199,7 @@ bool Hud::Update(float dt)
 			else if (exitButton->state == GuiControlState::FOCUSED) {
 				if (app->sceneMenu->fxHoverPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxHover);
+					app->audio->PlayFx(app->sceneMenu->FxButton1);
 					app->sceneMenu->fxHoverPlayed = true;
 				}
 			}
@@ -207,7 +207,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxClickPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxClick);
+					app->audio->PlayFx(app->sceneMenu->FxButton2);
 					app->sceneMenu->fxClickPlayed = true;
 				}
 				SDL_Quit();
@@ -233,7 +233,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxHoverPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxHover);
+					app->audio->PlayFx(app->sceneMenu->FxButton1);
 					app->sceneMenu->fxHoverPlayed = true;
 				}
 			}
@@ -241,7 +241,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxClickPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxClick);
+					app->audio->PlayFx(app->sceneMenu->FxButton2);
 					app->sceneMenu->fxClickPlayed = true;
 					onSettings = false;
 					resumeButton->state = GuiControlState::NORMAL;
@@ -254,7 +254,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxHoverPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxHover);
+					app->audio->PlayFx(app->sceneMenu->FxButton1);
 					app->sceneMenu->fxHoverPlayed = true;
 				}
 			}
@@ -263,7 +263,7 @@ bool Hud::Update(float dt)
 				
 				if (app->sceneMenu->fxClickPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxClick);
+					app->audio->PlayFx(app->sceneMenu->FxButton2);
 					app->sceneMenu->fxClickPlayed = true;
 					onSettings = false;
 					SDL_Quit();
@@ -273,7 +273,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxHoverPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxHover);
+					app->audio->PlayFx(app->sceneMenu->FxButton1);
 					app->sceneMenu->fxHoverPlayed = true;
 				}
 			}
@@ -281,7 +281,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxClickPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxClick);
+					app->audio->PlayFx(app->sceneMenu->FxButton2);
 					app->sceneMenu->fxClickPlayed = true;
 					if (app->sceneMenu->fullScreen == false) app->sceneMenu->fullScreen = true;
 					else app->sceneMenu->fullScreen = false;
@@ -291,7 +291,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxHoverPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxHover);
+					app->audio->PlayFx(app->sceneMenu->FxButton1);
 					app->sceneMenu->fxHoverPlayed = true;
 				}
 			}
@@ -299,7 +299,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxClickPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxClick);
+					app->audio->PlayFx(app->sceneMenu->FxButton2);
 					app->sceneMenu->fxClickPlayed = true;
 					if (app->sceneMenu->vSync == false) app->sceneMenu->vSync = true;
 					else app->sceneMenu->vSync = false;

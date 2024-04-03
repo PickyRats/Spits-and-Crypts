@@ -65,8 +65,8 @@ bool SceneMenu::Start()
 	settingsBoxHover = app->tex->Load(configNode2.child("settingsBoxHover").attribute("texturepath").as_string());
 	settingsTick = app->tex->Load(configNode2.child("settingsTick").attribute("texturepath").as_string());
 	settingsSlider = app->tex->Load(configNode2.child("settingsSlider").attribute("texturepath").as_string());
-	buttonFxHover = app->audio->LoadFx(configNode2.child("buttonFxHover").attribute("path").as_string());
-	buttonFxClick = app->audio->LoadFx(configNode2.child("buttonFxClick").attribute("path").as_string());
+	FxButton1 = app->audio->LoadFx(configNode2.child("buttonFx1").attribute("path").as_string());
+	FxButton2 = app->audio->LoadFx(configNode2.child("buttonFx2").attribute("path").as_string());
 
 	//Menu Buttons
 	startButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, NULL, playNormal, playHover, playClick, { 100, 250, 400, 50 }, this);//primer numero la posicion en x, 2ndo la pos en y, 3r el largo del boton y 4t el alto del boton.
@@ -131,7 +131,7 @@ bool SceneMenu::Update(float dt)
 		{
 			if (fxHoverPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxHover);
+				app->audio->PlayFx(FxButton1);
 				fxHoverPlayed = true;
 			}
 		}
@@ -139,7 +139,7 @@ bool SceneMenu::Update(float dt)
 		{
 			if (fxClickPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxClick);
+				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 			}
 			app->fade->Fade(this, (Module*)app->scene, 60.0f);
@@ -151,7 +151,7 @@ bool SceneMenu::Update(float dt)
 		{
 			if (fxHoverPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxHover);
+				app->audio->PlayFx(FxButton1);
 				fxHoverPlayed = true;
 			}
 		}
@@ -160,7 +160,7 @@ bool SceneMenu::Update(float dt)
 			
 			if (fxClickPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxClick);
+				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 			}
 		}
@@ -168,7 +168,7 @@ bool SceneMenu::Update(float dt)
 		{
 			if (fxHoverPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxHover);
+				app->audio->PlayFx(FxButton1);
 				fxHoverPlayed = true;
 			}
 		}
@@ -176,7 +176,7 @@ bool SceneMenu::Update(float dt)
 		{
 			if (fxClickPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxClick);
+				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 			}
 			//Show settings buttons
@@ -192,7 +192,7 @@ bool SceneMenu::Update(float dt)
 		{
 			if (fxHoverPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxHover);
+				app->audio->PlayFx(FxButton1);
 				fxHoverPlayed = true;
 			}
 		}
@@ -201,7 +201,7 @@ bool SceneMenu::Update(float dt)
 
 			if (fxClickPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxClick);
+				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 				onCredits = true;
 				creditsExitButton->state = GuiControlState::NORMAL;
@@ -213,7 +213,7 @@ bool SceneMenu::Update(float dt)
 		{
 			if (fxHoverPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxHover);
+				app->audio->PlayFx(FxButton1);
 				fxHoverPlayed = true;
 			}
 		}
@@ -222,7 +222,7 @@ bool SceneMenu::Update(float dt)
 
 			if (fxClickPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxClick);
+				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 				return false;
 			}
@@ -251,7 +251,7 @@ bool SceneMenu::Update(float dt)
 		{
 			if (fxHoverPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxHover);
+				app->audio->PlayFx(FxButton1);
 				fxHoverPlayed = true;
 			}
 		}
@@ -259,7 +259,7 @@ bool SceneMenu::Update(float dt)
 		{
 			if (fxClickPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxClick);
+				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 				onSettings = false;
 				//Show menu buttons
@@ -274,7 +274,7 @@ bool SceneMenu::Update(float dt)
 		{
 			if (fxHoverPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxHover);
+				app->audio->PlayFx(FxButton1);
 				fxHoverPlayed = true;
 			}
 		}
@@ -283,7 +283,7 @@ bool SceneMenu::Update(float dt)
 			
 			if (fxClickPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxClick);
+				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 				onSettings = false;
 				return false;
@@ -293,7 +293,7 @@ bool SceneMenu::Update(float dt)
 		{
 			if (fxHoverPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxHover);
+				app->audio->PlayFx(FxButton1);
 				fxHoverPlayed = true;
 			}
 		}
@@ -301,7 +301,7 @@ bool SceneMenu::Update(float dt)
 		{
 			if (fxClickPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxClick);
+				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 				if (fullScreen == false) fullScreen = true;
 				else fullScreen = false;
@@ -311,7 +311,7 @@ bool SceneMenu::Update(float dt)
 		{
 			if (fxHoverPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxHover);
+				app->audio->PlayFx(FxButton1);
 				fxHoverPlayed = true;
 			}
 		}
@@ -319,7 +319,7 @@ bool SceneMenu::Update(float dt)
 		{
 			if (fxClickPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxClick);
+				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 				if (vSync == false) vSync = true;
 				else vSync = false;
@@ -354,7 +354,7 @@ bool SceneMenu::Update(float dt)
 		{
 			if (fxHoverPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxHover);
+				app->audio->PlayFx(FxButton1);
 				fxHoverPlayed = true;
 			}
 		}
@@ -362,7 +362,7 @@ bool SceneMenu::Update(float dt)
 		{
 			if (fxClickPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxClick);
+				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 				onCredits = false;
 				//Show menu buttons
@@ -377,7 +377,7 @@ bool SceneMenu::Update(float dt)
 		{
 			if (fxHoverPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxHover);
+				app->audio->PlayFx(FxButton1);
 				fxHoverPlayed = true;
 			}
 		}
@@ -385,7 +385,7 @@ bool SceneMenu::Update(float dt)
 		{
 			if (fxClickPlayed == false)
 			{
-				app->audio->PlayFx(buttonFxClick);
+				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 				onCredits = false;
 				return false;

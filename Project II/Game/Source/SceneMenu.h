@@ -23,9 +23,9 @@ public:
 	bool Update(float dt);
 
 	bool CleanUp();
+	uint FxButton1;
+	uint FxButton2;
 
-	int buttonFxHover;
-	int buttonFxClick;
 	bool fxHoverPlayed = false;
 	bool fxClickPlayed = false;
 	bool fullScreen = false;
