@@ -1,5 +1,5 @@
-#ifndef __SCENE_H__
-#define __SCENE_H__
+#ifndef __SCENEVILLAGE_H__
+#define __SCENEVILLAGE_H__
 
 #include "Module.h"
 #include "Player.h"
@@ -9,14 +9,14 @@
 
 struct SDL_Texture;
 
-class Scene : public Module
+class SceneVillage : public Module
 {
 public:
 
-	Scene(bool enabled = true);
+	SceneVillage(bool enabled = true);
 
 	// Destructor
-	virtual ~Scene();
+	virtual ~SceneVillage();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node& conf);

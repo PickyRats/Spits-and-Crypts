@@ -66,7 +66,7 @@
     <ClCompile Include="Source\GuiControlSlider.cpp">
       <Filter>Modules\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Scene.cpp">
+    <ClCompile Include="Source\SceneVillage.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Source\SceneIntro.cpp">
@@ -177,7 +177,7 @@
     <ClInclude Include="Source\GuiControlSlider.h">
       <Filter>Modules\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Scene.h">
+    <ClInclude Include="Source\SceneVillage.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\SceneIntro.h">
