@@ -10,7 +10,7 @@
 #include "Player.h"
 #include "Window.h"
 #include "Box2D/Box2D/Box2D.h"
-#include "Scene.h"
+#include "SceneVillage.h"
 
 // Tell the compiler to reference the compiled Box2D libraries
 #ifdef _DEBUG
@@ -245,7 +245,7 @@ bool Physics::PostUpdate()
 					uint width, height;
 					app->win->GetWindowSize(width, height);
 					b2Vec2 pos = f->GetBody()->GetPosition();
-					float distance = app->scene->player->position.DistanceTo({ METERS_TO_PIXELS(pos.x), METERS_TO_PIXELS(pos.y) });
+					float distance = app->sceneVillage->player->position.DistanceTo({ METERS_TO_PIXELS(pos.x), METERS_TO_PIXELS(pos.y) });
 					if (distance < 1700)
 					{
 						app->render->DrawCircle(METERS_TO_PIXELS(pos.x), METERS_TO_PIXELS(pos.y), METERS_TO_PIXELS(shape->m_radius) * app->win->GetScale(), 255, 255, 255);
@@ -265,7 +265,7 @@ bool Physics::PostUpdate()
 						v = b->GetWorldPoint(polygonShape->GetVertex(i));
 						if (i > 0)
 						{
-							float distance = app->scene->player->position.DistanceTo({ METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y) });
+							float distance = app->sceneVillage->player->position.DistanceTo({ METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y) });
 							if (distance < 1700)
 							{
 								app->render->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), 255, 255, 100);
@@ -277,7 +277,7 @@ bool Physics::PostUpdate()
 					}
 
 					v = b->GetWorldPoint(polygonShape->GetVertex(0));
-					float distance = app->scene->player->position.DistanceTo({ METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y) });
+					float distance = app->sceneVillage->player->position.DistanceTo({ METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y) });
 					if (distance < 1700)
 					{
 						app->render->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), 255, 100, 100);
@@ -296,7 +296,7 @@ bool Physics::PostUpdate()
 						v = b->GetWorldPoint(shape->m_vertices[i]);
 						if (i > 0)
 						{
-							float distance = app->scene->player->position.DistanceTo({ METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y) });
+							float distance = app->sceneVillage->player->position.DistanceTo({ METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y) });
 							if (distance < 1700)
 							{
 								app->render->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), 100, 255, 100);
@@ -307,7 +307,7 @@ bool Physics::PostUpdate()
 					}
 
 					v = b->GetWorldPoint(shape->m_vertices[0]);
-					float distance = app->scene->player->position.DistanceTo({ METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y) });
+					float distance = app->sceneVillage->player->position.DistanceTo({ METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y) });
 					if (distance < 1700)
 					{
 						app->render->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), 100, 255, 100);
@@ -323,7 +323,7 @@ bool Physics::PostUpdate()
 
 					v1 = b->GetWorldPoint(shape->m_vertex0);
 					v2 = b->GetWorldPoint(shape->m_vertex1);
-					float distance = app->scene->player->position.DistanceTo({ METERS_TO_PIXELS(v1.x), METERS_TO_PIXELS(v1.y) });
+					float distance = app->sceneVillage->player->position.DistanceTo({ METERS_TO_PIXELS(v1.x), METERS_TO_PIXELS(v1.y) });
 					if (distance < 1700)
 					{
 						app->render->DrawLine(METERS_TO_PIXELS(v1.x), METERS_TO_PIXELS(v1.y), METERS_TO_PIXELS(v2.x), METERS_TO_PIXELS(v2.y), 100, 100, 255);
