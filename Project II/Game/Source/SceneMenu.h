@@ -23,19 +23,19 @@ public:
 	bool Update(float dt);
 
 	bool CleanUp();
+	uint FxButton1;
+	uint FxButton2;
 
-	int buttonFxHover;
-	int buttonFxClick;
 	bool fxHoverPlayed = false;
 	bool fxClickPlayed = false;
 	bool fullScreen = false;
 	bool vSync = true;
 
-	GuiControlButton* playButton;
-	GuiControlButton* continueButton;
+	GuiControlButton* startButton;
+	GuiControlButton* loadGameButton;
 	GuiControlButton* settingsButton;
 	GuiControlButton* creditsButton;
-	GuiControlButton* exitButtonMenu;
+	GuiControlButton* exitButton;
 	GuiControlButton* exitButtonSettings;
 	GuiControlButton* exitButtonCredits;
 	GuiControlButton* returnButtonSettings;
@@ -51,10 +51,10 @@ private:
 	SDL_Texture* playHover;
 	SDL_Texture* playClick;
 
-	SDL_Texture* continueDisabled;
-	SDL_Texture* continueNormal;
-	SDL_Texture* continueHover;
-	SDL_Texture* continueClick;
+	SDL_Texture* loadGameDisabled;
+	SDL_Texture* loadGameNormal;
+	SDL_Texture* loadGameHover;
+	SDL_Texture* loadGameClick;
 
 	SDL_Texture* settingsNormal;
 	SDL_Texture* settingsHover;
@@ -93,6 +93,9 @@ private:
 
 	GuiControlButton* creditsReturnButton;
 	GuiControlButton* creditsExitButton;
+
+	//add music to the menu
+	uint MenuMusic;
 	
 	bool onMenu = true;
 	bool onSettings = false;
