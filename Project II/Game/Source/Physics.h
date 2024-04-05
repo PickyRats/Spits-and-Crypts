@@ -28,6 +28,7 @@ enum class ColliderType {
 	PLAYER_BODY,
 	PLATFORM,
 	DOOR,
+	DIALOG_TRIGGER,
 	UNKNOWN
 	// ..
 };

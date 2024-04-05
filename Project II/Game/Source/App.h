@@ -25,6 +25,7 @@ class GuiManager;
 class SceneMenu;
 class Hud;
 class SceneIntro;
+class DialogManager;
 
 class App
 {
@@ -108,6 +109,7 @@ public:
 	SceneMenu* sceneMenu;
 	Hud* hud;
 	SceneIntro* sceneIntro;
+	DialogManager* dialogManager;
 
 	uint32 maxFrameDuration = 16;
 	uint32 initialMaxFrameDuration = 16;
