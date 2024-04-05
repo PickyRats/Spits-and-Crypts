@@ -165,81 +165,56 @@ bool SceneCombat::OnGuiMouseClickEvent(GuiControl* control)
 void SceneCombat::SelectTile()
 {
 	bool isLadder = app->map->pathfinding->IsLadder(iPoint{ tiles[tileIndex].position.x / 96, tiles[tileIndex].position.y / 96 });
+	bool upIsLadder = app->map->pathfinding->IsLadder(iPoint{ tiles[tileIndex].position.x / 96, (tiles[tileIndex].position.y - 96 - 96) / 96 });
+	bool downIsLadder = app->map->pathfinding->IsLadder(iPoint{ tiles[tileIndex].position.x / 96, (tiles[tileIndex].position.y + 96 + 96) / 96 });
 	bool rightIsLadder = app->map->pathfinding->IsLadder(iPoint{ (tiles[tileIndex].position.x + 96) / 96, tiles[tileIndex].position.y / 96 });
-	bool rightIsWalkable = app->map->pathfinding->IsWalkable(iPoint{ (tiles[tileIndex].position.x + 96 ) / 96 , tiles[tileIndex].position.y / 96 });
 	bool leftIsLadder = app->map->pathfinding->IsLadder(iPoint{ (tiles[tileIndex].position.x - 96) / 96, tiles[tileIndex].position.y / 96 });
+	bool rightIsWalkable = app->map->pathfinding->IsWalkable(iPoint{ (tiles[tileIndex].position.x + 96 ) / 96 , tiles[tileIndex].position.y / 96 });
 	bool leftIsWalkable = app->map->pathfinding->IsWalkable(iPoint{ (tiles[tileIndex].position.x - 96) / 96 , tiles[tileIndex].position.y / 96 });
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && (rightIsWalkable || rightIsLadder))
 	{
-		if (tileIndex == 0) movingDirection = 0;
-		if (movingDirection != 11 && (movingDirection != 12 && !tiles[tileIndex + 1].isSelected) || (movingDirection != 13 && !tiles[tileIndex - 1].isSelected) || isLadder)
+		if (!IsSelected(iPoint({ tiles[tileIndex].position.x + 96, tiles[tileIndex].position.y})))
 		{
-			if ((isLadder && (tiles[tileIndex].direction == 1 || ((tiles[tileIndex].direction == 4 || tiles[tileIndex].direction == 3 )&& !tiles[tileIndex + 1].isSelected))) || !isLadder)
-			{
-				tileIndex++;
+			tileIndex++;
 
-				tiles[tileIndex].isSelected = true;
-				tiles[tileIndex].position = { iPoint(tiles[tileIndex - 1].position.x + 96, tiles[tileIndex - 1].position.y) };
-				tiles[tileIndex].direction = 1;
-				movingDirection = 10;
-			}
-			else
-			{
-				tiles[tileIndex].isSelected = false;
-				tiles[tileIndex].direction = 0;
-				tileIndex--;
-				movingDirection = 11;
-			}
+			tiles[tileIndex].isSelected = true;
+			tiles[tileIndex].position = { iPoint(tiles[tileIndex - 1].position.x + 96, tiles[tileIndex - 1].position.y) };
+			tiles[tileIndex].direction = 1;
 		}
 		else
 		{
 			tiles[tileIndex].isSelected = false;
 			tiles[tileIndex].direction = 0;
 			tileIndex--;
-			movingDirection = 11;
 		}
 		hasClimbedUp = false;
 		hasClimbedDown = false;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && (leftIsWalkable || leftIsLadder))
 	{
-		if (tileIndex == 0) movingDirection = 0;
-		if ((movingDirection != 10 && !tiles[tileIndex + 1].isSelected) || (movingDirection != 11 && !tiles[tileIndex - 1].isSelected) || isLadder)
+		if (!IsSelected(iPoint({ tiles[tileIndex].position.x - 96, tiles[tileIndex].position.y })))
 		{
-			if ((isLadder && (tiles[tileIndex].direction == 2 || ((tiles[tileIndex].direction == 4 || tiles[tileIndex].direction == 3) && !tiles[tileIndex + 1].isSelected) || movingDirection == 13)) || !isLadder)
-			{
-				tileIndex++;
+			tileIndex++;
 
-				tiles[tileIndex].isSelected = true;
-				tiles[tileIndex].position = { iPoint(tiles[tileIndex - 1].position.x - 96, tiles[tileIndex - 1].position.y) };
-				tiles[tileIndex].direction = 2;
-				movingDirection = 12;
-			}
-			else
-			{
-				tiles[tileIndex].isSelected = false;
-				tiles[tileIndex].direction = 0;
-				tileIndex--;
-				movingDirection = 13;
-			}
+			tiles[tileIndex].isSelected = true;
+			tiles[tileIndex].position = { iPoint(tiles[tileIndex - 1].position.x - 96, tiles[tileIndex - 1].position.y) };
+			tiles[tileIndex].direction = 2;
 		}
 		else
 		{
-
 			tiles[tileIndex].isSelected = false;
 			tiles[tileIndex].direction = 0;
 			tileIndex--;
-			movingDirection = 13;
 		}
 		hasClimbedUp = false;
 		hasClimbedDown = false;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && upIsLadder)
 	{
-		if (!hasClimbedUp && isLadder && !IsSelected(iPoint({tiles[tileIndex].position.x, tiles[tileIndex].position.y - 96 - 96 })))
+		if (!hasClimbedUp && isLadder)
 		{
-			if (movingDirection == 0 || movingDirection == 10 || movingDirection == 12)
+			if (!IsSelected(iPoint({ tiles[tileIndex].position.x, tiles[tileIndex].position.y - 96 - 96 })))
 			{
 				tileIndex++;
 
@@ -253,17 +228,16 @@ void SceneCombat::SelectTile()
 				tiles[tileIndex].direction = 0;
 				tileIndex--;
 			}
-			movingDirection = 3;
 			hasClimbedUp = true;
 			hasClimbedDown = false;
 			//tiles[tileIndex].isLadder = true;
 		}
 	}
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && downIsLadder)
 	{
 		if (!hasClimbedDown && isLadder)
 		{
-			if (movingDirection == 0 || movingDirection == 10 || movingDirection == 11 || movingDirection == 12 || movingDirection == 13 || movingDirection == 3)
+			if (!IsSelected(iPoint({ tiles[tileIndex].position.x, tiles[tileIndex].position.y + 96 + 96 })))
 			{
 				tileIndex++;
 
@@ -277,7 +251,6 @@ void SceneCombat::SelectTile()
 				tiles[tileIndex].direction = 0;
 				tileIndex--;
 			}
-			movingDirection = 4;
 			hasClimbedDown = true;
 			hasClimbedUp = false;
 			//tiles[tileIndex].isLadder = true;
@@ -324,6 +297,15 @@ bool SceneCombat::IsSelected(iPoint tilePosition)
 	for (int i = 0; i <= tileIndex; i++)
 	{
 		if (tiles[i].position == tilePosition && tiles[i].isSelected) return true;
+	}
+	return false;
+}
+
+bool SceneCombat::IsAdjacent(iPoint tilePosition)
+{
+	for (int i = 0; i <= tileIndex; i++)
+	{
+		if (tiles[i].position == tilePosition && (i == tileIndex + 1 || i == tileIndex - 1)) return true;
 	}
 	return false;
 }

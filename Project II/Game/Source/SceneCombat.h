@@ -56,6 +56,8 @@ public:
 
 	bool IsSelected(iPoint tilePosition);
 
+	bool IsAdjacent(iPoint tilePosition);
+
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
@@ -70,7 +72,6 @@ public:
 	bool win = false;
 
 	int tileIndex = 0;
-	int movingDirection = 0; //0 = none, 1 = right, 2 = left, 3 = up, 4 = down, 10 right positive, 11 right negative, 12 left positive, 13 left negative
 	bool hasClimbedUp = false;
 	bool hasClimbedDown = false;
 

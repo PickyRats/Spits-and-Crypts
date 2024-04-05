@@ -142,7 +142,7 @@ bool Player::Update(float dt)
 
     currentAnim->Update();
 
-	printf("\r cameraX: %d cameraY: %d positionX: %d positionY %d", app->render->camera.x, app->render->camera.y, position.x, position.y);
+	//printf("\r cameraX: %d cameraY: %d positionX: %d positionY %d", app->render->camera.x, app->render->camera.y, position.x, position.y);
     return true;
 }
 
