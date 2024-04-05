@@ -31,7 +31,7 @@
 		</music>
 
 		<!-- Player -->
-		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+		<player x="96" y="96" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 	</scene>
 
 	<!-- Menu -->

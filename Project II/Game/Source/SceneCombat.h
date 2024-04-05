@@ -13,6 +13,7 @@ struct Tile
 {
 	iPoint position;
 	bool isSelected = false;
+	int direction = 0; //0 = none, 1 = right, 2 = left, 3 = up, 4 = down
 };
 
 class SceneCombat : public Module
@@ -50,6 +51,10 @@ public:
 	void ClampCamera();
 
 	void SelectTile();
+
+	void MovePlayer();
+
+	bool IsSelected(iPoint tilePosition);
 
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
