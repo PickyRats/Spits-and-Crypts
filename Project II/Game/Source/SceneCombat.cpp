@@ -96,7 +96,8 @@ bool SceneCombat::Update(float dt)
 	SelectTile();
 
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) MovePlayer();
-
+	if (isMoving) MovePlayer();
+	printf("\r destination x: %d", IsAdjacent(iPoint({ tiles[tileIndex].position.x, tiles[tileIndex].position.y - 96 - 96 })));
 	return true;
 }
 
@@ -182,11 +183,20 @@ void SceneCombat::SelectTile()
 			tiles[tileIndex].position = { iPoint(tiles[tileIndex - 1].position.x + 96, tiles[tileIndex - 1].position.y) };
 			tiles[tileIndex].direction = 1;
 		}
-		else
+		else if (IsAdjacent(iPoint({ tiles[tileIndex].position.x + 96, tiles[tileIndex].position.y })))
 		{
 			tiles[tileIndex].isSelected = false;
 			tiles[tileIndex].direction = 0;
 			tileIndex--;
+		}
+		else if (!IsAdjacent(iPoint({ tiles[tileIndex].position.x + 96, tiles[tileIndex].position.y })))
+		{
+			int newTileIndex = tileIndex - GetTileIndex({ tiles[tileIndex].position.x + 96, tiles[tileIndex].position.y });
+			for (int i = 0; i <= newTileIndex - 1; i++)
+			{
+				tiles[tileIndex - i] = { iPoint(0,0), false, 0 };
+			}
+			tileIndex -= newTileIndex;
 		}
 		hasClimbedUp = false;
 		hasClimbedDown = false;
@@ -201,11 +211,20 @@ void SceneCombat::SelectTile()
 			tiles[tileIndex].position = { iPoint(tiles[tileIndex - 1].position.x - 96, tiles[tileIndex - 1].position.y) };
 			tiles[tileIndex].direction = 2;
 		}
-		else
+		else if (IsAdjacent(iPoint({ tiles[tileIndex].position.x - 96, tiles[tileIndex].position.y })))
 		{
 			tiles[tileIndex].isSelected = false;
 			tiles[tileIndex].direction = 0;
 			tileIndex--;
+		}
+		else if (!IsAdjacent(iPoint({ tiles[tileIndex].position.x - 96, tiles[tileIndex].position.y })))
+		{
+			int newTileIndex = tileIndex - GetTileIndex({ tiles[tileIndex].position.x - 96, tiles[tileIndex].position.y});
+			for (int i = 0; i <= newTileIndex - 1; i++)
+			{
+				tiles[tileIndex - i] = { iPoint(0,0), false, 0 };
+			}
+			tileIndex -= newTileIndex;
 		}
 		hasClimbedUp = false;
 		hasClimbedDown = false;
@@ -222,11 +241,20 @@ void SceneCombat::SelectTile()
 				tiles[tileIndex].position = { iPoint(tiles[tileIndex - 1].position.x, tiles[tileIndex - 1].position.y - 96 - 96) };
 				tiles[tileIndex].direction = 3;
 			}
-			else
+			else if (IsAdjacent(iPoint({ tiles[tileIndex].position.x, tiles[tileIndex].position.y - 96 - 96 })))
 			{
 				tiles[tileIndex].isSelected = false;
 				tiles[tileIndex].direction = 0;
 				tileIndex--;
+			}
+			else if (!IsAdjacent(iPoint({ tiles[tileIndex].position.x, tiles[tileIndex].position.y - 96 - 96 })))
+			{
+				int newTileIndex = tileIndex - GetTileIndex({ tiles[tileIndex].position.x, tiles[tileIndex].position.y - 96 - 96 });
+				for (int i = 0; i <= newTileIndex - 1; i++)
+				{
+					tiles[tileIndex-i] = { iPoint(0,0), false, 0 };
+				}
+				tileIndex -= newTileIndex;
 			}
 			hasClimbedUp = true;
 			hasClimbedDown = false;
@@ -245,11 +273,20 @@ void SceneCombat::SelectTile()
 				tiles[tileIndex].position = { iPoint(tiles[tileIndex - 1].position.x, tiles[tileIndex - 1].position.y + 96 + 96) };
 				tiles[tileIndex].direction = 4;
 			}
-			else
+			else if(IsAdjacent(iPoint({ tiles[tileIndex].position.x, tiles[tileIndex].position.y + 96 + 96 })))
 			{
 				tiles[tileIndex].isSelected = false;
 				tiles[tileIndex].direction = 0;
 				tileIndex--;
+			}
+			else if (!IsAdjacent(iPoint({ tiles[tileIndex].position.x, tiles[tileIndex].position.y + 96 + 96 })))
+			{
+				int newTileIndex = tileIndex - GetTileIndex({ tiles[tileIndex].position.x, tiles[tileIndex].position.y + 96 + 96 });
+				for (int i = 0; i <= newTileIndex - 1; i++)
+				{
+					tiles[tileIndex - i] = { iPoint(0,0), false, 0 };
+				}
+				tileIndex -= newTileIndex;
 			}
 			hasClimbedDown = true;
 			hasClimbedUp = false;
@@ -268,28 +305,68 @@ void SceneCombat::SelectTile()
 
 void SceneCombat::MovePlayer()
 {
-	for (int i = 0; i <= tileIndex; i++)
+	currentPosition = player->position;
+	if (!isMoving)
 	{
-		if (tiles[i].direction == 1)
+		if (tiles[currentTile].direction == 1)
 		{
-			player->position.x += 96;
+			destinationPosition = { player->position.x + 96, player->position.y };
+			movingDirection = 1;
+			isMoving = true;
 		}
-		if (tiles[i].direction == 2)
+		if (tiles[currentTile].direction == 2)
 		{
-			player->position.x -= 96;
+			destinationPosition = { player->position.x - 96, player->position.y };
+			movingDirection = 2;
+			isMoving = true;
 		}
-		if (tiles[i].direction == 3)
+		if (tiles[currentTile].direction == 3)
 		{
-			player->position.y -= 96 * 2;
+			destinationPosition = { player->position.x, player->position.y - 96 - 96 };
+			movingDirection = 3;
+			isMoving = true;
 		}
-		if (tiles[i].direction == 4)
+		if (tiles[currentTile].direction == 4)
 		{
-			player->position.y += 96 * 2;
+			destinationPosition = { player->position.x, player->position.y + 96 + 96 };
+			movingDirection = 4;
+			isMoving = true;
 		}
-		if (i == tileIndex) tiles[0] = { tiles[tileIndex].position, true, 0};
-		if (i != 0) tiles[i] =  {iPoint(0,0), false, 0};
 	}
-	tileIndex = 0;
+
+	if (currentTile <= tileIndex)
+	{
+		if (currentPosition == destinationPosition)
+		{
+			movingDirection = 0;
+			tiles[currentTile-1] = { iPoint(0,0), false, 0 };
+			currentTile++;
+			isMoving = false;
+			MovePlayer();
+		}
+	}
+	else
+	{
+		isMoving = false;
+		//for (int i = 0; i <= tileIndex; i++)
+		//{
+		//	if (i == tileIndex) tiles[0] = { tiles[tileIndex].position, true, 0 };
+		//	if (i != 0) tiles[i] =  {iPoint(0,0), false, 0};
+		//}
+		tiles[0] = { tiles[tileIndex].position, true, 0 };
+		tileIndex = 0;
+		movingDirection = 0;
+		currentTile = 1;
+	}
+
+	if (movingDirection == 1) player->position.x += 2;
+	if (movingDirection == 2) player->position.x -= 2;
+	if (movingDirection == 3) player->position.y -= 2;
+	if (movingDirection == 4) player->position.y += 2;
+
+
+	//if (i == tileIndex) tiles[0] = { tiles[tileIndex].position, true, 0};
+	//if (i != 0) tiles[i] =  {iPoint(0,0), false, 0};
 }
 
 bool SceneCombat::IsSelected(iPoint tilePosition)
@@ -308,4 +385,13 @@ bool SceneCombat::IsAdjacent(iPoint tilePosition)
 		if (tiles[i].position == tilePosition && (i == tileIndex + 1 || i == tileIndex - 1)) return true;
 	}
 	return false;
+}
+
+int SceneCombat::GetTileIndex(iPoint tilePosition)
+{
+	for (int i = 0; i <= tileIndex; i++)
+	{
+		if (tiles[i].position == tilePosition) return i;
+	}
+	return -1;
 }

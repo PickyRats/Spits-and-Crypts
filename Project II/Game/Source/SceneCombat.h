@@ -54,6 +54,8 @@ public:
 
 	void MovePlayer();
 
+	int GetTileIndex(iPoint tilePosition);
+
 	bool IsSelected(iPoint tilePosition);
 
 	bool IsAdjacent(iPoint tilePosition);
@@ -75,6 +77,12 @@ public:
 	bool hasClimbedUp = false;
 	bool hasClimbedDown = false;
 
+	iPoint currentPosition = { 0, 0 };
+	iPoint initialPosition = { 0, 0 };
+	iPoint destinationPosition = { 0, 0 };
+	int currentTile = 1;
+	bool isMoving = false;
+	int movingDirection = 0;
 
 private:
 	SDL_Texture* backgroundTexture;
