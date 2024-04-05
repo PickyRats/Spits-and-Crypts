@@ -62,9 +62,9 @@ bool SceneCombat::Start()
 
 	tileTexture = app->tex->Load("Assets/Textures/tile.png");
 	selectedTileTexture = app->tex->Load("Assets/Textures/selected_tile.png");
+	cursorTexture = app->tex->Load("Assets/Textures/selection_cursor.png");
 
-	tiles[0].position = { iPoint(96, 96) };
-	tiles[0].isSelected = true;
+	tilePosition = { 96, 96 };
 
 	return true;
 }
@@ -87,17 +87,42 @@ bool SceneCombat::Update(float dt)
 
 	ClampCamera();
 
+	app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
+	const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
+	for (uint i = 0; i < path->Count(); ++i)
+	{
+		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+		if (i == path->Count() - 1) app->render->DrawTexture(selectedTileTexture, pos.x, pos.y);
+		else app->render->DrawTexture(tileTexture, pos.x, pos.y);
+	}
+
+	app->render->DrawTexture(cursorTexture, tilePosition.x, tilePosition.y);
+
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) tilePosition.x += 96;
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) tilePosition.x -= 96;
+	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) tilePosition.y -= (96 * 2);
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) tilePosition.y += (96 * 2);
+
 	app->render->camera.x += (-cameraX - app->render->camera.x) * cameraSmoothingFactor;
 	app->render->camera.y += (-cameraY - app->render->camera.y) * cameraSmoothingFactor;
 
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
-	SelectTile();
+	//SelectTile();
 
-	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) MovePlayer();
-	if (isMoving) MovePlayer();
-	printf("\r destination x: %d", IsAdjacent(iPoint({ tiles[tileIndex].position.x, tiles[tileIndex].position.y - 96 - 96 })));
+	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) isMoving = true;
+	if (isMoving)
+	{
+		iPoint nextTilePath;
+		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
+		if (path->Count() > 1) {
+			nextTilePath = { path->At(1)->x, path->At(1)->y };
+			Move(app->map->WorldToMap(player->position.x, player->position.y), nextTilePath);
+		}
+		else isMoving = false;
+	}
+
 	return true;
 }
 
@@ -163,235 +188,11 @@ bool SceneCombat::OnGuiMouseClickEvent(GuiControl* control)
 	return true;
 }
 
-void SceneCombat::SelectTile()
+void SceneCombat::Move(const iPoint& origin, const iPoint& destination) 
 {
-	bool isLadder = app->map->pathfinding->IsLadder(iPoint{ tiles[tileIndex].position.x / 96, tiles[tileIndex].position.y / 96 });
-	bool upIsLadder = app->map->pathfinding->IsLadder(iPoint{ tiles[tileIndex].position.x / 96, (tiles[tileIndex].position.y - 96 - 96) / 96 });
-	bool downIsLadder = app->map->pathfinding->IsLadder(iPoint{ tiles[tileIndex].position.x / 96, (tiles[tileIndex].position.y + 96 + 96) / 96 });
-	bool rightIsLadder = app->map->pathfinding->IsLadder(iPoint{ (tiles[tileIndex].position.x + 96) / 96, tiles[tileIndex].position.y / 96 });
-	bool leftIsLadder = app->map->pathfinding->IsLadder(iPoint{ (tiles[tileIndex].position.x - 96) / 96, tiles[tileIndex].position.y / 96 });
-	bool rightIsWalkable = app->map->pathfinding->IsWalkable(iPoint{ (tiles[tileIndex].position.x + 96 ) / 96 , tiles[tileIndex].position.y / 96 });
-	bool leftIsWalkable = app->map->pathfinding->IsWalkable(iPoint{ (tiles[tileIndex].position.x - 96) / 96 , tiles[tileIndex].position.y / 96 });
+	float xDiff = destination.x - origin.x;
+	float yDiff = destination.y - origin.y;
 
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && (rightIsWalkable || rightIsLadder))
-	{
-		if (!IsSelected(iPoint({ tiles[tileIndex].position.x + 96, tiles[tileIndex].position.y})))
-		{
-			tileIndex++;
-
-			tiles[tileIndex].isSelected = true;
-			tiles[tileIndex].position = { iPoint(tiles[tileIndex - 1].position.x + 96, tiles[tileIndex - 1].position.y) };
-			tiles[tileIndex].direction = 1;
-		}
-		else if (IsAdjacent(iPoint({ tiles[tileIndex].position.x + 96, tiles[tileIndex].position.y })))
-		{
-			tiles[tileIndex].isSelected = false;
-			tiles[tileIndex].direction = 0;
-			tileIndex--;
-		}
-		else if (!IsAdjacent(iPoint({ tiles[tileIndex].position.x + 96, tiles[tileIndex].position.y })))
-		{
-			int newTileIndex = tileIndex - GetTileIndex({ tiles[tileIndex].position.x + 96, tiles[tileIndex].position.y });
-			for (int i = 0; i <= newTileIndex - 1; i++)
-			{
-				tiles[tileIndex - i] = { iPoint(0,0), false, 0 };
-			}
-			tileIndex -= newTileIndex;
-		}
-		hasClimbedUp = false;
-		hasClimbedDown = false;
-	}
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && (leftIsWalkable || leftIsLadder))
-	{
-		if (!IsSelected(iPoint({ tiles[tileIndex].position.x - 96, tiles[tileIndex].position.y })))
-		{
-			tileIndex++;
-
-			tiles[tileIndex].isSelected = true;
-			tiles[tileIndex].position = { iPoint(tiles[tileIndex - 1].position.x - 96, tiles[tileIndex - 1].position.y) };
-			tiles[tileIndex].direction = 2;
-		}
-		else if (IsAdjacent(iPoint({ tiles[tileIndex].position.x - 96, tiles[tileIndex].position.y })))
-		{
-			tiles[tileIndex].isSelected = false;
-			tiles[tileIndex].direction = 0;
-			tileIndex--;
-		}
-		else if (!IsAdjacent(iPoint({ tiles[tileIndex].position.x - 96, tiles[tileIndex].position.y })))
-		{
-			int newTileIndex = tileIndex - GetTileIndex({ tiles[tileIndex].position.x - 96, tiles[tileIndex].position.y});
-			for (int i = 0; i <= newTileIndex - 1; i++)
-			{
-				tiles[tileIndex - i] = { iPoint(0,0), false, 0 };
-			}
-			tileIndex -= newTileIndex;
-		}
-		hasClimbedUp = false;
-		hasClimbedDown = false;
-	}
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && upIsLadder)
-	{
-		if (!hasClimbedUp && isLadder)
-		{
-			if (!IsSelected(iPoint({ tiles[tileIndex].position.x, tiles[tileIndex].position.y - 96 - 96 })))
-			{
-				tileIndex++;
-
-				tiles[tileIndex].isSelected = true;
-				tiles[tileIndex].position = { iPoint(tiles[tileIndex - 1].position.x, tiles[tileIndex - 1].position.y - 96 - 96) };
-				tiles[tileIndex].direction = 3;
-			}
-			else if (IsAdjacent(iPoint({ tiles[tileIndex].position.x, tiles[tileIndex].position.y - 96 - 96 })))
-			{
-				tiles[tileIndex].isSelected = false;
-				tiles[tileIndex].direction = 0;
-				tileIndex--;
-			}
-			else if (!IsAdjacent(iPoint({ tiles[tileIndex].position.x, tiles[tileIndex].position.y - 96 - 96 })))
-			{
-				int newTileIndex = tileIndex - GetTileIndex({ tiles[tileIndex].position.x, tiles[tileIndex].position.y - 96 - 96 });
-				for (int i = 0; i <= newTileIndex - 1; i++)
-				{
-					tiles[tileIndex-i] = { iPoint(0,0), false, 0 };
-				}
-				tileIndex -= newTileIndex;
-			}
-			hasClimbedUp = true;
-			hasClimbedDown = false;
-			//tiles[tileIndex].isLadder = true;
-		}
-	}
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && downIsLadder)
-	{
-		if (!hasClimbedDown && isLadder)
-		{
-			if (!IsSelected(iPoint({ tiles[tileIndex].position.x, tiles[tileIndex].position.y + 96 + 96 })))
-			{
-				tileIndex++;
-
-				tiles[tileIndex].isSelected = true;
-				tiles[tileIndex].position = { iPoint(tiles[tileIndex - 1].position.x, tiles[tileIndex - 1].position.y + 96 + 96) };
-				tiles[tileIndex].direction = 4;
-			}
-			else if(IsAdjacent(iPoint({ tiles[tileIndex].position.x, tiles[tileIndex].position.y + 96 + 96 })))
-			{
-				tiles[tileIndex].isSelected = false;
-				tiles[tileIndex].direction = 0;
-				tileIndex--;
-			}
-			else if (!IsAdjacent(iPoint({ tiles[tileIndex].position.x, tiles[tileIndex].position.y + 96 + 96 })))
-			{
-				int newTileIndex = tileIndex - GetTileIndex({ tiles[tileIndex].position.x, tiles[tileIndex].position.y + 96 + 96 });
-				for (int i = 0; i <= newTileIndex - 1; i++)
-				{
-					tiles[tileIndex - i] = { iPoint(0,0), false, 0 };
-				}
-				tileIndex -= newTileIndex;
-			}
-			hasClimbedDown = true;
-			hasClimbedUp = false;
-			//tiles[tileIndex].isLadder = true;
-		}
-	}
-
-	for (int i = 0; i <= tileIndex; i++)
-	{
-		if (i == tileIndex && tiles[i].isSelected) app->render->DrawTexture(selectedTileTexture, tiles[i].position.x, tiles[i].position.y);
-		else if (tiles[i].isSelected) app->render->DrawTexture(tileTexture, tiles[i].position.x, tiles[i].position.y);
-		//printf("\n Tile x: %d Tile y: %d selected: %d", tiles[i].position.x, tiles[i].position.y, tiles[i].isSelected);
-	}
-	//printf("\r Tile index: %d Moving Direction: %d Up: %d Down: %d positionX: %d positionY: %d ladder: %d", tileIndex, movingDirection, hasClimbedUp, hasClimbedDown, tiles[tileIndex].position.x, tiles[tileIndex].position.y, isLadder);
-}
-
-void SceneCombat::MovePlayer()
-{
-	currentPosition = player->position;
-	if (!isMoving)
-	{
-		if (tiles[currentTile].direction == 1)
-		{
-			destinationPosition = { player->position.x + 96, player->position.y };
-			movingDirection = 1;
-			isMoving = true;
-		}
-		if (tiles[currentTile].direction == 2)
-		{
-			destinationPosition = { player->position.x - 96, player->position.y };
-			movingDirection = 2;
-			isMoving = true;
-		}
-		if (tiles[currentTile].direction == 3)
-		{
-			destinationPosition = { player->position.x, player->position.y - 96 - 96 };
-			movingDirection = 3;
-			isMoving = true;
-		}
-		if (tiles[currentTile].direction == 4)
-		{
-			destinationPosition = { player->position.x, player->position.y + 96 + 96 };
-			movingDirection = 4;
-			isMoving = true;
-		}
-	}
-
-	if (currentTile <= tileIndex)
-	{
-		if (currentPosition == destinationPosition)
-		{
-			movingDirection = 0;
-			tiles[currentTile-1] = { iPoint(0,0), false, 0 };
-			currentTile++;
-			isMoving = false;
-			MovePlayer();
-		}
-	}
-	else
-	{
-		isMoving = false;
-		//for (int i = 0; i <= tileIndex; i++)
-		//{
-		//	if (i == tileIndex) tiles[0] = { tiles[tileIndex].position, true, 0 };
-		//	if (i != 0) tiles[i] =  {iPoint(0,0), false, 0};
-		//}
-		tiles[0] = { tiles[tileIndex].position, true, 0 };
-		tileIndex = 0;
-		movingDirection = 0;
-		currentTile = 1;
-	}
-
-	if (movingDirection == 1) player->position.x += 2;
-	if (movingDirection == 2) player->position.x -= 2;
-	if (movingDirection == 3) player->position.y -= 2;
-	if (movingDirection == 4) player->position.y += 2;
-
-
-	//if (i == tileIndex) tiles[0] = { tiles[tileIndex].position, true, 0};
-	//if (i != 0) tiles[i] =  {iPoint(0,0), false, 0};
-}
-
-bool SceneCombat::IsSelected(iPoint tilePosition)
-{
-	for (int i = 0; i <= tileIndex; i++)
-	{
-		if (tiles[i].position == tilePosition && tiles[i].isSelected) return true;
-	}
-	return false;
-}
-
-bool SceneCombat::IsAdjacent(iPoint tilePosition)
-{
-	for (int i = 0; i <= tileIndex; i++)
-	{
-		if (tiles[i].position == tilePosition && (i == tileIndex + 1 || i == tileIndex - 1)) return true;
-	}
-	return false;
-}
-
-int SceneCombat::GetTileIndex(iPoint tilePosition)
-{
-	for (int i = 0; i <= tileIndex; i++)
-	{
-		if (tiles[i].position == tilePosition) return i;
-	}
-	return -1;
+	player->position.x += (xDiff < 0) ? -2 : (xDiff > 0) ? 2 : 0;
+	player->position.y += (yDiff < 0) ? -2 : (yDiff > 0) ? 2 : 0;
 }
