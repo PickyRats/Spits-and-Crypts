@@ -90,7 +90,7 @@
 	<!-- SceneOasis -->
 	<sceneOasis>
 		<!-- Scene -->
-		<map path="Assets/Maps/" name="Map_OasisdelFaraón.tmx"/>
+		<map path="Assets/Maps/" name="Map_OasisdelFaraon.tmx"/>
 
 		<!-- Music -->
 		<music>
