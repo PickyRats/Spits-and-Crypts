@@ -64,8 +64,9 @@ bool SceneCombat::Start()
 	selectedTileTexture = app->tex->Load("Assets/Textures/selected_tile.png");
 	cursorTexture = app->tex->Load("Assets/Textures/selection_cursor.png");
 
+	//tiles[0] = { iPoint(96, 96), 0};
 	tilePosition = { 96, 96 };
-
+	app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 	return true;
 }
 
@@ -87,21 +88,42 @@ bool SceneCombat::Update(float dt)
 
 	ClampCamera();
 
-	app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 	const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
 	for (uint i = 0; i < path->Count(); ++i)
 	{
 		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
 		if (i == path->Count() - 1) app->render->DrawTexture(selectedTileTexture, pos.x, pos.y);
-		else app->render->DrawTexture(tileTexture, pos.x, pos.y);
+		else if (!isMoving || currentTile < i + 2) app->render->DrawTexture(tileTexture, pos.x, pos.y);
+		
+		if (pos.x > tiles[i-1].position.x) tiles[i] = { pos, 1 };
+		if (pos.x < tiles[i-1].position.x) tiles[i] = { pos, 2 };
+		if (pos.y < tiles[i-1].position.y) tiles[i] = { pos, 3 };
+		if (pos.y > tiles[i-1].position.y) tiles[i] = { pos, 4 };
 	}
+	tilesCount = path->Count();
 
 	app->render->DrawTexture(cursorTexture, tilePosition.x, tilePosition.y);
 
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) tilePosition.x += 96;
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) tilePosition.x -= 96;
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) tilePosition.y -= (96 * 2);
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) tilePosition.y += (96 * 2);
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && !isMoving)
+	{
+		tilePosition.x += 96;
+		app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
+	}
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && !isMoving)
+	{
+		tilePosition.x -= 96;
+		app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
+	}
+	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && !isMoving)
+	{		
+		tilePosition.y -= (96 * 2);
+		app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
+	}
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && !isMoving)
+	{
+		tilePosition.y += (96 * 2);
+		app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
+	}
 
 	app->render->camera.x += (-cameraX - app->render->camera.x) * cameraSmoothingFactor;
 	app->render->camera.y += (-cameraY - app->render->camera.y) * cameraSmoothingFactor;
@@ -109,19 +131,8 @@ bool SceneCombat::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
-	//SelectTile();
-
-	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) isMoving = true;
-	if (isMoving)
-	{
-		iPoint nextTilePath;
-		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
-		if (path->Count() > 1) {
-			nextTilePath = { path->At(1)->x, path->At(1)->y };
-			Move(app->map->WorldToMap(player->position.x, player->position.y), nextTilePath);
-		}
-		else isMoving = false;
-	}
+	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !isMoving) MovePlayer();
+	if (isMoving) MovePlayer();
 
 	return true;
 }
@@ -188,11 +199,65 @@ bool SceneCombat::OnGuiMouseClickEvent(GuiControl* control)
 	return true;
 }
 
-void SceneCombat::Move(const iPoint& origin, const iPoint& destination) 
+void SceneCombat::MovePlayer()
 {
-	float xDiff = destination.x - origin.x;
-	float yDiff = destination.y - origin.y;
+	currentPosition = player->position;
+	if (!isMoving)
+	{
+		if (tiles[currentTile].direction == 1)
+		{
+			destinationPosition = { player->position.x + 96, player->position.y };
+			movingDirection = 1;
+			isMoving = true;
+		}
+		if (tiles[currentTile].direction == 2)
+		{
+			destinationPosition = { player->position.x - 96, player->position.y };
+			movingDirection = 2;
+			isMoving = true;
+		}
+		if (tiles[currentTile].direction == 3)
+		{
+			destinationPosition = { player->position.x, player->position.y - 96 - 96 };
+			movingDirection = 3;
+			isMoving = true;
+		}
+		if (tiles[currentTile].direction == 4)
+		{
+			destinationPosition = { player->position.x, player->position.y + 96 + 96 };
+			movingDirection = 4;
+			isMoving = true;
+		}
+	}
 
-	player->position.x += (xDiff < 0) ? -2 : (xDiff > 0) ? 2 : 0;
-	player->position.y += (yDiff < 0) ? -2 : (yDiff > 0) ? 2 : 0;
+	if (currentTile <= tilesCount)
+	{
+		if (currentPosition == destinationPosition)
+		{
+			movingDirection = 0;
+			currentTile++;
+			isMoving = false;
+			MovePlayer();
+		}
+	}
+	else
+	{
+		isMoving = false;
+		tiles[0] = { tiles[tilesCount - 1].position, 0 };
+		for (int i = 1; i < currentTile; i++)
+		{
+			tiles[currentTile - i] = { iPoint(0,0), 0 };
+		}
+		tilesCount = 0;
+		movingDirection = 0;
+		currentTile = 1;
+		tilePosition = tiles[0].position;
+		app->map->pathfinding->ClearLastPath();
+		app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
+	}
+
+	if (movingDirection == 1) player->position.x += 2;
+	if (movingDirection == 2) player->position.x -= 2;
+	if (movingDirection == 3) player->position.y -= 2;
+	if (movingDirection == 4) player->position.y += 2;
 }

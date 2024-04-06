@@ -9,6 +9,12 @@
 
 struct SDL_Texture;
 
+struct Tile
+{
+	iPoint position = { 0, 0 };
+	int direction = 0; //0 = none, 1 = right, 2 = left, 3 = up, 4 = down
+};
+
 class SceneCombat : public Module
 {
 public:
@@ -43,7 +49,7 @@ public:
 
 	void ClampCamera();
 
-	void Move(const iPoint& origin, const iPoint& destination);
+	void MovePlayer();
 
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
@@ -58,6 +64,13 @@ public:
 
 	SDL_Texture* cursorTexture;
 	iPoint tilePosition;
+	iPoint currentPosition;
+	iPoint destinationPosition;
+	int movingDirection = 0; //0 = none, 1 = right, 2 = left, 3 = up, 4 = down
+
+	Tile tiles[100];
+	int currentTile = 1;
+	int tilesCount = 0;
 
 private:
 	SDL_Texture* backgroundTexture;
