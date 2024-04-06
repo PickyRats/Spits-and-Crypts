@@ -4,7 +4,7 @@
 #include "Audio.h"
 #include "Render.h"
 #include "Window.h"
-#include "SceneVillage.h"
+#include "SceneTemple.h"
 #include "Map.h"
 #include "FadeToBlack.h"
 #include "GuiManager.h"
@@ -16,19 +16,19 @@
 
 using namespace std;
 
-SceneVillage::SceneVillage(bool enabled) : Module(enabled)
+SceneTemple::SceneTemple(bool enabled) : Module(enabled)
 {
-	name.Create("sceneVillage");
+	name.Create("sceneTemple");
 }
 
 // Destructor
-SceneVillage::~SceneVillage()
+SceneTemple::~SceneTemple()
 {}
 
-pugi::xml_node configNode;
+pugi::xml_node configNodeTemple;
 
 // Called before render is available
-bool SceneVillage::Awake(pugi::xml_node& config)
+bool SceneTemple::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
@@ -44,18 +44,18 @@ bool SceneVillage::Awake(pugi::xml_node& config)
 	//	app->map->path = config.child("map").attribute("path").as_string();
 	//}
 
-	configNode = config;
+	configNodeTemple = config;
 
 	return ret;
 }
 
 // Called before the first frame
-bool SceneVillage::Start()
+bool SceneTemple::Start()
 {
-	if (configNode.child("map")) {
+	if (configNodeTemple.child("map")) {
 		//Get the map name from the config file and assigns the value in the module
-		app->map->mapName = configNode.child("map").attribute("name").as_string();
-		app->map->path = configNode.child("map").attribute("path").as_string();
+		app->map->mapName = configNodeTemple.child("map").attribute("name").as_string();
+		app->map->path = configNodeTemple.child("map").attribute("path").as_string();
 	}
 	app->map->Enable();
 	app->entityManager->Enable();
@@ -77,13 +77,13 @@ bool SceneVillage::Start()
 }
 
 // Called each loop iteration
-bool SceneVillage::PreUpdate()
+bool SceneTemple::PreUpdate()
 {
 	return true;
 }
 
 // Called each loop iteration
-bool SceneVillage::Update(float dt)
+bool SceneTemple::Update(float dt)
 {
 	/*app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);*/
 
@@ -104,7 +104,7 @@ bool SceneVillage::Update(float dt)
 }
 
 // Called each loop iteration
-bool SceneVillage::PostUpdate()
+bool SceneTemple::PostUpdate()
 {
 	bool ret = true;
 
@@ -117,20 +117,20 @@ bool SceneVillage::PostUpdate()
 }
 
 // Called before quitting
-bool SceneVillage::CleanUp()
+bool SceneTemple::CleanUp()
 {
 	LOG("Freeing scene");
 
 	return true;
 }
 
-void SceneVillage::SetCameraPosition(int x, int y)
+void SceneTemple::SetCameraPosition(int x, int y)
 {
 	cameraX = x;
 	cameraY = y;
 }
 
-void SceneVillage::ClampCamera()
+void SceneTemple::ClampCamera()
 {
 	// Clamp camera
 
@@ -142,7 +142,7 @@ void SceneVillage::ClampCamera()
 	
 }
 
-bool SceneVillage::LoadState(pugi::xml_node node)
+bool SceneTemple::LoadState(pugi::xml_node node)
 {
 	pugi::xml_node status = node.append_child("status");
 	status.attribute("status").as_bool();
@@ -150,7 +150,7 @@ bool SceneVillage::LoadState(pugi::xml_node node)
 	return true;
 }
 
-bool SceneVillage::SaveState(pugi::xml_node node)
+bool SceneTemple::SaveState(pugi::xml_node node)
 {
 	pugi::xml_node status = node.append_child("status");
 	status.append_attribute("status").set_value(1);
@@ -158,7 +158,7 @@ bool SceneVillage::SaveState(pugi::xml_node node)
 	return true;
 }
 
-bool SceneVillage::OnGuiMouseClickEvent(GuiControl* control)
+bool SceneTemple::OnGuiMouseClickEvent(GuiControl* control)
 {
 	LOG("Press Gui Control: %d", control->id);
 

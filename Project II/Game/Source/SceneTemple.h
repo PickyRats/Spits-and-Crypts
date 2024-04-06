@@ -1,5 +1,5 @@
-#ifndef __SCENEVILLAGE_H__
-#define __SCENEVILLAGE_H__
+#ifndef __SCENETEMPLE_H__
+#define __SCENETEMPLE_H__
 
 #include "Module.h"
 #include "Player.h"
@@ -9,17 +9,17 @@
 
 struct SDL_Texture;
 
-class SceneVillage : public Module
+class SceneTemple : public Module
 {
 public:
 
-	SceneVillage(bool enabled = true);
+	SceneTemple(bool enabled = true);
 
 	// Destructor
-	virtual ~SceneVillage();
+	virtual ~SceneTemple();
 
 	// Called before render is available
-	bool Awake(pugi::xml_node& config);
+	bool Awake(pugi::xml_node& conf);
 
 	// Called before the first frame
 	bool Start();
