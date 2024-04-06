@@ -1,3 +1,6 @@
+#ifndef __DIALOG_H__
+#define __DIALOG_H__
+
 #include "Point.h"
 #include "Input.h"
 #include "Render.h"
@@ -68,3 +71,4 @@ public:
 	TTF_Font* font;
 
 };
+#endif // __DIALOG_H__

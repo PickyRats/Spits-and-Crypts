@@ -5,6 +5,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "Animation.h"
+#include "DialogTriggerEntity.h"
 #include "SDL/include/SDL.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 
@@ -63,6 +64,9 @@ public:
 	b2Vec2 vel;
 
 	float dt;
+
+	bool contactDialogTrigger = false;
+	DialogTrigger* dialogTriggerContact = nullptr;
 
 };
 

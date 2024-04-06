@@ -111,7 +111,7 @@ bool DialogManager::AddDialog(Dialog* dialog)
 bool DialogManager::ShowDialog(Dialog* dialog)
 {
 	//Mostrar fondo
-	app->render->DrawTexture(background_tex, dialogPosition.x, dialogPosition.y, 0, 0);
+	app->render->DrawTexture(background_tex, dialogPosition.x, dialogPosition.y, 0);
 
 	std::string actualText = dialog->sentence.substr(0, indexText);
 
@@ -143,30 +143,30 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 
 	//Textura dialogo
 	textTexture = CreateTextTexture(dialog->font, actualText.c_str(), textColor, _textBoundWidth);
-	app->render->DrawTexture(textTexture, _dialogPosition.x, _dialogPosition.y, 0, 0);
+	app->render->DrawTexture(textTexture, _dialogPosition.x, _dialogPosition.y, 0);
 
 	//Imagen del personaje
 	if (dialog->face_tex != nullptr) {
-		app->render->DrawTexture(dialog->face_tex, dialogMargin[3] + dialogPosition.x, dialogMargin[0] + dialogPosition.y, 0, 0);
+		app->render->DrawTexture(dialog->face_tex, dialogMargin[3] + dialogPosition.x, dialogMargin[0] + dialogPosition.y, 0);
 	}
 
 
 
 	//Nombre personaje
-	textNameTexture = CreateTextTexture(app->render->primary_font, dialog->name.c_str(), textColor, textNameBoundWidth);
-	app->render->DrawTexture(textNameTexture, dialogMargin[3] + dialogPosition.x + namePosition.x, dialogMargin[0] + dialogPosition.y + namePosition.y, 0, 0);
+	textNameTexture = CreateTextTexture(app->render->font, dialog->name.c_str(), textColor, textNameBoundWidth);
+	app->render->DrawTexture(textNameTexture, dialogMargin[3] + dialogPosition.x + namePosition.x, dialogMargin[0] + dialogPosition.y + namePosition.y, 0);
 
 
 	//Opciones
 	if (dialog->type == DialogType::CHOOSE) {
 
 		//Textura opcion1
-		options1NameTexture = CreateTextTexture(app->render->primary_font, dialog->option1.c_str(), (optionSelected == 1) ? optionSelectedColor : optionColor, optionsBoundWidth);
-		app->render->DrawTexture(options1NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween, 0, 0);
+		options1NameTexture = CreateTextTexture(app->render->font, dialog->option1.c_str(), (optionSelected == 1) ? optionSelectedColor : optionColor, optionsBoundWidth);
+		app->render->DrawTexture(options1NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween, 0);
 
 		//Textura opcion2
-		options2NameTexture = CreateTextTexture(app->render->primary_font, dialog->option2.c_str(), (optionSelected == 2) ? optionSelectedColor : optionColor, optionsBoundWidth);
-		app->render->DrawTexture(options2NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween * 2, 0, 0);
+		options2NameTexture = CreateTextTexture(app->render->font, dialog->option2.c_str(), (optionSelected == 2) ? optionSelectedColor : optionColor, optionsBoundWidth);
+		app->render->DrawTexture(options2NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween * 2, 0);
 	}
 
 
@@ -214,16 +214,16 @@ TTF_Font* DialogManager::FontSelector(const char* font)
 {
 
 	if (std::strcmp(font, "primary") == 0) {
-		return app->render->primary_font;
+		return app->render->font;
 
 	}
 	else if (std::strcmp(font, "secondary") == 0) {
-		return app->render->secondary_font;
+		return app->render->font;
 	}
 
 
 	//Por defecto
-	return app->render->primary_font;
+	return app->render->font;
 }
 
 bool DialogManager::Update(float dt) {
