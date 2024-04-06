@@ -74,11 +74,11 @@ bool SceneMenu::Start()
 	creditsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, NULL, creditsNormal, creditsHover, creditsClick, { 100, 490, 400, 50 }, this);
 	exitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, NULL, exitNormal, exitHover, exitClick, { 100, 570, 400, 50 }, this);
 
-	//startButton->state = GuiControlState::NORMAL;
-	//loadGameButton->state = GuiControlState::DISABLED;
-	//settingsButton->state = GuiControlState::NORMAL;
-	//creditsButton->state = GuiControlState::NORMAL;
-	//exitButton->state = GuiControlState::NORMAL;
+	startButton->state = GuiControlState::NORMAL;
+	loadGameButton->state = GuiControlState::DISABLED;
+	settingsButton->state = GuiControlState::NORMAL;
+	creditsButton->state = GuiControlState::NORMAL;
+	exitButton->state = GuiControlState::NORMAL;
 
 	//Settings Buttons
 	settingsExitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, NULL, exitNormal, exitHover, exitClick, { 1419, 92, 63, 63 }, this);
@@ -90,13 +90,12 @@ bool SceneMenu::Start()
 	settingsAudioButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, NULL, exitNormal, exitHover, exitClick, { 440, 150, 400, 50 }, this);
 	settingsControlsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, NULL, exitNormal, exitHover, exitClick, { 840, 150, 400, 50 }, this);
 
-	/*settingsExitButton->state = GuiControlState::NORMAL;
+	settingsExitButton->state = GuiControlState::NORMAL;
 	settingsFullScreenButton->state = GuiControlState::NORMAL;
 	settingsVSyncButton->state = GuiControlState::NORMAL;
 	settingsMusicButton->state = GuiControlState::NORMAL;
-	settingsFxButton->state = GuiControlState::NORMAL;*/
+	settingsFxButton->state = GuiControlState::NORMAL;
 	
-
 	//Credits Buttons
 	creditsExitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, NULL, exitNormal, exitHover, exitClick, { 1419, 92, 63, 63 }, this);
 	
@@ -185,10 +184,6 @@ bool SceneMenu::Update(float dt)
 			settingsAudioButton->state = GuiControlState::NORMAL;
 			settingsControlsButton->state = GuiControlState::NORMAL;
 			//settingsExitButton->state = GuiControlState::NORMAL;
-			
-			
-			
-			
 		}
 		else if (creditsButton->state == GuiControlState::FOCUSED)
 		{
