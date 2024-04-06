@@ -71,6 +71,7 @@
 		</music>
 		<!-- Player -->
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+		<villageAmbient path="Assets/Audio/Music/Village_ambient.ogg" fadeTime="10" fadeOutTime="2"/>
 	</sceneVillage>
 
 	<!-- sceneOasis -->
@@ -82,6 +83,7 @@
 		</music>
 		<!-- Player -->
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+		<OasisMusic path="Assets/Audio/Music/tabern_Music.ogg" fadeTime="10" fadeOutTime="2"/>
 	</sceneOasis>
 
 	<!-- sceneTemple -->
@@ -93,6 +95,7 @@
 		</music>
 		<!-- Player -->
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+		<TempleMusic path="Assets/Audio/Music/temple_Music.ogg" fadeTime="10" fadeOutTime="2"/>
 	</sceneTemple>
 
 	<map>
