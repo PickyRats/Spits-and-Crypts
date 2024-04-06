@@ -19,7 +19,7 @@ public:
 	virtual ~SceneVillage();
 
 	// Called before render is available
-	bool Awake(pugi::xml_node& conf);
+	bool Awake(pugi::xml_node& config);
 
 	// Called before the first frame
 	bool Start();
@@ -48,7 +48,6 @@ public:
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
-	Player* player;	
 	GuiControlButton* gcButtom;
 
 	bool pause = false;

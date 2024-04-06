@@ -33,16 +33,16 @@ bool SceneVillage::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
-	if (config.child("player")) {
-		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-		player->parameters = config.child("player");
-	}
+	//if (config.child("player")) {
+	//	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+	//	player->parameters = config.child("player");
+	//}
 
-	if (config.child("map")) {
-		//Get the map name from the config file and assigns the value in the module
-		app->map->name = config.child("map").attribute("name").as_string();
-		app->map->path = config.child("map").attribute("path").as_string();
-	}
+	//if (config.child("map")) {
+	//	//Get the map name from the config file and assigns the value in the module
+	//	app->map->mapName = config.child("map").attribute("name").as_string();
+	//	app->map->path = config.child("map").attribute("path").as_string();
+	//}
 
 	configNode = config;
 
@@ -78,8 +78,8 @@ bool SceneVillage::Update(float dt)
 {
 	/*app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);*/
 
-	playerX = player->position.x;
-	playerY = player->position.y;
+	playerX = app->map->player->position.x;
+	playerY = app->map->player->position.y;
 
 	SetCameraPosition(0, 0);
 
