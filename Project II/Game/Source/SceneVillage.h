@@ -77,6 +77,7 @@ private:
 	bool changingLevel = false;
 	bool isLoading = false;
 
+	int VillageMusic;
 };
 
 #endif // __SCENE_H__

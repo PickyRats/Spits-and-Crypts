@@ -73,6 +73,7 @@ bool SceneVillage::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
+	app->audio->PlayMusic(configNode.child("villageAmbient").attribute("path").as_string());
 	return true;
 }
 
