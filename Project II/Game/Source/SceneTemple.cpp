@@ -38,11 +38,11 @@ bool SceneTemple::Awake(pugi::xml_node& config)
 	//	player->parameters = config.child("player");
 	//}
 
-	if (config.child("map")) {
-		//Get the map name from the config file and assigns the value in the module
-		app->map->mapName = config.child("map").attribute("name").as_string();
-		app->map->path = config.child("map").attribute("path").as_string();
-	}
+	//if (config.child("map")) {
+	//	//Get the map name from the config file and assigns the value in the module
+	//	app->map->mapName = config.child("map").attribute("name").as_string();
+	//	app->map->path = config.child("map").attribute("path").as_string();
+	//}
 
 	configNodeTemple = config;
 
@@ -52,6 +52,15 @@ bool SceneTemple::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool SceneTemple::Start()
 {
+	if (configNodeTemple.child("map")) {
+		//Get the map name from the config file and assigns the value in the module
+		app->map->mapName = configNodeTemple.child("map").attribute("name").as_string();
+		app->map->path = configNodeTemple.child("map").attribute("path").as_string();
+	}
+	app->map->Enable();
+	app->entityManager->Enable();
+	app->hud->Enable();
+
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
