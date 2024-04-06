@@ -48,13 +48,12 @@
 		<exitClick texturepath="Assets/Textures/Screens/More/exit_click.png"/>
 		<settings texturepath="Assets/Textures/Screens/More/settings.png"/>
 		<credits texturepath="Assets/Textures/Screens/More/credits.png"/>
-		<returnNormal texturepath="Assets/Textures/Screens/More/return_normal.png"/>
-		<returnHover texturepath="Assets/Textures/Screens/More/return_hover.png"/>
-		<returnClick texturepath="Assets/Textures/Screens/More/return_click.png"/>
 		<settingsBoxNormal texturepath="Assets/Textures/Screens/More/settings_box_normal.png"/>
 		<settingsBoxHover texturepath="Assets/Textures/Screens/More/settings_box_hover.png"/>
+		<settingsControls texturepath="Assets/Textures/Screens/More/settings_controls.png"/>
 		<settingsTick texturepath="Assets/Textures/Screens/More/tick.png"/>
 		<settingsSlider texturepath="Assets/Textures/Screens/More/slider.png"/>
+		<controlsHint texturepath="Assets/Textures/Screens/More/controls_hint.png"/>
 		<buttonFxHover path="Assets/Audio/Fx/button_hover.wav"/>
 		<buttonFxClick path="Assets/Audio/Fx/button_click.wav"/>
 		<buttonFx1 path="Assets/Audio/Fx/Button1.wav"/>
