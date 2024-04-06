@@ -57,7 +57,7 @@ bool SceneMenu::Start()
 	exitHover = app->tex->Load(configNode2.child("exitHover").attribute("texturepath").as_string());
 	exitClick = app->tex->Load(configNode2.child("exitClick").attribute("texturepath").as_string());
 	settings = app->tex->Load(configNode2.child("settings").attribute("texturepath").as_string());
-	credits = app->tex->Load(configNode2.child("credits").attribute("texturepath").as_string());
+	//credits = app->tex->Load(configNode2.child("credits").attribute("texturepath").as_string());
 	returnNormal = app->tex->Load(configNode2.child("returnNormal").attribute("texturepath").as_string());
 	returnHover = app->tex->Load(configNode2.child("returnHover").attribute("texturepath").as_string());
 	returnClick = app->tex->Load(configNode2.child("returnClick").attribute("texturepath").as_string());
@@ -142,7 +142,7 @@ bool SceneMenu::Update(float dt)
 				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 			}
-			app->fade->Fade(this, (Module*)app->sceneVillage, 60.0f);
+			app->fade->Fade(this, (Module*)app->sceneTemple, 60.0f);
 			app->map->Enable();
 			app->entityManager->Enable();
 			app->hud->Enable();

@@ -5,6 +5,7 @@
 #include "Textures.h"
 #include "Audio.h"
 #include "SceneVillage.h"
+#include "SceneTemple.h"
 #include "Map.h"
 #include "Physics.h"
 #include "FadeToBlack.h"
@@ -37,6 +38,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	audio = new Audio();
 	physics = new Physics();
 	sceneVillage = new SceneVillage(false);
+	sceneTemple = new SceneTemple(false);
 	map = new Map(false);
 	entityManager = new EntityManager(false);
 	fade = new FadeToBlack();
@@ -54,6 +56,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(audio);
 	AddModule(physics);
 	AddModule(sceneVillage);
+	AddModule(sceneTemple);
 	AddModule(map);
 	AddModule(entityManager);
 	AddModule(particleManager);

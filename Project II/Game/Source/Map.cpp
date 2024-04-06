@@ -5,7 +5,6 @@
 #include "Map.h"
 #include "Physics.h"
 #include "SceneVillage.h"
-
 #include "Defs.h"
 #include "Log.h"
 
@@ -13,7 +12,7 @@
 #include "SDL_image/include/SDL_image.h"
 
 
-Map::Map(bool enabled) : Module(enabled), mapLoaded(false)
+Map::Map(bool enabled) : Module(enabled)
 {
     name.Create("map");
 }
@@ -28,6 +27,11 @@ bool Map::Awake(pugi::xml_node& config)
     LOG("Loading Map Parser");
     bool ret = true;
 
+    if (config.child("player")) {
+    	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+    	player->parameters = config.child("player");
+    }
+
     return ret;
 }
 
@@ -35,7 +39,7 @@ bool Map::Start() {
 
     //Calls the functon to load the map, make sure that the filename is assigned
     SString mapPath = path;
-    mapPath += name;
+    mapPath += mapName;
     Load(mapPath);
 
     //Initialize the pathfinding
@@ -505,7 +509,7 @@ void Map::UpdateMapSize()
 
 void Map::UpdateTileLoadSize()
 {
-    iPoint playerPosition = app->sceneVillage->player->position;
+    iPoint playerPosition = app->map->player->position;
 
     int playerX = playerPosition.x / tilesSize;
     int playerY = playerPosition.y / tilesSize;
