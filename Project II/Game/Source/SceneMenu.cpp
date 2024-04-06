@@ -142,10 +142,7 @@ bool SceneMenu::Update(float dt)
 				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 			}
-			app->fade->Fade(this, (Module*)app->sceneOasisFaraon, 60.0f);
-			app->map->Enable();
-			app->entityManager->Enable();
-			app->hud->Enable();
+			app->fade->Fade(this, (Module*)app->sceneVillage, 60.0f);
 		}
 		else if (loadGameButton->state == GuiControlState::FOCUSED)
 		{
