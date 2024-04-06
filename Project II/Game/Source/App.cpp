@@ -5,6 +5,7 @@
 #include "Textures.h"
 #include "Audio.h"
 #include "SceneVillage.h"
+#include "SceneOasisFaraon.h"
 #include "SceneTemple.h"
 #include "Map.h"
 #include "Physics.h"
@@ -38,6 +39,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	audio = new Audio();
 	physics = new Physics();
 	sceneVillage = new SceneVillage(false);
+	sceneOasisFaraon = new SceneOasisFaraon(false);
 	sceneTemple = new SceneTemple(false);
 	map = new Map(false);
 	entityManager = new EntityManager(false);
@@ -56,6 +58,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(audio);
 	AddModule(physics);
 	AddModule(sceneVillage);
+	AddModule(sceneOasisFaraon);
 	AddModule(sceneTemple);
 	AddModule(map);
 	AddModule(entityManager);

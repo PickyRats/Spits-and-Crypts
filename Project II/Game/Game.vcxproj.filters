@@ -75,6 +75,7 @@
     <ClCompile Include="Source\SceneMenu.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SceneOasisFaraón.cpp">
     <ClCompile Include="Source\SceneTemple.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
@@ -189,6 +190,7 @@
     <ClInclude Include="Source\SceneMenu.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\SceneOasisFaraón.h">
     <ClInclude Include="Source\SceneTemple.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
