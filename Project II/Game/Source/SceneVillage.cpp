@@ -52,6 +52,15 @@ bool SceneVillage::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool SceneVillage::Start()
 {
+	if (configNode.child("map")) {
+		//Get the map name from the config file and assigns the value in the module
+		app->map->mapName = configNode.child("map").attribute("name").as_string();
+		app->map->path = configNode.child("map").attribute("path").as_string();
+	}
+	app->map->Enable();
+	app->entityManager->Enable();
+	app->hud->Enable();
+
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
