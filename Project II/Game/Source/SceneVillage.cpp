@@ -81,12 +81,12 @@ bool SceneVillage::Update(float dt)
 	playerX = player->position.x;
 	playerY = player->position.y;
 
-	SetCameraPosition(0, 0);
+	SetCameraPosition(playerX-200, 0);
 
 	ClampCamera();
 
-	app->render->camera.x += (-cameraX - app->render->camera.x) * cameraSmoothingFactor;
-	app->render->camera.y += (-cameraY - app->render->camera.y) * cameraSmoothingFactor;
+	app->render->camera.x += (-cameraX - app->render->camera.x);
+	app->render->camera.y += (-cameraY - app->render->camera.y);
 
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
