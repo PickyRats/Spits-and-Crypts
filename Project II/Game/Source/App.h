@@ -16,6 +16,7 @@ class Render;
 class Textures;
 class Audio;
 class SceneVillage;
+class SceneTemple;
 class EntityManager;
 class Map;
 class Physics;
@@ -99,6 +100,7 @@ public:
 	Textures* tex;
 	Audio* audio;
 	SceneVillage* sceneVillage;
+	SceneTemple* sceneTemple;
 	EntityManager* entityManager;
 	Map* map;
 	Physics* physics;
