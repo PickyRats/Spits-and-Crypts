@@ -78,6 +78,7 @@ private:
 
 	SDL_Texture* settingsTick;
 	SDL_Texture* settingsSlider;
+	SDL_Texture* settingsAudioPanel;
 	SDL_Texture* settingsMusicNormal;
 	SDL_Texture* settingsBoxNormal;
 	SDL_Texture* settingsBoxHover;

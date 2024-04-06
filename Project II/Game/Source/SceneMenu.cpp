@@ -64,6 +64,7 @@ bool SceneMenu::Start()
 	settingsControls = app->tex->Load(configNode2.child("settingsControls").attribute("texturepath").as_string());
 	settingsTick = app->tex->Load(configNode2.child("settingsTick").attribute("texturepath").as_string());
 	settingsSlider = app->tex->Load(configNode2.child("settingsSlider").attribute("texturepath").as_string());
+	settingsAudioPanel = app->tex->Load(configNode2.child("settingsAudioPanel").attribute("texturepath").as_string());
 	FxButton1 = app->audio->LoadFx(configNode2.child("buttonFx1").attribute("path").as_string());
 	FxButton2 = app->audio->LoadFx(configNode2.child("buttonFx2").attribute("path").as_string());
 
@@ -251,6 +252,7 @@ bool SceneMenu::Update(float dt)
 			}
 			else if (onSettingsAudio)
 			{
+				app->render->DrawTexture(settingsAudioPanel,340, 200, NULL, SDL_FLIP_NONE, 0);
 				settingsFxButton->state = GuiControlState::NORMAL;
 				settingsMusicButton->state = GuiControlState::NORMAL;
 				settingsFullScreenButton->state = GuiControlState::HIDDEN;
