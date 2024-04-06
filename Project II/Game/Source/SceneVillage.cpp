@@ -33,16 +33,16 @@ bool SceneVillage::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
-	if (config.child("player")) {
-		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-		player->parameters = config.child("player");
-	}
+	//if (config.child("player")) {
+	//	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+	//	player->parameters = config.child("player");
+	//}
 
-	if (config.child("map")) {
-		//Get the map name from the config file and assigns the value in the module
-		app->map->name = config.child("map").attribute("name").as_string();
-		app->map->path = config.child("map").attribute("path").as_string();
-	}
+	//if (config.child("map")) {
+	//	//Get the map name from the config file and assigns the value in the module
+	//	app->map->name = config.child("map").attribute("name").as_string();
+	//	app->map->path = config.child("map").attribute("path").as_string();
+	//}
 
 	configNode = config;
 
