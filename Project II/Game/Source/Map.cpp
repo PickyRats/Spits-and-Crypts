@@ -431,6 +431,11 @@ bool Map::CreateColliders()
                             c1->ctype = ColliderType::DOOR;
                             ret = true;
                             break;
+                        case 5:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::ITERACTABLE;
+                            ret = true;
+                            break;
                         default:
                             break;
                         }
