@@ -74,6 +74,32 @@
 		<musicMenu path="Assets/Audio/Music/menu_music.ogg" fadeTime="10" fadeOutTime="2"/>
 	</scenemenu>
 
+	<!-- SceneVillage -->
+	<sceneVillage>
+		<!-- Scene -->
+		<map path="Assets/Maps/" name="Map_Village.tmx"/>
+
+		<!-- Music -->
+		<music>
+		</music>
+
+		<!-- Player -->
+		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+	</sceneVillage>
+
+	<!-- SceneOasis -->
+	<sceneOasis>
+		<!-- Scene -->
+		<map path="Assets/Maps/" name="Map_OasisdelFaraón.tmx"/>
+
+		<!-- Music -->
+		<music>
+		</music>
+
+		<!-- Player -->
+		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+	</sceneOasis>
+	
 	<!-- Hud -->
 	<hud>
 		<pause texturepath="Assets/Textures/Screens/Pause/pause.png"/>
