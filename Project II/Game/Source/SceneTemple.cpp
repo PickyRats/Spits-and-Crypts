@@ -76,7 +76,7 @@ bool SceneTemple::PreUpdate()
 // Called each loop iteration
 bool SceneTemple::Update(float dt)
 {
-	app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);
+	/*app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);*/
 
 	playerX = player->position.x;
 	playerY = player->position.y;
