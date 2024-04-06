@@ -49,7 +49,14 @@ public:
 
 	void ClampCamera();
 
+	// Move the player following the path generated
 	void MovePlayer();
+
+	// Update the path to follow
+	void UpdatePath();
+
+	// Select the tile where the player is going to move
+	void SelectTiles();
 
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
