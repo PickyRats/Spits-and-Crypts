@@ -3,6 +3,7 @@
 #include "App.h"
 #include "Textures.h"
 #include "SceneVillage.h"
+#include "DialogTriggerEntity.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -85,6 +86,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	{
 	case EntityType::PLAYER:
 		entity = new Player();
+		break;
+	case EntityType::DIALOG_TRIGGER:
+		entity = new DialogTrigger();
 		break;
 	default:
 		break;

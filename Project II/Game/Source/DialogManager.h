@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __DIALOGMANAGER_H__
+#define __DIALOGMANAGER_H__
+
 #include "Module.h"
 #include "Dialog.h"
 #include "Timer.h"
@@ -85,4 +87,4 @@ private:
 
 };
 
-
+#endif // __DIALOGMANAGER_H__

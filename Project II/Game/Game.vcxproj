@@ -95,7 +95,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Dialog.cpp" />
     <ClCompile Include="Source\DialogManager.cpp" />
     <ClCompile Include="Source\DialogTriggerEntity.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
