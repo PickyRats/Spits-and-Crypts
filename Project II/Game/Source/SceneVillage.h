@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "Player.h"
+#include "Npcs.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
 #include <vector>
@@ -19,7 +20,7 @@ public:
 	virtual ~SceneVillage();
 
 	// Called before render is available
-	bool Awake(pugi::xml_node& conf);
+	bool Awake(pugi::xml_node& config);
 
 	// Called before the first frame
 	bool Start();
@@ -48,7 +49,6 @@ public:
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
-	Player* player;	
 	GuiControlButton* gcButtom;
 
 	bool pause = false;
@@ -78,6 +78,7 @@ private:
 	bool changingLevel = false;
 	bool isLoading = false;
 
+	int VillageMusic;
 };
 
 #endif // __SCENE_H__

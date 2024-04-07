@@ -1,5 +1,6 @@
 #include "EntityManager.h"
 #include "Player.h"
+#include "Npcs.h"
 #include "App.h"
 #include "Textures.h"
 #include "SceneVillage.h"
@@ -85,6 +86,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	{
 	case EntityType::PLAYER:
 		entity = new Player();
+		break;
+	case EntityType::NPCS:
+		entity = new Npcs();
 		break;
 	default:
 		break;

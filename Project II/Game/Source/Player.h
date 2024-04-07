@@ -66,6 +66,8 @@ public:
 
 	float dt;
 
+	bool isCombat = false;
+
 };
 
 #endif // __PLAYER_H__

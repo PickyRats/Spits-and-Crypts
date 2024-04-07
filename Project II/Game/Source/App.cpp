@@ -5,6 +5,8 @@
 #include "Textures.h"
 #include "Audio.h"
 #include "SceneVillage.h"
+#include "SceneOasisFaraon.h"
+#include "SceneTemple.h"
 #include "Map.h"
 #include "Physics.h"
 #include "FadeToBlack.h"
@@ -13,6 +15,7 @@
 #include "SceneMenu.h"
 #include "Hud.h"
 #include "SceneIntro.h"
+#include "SceneCombat.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -37,6 +40,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	audio = new Audio();
 	physics = new Physics();
 	sceneVillage = new SceneVillage(false);
+	sceneOasisFaraon = new SceneOasisFaraon(false);
+	sceneTemple = new SceneTemple(false);
 	map = new Map(false);
 	entityManager = new EntityManager(false);
 	fade = new FadeToBlack();
@@ -45,6 +50,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	sceneMenu = new SceneMenu(false);
 	hud = new Hud(false);
 	sceneIntro = new SceneIntro();
+	sceneCombat = new SceneCombat(false);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -53,7 +59,13 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(physics);
+
+	//AddModule(scene);
+	AddModule(sceneCombat);
 	AddModule(sceneVillage);
+	AddModule(sceneOasisFaraon);
+	AddModule(sceneTemple);
+
 	AddModule(map);
 	AddModule(entityManager);
 	AddModule(particleManager);
