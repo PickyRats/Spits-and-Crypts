@@ -79,6 +79,13 @@ private:
 	SDL_Texture* settingsTick;
 	SDL_Texture* settingsSlider;
 	SDL_Texture* settingsAudioPanel;
+	SDL_Texture* settingsOptionsPanel;
+	SDL_Texture* settingsOptionsButtonNormal;
+	SDL_Texture* settingsOptionsButtonHover;
+	SDL_Texture* settingsAudioButtonNormal;
+	SDL_Texture* settingsAudioButtonHover;
+	SDL_Texture* settingsControlsButtonNormal;
+	SDL_Texture* settingsControlsButtonHover;
 	SDL_Texture* settingsMusicNormal;
 	SDL_Texture* settingsBoxNormal;
 	SDL_Texture* settingsBoxHover;
