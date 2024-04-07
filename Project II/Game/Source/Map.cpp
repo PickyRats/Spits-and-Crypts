@@ -5,7 +5,6 @@
 #include "Map.h"
 #include "Physics.h"
 #include "SceneVillage.h"
-
 #include "Defs.h"
 #include "Log.h"
 
@@ -13,7 +12,7 @@
 #include "SDL_image/include/SDL_image.h"
 
 
-Map::Map(bool enabled) : Module(enabled), mapLoaded(false)
+Map::Map(bool enabled) : Module(enabled)
 {
     name.Create("map");
 }
@@ -28,6 +27,11 @@ bool Map::Awake(pugi::xml_node& config)
     LOG("Loading Map Parser");
     bool ret = true;
 
+    if (config.child("player")) {
+    	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+    	player->parameters = config.child("player");
+    }
+
     return ret;
 }
 
@@ -35,7 +39,7 @@ bool Map::Start() {
 
     //Calls the functon to load the map, make sure that the filename is assigned
     SString mapPath = path;
-    mapPath += name;
+    mapPath += mapName;
     Load(mapPath);
 
     //Initialize the pathfinding
@@ -426,6 +430,16 @@ bool Map::CreateColliders()
                             c1->ctype = ColliderType::PLATFORM;
                             ret = true;
                             break;
+                        case 4:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::DOOR;
+                            ret = true;
+                            break;
+                        case 5:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::ITERACTABLE;
+                            ret = true;
+                            break;
                         default:
                             break;
                         }
@@ -500,7 +514,7 @@ void Map::UpdateMapSize()
 
 void Map::UpdateTileLoadSize()
 {
-    iPoint playerPosition = app->sceneVillage->player->position;
+    iPoint playerPosition = app->map->player->position;
 
     int playerX = playerPosition.x / tilesSize;
     int playerY = playerPosition.y / tilesSize;

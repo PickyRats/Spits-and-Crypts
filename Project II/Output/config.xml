@@ -39,7 +39,7 @@
 		<!-- Nieta -->
 		<npc x="550" y="550" texturepath="Assets/Textures/Npcs/nieta.png" id="2"/>
 	</sceneVillage>
-	
+
 	<!-- Intro -->
 	<sceneintro>
 		<logoFx path="Assets/Audio/Fx/Logo.wav"/>
@@ -80,6 +80,47 @@
 		<musicMenu path="Assets/Audio/Music/menu_music.ogg" fadeTime="10" fadeOutTime="2"/>
 	</scenemenu>
 
+	<!-- sceneVillage -->
+	<sceneVillage>
+		<!-- Scene -->
+		<map path="Assets/Maps/" name="Map_Village.tmx"/>
+		<!-- Music -->
+		<music>
+		</music>
+		<!-- Player -->
+		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+		<villageAmbient path="Assets/Audio/Music/Village_ambient.ogg" fadeTime="10" fadeOutTime="2"/>
+	</sceneVillage>
+
+	<!-- sceneOasis -->
+	<sceneOasis>
+		<!-- Scene -->
+		<map path="Assets/Maps/" name="Map_OasisdelFaraon.tmx"/>
+    <!-- Music -->
+		<music>
+		</music>
+		<!-- Player -->
+		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+		<OasisMusic path="Assets/Audio/Music/tabern_Music.ogg" fadeTime="10" fadeOutTime="2"/>
+	</sceneOasis>
+
+	<!-- sceneTemple -->
+	<sceneTemple>
+		<!-- Scene -->
+		<map path="Assets/Maps/" name="Map_Temple.tmx"/>
+    <!-- Music -->
+		<music>
+		</music>
+		<!-- Player -->
+		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+		<TempleMusic path="Assets/Audio/Music/temple_Music.ogg" fadeTime="10" fadeOutTime="2"/>
+	</sceneTemple>
+
+	<map>
+		<!-- Player -->
+		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+	</map>
+	
 	<!-- Hud -->
 	<hud>
 		<pause texturepath="Assets/Textures/Screens/Pause/pause.png"/>

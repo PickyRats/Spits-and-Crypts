@@ -16,6 +16,8 @@ class Render;
 class Textures;
 class Audio;
 class SceneVillage;
+class SceneOasisFaraon;
+class SceneTemple;
 class EntityManager;
 class Map;
 class Physics;
@@ -99,6 +101,8 @@ public:
 	Textures* tex;
 	Audio* audio;
 	SceneVillage* sceneVillage;
+	SceneOasisFaraon* sceneOasisFaraon;
+	SceneTemple* sceneTemple;
 	EntityManager* entityManager;
 	Map* map;
 	Physics* physics;

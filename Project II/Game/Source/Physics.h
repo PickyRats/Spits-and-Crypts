@@ -29,6 +29,7 @@ enum class ColliderType {
 	NPC,
 	PLATFORM,
 	DOOR,
+	ITERACTABLE,
 	UNKNOWN
 	// ..
 };

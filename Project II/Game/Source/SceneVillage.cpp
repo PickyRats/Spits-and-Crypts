@@ -33,10 +33,10 @@ bool SceneVillage::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
-	if (config.child("player")) {
-		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-		player->parameters = config.child("player");
-	}
+	//if (config.child("player")) {
+	//	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+	//	player->parameters = config.child("player");
+	//}
 
 	for (pugi::xml_node itemNode = config.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
 	{
@@ -50,6 +50,12 @@ bool SceneVillage::Awake(pugi::xml_node& config)
 		app->map->path = config.child("map").attribute("path").as_string();
 	}
 
+	//if (config.child("map")) {
+	//	//Get the map name from the config file and assigns the value in the module
+	//	app->map->mapName = config.child("map").attribute("name").as_string();
+	//	app->map->path = config.child("map").attribute("path").as_string();
+	//}
+
 	configNode = config;
 
 	return ret;
@@ -58,6 +64,15 @@ bool SceneVillage::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool SceneVillage::Start()
 {
+	if (configNode.child("map")) {
+		//Get the map name from the config file and assigns the value in the module
+		app->map->mapName = configNode.child("map").attribute("name").as_string();
+		app->map->path = configNode.child("map").attribute("path").as_string();
+	}
+	app->map->Enable();
+	app->entityManager->Enable();
+	app->hud->Enable();
+
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
@@ -70,6 +85,7 @@ bool SceneVillage::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
+	app->audio->PlayMusic(configNode.child("villageAmbient").attribute("path").as_string());
 	return true;
 }
 
@@ -82,10 +98,10 @@ bool SceneVillage::PreUpdate()
 // Called each loop iteration
 bool SceneVillage::Update(float dt)
 {
-	app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);
+	/*app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);*/
 
-	playerX = player->position.x;
-	playerY = player->position.y;
+	playerX = app->map->player->position.x;
+	playerY = app->map->player->position.y;
 
 	SetCameraPosition(0, 0);
 
