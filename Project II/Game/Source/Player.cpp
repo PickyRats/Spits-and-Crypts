@@ -4,8 +4,6 @@
 #include "Audio.h"
 #include "Input.h"
 #include "Render.h"
-#include "Scene.h"
-#include "SceneCombat.h"
 #include "SceneVillage.h"
 #include "Log.h"
 #include "Point.h"
@@ -68,83 +66,83 @@ bool Player::Update(float dt)
 		isDead = true;
 	}
 
-	if (!isDead)
+	if (!isDead && !isCombat)
 	{
 		currentAnim = &idleAnim;
 
-		//vel = pbody->body->GetLinearVelocity();
+		vel = pbody->body->GetLinearVelocity();
 
-		//if (!godMode)
-		//{
-		//	
-		//	//player movement
-		//	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		//	{
-		//		LeftMovement();
-		//	}
+		if (!godMode)
+		{
 
-		//	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		//	{
-		//		RightMovement();
-		//	}
+			//player movement
+			if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+			{
+				LeftMovement();
+			}
 
-		//	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE)
-		//	{
-		//		isWalking = false;
-		//		vel.x = 0;
-		//	}
+			if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+			{
+				RightMovement();
+			}
 
-		//	//jump
-		//	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-		//	{	
-		//		Jump();
-		//	}
+			if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE)
+			{
+				isWalking = false;
+				vel.x = 0;
+			}
 
-		//	vel.y = -GRAVITY_Y;
-		//	pbody->body->SetLinearVelocity(vel);
-		//	playerPbody->body->SetTransform({ pbody->body->GetPosition().x, pbody->body->GetPosition().y - PIXEL_TO_METERS(10) }, 0);
-		//}
-		//else
-		//{	
-		//	//god mode
-		//	vel.SetZero();
+			//jump
+			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+			{
+				Jump();
+			}
 
-		//	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		//	{
-		//		vel.y = -speed * 2 * dt;
-		//	}
-		//	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		//	{
-		//		vel.y = speed * 2 * dt;
-		//	}
-		//	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		//	{
-		//		vel.x = -speed * 2 * dt;
-		//	}
-		//	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		//	{
-		//		vel.x = speed * 2 * dt;
-		//	}
+			vel.y = -GRAVITY_Y;
+			pbody->body->SetLinearVelocity(vel);
+			playerPbody->body->SetTransform({ pbody->body->GetPosition().x, pbody->body->GetPosition().y - PIXEL_TO_METERS(10) }, 0);
+		}
+		else
+		{
+			//god mode
+			vel.SetZero();
 
-		//	pbody->body->SetLinearVelocity(vel);
-		//	playerPbody->body->SetTransform({ pbody->body->GetPosition().x, pbody->body->GetPosition().y - PIXEL_TO_METERS(10) }, 0);
-		//}
+			if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+			{
+				vel.y = -speed * 2 * dt;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+			{
+				vel.y = speed * 2 * dt;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+			{
+				vel.x = -speed * 2 * dt;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+			{
+				vel.x = speed * 2 * dt;
+			}
 
-		//position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 50;
-		//position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 42;
+			pbody->body->SetLinearVelocity(vel);
+			playerPbody->body->SetTransform({ pbody->body->GetPosition().x, pbody->body->GetPosition().y - PIXEL_TO_METERS(10) }, 0);
+		}
+
+		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 50;
+		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 42;
 	}
 	else
 	{
 		// death
-		pbody->body->SetLinearVelocity({0, 0});
+		pbody->body->SetLinearVelocity({ 0, 0 });
 	}
 
 	DrawPlayer();
 
-    currentAnim->Update();
+	currentAnim->Update();
 
 	//printf("\r cameraX: %d cameraY: %d positionX: %d positionY %d", app->render->camera.x, app->render->camera.y, position.x, position.y);
-    return true;
+	return true;
 }
 
 void Player::LeftMovement()
@@ -161,12 +159,12 @@ void Player::RightMovement()
 
 void Player::Jump()
 {
-	
+
 }
 
 void Player::DrawPlayer()
 {
-	
+
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
 
 	if (isFacingRight)

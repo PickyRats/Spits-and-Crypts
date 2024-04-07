@@ -18,12 +18,14 @@ using namespace std;
 
 SceneCombat::SceneCombat(bool enabled) : Module(enabled)
 {
-	name.Create("scene");
+	name.Create("sceneCombat");
 }
 
 // Destructor
 SceneCombat::~SceneCombat()
 {}
+
+pugi::xml_node configNodeCombat;
 
 // Called before render is available
 bool SceneCombat::Awake(pugi::xml_node& config)
@@ -31,23 +33,24 @@ bool SceneCombat::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
-	if (config.child("player")) {
-		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-		player->parameters = config.child("player");
-	}
-
-	if (config.child("map")) {
-		//Get the map name from the config file and assigns the value in the module
-		app->map->name = config.child("map").attribute("name").as_string();
-		app->map->path = config.child("map").attribute("path").as_string();
-	}
-
+	configNodeCombat = config;
 	return ret;
 }
 
 // Called before the first frame
 bool SceneCombat::Start()
 {
+	if (configNodeCombat.child("map")) {
+		//Get the map name from the config file and assigns the value in the module
+		app->map->mapName = configNodeCombat.child("map").attribute("name").as_string();
+		app->map->path = configNodeCombat.child("map").attribute("path").as_string();
+	}
+	app->map->Enable();
+	app->entityManager->Enable();
+	app->hud->Enable();
+
+	app->map->player->isCombat = true;
+
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
@@ -65,7 +68,7 @@ bool SceneCombat::Start()
 	cursorTexture = app->tex->Load("Assets/Textures/selection_cursor.png");
 
 	tilePosition = { 64, 64 };
-	app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
+	app->map->pathfinding->CreatePath(app->map->WorldToMap(app->map->player->position.x, app->map->player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 	return true;
 }
 
@@ -80,8 +83,8 @@ bool SceneCombat::Update(float dt)
 {
 	//app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);
 
-	playerX = player->position.x;
-	playerY = player->position.y;
+	playerX = app->map->player->position.x;
+	playerY = app->map->player->position.y;
 
 	SetCameraPosition(0, 0);
 
@@ -167,32 +170,32 @@ bool SceneCombat::OnGuiMouseClickEvent(GuiControl* control)
 
 void SceneCombat::MovePlayer()
 {
-	currentPosition = player->position;
+	currentPosition = app->map->player->position;
 
 	// Set the destination position
 	if (!isMoving)
 	{
 		if (tiles[currentTile].direction == 1)
 		{
-			destinationPosition = { player->position.x + 64, player->position.y };
+			destinationPosition = { app->map->player->position.x + 64, app->map->player->position.y };
 			movingDirection = 1;
 			isMoving = true;
 		}
 		if (tiles[currentTile].direction == 2)
 		{
-			destinationPosition = { player->position.x - 64, player->position.y };
+			destinationPosition = { app->map->player->position.x - 64, app->map->player->position.y };
 			movingDirection = 2;
 			isMoving = true;
 		}
 		if (tiles[currentTile].direction == 3)
 		{
-			destinationPosition = { player->position.x, player->position.y - 64 - 64 - 64 };
+			destinationPosition = { app->map->player->position.x, app->map->player->position.y - 64 - 64 - 64 };
 			movingDirection = 3;
 			isMoving = true;
 		}
 		if (tiles[currentTile].direction == 4)
 		{
-			destinationPosition = { player->position.x, player->position.y + 64 + 64 + 64 };
+			destinationPosition = { app->map->player->position.x, app->map->player->position.y + 64 + 64 + 64 };
 			movingDirection = 4;
 			isMoving = true;
 		}
@@ -222,14 +225,14 @@ void SceneCombat::MovePlayer()
 		currentTile = 1;
 		tilePosition = tiles[0].position;
 		app->map->pathfinding->ClearLastPath();
-		app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
+		app->map->pathfinding->CreatePath(app->map->WorldToMap(app->map->player->position.x, app->map->player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 	}
 
 	// Move the player
-	if (movingDirection == 1) player->position.x += 2;
-	if (movingDirection == 2) player->position.x -= 2;
-	if (movingDirection == 3) player->position.y -= 2;
-	if (movingDirection == 4) player->position.y += 2;
+	if (movingDirection == 1) app->map->player->position.x += 2;
+	if (movingDirection == 2) app->map->player->position.x -= 2;
+	if (movingDirection == 3) app->map->player->position.y -= 2;
+	if (movingDirection == 4) app->map->player->position.y += 2;
 }
 
 void SceneCombat::UpdatePath()
@@ -265,7 +268,7 @@ void SceneCombat::SelectTiles()
 		{
 			tiles[100 - i] = { iPoint(0,0), 0 };
 		}
-		app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
+		app->map->pathfinding->CreatePath(app->map->WorldToMap(app->map->player->position.x, app->map->player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 	}
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && !isMoving)
 	{
@@ -274,7 +277,7 @@ void SceneCombat::SelectTiles()
 		{
 			tiles[100 - i] = { iPoint(0,0), 0 };
 		}
-		app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
+		app->map->pathfinding->CreatePath(app->map->WorldToMap(app->map->player->position.x, app->map->player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 	}
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && !isMoving)
 	{
@@ -283,7 +286,7 @@ void SceneCombat::SelectTiles()
 		{
 			tiles[100 - i] = { iPoint(0,0), 0 };
 		}
-		app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
+		app->map->pathfinding->CreatePath(app->map->WorldToMap(app->map->player->position.x, app->map->player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 	}
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && !isMoving)
 	{
@@ -292,6 +295,6 @@ void SceneCombat::SelectTiles()
 		{
 			tiles[100 - i] = { iPoint(0,0), 0 };
 		}
-		app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
+		app->map->pathfinding->CreatePath(app->map->WorldToMap(app->map->player->position.x, app->map->player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 	}
 }

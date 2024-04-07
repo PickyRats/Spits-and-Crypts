@@ -201,9 +201,6 @@
     <ClInclude Include="Source\SceneCombat.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EntityPlayer.h">
-    <Filter>Modules\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Npcs.h">
       <Filter>Entities</Filter>
     </ClInclude>
