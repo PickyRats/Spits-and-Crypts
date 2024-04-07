@@ -264,12 +264,16 @@ bool SceneMenu::Update(float dt)
 				settingsVSyncButton->state = GuiControlState::HIDDEN;
 			}
 			else if (onSettingsOptions)
-			{
+			{	
 				app->render->DrawTexture(settingsOptionsPanel, 340, 200, NULL, SDL_FLIP_NONE, 0);
-				settingsFullScreenButton->state = GuiControlState::NORMAL;
-				settingsVSyncButton->state = GuiControlState::NORMAL;
-				settingsFxButton->state = GuiControlState::HIDDEN;
-				settingsMusicButton->state = GuiControlState::HIDDEN;
+				if (buttonsActivated)
+				{
+					buttonsActivated = false;
+					settingsFullScreenButton->state = GuiControlState::NORMAL;
+					settingsVSyncButton->state = GuiControlState::NORMAL;
+					settingsFxButton->state = GuiControlState::HIDDEN;
+					settingsMusicButton->state = GuiControlState::HIDDEN;
+				}
 			}
 		}
 		//return control
@@ -302,6 +306,7 @@ bool SceneMenu::Update(float dt)
 			onSettingsControls = false;
 			onSettingsOptions = true;
 			onSettingsAudio = false;
+			buttonsActivated = true;
 		}
 		else if (settingsAudioButton->state == GuiControlState::FOCUSED)
 		{
@@ -321,6 +326,7 @@ bool SceneMenu::Update(float dt)
 			onSettingsControls = false;
 			onSettingsOptions = false;
 			onSettingsAudio = true;
+			buttonsActivated = true;
 		}
 		else if (settingsControlsButton->state == GuiControlState::FOCUSED)
 		{
@@ -340,6 +346,7 @@ bool SceneMenu::Update(float dt)
 			onSettingsControls = true;
 			onSettingsOptions = false;
 			onSettingsAudio = false;
+			buttonsActivated = true;
 		}
 		else if (settingsFullScreenButton->state == GuiControlState::FOCUSED)
 		{
@@ -349,7 +356,6 @@ bool SceneMenu::Update(float dt)
 				fxHoverPlayed = true;
 			}
 		}
-		
 		else if (settingsFullScreenButton->state == GuiControlState::PRESSED)
 		{
 			if (fxClickPlayed == false)

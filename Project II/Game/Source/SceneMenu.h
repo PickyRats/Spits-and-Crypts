@@ -110,6 +110,7 @@ private:
 	bool onSettingsControls = false;
 	bool onSettingsAudio = true;
 	bool onSettingsOptions = false;
+	bool buttonsActivated = false;
 	bool onCredits = false;
 
 };
