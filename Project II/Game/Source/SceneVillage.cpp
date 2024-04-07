@@ -81,7 +81,7 @@ bool SceneVillage::Update(float dt)
 	playerX = player->position.x;
 	playerY = player->position.y;
 
-	SetCameraPosition(playerX-200, 0);
+	SetCameraPosition(playerX-550, 48);
 
 	ClampCamera();
 
