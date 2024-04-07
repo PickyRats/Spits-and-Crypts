@@ -22,24 +22,6 @@
 		<fx volume="200"/>
 	</audio>
 
-	<sceneVillage>
-		<!-- Scene -->
-		<map path="Assets/Maps/" name="Map_Village.tmx"/>
-
-		<!-- Music -->
-		<music>
-		</music>
-
-		<!-- Player -->
-		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
-
-		<!-- Abuela -->
-		<npc x="300" y="300" texturepath="Assets/Textures/Npcs/abuela.png" id="1"/>
-
-		<!-- Nieta -->
-		<npc x="550" y="550" texturepath="Assets/Textures/Npcs/nieta.png" id="2"/>
-	</sceneVillage>
-
 	<!-- Intro -->
 	<sceneintro>
 		<logoFx path="Assets/Audio/Fx/Logo.wav"/>
@@ -87,9 +69,14 @@
 		<!-- Music -->
 		<music>
 		</music>
-		<!-- Player -->
-		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+		
 		<villageAmbient path="Assets/Audio/Music/Village_ambient.ogg" fadeTime="10" fadeOutTime="2"/>
+
+		<!-- Abuela -->
+		<npc x="300" y="300" texturepath="Assets/Textures/Npcs/abuela.png" id="1"/>
+
+		<!-- Nieta -->
+		<npc x="550" y="550" texturepath="Assets/Textures/Npcs/nieta.png" id="2"/>
 	</sceneVillage>
 
 	<!-- sceneOasis -->
@@ -99,8 +86,7 @@
     <!-- Music -->
 		<music>
 		</music>
-		<!-- Player -->
-		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+
 		<OasisMusic path="Assets/Audio/Music/tabern_Music.ogg" fadeTime="10" fadeOutTime="2"/>
 	</sceneOasis>
 
@@ -111,8 +97,7 @@
     <!-- Music -->
 		<music>
 		</music>
-		<!-- Player -->
-		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+
 		<TempleMusic path="Assets/Audio/Music/temple_Music.ogg" fadeTime="10" fadeOutTime="2"/>
 	</sceneTemple>
 
