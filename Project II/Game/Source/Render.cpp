@@ -62,7 +62,6 @@ bool Render::Awake(pugi::xml_node& config)
 
 	//load a font into memory
 	font = TTF_OpenFont("Assets/Fonts/arlrdbd.ttf", 25);
-
 	return ret;
 }
 

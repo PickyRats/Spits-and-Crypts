@@ -35,8 +35,6 @@ bool DialogTrigger::Start() {
 	std::string fontTarget = parameters.attribute("font").as_string("primary");
 
 
-
-
 	played = false;
 
 	//Cargar dialogos
