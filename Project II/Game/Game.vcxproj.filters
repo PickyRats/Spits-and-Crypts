@@ -198,10 +198,10 @@
     <ClInclude Include="Source\Npcs.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Source\SceneOasisFaraón.h">
+    <ClInclude Include="Source\SceneTemple.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\SceneTemple.h">
+    <ClInclude Include="Source\SceneOasisFaraon.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
