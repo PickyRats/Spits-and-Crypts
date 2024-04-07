@@ -85,10 +85,10 @@ void Npcs::GiveMission(int idMission)
 	switch (idMission)
 	{
 	case 1:
-		printf("Hola soy la abuela");
+		printf(" La abuela dijo: Hola soy la abuela \n");
 		break;
 	case 2:
-		printf("JUEPUTA");
+		printf(" y la nieta respondio: JUEPUTA \n");
 		break;
 	default:
 		break;
