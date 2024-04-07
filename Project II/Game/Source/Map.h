@@ -7,6 +7,7 @@
 #include "PQueue.h"
 #include "DynArray.h"
 #include "Pathfinding.h"
+#include "Player.h"
 
 #include "PugiXml\src\pugixml.hpp"
 
@@ -150,7 +151,8 @@ private:
 	void CreateEntities(const char* nodeName, EntityType entityType, iPoint pos);
 
 public: 
-	SString name;
+	Player* player;
+	SString mapName;
 	SString path;
 	PathFinding* pathfinding;
 

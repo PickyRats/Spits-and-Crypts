@@ -6,7 +6,7 @@
 #include "Audio.h"
 #include "Render.h"
 #include "Window.h"
-#include "Scene.h"
+#include "SceneVillage.h"
 #include "Map.h"
 #include "FadeToBlack.h"
 #include "GuiManager.h"
@@ -62,18 +62,18 @@ bool Hud::Start()
 	settingsReturnNormal = app->tex->Load(configNode3.child("settingsReturnNormal").attribute("texturepath").as_string());
 	settingsReturnHover = app->tex->Load(configNode3.child("settingsReturnHover").attribute("texturepath").as_string());
 	settingsReturnClick = app->tex->Load(configNode3.child("settingsReturnClick").attribute("texturepath").as_string());
-	settingsMusicNormal = app->tex->Load(configNode3.child("settingsMusicNormal").attribute("texturepath").as_string());
-	settingsMusicHover = app->tex->Load(configNode3.child("settingsMusicHover").attribute("texturepath").as_string());
-	settingsMusicClick = app->tex->Load(configNode3.child("settingsMusicClick").attribute("texturepath").as_string());
-	settingsFxNormal = app->tex->Load(configNode3.child("settingsFxNormal").attribute("texturepath").as_string());
-	settingsFxHover = app->tex->Load(configNode3.child("settingsFxHover").attribute("texturepath").as_string());
-	settingsFxClick = app->tex->Load(configNode3.child("settingsFxClick").attribute("texturepath").as_string());
-	settingsFullScreenNormal = app->tex->Load(configNode3.child("settingsFullScreenNormal").attribute("texturepath").as_string());
-	settingsFullScreenHover = app->tex->Load(configNode3.child("settingsFullScreenHover").attribute("texturepath").as_string());
-	settingsFullScreenClick = app->tex->Load(configNode3.child("settingsFullScreenClick").attribute("texturepath").as_string());
-	settingsVSyncNormal = app->tex->Load(configNode3.child("settingsVSyncNormal").attribute("texturepath").as_string());
-	settingsVSyncHover = app->tex->Load(configNode3.child("settingsVSyncHover").attribute("texturepath").as_string());
-	settingsVSyncClick = app->tex->Load(configNode3.child("settingsVSyncClick").attribute("texturepath").as_string());
+	//settingsMusicNormal = app->tex->Load(configNode3.child("settingsMusicNormal").attribute("texturepath").as_string());
+	/*settingsMusicHover = app->tex->Load(configNode3.child("settingsMusicHover").attribute("texturepath").as_string());*/
+	//settingsMusicClick = app->tex->Load(configNode3.child("settingsMusicClick").attribute("texturepath").as_string());
+	//settingsFxNormal = app->tex->Load(configNode3.child("settingsFxNormal").attribute("texturepath").as_string());
+	//settingsFxHover = app->tex->Load(configNode3.child("settingsFxHover").attribute("texturepath").as_string());
+	//settingsFxClick = app->tex->Load(configNode3.child("settingsFxClick").attribute("texturepath").as_string());
+	//settingsFullScreenNormal = app->tex->Load(configNode3.child("settingsFullScreenNormal").attribute("texturepath").as_string());
+	//settingsFullScreenHover = app->tex->Load(configNode3.child("settingsFullScreenHover").attribute("texturepath").as_string());
+	//settingsFullScreenClick = app->tex->Load(configNode3.child("settingsFullScreenClick").attribute("texturepath").as_string());
+	//settingsVSyncNormal = app->tex->Load(configNode3.child("settingsVSyncNormal").attribute("texturepath").as_string());
+	//settingsVSyncHover = app->tex->Load(configNode3.child("settingsVSyncHover").attribute("texturepath").as_string());
+	/*settingsVSyncClick = app->tex->Load(configNode3.child("settingsVSyncClick").attribute("texturepath").as_string());*/
 	settingsTick = app->tex->Load(configNode3.child("settingsTick").attribute("texturepath").as_string());
 	settingsSlider = app->tex->Load(configNode3.child("settingsSlider").attribute("texturepath").as_string());
 	settingsBoxNormal = app->tex->Load(configNode3.child("settingsBoxNormal").attribute("texturepath").as_string());
@@ -94,11 +94,12 @@ bool Hud::Start()
 	settingsMusicButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 10, NULL, settingsSlider, settingsSlider, settingsSlider, { 1124, 259, 30, 80 }, this, { 663, 259, 613, 80 });
 	settingsFxButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 11, NULL, settingsSlider, settingsSlider, settingsSlider, { 1124, 376, 30, 80 }, this, { 663, 376, 613, 80 });
 
-	app->sceneMenu->playButton->state = GuiControlState::HIDDEN;
-	app->sceneMenu->continueButton->state = GuiControlState::HIDDEN;
+	app->sceneMenu->loadGameButton->state = GuiControlState::HIDDEN;
+	app->sceneMenu->startButton->state = GuiControlState::HIDDEN;
+	//app->sceneMenu->continueButton->state = GuiControlState::HIDDEN;
 	app->sceneMenu->settingsButton->state = GuiControlState::HIDDEN;
 	app->sceneMenu->creditsButton->state = GuiControlState::HIDDEN;
-	app->sceneMenu->exitButtonMenu->state = GuiControlState::HIDDEN;
+	app->sceneMenu->exitButton->state = GuiControlState::HIDDEN;
 
 	exitButton->state = GuiControlState::HIDDEN;
 	resumeButton->state = GuiControlState::HIDDEN;
@@ -117,7 +118,7 @@ bool Hud::Start()
 bool Hud::Update(float dt)
 {
 	//Pause menu
-	if (app->scene->pause) {
+	if (app->sceneVillage->pause) {
 		//If pause menu is activated, show buttons
 		if (resumeButton->state == GuiControlState::HIDDEN)
 		{
@@ -133,7 +134,7 @@ bool Hud::Update(float dt)
 			if (resumeButton->state == GuiControlState::FOCUSED) {
 				if (app->sceneMenu->fxHoverPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxHover);
+					app->audio->PlayFx(app->sceneMenu->FxButton1);
 					app->sceneMenu->fxHoverPlayed = true;
 				}
 			}
@@ -141,15 +142,15 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxClickPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxClick);
+					app->audio->PlayFx(app->sceneMenu->FxButton2);
 					app->sceneMenu->fxClickPlayed = true;
 				}
-				app->scene->pause = false;
+				app->sceneVillage->pause = false;
 			}
 			else if (settingsButton->state == GuiControlState::FOCUSED) {
 				if (app->sceneMenu->fxHoverPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxHover);
+					app->audio->PlayFx(app->sceneMenu->FxButton1);
 					app->sceneMenu->fxHoverPlayed = true;
 				}
 			}
@@ -157,7 +158,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxClickPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxClick);
+					app->audio->PlayFx(app->sceneMenu->FxButton2);
 					app->sceneMenu->fxClickPlayed = true;
 				}
 				onSettings = true;
@@ -171,7 +172,7 @@ bool Hud::Update(float dt)
 			else if (backToTitleButton->state == GuiControlState::FOCUSED) {
 				if (app->sceneMenu->fxHoverPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxHover);
+					app->audio->PlayFx(app->sceneMenu->FxButton1);
 					app->sceneMenu->fxHoverPlayed = true;
 				}
 			}
@@ -179,7 +180,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxClickPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxClick);
+					app->audio->PlayFx(app->sceneMenu->FxButton2);
 					app->sceneMenu->fxClickPlayed = true;
 				}
 
@@ -188,17 +189,17 @@ bool Hud::Update(float dt)
 				settingsButton->state = GuiControlState::HIDDEN;
 				exitButton->state = GuiControlState::HIDDEN;
 
-				app->fade->Fade((Module*)app->scene, (Module*)app->sceneMenu, 30.0f);
+				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneMenu, 30.0f);
 				app->map->Disable();
 				app->particleManager->Disable();
 				app->entityManager->Disable();
 				app->hud->Disable();
-				app->scene->pause = false;
+				app->sceneVillage->pause = false;
 			}
 			else if (exitButton->state == GuiControlState::FOCUSED) {
 				if (app->sceneMenu->fxHoverPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxHover);
+					app->audio->PlayFx(app->sceneMenu->FxButton1);
 					app->sceneMenu->fxHoverPlayed = true;
 				}
 			}
@@ -206,7 +207,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxClickPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxClick);
+					app->audio->PlayFx(app->sceneMenu->FxButton2);
 					app->sceneMenu->fxClickPlayed = true;
 				}
 				SDL_Quit();
@@ -232,7 +233,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxHoverPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxHover);
+					app->audio->PlayFx(app->sceneMenu->FxButton1);
 					app->sceneMenu->fxHoverPlayed = true;
 				}
 			}
@@ -240,7 +241,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxClickPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxClick);
+					app->audio->PlayFx(app->sceneMenu->FxButton2);
 					app->sceneMenu->fxClickPlayed = true;
 					onSettings = false;
 					resumeButton->state = GuiControlState::NORMAL;
@@ -253,7 +254,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxHoverPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxHover);
+					app->audio->PlayFx(app->sceneMenu->FxButton1);
 					app->sceneMenu->fxHoverPlayed = true;
 				}
 			}
@@ -262,7 +263,7 @@ bool Hud::Update(float dt)
 				
 				if (app->sceneMenu->fxClickPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxClick);
+					app->audio->PlayFx(app->sceneMenu->FxButton2);
 					app->sceneMenu->fxClickPlayed = true;
 					onSettings = false;
 					SDL_Quit();
@@ -272,7 +273,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxHoverPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxHover);
+					app->audio->PlayFx(app->sceneMenu->FxButton1);
 					app->sceneMenu->fxHoverPlayed = true;
 				}
 			}
@@ -280,7 +281,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxClickPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxClick);
+					app->audio->PlayFx(app->sceneMenu->FxButton2);
 					app->sceneMenu->fxClickPlayed = true;
 					if (app->sceneMenu->fullScreen == false) app->sceneMenu->fullScreen = true;
 					else app->sceneMenu->fullScreen = false;
@@ -290,7 +291,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxHoverPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxHover);
+					app->audio->PlayFx(app->sceneMenu->FxButton1);
 					app->sceneMenu->fxHoverPlayed = true;
 				}
 			}
@@ -298,7 +299,7 @@ bool Hud::Update(float dt)
 			{
 				if (app->sceneMenu->fxClickPlayed == false)
 				{
-					app->audio->PlayFx(app->sceneMenu->buttonFxClick);
+					app->audio->PlayFx(app->sceneMenu->FxButton2);
 					app->sceneMenu->fxClickPlayed = true;
 					if (app->sceneMenu->vSync == false) app->sceneMenu->vSync = true;
 					else app->sceneMenu->vSync = false;

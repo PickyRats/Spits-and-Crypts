@@ -6,6 +6,7 @@
 #include "Render.h"
 #include "Scene.h"
 #include "SceneCombat.h"
+#include "SceneVillage.h"
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
@@ -149,11 +150,13 @@ bool Player::Update(float dt)
 void Player::LeftMovement()
 {
 	isFacingRight = false;
+	vel.x = -speed * 1 * dt;
 }
 
 void Player::RightMovement()
 {
 	isFacingRight = true;
+	vel.x = speed * 1 * dt;
 }
 
 void Player::Jump()

@@ -4,7 +4,7 @@
 #include "Render.h"
 #include "Window.h"
 #include "Log.h"
-#include "Scene.h"
+#include "SceneVillage.h"
 #include "Map.h"
 #include "SDL/include/SDL_render.h"
 

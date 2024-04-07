@@ -34,16 +34,21 @@
 		<player x="64" y="64" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 	</scene>
 
+	<!-- Intro -->
+	<sceneintro>
+		<logoFx path="Assets/Audio/Fx/Logo.wav"/>
+	</sceneintro>
+
 	<!-- Menu -->
 	<scenemenu>
 		<background texturepath="Assets/Textures/Screens/background.png"/>
 		<playNormal texturepath="Assets/Textures/Screens/Play/play_normal.png"/>
 		<playHover texturepath="Assets/Textures/Screens/Play/play_hover.png"/>
 		<playClick texturepath="Assets/Textures/Screens/Play/play_click.png"/>
-		<continueDisabled texturepath="Assets/Textures/Screens/Continue/continue_disabled.png"/>
-		<continueNormal texturepath="Assets/Textures/Screens/Continue/continue_normal.png"/>
-		<continueHover texturepath="Assets/Textures/Screens/Continue/continue_hover.png"/>
-		<continueClick texturepath="Assets/Textures/Screens/Continue/continue_click.png"/>
+		<loadGameDisabled texturepath="Assets/Textures/Screens/LoadGame/load_game_disabled.png"/>
+		<loadGameNormal texturepath="Assets/Textures/Screens/LoadGame/load_game_normal.png"/>
+		<loadGameHover texturepath="Assets/Textures/Screens/LoadGame/load_game_hover.png"/>
+		<loadGameClick texturepath="Assets/Textures/Screens/LoadGame/load_game_click.png"/>
 		<settingsNormal texturepath="Assets/Textures/Screens/Settings/settings_normal.png"/>
 		<settingsHover texturepath="Assets/Textures/Screens/Settings/settings_hover.png"/>
 		<settingsClick texturepath="Assets/Textures/Screens/Settings/settings_click.png"/>
@@ -64,8 +69,55 @@
 		<settingsSlider texturepath="Assets/Textures/Screens/More/slider.png"/>
 		<buttonFxHover path="Assets/Audio/Fx/button_hover.wav"/>
 		<buttonFxClick path="Assets/Audio/Fx/button_click.wav"/>
+		<buttonFx1 path="Assets/Audio/Fx/Button1.wav"/>
+		<buttonFx2 path="Assets/Audio/Fx/Button2.wav"/>
+		<musicMenu path="Assets/Audio/Music/menu_music.ogg" fadeTime="10" fadeOutTime="2"/>
 	</scenemenu>
 
+	<!-- sceneVillage -->
+	<sceneVillage>
+		<!-- Scene -->
+		<map path="Assets/Maps/" name="Map_Village.tmx"/>
+		<!-- Music -->
+		<music>
+		</music>
+		
+		<villageAmbient path="Assets/Audio/Music/Village_ambient.ogg" fadeTime="10" fadeOutTime="2"/>
+
+		<!-- Abuela -->
+		<npc x="300" y="300" texturepath="Assets/Textures/Npcs/abuela.png" id="1"/>
+
+		<!-- Nieta -->
+		<npc x="550" y="550" texturepath="Assets/Textures/Npcs/nieta.png" id="2"/>
+	</sceneVillage>
+
+	<!-- sceneOasis -->
+	<sceneOasis>
+		<!-- Scene -->
+		<map path="Assets/Maps/" name="Map_OasisdelFaraon.tmx"/>
+    <!-- Music -->
+		<music>
+		</music>
+
+		<OasisMusic path="Assets/Audio/Music/tabern_Music.ogg" fadeTime="10" fadeOutTime="2"/>
+	</sceneOasis>
+
+	<!-- sceneTemple -->
+	<sceneTemple>
+		<!-- Scene -->
+		<map path="Assets/Maps/" name="Map_Temple.tmx"/>
+    <!-- Music -->
+		<music>
+		</music>
+
+		<TempleMusic path="Assets/Audio/Music/temple_Music.ogg" fadeTime="10" fadeOutTime="2"/>
+	</sceneTemple>
+
+	<map>
+		<!-- Player -->
+		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+	</map>
+	
 	<!-- Hud -->
 	<hud>
 		<pause texturepath="Assets/Textures/Screens/Pause/pause.png"/>
