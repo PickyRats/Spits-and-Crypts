@@ -32,6 +32,12 @@
 
 		<!-- Player -->
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+
+		<!-- Abuela -->
+		<npc x="300" y="300" texturepath="Assets/Textures/Npcs/abuela.png" id="1"/>
+
+		<!-- Nieta -->
+		<npc x="550" y="550" texturepath="Assets/Textures/Npcs/nieta.png" id="2"/>
 	</sceneVillage>
 	
 	<!-- Intro -->

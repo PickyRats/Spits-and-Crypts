@@ -1,5 +1,6 @@
 #include "EntityManager.h"
 #include "Player.h"
+#include "Npcs.h"
 #include "App.h"
 #include "Textures.h"
 #include "SceneVillage.h"
