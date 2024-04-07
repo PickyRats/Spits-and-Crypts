@@ -169,7 +169,9 @@ private:
 	bool mapLoaded;
 	MapLayer* navigationLayer;
 	int blockedGid = 49;
-	int walkableGid = 1448;
+	int walkableGid = 32;
+	int ladderTopGid = 34;
+	int ladderBottomGid = 31;
 	int startHeight = 0;
 	int endHeight = 0;
 	int startWidth = 0;
@@ -179,7 +181,7 @@ private:
 	int startMapWidth = 0;
 	int endMapWidth = 0;
 	int tilesToLoad = 55;
-	int tilesSize = 32;
+	int tilesSize = 64;
 };
 
 #endif // __MAP_H__

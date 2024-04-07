@@ -10,8 +10,9 @@
 #include "Player.h"
 #include "Window.h"
 #include "Box2D/Box2D/Box2D.h"
-#include "SceneVillage.h"
+
 #include "Map.h"
+
 
 // Tell the compiler to reference the compiled Box2D libraries
 #ifdef _DEBUG

@@ -69,6 +69,16 @@ public:
 		}
 	}
 
+	virtual void UpdatePoints(int pointsCost)
+	{
+		currentPoints -= pointsCost;
+	}
+
+	virtual bool HasAvailablePoints(int pointsCost)
+	{
+		return currentPoints >= pointsCost;
+	}
+
 	virtual void OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	};
@@ -95,6 +105,8 @@ public:
 
 	bool isDead = false;
 	int health = 100;
+	int totalPoints = 10;
+	int currentPoints = 10;
 	bool setLoadPosition = false;
 };
 

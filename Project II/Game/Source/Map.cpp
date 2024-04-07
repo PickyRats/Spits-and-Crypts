@@ -4,7 +4,10 @@
 #include "Textures.h"
 #include "Map.h"
 #include "Physics.h"
+
+#include "SceneCombat.h"
 #include "SceneVillage.h"
+
 #include "Defs.h"
 #include "Log.h"
 
@@ -391,6 +394,8 @@ void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
             //If the gid is a blockedGid is an area that I cannot navigate, so is set in the navigation map as 0, all the other areas can be navigated
             //!!!! make sure that you assign blockedGid according to your map
             if (gid == walkableGid) navigationMap[i] = 1;
+            else if (gid == ladderBottomGid) navigationMap[i] = 2;
+            else if (gid == ladderTopGid) navigationMap[i] = 3;
             else navigationMap[i] = 0;
            
         }
@@ -467,7 +472,7 @@ void Map::DestroyAllColliders()
         {
             ColliderType ctype = physBody->ctype;
 
-            // Comprueba el tipo del collider y elimina solo los tipos específicos
+            // Comprueba el tipo del collider y elimina solo los tipos especÃ­ficos
 
             /*if (ctype == ColliderType::PLATFORM)
             {
@@ -514,6 +519,7 @@ void Map::UpdateMapSize()
 
 void Map::UpdateTileLoadSize()
 {
+
     iPoint playerPosition = app->map->player->position;
 
     int playerX = playerPosition.x / tilesSize;

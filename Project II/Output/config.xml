@@ -22,6 +22,16 @@
 		<fx volume="200"/>
 	</audio>
 
+	<sceneCombat>
+		<!-- Scene -->
+		<map path="Assets/Maps/" name="Map_Combat.tmx"/>
+
+		<!-- Music -->
+		<music>
+		</music>
+
+	</sceneCombat>
+
 	<!-- Intro -->
 	<sceneintro>
 		<logoFx path="Assets/Audio/Fx/Logo.wav"/>
@@ -103,7 +113,7 @@
 
 	<map>
 		<!-- Player -->
-		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+		<player x="64" y="64" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 	</map>
 	
 	<!-- Hud -->
