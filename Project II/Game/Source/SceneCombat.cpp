@@ -64,7 +64,7 @@ bool SceneCombat::Start()
 	selectedTileTexture = app->tex->Load("Assets/Textures/selected_tile.png");
 	cursorTexture = app->tex->Load("Assets/Textures/selection_cursor.png");
 
-	tilePosition = { 96, 96 };
+	tilePosition = { 64, 64 };
 	app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 	return true;
 }
@@ -78,7 +78,7 @@ bool SceneCombat::PreUpdate()
 // Called each loop iteration
 bool SceneCombat::Update(float dt)
 {
-	app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);
+	//app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);
 
 	playerX = player->position.x;
 	playerY = player->position.y;
@@ -174,25 +174,25 @@ void SceneCombat::MovePlayer()
 	{
 		if (tiles[currentTile].direction == 1)
 		{
-			destinationPosition = { player->position.x + 96, player->position.y };
+			destinationPosition = { player->position.x + 64, player->position.y };
 			movingDirection = 1;
 			isMoving = true;
 		}
 		if (tiles[currentTile].direction == 2)
 		{
-			destinationPosition = { player->position.x - 96, player->position.y };
+			destinationPosition = { player->position.x - 64, player->position.y };
 			movingDirection = 2;
 			isMoving = true;
 		}
 		if (tiles[currentTile].direction == 3)
 		{
-			destinationPosition = { player->position.x, player->position.y - 96 - 96 };
+			destinationPosition = { player->position.x, player->position.y - 64 - 64 - 64 };
 			movingDirection = 3;
 			isMoving = true;
 		}
 		if (tiles[currentTile].direction == 4)
 		{
-			destinationPosition = { player->position.x, player->position.y + 96 + 96 };
+			destinationPosition = { player->position.x, player->position.y + 64 + 64 + 64 };
 			movingDirection = 4;
 			isMoving = true;
 		}
@@ -259,22 +259,39 @@ void SceneCombat::SelectTiles()
 {
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && !isMoving)
 	{
-		tilePosition.x += 96;
+
+		tilePosition.x += 64;
+		for (int i = 1; i < 100; i++)
+		{
+			tiles[100 - i] = { iPoint(0,0), 0 };
+		}
 		app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 	}
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && !isMoving)
 	{
-		tilePosition.x -= 96;
+		tilePosition.x -= 64;
+		for (int i = 1; i < 100; i++)
+		{
+			tiles[100 - i] = { iPoint(0,0), 0 };
+		}
 		app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 	}
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && !isMoving)
 	{
-		tilePosition.y -= (96 * 2);
+		tilePosition.y -= (64 * 3);
+		for (int i = 1; i < 100; i++)
+		{
+			tiles[100 - i] = { iPoint(0,0), 0 };
+		}
 		app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 	}
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && !isMoving)
 	{
-		tilePosition.y += (96 * 2);
+		tilePosition.y += (64 * 3);
+		for (int i = 1; i < 100; i++)
+		{
+			tiles[100 - i] = { iPoint(0,0), 0 };
+		}
 		app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 	}
 }

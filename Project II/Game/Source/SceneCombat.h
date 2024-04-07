@@ -97,6 +97,7 @@ private:
 	bool isLoading = false;
 	SDL_Texture* tileTexture;
 	SDL_Texture* selectedTileTexture;
+	int maxTiles = 12;
 };
 
 #endif // __SCENECOMBAT_H__

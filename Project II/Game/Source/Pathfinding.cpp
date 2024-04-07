@@ -56,10 +56,16 @@ bool PathFinding::IsWalkable(const iPoint& pos) const
 }
 
 // Utility: returns true is the tile is a ladder
-bool PathFinding::IsLadder(const iPoint& pos) const
+bool PathFinding::IsLadderBottom(const iPoint& pos) const
 {
 	uchar ladderId = GetTileAt(pos);
 	bool isLadder = ladderId != INVALID_WALK_CODE && ladderId == 2;
+	return  isLadder;
+}
+bool PathFinding::IsLadderTop(const iPoint& pos) const
+{
+	uchar ladderId = GetTileAt(pos);
+	bool isLadder = ladderId != INVALID_WALK_CODE && ladderId == 3;
 	return  isLadder;
 }
 
@@ -94,7 +100,7 @@ int PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 	int iterations = 0;
 
 	// L13: DONE 1: if origin or destination are not walkable, return -1
-	if (((IsWalkable(origin) || IsLadder(origin)) && (IsWalkable(destination) || IsLadder(destination))))
+	if (((IsWalkable(origin) || IsLadderBottom(origin) || IsLadderTop(origin)) && (IsWalkable(destination) || IsLadderBottom(destination) || IsLadderTop(destination))))
 	{
 		// L13: DONE 2: Create two lists: frontier, visited
 		PathList frontier;
@@ -235,20 +241,20 @@ uint PathNode::FindWalkableAdjacents(PathList& listToFill) const
 	uint before = listToFill.list.Count();
 
 	// top
-	tile.Create(pos.x, pos.y + 2);
-	if (app->map->pathfinding->IsLadder(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
+	tile.Create(pos.x, pos.y + 3);
+	if (app->map->pathfinding->IsLadderBottom(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
 
 	// bottom
-	tile.Create(pos.x, pos.y - 2);
-	if (app->map->pathfinding->IsLadder(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
+	tile.Create(pos.x, pos.y - 3);
+	if (app->map->pathfinding->IsLadderTop(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
 
 	// left
 	tile.Create(pos.x + 1, pos.y);
-	if (app->map->pathfinding->IsWalkable(tile) || app->map->pathfinding->IsLadder(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
+	if (app->map->pathfinding->IsWalkable(tile) || app->map->pathfinding->IsLadderTop(tile) || app->map->pathfinding->IsLadderBottom(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
 
 	// right
 	tile.Create(pos.x - 1, pos.y);
-	if (app->map->pathfinding->IsWalkable(tile) || app->map->pathfinding->IsLadder(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
+	if (app->map->pathfinding->IsWalkable(tile) || app->map->pathfinding->IsLadderTop(tile) || app->map->pathfinding->IsLadderBottom(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
 
 	return listToFill.list.Count();
 }
