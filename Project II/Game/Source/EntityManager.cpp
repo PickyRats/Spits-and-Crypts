@@ -86,6 +86,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::PLAYER:
 		entity = new Player();
 		break;
+	case EntityType::NPCS:
+		entity = new Npcs();
+		break;
 	default:
 		break;
 	}

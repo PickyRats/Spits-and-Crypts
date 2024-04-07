@@ -107,6 +107,7 @@
     <ClCompile Include="Source\Audio.cpp" />
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Map.cpp" />
+    <ClCompile Include="Source\Npcs.cpp" />
     <ClCompile Include="Source\ParticleManager.cpp" />
     <ClCompile Include="Source\Pathfinding.cpp" />
     <ClCompile Include="Source\PerfTimer.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="Source\GuiManager.h" />
     <ClInclude Include="Source\Hud.h" />
     <ClInclude Include="Source\Map.h" />
+    <ClInclude Include="Source\Npcs.h" />
     <ClInclude Include="Source\ParticleManager.h" />
     <ClInclude Include="Source\Pathfinding.h" />
     <ClInclude Include="Source\PerfTimer.h" />
