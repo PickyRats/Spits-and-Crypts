@@ -77,7 +77,7 @@ public:
 	Tile tiles[100];
 	int currentTile = 1;
 	int tilesCount = 0;
-
+	int maxTiles = 12;
 private:
 	SDL_Texture* backgroundTexture;
 	SDL_Texture* backgroundTexture2;
@@ -96,7 +96,6 @@ private:
 	bool isLoading = false;
 	SDL_Texture* tileTexture;
 	SDL_Texture* selectedTileTexture;
-	int maxTiles = 12;
 };
 
 #endif // __SCENECOMBAT_H__
