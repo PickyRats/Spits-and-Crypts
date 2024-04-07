@@ -58,6 +58,8 @@ public:
 
 	bool godMode = false;
 
+	bool isjumping = false;
+
 	b2Transform initialTransform;
 
 	b2Vec2 vel;
