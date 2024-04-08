@@ -33,14 +33,20 @@ bool SceneVillage::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
-	if (config.child("player")) {
-		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-		player->parameters = config.child("player");
+	//if (config.child("player")) {
+	//	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+	//	player->parameters = config.child("player");
+	//}
+
+	for (pugi::xml_node itemNode = config.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
+	{
+		Npcs* npc = (Npcs*)app->entityManager->CreateEntity(EntityType::NPCS);
+		npc->parameters = itemNode;
 	}
 
 	//if (config.child("map")) {
 	//	//Get the map name from the config file and assigns the value in the module
-	//	app->map->name = config.child("map").attribute("name").as_string();
+	//	app->map->mapName = config.child("map").attribute("name").as_string();
 	//	app->map->path = config.child("map").attribute("path").as_string();
 	//}
 
@@ -52,6 +58,18 @@ bool SceneVillage::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool SceneVillage::Start()
 {
+	if (configNode.child("map")) {
+		//Get the map name from the config file and assigns the value in the module
+		app->map->mapName = configNode.child("map").attribute("name").as_string();
+		app->map->path = configNode.child("map").attribute("path").as_string();
+	}
+	app->map->Enable();
+	app->entityManager->Enable();
+	app->hud->Enable();
+
+	//Load the player in the map
+	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(96), PIXEL_TO_METERS(640)), 0);
+
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
@@ -64,6 +82,7 @@ bool SceneVillage::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
+	app->audio->PlayMusic(configNode.child("villageAmbient").attribute("path").as_string());
 	return true;
 }
 
@@ -76,17 +95,17 @@ bool SceneVillage::PreUpdate()
 // Called each loop iteration
 bool SceneVillage::Update(float dt)
 {
-	app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);
+	/*app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);*/
 
-	playerX = player->position.x;
-	playerY = player->position.y;
+	playerX = app->map->player->position.x;
+	playerY = app->map->player->position.y;
 
-	SetCameraPosition(0, 0);
+	SetCameraPosition(playerX-550, 48);
 
 	ClampCamera();
 
-	app->render->camera.x += (-cameraX - app->render->camera.x) * cameraSmoothingFactor;
-	app->render->camera.y += (-cameraY - app->render->camera.y) * cameraSmoothingFactor;
+	app->render->camera.x += (-cameraX - app->render->camera.x);
+	app->render->camera.y += (-cameraY - app->render->camera.y);
 
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();

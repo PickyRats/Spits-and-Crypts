@@ -66,7 +66,7 @@ bool Player::Update(float dt)
 		isDead = true;
 	}
 
-	if (!isDead)
+	if (!isDead && !isCombat)
 	{
 		currentAnim = &idleAnim;
 
@@ -74,7 +74,7 @@ bool Player::Update(float dt)
 
 		if (!godMode)
 		{
-			
+
 			//player movement
 			if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 			{
@@ -93,17 +93,17 @@ bool Player::Update(float dt)
 			}
 
 			//jump
-			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !isjumping)
 			{	
 				Jump();
 			}
-
-			vel.y = -GRAVITY_Y;
+		
+			/*vel.y = -GRAVITY_Y;*/
 			pbody->body->SetLinearVelocity(vel);
 			playerPbody->body->SetTransform({ pbody->body->GetPosition().x, pbody->body->GetPosition().y - PIXEL_TO_METERS(10) }, 0);
 		}
 		else
-		{	
+		{
 			//god mode
 			vel.SetZero();
 
@@ -134,15 +134,15 @@ bool Player::Update(float dt)
 	else
 	{
 		// death
-		pbody->body->SetLinearVelocity({0, 0});
+		pbody->body->SetLinearVelocity({ 0, 0 });
 	}
 
 	DrawPlayer();
 
-    currentAnim->Update();
+	currentAnim->Update();
 
-	printf("\r cameraX: %d cameraY: %d positionX: %d positionY %d", app->render->camera.x, app->render->camera.y, position.x, position.y);
-    return true;
+	//printf("\r cameraX: %d cameraY: %d positionX: %d positionY %d", app->render->camera.x, app->render->camera.y, position.x, position.y);
+	return true;
 }
 
 void Player::LeftMovement()
@@ -159,12 +159,13 @@ void Player::RightMovement()
 
 void Player::Jump()
 {
-	
+	vel.y = -speed * 2 * dt;
+	isjumping = true;
 }
 
 void Player::DrawPlayer()
 {
-	
+
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
 
 	if (isFacingRight)
@@ -209,8 +210,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	switch (physB->ctype)
 	{
-	case ColliderType::UNKNOWN:
-		LOG("Collision UNKNOWN");
+	case ColliderType::PLATFORM:
+		isjumping = false;
 		break;
 	}
 
