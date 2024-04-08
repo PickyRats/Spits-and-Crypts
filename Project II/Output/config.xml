@@ -143,6 +143,14 @@
 		<settingsTick texturepath="Assets/Textures/Screens/More/tick.png"/>
 		<settingsSlider texturepath="Assets/Textures/Screens/More/slider.png"/>
 		<settings texturepath="Assets/Textures/Screens/More/settings.png"/>
+
+		<character1 texturepath="Assets/Textures/Screens/More/character1.png"/>
+		<fuego texturepath="Assets/Textures/Screens/More/fuego.png"/>
+		<life1 texturepath="Assets/Textures/Screens/More/life1.png"/>
+		<life2 texturepath="Assets/Textures/Screens/More/life2.png"/>
+		<PP texturepath="Assets/Textures/Screens/More/PP.png"/>
+		<sword1 texturepath="Assets/Textures/Screens/More/sword1.png"/>
+		<sword2 texturepath="Assets/Textures/Screens/More/sword2.png"/>
 	</hud>
 
 	<animations>

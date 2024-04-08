@@ -43,6 +43,15 @@ bool Hud::Awake(pugi::xml_node& config)
 bool Hud::Start()
 {
 	// Charge all textures
+	// Exploration Mode
+	character1 = app->tex->Load(configNode3.child("character1").attribute("texturepath").as_string());
+	fuego = app->tex->Load(configNode3.child("fuego").attribute("texturepath").as_string());
+	life1 = app->tex->Load(configNode3.child("life1").attribute("texturepath").as_string());
+	life2 = app->tex->Load(configNode3.child("life2").attribute("texturepath").as_string());
+	PP = app->tex->Load(configNode3.child("PP").attribute("texturepath").as_string());
+	sword1 = app->tex->Load(configNode3.child("sword1").attribute("texturepath").as_string());
+	sword2 = app->tex->Load(configNode3.child("sword2").attribute("texturepath").as_string());
+	//
 	pause = app->tex->Load(configNode3.child("pause").attribute("texturepath").as_string());
 	exitNormal = app->tex->Load(configNode3.child("exitNormal").attribute("texturepath").as_string());
 	exitHover = app->tex->Load(configNode3.child("exitHover").attribute("texturepath").as_string());
@@ -332,7 +341,38 @@ bool Hud::Update(float dt)
 		settingsVSyncButton->state = GuiControlState::HIDDEN;
 		settingsMusicButton->state = GuiControlState::HIDDEN;
 		settingsFxButton->state = GuiControlState::HIDDEN;
+		
+		//Exploration Mode Drawing
+		////players
+		app->render->DrawTexture(character1, 20, 660, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(character1, 80, 660, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(character1, 140, 660, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(character1, 200, 660, NULL, SDL_FLIP_NONE, 0);
+		////
+		// 
+		////barras vida
+		app->render->DrawTexture(life1, 70, 660, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(life2, 73, 697, NULL, SDL_FLIP_NONE, 0);
+
+		app->render->DrawTexture(life1, 130, 660, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(life2, 133, 697, NULL, SDL_FLIP_NONE, 0);
+
+		app->render->DrawTexture(life1, 190, 660, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(life2, 193, 697, NULL, SDL_FLIP_NONE, 0);
+
+		app->render->DrawTexture(life1, 250, 660, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(life2, 253, 697, NULL, SDL_FLIP_NONE, 0);
+		////
+		//
+		////botones abajo derecha
+		app->render->DrawTexture(sword1, 700, 697, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(fuego, 600, 697, NULL, SDL_FLIP_NONE, 0);
+
+
+		
 	}
+	
+
 
 	return true;
 }

@@ -32,6 +32,18 @@ public:
 	bool onSettings = false;
 private:
 
+	//HUD EXPLORACION
+	SDL_Texture* character1;
+	SDL_Texture* fuego;
+	SDL_Texture* life1;
+	SDL_Texture* life2;
+	SDL_Texture* PP;
+	SDL_Texture* sword1;
+	SDL_Texture* sword2;
+
+
+
+
 	SDL_Texture* exitNormal;
 	SDL_Texture* exitHover;
 	SDL_Texture* exitClick;
