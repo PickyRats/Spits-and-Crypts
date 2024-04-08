@@ -454,6 +454,7 @@ bool Map::CreateColliders()
                         case 7:
                             c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
                             c1->ctype = ColliderType::DOOR_TEMPLE;
+                            printf("7");
                             ret = true;
                             break;
                         case 8:
@@ -523,23 +524,9 @@ void Map::UpdateMapSize()
     {
         startMapWidth = 0;
         startMapHeight = 0;
-        endMapWidth = 108;
-        endMapHeight = 53;
+        endMapWidth = 45;
+        endMapHeight = 12;
     }
-    else if (mapIdx == 2)
-    {
-        startMapWidth = 122;
-        startMapHeight = 0;
-        endMapWidth = 264;
-        endMapHeight = 45;
-    }
-    else if (mapIdx == 3)
-    {
-		startMapWidth = 0;
-		startMapHeight = 50;
-		endMapWidth = 199;
-		endMapHeight = 199;
-	}
     else
     {
         startMapWidth = 0;
@@ -558,9 +545,9 @@ void Map::UpdateTileLoadSize()
     int playerY = playerPosition.y / tilesSize;
 
     startWidth = (playerX - tilesToLoad < startMapWidth) ? startMapWidth : playerX - tilesToLoad;
-    endWidth = (playerX + tilesToLoad > endMapWidth) ? endMapWidth : playerX + tilesToLoad;
+    endWidth = (playerX + tilesToLoad > mapData.width) ? mapData.width : playerX + tilesToLoad;
     startHeight = (playerY - tilesToLoad < startMapHeight) ? startMapHeight : playerY - tilesToLoad;
-    endHeight = (playerY + tilesToLoad > endMapHeight) ? endMapHeight : playerY + tilesToLoad;
+    endHeight = (playerY + tilesToLoad > mapData.height) ? mapData.height : playerY + tilesToLoad;
 }
 
 bool Map::LoadEntities()

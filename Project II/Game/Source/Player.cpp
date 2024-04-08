@@ -213,6 +213,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PLATFORM:
 		isjumping = false;
 		break;
+	case ColliderType::DOOR_ALDEA:
+		app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
+		break;
 	}
 
 }
