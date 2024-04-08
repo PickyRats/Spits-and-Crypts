@@ -59,10 +59,10 @@
 		<villageAmbient path="Assets/Audio/Music/Village_ambient.ogg" fadeTime="10" fadeOutTime="2"/>
 
 		<!-- Abuela -->
-		<npc x="300" y="300" texturepath="Assets/Textures/Npcs/abuela.png" id="1"/>
+		<npc x="300" y="300" texturepath="Assets/Textures/Npcs/abuela.png" id="1" scene="1"/>
 
 		<!-- Nieta -->
-		<npc x="550" y="550" texturepath="Assets/Textures/Npcs/nieta.png" id="2"/>
+		<npc x="550" y="550" texturepath="Assets/Textures/Npcs/nieta.png" id="2" scene="1"/>
 	</sceneVillage>
 
 	<!-- sceneOasis -->
@@ -85,6 +85,12 @@
 		</music>
 
 		<TempleMusic path="Assets/Audio/Music/temple_Music.ogg" fadeTime="10" fadeOutTime="2"/>
+
+		<!-- Maat -->
+		<npc x="300" y="300" texturepath="Assets/Textures/Npcs/maat.png" id="3" scene="2"/>
+
+		<!-- Toth -->
+		<npc x="550" y="550" texturepath="Assets/Textures/Npcs/toth.png" id="4" scene="2"/>
 	</sceneTemple>
 
 	<map>
