@@ -29,8 +29,22 @@
 		<!-- Music -->
 		<music>
 		</music>
-
 	</sceneCombat>
+		<!-- Player -->
+		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+	</sceneVillage>
+	
+	<sceneShop>
+		<!-- Scene -->
+		<map path="Assets/Maps/" name="Map_Shop.tmx"/>
+
+		<!-- Music -->
+		<music>
+		</music>
+
+		<!-- Player -->
+		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+	</sceneShop>
 
 	<!-- Intro -->
 	<sceneintro>

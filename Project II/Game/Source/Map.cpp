@@ -7,6 +7,7 @@
 
 #include "SceneCombat.h"
 #include "SceneVillage.h"
+#include "SceneShop.h"
 
 #include "Defs.h"
 #include "Log.h"

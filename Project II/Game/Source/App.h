@@ -16,6 +16,7 @@ class Render;
 class Textures;
 class Audio;
 class SceneVillage;
+class SceneShop;
 class SceneOasisFaraon;
 class SceneTemple;
 class EntityManager;
@@ -102,6 +103,7 @@ public:
 	Textures* tex;
 	Audio* audio;
 	SceneVillage* sceneVillage;
+	SceneShop* sceneShop;
 	SceneOasisFaraon* sceneOasisFaraon;
 	SceneTemple* sceneTemple;
 	EntityManager* entityManager;

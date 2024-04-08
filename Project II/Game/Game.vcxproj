@@ -113,6 +113,7 @@
     <ClCompile Include="Source\PerfTimer.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
     <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\SceneShop.cpp" />
     <ClCompile Include="Source\SceneOasisFaraon.cpp" />
     <ClCompile Include="Source\SceneTemple.cpp" />
     <ClCompile Include="Source\SceneVillage.cpp" />
@@ -142,6 +143,7 @@
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\PQueue.h" />
     <ClInclude Include="Source\Queue.h" />
+    <ClInclude Include="Source\SceneShop.h" />
     <ClInclude Include="Source\SceneOasisFaraon.h" />
     <ClInclude Include="Source\SceneTemple.h" />
     <ClInclude Include="Source\SceneVillage.h" />
