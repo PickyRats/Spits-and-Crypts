@@ -30,9 +30,6 @@
 		<music>
 		</music>
 	</sceneCombat>
-		<!-- Player -->
-		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
-	</sceneVillage>
 	
 	<sceneShop>
 		<!-- Scene -->
@@ -50,48 +47,6 @@
 	<sceneintro>
 		<logoFx path="Assets/Audio/Fx/Logo.wav"/>
 	</sceneintro>
-
-	<!-- Menu -->
-	<scenemenu>
-		<background texturepath="Assets/Textures/Screens/background.png"/>
-		<playNormal texturepath="Assets/Textures/Screens/Play/play_normal.png"/>
-		<playHover texturepath="Assets/Textures/Screens/Play/play_hover.png"/>
-		<playClick texturepath="Assets/Textures/Screens/Play/play_click.png"/>
-		<loadGameDisabled texturepath="Assets/Textures/Screens/LoadGame/load_game_disabled.png"/>
-		<loadGameNormal texturepath="Assets/Textures/Screens/LoadGame/load_game_normal.png"/>
-		<loadGameHover texturepath="Assets/Textures/Screens/LoadGame/load_game_hover.png"/>
-		<loadGameClick texturepath="Assets/Textures/Screens/LoadGame/load_game_click.png"/>
-		<settingsNormal texturepath="Assets/Textures/Screens/Settings/settings_normal.png"/>
-		<settingsHover texturepath="Assets/Textures/Screens/Settings/settings_hover.png"/>
-		<settingsClick texturepath="Assets/Textures/Screens/Settings/settings_click.png"/>
-		<creditsNormal texturepath="Assets/Textures/Screens/Credits/credits_normal.png"/>
-		<creditsHover texturepath="Assets/Textures/Screens/Credits/credits_hover.png"/>
-		<creditsClick texturepath="Assets/Textures/Screens/Credits/credits_click.png"/>
-		<exitNormal texturepath="Assets/Textures/Screens/More/exit_normal.png"/>
-		<exitHover texturepath="Assets/Textures/Screens/More/exit_hover.png"/>
-		<exitClick texturepath="Assets/Textures/Screens/More/exit_click.png"/>
-		<settings texturepath="Assets/Textures/Screens/More/settings.png"/>
-		<credits texturepath="Assets/Textures/Screens/More/credits.png"/>
-		<settingsBoxNormal texturepath="Assets/Textures/Screens/More/settings_box_normal.png"/>
-		<settingsBoxHover texturepath="Assets/Textures/Screens/More/settings_box_hover.png"/>
-		<settingsControls texturepath="Assets/Textures/Screens/More/settings_controls.png"/>
-		<settingsTick texturepath="Assets/Textures/Screens/More/tick.png"/>
-		<settingsSlider texturepath="Assets/Textures/Screens/More/slider.png"/>
-		<settingsAudioPanel texturepath="Assets/Textures/Screens/More/settings_audio_panel.png"/>
-		<settingsOptionsPanel texturepath="Assets/Textures/Screens/More/settings_options_panel.png"/>
-		<settingsOptionsButtonNormal texturepath="Assets/Textures/Screens/More/settings_options_button_normal.png"/>
-		<settingsOptionsButtonHover texturepath="Assets/Textures/Screens/More/settings_options_button_hover.png"/>
-		<settingsAudioButtonNormal texturepath="Assets/Textures/Screens/More/settings_audio_button_normal.png"/>
-		<settingsAudioButtonHover texturepath="Assets/Textures/Screens/More/settings_audio_button_hover.png"/>
-		<settingsControlsButtonNormal texturepath="Assets/Textures/Screens/More/settings_controls_button_normal.png"/>
-		<settingsControlsButtonHover texturepath="Assets/Textures/Screens/More/settings_controls_button_hover.png"/>
-		<controlsHint texturepath="Assets/Textures/Screens/More/controls_hint.png"/>
-		<buttonFxHover path="Assets/Audio/Fx/button_hover.wav"/>
-		<buttonFxClick path="Assets/Audio/Fx/button_click.wav"/>
-		<buttonFx1 path="Assets/Audio/Fx/Button1.wav"/>
-		<buttonFx2 path="Assets/Audio/Fx/Button2.wav"/>
-		<musicMenu path="Assets/Audio/Music/menu_music.ogg" fadeTime="10" fadeOutTime="2"/>
-	</scenemenu>
 
 	<!-- sceneVillage -->
 	<sceneVillage>
@@ -136,6 +91,48 @@
 		<!-- Player -->
 		<player x="64" y="64" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 	</map>
+	
+	<!-- Menu-->
+	<scenemenu>
+		<background texturepath="Assets/Textures/Screens/background.png"/>
+		<playNormal texturepath="Assets/Textures/Screens/Play/play_normal.png"/>
+		<playHover texturepath="Assets/Textures/Screens/Play/play_hover.png"/>
+		<playClick texturepath="Assets/Textures/Screens/Play/play_click.png"/>
+		<loadGameDisabled texturepath="Assets/Textures/Screens/LoadGame/load_game_disabled.png"/>
+		<loadGameNormal texturepath="Assets/Textures/Screens/LoadGame/load_game_normal.png"/>
+		<loadGameHover texturepath="Assets/Textures/Screens/LoadGame/load_game_hover.png"/>
+		<loadGameClick texturepath="Assets/Textures/Screens/LoadGame/load_game_click.png"/>
+		<settingsNormal texturepath="Assets/Textures/Screens/Settings/settings_normal.png"/>
+		<settingsHover texturepath="Assets/Textures/Screens/Settings/settings_hover.png"/>
+		<settingsClick texturepath="Assets/Textures/Screens/Settings/settings_click.png"/>
+		<creditsNormal texturepath="Assets/Textures/Screens/Credits/credits_normal.png"/>
+		<creditsHover texturepath="Assets/Textures/Screens/Credits/credits_hover.png"/>
+		<creditsClick texturepath="Assets/Textures/Screens/Credits/credits_click.png"/>
+		<exitNormal texturepath="Assets/Textures/Screens/More/exit_normal.png"/>
+		<exitHover texturepath="Assets/Textures/Screens/More/exit_hover.png"/>
+		<exitClick texturepath="Assets/Textures/Screens/More/exit_click.png"/>
+		<settings texturepath="Assets/Textures/Screens/More/settings.png"/>
+		<credits texturepath="Assets/Textures/Screens/More/credits.png"/>
+		<settingsBoxNormal texturepath="Assets/Textures/Screens/More/settings_box_normal.png"/>
+		<settingsBoxHover texturepath="Assets/Textures/Screens/More/settings_box_hover.png"/>
+		<settingsControls texturepath="Assets/Textures/Screens/More/settings_controls.png"/>
+		<settingsTick texturepath="Assets/Textures/Screens/More/tick.png"/>
+		<settingsSlider texturepath="Assets/Textures/Screens/More/slider.png"/>
+		<settingsAudioPanel texturepath="Assets/Textures/Screens/More/settings_audio_panel.png"/>
+		<settingsOptionsPanel texturepath="Assets/Textures/Screens/More/settings_options_panel.png"/>
+		<settingsOptionsButtonNormal texturepath="Assets/Textures/Screens/More/settings_options_button_normal.png"/>
+		<settingsOptionsButtonHover texturepath="Assets/Textures/Screens/More/settings_options_button_hover.png"/>
+		<settingsAudioButtonNormal texturepath="Assets/Textures/Screens/More/settings_audio_button_normal.png"/>
+		<settingsAudioButtonHover texturepath="Assets/Textures/Screens/More/settings_audio_button_hover.png"/>
+		<settingsControlsButtonNormal texturepath="Assets/Textures/Screens/More/settings_controls_button_normal.png"/>
+		<settingsControlsButtonHover texturepath="Assets/Textures/Screens/More/settings_controls_button_hover.png"/>
+		<controlsHint texturepath="Assets/Textures/Screens/More/controls_hint.png"/>
+		<buttonFxHover path="Assets/Audio/Fx/button_hover.wav"/>
+		<buttonFxClick path="Assets/Audio/Fx/button_click.wav"/>
+		<buttonFx1 path="Assets/Audio/Fx/Button1.wav"/>
+		<buttonFx2 path="Assets/Audio/Fx/Button2.wav"/>
+		<musicMenu path="Assets/Audio/Music/menu_music.ogg" fadeTime="10" fadeOutTime="2"/>
+	</scenemenu>
 	
 	<!-- Hud -->
 	<hud>
