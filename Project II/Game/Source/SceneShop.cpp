@@ -1,10 +1,10 @@
+#include "SceneShop.h"
 #include "App.h"
 #include "Input.h"
 #include "Textures.h"
 #include "Audio.h"
 #include "Render.h"
 #include "Window.h"
-#include "SceneVillage.h"
 #include "Map.h"
 #include "FadeToBlack.h"
 #include "GuiManager.h"
@@ -16,19 +16,19 @@
 
 using namespace std;
 
-SceneVillage::SceneVillage(bool enabled) : Module(enabled)
+SceneShop::SceneShop(bool enabled) : Module(enabled)
 {
-	name.Create("sceneVillage");
+	name.Create("sceneShop");
 }
 
 // Destructor
-SceneVillage::~SceneVillage()
+SceneShop::~SceneShop()
 {}
 
-pugi::xml_node configNode;
+pugi::xml_node configNodeShop;
 
 // Called before render is available
-bool SceneVillage::Awake(pugi::xml_node& config)
+bool SceneShop::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
@@ -38,19 +38,19 @@ bool SceneVillage::Awake(pugi::xml_node& config)
 		player->parameters = config.child("player");
 	}
 
-	//if (config.child("map")) {
-	//	//Get the map name from the config file and assigns the value in the module
-	//	app->map->name = config.child("map").attribute("name").as_string();
-	//	app->map->path = config.child("map").attribute("path").as_string();
-	//}
+	if (config.child("map")) {
+		//Get the map name from the config file and assigns the value in the module
+		app->map->name = config.child("map").attribute("name").as_string();
+		app->map->path = config.child("map").attribute("path").as_string();
+	}
 
-	configNode = config;
+	configNodeShop = config;
 
 	return ret;
 }
 
 // Called before the first frame
-bool SceneVillage::Start()
+bool SceneShop::Start()
 {
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -68,13 +68,13 @@ bool SceneVillage::Start()
 }
 
 // Called each loop iteration
-bool SceneVillage::PreUpdate()
+bool SceneShop::PreUpdate()
 {
 	return true;
 }
 
 // Called each loop iteration
-bool SceneVillage::Update(float dt)
+bool SceneShop::Update(float dt)
 {
 	app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);
 
@@ -95,7 +95,7 @@ bool SceneVillage::Update(float dt)
 }
 
 // Called each loop iteration
-bool SceneVillage::PostUpdate()
+bool SceneShop::PostUpdate()
 {
 	bool ret = true;
 
@@ -108,20 +108,20 @@ bool SceneVillage::PostUpdate()
 }
 
 // Called before quitting
-bool SceneVillage::CleanUp()
+bool SceneShop::CleanUp()
 {
 	LOG("Freeing scene");
 
 	return true;
 }
 
-void SceneVillage::SetCameraPosition(int x, int y)
+void SceneShop::SetCameraPosition(int x, int y)
 {
 	cameraX = x;
 	cameraY = y;
 }
 
-void SceneVillage::ClampCamera()
+void SceneShop::ClampCamera()
 {
 	// Clamp camera
 
@@ -130,10 +130,10 @@ void SceneVillage::ClampCamera()
 
 	if (cameraY < 0) cameraY = 0;
 	else if (cameraY + windowH > levelHeight) cameraY = levelHeight - windowH;
-	
+
 }
 
-bool SceneVillage::LoadState(pugi::xml_node node)
+bool SceneShop::LoadState(pugi::xml_node node)
 {
 	pugi::xml_node status = node.append_child("status");
 	status.attribute("status").as_bool();
@@ -141,7 +141,7 @@ bool SceneVillage::LoadState(pugi::xml_node node)
 	return true;
 }
 
-bool SceneVillage::SaveState(pugi::xml_node node)
+bool SceneShop::SaveState(pugi::xml_node node)
 {
 	pugi::xml_node status = node.append_child("status");
 	status.append_attribute("status").set_value(1);
@@ -149,7 +149,7 @@ bool SceneVillage::SaveState(pugi::xml_node node)
 	return true;
 }
 
-bool SceneVillage::OnGuiMouseClickEvent(GuiControl* control)
+bool SceneShop::OnGuiMouseClickEvent(GuiControl* control)
 {
 	LOG("Press Gui Control: %d", control->id);
 

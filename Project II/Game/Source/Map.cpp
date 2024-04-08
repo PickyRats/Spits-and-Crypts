@@ -5,6 +5,7 @@
 #include "Map.h"
 #include "Physics.h"
 #include "SceneVillage.h"
+#include "SceneShop.h"
 
 #include "Defs.h"
 #include "Log.h"
