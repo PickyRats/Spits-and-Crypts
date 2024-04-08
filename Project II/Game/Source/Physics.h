@@ -30,6 +30,7 @@ enum class ColliderType {
 	PLATFORM,
 	DOOR,
 	ITERACTABLE,
+	ENEMY,
 	UNKNOWN
 	// ..
 };

@@ -33,6 +33,11 @@ bool SceneCombat::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
+	if (config.child("enemy")) {
+		enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+		enemy->parameters = config.child("enemy");
+	}
+
 	configNodeCombat = config;
 	return ret;
 }
@@ -64,6 +69,7 @@ bool SceneCombat::Start()
 	app->render->camera.y = 0;
 
 	tileTexture = app->tex->Load("Assets/Textures/tile.png");
+	tileEnemyTexture = app->tex->Load("Assets/Textures/tile_enemy.png");
 	selectedTileTexture = app->tex->Load("Assets/Textures/selected_tile.png");
 	cursorTexture = app->tex->Load("Assets/Textures/selection_cursor.png");
 
@@ -90,9 +96,36 @@ bool SceneCombat::Update(float dt)
 
 	ClampCamera();
 
-	UpdatePath();
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	{
+		app->map->pathfinding->ClearLastPath();
+		app->map->pathfinding->CreatePath(app->map->WorldToMap(app->map->player->position.x, app->map->player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
+		isPlayerTurn = !isPlayerTurn;
+	}
 
-	SelectTiles();
+	if (isPlayerTurn)
+	{
+		maxTiles = 12;
+		UpdatePath();
+
+		SelectTiles();
+	}
+	else
+	{
+		maxTiles = 50;
+
+		app->map->pathfinding->ClearLastPath();
+		app->map->pathfinding->CreatePath(app->map->WorldToMap(enemy->position.x, enemy->position.y), app->map->WorldToMap(app->map->player->position.x, app->map->player->position.y));
+	
+		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
+		for (uint i = 0; i < path->Count(); ++i)
+		{
+			// Draw the path
+			iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+			app->render->DrawTexture(tileEnemyTexture, pos.x, pos.y);
+
+		}
+	}
 
 	app->render->camera.x += (-cameraX - app->render->camera.x) * cameraSmoothingFactor;
 	app->render->camera.y += (-cameraY - app->render->camera.y) * cameraSmoothingFactor;

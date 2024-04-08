@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
 #include <vector>
@@ -78,6 +79,8 @@ public:
 	int currentTile = 1;
 	int tilesCount = 0;
 	int maxTiles = 12;
+
+	Enemy* enemy;
 private:
 	SDL_Texture* backgroundTexture;
 	SDL_Texture* backgroundTexture2;
@@ -95,7 +98,9 @@ private:
 	bool changingLevel = false;
 	bool isLoading = false;
 	SDL_Texture* tileTexture;
+	SDL_Texture* tileEnemyTexture;
 	SDL_Texture* selectedTileTexture;
+	bool isPlayerTurn = true;
 };
 
 #endif // __SCENECOMBAT_H__

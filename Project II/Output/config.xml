@@ -29,7 +29,8 @@
 		<!-- Music -->
 		<music>
 		</music>
-
+		<!--Enemy -->
+		<enemy x="1024" y="448" texturepath="Assets/Textures/enemy.png" id="1"/>
 	</sceneCombat>
 
 	<!-- Intro -->
