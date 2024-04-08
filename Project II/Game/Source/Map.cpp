@@ -431,21 +431,52 @@ bool Map::CreateColliders()
 
                         switch (mapLayerItem->data->Get(x, y))
                         {
-                        case 2:
+                        case 3:
                             c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
-                            c1->ctype = ColliderType::PLATFORM;
+                            c1->ctype = ColliderType::WALL;
                             ret = true;
                             break;
                         case 4:
                             c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
-                            c1->ctype = ColliderType::DOOR;
+                            c1->ctype = ColliderType::PLATFORM;
                             ret = true;
                             break;
                         case 5:
                             c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
-                            c1->ctype = ColliderType::ITERACTABLE;
+                            c1->ctype = ColliderType::DOOR_SHOP;
                             ret = true;
                             break;
+                        case 6:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::DOOR_OASIS;
+                            ret = true;
+                            break;
+                        case 7:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::DOOR_TEMPLE;
+                            ret = true;
+                            break;
+                        case 8:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::DOOR_ALDEA;
+                            ret = true;
+                            break;
+                        case 10:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::COMBAT;
+                            ret = true;
+                            break;
+                        case 11:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::DOOR_FLOOR_1;
+                            ret = true;
+                            break;
+                      
+                       /* case 5:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::ITERACTABLE;
+                            ret = true;
+                            break;*/
                         default:
                             break;
                         }
