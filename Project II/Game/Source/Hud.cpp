@@ -43,7 +43,7 @@ bool Hud::Awake(pugi::xml_node& config)
 bool Hud::Start()
 {
 	// Charge all textures
-	// Exploration Mode
+	// Combat Mode UI
 	character1 = app->tex->Load(configNode3.child("character1").attribute("texturepath").as_string());
 	fuego = app->tex->Load(configNode3.child("fuego").attribute("texturepath").as_string());
 	life1 = app->tex->Load(configNode3.child("life1").attribute("texturepath").as_string());
@@ -51,6 +51,7 @@ bool Hud::Start()
 	PP = app->tex->Load(configNode3.child("PP").attribute("texturepath").as_string());
 	sword1 = app->tex->Load(configNode3.child("sword1").attribute("texturepath").as_string());
 	sword2 = app->tex->Load(configNode3.child("sword2").attribute("texturepath").as_string());
+	number14 = app->tex->Load(configNode3.child("14").attribute("texturepath").as_string());
 	//
 	pause = app->tex->Load(configNode3.child("pause").attribute("texturepath").as_string());
 	exitNormal = app->tex->Load(configNode3.child("exitNormal").attribute("texturepath").as_string());
@@ -342,7 +343,7 @@ bool Hud::Update(float dt)
 		settingsMusicButton->state = GuiControlState::HIDDEN;
 		settingsFxButton->state = GuiControlState::HIDDEN;
 		
-		//Exploration Mode Drawing
+		//Combat Mode Drawing
 		////players
 		app->render->DrawTexture(character1, 20, 660, NULL, SDL_FLIP_NONE, 0);
 		app->render->DrawTexture(character1, 80, 660, NULL, SDL_FLIP_NONE, 0);
@@ -365,11 +366,20 @@ bool Hud::Update(float dt)
 		////
 		//
 		////botones abajo derecha
-		app->render->DrawTexture(sword1, 700, 697, NULL, SDL_FLIP_NONE, 0);
-		app->render->DrawTexture(fuego, 600, 697, NULL, SDL_FLIP_NONE, 0);
-
-
-		
+		app->render->DrawTexture(sword2, 1150, 660, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(fuego, 1210, 660, NULL, SDL_FLIP_NONE, 0);
+		////
+		//
+		////PP
+		app->render->DrawTexture(PP, 20, 20, NULL, SDL_FLIP_NONE, 0);
+		////
+		//
+		////Sword1
+		app->render->DrawTexture(sword1, 1210, 20, NULL, SDL_FLIP_NONE, 0);
+		////
+		//
+		////14
+		app->render->DrawTexture(number14, 30, 30, NULL, SDL_FLIP_NONE, 0);
 	}
 	
 

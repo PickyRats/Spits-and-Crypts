@@ -40,6 +40,7 @@ private:
 	SDL_Texture* PP;
 	SDL_Texture* sword1;
 	SDL_Texture* sword2;
+	SDL_Texture* number14;
 
 
 

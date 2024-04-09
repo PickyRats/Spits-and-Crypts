@@ -151,6 +151,8 @@
 		<PP texturepath="Assets/Textures/Screens/More/PP.png"/>
 		<sword1 texturepath="Assets/Textures/Screens/More/sword1.png"/>
 		<sword2 texturepath="Assets/Textures/Screens/More/sword2.png"/>
+		<number14 texturepath="Assets/Textures/Screens/More/14.png"/>
+		
 	</hud>
 
 	<animations>
