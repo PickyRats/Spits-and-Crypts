@@ -44,6 +44,8 @@ private:
 	SDL_Texture* L3Move;
 	SDL_Texture* execute;
 	SDL_Texture* Xaccept;
+	SDL_Texture* playerverd;
+	SDL_Texture* enemyrojo;
 
 
 

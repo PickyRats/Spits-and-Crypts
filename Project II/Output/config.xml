@@ -155,6 +155,8 @@
 		<L3Move texturepath="Assets/Textures/Screens/More/L3Move.png"/>
 		<execute texturepath="Assets/Textures/Screens/More/4execute.png"/>
 		<Xaccept texturepath="Assets/Textures/Screens/More/Xaccept.png"/>
+		<playerverd texturepath="Assets/Textures/Screens/More/playerverd.png"/>
+		<enemyrojo texturepath="Assets/Textures/Screens/More/enemyrojo.png"/>
 		
 	</hud>
 

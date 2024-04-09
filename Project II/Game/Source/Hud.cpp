@@ -55,6 +55,8 @@ bool Hud::Start()
 	L3Move = app->tex->Load(configNode3.child("L3Move").attribute("texturepath").as_string());
 	execute = app->tex->Load(configNode3.child("execute").attribute("texturepath").as_string());
 	Xaccept = app->tex->Load(configNode3.child("Xaccept").attribute("texturepath").as_string());
+	playerverd = app->tex->Load(configNode3.child("playerverd").attribute("texturepath").as_string());
+	enemyrojo = app->tex->Load(configNode3.child("enemyrojo").attribute("texturepath").as_string());
 
 	//
 	pause = app->tex->Load(configNode3.child("pause").attribute("texturepath").as_string());
@@ -348,56 +350,64 @@ bool Hud::Update(float dt)
 		settingsFxButton->state = GuiControlState::HIDDEN;
 		
 		//Combat Mode Drawing
-		////players
-		app->render->DrawTexture(character1, 20, 660, NULL, SDL_FLIP_NONE, 0);
-		app->render->DrawTexture(character1, 80, 660, NULL, SDL_FLIP_NONE, 0);
-		app->render->DrawTexture(character1, 140, 660, NULL, SDL_FLIP_NONE, 0);
-		app->render->DrawTexture(character1, 200, 660, NULL, SDL_FLIP_NONE, 0);
-		////
-		// 
-		////barras vida
-		app->render->DrawTexture(life1, 70, 660, NULL, SDL_FLIP_NONE, 0);
-		app->render->DrawTexture(life2, 73, 697, NULL, SDL_FLIP_NONE, 0);
+		//////players
+		//app->render->DrawTexture(character1, 20, 660, NULL, SDL_FLIP_NONE, 0);
+		//app->render->DrawTexture(character1, 80, 660, NULL, SDL_FLIP_NONE, 0);
+		//app->render->DrawTexture(character1, 140, 660, NULL, SDL_FLIP_NONE, 0);
+		//app->render->DrawTexture(character1, 200, 660, NULL, SDL_FLIP_NONE, 0);
+		//////
+		//// 
+		//////barras vida
+		//app->render->DrawTexture(life1, 70, 660, NULL, SDL_FLIP_NONE, 0);
+		//app->render->DrawTexture(life2, 73, 697, NULL, SDL_FLIP_NONE, 0);
 
-		app->render->DrawTexture(life1, 130, 660, NULL, SDL_FLIP_NONE, 0);
-		app->render->DrawTexture(life2, 133, 697, NULL, SDL_FLIP_NONE, 0);
+		//app->render->DrawTexture(life1, 130, 660, NULL, SDL_FLIP_NONE, 0);
+		//app->render->DrawTexture(life2, 133, 697, NULL, SDL_FLIP_NONE, 0);
 
-		app->render->DrawTexture(life1, 190, 660, NULL, SDL_FLIP_NONE, 0);
-		app->render->DrawTexture(life2, 193, 697, NULL, SDL_FLIP_NONE, 0);
+		//app->render->DrawTexture(life1, 190, 660, NULL, SDL_FLIP_NONE, 0);
+		//app->render->DrawTexture(life2, 193, 697, NULL, SDL_FLIP_NONE, 0);
 
-		app->render->DrawTexture(life1, 250, 660, NULL, SDL_FLIP_NONE, 0);
-		app->render->DrawTexture(life2, 253, 697, NULL, SDL_FLIP_NONE, 0);
+		//app->render->DrawTexture(life1, 250, 660, NULL, SDL_FLIP_NONE, 0);
+		//app->render->DrawTexture(life2, 253, 697, NULL, SDL_FLIP_NONE, 0);
+		//////
 		////
-		//
-		////botones abajo derecha
-		app->render->DrawTexture(sword2, 1150, 660, NULL, SDL_FLIP_NONE, 0);
-		app->render->DrawTexture(fuego, 1210, 660, NULL, SDL_FLIP_NONE, 0);
+		//////botones abajo derecha
+		//app->render->DrawTexture(sword2, 1150, 660, NULL, SDL_FLIP_NONE, 0);
+		//app->render->DrawTexture(fuego, 1210, 660, NULL, SDL_FLIP_NONE, 0);
+		//////
 		////
-		//
-		////PP
-		app->render->DrawTexture(PP, 20, 20, NULL, SDL_FLIP_NONE, 0);
+		//////PP
+		//app->render->DrawTexture(PP, 20, 20, NULL, SDL_FLIP_NONE, 0);
+		//////
 		////
-		//
-		////Sword1
-		app->render->DrawTexture(sword1, 1210, 20, NULL, SDL_FLIP_NONE, 0);
+		//////Sword1
+		//app->render->DrawTexture(sword1, 1210, 20, NULL, SDL_FLIP_NONE, 0);
+		//////
 		////
-		//
-		////14
-		app->render->DrawTexture(number14, 52, 46, NULL, SDL_FLIP_NONE, 0);
+		//////14
+		//app->render->DrawTexture(number14, 52, 46, NULL, SDL_FLIP_NONE, 0);
+		//////
+		//// 
+		//////L3Move
+		//app->render->DrawTexture(L3Move, 500, 660, NULL, SDL_FLIP_NONE, 0);
+		//////
 		////
-		// 
-		////L3Move
-		app->render->DrawTexture(L3Move, 500, 660, NULL, SDL_FLIP_NONE, 0);
+		/////execute
+		//app->render->DrawTexture(execute, 620, 660, NULL, SDL_FLIP_NONE, 0);
+		//////
 		////
-		//
-		///execute
-		app->render->DrawTexture(execute, 620, 660, NULL, SDL_FLIP_NONE, 0);
+		//////Xaccept
+		//app->render->DrawTexture(Xaccept, 740, 660, NULL, SDL_FLIP_NONE, 0);
+		//////
 		////
-		//
-		////Xaccept
-		app->render->DrawTexture(Xaccept, 740, 660, NULL, SDL_FLIP_NONE, 0);
+		//////enemyrojo
+		//app->render->DrawTexture(enemyrojo, 1210, 620, NULL, SDL_FLIP_NONE, 0);
+		//////
 		////
-		//
+		//////playerverd
+		//app->render->DrawTexture(playerverd, 1180, 620, NULL, SDL_FLIP_NONE, 0);
+		//////
+		////
 
 
 
