@@ -454,7 +454,6 @@ bool Map::CreateColliders()
                         case 7:
                             c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
                             c1->ctype = ColliderType::DOOR_TEMPLE;
-                            printf("7");
                             ret = true;
                             break;
                         case 8:
@@ -507,10 +506,17 @@ void Map::DestroyAllColliders()
 
             // Comprueba el tipo del collider y elimina solo los tipos específicos
 
-            /*if (ctype == ColliderType::PLATFORM)
+            if (ctype == ColliderType::WALL 
+                || ctype == ColliderType::PLATFORM 
+                || ctype == ColliderType::DOOR_SHOP 
+                || ctype == ColliderType::DOOR_OASIS 
+                || ctype == ColliderType::DOOR_TEMPLE
+                || ctype == ColliderType::DOOR_ALDEA
+                || ctype == ColliderType::DOOR_FLOOR_1
+                || ctype == ColliderType:: COMBAT)
             {
                 physicsWorld->DestroyBody(body);
-            }*/
+            }
         }
 
         body = nextBody;

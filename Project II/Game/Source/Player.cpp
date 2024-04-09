@@ -10,6 +10,9 @@
 #include "Physics.h"
 #include "FadeToBlack.h"
 #include "Hud.h"
+#include "SceneShop.h"
+#include "SceneOasisFaraon.h"
+#include "SceneTemple.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -214,7 +217,18 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		isjumping = false;
 		break;
 	case ColliderType::DOOR_ALDEA:
-		app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
+		if (app->sceneShop->active) app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
+		else if (app->sceneOasisFaraon->active) app->fade->Fade((Module*)app->sceneOasisFaraon, (Module*)app->sceneVillage, 60.0f);
+		else if (app->sceneTemple->active) app->fade->Fade((Module*)app->sceneTemple, (Module*)app->sceneVillage, 60.0f);
+		break;
+	case ColliderType::DOOR_SHOP:
+		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneShop, 60.0f);
+		break;
+	case ColliderType::DOOR_OASIS:
+		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneOasisFaraon, 60.0f);
+		break;
+	case ColliderType::DOOR_TEMPLE:
+		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneTemple, 60.0f);
 		break;
 	}
 

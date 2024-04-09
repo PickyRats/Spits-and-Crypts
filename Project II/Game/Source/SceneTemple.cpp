@@ -125,6 +125,7 @@ bool SceneTemple::CleanUp()
 {
 	LOG("Freeing scene");
 
+	app->map->Disable();
 	return true;
 }
 
