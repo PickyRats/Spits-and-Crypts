@@ -59,6 +59,9 @@ public:
 	// Select the tile where the player is going to move
 	void SelectTiles();
 
+	// Change the turn
+	void ChangeTurn();
+
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 

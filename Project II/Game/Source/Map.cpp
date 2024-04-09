@@ -77,11 +77,10 @@ bool Map::Update(float dt)
 
             UpdateTileLoadSize();
 
-            for (int i = startWidth; i < endWidth; i++) {
-                for (int j = startHeight; j < endHeight; j++) {
+            for (int i = startWidth; i < mapData.width; i++) {
+                for (int j = startHeight; j < mapData.height; j++) {
                     //Get the gid from tile
                     int gid = mapLayer->data->Get(i, j);
-
 
                     TileSet* tileSet = GetTilesetFromTileId(gid);
                     SDL_Rect tileRect = tileSet->GetRect(gid);
@@ -95,7 +94,7 @@ bool Map::Update(float dt)
         }
         mapLayer = mapLayer->next;
     }
-
+    LOG("Map updated successfully");
     return true;
 }
 
@@ -405,6 +404,7 @@ void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
     width = mapData.width;
     height = mapData.height;
 
+    LOG("Navigation map created successfully");
 }
 
 bool Map::CreateColliders()
@@ -454,7 +454,7 @@ bool Map::CreateColliders()
         }
         mapLayerItem = mapLayerItem->next;
     }
-
+    LOG("Colliders created successfully");
     return ret;
 }
 
@@ -573,6 +573,7 @@ bool Map::LoadEntities()
 
     }
 
+    LOG("Entities loaded successfully");
     return false;
 }
 

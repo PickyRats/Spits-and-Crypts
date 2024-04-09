@@ -106,8 +106,8 @@ public:
 
 	bool isDead = false;
 	int health = 100;
-	int totalPoints = 10;
-	int currentPoints = 10;
+	int totalPoints = 5;
+	int currentPoints = 5;
 	int attackRange = 3;
 	bool setLoadPosition = false;
 };
