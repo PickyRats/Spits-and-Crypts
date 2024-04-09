@@ -44,6 +44,7 @@ public:
 
 	PhysBody* pbody;
 	PhysBody* playerPbody;
+	bool physCreated=false;
 
 	Animation* currentAnim;
 	Animation idleAnim;

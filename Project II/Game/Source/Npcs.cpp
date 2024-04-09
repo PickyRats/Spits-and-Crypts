@@ -42,13 +42,6 @@ bool Npcs::Start() {
 
 	//currentAnim = &idleAnim;
 
-	pbody = app->physics->CreateCircle(position.x + 50, position.y, 22, bodyType::DYNAMIC);
-	pbody->listener = this;
-	pbody->ctype = ColliderType::NPC;
-
-
-
-
 	return true;
 }
 
@@ -59,14 +52,32 @@ bool Npcs::Update(float dt)
 	int sceneTemple = app->sceneTemple->sceneNum;
 	int npcScene= parameters.attribute("scene").as_int();
 
+	//Comprobar si la escena actual es la que tiene el npc y crearlo si es así
 	if (app->sceneVillage->active && sceneVillage== npcScene)
 	{
+		//Crear el cuerpo físico una sola vez
+		if (physCreated==false)
+		{
+			pbody = app->physics->CreateCircle(position.x + 50, position.y, 22, bodyType::DYNAMIC);
+			pbody->listener = this;
+			pbody->ctype = ColliderType::NPC;
+			physCreated = true;
+		}
+		
+
 		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 50;
 		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 42;
 		DrawNpcs();
 	}
 	else if (app->sceneTemple->active && sceneTemple== npcScene)
 	{
+		if (physCreated==false)
+		{
+			pbody = app->physics->CreateCircle(position.x + 50, position.y, 22, bodyType::DYNAMIC);
+			pbody->listener = this;
+			pbody->ctype = ColliderType::NPC;
+			physCreated = true;
+		}
 		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 50;
 		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 42;
 		DrawNpcs();
