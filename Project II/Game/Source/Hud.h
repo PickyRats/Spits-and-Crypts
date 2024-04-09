@@ -41,7 +41,9 @@ private:
 	SDL_Texture* sword1;
 	SDL_Texture* sword2;
 	SDL_Texture* number14;
-	SDL_Texture* 2flecha;
+	SDL_Texture* L3Move;
+	SDL_Texture* execute;
+	SDL_Texture* Xaccept;
 
 
 

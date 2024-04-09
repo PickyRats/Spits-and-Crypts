@@ -152,7 +152,9 @@
 		<sword1 texturepath="Assets/Textures/Screens/More/sword1.png"/>
 		<sword2 texturepath="Assets/Textures/Screens/More/sword2.png"/>
 		<number14 texturepath="Assets/Textures/Screens/More/14.png"/>
-		<2flecha texturepath="Assets/Textures/Screens/More/2flecha.png"/>
+		<L3Move texturepath="Assets/Textures/Screens/More/L3Move.png"/>
+		<execute texturepath="Assets/Textures/Screens/More/4execute.png"/>
+		<Xaccept texturepath="Assets/Textures/Screens/More/Xaccept.png"/>
 		
 	</hud>
 

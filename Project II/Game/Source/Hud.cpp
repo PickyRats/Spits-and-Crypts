@@ -52,6 +52,10 @@ bool Hud::Start()
 	sword1 = app->tex->Load(configNode3.child("sword1").attribute("texturepath").as_string());
 	sword2 = app->tex->Load(configNode3.child("sword2").attribute("texturepath").as_string());
 	number14 = app->tex->Load(configNode3.child("number14").attribute("texturepath").as_string());
+	L3Move = app->tex->Load(configNode3.child("L3Move").attribute("texturepath").as_string());
+	execute = app->tex->Load(configNode3.child("execute").attribute("texturepath").as_string());
+	Xaccept = app->tex->Load(configNode3.child("Xaccept").attribute("texturepath").as_string());
+
 	//
 	pause = app->tex->Load(configNode3.child("pause").attribute("texturepath").as_string());
 	exitNormal = app->tex->Load(configNode3.child("exitNormal").attribute("texturepath").as_string());
@@ -380,9 +384,22 @@ bool Hud::Update(float dt)
 		//
 		////14
 		app->render->DrawTexture(number14, 52, 46, NULL, SDL_FLIP_NONE, 0);
-		////2flecha
+		////
+		// 
+		////L3Move
+		app->render->DrawTexture(L3Move, 500, 660, NULL, SDL_FLIP_NONE, 0);
+		////
 		//
-		app->render->DrawTexture(2flecha, 52, 46, NULL, SDL_FLIP_NONE, 0);
+		///execute
+		app->render->DrawTexture(execute, 620, 660, NULL, SDL_FLIP_NONE, 0);
+		////
+		//
+		////Xaccept
+		app->render->DrawTexture(Xaccept, 740, 660, NULL, SDL_FLIP_NONE, 0);
+		////
+		//
+
+
 
 	}
 	
