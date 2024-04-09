@@ -51,7 +51,7 @@ bool Hud::Start()
 	PP = app->tex->Load(configNode3.child("PP").attribute("texturepath").as_string());
 	sword1 = app->tex->Load(configNode3.child("sword1").attribute("texturepath").as_string());
 	sword2 = app->tex->Load(configNode3.child("sword2").attribute("texturepath").as_string());
-	number14 = app->tex->Load(configNode3.child("14").attribute("texturepath").as_string());
+	number14 = app->tex->Load(configNode3.child("number14").attribute("texturepath").as_string());
 	//
 	pause = app->tex->Load(configNode3.child("pause").attribute("texturepath").as_string());
 	exitNormal = app->tex->Load(configNode3.child("exitNormal").attribute("texturepath").as_string());
@@ -379,7 +379,11 @@ bool Hud::Update(float dt)
 		////
 		//
 		////14
-		app->render->DrawTexture(number14, 30, 30, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(number14, 52, 46, NULL, SDL_FLIP_NONE, 0);
+		////2flecha
+		//
+		app->render->DrawTexture(2flecha, 52, 46, NULL, SDL_FLIP_NONE, 0);
+
 	}
 	
 
