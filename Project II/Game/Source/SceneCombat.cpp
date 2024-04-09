@@ -98,8 +98,18 @@ bool SceneCombat::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 	{
+		isMoving = false;
+		tiles[0] = { enemy->position, 0 };
+		for (int i = 1; i < currentTile; i++)
+		{
+			tiles[currentTile - i] = { iPoint(0,0), 0 };
+		}
+		tilesCount = 0;
+		movingDirection = 0;
+		currentTile = 1;
+		tilePosition = tiles[0].position;
 		app->map->pathfinding->ClearLastPath();
-		app->map->pathfinding->CreatePath(app->map->WorldToMap(app->map->player->position.x, app->map->player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
+		app->map->pathfinding->CreatePath(app->map->WorldToMap(enemy->position.x, enemy->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 		isPlayerTurn = !isPlayerTurn;
 	}
 
@@ -114,12 +124,44 @@ bool SceneCombat::Update(float dt)
 	{
 		maxTiles = 50;
 
-		app->map->pathfinding->ClearLastPath();
-		int destinationTiles = app->map->pathfinding->CreatePath(app->map->WorldToMap(enemy->position.x, enemy->position.y), app->map->WorldToMap(app->map->player->position.x, app->map->player->position.y));
-		int movementTiles = destinationTiles - enemy->attackRange;
+		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
+		for (uint i = 0; i < path->Count(); ++i)
+		{
+			// Draw the path
+			iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+			app->render->DrawTexture(tileEnemyTexture, pos.x, pos.y);
+
+			// Set the direction of the tiles
+			if (pos.x > tiles[i - 1].position.x) tiles[i] = { pos, 1 };
+			if (pos.x < tiles[i - 1].position.x) tiles[i] = { pos, 2 };
+			if (pos.y < tiles[i - 1].position.y) tiles[i] = { pos, 3 };
+			if (pos.y > tiles[i - 1].position.y) tiles[i] = { pos, 4 };
+		}
+
+		tilesCount = path->Count();
 
 		if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 		{
+			app->map->pathfinding->ClearLastPath();
+			int destinationTiles = app->map->pathfinding->CreatePath(app->map->WorldToMap(enemy->position.x, enemy->position.y), app->map->WorldToMap(app->map->player->position.x, app->map->player->position.y));
+			int movementTiles = destinationTiles - enemy->attackRange;
+
+			const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
+			for (uint i = 0; i < path->Count(); ++i)
+			{
+				// Draw the path
+				iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+				app->render->DrawTexture(tileEnemyTexture, pos.x, pos.y);
+
+				// Set the direction of the tiles
+				if (pos.x > tiles[i - 1].position.x) tiles[i] = { pos, 1 };
+				if (pos.x < tiles[i - 1].position.x) tiles[i] = { pos, 2 };
+				if (pos.y < tiles[i - 1].position.y) tiles[i] = { pos, 3 };
+				if (pos.y > tiles[i - 1].position.y) tiles[i] = { pos, 4 };
+			}
+
+			tilesCount = path->Count();
+
 			if (enemy->attackRange >= destinationTiles) printf("Enemy is attacking\n");
 			else if (enemy->currentPoints > 0 && movementTiles <= enemy->currentPoints)
 			{
@@ -134,17 +176,9 @@ bool SceneCombat::Update(float dt)
 				enemy->currentPoints = 0;
 			}
 			else printf("No points\n");
-			isPlayerTurn = true;
+	/*		isPlayerTurn = true;*/
 		}
 		
-		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
-		for (uint i = 0; i < path->Count(); ++i)
-		{
-			// Draw the path
-			iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-			app->render->DrawTexture(tileEnemyTexture, pos.x, pos.y);
-
-		}
 	}
 
 	app->render->camera.x += (-cameraX - app->render->camera.x) * cameraSmoothingFactor;
