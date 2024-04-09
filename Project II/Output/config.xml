@@ -157,6 +157,8 @@
 		<Xaccept texturepath="Assets/Textures/Screens/More/Xaccept.png"/>
 		<playerverd texturepath="Assets/Textures/Screens/More/playerverd.png"/>
 		<enemyrojo texturepath="Assets/Textures/Screens/More/enemyrojo.png"/>
+		<L1 texturepath="Assets/Textures/Screens/More/L1.png"/>
+		<R1 texturepath="Assets/Textures/Screens/More/R1.png"/>
 		
 	</hud>
 

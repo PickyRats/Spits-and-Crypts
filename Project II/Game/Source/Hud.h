@@ -46,6 +46,8 @@ private:
 	SDL_Texture* Xaccept;
 	SDL_Texture* playerverd;
 	SDL_Texture* enemyrojo;
+	SDL_Texture* L1;
+	SDL_Texture* R1;
 
 
 
