@@ -108,6 +108,7 @@ public:
 	int health = 100;
 	int totalPoints = 10;
 	int currentPoints = 10;
+	int attackRange = 3;
 	bool setLoadPosition = false;
 };
 

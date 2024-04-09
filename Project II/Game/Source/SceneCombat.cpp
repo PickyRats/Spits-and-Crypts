@@ -115,8 +115,28 @@ bool SceneCombat::Update(float dt)
 		maxTiles = 50;
 
 		app->map->pathfinding->ClearLastPath();
-		app->map->pathfinding->CreatePath(app->map->WorldToMap(enemy->position.x, enemy->position.y), app->map->WorldToMap(app->map->player->position.x, app->map->player->position.y));
-	
+		int destinationTiles = app->map->pathfinding->CreatePath(app->map->WorldToMap(enemy->position.x, enemy->position.y), app->map->WorldToMap(app->map->player->position.x, app->map->player->position.y));
+		int movementTiles = destinationTiles - enemy->attackRange;
+
+		if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+		{
+			if (enemy->attackRange >= destinationTiles) printf("Enemy is attacking\n");
+			else if (enemy->currentPoints > 0 && movementTiles <= enemy->currentPoints)
+			{
+				MovePlayer(enemy);
+				printf("Enemy is moving %d tiles\n", movementTiles);
+				enemy->currentPoints -= movementTiles;
+			}
+			else if (enemy->currentPoints > 0)
+			{
+				MovePlayer(enemy);
+				printf("Enemy is moving %d tiles\n", enemy->currentPoints);
+				enemy->currentPoints = 0;
+			}
+			else printf("No points\n");
+			isPlayerTurn = true;
+		}
+		
 		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
 		for (uint i = 0; i < path->Count(); ++i)
 		{
@@ -133,8 +153,10 @@ bool SceneCombat::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
-	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !isMoving) MovePlayer();
-	if (isMoving) MovePlayer();
+	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !isMoving) MovePlayer(app->map->player);
+
+	if (isPlayerTurn && isMoving) MovePlayer(app->map->player);
+	else if (!isPlayerTurn && isMoving) MovePlayer(enemy);
 
 	return true;
 }
@@ -201,34 +223,34 @@ bool SceneCombat::OnGuiMouseClickEvent(GuiControl* control)
 	return true;
 }
 
-void SceneCombat::MovePlayer()
+void SceneCombat::MovePlayer(Entity* entity)
 {
-	currentPosition = app->map->player->position;
+	iPoint* currentPosition = &entity->position;
 
 	// Set the destination position
 	if (!isMoving)
 	{
 		if (tiles[currentTile].direction == 1)
 		{
-			destinationPosition = { app->map->player->position.x + 64, app->map->player->position.y };
+			destinationPosition = { currentPosition->x + 64, currentPosition->y };
 			movingDirection = 1;
 			isMoving = true;
 		}
 		if (tiles[currentTile].direction == 2)
 		{
-			destinationPosition = { app->map->player->position.x - 64, app->map->player->position.y };
+			destinationPosition = { currentPosition->x - 64, currentPosition->y };
 			movingDirection = 2;
 			isMoving = true;
 		}
 		if (tiles[currentTile].direction == 3)
 		{
-			destinationPosition = { app->map->player->position.x, app->map->player->position.y - 64 - 64 - 64 };
+			destinationPosition = { currentPosition->x, currentPosition->y - 64 - 64 - 64 };
 			movingDirection = 3;
 			isMoving = true;
 		}
 		if (tiles[currentTile].direction == 4)
 		{
-			destinationPosition = { app->map->player->position.x, app->map->player->position.y + 64 + 64 + 64 };
+			destinationPosition = { currentPosition->x, currentPosition->y + 64 + 64 + 64 };
 			movingDirection = 4;
 			isMoving = true;
 		}
@@ -237,12 +259,12 @@ void SceneCombat::MovePlayer()
 	// Check if the player has reached the destination
 	if (currentTile <= tilesCount)
 	{
-		if (currentPosition == destinationPosition)
+		if (currentPosition->x == destinationPosition.x && currentPosition->y == destinationPosition.y)
 		{
 			movingDirection = 0;
 			currentTile++;
 			isMoving = false;
-			MovePlayer();
+			MovePlayer(entity);
 		}
 	}
 	else // Reset the path
@@ -258,14 +280,15 @@ void SceneCombat::MovePlayer()
 		currentTile = 1;
 		tilePosition = tiles[0].position;
 		app->map->pathfinding->ClearLastPath();
-		app->map->pathfinding->CreatePath(app->map->WorldToMap(app->map->player->position.x, app->map->player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
+		app->map->pathfinding->CreatePath(app->map->WorldToMap(currentPosition->x, currentPosition->y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
+		isPlayerTurn = false;
 	}
 
 	// Move the player
-	if (movingDirection == 1) app->map->player->position.x += 2;
-	if (movingDirection == 2) app->map->player->position.x -= 2;
-	if (movingDirection == 3) app->map->player->position.y -= 2;
-	if (movingDirection == 4) app->map->player->position.y += 2;
+	if (movingDirection == 1) currentPosition->x += 2;
+	if (movingDirection == 2) currentPosition->x -= 2;
+	if (movingDirection == 3) currentPosition->y -= 2;
+	if (movingDirection == 4) currentPosition->y += 2;
 }
 
 void SceneCombat::UpdatePath()

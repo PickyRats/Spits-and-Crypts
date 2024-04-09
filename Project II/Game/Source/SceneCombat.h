@@ -51,7 +51,7 @@ public:
 	void ClampCamera();
 
 	// Move the player following the path generated
-	void MovePlayer();
+	void MovePlayer(Entity* entity);
 
 	// Update the path to follow
 	void UpdatePath();
