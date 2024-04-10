@@ -70,8 +70,8 @@ bool Map::Update(float dt)
 
             UpdateTileLoadSize();
 
-            for (int i = startWidth; i < endWidth; i++) {
-                for (int j = startHeight; j < endHeight; j++) {
+            for (int i = startWidth; i < mapData.width; i++) {
+                for (int j = startHeight; j < mapData.height; j++) {
                     //Get the gid from tile
                     int gid = mapLayer->data->Get(i, j);
 
