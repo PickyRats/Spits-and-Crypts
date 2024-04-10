@@ -143,7 +143,30 @@ bool Player::Update(float dt)
 	DrawPlayer();
 
 	currentAnim->Update();
-
+	if (app->input->GetKey(SDL_SCANCODE_F)==KEY_DOWN)
+	{
+		if (doorAldea) {
+			if (app->sceneShop->active) app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
+			else if (app->sceneOasisFaraon->active) app->fade->Fade((Module*)app->sceneOasisFaraon, (Module*)app->sceneVillage, 60.0f);
+			else if (app->sceneTemple->active) app->fade->Fade((Module*)app->sceneTemple, (Module*)app->sceneVillage, 60.0f);
+			doorAldea = false;
+		}
+		if (doorOasis)
+		{
+			app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneOasisFaraon, 60.0f);
+			doorOasis = false;
+		}
+		if (doorShop)
+		{
+			app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneShop, 60.0f);
+			doorShop = false;
+		}
+		if (doorTemple)
+		{
+			app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneTemple, 60.0f);
+			doorTemple = false;
+		}
+	}
 	//printf("\r cameraX: %d cameraY: %d positionX: %d positionY %d", app->render->camera.x, app->render->camera.y, position.x, position.y);
 	return true;
 }
@@ -217,18 +240,35 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		isjumping = false;
 		break;
 	case ColliderType::DOOR_ALDEA:
-		if (app->sceneShop->active) app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
-		else if (app->sceneOasisFaraon->active) app->fade->Fade((Module*)app->sceneOasisFaraon, (Module*)app->sceneVillage, 60.0f);
-		else if (app->sceneTemple->active) app->fade->Fade((Module*)app->sceneTemple, (Module*)app->sceneVillage, 60.0f);
+		doorAldea = true;
 		break;
 	case ColliderType::DOOR_SHOP:
-		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneShop, 60.0f);
+		doorShop = true;
 		break;
 	case ColliderType::DOOR_OASIS:
-		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneOasisFaraon, 60.0f);
+		doorOasis = true;
 		break;
 	case ColliderType::DOOR_TEMPLE:
-		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneTemple, 60.0f);
+		doorTemple = true;
+		break;
+	}
+
+}
+void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
+
+	switch (physB->ctype)
+	{
+	case ColliderType::DOOR_ALDEA:
+		doorAldea = false;
+		break;
+	case ColliderType::DOOR_SHOP:
+		doorShop = false;
+		break;
+	case ColliderType::DOOR_OASIS:
+		doorOasis = false;
+		break;
+	case ColliderType::DOOR_TEMPLE:
+		doorTemple = false;
 		break;
 	}
 

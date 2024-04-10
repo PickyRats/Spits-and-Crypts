@@ -28,6 +28,8 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+	void OnExitCollision(PhysBody* physA, PhysBody* physB);
+
 	void LoadAnimations();
 	
 	void ToggleGodMode();
@@ -59,6 +61,11 @@ public:
 	bool godMode = false;
 
 	bool isjumping = false;
+
+	bool doorAldea = false;
+	bool doorShop = false;
+	bool doorOasis = false;
+	bool doorTemple = false;
 
 	b2Transform initialTransform;
 
