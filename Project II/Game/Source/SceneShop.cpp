@@ -62,7 +62,9 @@ bool SceneShop::Start()
     		//Get the map name from the config file and assigns the value in the module
     		app->map->mapName = configNodeShop.child("map").attribute("name").as_string();
    		app->map->path = configNodeShop.child("map").attribute("path").as_string();
+		
 	}
+	app->audio->PlayMusic(configNodeShop.child("music").child("ShopMusic").attribute("path").as_string(), configNodeShop.child("music").child("ShopMusic").attribute("fadeTime").as_float());
 	app->map->Enable();
 	app->entityManager->Enable();
 	app->hud->Enable();
