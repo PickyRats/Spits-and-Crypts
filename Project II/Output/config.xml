@@ -41,6 +41,9 @@
 
 		<!-- Player -->
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+
+		<!-- Mercante  -->
+		<npc x="150" y="50" texturepath="Assets/Textures/Npcs/mercante.png" id="7" scene="3"/>
 	</sceneShop>
 
 	<!-- Intro -->
@@ -69,6 +72,12 @@
 	<sceneOasis>
 		<!-- Scene -->
 		<map path="Assets/Maps/" name="Map_OasisdelFaraon.tmx"/>
+
+		<!-- Player -->
+		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+		
+		<!-- Tabernero  -->
+		<npc x="300" y="300" texturepath="Assets/Textures/Npcs/Anhuvihsh.png" id="8" scene="4"/>
     <!-- Music -->
 		<music>
 		</music>

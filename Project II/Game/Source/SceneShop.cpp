@@ -10,6 +10,7 @@
 #include "GuiManager.h"
 #include "ParticleManager.h"
 #include "Hud.h"
+#include "Npcs.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -43,6 +44,11 @@ bool SceneShop::Awake(pugi::xml_node& config)
 	//	app->map->name = config.child("map").attribute("name").as_string();
 	//	app->map->path = config.child("map").attribute("path").as_string();
 	//}
+	for (pugi::xml_node itemNode = config.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
+	{
+		Npcs* npc = (Npcs*)app->entityManager->CreateEntity(EntityType::NPCS);
+		npc->parameters = itemNode;
+	}
 
 	configNodeShop = config;
 
