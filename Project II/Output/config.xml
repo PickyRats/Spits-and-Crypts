@@ -37,6 +37,7 @@
 
 		<!-- Music -->
 		<music>
+			<ShopMusic path="Assets/Audio/Music/Shop_Music.ogg" fadeTime="10" fadeOutTime="2"/>
 		</music>
 
 		<!-- Player -->
