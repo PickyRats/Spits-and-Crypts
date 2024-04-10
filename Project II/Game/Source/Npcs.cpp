@@ -78,8 +78,8 @@ bool Npcs::Update(float dt)
 			pbody->ctype = ColliderType::NPC;
 			physCreated = true;
 		}
-		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 50;
-		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 42;
+		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x);
+		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y);
 		DrawNpcs();
 	}
 	else
@@ -104,8 +104,12 @@ void Npcs::Interact(int id)
 	case 4:
 		GiveMission(4);
 		break;
-
-
+	case 5:
+		GiveMission(5);
+		break;
+	case 6:
+		GiveMission(6);
+		break;
 	default:
 		break;
 	}
@@ -128,6 +132,12 @@ void Npcs::GiveMission(int idMission)
 	case 4:
 		printf( "comeme toth la polla \n");
 		break;
+	case 5:
+		printf(" Soy ISIS (Estado Islamico) \n");
+		break;
+	case 6:
+		printf("Eres Horruroso xd \n");
+		break;
 	default:
 		break;
 	}
@@ -138,7 +148,7 @@ void Npcs::DrawNpcs()
 
 	//SDL_Rect rect = currentAnim->GetCurrentFrame();
 
-	app->render->DrawTexture(texture, position.x, position.y);
+	app->render->DrawTexture(texture, position.x-20, position.y-300);
 
 }
 

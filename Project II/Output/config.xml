@@ -91,6 +91,12 @@
 
 		<!-- Toth -->
 		<npc x="550" y="550" texturepath="Assets/Textures/Npcs/toth.png" id="4" scene="2"/>
+		
+		<!-- Isis -->
+		<npc x="650" y="300" texturepath="Assets/Textures/Npcs/isis.png" id="5" scene="2"/>
+
+		<!-- Horus -->
+		<npc x="750" y="550" texturepath="Assets/Textures/Npcs/horus.png" id="6" scene="2"/>
 	</sceneTemple>
 
 	<map>
