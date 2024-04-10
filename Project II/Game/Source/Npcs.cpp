@@ -176,7 +176,7 @@ void Npcs::GiveMission(int idMission)
 		printf(" Salami en mi cum a mi humilde tienda \n");
 		break;
 	case 8:
-		printf(" Que haces bebiendo whisky para desayunar \n");
+		printf(" Que haces pidiendome wishky con cereales \n");
 		break;
 	default:
 		break;
