@@ -56,6 +56,7 @@ public:
 	iPoint lastTorchPos = { 0, 0 };
 	bool notUseChechPoint = false;
 	bool win = false;
+	int sceneNum = 4;
 
 private:
 	SDL_Texture* backgroundTexture;

@@ -41,6 +41,9 @@
 
 		<!-- Player -->
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+
+		<!-- Mercante  -->
+		<npc x="150" y="50" texturepath="Assets/Textures/Npcs/mercante.png" id="7" scene="3"/>
 	</sceneShop>
 
 	<!-- Intro -->
@@ -59,16 +62,22 @@
 		<villageAmbient path="Assets/Audio/Music/Village_ambient.ogg" fadeTime="10" fadeOutTime="2"/>
 
 		<!-- Abuela -->
-		<npc x="300" y="300" texturepath="Assets/Textures/Npcs/abuela.png" id="1"/>
+		<npc x="300" y="300" texturepath="Assets/Textures/Npcs/abuela.png" id="1" scene="1"/>
 
 		<!-- Nieta -->
-		<npc x="550" y="550" texturepath="Assets/Textures/Npcs/nieta.png" id="2"/>
+		<npc x="550" y="550" texturepath="Assets/Textures/Npcs/nieta.png" id="2" scene="1"/>
 	</sceneVillage>
 
 	<!-- sceneOasis -->
 	<sceneOasis>
 		<!-- Scene -->
 		<map path="Assets/Maps/" name="Map_OasisdelFaraon.tmx"/>
+
+		<!-- Player -->
+		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+		
+		<!-- Tabernero  -->
+		<npc x="300" y="300" texturepath="Assets/Textures/Npcs/Anhuvihsh.png" id="8" scene="4"/>
     <!-- Music -->
 		<music>
 		</music>
@@ -85,6 +94,18 @@
 		</music>
 
 		<TempleMusic path="Assets/Audio/Music/temple_Music.ogg" fadeTime="10" fadeOutTime="2"/>
+
+		<!-- Maat -->
+		<npc x="300" y="300" texturepath="Assets/Textures/Npcs/maat.png" id="3" scene="2"/>
+
+		<!-- Toth -->
+		<npc x="550" y="550" texturepath="Assets/Textures/Npcs/toth.png" id="4" scene="2"/>
+		
+		<!-- Isis -->
+		<npc x="650" y="300" texturepath="Assets/Textures/Npcs/isis.png" id="5" scene="2"/>
+
+		<!-- Horus -->
+		<npc x="750" y="550" texturepath="Assets/Textures/Npcs/horus.png" id="6" scene="2"/>
 	</sceneTemple>
 
 	<map>
