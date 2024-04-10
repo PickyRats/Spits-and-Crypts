@@ -180,7 +180,11 @@ bool SceneCombat::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
-	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !isMoving) MovePlayer(app->map->player);
+	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !isMoving)
+	{
+		app->map->player->currentPoints -= tilesCount;
+		MovePlayer(app->map->player);
+	}
 
 	if (isPlayerTurn && isMoving) MovePlayer(app->map->player);
 	else if (!isPlayerTurn && isMoving) MovePlayer(enemy);
@@ -333,6 +337,7 @@ void SceneCombat::UpdatePath()
 
 void SceneCombat::SelectTiles()
 {
+	maxTiles = app->map->player->currentPoints;
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && !isMoving)
 	{
 
