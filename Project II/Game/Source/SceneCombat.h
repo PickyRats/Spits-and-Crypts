@@ -104,6 +104,10 @@ private:
 	SDL_Texture* tileEnemyTexture;
 	SDL_Texture* selectedTileTexture;
 	bool isPlayerTurn = true;
+	Entity* players[5];
+	Entity* enemies[5];
+	int currentPlayerIndex = 0;
+	int currentEnemyIndex = 0;
 };
 
 #endif // __SCENECOMBAT_H__
