@@ -37,6 +37,8 @@ public:
 	// Called each loop iteration
 	bool Update(float dt);
 
+	void EnemyAttack();
+
 	// Called before all Updates
 	bool PostUpdate();
 
@@ -58,6 +60,8 @@ public:
 
 	// Select the tile where the player is going to move
 	void SelectTiles();
+
+	void ResetTilesArray(int max);
 
 	// Change the turn
 	void ChangeTurn();
@@ -108,6 +112,7 @@ private:
 	Entity* enemies[5];
 	int currentPlayerIndex = 0;
 	int currentEnemyIndex = 0;
+	bool enemyCanAttack = false;
 };
 
 #endif // __SCENECOMBAT_H__
