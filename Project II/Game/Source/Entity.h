@@ -110,6 +110,7 @@ public:
 	int currentPoints = 5;
 	int attackRange = 3;
 	bool setLoadPosition = false;
+	int attackDamage = 10;
 };
 
 #endif // __ENTITY_H__

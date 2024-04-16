@@ -131,7 +131,7 @@ bool SceneCombat::Update(float dt)
 			tilesCount = path->Count();
 			app->map->pathfinding->ClearLastPath();
 			int destinationTiles = app->map->pathfinding->CreatePath(app->map->WorldToMap(enemies[currentEnemyIndex]->position.x, enemies[currentEnemyIndex]->position.y), app->map->WorldToMap(players[0]->position.x, players[0]->position.y));
-			int movementTiles = destinationTiles - enemies[currentEnemyIndex]->attackRange;
+			int movementTiles = destinationTiles - enemies[currentEnemyIndex]->attackRange - 1;
 
 			const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
 			for (uint i = 0; i < path->Count(); ++i)
@@ -149,7 +149,12 @@ bool SceneCombat::Update(float dt)
 
 			tilesCount = path->Count();
 
-			if (enemies[currentEnemyIndex]->attackRange >= destinationTiles) EnemyAttack();
+			for (int i = enemies[currentEnemyIndex]->attackRange + 1; i > 0; --i)
+			{
+				if (tiles[tilesCount - i].position.y != players[currentPlayerIndex]->position.y) movementTiles++;
+			}
+
+			if (enemies[currentEnemyIndex]->attackRange >= destinationTiles - 1) EnemyAttack();
 			else if (enemies[currentEnemyIndex]->currentPoints > 0 && movementTiles <= enemies[currentEnemyIndex]->currentPoints)
 			{
 				for (int i = enemies[currentEnemyIndex]->currentPoints; i < tilesCount; ++i)
@@ -412,5 +417,6 @@ void SceneCombat::ChangeTurn()
 void SceneCombat::EnemyAttack()
 {
 	enemyCanAttack = false;
-	printf("Enemy is attacking\n");
+	players[currentPlayerIndex]->health -= enemies[currentEnemyIndex]->attackDamage;
+	printf("Enemy is attacking player life: %d \n", players[currentPlayerIndex]->health);
 }
