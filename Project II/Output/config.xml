@@ -116,7 +116,7 @@
 	
 	<!-- Menu-->
 	<scenemenu>
-		<background texturepath="Assets/Textures/Screens/background.png"/>
+		<background texturepath="Assets/Textures/Screens/main_menu_background.png"/>
 		<playNormal texturepath="Assets/Textures/Screens/Play/play_normal.png"/>
 		<playHover texturepath="Assets/Textures/Screens/Play/play_hover.png"/>
 		<playClick texturepath="Assets/Textures/Screens/Play/play_click.png"/>
@@ -148,7 +148,6 @@
 		<settingsAudioButtonHover texturepath="Assets/Textures/Screens/More/settings_audio_button_hover.png"/>
 		<settingsControlsButtonNormal texturepath="Assets/Textures/Screens/More/settings_controls_button_normal.png"/>
 		<settingsControlsButtonHover texturepath="Assets/Textures/Screens/More/settings_controls_button_hover.png"/>
-		<controlsHint texturepath="Assets/Textures/Screens/More/controls_hint.png"/>
 		<buttonFxHover path="Assets/Audio/Fx/button_hover.wav"/>
 		<buttonFxClick path="Assets/Audio/Fx/button_click.wav"/>
 		<buttonFx1 path="Assets/Audio/Fx/Button1.wav"/>
