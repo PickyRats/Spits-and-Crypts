@@ -442,22 +442,22 @@ bool Map::CreateColliders()
                             ret = true;
                             break;
                         case 5:
-                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y, mapData.tileWidth, mapData.tileHeight*2, STATIC);
+                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y, mapData.tileWidth, mapData.tileHeight*2, STATIC);
                             c1->ctype = ColliderType::DOOR_SHOP;
                             ret = true;
                             break;
                         case 6:
-                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y , mapData.tileWidth, mapData.tileHeight*2, STATIC);
+                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y , mapData.tileWidth, mapData.tileHeight*2, STATIC);
                             c1->ctype = ColliderType::DOOR_OASIS;
                             ret = true;
                             break;
                         case 7:
-                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y , mapData.tileWidth, mapData.tileHeight*2, STATIC);
+                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y , mapData.tileWidth, mapData.tileHeight*2, STATIC);
                             c1->ctype = ColliderType::DOOR_TEMPLE;
                             ret = true;
                             break;
                         case 8:
-                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y, mapData.tileWidth, mapData.tileHeight*2, STATIC);
+                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y, mapData.tileWidth, mapData.tileHeight*2, STATIC);
                             c1->ctype = ColliderType::DOOR_ALDEA;
                             ret = true;
                             break;
@@ -467,7 +467,7 @@ bool Map::CreateColliders()
                             ret = true;
                             break;
                         case 11:
-                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y , mapData.tileWidth, mapData.tileHeight*2, STATIC);
+                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y , mapData.tileWidth, mapData.tileHeight*2, STATIC);
                             c1->ctype = ColliderType::DOOR_FLOOR_1;
                             ret = true;
                             break;
