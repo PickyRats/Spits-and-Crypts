@@ -87,6 +87,9 @@
     <ClCompile Include="Source\SceneShop.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SceneFloor1.cpp">
+      <Filter>Modules\Scenes</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Player.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
@@ -214,6 +217,9 @@
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\SceneShop.h">
+      <Filter>Modules\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneFloor1.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
