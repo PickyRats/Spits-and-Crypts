@@ -37,7 +37,11 @@ public:
 	// Called each loop iteration
 	bool Update(float dt);
 
+	// Enemy attack
 	void EnemyAttack();
+
+	// Verify if the tile is occupied
+	bool IsTileOccupied();
 
 	// Called before all Updates
 	bool PostUpdate();

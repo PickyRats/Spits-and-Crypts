@@ -152,6 +152,7 @@ private:
 
 public: 
 	Player* player;
+	Player* player2;
 	SString mapName;
 	SString path;
 	PathFinding* pathfinding;

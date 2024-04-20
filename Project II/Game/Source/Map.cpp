@@ -34,7 +34,10 @@ bool Map::Awake(pugi::xml_node& config)
     	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
     	player->parameters = config.child("player");
     }
-
+    if (config.child("player2")) {
+        player2 = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+        player2->parameters = config.child("player2");
+    }
     return ret;
 }
 
