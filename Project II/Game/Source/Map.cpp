@@ -471,7 +471,11 @@ bool Map::CreateColliders()
                             c1->ctype = ColliderType::DOOR_FLOOR_1;
                             ret = true;
                             break;
-                      
+                        case 12:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y, mapData.tileWidth, mapData.tileHeight * 2, STATIC);
+                            c1->ctype = ColliderType::TRAP;
+                            ret = true;
+                            break;                                
                        /* case 5:
                             c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
                             c1->ctype = ColliderType::ITERACTABLE;
