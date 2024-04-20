@@ -114,6 +114,16 @@
 		<player x="64" y="64" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 	</map>
 	
+	<!-- sceneFloor1 -->
+	<sceneFloor1>
+		<!-- Scene -->
+		<map path="Assets/Maps/" name="Map_floor_1.tmx"/>
+		<!-- Music -->
+		<music>
+		</music>
+
+	</sceneFloor1>
+	
 	<!-- Menu-->
 	<scenemenu>
 		<background texturepath="Assets/Textures/Screens/main_menu_background.png"/>
