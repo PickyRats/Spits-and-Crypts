@@ -211,7 +211,7 @@
 	<animations>
 		<!-- Player Animations-->
 		<player>
-			<idleAnim loop="true" speed="0.1f">
+			<idleAnim loop="true" speed=" 0.1f">
 				<animation x="0" y="0" w="100" h="64"/>
 				<animation x="100" y="0" w="100" h="64"/>
 				<animation x="200" y="0" w="100" h="64"/>
