@@ -66,6 +66,7 @@ public:
 	bool doorShop = false;
 	bool doorOasis = false;
 	bool doorTemple = false;
+	bool doorFlor1 = false;
 
 	b2Transform initialTransform;
 
