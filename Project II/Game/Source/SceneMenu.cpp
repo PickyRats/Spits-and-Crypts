@@ -152,7 +152,6 @@ bool SceneMenu::Update(float dt)
       
 			app->fade->Fade(this, (Module*)app->sceneVillage, 60.0f);
 
-
 		}
 		else if (loadGameButton->state == GuiControlState::FOCUSED)
 		{

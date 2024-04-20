@@ -62,20 +62,21 @@ bool Npcs::Update(float dt)
 		//Crear el cuerpo físico una sola vez
 		if (physCreated==false)
 		{
-			pbody = app->physics->CreateCircle(position.x + 50, position.y, 22, bodyType::DYNAMIC);
+			pbody = app->physics->CreateRectangle(position.x, position.y, 64,128, bodyType::STATIC);
+			//pbody = app->physics->CreateCircle(position.x , position.y, 22, bodyType::DYNAMIC);
 			pbody->listener = this;
 			pbody->ctype = ColliderType::NPC;
 			physCreated = true;
 		}
-		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 50;
-		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 42;
+		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x)-32;
+		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y)-64;
 		DrawNpcs();
 	}
 	else if (app->sceneTemple->active && sceneTemple== npcScene)
 	{
 		if (physCreated==false)
 		{
-			pbody = app->physics->CreateCircle(position.x + 50, position.y, 22, bodyType::DYNAMIC);
+			pbody = app->physics->CreateCircle(position.x, position.y, 22, bodyType::DYNAMIC);
 			pbody->listener = this;
 			pbody->ctype = ColliderType::NPC;
 			physCreated = true;
@@ -88,20 +89,20 @@ bool Npcs::Update(float dt)
 	{
 		if (physCreated == false)
 		{
-			pbody = app->physics->CreateCircle(position.x + 50, position.y, 22, bodyType::DYNAMIC);
+			pbody = app->physics->CreateRectangle(position.x, position.y, 64, 128, bodyType::STATIC);
 			pbody->listener = this;
 			pbody->ctype = ColliderType::NPC;
 			physCreated = true;
 		}
-		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x);
-		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y);
+		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 32;
+		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 64;
 		DrawNpcs();
 	}
 	else if (app->sceneOasisFaraon->active && sceneOasisFaraon == npcScene)
 	{
 		if (physCreated == false)
 		{
-			pbody = app->physics->CreateCircle(position.x + 50, position.y, 22, bodyType::DYNAMIC);
+			pbody = app->physics->CreateCircle(position.x , position.y, 22, bodyType::DYNAMIC);
 			pbody->listener = this;
 			pbody->ctype = ColliderType::NPC;
 			physCreated = true;
@@ -188,7 +189,7 @@ void Npcs::DrawNpcs()
 
 	//SDL_Rect rect = currentAnim->GetCurrentFrame();
 
-	app->render->DrawTexture(texture, position.x-20, position.y-300);
+	app->render->DrawTexture(texture, position.x, position.y);
 
 }
 
