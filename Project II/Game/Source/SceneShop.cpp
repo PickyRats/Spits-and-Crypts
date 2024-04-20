@@ -131,6 +131,7 @@ bool SceneShop::CleanUp()
 {
 	LOG("Freeing scene");
 
+	app->map->Disable();
 	return true;
 }
 

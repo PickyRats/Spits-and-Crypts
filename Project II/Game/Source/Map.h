@@ -156,7 +156,7 @@ public:
 	SString path;
 	PathFinding* pathfinding;
 
-	int mapIdx = 1;
+	int mapIdx = 1; //1= sceneVillage, 2 = sceneShop, 3 = sceneOasisFaraon, 4 = sceneTemple
 
 	List<PhysBody*> wallEndCollision;
 
@@ -177,8 +177,8 @@ private:
 	int startWidth = 0;
 	int endWidth = 0;
 	int startMapHeight = 0;
-	int endMapHeight = 0;
-	int startMapWidth = 0;
+	int endMapHeight = 12;
+	int startMapWidth = 45;
 	int endMapWidth = 0;
 	int tilesToLoad = 55;
 	int tilesSize = 64;

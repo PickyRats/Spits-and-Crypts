@@ -110,7 +110,7 @@ bool SceneMenu::Start()
 	
 
 	//audio
-	app->audio->PlayMusic(configNode2.child("musicMenu").attribute("path").as_string(), configNode2.child("musicMenu").attribute("fadeTime").as_float());
+	app->audio->PlayMusic(configNode2.child("musicMenu").attribute("path").as_string());
 
 	return true;
 }

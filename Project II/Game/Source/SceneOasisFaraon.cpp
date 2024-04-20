@@ -57,7 +57,7 @@ bool SceneOasisFaraon::Start()
 	app->entityManager->Enable();
 	app->hud->Enable();
 
-	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(1200), PIXEL_TO_METERS(640)), 0);
+	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(96), PIXEL_TO_METERS(640)), 0);
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
@@ -120,6 +120,7 @@ bool SceneOasisFaraon::CleanUp()
 {
 	LOG("Freeing scene");
 
+	app->map->Disable();
 	return true;
 }
 
