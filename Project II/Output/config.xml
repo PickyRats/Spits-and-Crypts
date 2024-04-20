@@ -118,7 +118,7 @@
 		<!-- Music -->
 		<music>
 		</music>
-
+		<Floor1Music path="Assets/Audio/Music/Floor1_music.ogg" fadeTime="2" fadeOutTime="2"/>
 	</sceneFloor1>
 	
 	<!-- Menu-->
