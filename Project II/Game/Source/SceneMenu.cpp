@@ -58,7 +58,6 @@ bool SceneMenu::Start()
 	exitHover = app->tex->Load(configNode2.child("exitHover").attribute("texturepath").as_string());
 	exitClick = app->tex->Load(configNode2.child("exitClick").attribute("texturepath").as_string());
 	settings = app->tex->Load(configNode2.child("settings").attribute("texturepath").as_string());
-	controlsHint = app->tex->Load(configNode2.child("controlsHint").attribute("texturepath").as_string());
 	credits = app->tex->Load(configNode2.child("credits").attribute("texturepath").as_string());
 	settingsBoxNormal = app->tex->Load(configNode2.child("settingsBoxNormal").attribute("texturepath").as_string());
 	settingsBoxHover = app->tex->Load(configNode2.child("settingsBoxHover").attribute("texturepath").as_string());
@@ -134,7 +133,6 @@ bool SceneMenu::Update(float dt)
 
 		//Render background 
 		app->render->DrawTexture(background, 0, 0, NULL, SDL_FLIP_NONE, 0);
-		app->render->DrawTexture(controlsHint, 30, 670, NULL, SDL_FLIP_NONE, 0);
 		//Check if buttons are focused or pressed. If pressed, do the action. With sound effects.
 		if (startButton->state == GuiControlState::FOCUSED)
 		{
@@ -152,7 +150,7 @@ bool SceneMenu::Update(float dt)
 				fxClickPlayed = true;
 			}
 
-			app->fade->Fade(this, (Module*)app->sceneShop, 60.0f);
+			app->fade->Fade(this, (Module*)app->sceneOasisFaraon, 60.0f);
 
 		}
 		else if (loadGameButton->state == GuiControlState::FOCUSED)

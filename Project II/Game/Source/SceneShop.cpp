@@ -10,6 +10,7 @@
 #include "GuiManager.h"
 #include "ParticleManager.h"
 #include "Hud.h"
+#include "Npcs.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -43,6 +44,11 @@ bool SceneShop::Awake(pugi::xml_node& config)
 	//	app->map->name = config.child("map").attribute("name").as_string();
 	//	app->map->path = config.child("map").attribute("path").as_string();
 	//}
+	for (pugi::xml_node itemNode = config.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
+	{
+		Npcs* npc = (Npcs*)app->entityManager->CreateEntity(EntityType::NPCS);
+		npc->parameters = itemNode;
+	}
 
 	configNodeShop = config;
 
@@ -56,7 +62,9 @@ bool SceneShop::Start()
     		//Get the map name from the config file and assigns the value in the module
     		app->map->mapName = configNodeShop.child("map").attribute("name").as_string();
    		app->map->path = configNodeShop.child("map").attribute("path").as_string();
+		
 	}
+	app->audio->PlayMusic(configNodeShop.child("music").child("ShopMusic").attribute("path").as_string(), configNodeShop.child("music").child("ShopMusic").attribute("fadeTime").as_float());
 	app->map->Enable();
 	app->entityManager->Enable();
 	app->hud->Enable();

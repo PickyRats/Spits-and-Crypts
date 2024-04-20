@@ -9,6 +9,7 @@
 #include "FadeToBlack.h"
 #include "GuiManager.h"
 #include "ParticleManager.h"
+#include "Npcs.h"
 #include "Hud.h"
 
 #include "Defs.h"
@@ -33,6 +34,11 @@ bool SceneOasisFaraon::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
+	for (pugi::xml_node itemNode = config.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
+	{
+		Npcs* npc = (Npcs*)app->entityManager->CreateEntity(EntityType::NPCS);
+		npc->parameters = itemNode;
+	}
 	configNodeOasis = config;
 
 	return ret;
