@@ -60,7 +60,7 @@
 		<music>
 		</music>
 		
-		<villageAmbient path="Assets/Audio/Music/Village_ambient.ogg" fadeTime="10" fadeOutTime="2"/>
+		<villageAmbient path="Assets/Audio/Music/Village_ambient.ogg" fadeTime="2" fadeOutTime="2"/>
 
 		<!-- Abuela -->
 		<npc x="300" y="300" texturepath="Assets/Textures/Npcs/abuela.png" id="1" scene="1"/>
@@ -83,7 +83,7 @@
 		<music>
 		</music>
 
-		<OasisMusic path="Assets/Audio/Music/tabern_Music.ogg" fadeTime="10" fadeOutTime="2"/>
+		<OasisMusic path="Assets/Audio/Music/tabern_Music.ogg" fadeTime="2" fadeOutTime="2"/>
 	</sceneOasis>
 
 	<!-- sceneTemple -->
@@ -91,10 +91,7 @@
 		<!-- Scene -->
 		<map path="Assets/Maps/" name="Map_Temple.tmx"/>
     <!-- Music -->
-		<music>
-		</music>
-
-		<TempleMusic path="Assets/Audio/Music/temple_Music.ogg" fadeTime="10" fadeOutTime="2"/>
+		<TempleMusic path="Assets/Audio/Music/temple_Music.ogg" fadeTime="2" fadeOutTime="2"/>
 
 		<!-- Maat -->
 		<npc x="300" y="300" texturepath="Assets/Textures/Npcs/maat.png" id="3" scene="2"/>
@@ -152,7 +149,7 @@
 		<buttonFxClick path="Assets/Audio/Fx/button_click.wav"/>
 		<buttonFx1 path="Assets/Audio/Fx/Button1.wav"/>
 		<buttonFx2 path="Assets/Audio/Fx/Button2.wav"/>
-		<musicMenu path="Assets/Audio/Music/menu_music.ogg" fadeTime="10" fadeOutTime="2"/>
+		<musicMenu path="Assets/Audio/Music/menu_music.ogg" fadeTime="2" fadeOutTime="2"/>
 	</scenemenu>
 	
 	<!-- Hud -->
