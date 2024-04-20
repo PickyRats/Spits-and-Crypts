@@ -68,11 +68,11 @@ private:
 
 	float cameraSmoothingFactor = 0.04f;
 
-	int levelWidth = 107 * 32;
-	int levelHeight = 50 * 32;
+	int levelWidth = 22 * 64;
+	int levelHeight = 50 * 64;
 
-	int level2Width = 140 * 32;
-	int level2Height = 45 * 32;
+	int level2Width = 140 * 64;
+	int level2Height = 45 * 64;
 
 	int playerX, playerY, cameraX, cameraY;
 	bool changingLevel = false;

@@ -70,7 +70,7 @@ bool SceneTemple::Start()
 
 	//Load the player in the map
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(96), PIXEL_TO_METERS(640)), 0);
-
+	ClampCamera();
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 

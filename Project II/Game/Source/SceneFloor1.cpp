@@ -83,6 +83,7 @@ bool SceneFloor1::Start()
 	app->render->camera.y = 0;
 
 	app->audio->PlayMusic(configNodeFloor1.child("villageAmbient").attribute("path").as_string());
+	
 	return true;
 }
 
@@ -101,7 +102,7 @@ bool SceneFloor1::Update(float dt)
 	playerY = app->map->player->position.y;
 
 	SetCameraPosition(playerX-550, 48);
-
+	printf("\r cameraX: %d cameraY: %d playerX: %d playerY %d", cameraX, cameraY, playerX, playerY);
 	ClampCamera();
 
 	app->render->camera.x += (-cameraX - app->render->camera.x);
@@ -110,6 +111,13 @@ bool SceneFloor1::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
+	//if (app->render->camera.x - playerX - 100 <= -200 && app->render->camera.x - playerX - 100 >= -12850) {
+	//	app->render->camera.x = -(playerX - 100);
+
+	//}
+	//if (app->render->camera.x - playerX - 100 <= -12900) {
+	//	app->render->camera.x = -6333;
+	//}
 	return true;
 }
 
@@ -150,6 +158,8 @@ void SceneFloor1::ClampCamera()
 	if (cameraY < 0) cameraY = 0;
 	else if (cameraY + windowH > levelHeight) cameraY = levelHeight - windowH;
 	
+	
+
 }
 
 bool SceneFloor1::LoadState(pugi::xml_node node)
