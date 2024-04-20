@@ -91,7 +91,7 @@ public:
 	int tilesCount = 0;
 	int maxTiles = 12;
 
-	Enemy* enemy;
+	Enemy* enemy[2];
 private:
 	SDL_Texture* backgroundTexture;
 	SDL_Texture* backgroundTexture2;

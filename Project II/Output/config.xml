@@ -31,6 +31,7 @@
 		</music>
 		<!--Enemy -->
 		<enemy x="1024" y="448" texturepath="Assets/Textures/enemy.png" id="1"/>
+		<enemy x="256" y="448" texturepath="Assets/Textures/enemy.png" id="2"/>
 	</sceneCombat>
 
 	<!-- Intro -->

@@ -33,9 +33,12 @@ bool SceneCombat::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
-	if (config.child("enemy")) {
-		enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
-		enemy->parameters = config.child("enemy");
+	int i = 0;
+	for (pugi::xml_node itemNode = config.child("enemy"); itemNode; itemNode = itemNode.next_sibling("enemy"))
+	{
+		enemy[i] = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+		enemy[i]->parameters = itemNode;
+		i++;
 	}
 
 	configNodeCombat = config;
@@ -77,7 +80,10 @@ bool SceneCombat::Start()
 	tilePosition = { 64, 64 };
 	app->map->pathfinding->CreatePath(app->map->WorldToMap(app->map->player->position.x, app->map->player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 
-	enemies[0] = enemy;
+	for (int i = 0; i < 2; i++)
+	{
+		enemies[i] = enemy[i];
+	}
 	players[0] = app->map->player;
 	players[1] = app->map->player2;
 	return true;
@@ -439,6 +445,8 @@ void SceneCombat::ChangeTurn()
 		tilePosition = tiles[0].position;
 		app->map->pathfinding->ClearLastPath();
 		app->map->pathfinding->CreatePath(app->map->WorldToMap(players[currentPlayerIndex]->position.x, players[currentPlayerIndex]->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
+		if (enemies[currentEnemyIndex + 1] != nullptr && !enemies[currentEnemyIndex + 1]->isDead) currentEnemyIndex++;
+		else currentEnemyIndex = 0;
 	}
 
 	isPlayerTurn = !isPlayerTurn;
@@ -457,7 +465,7 @@ bool SceneCombat::IsTileOccupied()
 	{
 		if (players[i]->position.x == tilePosition.x && players[i]->position.y == tilePosition.y) return true;
 	}
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		if (enemies[i]->position.x == tilePosition.x && enemies[i]->position.y == tilePosition.y) return true;
 	}
