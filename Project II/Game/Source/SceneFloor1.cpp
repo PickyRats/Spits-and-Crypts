@@ -82,7 +82,7 @@ bool SceneFloor1::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	app->audio->PlayMusic(configNodeFloor1.child("Floor1Music").attribute("path").as_string());
+	/*app->audio->PlayMusic(configNodeFloor1.child("Floor1Music").attribute("path").as_string());*/
 	
 	return true;
 }

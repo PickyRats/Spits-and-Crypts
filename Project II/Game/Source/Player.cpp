@@ -52,6 +52,7 @@ bool Player::Start() {
 
 	initialTransform = pbody->body->GetTransform();
 
+	stepsFx = app->audio->LoadFx("Assets/Audio/Fx/Footsteps_Fx.wav");
 	ToggleGodMode();
 
 	return true;
@@ -81,11 +82,21 @@ bool Player::Update(float dt)
 			//player movement
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 			{
+				if (step == false)
+				{
+					app->audio->PlayFx(stepsFx);
+					step = true;
+				}
 				LeftMovement();
 			}
 
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 			{
+				if (step == false)
+				{
+					app->audio->PlayFx(stepsFx);
+					step = true;
+				}
 				RightMovement();
 			}
 
@@ -168,6 +179,7 @@ bool Player::Update(float dt)
 		}
 	}
 	//printf("\r cameraX: %d cameraY: %d positionX: %d positionY %d", app->render->camera.x, app->render->camera.y, position.x, position.y);
+	
 	return true;
 }
 
