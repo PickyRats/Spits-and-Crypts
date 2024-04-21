@@ -69,6 +69,10 @@ bool Player::Update(float dt)
 	{
 		isDead = true;
 	}
+	if (isDead)
+	{
+		Respaw();
+	}
 
 	if (!isDead && !isCombat)
 	{
@@ -196,6 +200,11 @@ void Player::Jump()
 	isjumping = true;
 }
 
+void Player::Respaw() {
+	app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
+	isDead = false;
+}
+
 void Player::DrawPlayer()
 {
 
@@ -260,6 +269,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::DOOR_FLOOR_1:
 		doorFlor1 = true;
+		break;
+	case ColliderType::TRAP:
+		isDead = true;
 		break;
 	}
 
