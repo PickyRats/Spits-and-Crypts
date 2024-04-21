@@ -24,8 +24,6 @@ bool DialogTrigger::Awake() {
 
 bool DialogTrigger::Start() {
 
-
-
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
@@ -33,7 +31,6 @@ bool DialogTrigger::Start() {
 	repeatDialog = parameters.attribute("repeat").as_bool(false);
 
 	std::string fontTarget = parameters.attribute("font").as_string("primary");
-
 
 	played = false;
 
@@ -59,7 +56,7 @@ bool DialogTrigger::Start() {
 		faceTexture = app->tex->Load(faceTexturePath);
 	}
 
-	pbody = app->physics->CreateRectangleSensor(position.x + 10, position.y, 100, 100, bodyType::KINEMATIC);
+	pbody = app->physics->CreateRectangleSensor(position.x, position.y, 100, 100, bodyType::KINEMATIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::DIALOG_TRIGGER;
 
@@ -112,8 +109,6 @@ bool DialogTrigger::CleanUp()
 
 void DialogTrigger::PlayDialog()
 {
-
-
 	//Play el dialogo normal
 	if ((played && !repeatDialog) || !played) {
 

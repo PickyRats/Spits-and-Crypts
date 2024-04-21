@@ -19,7 +19,7 @@ DialogManager::~DialogManager()
 {}
 
 // Called before render is available
-bool DialogManager::Awake(pugi::xml_node config)
+bool DialogManager::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Dialog Manager");
 	bool ret = true;
@@ -111,7 +111,7 @@ bool DialogManager::AddDialog(Dialog* dialog)
 bool DialogManager::ShowDialog(Dialog* dialog)
 {
 	//Mostrar fondo
-	app->render->DrawTexture(background_tex, dialogPosition.x, dialogPosition.y, 0);
+	app->render->DrawTexture(background_tex, 0, 0, 0);
 
 	std::string actualText = dialog->sentence.substr(0, indexText);
 
@@ -153,8 +153,8 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 
 
 	//Nombre personaje
-	textNameTexture = CreateTextTexture(app->render->font, dialog->name.c_str(), textColor, textNameBoundWidth);
-	app->render->DrawTexture(textNameTexture, dialogMargin[3] + dialogPosition.x + namePosition.x, dialogMargin[0] + dialogPosition.y + namePosition.y, 0);
+	textNameTexture = CreateTextTexture(app->render->font, dialog->name.c_str(), nameColor, textNameBoundWidth);
+	app->render->DrawTexture(textNameTexture, dialogMargin[3] + namePosition.x, dialogMargin[0] + namePosition.y, 0);
 
 
 	//Opciones

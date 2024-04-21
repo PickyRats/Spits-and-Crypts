@@ -18,7 +18,7 @@ public:
 	virtual ~DialogManager();
 
 	// Called before render is available
-	bool Awake(pugi::xml_node config);
+	bool Awake(pugi::xml_node& config);
 
 	// Called after Awake
 	bool Start();
@@ -54,23 +54,24 @@ public:
 private:
 
 	//Colores
-	SDL_Color textColor = { 255,255,255,255 };
+	SDL_Color textColor = { 0,0,0,0 };
+	SDL_Color nameColor= { 255,255,255,255 };
 	SDL_Color optionSelectedColor = { 200, 200, 200, 255 };
 	SDL_Color optionColor = { 23, 23, 23, 255 };
 
 
 	//Posiciones
 	std::vector<int> dialogMargin = { 130, 50, 0, 50 };
-	iPoint dialogPosition = { 0 , 0 }; //{ 0 , 375 }
-	iPoint namePosition = { 40 , -75 };
+	iPoint dialogPosition = { 360 , 470 }; //{ 0 , 375 }
+	iPoint namePosition = { 520 , 430 };
 	iPoint optionsPosition = { 900 , 300 };
 	int optionsDistanceBetween = 50;
 
 	//Dimensiones
-	int textBoundWidth;
+	int textBoundWidth= 100;
 	int textNameBoundWidth = 200;
 	int optionsBoundWidth = 350;
-	iPoint faceTextureSize = { 250, 250 };
+	iPoint faceTextureSize = { 100, 100 };
 
 
 	//Config
