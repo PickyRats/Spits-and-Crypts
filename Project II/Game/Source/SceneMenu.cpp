@@ -91,12 +91,12 @@ bool SceneMenu::Start()
 	//Settings Buttons
 	settingsExitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, NULL, exitNormal, exitHover, exitClick, { 1419, 92, 63, 63 }, this);
 	settingsFullScreenButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 8, NULL, settingsBoxNormal, settingsBoxHover, settingsTick, { 661, 250, 89, 89 }, this);
-	settingsVSyncButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 9, NULL, settingsBoxNormal, settingsBoxHover, settingsTick, { 661, 350, 89, 89 }, this);
-	settingsMusicButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 10, NULL, settingsSlider, settingsSlider, settingsSlider, { 1124, 259, 30, 80 }, this, { 663, 259, 613, 80 });
-	settingsFxButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 11, NULL, settingsSlider, settingsSlider, settingsSlider, { 1124, 376, 30, 80 }, this, { 663, 376, 613, 80 });
-	settingsOptionsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, NULL, settingsOptionsButtonNormal, settingsOptionsButtonHover, exitClick, { 40, 150, 400, 50 }, this);
-	settingsAudioButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, NULL, settingsAudioButtonNormal, settingsAudioButtonHover, exitClick, { 440, 150, 400, 50 }, this);
-	settingsControlsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, NULL, settingsControlsButtonNormal, settingsControlsButtonHover, exitClick, { 840, 150, 400, 50 }, this);
+	settingsVSyncButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 7, NULL, settingsBoxNormal, settingsBoxHover, settingsTick, { 661, 350, 89, 89 }, this);
+	settingsMusicButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 231, NULL, settingsSlider, settingsSlider, settingsSlider, { 1124, 259, 30, 80 }, this, { 663, 259, 613, 80 });
+	settingsFxButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 21, NULL, settingsSlider, settingsSlider, settingsSlider, { 1124, 376, 30, 80 }, this, { 663, 376, 613, 80 });
+	settingsOptionsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, NULL, settingsOptionsButtonNormal, settingsOptionsButtonHover, exitClick, { 40, 150, 400, 50 }, this);
+	settingsAudioButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, NULL, settingsAudioButtonNormal, settingsAudioButtonHover, exitClick, { 440, 150, 400, 50 }, this);
+	settingsControlsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, NULL, settingsControlsButtonNormal, settingsControlsButtonHover, exitClick, { 840, 150, 400, 50 }, this);
 
 	settingsExitButton->state = GuiControlState::NORMAL;
 	settingsFullScreenButton->state = GuiControlState::NORMAL;
@@ -117,9 +117,19 @@ bool SceneMenu::Start()
 
 bool SceneMenu::Update(float dt)
 {
+
 	//On menu screen
 	if(onMenu && !onSettings && !onCredits){
 
+		if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN))
+		{
+			currentId++;
+
+		}
+		if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN))
+		{
+			currentId--;
+		}
 		//Hide settings buttons
 		settingsExitButton->state = GuiControlState::HIDDEN;
 		settingsFullScreenButton->state = GuiControlState::HIDDEN;
@@ -178,6 +188,7 @@ bool SceneMenu::Update(float dt)
 		}
 		else if (settingsButton->state == GuiControlState::PRESSED)
 		{
+			currentId = 9;
 			if (fxClickPlayed == false)
 			{
 				app->audio->PlayFx(FxButton2);
@@ -235,6 +246,28 @@ bool SceneMenu::Update(float dt)
 	//On settings screen
 	else if (onSettings)
 	{
+		if ((app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN))
+		{
+			if (currentId >= 9 && currentId < 12)
+			{
+				currentId = 12;
+			}
+			else if (currentId >= 6 && currentId < 9)
+			{
+				currentId = 9;
+			}
+		}
+		else if((app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN))
+		{
+			if (currentId >= 12)
+			{
+				currentId = 9;
+			}
+			else if (currentId >= 9 && currentId < 12)
+			{
+				currentId = 6;
+			}
+		}
 		//Hide menu buttons
 		startButton->state = GuiControlState::HIDDEN;
 		loadGameButton->state = GuiControlState::HIDDEN;
@@ -264,6 +297,14 @@ bool SceneMenu::Update(float dt)
 			}
 			else if (onSettingsOptions)
 			{	
+				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && currentId != 8)
+				{
+					currentId++;
+				}
+				else if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && currentId != 7)
+				{
+					currentId--;
+				}
 				app->render->DrawTexture(settingsOptionsPanel, 340, 200, NULL, SDL_FLIP_NONE, 0);
 				if (buttonsActivated)
 				{
@@ -278,6 +319,7 @@ bool SceneMenu::Update(float dt)
 		//return control
 		if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 		{
+			currentId = 1;
 			onSettings = false;
 			//Show menu buttons
 			startButton->state = GuiControlState::NORMAL;

@@ -4,6 +4,7 @@
 #include "Audio.h"
 #include "Log.h"
 #include "GuiManager.h"
+#include "SceneMenu.h"
 
 GuiControlCheckBox::GuiControlCheckBox(uint32 id, SDL_Rect bounds, SDL_Texture* textureDisabled, SDL_Texture* textureNormal, SDL_Texture* textureFocused, SDL_Texture* texturePressed) : GuiControl(GuiControlType::BUTTON, id)
 {
@@ -32,11 +33,11 @@ bool GuiControlCheckBox::Update(float dt)
 		app->input->GetMousePosition(mouseX, mouseY);
 
 		//If the position of the mouse if inside the bounds of the button 
-		if (mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h) {
+		if (/*mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h*/ app->sceneMenu->currentId == id) {
 		
 			state = GuiControlState::FOCUSED;
 
-			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
+			if (/*app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN*/(app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)) {
 				state = GuiControlState::PRESSED;
 				pressed = !pressed;
 			}

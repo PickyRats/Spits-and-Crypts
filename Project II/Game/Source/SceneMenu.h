@@ -30,6 +30,7 @@ public:
 	bool fxClickPlayed = false;
 	bool fullScreen = false;
 	bool vSync = true;
+	int currentId= 1;
 
 	GuiControlButton* startButton;
 	GuiControlButton* loadGameButton;
