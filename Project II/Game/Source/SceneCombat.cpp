@@ -86,6 +86,8 @@ bool SceneCombat::Start()
 	}
 	players[0] = app->map->player;
 	players[1] = app->map->player2;
+	app->map->player2->isVisible = true;
+	app->map->player2->CreateBody();
 	return true;
 }
 

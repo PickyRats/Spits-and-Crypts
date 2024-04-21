@@ -5,6 +5,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "SceneVillage.h"
+#include "SceneCombat.h"
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
@@ -40,10 +41,6 @@ bool Enemy::Start() {
 
 	//currentAnim = &idleAnim;
 
-	pbody = app->physics->CreateCircle(position.x + 50, position.y, 22, bodyType::DYNAMIC);
-	pbody->listener = this;
-	pbody->ctype = ColliderType::ENEMY;
-
 	return true;
 }
 
@@ -54,8 +51,25 @@ bool Enemy::Update(float dt)
 	
 	/*position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 50;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 42;*/
-	DrawEnemy();
-
+	if (app->sceneCombat->active)
+	{
+		if (!physCreated)
+		{
+			pbody = app->physics->CreateCircle(position.x + 50, position.y, 22, bodyType::DYNAMIC);
+			pbody->listener = this;
+			pbody->ctype = ColliderType::ENEMY;
+			physCreated = true;
+		}
+		DrawEnemy();
+	}
+	else
+	{
+		if (physCreated)
+		{
+			app->physics->world->DestroyBody(pbody->body);
+			physCreated = false;
+		}
+	}
 	return true;
 }
 

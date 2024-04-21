@@ -45,5 +45,7 @@ public:
 	float dt;
 
 	SDL_Texture* tileTexture;
+
+	bool physCreated = false;
 };
 

@@ -46,8 +46,11 @@ public:
 
 	void Respaw();
 
+	void CreateBody();
+
 public:
 	float speed = 0.2f;
+	int id = 0;
 	const char* texturePath;
 
 	SDL_Texture* texture = NULL;
@@ -81,7 +84,7 @@ public:
 	float dt;
 
 	bool isCombat = false;
-
+	bool isVisible = true;
 
 	uint stepsFx;
 
