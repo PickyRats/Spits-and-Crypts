@@ -150,7 +150,7 @@ bool SceneMenu::Update(float dt)
 				fxClickPlayed = true;
 			}
       
-			app->fade->Fade(this, (Module*)app->sceneVillage, 60.0f);
+			app->fade->Fade(this, (Module*)app->sceneFloor1, 60.0f);
 
 
 		}

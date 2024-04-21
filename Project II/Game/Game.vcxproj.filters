@@ -93,6 +93,9 @@
     <ClCompile Include="Source\Player.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Piezas_puzle.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -221,6 +224,9 @@
     </ClInclude>
     <ClInclude Include="Source\SceneFloor1.h">
       <Filter>Modules\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Piezas_puzle.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

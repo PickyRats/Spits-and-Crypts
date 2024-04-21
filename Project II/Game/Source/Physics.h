@@ -37,6 +37,7 @@ enum class ColliderType {
 	WALL,
 	DOOR,
 	ITERACTABLE,
+	ITEM,
 	UNKNOWN
 	// ..
 };
