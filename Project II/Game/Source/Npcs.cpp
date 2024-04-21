@@ -57,10 +57,10 @@ bool Npcs::Update(float dt)
 	int npcScene= parameters.attribute("scene").as_int();
 
 	//Comprobar si la escena actual es la que tiene el npc y crearlo si es así
-	if (app->sceneVillage->active && sceneVillage== npcScene)
+	if (app->sceneVillage->active && sceneVillage == npcScene)
 	{
 		//Crear el cuerpo físico una sola vez
-		if (physCreated==false)
+		if (!physCreated)
 		{
 			pbody = app->physics->CreateRectangle(position.x, position.y, 64,128, bodyType::STATIC);
 			//pbody = app->physics->CreateCircle(position.x , position.y, 22, bodyType::DYNAMIC);
@@ -74,7 +74,7 @@ bool Npcs::Update(float dt)
 	}
 	else if (app->sceneTemple->active && sceneTemple== npcScene)
 	{
-		if (physCreated==false)
+		if (!physCreated)
 		{
 			pbody = app->physics->CreateCircle(position.x, position.y, 22, bodyType::DYNAMIC);
 			pbody->listener = this;
@@ -87,7 +87,7 @@ bool Npcs::Update(float dt)
 	}
 	else if (app->sceneShop->active && sceneShop == npcScene)
 	{
-		if (physCreated == false)
+		if (!physCreated)
 		{
 			pbody = app->physics->CreateRectangle(position.x, position.y, 64, 128, bodyType::STATIC);
 			pbody->listener = this;
@@ -100,7 +100,7 @@ bool Npcs::Update(float dt)
 	}
 	else if (app->sceneOasisFaraon->active && sceneOasisFaraon == npcScene)
 	{
-		if (physCreated == false)
+		if (!physCreated)
 		{
 			pbody = app->physics->CreateCircle(position.x , position.y, 22, bodyType::DYNAMIC);
 			pbody->listener = this;
@@ -111,10 +111,8 @@ bool Npcs::Update(float dt)
 		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y);
 		DrawNpcs();
 	}
-	else
-	{
-		return true;
-	}
+
+	return true;
 }
 
 void Npcs::Interact(int id) 
