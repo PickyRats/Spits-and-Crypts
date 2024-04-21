@@ -77,7 +77,7 @@ bool SceneCombat::Start()
 	selectedTileTexture = app->tex->Load("Assets/Textures/selected_tile.png");
 	cursorTexture = app->tex->Load("Assets/Textures/selection_cursor.png");
 
-	tilePosition = { 64, 64 };
+	tilePosition = { 64, 576 };
 	app->map->pathfinding->CreatePath(app->map->WorldToMap(app->map->player->position.x, app->map->player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 
 	for (int i = 0; i < 2; i++)

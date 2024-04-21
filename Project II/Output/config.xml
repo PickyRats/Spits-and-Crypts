@@ -31,8 +31,8 @@
 		</music>
     
 		<!--Enemy -->
-		<enemy x="1024" y="448" texturepath="Assets/Textures/enemy.png" id="1"/>
-		<enemy x="256" y="448" texturepath="Assets/Textures/enemy.png" id="2"/>
+		<enemy x="1216" y="384" texturepath="Assets/Textures/enemy.png" id="1"/>
+		<enemy x="704" y="192" texturepath="Assets/Textures/enemy.png" id="2"/>
 
 	</sceneCombat>
 	
@@ -113,8 +113,8 @@
 
   <map>
 		<!-- Player -->
-		<player x="64" y="64" texturepath="Assets/Textures/player.png" speed="0.2f" id="1"/>
-		<player2 x="0" y="64" texturepath="Assets/Textures/player.png" speed="0.2f" id="2"/>
+		<player x="64" y="576" texturepath="Assets/Textures/player.png" speed="0.2f" id="1"/>
+		<player2 x="0" y="576" texturepath="Assets/Textures/player.png" speed="0.2f" id="2"/>
 	</map>
 	
 	<!-- sceneFloor1 -->
