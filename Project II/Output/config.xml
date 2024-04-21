@@ -29,9 +29,14 @@
 		<!-- Music -->
 		<music>
 		</music>
+    
+		<!--Enemy -->
+		<enemy x="1024" y="448" texturepath="Assets/Textures/enemy.png" id="1"/>
+		<enemy x="256" y="448" texturepath="Assets/Textures/enemy.png" id="2"/>
+
 	</sceneCombat>
 	
-	<sceneShop>
+  	<sceneShop>
 		<!-- Scene -->
 		<map path="Assets/Maps/" name="Map_Shop.tmx"/>
 
@@ -44,7 +49,7 @@
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 
 		<!-- Mercante  -->
-		<npc x="150" y="50" texturepath="Assets/Textures/Npcs/mercante.png" id="7" scene="3"/>
+		<npc x="1024" y="576" texturepath="Assets/Textures/Npcs/mercante.png" id="7" scene="3"/>
 	</sceneShop>
 
 	<!-- Intro -->
@@ -106,9 +111,10 @@
 		<npc x="750" y="550" texturepath="Assets/Textures/Npcs/horus.png" id="6" scene="2"/>
 	</sceneTemple>
 
-	<map>
+  <map>
 		<!-- Player -->
-		<player x="64" y="64" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+		<player x="64" y="64" texturepath="Assets/Textures/player.png" speed="0.2f" id="1"/>
+		<player2 x="0" y="64" texturepath="Assets/Textures/player.png" speed="0.2f" id="2"/>
 	</map>
 	
 	<!-- sceneFloor1 -->
@@ -216,7 +222,7 @@
 	<animations>
 		<!-- Player Animations-->
 		<player>
-			<idleAnim loop="true" speed="0.1f">
+			<idleAnim loop="true" speed=" 0.1f">
 				<animation x="0" y="0" w="100" h="64"/>
 				<animation x="100" y="0" w="100" h="64"/>
 				<animation x="200" y="0" w="100" h="64"/>

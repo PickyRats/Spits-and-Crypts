@@ -142,6 +142,7 @@ bool SceneFloor1::PostUpdate()
 bool SceneFloor1::CleanUp()
 {
 	LOG("Freeing scene");
+	app->map->Disable();
 
 	return true;
 }

@@ -1,6 +1,8 @@
 #include "App.h"
 #include "Map.h"
 #include "PathFinding.h"
+#include "SceneCombat.h"
+#include <vector>
 
 #include "Defs.h"
 #include "Log.h"
@@ -127,14 +129,25 @@ int PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 				// Backtrack to create the final path
 				// Use the Pathnode::parent and Flip() the path when you are finish
 				const PathNode* pathNode = &node->data;
+				std::vector<iPoint> allSteps;
 
 				while (pathNode)
 				{
-					lastPath.PushBack(pathNode->pos);
+					allSteps.push_back(pathNode->pos);
 					pathNode = pathNode->parent;
 				}
 
-				lastPath.Flip();
+				for (int i = allSteps.size() - 1; i >= 0; --i)
+				{
+					lastPath.PushBack(allSteps[i]);
+				}
+
+				while (lastPath.Count() > app->sceneCombat->maxTiles + 1)
+				{
+					iPoint dummyValue;
+					lastPath.Pop(dummyValue);
+				}
+
 				ret = lastPath.Count();
 				LOG("Created path of %d steps in %d iterations", ret, iterations);
 				break;

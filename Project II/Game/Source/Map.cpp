@@ -35,7 +35,10 @@ bool Map::Awake(pugi::xml_node& config)
     	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
     	player->parameters = config.child("player");
     }
-
+    if (config.child("player2")) {
+        player2 = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+        player2->parameters = config.child("player2");
+    }
     return ret;
 }
 
@@ -78,11 +81,10 @@ bool Map::Update(float dt)
 
             UpdateTileLoadSize();
 
-            for (int i = startWidth; i < endWidth; i++) {
-                for (int j = startHeight; j < endHeight; j++) {
+            for (int i = startWidth; i < mapData.width; i++) {
+                for (int j = startHeight; j < mapData.height; j++) {
                     //Get the gid from tile
                     int gid = mapLayer->data->Get(i, j);
-
 
                     TileSet* tileSet = GetTilesetFromTileId(gid);
                     SDL_Rect tileRect = tileSet->GetRect(gid);
@@ -96,7 +98,7 @@ bool Map::Update(float dt)
         }
         mapLayer = mapLayer->next;
     }
-
+    LOG("Map updated successfully");
     return true;
 }
 
@@ -406,6 +408,7 @@ void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
     width = mapData.width;
     height = mapData.height;
 
+    LOG("Navigation map created successfully");
 }
 
 bool Map::CreateColliders()
@@ -471,7 +474,26 @@ bool Map::CreateColliders()
                             c1->ctype = ColliderType::DOOR_FLOOR_1;
                             ret = true;
                             break;
-                      
+                        case 12:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::TRAP;
+                            ret = true;
+                            break;      
+                        case 102:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::PLATFORM;
+                            ret = true;
+                            break;
+                        case 112:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::WALL;
+                            ret = true;
+                            break;
+                        case 122:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::WALL;
+                            ret = true;
+                            break;
                        /* case 5:
                             c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
                             c1->ctype = ColliderType::ITERACTABLE;
@@ -486,7 +508,7 @@ bool Map::CreateColliders()
         }
         mapLayerItem = mapLayerItem->next;
     }
-
+    LOG("Colliders created successfully");
     return ret;
 }
 
@@ -598,6 +620,7 @@ bool Map::LoadEntities()
 
     }
 
+    LOG("Entities loaded successfully");
     return false;
 }
 

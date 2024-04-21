@@ -36,8 +36,10 @@ enum class ColliderType {
 	COMBAT,
 	WALL,
 	DOOR,
+	TRAP,
 	ITERACTABLE,
 	ITEM,
+	ENEMY,
 	UNKNOWN
 	// ..
 };

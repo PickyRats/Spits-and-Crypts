@@ -41,9 +41,16 @@ public:
 	void RightMovement();
 
 	void Jump();
+	
+	void WalkingSound();
+
+	void Respaw();
+
+	void CreateBody();
 
 public:
 	float speed = 0.2f;
+	int id = 0;
 	const char* texturePath;
 
 	SDL_Texture* texture = NULL;
@@ -66,6 +73,8 @@ public:
 	bool doorShop = false;
 	bool doorOasis = false;
 	bool doorTemple = false;
+	bool step = false;
+	bool walkingSoundPlaying = false;
 	bool doorFlor1 = false;
 
 	b2Transform initialTransform;
@@ -75,6 +84,12 @@ public:
 	float dt;
 
 	bool isCombat = false;
+	bool isVisible = true;
+
+	uint stepsFx;
+
+	bool isDead = false;
+
 
 };
 
