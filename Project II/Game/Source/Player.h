@@ -44,6 +44,8 @@ public:
 	
 	void WalkingSound();
 
+	void Respaw();
+
 public:
 	float speed = 0.2f;
 	const char* texturePath;
@@ -70,6 +72,8 @@ public:
 	bool doorTemple = false;
 	bool step = false;
 	bool walkingSoundPlaying = false;
+	bool doorFlor1 = false;
+
 	b2Transform initialTransform;
 
 	b2Vec2 vel;
@@ -78,7 +82,11 @@ public:
 
 	bool isCombat = false;
 
+
 	uint stepsFx;
+
+	bool isDead = false;
+
 
 };
 

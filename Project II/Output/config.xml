@@ -44,7 +44,7 @@
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 
 		<!-- Mercante  -->
-		<npc x="150" y="50" texturepath="Assets/Textures/Npcs/mercante.png" id="7" scene="3"/>
+		<npc x="1024" y="576" texturepath="Assets/Textures/Npcs/mercante.png" id="7" scene="3"/>
 	</sceneShop>
 
 	<!-- Intro -->
@@ -211,7 +211,7 @@
 	<animations>
 		<!-- Player Animations-->
 		<player>
-			<idleAnim loop="true" speed="0.1f">
+			<idleAnim loop="true" speed=" 0.1f">
 				<animation x="0" y="0" w="100" h="64"/>
 				<animation x="100" y="0" w="100" h="64"/>
 				<animation x="200" y="0" w="100" h="64"/>

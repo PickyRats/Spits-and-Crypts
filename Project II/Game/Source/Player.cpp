@@ -13,6 +13,7 @@
 #include "SceneShop.h"
 #include "SceneOasisFaraon.h"
 #include "SceneTemple.h"
+#include "SceneFloor1.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -68,6 +69,10 @@ bool Player::Update(float dt)
 	if (health <= 0 && !isDead)
 	{
 		isDead = true;
+	}
+	if (isDead)
+	{
+		Respaw();
 	}
 
 	if (!isDead && !isCombat)
@@ -154,6 +159,7 @@ bool Player::Update(float dt)
 			if (app->sceneShop->active) app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
 			else if (app->sceneOasisFaraon->active) app->fade->Fade((Module*)app->sceneOasisFaraon, (Module*)app->sceneVillage, 60.0f);
 			else if (app->sceneTemple->active) app->fade->Fade((Module*)app->sceneTemple, (Module*)app->sceneVillage, 60.0f);
+			else if (app->sceneFloor1->active) app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
 			doorAldea = false;
 		}
 		if (doorOasis)
@@ -171,6 +177,11 @@ bool Player::Update(float dt)
 			app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneTemple, 60.0f);
 			doorTemple = false;
 		}
+		if (doorFlor1)
+		{
+			app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneFloor1, 60.0f);
+			doorFlor1 = false;
+		}
 	}
 	//printf("\r cameraX: %d cameraY: %d positionX: %d positionY %d", app->render->camera.x, app->render->camera.y, position.x, position.y);
 	
@@ -181,14 +192,14 @@ void Player::LeftMovement()
 {
 	isFacingRight = false;
 	isWalking = true;	
-	vel.x = -speed * 1 * dt;
+	vel.x = -speed * 2 * dt;
 }
 
 void Player::RightMovement()
 {
 	isFacingRight = true;
 	isWalking = true;
-	vel.x = speed * 1 * dt;
+	vel.x = speed * 2 * dt;
 }
 
 void Player::WalkingSound()
@@ -214,6 +225,11 @@ void Player::Jump()
 {
 	vel.y = -speed * 2 * dt;
 	isjumping = true;
+}
+
+void Player::Respaw() {
+	app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
+	isDead = false;
 }
 
 void Player::DrawPlayer()
@@ -278,6 +294,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::DOOR_TEMPLE:
 		doorTemple = true;
 		break;
+	case ColliderType::DOOR_FLOOR_1:
+		doorFlor1 = true;
+		break;
+	case ColliderType::TRAP:
+		isDead = true;
+		break;
 	}
 
 }
@@ -296,6 +318,9 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::DOOR_TEMPLE:
 		doorTemple = false;
+		break;
+	case ColliderType::DOOR_FLOOR_1:
+		doorFlor1 = false;
 		break;
 	}
 
