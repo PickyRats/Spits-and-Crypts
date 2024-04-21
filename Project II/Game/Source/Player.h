@@ -41,6 +41,8 @@ public:
 	void RightMovement();
 
 	void Jump();
+	
+	void WalkingSound();
 
 	void Respaw();
 
@@ -68,6 +70,8 @@ public:
 	bool doorShop = false;
 	bool doorOasis = false;
 	bool doorTemple = false;
+	bool step = false;
+	bool walkingSoundPlaying = false;
 	bool doorFlor1 = false;
 
 	b2Transform initialTransform;
@@ -78,7 +82,11 @@ public:
 
 	bool isCombat = false;
 
+
+	uint stepsFx;
+
 	bool isDead = false;
+
 
 };
 
