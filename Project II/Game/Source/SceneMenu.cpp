@@ -90,8 +90,8 @@ bool SceneMenu::Start()
 
 	//Settings Buttons
 	settingsExitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, NULL, exitNormal, exitHover, exitClick, { 1419, 92, 63, 63 }, this);
-	settingsFullScreenButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 8, NULL, settingsBoxNormal, settingsBoxHover, settingsTick, { 661, 250, 89, 89 }, this);
-	settingsVSyncButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 7, NULL, settingsBoxNormal, settingsBoxHover, settingsTick, { 661, 350, 89, 89 }, this);
+	settingsFullScreenButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 7, NULL, settingsBoxNormal, settingsBoxHover, settingsTick, { 661, 250, 89, 89 }, this);
+	settingsVSyncButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 8, NULL, settingsBoxNormal, settingsBoxHover, settingsTick, { 661, 350, 89, 89 }, this);
 	settingsMusicButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 231, NULL, settingsSlider, settingsSlider, settingsSlider, { 1124, 259, 30, 80 }, this, { 663, 259, 613, 80 });
 	settingsFxButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 21, NULL, settingsSlider, settingsSlider, settingsSlider, { 1124, 376, 30, 80 }, this, { 663, 376, 613, 80 });
 	settingsOptionsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, NULL, settingsOptionsButtonNormal, settingsOptionsButtonHover, exitClick, { 40, 150, 400, 50 }, this);
@@ -300,10 +300,14 @@ bool SceneMenu::Update(float dt)
 				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && currentId != 8)
 				{
 					currentId++;
+					fxHoverPlayed = false;
+					fxClickPlayed = false;
 				}
-				else if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && currentId != 7)
+				else if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && currentId != 6)
 				{
 					currentId--;
+					fxHoverPlayed = false;
+					fxClickPlayed = false;
 				}
 				app->render->DrawTexture(settingsOptionsPanel, 340, 200, NULL, SDL_FLIP_NONE, 0);
 				if (buttonsActivated)
@@ -344,6 +348,7 @@ bool SceneMenu::Update(float dt)
 				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 			}
+			fxClickPlayed = false;
 			onSettingsControls = false;
 			onSettingsOptions = true;
 			onSettingsAudio = false;
@@ -399,12 +404,12 @@ bool SceneMenu::Update(float dt)
 		}
 		else if (settingsFullScreenButton->state == GuiControlState::PRESSED)
 		{
+			if (fullScreen == false) fullScreen = true;
+			else fullScreen = false;
 			if (fxClickPlayed == false)
 			{
 				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
-				if (fullScreen == false) fullScreen = true;
-				else fullScreen = false;
 			}
 		}
 		else if (settingsVSyncButton->state == GuiControlState::FOCUSED)
@@ -417,12 +422,12 @@ bool SceneMenu::Update(float dt)
 		}
 		else if (settingsVSyncButton->state == GuiControlState::PRESSED)
 		{
+			if (vSync == false) vSync = true;
+			else vSync = false;
 			if (fxClickPlayed == false)
 			{
 				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
-				if (vSync == false) vSync = true;
-				else vSync = false;
 			}
 		}
 		else

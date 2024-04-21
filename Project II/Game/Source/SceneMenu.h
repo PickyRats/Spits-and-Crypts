@@ -29,7 +29,7 @@ public:
 	bool fxHoverPlayed = false;
 	bool fxClickPlayed = false;
 	bool fullScreen = false;
-	bool vSync = true;
+	bool vSync = false;
 	int currentId= 1;
 
 	GuiControlButton* startButton;
