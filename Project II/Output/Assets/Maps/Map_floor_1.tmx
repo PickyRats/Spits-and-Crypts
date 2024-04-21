@@ -3631,7 +3631,7 @@
    <tile gid="135"/>
   </data>
  </layer>
- <layer id="2" name="Collisions" width="100" height="12" visible="0" opacity="0.63">
+ <layer id="2" name="Collisions" width="100" height="12" opacity="0.63">
   <properties>
    <property name="Draw" type="bool" value="false"/>
   </properties>
@@ -4636,7 +4636,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="8"/>
    <tile/>
    <tile/>
    <tile/>

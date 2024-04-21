@@ -42,6 +42,8 @@ public:
 
 	void Jump();
 
+	void Respaw();
+
 public:
 	float speed = 0.2f;
 	const char* texturePath;
@@ -75,6 +77,8 @@ public:
 	float dt;
 
 	bool isCombat = false;
+
+	bool isDead = false;
 
 };
 
