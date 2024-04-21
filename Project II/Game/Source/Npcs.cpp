@@ -111,6 +111,14 @@ bool Npcs::Update(float dt)
 		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y);
 		DrawNpcs();
 	}
+	else
+	{
+		if (physCreated)
+		{
+			app->physics->world->DestroyBody(pbody->body);
+			physCreated = false;
+		}
+	}
 
 	return true;
 }
