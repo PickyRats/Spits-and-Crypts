@@ -28,7 +28,15 @@ enum class ColliderType {
 	PLAYER_BODY,
 	NPC,
 	PLATFORM,
+	DOOR_SHOP,
+	DOOR_OASIS,
+	DOOR_TEMPLE,
+	DOOR_ALDEA,
+	DOOR_FLOOR_1,
+	COMBAT,
+	WALL,
 	DOOR,
+	TRAP,
 	ITERACTABLE,
 	ENEMY,
 	UNKNOWN
@@ -79,6 +87,8 @@ public:
 	
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
+
+	void EndContact(b2Contact* contact);
 
 
 	// Box2D World

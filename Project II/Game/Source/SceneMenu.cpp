@@ -7,6 +7,7 @@
 #include "Render.h"
 #include "Window.h"
 #include "SceneVillage.h"
+#include "SceneShop.h"
 #include "Map.h"
 #include "FadeToBlack.h"
 #include "GuiManager.h"
@@ -57,7 +58,6 @@ bool SceneMenu::Start()
 	exitHover = app->tex->Load(configNode2.child("exitHover").attribute("texturepath").as_string());
 	exitClick = app->tex->Load(configNode2.child("exitClick").attribute("texturepath").as_string());
 	settings = app->tex->Load(configNode2.child("settings").attribute("texturepath").as_string());
-	controlsHint = app->tex->Load(configNode2.child("controlsHint").attribute("texturepath").as_string());
 	credits = app->tex->Load(configNode2.child("credits").attribute("texturepath").as_string());
 	settingsBoxNormal = app->tex->Load(configNode2.child("settingsBoxNormal").attribute("texturepath").as_string());
 	settingsBoxHover = app->tex->Load(configNode2.child("settingsBoxHover").attribute("texturepath").as_string());
@@ -110,7 +110,7 @@ bool SceneMenu::Start()
 	
 
 	//audio
-	app->audio->PlayMusic(configNode2.child("musicMenu").attribute("path").as_string(), configNode2.child("musicMenu").attribute("fadeTime").as_float());
+	app->audio->PlayMusic(configNode2.child("musicMenu").attribute("path").as_string());
 
 	return true;
 }
@@ -133,7 +133,6 @@ bool SceneMenu::Update(float dt)
 
 		//Render background 
 		app->render->DrawTexture(background, 0, 0, NULL, SDL_FLIP_NONE, 0);
-		app->render->DrawTexture(controlsHint, 30, 670, NULL, SDL_FLIP_NONE, 0);
 		//Check if buttons are focused or pressed. If pressed, do the action. With sound effects.
 		if (startButton->state == GuiControlState::FOCUSED)
 		{
@@ -150,7 +149,7 @@ bool SceneMenu::Update(float dt)
 				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 			}
-			app->fade->Fade(this, (Module*)app->sceneCombat, 60.0f);
+			app->fade->Fade(this, (Module*)app->sceneVillage, 60.0f);
 		}
 		else if (loadGameButton->state == GuiControlState::FOCUSED)
 		{
@@ -264,12 +263,16 @@ bool SceneMenu::Update(float dt)
 				settingsVSyncButton->state = GuiControlState::HIDDEN;
 			}
 			else if (onSettingsOptions)
-			{
+			{	
 				app->render->DrawTexture(settingsOptionsPanel, 340, 200, NULL, SDL_FLIP_NONE, 0);
-				settingsFullScreenButton->state = GuiControlState::NORMAL;
-				settingsVSyncButton->state = GuiControlState::NORMAL;
-				settingsFxButton->state = GuiControlState::HIDDEN;
-				settingsMusicButton->state = GuiControlState::HIDDEN;
+				if (buttonsActivated)
+				{
+					buttonsActivated = false;
+					settingsFullScreenButton->state = GuiControlState::NORMAL;
+					settingsVSyncButton->state = GuiControlState::NORMAL;
+					settingsFxButton->state = GuiControlState::HIDDEN;
+					settingsMusicButton->state = GuiControlState::HIDDEN;
+				}
 			}
 		}
 		//return control
@@ -302,6 +305,7 @@ bool SceneMenu::Update(float dt)
 			onSettingsControls = false;
 			onSettingsOptions = true;
 			onSettingsAudio = false;
+			buttonsActivated = true;
 		}
 		else if (settingsAudioButton->state == GuiControlState::FOCUSED)
 		{
@@ -321,6 +325,7 @@ bool SceneMenu::Update(float dt)
 			onSettingsControls = false;
 			onSettingsOptions = false;
 			onSettingsAudio = true;
+			buttonsActivated = true;
 		}
 		else if (settingsControlsButton->state == GuiControlState::FOCUSED)
 		{
@@ -340,6 +345,7 @@ bool SceneMenu::Update(float dt)
 			onSettingsControls = true;
 			onSettingsOptions = false;
 			onSettingsAudio = false;
+			buttonsActivated = true;
 		}
 		else if (settingsFullScreenButton->state == GuiControlState::FOCUSED)
 		{
@@ -349,7 +355,6 @@ bool SceneMenu::Update(float dt)
 				fxHoverPlayed = true;
 			}
 		}
-		
 		else if (settingsFullScreenButton->state == GuiControlState::PRESSED)
 		{
 			if (fxClickPlayed == false)

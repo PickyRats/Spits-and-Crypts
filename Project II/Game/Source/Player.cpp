@@ -10,6 +10,10 @@
 #include "Physics.h"
 #include "FadeToBlack.h"
 #include "Hud.h"
+#include "SceneShop.h"
+#include "SceneOasisFaraon.h"
+#include "SceneTemple.h"
+#include "SceneFloor1.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -49,6 +53,7 @@ bool Player::Start() {
 
 	initialTransform = pbody->body->GetTransform();
 
+	stepsFx = app->audio->LoadFx("Assets/Audio/Fx/Footsteps_Fx.wav");
 	ToggleGodMode();
 
 	return true;
@@ -65,6 +70,10 @@ bool Player::Update(float dt)
 	{
 		isDead = true;
 	}
+	if (isDead)
+	{
+		Respaw();
+	}
 
 	if (!isDead && !isCombat)
 	{
@@ -74,20 +83,24 @@ bool Player::Update(float dt)
 
 		if (!godMode)
 		{
-
+			//Funcion para hacer sonidos
+			WalkingSound();
 			//player movement
-			if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 			{
+				
 				LeftMovement();
 			}
 
-			if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 			{
+	
 				RightMovement();
 			}
 
-			if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE)
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE)
 			{
+				
 				isWalking = false;
 				vel.x = 0;
 			}
@@ -140,27 +153,83 @@ bool Player::Update(float dt)
 	DrawPlayer();
 
 	currentAnim->Update();
-
+	if (app->input->GetKey(SDL_SCANCODE_F)==KEY_DOWN)
+	{
+		if (doorAldea) {
+			if (app->sceneShop->active) app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
+			else if (app->sceneOasisFaraon->active) app->fade->Fade((Module*)app->sceneOasisFaraon, (Module*)app->sceneVillage, 60.0f);
+			else if (app->sceneTemple->active) app->fade->Fade((Module*)app->sceneTemple, (Module*)app->sceneVillage, 60.0f);
+			else if (app->sceneFloor1->active) app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
+			doorAldea = false;
+		}
+		if (doorOasis)
+		{
+			app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneOasisFaraon, 60.0f);
+			doorOasis = false;
+		}
+		if (doorShop)
+		{
+			app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneShop, 60.0f);
+			doorShop = false;
+		}
+		if (doorTemple)
+		{
+			app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneTemple, 60.0f);
+			doorTemple = false;
+		}
+		if (doorFlor1)
+		{
+			app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneFloor1, 60.0f);
+			doorFlor1 = false;
+		}
+	}
 	//printf("\r cameraX: %d cameraY: %d positionX: %d positionY %d", app->render->camera.x, app->render->camera.y, position.x, position.y);
+	
 	return true;
 }
 
 void Player::LeftMovement()
 {
 	isFacingRight = false;
-	vel.x = -speed * 1 * dt;
+	isWalking = true;	
+	vel.x = -speed * 2 * dt;
 }
 
 void Player::RightMovement()
 {
 	isFacingRight = true;
-	vel.x = speed * 1 * dt;
+	isWalking = true;
+	vel.x = speed * 2 * dt;
 }
 
+void Player::WalkingSound()
+{
+	if (isWalking)// si el bool isWalking es true  y is walking sound playing es false se activa el sonido y se cambia el bool a true
+	{
+		if (!walkingSoundPlaying)
+		{
+			app->audio->PlayFx(stepsFx, -1);
+			walkingSoundPlaying = true;
+		}
+		
+	
+	}
+	else if(walkingSoundPlaying) // cuando se cambia el bool a true accede al segundo else que pausa el sonido y cambia el bool a false
+	{
+		app->audio->PauseFx(stepsFx);
+		walkingSoundPlaying = false;
+	}
+
+}
 void Player::Jump()
 {
 	vel.y = -speed * 2 * dt;
 	isjumping = true;
+}
+
+void Player::Respaw() {
+	app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
+	isDead = false;
 }
 
 void Player::DrawPlayer()
@@ -212,6 +281,46 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::PLATFORM:
 		isjumping = false;
+		break;
+	case ColliderType::DOOR_ALDEA:
+		doorAldea = true;
+		break;
+	case ColliderType::DOOR_SHOP:
+		doorShop = true;
+		break;
+	case ColliderType::DOOR_OASIS:
+		doorOasis = true;
+		break;
+	case ColliderType::DOOR_TEMPLE:
+		doorTemple = true;
+		break;
+	case ColliderType::DOOR_FLOOR_1:
+		doorFlor1 = true;
+		break;
+	case ColliderType::TRAP:
+		isDead = true;
+		break;
+	}
+
+}
+void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
+
+	switch (physB->ctype)
+	{
+	case ColliderType::DOOR_ALDEA:
+		doorAldea = false;
+		break;
+	case ColliderType::DOOR_SHOP:
+		doorShop = false;
+		break;
+	case ColliderType::DOOR_OASIS:
+		doorOasis = false;
+		break;
+	case ColliderType::DOOR_TEMPLE:
+		doorTemple = false;
+		break;
+	case ColliderType::DOOR_FLOOR_1:
+		doorFlor1 = false;
 		break;
 	}
 

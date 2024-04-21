@@ -157,7 +157,7 @@ public:
 	SString path;
 	PathFinding* pathfinding;
 
-	int mapIdx = 1;
+	int mapIdx = 1; //1= sceneVillage, 2 = sceneShop, 3 = sceneOasisFaraon, 4 = sceneTemple
 
 	List<PhysBody*> wallEndCollision;
 
@@ -170,16 +170,16 @@ private:
 	bool mapLoaded;
 	MapLayer* navigationLayer;
 	int blockedGid = 49;
-	int walkableGid = 32;
-	int ladderTopGid = 34;
-	int ladderBottomGid = 31;
+	int walkableGid = 4;
+	int ladderTopGid = 1;
+	int ladderBottomGid = 2;
 	int startHeight = 0;
 	int endHeight = 0;
 	int startWidth = 0;
 	int endWidth = 0;
 	int startMapHeight = 0;
-	int endMapHeight = 0;
-	int startMapWidth = 0;
+	int endMapHeight = 12;
+	int startMapWidth = 45;
 	int endMapWidth = 0;
 	int tilesToLoad = 55;
 	int tilesSize = 64;

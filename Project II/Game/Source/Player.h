@@ -28,6 +28,8 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+	void OnExitCollision(PhysBody* physA, PhysBody* physB);
+
 	void LoadAnimations();
 	
 	void ToggleGodMode();
@@ -39,6 +41,10 @@ public:
 	void RightMovement();
 
 	void Jump();
+	
+	void WalkingSound();
+
+	void Respaw();
 
 public:
 	float speed = 0.2f;
@@ -60,6 +66,14 @@ public:
 
 	bool isjumping = false;
 
+	bool doorAldea = false;
+	bool doorShop = false;
+	bool doorOasis = false;
+	bool doorTemple = false;
+	bool step = false;
+	bool walkingSoundPlaying = false;
+	bool doorFlor1 = false;
+
 	b2Transform initialTransform;
 
 	b2Vec2 vel;
@@ -67,6 +81,12 @@ public:
 	float dt;
 
 	bool isCombat = false;
+
+
+	uint stepsFx;
+
+	bool isDead = false;
+
 
 };
 

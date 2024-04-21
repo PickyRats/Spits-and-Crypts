@@ -13,6 +13,7 @@ enum class EntityType
 	PLAYER,
 	NPCS,
 	ENEMY,
+	TRAP,
 	UNKNOWN
 };
 

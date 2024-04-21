@@ -10,6 +10,7 @@
 #include "GuiManager.h"
 #include "ParticleManager.h"
 #include "Hud.h"
+#include "Npcs.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -44,6 +45,12 @@ bool SceneTemple::Awake(pugi::xml_node& config)
 	//	app->map->path = config.child("map").attribute("path").as_string();
 	//}
 
+	for (pugi::xml_node itemNode = config.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
+	{
+		Npcs* npc = (Npcs*)app->entityManager->CreateEntity(EntityType::NPCS);
+		npc->parameters = itemNode;
+	}
+
 	configNodeTemple = config;
 
 	return ret;
@@ -63,7 +70,7 @@ bool SceneTemple::Start()
 
 	//Load the player in the map
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(96), PIXEL_TO_METERS(640)), 0);
-
+	ClampCamera();
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
@@ -125,6 +132,7 @@ bool SceneTemple::CleanUp()
 {
 	LOG("Freeing scene");
 
+	app->map->Disable();
 	return true;
 }
 

@@ -9,6 +9,7 @@
 #include "FadeToBlack.h"
 #include "GuiManager.h"
 #include "ParticleManager.h"
+#include "Npcs.h"
 #include "Hud.h"
 
 #include "Defs.h"
@@ -33,6 +34,11 @@ bool SceneOasisFaraon::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
+	for (pugi::xml_node itemNode = config.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
+	{
+		Npcs* npc = (Npcs*)app->entityManager->CreateEntity(EntityType::NPCS);
+		npc->parameters = itemNode;
+	}
 	configNodeOasis = config;
 
 	return ret;
@@ -51,7 +57,7 @@ bool SceneOasisFaraon::Start()
 	app->entityManager->Enable();
 	app->hud->Enable();
 
-	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(1200), PIXEL_TO_METERS(640)), 0);
+	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(96), PIXEL_TO_METERS(640)), 0);
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
@@ -114,6 +120,7 @@ bool SceneOasisFaraon::CleanUp()
 {
 	LOG("Freeing scene");
 
+	app->map->Disable();
 	return true;
 }
 
