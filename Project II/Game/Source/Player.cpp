@@ -78,30 +78,24 @@ bool Player::Update(float dt)
 
 		if (!godMode)
 		{
-
+			//Funcion para hacer sonidos
+			WalkingSound();
 			//player movement
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 			{
-				if (step == false)
-				{
-					app->audio->PlayFx(stepsFx);
-					step = true;
-				}
+				
 				LeftMovement();
 			}
 
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 			{
-				if (step == false)
-				{
-					app->audio->PlayFx(stepsFx);
-					step = true;
-				}
+	
 				RightMovement();
 			}
 
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE)
 			{
+				
 				isWalking = false;
 				vel.x = 0;
 			}
@@ -186,15 +180,36 @@ bool Player::Update(float dt)
 void Player::LeftMovement()
 {
 	isFacingRight = false;
+	isWalking = true;	
 	vel.x = -speed * 1 * dt;
 }
 
 void Player::RightMovement()
 {
 	isFacingRight = true;
+	isWalking = true;
 	vel.x = speed * 1 * dt;
 }
 
+void Player::WalkingSound()
+{
+	if (isWalking)// si el bool isWalking es true  y is walking sound playing es false se activa el sonido y se cambia el bool a true
+	{
+		if (!walkingSoundPlaying)
+		{
+			app->audio->PlayFx(stepsFx, -1);
+			walkingSoundPlaying = true;
+		}
+		
+	
+	}
+	else if(walkingSoundPlaying) // cuando se cambia el bool a true accede al segundo else que pausa el sonido y cambia el bool a false
+	{
+		app->audio->PauseFx(stepsFx);
+		walkingSoundPlaying = false;
+	}
+
+}
 void Player::Jump()
 {
 	vel.y = -speed * 2 * dt;

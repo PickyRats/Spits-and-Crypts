@@ -41,6 +41,8 @@ public:
 	void RightMovement();
 
 	void Jump();
+	
+	void WalkingSound();
 
 public:
 	float speed = 0.2f;
@@ -67,7 +69,7 @@ public:
 	bool doorOasis = false;
 	bool doorTemple = false;
 	bool step = false;
-
+	bool walkingSoundPlaying = false;
 	b2Transform initialTransform;
 
 	b2Vec2 vel;
