@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
 #include <vector>
@@ -36,6 +37,12 @@ public:
 	// Called each loop iteration
 	bool Update(float dt);
 
+	// Enemy attack
+	void EnemyAttack();
+
+	// Verify if the tile is occupied
+	bool IsTileOccupied();
+
 	// Called before all Updates
 	bool PostUpdate();
 
@@ -50,13 +57,18 @@ public:
 	void ClampCamera();
 
 	// Move the player following the path generated
-	void MovePlayer();
+	void MovePlayer(Entity* entity);
 
 	// Update the path to follow
 	void UpdatePath();
 
 	// Select the tile where the player is going to move
 	void SelectTiles();
+
+	void ResetTilesArray(int max);
+
+	// Change the turn
+	void ChangeTurn();
 
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
@@ -77,7 +89,9 @@ public:
 	Tile tiles[100];
 	int currentTile = 1;
 	int tilesCount = 0;
+	int maxTiles = 12;
 
+	Enemy* enemy[2];
 private:
 	SDL_Texture* backgroundTexture;
 	SDL_Texture* backgroundTexture2;
@@ -95,8 +109,14 @@ private:
 	bool changingLevel = false;
 	bool isLoading = false;
 	SDL_Texture* tileTexture;
+	SDL_Texture* tileEnemyTexture;
 	SDL_Texture* selectedTileTexture;
-	int maxTiles = 12;
+	bool isPlayerTurn = true;
+	Entity* players[5];
+	Entity* enemies[5];
+	int currentPlayerIndex = 0;
+	int currentEnemyIndex = 0;
+	bool enemyCanAttack = false;
 };
 
 #endif // __SCENECOMBAT_H__

@@ -12,6 +12,7 @@ enum class EntityType
 {
 	PLAYER,
 	NPCS,
+	ENEMY,
 	TRAP,
 	UNKNOWN
 };
@@ -106,9 +107,11 @@ public:
 
 	bool isDead = false;
 	int health = 100;
-	int totalPoints = 10;
-	int currentPoints = 10;
+	int totalPoints = 5;
+	int currentPoints = 5;
+	int attackRange = 3;
 	bool setLoadPosition = false;
+	int attackDamage = 10;
 };
 
 #endif // __ENTITY_H__
