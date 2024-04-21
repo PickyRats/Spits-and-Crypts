@@ -38,6 +38,7 @@ enum class ColliderType {
 	DOOR,
 	TRAP,
 	ITERACTABLE,
+	ITEM,
 	ENEMY,
 	UNKNOWN
 	// ..

@@ -12,6 +12,7 @@ enum class EntityType
 {
 	PLAYER,
 	NPCS,
+	PIEZAS,
 	ENEMY,
 	TRAP,
 	UNKNOWN

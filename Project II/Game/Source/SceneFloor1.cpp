@@ -43,7 +43,11 @@ bool SceneFloor1::Awake(pugi::xml_node& config)
 		Npcs* npc = (Npcs*)app->entityManager->CreateEntity(EntityType::NPCS);
 		npc->parameters = itemNode;
 	}
-
+	for (pugi::xml_node itemNode = config.child("Piece"); itemNode; itemNode = itemNode.next_sibling("Piece"))
+	{
+		Piezas_puzle* pieces = (Piezas_puzle*)app->entityManager->CreateEntity(EntityType::PIEZAS);
+		pieces->parameters = itemNode;
+	}
 	//if (config.child("map")) {
 	//	//Get the map name from the config file and assigns the value in the module
 	//	app->map->mapName = config.child("map").attribute("name").as_string();

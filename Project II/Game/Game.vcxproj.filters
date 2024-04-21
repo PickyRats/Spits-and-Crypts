@@ -96,6 +96,9 @@
     <ClCompile Include="Source\Player.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Piezas_puzle.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Trap.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
@@ -227,6 +230,9 @@
     </ClInclude>
     <ClInclude Include="Source\SceneFloor1.h">
       <Filter>Modules\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Piezas_puzle.h">
+      <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="Source\Enemy.h">
       <Filter>Entities</Filter>

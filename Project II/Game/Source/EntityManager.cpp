@@ -1,6 +1,7 @@
 #include "EntityManager.h"
 #include "Player.h"
 #include "Npcs.h"
+#include "Piezas_puzle.h"
 #include "Enemy.h"
 #include "App.h"
 #include "Textures.h"
@@ -91,6 +92,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::NPCS:
 		entity = new Npcs();
 		break;
+	case EntityType::PIEZAS:
+		entity = new Piezas_puzle();
+    break;
 	case EntityType::ENEMY:
 		entity = new Enemy();
 		break;
