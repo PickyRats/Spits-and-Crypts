@@ -49,6 +49,8 @@ public:
 
 	void CreateBody();
 
+	void DestroyBody();
+
 public:
 	float speed = 0.2f;
 	int id = 0;
@@ -74,9 +76,11 @@ public:
 	bool doorShop = false;
 	bool doorOasis = false;
 	bool doorTemple = false;
+	bool doorFlor1 = false;
+	bool enterCombat = false;
+
 	bool step = false;
 	bool walkingSoundPlaying = false;
-	bool doorFlor1 = false;
 
 	b2Transform initialTransform;
 

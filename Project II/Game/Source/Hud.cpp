@@ -411,11 +411,11 @@ bool Hud::Update(float dt)
 			////
 			//
 			////L1
-			app->render->DrawTexture(L1, 520, 620, NULL, SDL_FLIP_NONE, 0);
+			//app->render->DrawTexture(L1, 520, 620, NULL, SDL_FLIP_NONE, 0);
 			////
 			//
 			////R1
-			app->render->DrawTexture(R1, 1180, 620, NULL, SDL_FLIP_NONE, 0);
+			//app->render->DrawTexture(R1, 1180, 620, NULL, SDL_FLIP_NONE, 0);
 			////
 			//
 		}
