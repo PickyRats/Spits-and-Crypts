@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "GuiControlButton.h"
+#include "GuiControlCheckBox.h"
 #include "GuiManager.h"
 #include "GuiControl.h"
 #include "GuiControlSlider.h"
@@ -30,7 +31,7 @@ public:
 	bool fxHoverPlayed = false;
 	bool fxClickPlayed = false;
 	bool fullScreen = false;
-	bool vSync = false;
+	bool vSync = true;
 	int currentId= 1;
 
 	GuiControlButton* startButton;
@@ -98,7 +99,7 @@ private:
 	GuiControlButton* settingsAudioButton;
 	GuiControlButton* settingsControlsButton;
 	GuiControlButton* settingsFullScreenButton;
-	GuiControlButton* settingsVSyncButton;
+	GuiControlCheckBox* settingsVSyncButton;
 	GuiControlSlider* settingsMusicButton;
 	GuiControlSlider* settingsFxButton;
 	

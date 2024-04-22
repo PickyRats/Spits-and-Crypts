@@ -120,7 +120,7 @@ bool Hud::Start()
 	settingsReturnButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, NULL, returnNormal, returnHover, returnClick, { 133, 92, 63, 63 }, this);
 	settingsExitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, NULL, exitNormal, exitHover, exitClick, { 1419, 92, 63, 63 }, this);
 	settingsFullScreenButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 7, NULL, settingsBoxNormal, settingsBoxHover, settingsTick, { 661, 250, 89, 89 }, this);
-	settingsVSyncButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 8, NULL, settingsBoxNormal, settingsBoxHover, settingsTick, { 661, 350, 89, 89 }, this);
+	settingsVSyncButton = (GuiControlCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 8, NULL, settingsBoxNormal, settingsBoxHover, settingsTick, { 661, 350, 89, 89 }, this);
 	settingsMusicButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 10, NULL, settingsSlider, settingsSlider, settingsSlider, { 1124, 259, 30, 80 }, this, { 663, 259, 613, 80 });
 	settingsFxButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 11, NULL, settingsSlider, settingsSlider, settingsSlider, { 1124, 376, 30, 80 }, this, { 663, 376, 613, 80 });
 	settingsControlsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, NULL, settingsControlsButtonNormal, settingsControlsButtonHover, exitClick, { 840, 150, 400, 50 }, this);
@@ -149,6 +149,15 @@ bool Hud::Start()
 	settingsControlsButton->state = GuiControlState::HIDDEN;
 	settingsAudioButton->state = GuiControlState::HIDDEN;
 	settingsOptionsButton->state = GuiControlState::HIDDEN;
+
+	if (app->sceneMenu->vSync == true)
+	{
+		settingsVSyncButton->pressed = true;
+	}
+	else
+	{
+		settingsVSyncButton->pressed = false;
+	}
 
 	return true;
 }
@@ -356,11 +365,13 @@ bool Hud::Update(float dt)
 					fxClickPlayed = false;
 				}*/
 				app->render->DrawTexture(settingsOptionsPanel, 340, 200, NULL, SDL_FLIP_NONE, 0);
+				
 				if (buttonsActivated)
 				{
 					buttonsActivated = false;
-					settingsFullScreenButton->state = GuiControlState::NORMAL;
+					
 					settingsVSyncButton->state = GuiControlState::NORMAL;
+					settingsFullScreenButton->state = GuiControlState::NORMAL;
 					settingsFxButton->state = GuiControlState::HIDDEN;
 					settingsMusicButton->state = GuiControlState::HIDDEN;
 				}
@@ -519,9 +530,9 @@ bool Hud::Update(float dt)
 				app->sceneMenu->fxHoverPlayed = false;
 				app->sceneMenu->fxClickPlayed = false;
 			}
-			//FullScreen and VSync
-			if (app->sceneMenu->fullScreen)	SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN);
-			else SDL_SetWindowFullscreen(app->win->window, 0);
+			////FullScreen and VSync
+			//if (app->sceneMenu->fullScreen)	SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN);
+			//else SDL_SetWindowFullscreen(app->win->window, 0);
 
 			if (app->sceneMenu->vSync)	app->render->vsync = true;
 			else	app->render->vsync = false;
@@ -616,9 +627,6 @@ bool Hud::Update(float dt)
 		}
 	}
 	
-	
-
-
 	return true;
 }
 
