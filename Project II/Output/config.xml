@@ -42,6 +42,16 @@
 			  <sentence text="que te abrigues!"/>
 		  </repeat_sentences>
 	  </dialogTrigger>
+
+		<dialogTrigger x="800" y="450"  name="La nieta" repeat="true">
+			<sentences>
+				<sentence text="ayuda Pedro, necesito que me apruebes"/>
+				<sentence text="Por favor, me porto bien"/>
+			</sentences>
+			<repeat_sentences>
+				<sentence text="U FOCKIN NIGGA"/>
+			</repeat_sentences>
+		</dialogTrigger>
 		
 	</sceneVillage>
 	
