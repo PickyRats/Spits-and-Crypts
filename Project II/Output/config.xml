@@ -216,6 +216,16 @@
 		<enemyrojo texturepath="Assets/Textures/Screens/More/enemyrojo.png"/>
 		<L1 texturepath="Assets/Textures/Screens/More/L1.png"/>
 		<R1 texturepath="Assets/Textures/Screens/More/R1.png"/>
+
+		<Selectorazul texturepath="Assets/Textures/Screens/Combat/selectorpersonatge.png"/>
+		<Selectornaranja texturepath="Assets/Textures/Screens/Combat/selectorhabilitatorange.png"/>
+		<points texturepath="Assets/Textures/Screens/Combat/points.png"/>
+		<vidas texturepath="Assets/Textures/Screens/Combat/vidas.png"/>
+		<Cuadrojugador texturepath="Assets/Textures/Screens/Combat/habilitatijugador.png"/>
+		<Opacity texturepath="Assets/Textures/Screens/Combat/cooldownopacity.png"/>
+		<Personaje1 texturepath="Assets/Textures/Screens/Combat/fotopersonatge.png"/>
+		<Personaje2 texturepath="Assets/Textures/Screens/Combat/fotopersonatge2.png"/>
+		
 		
 	</hud>
 

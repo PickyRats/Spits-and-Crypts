@@ -59,6 +59,16 @@ bool Hud::Start()
 	playerverd = app->tex->Load(configNode3.child("playerverd").attribute("texturepath").as_string());
 	enemyrojo = app->tex->Load(configNode3.child("enemyrojo").attribute("texturepath").as_string());
 
+	vidas = app->tex->Load(configNode3.child("vidas").attribute("texturepath").as_string());
+	points = app->tex->Load(configNode3.child("points").attribute("texturepath").as_string());
+	Personaje1 = app->tex->Load(configNode3.child("Personaje1").attribute("texturepath").as_string());
+	Personaje2 = app->tex->Load(configNode3.child("Personaje2").attribute("texturepath").as_string());
+	Selectorazul = app->tex->Load(configNode3.child("Selectorazul").attribute("texturepath").as_string());
+	Selectornaranja = app->tex->Load(configNode3.child("selectornaranja").attribute("texturepath").as_string());
+	Opacity = app->tex->Load(configNode3.child("Opacity").attribute("texturepath").as_string());
+	Cuadrojugador = app->tex->Load(configNode3.child("Cuadrojugador").attribute("texturepath").as_string());
+
+
 	//
 	pause = app->tex->Load(configNode3.child("pause").attribute("texturepath").as_string());
 	exitNormal = app->tex->Load(configNode3.child("exitNormal").attribute("texturepath").as_string());
@@ -353,33 +363,33 @@ bool Hud::Update(float dt)
 		if (app->sceneCombat->active) {
 			//Combat Mode Drawing
 			////players
-			app->render->DrawTexture(character1, 20, 660, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(character1, 80, 660, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(character1, 140, 660, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(character1, 200, 660, NULL, SDL_FLIP_NONE, 0);
+			
+			app->render->DrawTexture(Cuadrojugador, 10, 660, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(Cuadrojugador, 70, 660, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(Selectorazul, 10, 660, NULL, SDL_FLIP_NONE, 0);
+			
+			app->render->DrawTexture(Personaje1, 20, 660, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(Personaje2, 80, 660, NULL, SDL_FLIP_NONE, 0);
 			////
 			// 
 			////barras vida
-			app->render->DrawTexture(life1, 70, 660, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(life2, 73, 697, NULL, SDL_FLIP_NONE, 0);
+			/*app->render->DrawTexture(vidas, 0, 0, SDL_Rect { 18,51 }, SDL_FLIP_NONE, 0);*/
+			
+			app->render->DrawTexture(vidas, 63, 660, &lifeRects[0]);
+			app->render->DrawTexture(vidas, 123, 660, &lifeRects[0]);
 
-			app->render->DrawTexture(life1, 130, 660, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(life2, 133, 697, NULL, SDL_FLIP_NONE, 0);
-
-			app->render->DrawTexture(life1, 190, 660, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(life2, 193, 697, NULL, SDL_FLIP_NONE, 0);
-
-			app->render->DrawTexture(life1, 250, 660, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(life2, 253, 697, NULL, SDL_FLIP_NONE, 0);
 			////
 			//
 			////botones abajo derecha
-			app->render->DrawTexture(sword2, 1150, 660, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(fuego, 1210, 660, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(Cuadrojugador, 1150, 660, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(Cuadrojugador, 1210, 660, NULL, SDL_FLIP_NONE, 0);
+
+			app->render->DrawTexture(Selectornaranja, 1210, 660, NULL, SDL_FLIP_NONE, 0);
 			////
 			//
 			////PP
-			app->render->DrawTexture(PP, 20, 20, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(points, 20, 20, &pointsRects[1]);
+
 			////
 			//
 			////Sword1
@@ -391,15 +401,6 @@ bool Hud::Update(float dt)
 			////
 			// 
 			////L3Move
-			app->render->DrawTexture(L3Move, 500, 660, NULL, SDL_FLIP_NONE, 0);
-			////
-			//
-			///execute
-			app->render->DrawTexture(execute, 620, 660, NULL, SDL_FLIP_NONE, 0);
-			////
-			//
-			////Xaccept
-			app->render->DrawTexture(Xaccept, 740, 660, NULL, SDL_FLIP_NONE, 0);
 			////
 			//
 			////enemyrojo
@@ -408,14 +409,6 @@ bool Hud::Update(float dt)
 			//
 			////playerverd
 			app->render->DrawTexture(playerverd, 1180, 620, NULL, SDL_FLIP_NONE, 0);
-			////
-			//
-			////L1
-			app->render->DrawTexture(L1, 520, 620, NULL, SDL_FLIP_NONE, 0);
-			////
-			//
-			////R1
-			app->render->DrawTexture(R1, 1180, 620, NULL, SDL_FLIP_NONE, 0);
 			////
 			//
 		}
