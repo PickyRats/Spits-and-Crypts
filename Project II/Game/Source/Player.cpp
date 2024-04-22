@@ -120,19 +120,19 @@ bool Player::Update(float dt)
 				//god mode
 				vel.SetZero();
 
-				if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 				{
 					vel.y = -speed * 2 * dt;
 				}
-				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 				{
 					vel.y = speed * 2 * dt;
 				}
-				if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 				{
 					vel.x = -speed * 2 * dt;
 				}
-				if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 				{
 					vel.x = speed * 2 * dt;
 				}
