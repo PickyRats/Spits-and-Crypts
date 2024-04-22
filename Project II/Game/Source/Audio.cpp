@@ -107,6 +107,7 @@ void Audio::CleanMusic(const char* path, float fadeOutTime)
 bool Audio::PlayMusic(const char* path, float fadeTime)
 {
 	bool ret = true;
+	
 
 	if (!active)
 		return false;

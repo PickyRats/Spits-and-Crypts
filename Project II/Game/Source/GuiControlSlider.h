@@ -16,6 +16,8 @@ public:
 
 	// Called each loop iteration
 	bool Update(float dt);
+	int sliderPosition = 0;
+	SDL_Rect sliderBounds;
 
 private:
 
@@ -29,9 +31,9 @@ private:
 	SDL_Texture* textureNormal;
 	SDL_Texture* textureFocused; 
 	SDL_Texture* texturePressed;
-	int sliderPosition = 0;
+	
 	int initialMouseX = 0;
-	SDL_Rect sliderBounds;
+	
 };
 
 #endif // __GUICONTROLSLIDER_H__
