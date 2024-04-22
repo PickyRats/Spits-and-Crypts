@@ -49,6 +49,13 @@ private:
 	SDL_Texture* L1;
 	SDL_Texture* R1;
 
+	SDL_Texture* cero;
+	SDL_Texture* veinte;
+	SDL_Texture* cuarenta;
+	SDL_Texture* sesenta;
+	SDL_Texture* ochenta;
+	SDL_Texture* cien;
+
 
 
 
