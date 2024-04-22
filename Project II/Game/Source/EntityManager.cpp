@@ -92,13 +92,13 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::DIALOG_TRIGGER:
 		entity = new DialogTrigger();
-    break;
+		break;
 	case EntityType::NPCS:
 		entity = new Npcs();
 		break;
 	case EntityType::PIEZAS:
 		entity = new Piezas_puzle();
-    break;
+		break;
 	case EntityType::ENEMY:
 		entity = new Enemy();
 		break;
