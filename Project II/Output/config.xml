@@ -196,6 +196,17 @@
 		<settingsSlider texturepath="Assets/Textures/Screens/More/slider.png"/>
 		<settings texturepath="Assets/Textures/Screens/More/settings.png"/>
 
+		<settingsControlsButtonNormal texturepath="Assets/Textures/Screens/More/settings_controls_button_normal.png"/>
+		<settingsControlsButtonHover texturepath="Assets/Textures/Screens/More/settings_controls_button_hover.png"/>
+		<settingsAudioButtonNormal texturepath="Assets/Textures/Screens/More/settings_audio_button_normal.png"/>
+		<settingsAudioButtonHover texturepath="Assets/Textures/Screens/More/settings_audio_button_hover.png"/>
+		<settingsOptionsButtonNormal texturepath="Assets/Textures/Screens/More/settings_options_button_normal.png"/>
+		<settingsOptionsButtonHover texturepath="Assets/Textures/Screens/More/settings_options_button_hover.png"/>
+		
+		<settingsControls texturepath="Assets/Textures/Screens/More/settings_controls.png"/>
+		<settingsAudioPanel texturepath="Assets/Textures/Screens/More/settings_audio_panel.png"/>
+		<settingsOptionsPanel texturepath="Assets/Textures/Screens/More/settings_options_panel.png"/>
+
 		<character1 texturepath="Assets/Textures/Screens/More/character1.png"/>
 		<fuego texturepath="Assets/Textures/Screens/More/fuego.png"/>
 		<life1 texturepath="Assets/Textures/Screens/More/life1.png"/>

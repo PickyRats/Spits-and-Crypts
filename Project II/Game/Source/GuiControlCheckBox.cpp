@@ -33,11 +33,11 @@ bool GuiControlCheckBox::Update(float dt)
 		app->input->GetMousePosition(mouseX, mouseY);
 
 		//If the position of the mouse if inside the bounds of the button 
-		if (/*mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h*/ app->sceneMenu->currentId == id) {
+		if (mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h || app->sceneMenu->currentId == id) {
 		
 			state = GuiControlState::FOCUSED;
 
-			if (/*app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN*/(app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)) {
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN || (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)) {
 				state = GuiControlState::PRESSED;
 				pressed = !pressed;
 			}
