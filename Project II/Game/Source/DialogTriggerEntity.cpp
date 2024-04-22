@@ -111,8 +111,6 @@ void DialogTrigger::PlayDialog()
 {
 	//Play el dialogo normal
 	if ((played && !repeatDialog) || !played) {
-
-
 		ListItem<Dialog*>* item;
 		Dialog* pDialog = nullptr;
 
@@ -122,7 +120,6 @@ void DialogTrigger::PlayDialog()
 			app->dialogManager->AddDialog(pDialog);
 		}
 		played = true;
-
 
 		//Play el dialogo repetido
 	}

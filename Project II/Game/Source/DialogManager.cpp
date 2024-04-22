@@ -142,7 +142,7 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 	}
 
 	//Textura dialogo
-	textTexture = CreateTextTexture(dialog->font, actualText.c_str(), textColor, _textBoundWidth);
+	textTexture = CreateTextTexture(dialog->font, actualText.c_str(), textColor, 450);
 	app->render->DrawTexture(textTexture, _dialogPosition.x, _dialogPosition.y, 0);
 
 	//Imagen del personaje
@@ -150,11 +150,9 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 		app->render->DrawTexture(dialog->face_tex, dialogMargin[3] + dialogPosition.x, dialogMargin[0] + dialogPosition.y, 0);
 	}
 
-
-
 	//Nombre personaje
 	textNameTexture = CreateTextTexture(app->render->font, dialog->name.c_str(), nameColor, textNameBoundWidth);
-	app->render->DrawTexture(textNameTexture, dialogMargin[3] + namePosition.x, dialogMargin[0] + namePosition.y, 0);
+	app->render->DrawTexture(textNameTexture, dialogMargin[3] + namePosition.x, dialogMargin[0] + namePosition.y);
 
 
 	//Opciones

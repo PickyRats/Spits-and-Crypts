@@ -54,6 +54,7 @@ public:
 private:
 
 	//Colores
+	
 	SDL_Color textColor = { 0,0,0,0 };
 	SDL_Color nameColor= { 255,255,255,255 };
 	SDL_Color optionSelectedColor = { 200, 200, 200, 255 };
