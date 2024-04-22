@@ -36,7 +36,7 @@
 
 	</sceneCombat>
 	
-  	<sceneShop>
+  <sceneShop>
 		<!-- Scene -->
 		<map path="Assets/Maps/" name="Map_Shop.tmx"/>
 
@@ -47,10 +47,36 @@
 
 		<!-- Player -->
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
-
-		<!-- Mercante  -->
+				<!-- Mercante  -->
 		<npc x="1024" y="576" texturepath="Assets/Textures/Npcs/mercante.png" id="7" scene="3"/>
+  
+		<dialogTrigger x="600" y="450"  name="La abuela" repeat="true">
+		  <sentences>
+			  <sentence text="Uy nene, no veas como refresca"/>
+			  <sentence text="ponte algo de abrigo que vas a pillar frío"/>
+		  </sentences>
+		  <repeat_sentences>
+			  <sentence text="que te abrigues!"/>
+		  </repeat_sentences>
+	  </dialogTrigger>
+
+		<dialogTrigger x="800" y="450"  name="La nieta" repeat="true">
+			<sentences>
+				<sentence text="ayuda Pedro, necesito que me apruebes"/>
+				<sentence text="Por favor, me porto bien"/>
+			</sentences>
+			<repeat_sentences>
+				<sentence text="U FOCKIN NIGGA"/>
+			</repeat_sentences>
+		</dialogTrigger>
+    
 	</sceneShop>
+  
+	<dialogmanager>
+		<textures>
+			<background_dialog texturepath="Assets/Textures/cuadroDialogo.png"/>
+		</textures>
+	</dialogmanager>
 
 	<!-- Intro -->
 	<sceneintro>
@@ -231,5 +257,6 @@
 		</player>
 
 	</animations>
+	
 </config>
 
