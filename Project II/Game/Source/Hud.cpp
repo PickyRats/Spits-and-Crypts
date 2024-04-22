@@ -375,8 +375,8 @@ bool Hud::Update(float dt)
 			////barras vida
 			/*app->render->DrawTexture(vidas, 0, 0, SDL_Rect { 18,51 }, SDL_FLIP_NONE, 0);*/
 			
-			app->render->DrawTexture(vidas, 63, 660, &lifeRects[0]);
-			app->render->DrawTexture(vidas, 123, 660, &lifeRects[0]);
+			app->render->DrawTexture(vidas, 63, 660, &lifeRects[1]);
+			app->render->DrawTexture(vidas, 123, 660, &lifeRects[6]);
 
 			////
 			//
@@ -388,7 +388,7 @@ bool Hud::Update(float dt)
 			////
 			//
 			////PP
-			app->render->DrawTexture(points, 20, 20, &pointsRects[1]);
+			app->render->DrawTexture(points, 20, 20, &pointsRects[3]);
 
 			////
 			//
