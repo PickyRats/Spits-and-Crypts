@@ -144,7 +144,7 @@ bool Player::Update(float dt)
 			position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 50;
 			position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 42;
 		}
-		else
+		else if (id == 1)
 		{
 			// death
 			pbody->body->SetLinearVelocity({ 0, 0 });
@@ -162,25 +162,30 @@ bool Player::Update(float dt)
 				else if (app->sceneFloor1->active) app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
 				doorAldea = false;
 			}
-			if (doorOasis)
+			else if (doorOasis)
 			{
 				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneOasisFaraon, 60.0f);
 				doorOasis = false;
 			}
-			if (doorShop)
+			else if (doorShop)
 			{
 				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneShop, 60.0f);
 				doorShop = false;
 			}
-			if (doorTemple)
+			else if (doorTemple)
 			{
 				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneTemple, 60.0f);
 				doorTemple = false;
 			}
-			if (doorFlor1)
+			else if (doorFlor1)
 			{
 				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneFloor1, 60.0f);
 				doorFlor1 = false;
+			}
+			else if (enterCombat)
+			{
+				app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneCombat, 60.0f);
+				enterCombat = false;
 			}
 		}
 	}
@@ -304,6 +309,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::TRAP:
 		isDead = true;
 		break;
+	case ColliderType::COMBAT:
+		enterCombat = true;
+		break;
 	}
 
 }
@@ -326,6 +334,9 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::DOOR_FLOOR_1:
 		doorFlor1 = false;
 		break;
+	case ColliderType::COMBAT:
+		enterCombat = false;
+		break;
 	}
 
 }
@@ -346,4 +357,10 @@ void Player::CreateBody()
 	playerPbody->ctype = ColliderType::PLAYER_BODY;
 
 	initialTransform = pbody->body->GetTransform();
+}
+
+void Player::DestroyBody()
+{
+	app->physics->world->DestroyBody(pbody->body);
+	app->physics->world->DestroyBody(playerPbody->body);
 }

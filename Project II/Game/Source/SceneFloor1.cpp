@@ -68,7 +68,7 @@ bool SceneFloor1::Start()
 	app->hud->Enable();
 
 	//Load the player in the map
-	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(96), PIXEL_TO_METERS(640)), 0);
+	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(playerStartPosition.x), PIXEL_TO_METERS(playerStartPosition.y)), 0);
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -101,7 +101,7 @@ bool SceneFloor1::Update(float dt)
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;
 
-	SetCameraPosition(playerX-550, 48);
+	SetCameraPosition(playerX-550, 0);
 	printf("\r cameraX: %d cameraY: %d playerX: %d playerY %d", cameraX, cameraY, playerX, playerY);
 	ClampCamera();
 

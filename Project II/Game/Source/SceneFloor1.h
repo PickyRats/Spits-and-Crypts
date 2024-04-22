@@ -54,10 +54,13 @@ public:
 	bool pause = false;
 	bool isTorchActive = false;
 	bool checkPoint = false;
-	iPoint lastTorchPos = { 0, 0 };
+	iPoint playerStartPosition = { 64,576 };
 	bool notUseChechPoint = false;
 	bool win = false;
 	int sceneNum = 1;
+
+	int levelWidth = 37 * 64;
+	int levelHeight = 12 * 64;
 
 private:
 	SDL_Texture* backgroundTexture;
@@ -68,12 +71,6 @@ private:
 	uint windowW, windowH;
 
 	float cameraSmoothingFactor = 0.04f;
-
-	int levelWidth = 107 * 64;
-	int levelHeight = 50 * 64;
-
-	int level2Width = 140 * 64;
-	int level2Height = 45 * 64;
 
 	int playerX, playerY, cameraX, cameraY;
 	bool changingLevel = false;

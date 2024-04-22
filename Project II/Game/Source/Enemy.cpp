@@ -53,22 +53,7 @@ bool Enemy::Update(float dt)
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 42;*/
 	if (app->sceneCombat->active)
 	{
-		if (!physCreated)
-		{
-			pbody = app->physics->CreateCircle(position.x + 50, position.y, 22, bodyType::DYNAMIC);
-			pbody->listener = this;
-			pbody->ctype = ColliderType::ENEMY;
-			physCreated = true;
-		}
 		DrawEnemy();
-	}
-	else
-	{
-		if (physCreated)
-		{
-			app->physics->world->DestroyBody(pbody->body);
-			physCreated = false;
-		}
 	}
 	return true;
 }
