@@ -54,12 +54,6 @@ bool SceneVillage::Awake(pugi::xml_node& config)
 
 	configNode = config;
 
-	for (pugi::xml_node itemNode = config.child("dialogTrigger"); itemNode; itemNode = itemNode.next_sibling("dialogTrigger"))
-	{
-		DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER);
-		dialogTrigger->parameters = itemNode;
-	}
-
 	return ret;
 }
 
