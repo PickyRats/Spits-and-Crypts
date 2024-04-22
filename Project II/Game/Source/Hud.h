@@ -30,6 +30,7 @@ public:
 	bool playerDeadHud = false;
 	bool spacePressed = false;
 	bool onSettings = false;
+	int currentId = 0;
 private:
 
 	//HUD EXPLORACION

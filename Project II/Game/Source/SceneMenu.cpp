@@ -121,12 +121,12 @@ bool SceneMenu::Update(float dt)
 	//On menu screen
 	if(onMenu && !onSettings && !onCredits){
 
-		if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN))
+		if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && currentId < 5))
 		{
-			currentId++;
+				currentId++;
 
 		}
-		if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN))
+		if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && currentId > 1))
 		{
 			currentId--;
 		}

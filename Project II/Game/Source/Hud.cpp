@@ -7,6 +7,10 @@
 #include "Render.h"
 #include "Window.h"
 #include "SceneVillage.h"
+#include "SceneShop.h"
+#include "SceneOasisFaraon.h"
+#include "SceneFloor1.h"
+#include "SceneTemple.h"
 #include "Map.h"
 #include "FadeToBlack.h"
 #include "GuiManager.h"
@@ -99,10 +103,10 @@ bool Hud::Start()
 
 
 	//Create Buttons
-	exitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, NULL, exitNormal, exitHover, exitClick, { 1419, 92, 63, 63 }, this);
-	resumeButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, NULL, resumeNormal, resumeHover, resumeClick, { 657, 305, 281, 64 }, this);
-	settingsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, NULL, settingsNormal, settingsHover, settingsClick, { 657, 418, 279, 64 }, this);
-	backToTitleButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, NULL, backToTitleNormal, backToTitleHover, backToTitleClick, { 599, 531, 399, 64 }, this);
+	exitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 0, NULL, exitNormal, exitHover, exitClick, { 1419, 92, 63, 63 }, this);
+	resumeButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, NULL, resumeNormal, resumeHover, resumeClick, { 657, 305, 281, 64 }, this);
+	settingsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, NULL, settingsNormal, settingsHover, settingsClick, { 657, 418, 279, 64 }, this);
+	backToTitleButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, NULL, backToTitleNormal, backToTitleHover, backToTitleClick, { 599, 531, 399, 64 }, this);
 
 	settingsReturnButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, NULL, returnNormal, returnHover, returnClick, { 133, 92, 63, 63 }, this);
 	settingsExitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, NULL, exitNormal, exitHover, exitClick, { 1419, 92, 63, 63 }, this);
@@ -135,7 +139,7 @@ bool Hud::Start()
 bool Hud::Update(float dt)
 {
 	//Pause menu
-	if (app->sceneVillage->pause) {
+	if (app->sceneVillage->pause || app->sceneShop->pause || app->sceneOasisFaraon->pause || app->sceneTemple->pause || app->sceneFloor1->pause) {
 		//If pause menu is activated, show buttons
 		if (resumeButton->state == GuiControlState::HIDDEN)
 		{
@@ -147,6 +151,16 @@ bool Hud::Update(float dt)
 		if(!onSettings){
 			//Render pause
 			app->render->DrawTexture(pause, 0, 0, NULL, SDL_FLIP_NONE, 0);
+
+			if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && app->sceneMenu->currentId < 3))
+			{
+				app->sceneMenu->currentId++;
+
+			}
+			if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && app->sceneMenu->currentId > 1))
+			{
+				app->sceneMenu->currentId--;
+			}
 			//Check if buttons are focused or pressed. If pressed, do the action. With sound effects. 
 			if (resumeButton->state == GuiControlState::FOCUSED) {
 				if (app->sceneMenu->fxHoverPlayed == false)
@@ -206,7 +220,10 @@ bool Hud::Update(float dt)
 				settingsButton->state = GuiControlState::HIDDEN;
 				exitButton->state = GuiControlState::HIDDEN;
 
-				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneMenu, 30.0f);
+				if(app->sceneVillage->active)
+				{
+					app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneMenu, 60.0f);
+				}
 				app->map->Disable();
 				app->particleManager->Disable();
 				app->entityManager->Disable();

@@ -89,6 +89,7 @@ bool SceneShop::Start()
 // Called each loop iteration
 bool SceneShop::PreUpdate()
 {
+
 	return true;
 }
 
