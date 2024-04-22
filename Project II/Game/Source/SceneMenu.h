@@ -5,6 +5,7 @@
 #include "GuiControlButton.h"
 #include "GuiManager.h"
 #include "GuiControl.h"
+#include "GuiControlSlider.h"
 
 struct SDL_Texture;
 
@@ -98,8 +99,9 @@ private:
 	GuiControlButton* settingsControlsButton;
 	GuiControlButton* settingsFullScreenButton;
 	GuiControlButton* settingsVSyncButton;
-	GuiControlButton* settingsMusicButton;
-	GuiControlButton* settingsFxButton;
+	GuiControlSlider* settingsMusicButton;
+	GuiControlSlider* settingsFxButton;
+	
 
 	GuiControlButton* creditsExitButton;
 

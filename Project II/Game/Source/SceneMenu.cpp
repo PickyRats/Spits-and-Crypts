@@ -92,8 +92,8 @@ bool SceneMenu::Start()
 	settingsExitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, NULL, exitNormal, exitHover, exitClick, { 1419, 92, 63, 63 }, this);
 	settingsFullScreenButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 7, NULL, settingsBoxNormal, settingsBoxHover, settingsTick, { 661, 250, 89, 89 }, this);
 	settingsVSyncButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 8, NULL, settingsBoxNormal, settingsBoxHover, settingsTick, { 661, 350, 89, 89 }, this);
-	settingsMusicButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 231, NULL, settingsSlider, settingsSlider, settingsSlider, { 893, 245, 30, 80 }, this, { 643, 245, 280, 80 });
-	settingsFxButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 21, NULL, settingsSlider, settingsSlider, settingsSlider, { 893, 355, 30, 80 }, this, { 643, 355, 280, 80 });
+	settingsMusicButton = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 231, NULL, settingsSlider, settingsSlider, settingsSlider, { 893, 245, 30, 80 }, this, { 643, 245, 280, 80 });
+	settingsFxButton = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 21, NULL, settingsSlider, settingsSlider, settingsSlider, { 893, 355, 30, 80 }, this, { 643, 355, 280, 80 });
 	settingsOptionsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, NULL, settingsOptionsButtonNormal, settingsOptionsButtonHover, exitClick, { 40, 150, 400, 50 }, this);
 	settingsAudioButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, NULL, settingsAudioButtonNormal, settingsAudioButtonHover, exitClick, { 440, 150, 400, 50 }, this);
 	settingsControlsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, NULL, settingsControlsButtonNormal, settingsControlsButtonHover, exitClick, { 840, 150, 400, 50 }, this);
@@ -117,7 +117,15 @@ bool SceneMenu::Start()
 
 bool SceneMenu::Update(float dt)
 {
+	int rangoMusic = settingsMusicButton->sliderBounds.w - 20;
+	int percentageMusic = (((float)settingsMusicButton->sliderPosition - settingsMusicButton->sliderBounds.x) / rangoMusic) * 100;
+	Mix_VolumeMusic(percentageMusic);
 
+
+
+	int rangoFX = settingsFxButton->sliderBounds.w - 20;
+	int percentageFX = (((float)settingsFxButton->sliderPosition - settingsFxButton->sliderBounds.x) / rangoFX) * 100;
+	Mix_Volume(-1,percentageFX);
 	//On menu screen
 	if(onMenu && !onSettings && !onCredits){
 
@@ -294,6 +302,7 @@ bool SceneMenu::Update(float dt)
 				settingsMusicButton->state = GuiControlState::NORMAL;
 				settingsFullScreenButton->state = GuiControlState::HIDDEN;
 				settingsVSyncButton->state = GuiControlState::HIDDEN;
+				
 
 			}
 			else if (onSettingsOptions)
