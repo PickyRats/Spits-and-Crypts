@@ -16,6 +16,10 @@ class Render;
 class Textures;
 class Audio;
 class SceneVillage;
+class SceneShop;
+class SceneOasisFaraon;
+class SceneTemple;
+class SceneFloor1;
 class EntityManager;
 class Map;
 class Physics;
@@ -26,6 +30,7 @@ class SceneMenu;
 class Hud;
 class SceneIntro;
 class DialogManager;
+class SceneCombat;
 
 class App
 {
@@ -100,6 +105,10 @@ public:
 	Textures* tex;
 	Audio* audio;
 	SceneVillage* sceneVillage;
+	SceneShop* sceneShop;
+	SceneOasisFaraon* sceneOasisFaraon;
+	SceneTemple* sceneTemple;
+	SceneFloor1* sceneFloor1;
 	EntityManager* entityManager;
 	Map* map;
 	Physics* physics;
@@ -110,6 +119,7 @@ public:
 	Hud* hud;
 	SceneIntro* sceneIntro;
 	DialogManager* dialogManager;
+	SceneCombat* sceneCombat;
 
 	uint32 maxFrameDuration = 16;
 	uint32 initialMaxFrameDuration = 16;

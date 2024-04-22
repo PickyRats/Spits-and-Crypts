@@ -26,9 +26,21 @@ enum bodyType {
 enum class ColliderType {
 	PLAYER,
 	PLAYER_BODY,
+	NPC,
 	PLATFORM,
+	DOOR_SHOP,
+	DOOR_OASIS,
+	DOOR_TEMPLE,
+	DOOR_ALDEA,
+	DOOR_FLOOR_1,
+	COMBAT,
+	WALL,
 	DOOR,
 	DIALOG_TRIGGER,
+	TRAP,
+	ITERACTABLE,
+	ITEM,
+	ENEMY,
 	UNKNOWN
 	// ..
 };
@@ -77,6 +89,8 @@ public:
 	
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
+	void EndContact(b2Contact* contact);
+
 	void EndContact(b2Contact* contact);
 
 

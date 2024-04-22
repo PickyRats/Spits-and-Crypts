@@ -10,6 +10,10 @@
 #include "Physics.h"
 #include "FadeToBlack.h"
 #include "Hud.h"
+#include "SceneShop.h"
+#include "SceneOasisFaraon.h"
+#include "SceneTemple.h"
+#include "SceneFloor1.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -27,6 +31,7 @@ bool Player::Awake() {
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 	speed = parameters.attribute("speed").as_float();
+	id = parameters.attribute("id").as_int();
 
 	return true;
 }
@@ -40,16 +45,15 @@ bool Player::Start() {
 
 	currentAnim = &idleAnim;
 
-	pbody = app->physics->CreateCircle(position.x + 50, position.y, 22, bodyType::DYNAMIC);
-	pbody->listener = this;
-	pbody->ctype = ColliderType::PLAYER;
+	stepsFx = app->audio->LoadFx("Assets/Audio/Fx/Footsteps_Fx.wav");
+	//ToggleGodMode();
 
-	playerPbody = app->physics->CreateRectangleSensor(position.x + 50, position.y, 24, 60, bodyType::DYNAMIC);
-	playerPbody->ctype = ColliderType::PLAYER_BODY;
-
-	initialTransform = pbody->body->GetTransform();
-
-	ToggleGodMode();
+	if (id == 1)
+	{
+		CreateBody();
+		isVisible = true;
+	}
+	else isVisible = false;
 
 	return true;
 }
@@ -59,110 +63,179 @@ bool Player::Update(float dt)
 	this->dt = dt;
 
 	//godmode
-	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) ToggleGodMode();
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN && !isCombat) ToggleGodMode();
 
 	if (health <= 0 && !isDead)
 	{
 		isDead = true;
 	}
-
-	if (!isDead)
+	if (isDead)
 	{
-		currentAnim = &idleAnim;
-
-		vel = pbody->body->GetLinearVelocity();
-
-		if (!godMode)
+		Respaw();
+	}
+	if (isVisible)
+	{
+		if (!isDead && !isCombat)
 		{
-			
-			//player movement
-			if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+			currentAnim = &idleAnim;
+
+			vel = pbody->body->GetLinearVelocity();
+
+			if (!godMode)
 			{
-				LeftMovement();
-			}
+				//Funcion para hacer sonidos
+				WalkingSound();
+				//player movement
+				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+				{
 
-			if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+					LeftMovement();
+				}
+
+				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+				{
+
+					RightMovement();
+				}
+
+				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE)
+				{
+
+					isWalking = false;
+					vel.x = 0;
+				}
+
+				//jump
+				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !isjumping)
+				{
+					Jump();
+				}
+
+				/*vel.y = -GRAVITY_Y;*/
+				pbody->body->SetLinearVelocity(vel);
+				playerPbody->body->SetTransform({ pbody->body->GetPosition().x, pbody->body->GetPosition().y - PIXEL_TO_METERS(10) }, 0);
+			}
+			else
 			{
-				RightMovement();
+				//god mode
+				vel.SetZero();
+
+				if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+				{
+					vel.y = -speed * 2 * dt;
+				}
+				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+				{
+					vel.y = speed * 2 * dt;
+				}
+				if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+				{
+					vel.x = -speed * 2 * dt;
+				}
+				if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+				{
+					vel.x = speed * 2 * dt;
+				}
+
+				pbody->body->SetLinearVelocity(vel);
+				playerPbody->body->SetTransform({ pbody->body->GetPosition().x, pbody->body->GetPosition().y - PIXEL_TO_METERS(10) }, 0);
 			}
 
-			if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_IDLE)
-			{
-				isWalking = false;
-				vel.x = 0;
-			}
-
-			//jump
-			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-			{	
-				Jump();
-			}
-
-			vel.y = -GRAVITY_Y;
-			pbody->body->SetLinearVelocity(vel);
-			playerPbody->body->SetTransform({ pbody->body->GetPosition().x, pbody->body->GetPosition().y - PIXEL_TO_METERS(10) }, 0);
+			position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 50;
+			position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 42;
 		}
 		else
-		{	
-			//god mode
-			vel.SetZero();
-
-			if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-			{
-				vel.y = -speed * 2 * dt;
-			}
-			if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-			{
-				vel.y = speed * 2 * dt;
-			}
-			if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-			{
-				vel.x = -speed * 2 * dt;
-			}
-			if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-			{
-				vel.x = speed * 2 * dt;
-			}
-
-			pbody->body->SetLinearVelocity(vel);
-			playerPbody->body->SetTransform({ pbody->body->GetPosition().x, pbody->body->GetPosition().y - PIXEL_TO_METERS(10) }, 0);
+		{
+			// death
+			pbody->body->SetLinearVelocity({ 0, 0 });
 		}
 
-		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 50;
-		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 42;
+		DrawPlayer();
+
+		currentAnim->Update();
+		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+		{
+			if (doorAldea) {
+				if (app->sceneShop->active) app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
+				else if (app->sceneOasisFaraon->active) app->fade->Fade((Module*)app->sceneOasisFaraon, (Module*)app->sceneVillage, 60.0f);
+				else if (app->sceneTemple->active) app->fade->Fade((Module*)app->sceneTemple, (Module*)app->sceneVillage, 60.0f);
+				else if (app->sceneFloor1->active) app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
+				doorAldea = false;
+			}
+			if (doorOasis)
+			{
+				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneOasisFaraon, 60.0f);
+				doorOasis = false;
+			}
+			if (doorShop)
+			{
+				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneShop, 60.0f);
+				doorShop = false;
+			}
+			if (doorTemple)
+			{
+				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneTemple, 60.0f);
+				doorTemple = false;
+			}
+			if (doorFlor1)
+			{
+				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneFloor1, 60.0f);
+				doorFlor1 = false;
+			}
+		}
 	}
-	else
-	{
-		// death
-		pbody->body->SetLinearVelocity({0, 0});
-	}
-
-	DrawPlayer();
-
-    currentAnim->Update();
-
-	printf("\r cameraX: %d cameraY: %d positionX: %d positionY %d", app->render->camera.x, app->render->camera.y, position.x, position.y);
-    return true;
+	//printf("\r cameraX: %d cameraY: %d positionX: %d positionY %d", app->render->camera.x, app->render->camera.y, position.x, position.y);
+	
+	return true;
 }
 
 void Player::LeftMovement()
 {
 	isFacingRight = false;
+	isWalking = true;	
+	vel.x = -speed * 2 * dt;
 }
 
 void Player::RightMovement()
 {
 	isFacingRight = true;
+	isWalking = true;
+	vel.x = speed * 2 * dt;
 }
 
+void Player::WalkingSound()
+{
+	if (isWalking)// si el bool isWalking es true  y is walking sound playing es false se activa el sonido y se cambia el bool a true
+	{
+		if (!walkingSoundPlaying)
+		{
+			app->audio->PlayFx(stepsFx, -1);
+			walkingSoundPlaying = true;
+		}
+		
+	
+	}
+	else if(walkingSoundPlaying) // cuando se cambia el bool a true accede al segundo else que pausa el sonido y cambia el bool a false
+	{
+		app->audio->PauseFx(stepsFx);
+		walkingSoundPlaying = false;
+	}
+
+}
 void Player::Jump()
 {
-	
+	vel.y = -speed * 2 * dt;
+	isjumping = true;
+}
+
+void Player::Respaw() {
+	app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
+	isDead = false;
 }
 
 void Player::DrawPlayer()
 {
-	
+
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
 
 	if (isFacingRight)
@@ -179,19 +252,22 @@ void Player::DrawPlayer()
 void Player::ToggleGodMode()
 {
 	godMode = !godMode;
-
-	if (godMode)
+	if (id == 1)
 	{
-		pbody->body->GetFixtureList()->SetSensor(true);
-		pbody->body->SetGravityScale(0.0f);
-		pbody->body->SetLinearVelocity({ 0, 0 });
-		currentAnim = &idleAnim;
+		if (godMode)
+		{
+			pbody->body->GetFixtureList()->SetSensor(true);
+			pbody->body->SetGravityScale(0.0f);
+			pbody->body->SetLinearVelocity({ 0, 0 });
+			currentAnim = &idleAnim;
+		}
+		else
+		{
+			pbody->body->GetFixtureList()->SetSensor(false);
+			pbody->body->SetGravityScale(1.0f);
+		}
 	}
-	else
-	{
-		pbody->body->GetFixtureList()->SetSensor(false);
-		pbody->body->SetGravityScale(1.0f);
-	}
+	
 
 }
 
@@ -207,8 +283,48 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	switch (physB->ctype)
 	{
-	case ColliderType::UNKNOWN:
-		LOG("Collision UNKNOWN");
+	case ColliderType::PLATFORM:
+		isjumping = false;
+		break;
+	case ColliderType::DOOR_ALDEA:
+		doorAldea = true;
+		break;
+	case ColliderType::DOOR_SHOP:
+		doorShop = true;
+		break;
+	case ColliderType::DOOR_OASIS:
+		doorOasis = true;
+		break;
+	case ColliderType::DOOR_TEMPLE:
+		doorTemple = true;
+		break;
+	case ColliderType::DOOR_FLOOR_1:
+		doorFlor1 = true;
+		break;
+	case ColliderType::TRAP:
+		isDead = true;
+		break;
+	}
+
+}
+void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
+
+	switch (physB->ctype)
+	{
+	case ColliderType::DOOR_ALDEA:
+		doorAldea = false;
+		break;
+	case ColliderType::DOOR_SHOP:
+		doorShop = false;
+		break;
+	case ColliderType::DOOR_OASIS:
+		doorOasis = false;
+		break;
+	case ColliderType::DOOR_TEMPLE:
+		doorTemple = false;
+		break;
+	case ColliderType::DOOR_FLOOR_1:
+		doorFlor1 = false;
 		break;
 	}
 
@@ -218,4 +334,16 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 void Player::LoadAnimations()
 {
 	idleAnim.LoadAnimations("idleAnim", "player");
+}
+
+void Player::CreateBody()
+{
+	pbody = app->physics->CreateCircle(position.x + 50, position.y, 22, bodyType::DYNAMIC);
+	pbody->listener = this;
+	pbody->ctype = ColliderType::PLAYER;
+
+	playerPbody = app->physics->CreateRectangleSensor(position.x + 50, position.y, 24, 60, bodyType::DYNAMIC);
+	playerPbody->ctype = ColliderType::PLAYER_BODY;
+
+	initialTransform = pbody->body->GetTransform();
 }

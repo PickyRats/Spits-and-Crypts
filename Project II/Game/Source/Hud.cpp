@@ -14,6 +14,7 @@
 #include "Defs.h"
 #include "Log.h"
 #include "SceneMenu.h"
+#include "SceneCombat.h"
 
 #include <iostream>
 #include <iomanip>
@@ -43,6 +44,22 @@ bool Hud::Awake(pugi::xml_node& config)
 bool Hud::Start()
 {
 	// Charge all textures
+	// Combat Mode UI
+	character1 = app->tex->Load(configNode3.child("character1").attribute("texturepath").as_string());
+	fuego = app->tex->Load(configNode3.child("fuego").attribute("texturepath").as_string());
+	life1 = app->tex->Load(configNode3.child("life1").attribute("texturepath").as_string());
+	life2 = app->tex->Load(configNode3.child("life2").attribute("texturepath").as_string());
+	PP = app->tex->Load(configNode3.child("PP").attribute("texturepath").as_string());
+	sword1 = app->tex->Load(configNode3.child("sword1").attribute("texturepath").as_string());
+	sword2 = app->tex->Load(configNode3.child("sword2").attribute("texturepath").as_string());
+	number14 = app->tex->Load(configNode3.child("number14").attribute("texturepath").as_string());
+	L3Move = app->tex->Load(configNode3.child("L3Move").attribute("texturepath").as_string());
+	execute = app->tex->Load(configNode3.child("execute").attribute("texturepath").as_string());
+	Xaccept = app->tex->Load(configNode3.child("Xaccept").attribute("texturepath").as_string());
+	playerverd = app->tex->Load(configNode3.child("playerverd").attribute("texturepath").as_string());
+	enemyrojo = app->tex->Load(configNode3.child("enemyrojo").attribute("texturepath").as_string());
+
+	//
 	pause = app->tex->Load(configNode3.child("pause").attribute("texturepath").as_string());
 	exitNormal = app->tex->Load(configNode3.child("exitNormal").attribute("texturepath").as_string());
 	exitHover = app->tex->Load(configNode3.child("exitHover").attribute("texturepath").as_string());
@@ -62,18 +79,18 @@ bool Hud::Start()
 	settingsReturnNormal = app->tex->Load(configNode3.child("settingsReturnNormal").attribute("texturepath").as_string());
 	settingsReturnHover = app->tex->Load(configNode3.child("settingsReturnHover").attribute("texturepath").as_string());
 	settingsReturnClick = app->tex->Load(configNode3.child("settingsReturnClick").attribute("texturepath").as_string());
-	settingsMusicNormal = app->tex->Load(configNode3.child("settingsMusicNormal").attribute("texturepath").as_string());
-	settingsMusicHover = app->tex->Load(configNode3.child("settingsMusicHover").attribute("texturepath").as_string());
-	settingsMusicClick = app->tex->Load(configNode3.child("settingsMusicClick").attribute("texturepath").as_string());
-	settingsFxNormal = app->tex->Load(configNode3.child("settingsFxNormal").attribute("texturepath").as_string());
-	settingsFxHover = app->tex->Load(configNode3.child("settingsFxHover").attribute("texturepath").as_string());
-	settingsFxClick = app->tex->Load(configNode3.child("settingsFxClick").attribute("texturepath").as_string());
-	settingsFullScreenNormal = app->tex->Load(configNode3.child("settingsFullScreenNormal").attribute("texturepath").as_string());
-	settingsFullScreenHover = app->tex->Load(configNode3.child("settingsFullScreenHover").attribute("texturepath").as_string());
-	settingsFullScreenClick = app->tex->Load(configNode3.child("settingsFullScreenClick").attribute("texturepath").as_string());
-	settingsVSyncNormal = app->tex->Load(configNode3.child("settingsVSyncNormal").attribute("texturepath").as_string());
-	settingsVSyncHover = app->tex->Load(configNode3.child("settingsVSyncHover").attribute("texturepath").as_string());
-	settingsVSyncClick = app->tex->Load(configNode3.child("settingsVSyncClick").attribute("texturepath").as_string());
+	//settingsMusicNormal = app->tex->Load(configNode3.child("settingsMusicNormal").attribute("texturepath").as_string());
+	/*settingsMusicHover = app->tex->Load(configNode3.child("settingsMusicHover").attribute("texturepath").as_string());*/
+	//settingsMusicClick = app->tex->Load(configNode3.child("settingsMusicClick").attribute("texturepath").as_string());
+	//settingsFxNormal = app->tex->Load(configNode3.child("settingsFxNormal").attribute("texturepath").as_string());
+	//settingsFxHover = app->tex->Load(configNode3.child("settingsFxHover").attribute("texturepath").as_string());
+	//settingsFxClick = app->tex->Load(configNode3.child("settingsFxClick").attribute("texturepath").as_string());
+	//settingsFullScreenNormal = app->tex->Load(configNode3.child("settingsFullScreenNormal").attribute("texturepath").as_string());
+	//settingsFullScreenHover = app->tex->Load(configNode3.child("settingsFullScreenHover").attribute("texturepath").as_string());
+	//settingsFullScreenClick = app->tex->Load(configNode3.child("settingsFullScreenClick").attribute("texturepath").as_string());
+	//settingsVSyncNormal = app->tex->Load(configNode3.child("settingsVSyncNormal").attribute("texturepath").as_string());
+	//settingsVSyncHover = app->tex->Load(configNode3.child("settingsVSyncHover").attribute("texturepath").as_string());
+	/*settingsVSyncClick = app->tex->Load(configNode3.child("settingsVSyncClick").attribute("texturepath").as_string());*/
 	settingsTick = app->tex->Load(configNode3.child("settingsTick").attribute("texturepath").as_string());
 	settingsSlider = app->tex->Load(configNode3.child("settingsSlider").attribute("texturepath").as_string());
 	settingsBoxNormal = app->tex->Load(configNode3.child("settingsBoxNormal").attribute("texturepath").as_string());
@@ -332,7 +349,80 @@ bool Hud::Update(float dt)
 		settingsVSyncButton->state = GuiControlState::HIDDEN;
 		settingsMusicButton->state = GuiControlState::HIDDEN;
 		settingsFxButton->state = GuiControlState::HIDDEN;
+
+		if (app->sceneCombat->active) {
+			//Combat Mode Drawing
+			////players
+			app->render->DrawTexture(character1, 20, 660, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(character1, 80, 660, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(character1, 140, 660, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(character1, 200, 660, NULL, SDL_FLIP_NONE, 0);
+			////
+			// 
+			////barras vida
+			app->render->DrawTexture(life1, 70, 660, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(life2, 73, 697, NULL, SDL_FLIP_NONE, 0);
+
+			app->render->DrawTexture(life1, 130, 660, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(life2, 133, 697, NULL, SDL_FLIP_NONE, 0);
+
+			app->render->DrawTexture(life1, 190, 660, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(life2, 193, 697, NULL, SDL_FLIP_NONE, 0);
+
+			app->render->DrawTexture(life1, 250, 660, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(life2, 253, 697, NULL, SDL_FLIP_NONE, 0);
+			////
+			//
+			////botones abajo derecha
+			app->render->DrawTexture(sword2, 1150, 660, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(fuego, 1210, 660, NULL, SDL_FLIP_NONE, 0);
+			////
+			//
+			////PP
+			app->render->DrawTexture(PP, 20, 20, NULL, SDL_FLIP_NONE, 0);
+			////
+			//
+			////Sword1
+			app->render->DrawTexture(sword1, 1210, 20, NULL, SDL_FLIP_NONE, 0);
+			////
+			//
+			////14
+			app->render->DrawTexture(number14, 52, 46, NULL, SDL_FLIP_NONE, 0);
+			////
+			// 
+			////L3Move
+			app->render->DrawTexture(L3Move, 500, 660, NULL, SDL_FLIP_NONE, 0);
+			////
+			//
+			///execute
+			app->render->DrawTexture(execute, 620, 660, NULL, SDL_FLIP_NONE, 0);
+			////
+			//
+			////Xaccept
+			app->render->DrawTexture(Xaccept, 740, 660, NULL, SDL_FLIP_NONE, 0);
+			////
+			//
+			////enemyrojo
+			app->render->DrawTexture(enemyrojo, 1210, 620, NULL, SDL_FLIP_NONE, 0);
+			////
+			//
+			////playerverd
+			app->render->DrawTexture(playerverd, 1180, 620, NULL, SDL_FLIP_NONE, 0);
+			////
+			//
+			////L1
+			app->render->DrawTexture(L1, 520, 620, NULL, SDL_FLIP_NONE, 0);
+			////
+			//
+			////R1
+			app->render->DrawTexture(R1, 1180, 620, NULL, SDL_FLIP_NONE, 0);
+			////
+			//
+		}
 	}
+	
+	
+
 
 	return true;
 }

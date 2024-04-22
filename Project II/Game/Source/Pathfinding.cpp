@@ -1,6 +1,8 @@
 #include "App.h"
 #include "Map.h"
 #include "PathFinding.h"
+#include "SceneCombat.h"
+#include <vector>
 
 #include "Defs.h"
 #include "Log.h"
@@ -51,8 +53,22 @@ bool PathFinding::CheckBoundaries(const iPoint& pos) const
 bool PathFinding::IsWalkable(const iPoint& pos) const
 {
 	uchar walkId = GetTileAt(pos);
-	bool isWalkable = walkId != INVALID_WALK_CODE && walkId > 0;
+	bool isWalkable = walkId != INVALID_WALK_CODE && walkId == 1;
 	return  isWalkable;
+}
+
+// Utility: returns true is the tile is a ladder
+bool PathFinding::IsLadderBottom(const iPoint& pos) const
+{
+	uchar ladderId = GetTileAt(pos);
+	bool isLadder = ladderId != INVALID_WALK_CODE && ladderId == 2;
+	return  isLadder;
+}
+bool PathFinding::IsLadderTop(const iPoint& pos) const
+{
+	uchar ladderId = GetTileAt(pos);
+	bool isLadder = ladderId != INVALID_WALK_CODE && ladderId == 3;
+	return  isLadder;
 }
 
 // Utility: return the walkability value of a tile
@@ -80,13 +96,13 @@ void PathFinding::ClearLastPath()
 // ----------------------------------------------------------------------------------
 // Actual A* algorithm: return number of steps in the creation of the path or -1 ----
 // ----------------------------------------------------------------------------------
-int PathFinding::CreatePath(const iPoint& origin, const iPoint& destination, bool canFly)
+int PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 {
 	int ret = -1;
 	int iterations = 0;
 
 	// L13: DONE 1: if origin or destination are not walkable, return -1
-	if ((IsWalkable(origin) && IsWalkable(destination)) || canFly)
+	if (((IsWalkable(origin) || IsLadderBottom(origin) || IsLadderTop(origin)) && (IsWalkable(destination) || IsLadderBottom(destination) || IsLadderTop(destination))))
 	{
 		// L13: DONE 2: Create two lists: frontier, visited
 		PathList frontier;
@@ -113,14 +129,25 @@ int PathFinding::CreatePath(const iPoint& origin, const iPoint& destination, boo
 				// Backtrack to create the final path
 				// Use the Pathnode::parent and Flip() the path when you are finish
 				const PathNode* pathNode = &node->data;
+				std::vector<iPoint> allSteps;
 
 				while (pathNode)
 				{
-					lastPath.PushBack(pathNode->pos);
+					allSteps.push_back(pathNode->pos);
 					pathNode = pathNode->parent;
 				}
 
-				lastPath.Flip();
+				for (int i = allSteps.size() - 1; i >= 0; --i)
+				{
+					lastPath.PushBack(allSteps[i]);
+				}
+
+				while (lastPath.Count() > app->sceneCombat->maxTiles + 1)
+				{
+					iPoint dummyValue;
+					lastPath.Pop(dummyValue);
+				}
+
 				ret = lastPath.Count();
 				LOG("Created path of %d steps in %d iterations", ret, iterations);
 				break;
@@ -129,7 +156,7 @@ int PathFinding::CreatePath(const iPoint& origin, const iPoint& destination, boo
 			// L13: DONE 4: Fill a list of all adjancent nodes. 
 			// use the FindWalkableAdjacents function
 			PathList adjacent;
-			node->data.FindWalkableAdjacents(adjacent, canFly);
+			node->data.FindWalkableAdjacents(adjacent);
 
 			// L13: DONE 5: Iterate adjancent nodes:
 			// If it is a better path, Update the parent
@@ -221,26 +248,26 @@ PathNode::PathNode(const PathNode& node) : g(node.g), h(node.h), pos(node.pos), 
 // PathNode -------------------------------------------------------------------------
 // Fills a list (PathList) of all valid adjacent pathnodes
 // ----------------------------------------------------------------------------------
-uint PathNode::FindWalkableAdjacents(PathList& listToFill, bool canFly) const
+uint PathNode::FindWalkableAdjacents(PathList& listToFill) const
 {
 	iPoint tile;
 	uint before = listToFill.list.Count();
 
 	// top
-	tile.Create(pos.x, pos.y + 1);
-	if (app->map->pathfinding->IsWalkable(tile) || canFly) listToFill.list.Add(PathNode(-1, -1, tile, this));
+	tile.Create(pos.x, pos.y + 3);
+	if (app->map->pathfinding->IsLadderBottom(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
 
 	// bottom
-	tile.Create(pos.x, pos.y - 1);
-	if (app->map->pathfinding->IsWalkable(tile) || canFly) listToFill.list.Add(PathNode(-1, -1, tile, this));
+	tile.Create(pos.x, pos.y - 3);
+	if (app->map->pathfinding->IsLadderTop(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
 
 	// left
 	tile.Create(pos.x + 1, pos.y);
-	if (app->map->pathfinding->IsWalkable(tile) || canFly) listToFill.list.Add(PathNode(-1, -1, tile, this));
+	if (app->map->pathfinding->IsWalkable(tile) || app->map->pathfinding->IsLadderTop(tile) || app->map->pathfinding->IsLadderBottom(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
 
 	// right
 	tile.Create(pos.x - 1, pos.y);
-	if (app->map->pathfinding->IsWalkable(tile) || canFly) listToFill.list.Add(PathNode(-1, -1, tile, this));
+	if (app->map->pathfinding->IsWalkable(tile) || app->map->pathfinding->IsLadderTop(tile) || app->map->pathfinding->IsLadderBottom(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
 
 	return listToFill.list.Count();
 }

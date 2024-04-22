@@ -7,6 +7,7 @@
 #include "PQueue.h"
 #include "DynArray.h"
 #include "Pathfinding.h"
+#include "Player.h"
 
 #include "PugiXml\src\pugixml.hpp"
 
@@ -150,11 +151,13 @@ private:
 	void CreateEntities(const char* nodeName, EntityType entityType, iPoint pos);
 
 public: 
-	SString name;
+	Player* player;
+	Player* player2;
+	SString mapName;
 	SString path;
 	PathFinding* pathfinding;
 
-	int mapIdx = 1;
+	int mapIdx = 1; //1= sceneVillage, 2 = sceneShop, 3 = sceneOasisFaraon, 4 = sceneTemple
 
 	List<PhysBody*> wallEndCollision;
 
@@ -167,17 +170,19 @@ private:
 	bool mapLoaded;
 	MapLayer* navigationLayer;
 	int blockedGid = 49;
-	int walkableGid = 1448;
+	int walkableGid = 4;
+	int ladderTopGid = 1;
+	int ladderBottomGid = 2;
 	int startHeight = 0;
 	int endHeight = 0;
 	int startWidth = 0;
 	int endWidth = 0;
 	int startMapHeight = 0;
-	int endMapHeight = 0;
-	int startMapWidth = 0;
+	int endMapHeight = 12;
+	int startMapWidth = 45;
 	int endMapWidth = 0;
 	int tilesToLoad = 55;
-	int tilesSize = 32;
+	int tilesSize = 64;
 };
 
 #endif // __MAP_H__

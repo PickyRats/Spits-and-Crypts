@@ -4,7 +4,10 @@
 #include "Textures.h"
 #include "Map.h"
 #include "Physics.h"
+
+#include "SceneCombat.h"
 #include "SceneVillage.h"
+#include "SceneShop.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -13,7 +16,7 @@
 #include "SDL_image/include/SDL_image.h"
 
 
-Map::Map(bool enabled) : Module(enabled), mapLoaded(false)
+Map::Map(bool enabled) : Module(enabled)
 {
     name.Create("map");
 }
@@ -28,6 +31,14 @@ bool Map::Awake(pugi::xml_node& config)
     LOG("Loading Map Parser");
     bool ret = true;
 
+    if (config.child("player")) {
+    	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+    	player->parameters = config.child("player");
+    }
+    if (config.child("player2")) {
+        player2 = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+        player2->parameters = config.child("player2");
+    }
     return ret;
 }
 
@@ -35,7 +46,7 @@ bool Map::Start() {
 
     //Calls the functon to load the map, make sure that the filename is assigned
     SString mapPath = path;
-    mapPath += name;
+    mapPath += mapName;
     Load(mapPath);
 
     //Initialize the pathfinding
@@ -75,7 +86,6 @@ bool Map::Update(float dt)
                     //Get the gid from tile
                     int gid = mapLayer->data->Get(i, j);
 
-
                     TileSet* tileSet = GetTilesetFromTileId(gid);
                     SDL_Rect tileRect = tileSet->GetRect(gid);
 
@@ -88,7 +98,7 @@ bool Map::Update(float dt)
         }
         mapLayer = mapLayer->next;
     }
-
+    LOG("Map updated successfully");
     return true;
 }
 
@@ -387,6 +397,8 @@ void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
             //If the gid is a blockedGid is an area that I cannot navigate, so is set in the navigation map as 0, all the other areas can be navigated
             //!!!! make sure that you assign blockedGid according to your map
             if (gid == walkableGid) navigationMap[i] = 1;
+            else if (gid == ladderBottomGid) navigationMap[i] = 2;
+            else if (gid == ladderTopGid) navigationMap[i] = 3;
             else navigationMap[i] = 0;
            
         }
@@ -396,6 +408,7 @@ void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
     width = mapData.width;
     height = mapData.height;
 
+    LOG("Navigation map created successfully");
 }
 
 bool Map::CreateColliders()
@@ -421,11 +434,71 @@ bool Map::CreateColliders()
 
                         switch (mapLayerItem->data->Get(x, y))
                         {
-                        case 2:
+                        case 3:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::WALL;
+                            ret = true;
+                            break;
+                        case 4:
                             c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
                             c1->ctype = ColliderType::PLATFORM;
                             ret = true;
                             break;
+                        case 5:
+                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y, mapData.tileWidth, mapData.tileHeight*2, STATIC);
+                            c1->ctype = ColliderType::DOOR_SHOP;
+                            ret = true;
+                            break;
+                        case 6:
+                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y , mapData.tileWidth, mapData.tileHeight*2, STATIC);
+                            c1->ctype = ColliderType::DOOR_OASIS;
+                            ret = true;
+                            break;
+                        case 7:
+                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y , mapData.tileWidth, mapData.tileHeight*2, STATIC);
+                            c1->ctype = ColliderType::DOOR_TEMPLE;
+                            ret = true;
+                            break;
+                        case 8:
+                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y, mapData.tileWidth, mapData.tileHeight*2, STATIC);
+                            c1->ctype = ColliderType::DOOR_ALDEA;
+                            ret = true;
+                            break;
+                        case 10:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::COMBAT;
+                            ret = true;
+                            break;
+                        case 9:
+                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y , mapData.tileWidth, mapData.tileHeight*2, STATIC);
+                            c1->ctype = ColliderType::DOOR_FLOOR_1;
+                            ret = true;
+                            break;
+                        case 12:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::TRAP;
+                            ret = true;
+                            break;      
+                        case 102:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::PLATFORM;
+                            ret = true;
+                            break;
+                        case 112:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::WALL;
+                            ret = true;
+                            break;
+                        case 122:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::WALL;
+                            ret = true;
+                            break;
+                       /* case 5:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::ITERACTABLE;
+                            ret = true;
+                            break;*/
                         default:
                             break;
                         }
@@ -435,7 +508,7 @@ bool Map::CreateColliders()
         }
         mapLayerItem = mapLayerItem->next;
     }
-
+    LOG("Colliders created successfully");
     return ret;
 }
 
@@ -453,12 +526,19 @@ void Map::DestroyAllColliders()
         {
             ColliderType ctype = physBody->ctype;
 
-            // Comprueba el tipo del collider y elimina solo los tipos específicos
+            // Comprueba el tipo del collider y elimina solo los tipos especÃ­ficos
 
-            /*if (ctype == ColliderType::PLATFORM)
+            if (ctype == ColliderType::WALL 
+                || ctype == ColliderType::PLATFORM 
+                || ctype == ColliderType::DOOR_SHOP 
+                || ctype == ColliderType::DOOR_OASIS 
+                || ctype == ColliderType::DOOR_TEMPLE
+                || ctype == ColliderType::DOOR_ALDEA
+                || ctype == ColliderType::DOOR_FLOOR_1
+                || ctype == ColliderType:: COMBAT)
             {
                 physicsWorld->DestroyBody(body);
-            }*/
+            }
         }
 
         body = nextBody;
@@ -472,23 +552,9 @@ void Map::UpdateMapSize()
     {
         startMapWidth = 0;
         startMapHeight = 0;
-        endMapWidth = 108;
-        endMapHeight = 53;
+        endMapWidth = 45;
+        endMapHeight = 12;
     }
-    else if (mapIdx == 2)
-    {
-        startMapWidth = 122;
-        startMapHeight = 0;
-        endMapWidth = 264;
-        endMapHeight = 45;
-    }
-    else if (mapIdx == 3)
-    {
-		startMapWidth = 0;
-		startMapHeight = 50;
-		endMapWidth = 199;
-		endMapHeight = 199;
-	}
     else
     {
         startMapWidth = 0;
@@ -500,15 +566,16 @@ void Map::UpdateMapSize()
 
 void Map::UpdateTileLoadSize()
 {
-    iPoint playerPosition = app->sceneVillage->player->position;
+
+    iPoint playerPosition = app->map->player->position;
 
     int playerX = playerPosition.x / tilesSize;
     int playerY = playerPosition.y / tilesSize;
 
     startWidth = (playerX - tilesToLoad < startMapWidth) ? startMapWidth : playerX - tilesToLoad;
-    endWidth = (playerX + tilesToLoad > endMapWidth) ? endMapWidth : playerX + tilesToLoad;
+    endWidth = (playerX + tilesToLoad > mapData.width) ? mapData.width : playerX + tilesToLoad;
     startHeight = (playerY - tilesToLoad < startMapHeight) ? startMapHeight : playerY - tilesToLoad;
-    endHeight = (playerY + tilesToLoad > endMapHeight) ? endMapHeight : playerY + tilesToLoad;
+    endHeight = (playerY + tilesToLoad > mapData.height) ? mapData.height : playerY + tilesToLoad;
 }
 
 bool Map::LoadEntities()
@@ -553,6 +620,7 @@ bool Map::LoadEntities()
 
     }
 
+    LOG("Entities loaded successfully");
     return false;
 }
 

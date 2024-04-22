@@ -73,25 +73,33 @@ private:
 	SDL_Texture* returnClick;
 
 	SDL_Texture* settings;
+	SDL_Texture* controlsHint;
 	SDL_Texture* credits;
 
 	SDL_Texture* settingsTick;
-
 	SDL_Texture* settingsSlider;
-
+	SDL_Texture* settingsAudioPanel;
+	SDL_Texture* settingsOptionsPanel;
+	SDL_Texture* settingsOptionsButtonNormal;
+	SDL_Texture* settingsOptionsButtonHover;
+	SDL_Texture* settingsAudioButtonNormal;
+	SDL_Texture* settingsAudioButtonHover;
+	SDL_Texture* settingsControlsButtonNormal;
+	SDL_Texture* settingsControlsButtonHover;
 	SDL_Texture* settingsMusicNormal;
-
 	SDL_Texture* settingsBoxNormal;
 	SDL_Texture* settingsBoxHover;
+	SDL_Texture* settingsControls;
 
-	GuiControlButton* settingsReturnButton;
 	GuiControlButton* settingsExitButton;
+	GuiControlButton* settingsOptionsButton;
+	GuiControlButton* settingsAudioButton;
+	GuiControlButton* settingsControlsButton;
 	GuiControlButton* settingsFullScreenButton;
 	GuiControlButton* settingsVSyncButton;
 	GuiControlButton* settingsMusicButton;
 	GuiControlButton* settingsFxButton;
 
-	GuiControlButton* creditsReturnButton;
 	GuiControlButton* creditsExitButton;
 
 	//add music to the menu
@@ -99,6 +107,10 @@ private:
 	
 	bool onMenu = true;
 	bool onSettings = false;
+	bool onSettingsControls = false;
+	bool onSettingsAudio = true;
+	bool onSettingsOptions = false;
+	bool buttonsActivated = false;
 	bool onCredits = false;
 
 };

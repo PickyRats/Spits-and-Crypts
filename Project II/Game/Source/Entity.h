@@ -12,6 +12,10 @@ enum class EntityType
 {
 	PLAYER,
 	DIALOG_TRIGGER,
+	NPCS,
+	PIEZAS,
+	ENEMY,
+	TRAP,
 	UNKNOWN
 };
 
@@ -69,6 +73,16 @@ public:
 		}
 	}
 
+	virtual void UpdatePoints(int pointsCost)
+	{
+		currentPoints -= pointsCost;
+	}
+
+	virtual bool HasAvailablePoints(int pointsCost)
+	{
+		return currentPoints >= pointsCost;
+	}
+
 	virtual void OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	};
@@ -95,7 +109,11 @@ public:
 
 	bool isDead = false;
 	int health = 100;
+	int totalPoints = 5;
+	int currentPoints = 5;
+	int attackRange = 3;
 	bool setLoadPosition = false;
+	int attackDamage = 10;
 };
 
 #endif // __ENTITY_H__

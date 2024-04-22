@@ -22,17 +22,34 @@
 		<fx volume="200"/>
 	</audio>
 
-	<sceneVillage>
+	<sceneCombat>
 		<!-- Scene -->
-		<map path="Assets/Maps/" name="Map_Village.tmx"/>
+		<map path="Assets/Maps/" name="Map_Combat.tmx"/>
 
 		<!-- Music -->
 		<music>
 		</music>
+    
+		<!--Enemy -->
+		<enemy x="1024" y="448" texturepath="Assets/Textures/enemy.png" id="1"/>
+		<enemy x="256" y="448" texturepath="Assets/Textures/enemy.png" id="2"/>
+
+	</sceneCombat>
+	
+  <sceneShop>
+		<!-- Scene -->
+		<map path="Assets/Maps/" name="Map_Shop.tmx"/>
+
+		<!-- Music -->
+		<music>
+			<ShopMusic path="Assets/Audio/Music/Shop_Music.ogg" fadeTime="10" fadeOutTime="2"/>
+		</music>
 
 		<!-- Player -->
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
-		
+				<!-- Mercante  -->
+		<npc x="1024" y="576" texturepath="Assets/Textures/Npcs/mercante.png" id="7" scene="3"/>
+  
 		<dialogTrigger x="600" y="450"  name="La abuela" repeat="true">
 		  <sentences>
 			  <sentence text="Uy nene, no veas como refresca"/>
@@ -52,23 +69,98 @@
 				<sentence text="U FOCKIN NIGGA"/>
 			</repeat_sentences>
 		</dialogTrigger>
-		
-	</sceneVillage>
-	
+    
+	</sceneShop>
+  
 	<dialogmanager>
 		<textures>
 			<background_dialog texturepath="Assets/Textures/cuadroDialogo.png"/>
 		</textures>
 	</dialogmanager>
-	
+
 	<!-- Intro -->
 	<sceneintro>
 		<logoFx path="Assets/Audio/Fx/Logo.wav"/>
 	</sceneintro>
 
-	<!-- Menu -->
+	<!-- sceneVillage -->
+	<sceneVillage>
+		<!-- Scene -->
+		<map path="Assets/Maps/" name="Map_Village.tmx"/>
+		<!-- Music -->
+		<music>
+		</music>
+		
+		<villageAmbient path="Assets/Audio/Music/Village_ambient.ogg" fadeTime="2" fadeOutTime="2"/>
+
+		<!-- Abuela -->
+		<npc x="300" y="300" texturepath="Assets/Textures/Npcs/abuela.png" id="1" scene="1"/>
+
+		<!-- Nieta -->
+		<npc x="550" y="550" texturepath="Assets/Textures/Npcs/nieta.png" id="2" scene="1"/>
+	</sceneVillage>
+
+	<!-- sceneOasis -->
+	<sceneOasis>
+		<!-- Scene -->
+		<map path="Assets/Maps/" name="Map_OasisdelFaraon.tmx"/>
+
+		<!-- Player -->
+		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+		
+		<!-- Tabernero  -->
+		<npc x="300" y="300" texturepath="Assets/Textures/Npcs/Anhuvihsh.png" id="8" scene="4"/>
+    <!-- Music -->
+		<music>
+		</music>
+
+		<OasisMusic path="Assets/Audio/Music/tabern_Music.ogg" fadeTime="2" fadeOutTime="2"/>
+	</sceneOasis>
+
+	<!-- sceneTemple -->
+	<sceneTemple>
+		<!-- Scene -->
+		<map path="Assets/Maps/" name="Map_Temple.tmx"/>
+    <!-- Music -->
+		<TempleMusic path="Assets/Audio/Music/temple_Music.ogg" fadeTime="2" fadeOutTime="2"/>
+
+		<!-- Maat -->
+		<npc x="300" y="300" texturepath="Assets/Textures/Npcs/maat.png" id="3" scene="2"/>
+
+		<!-- Toth -->
+		<npc x="550" y="550" texturepath="Assets/Textures/Npcs/toth.png" id="4" scene="2"/>
+		
+		<!-- Isis -->
+		<npc x="650" y="300" texturepath="Assets/Textures/Npcs/isis.png" id="5" scene="2"/>
+
+		<!-- Horus -->
+		<npc x="750" y="550" texturepath="Assets/Textures/Npcs/horus.png" id="6" scene="2"/>
+	</sceneTemple>
+
+  <map>
+		<!-- Player -->
+		<player x="64" y="64" texturepath="Assets/Textures/player.png" speed="0.2f" id="1"/>
+		<player2 x="0" y="64" texturepath="Assets/Textures/player.png" speed="0.2f" id="2"/>
+	</map>
+	
+	<!-- sceneFloor1 -->
+	<sceneFloor1>
+		<!-- Scene -->
+		<map path="Assets/Maps/" name="Map_floor_1.tmx"/>
+		<!-- Music -->
+		<music>
+		</music>
+		<Floor1Music path="Assets/Audio/Music/Floor1_music.ogg" fadeTime="2" fadeOutTime="2"/>
+		
+		<Piece x="4992" y="448" texturepath="Assets/Textures/items/Piece_1.png" id="1" />
+		<Piece x="5248" y="448" texturepath="Assets/Textures/items/Piece_2.png" id="2" />
+		<Piece x="5632" y="512" texturepath="Assets/Textures/items/Piece_3.png" id="3" />
+		<Piece x="6016" y="448" texturepath="Assets/Textures/items/piece_4.png" id="4" />
+	</sceneFloor1>
+	
+	<!-- Menu-->
 	<scenemenu>
-		<background texturepath="Assets/Textures/Screens/background.png"/>
+		<background texturepath="Assets/Textures/Screens/main_menu_background.png"/>
 		<playNormal texturepath="Assets/Textures/Screens/Play/play_normal.png"/>
 		<playHover texturepath="Assets/Textures/Screens/Play/play_hover.png"/>
 		<playClick texturepath="Assets/Textures/Screens/Play/play_click.png"/>
@@ -87,20 +179,26 @@
 		<exitClick texturepath="Assets/Textures/Screens/More/exit_click.png"/>
 		<settings texturepath="Assets/Textures/Screens/More/settings.png"/>
 		<credits texturepath="Assets/Textures/Screens/More/credits.png"/>
-		<returnNormal texturepath="Assets/Textures/Screens/More/return_normal.png"/>
-		<returnHover texturepath="Assets/Textures/Screens/More/return_hover.png"/>
-		<returnClick texturepath="Assets/Textures/Screens/More/return_click.png"/>
 		<settingsBoxNormal texturepath="Assets/Textures/Screens/More/settings_box_normal.png"/>
 		<settingsBoxHover texturepath="Assets/Textures/Screens/More/settings_box_hover.png"/>
+		<settingsControls texturepath="Assets/Textures/Screens/More/settings_controls.png"/>
 		<settingsTick texturepath="Assets/Textures/Screens/More/tick.png"/>
 		<settingsSlider texturepath="Assets/Textures/Screens/More/slider.png"/>
+		<settingsAudioPanel texturepath="Assets/Textures/Screens/More/settings_audio_panel.png"/>
+		<settingsOptionsPanel texturepath="Assets/Textures/Screens/More/settings_options_panel.png"/>
+		<settingsOptionsButtonNormal texturepath="Assets/Textures/Screens/More/settings_options_button_normal.png"/>
+		<settingsOptionsButtonHover texturepath="Assets/Textures/Screens/More/settings_options_button_hover.png"/>
+		<settingsAudioButtonNormal texturepath="Assets/Textures/Screens/More/settings_audio_button_normal.png"/>
+		<settingsAudioButtonHover texturepath="Assets/Textures/Screens/More/settings_audio_button_hover.png"/>
+		<settingsControlsButtonNormal texturepath="Assets/Textures/Screens/More/settings_controls_button_normal.png"/>
+		<settingsControlsButtonHover texturepath="Assets/Textures/Screens/More/settings_controls_button_hover.png"/>
 		<buttonFxHover path="Assets/Audio/Fx/button_hover.wav"/>
 		<buttonFxClick path="Assets/Audio/Fx/button_click.wav"/>
 		<buttonFx1 path="Assets/Audio/Fx/Button1.wav"/>
 		<buttonFx2 path="Assets/Audio/Fx/Button2.wav"/>
-		<musicMenu path="Assets/Audio/Music/menu_music.ogg" fadeTime="10" fadeOutTime="2"/>
+		<musicMenu path="Assets/Audio/Music/menu_music.ogg" fadeTime="2" fadeOutTime="2"/>
 	</scenemenu>
-
+	
 	<!-- Hud -->
 	<hud>
 		<pause texturepath="Assets/Textures/Screens/Pause/pause.png"/>
@@ -128,12 +226,29 @@
 		<settingsTick texturepath="Assets/Textures/Screens/More/tick.png"/>
 		<settingsSlider texturepath="Assets/Textures/Screens/More/slider.png"/>
 		<settings texturepath="Assets/Textures/Screens/More/settings.png"/>
+
+		<character1 texturepath="Assets/Textures/Screens/More/character1.png"/>
+		<fuego texturepath="Assets/Textures/Screens/More/fuego.png"/>
+		<life1 texturepath="Assets/Textures/Screens/More/life1.png"/>
+		<life2 texturepath="Assets/Textures/Screens/More/life2.png"/>
+		<PP texturepath="Assets/Textures/Screens/More/PP.png"/>
+		<sword1 texturepath="Assets/Textures/Screens/More/sword1.png"/>
+		<sword2 texturepath="Assets/Textures/Screens/More/sword2.png"/>
+		<number14 texturepath="Assets/Textures/Screens/More/14.png"/>
+		<L3Move texturepath="Assets/Textures/Screens/More/L3Move.png"/>
+		<execute texturepath="Assets/Textures/Screens/More/4execute.png"/>
+		<Xaccept texturepath="Assets/Textures/Screens/More/Xaccept.png"/>
+		<playerverd texturepath="Assets/Textures/Screens/More/playerverd.png"/>
+		<enemyrojo texturepath="Assets/Textures/Screens/More/enemyrojo.png"/>
+		<L1 texturepath="Assets/Textures/Screens/More/L1.png"/>
+		<R1 texturepath="Assets/Textures/Screens/More/R1.png"/>
+		
 	</hud>
 
 	<animations>
 		<!-- Player Animations-->
 		<player>
-			<idleAnim loop="true" speed="0.1f">
+			<idleAnim loop="true" speed=" 0.1f">
 				<animation x="0" y="0" w="100" h="64"/>
 				<animation x="100" y="0" w="100" h="64"/>
 				<animation x="200" y="0" w="100" h="64"/>

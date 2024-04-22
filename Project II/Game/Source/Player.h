@@ -29,6 +29,8 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+	void OnExitCollision(PhysBody* physA, PhysBody* physB);
+
 	void LoadAnimations();
 	
 	void ToggleGodMode();
@@ -40,9 +42,16 @@ public:
 	void RightMovement();
 
 	void Jump();
+	
+	void WalkingSound();
+
+	void Respaw();
+
+	void CreateBody();
 
 public:
 	float speed = 0.2f;
+	int id = 0;
 	const char* texturePath;
 
 	SDL_Texture* texture = NULL;
@@ -59,6 +68,16 @@ public:
 
 	bool godMode = false;
 
+	bool isjumping = false;
+
+	bool doorAldea = false;
+	bool doorShop = false;
+	bool doorOasis = false;
+	bool doorTemple = false;
+	bool step = false;
+	bool walkingSoundPlaying = false;
+	bool doorFlor1 = false;
+
 	b2Transform initialTransform;
 
 	b2Vec2 vel;
@@ -67,6 +86,13 @@ public:
 
 	bool contactDialogTrigger = false;
 	DialogTrigger* dialogTriggerContact = nullptr;
+	bool isCombat = false;
+	bool isVisible = true;
+
+	uint stepsFx;
+
+	bool isDead = false;
+
 
 };
 
