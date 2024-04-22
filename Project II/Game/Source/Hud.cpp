@@ -223,12 +223,34 @@ bool Hud::Update(float dt)
 				if(app->sceneVillage->active)
 				{
 					app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneMenu, 60.0f);
+					app->sceneVillage->pause = false;
 				}
+				else  if (app->sceneShop->active)
+				{
+					app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneMenu, 60.0f);
+					app->sceneShop->pause = false;
+				}
+				else  if (app->sceneOasisFaraon->active)
+				{
+					app->fade->Fade((Module*)app->sceneOasisFaraon, (Module*)app->sceneMenu, 60.0f);
+					app->sceneOasisFaraon->pause = false;
+				}
+				else  if (app->sceneTemple->active)
+				{
+					app->fade->Fade((Module*)app->sceneTemple, (Module*)app->sceneMenu, 60.0f);
+					app->sceneTemple->pause = false;
+				}
+				else  if (app->sceneFloor1->active)
+				{
+					app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneMenu, 60.0f);
+					app->sceneFloor1->pause = false;
+				}
+
 				app->map->Disable();
 				app->particleManager->Disable();
 				app->entityManager->Disable();
 				app->hud->Disable();
-				app->sceneVillage->pause = false;
+				
 			}
 			else if (exitButton->state == GuiControlState::FOCUSED) {
 				if (app->sceneMenu->fxHoverPlayed == false)
