@@ -33,7 +33,7 @@
 		<!-- Player -->
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 		
-		<dialogTrigger x="600" y="450" texturepath="Assets/Textures/player5.png"  facetexturepath="Assets/Textures/player2_face.png" name="La abuela" repeat="true">
+		<dialogTrigger x="600" y="450"  name="La abuela" repeat="true">
 		  <sentences>
 			  <sentence text="Uy nene, no veas como refresca"/>
 			  <sentence text="ponte algo de abrigo que vas a pillar frío"/>
