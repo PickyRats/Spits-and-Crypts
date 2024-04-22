@@ -80,7 +80,7 @@
     </ClCompile>
     <ClCompile Include="Source\DialogTriggerEntity.cpp">
       <Filter>Modules\UI\Dialog</Filter>
-    </ClInclude>
+    </ClCompile>
     <ClCompile Include="Source\SceneCombat.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
