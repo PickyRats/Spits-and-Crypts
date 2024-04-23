@@ -91,7 +91,9 @@ bool SceneCombat::Start()
 	players[0] = app->map->player;
 	players[1] = app->map->player2;
 	app->map->player2->isVisible = true;
-	app->map->player2->position = { 0, 576 };
+  app->map->player2->position = { 0, 576 };
+
+	currentEntity = players[currentPlayerIndex];
 	return true;
 }
 
@@ -452,6 +454,7 @@ void SceneCombat::ChangeTurn()
 		app->map->pathfinding->CreatePath(app->map->WorldToMap(enemies[currentEnemyIndex]->position.x, enemies[currentEnemyIndex]->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 		if (players[currentPlayerIndex + 1] != nullptr && !players[currentPlayerIndex + 1]->isDead) currentPlayerIndex++;
 		else currentPlayerIndex = 0;
+		currentEntity = enemies[currentEnemyIndex];
 	}
 	else
 	{
@@ -466,6 +469,7 @@ void SceneCombat::ChangeTurn()
 		app->map->pathfinding->CreatePath(app->map->WorldToMap(players[currentPlayerIndex]->position.x, players[currentPlayerIndex]->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 		if (enemies[currentEnemyIndex + 1] != nullptr && !enemies[currentEnemyIndex + 1]->isDead) currentEnemyIndex++;
 		else currentEnemyIndex = 0;
+		currentEntity = players[currentPlayerIndex];
 	}
 
 	isPlayerTurn = !isPlayerTurn;
