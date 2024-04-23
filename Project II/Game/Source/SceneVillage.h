@@ -62,6 +62,7 @@ public:
 private:
 	SDL_Texture* backgroundTexture;
 	SDL_Texture* backgroundTexture2;
+	SDL_Texture* aldea;
 	SDL_Rect bg;
 	float textPosX, textPosY = 0;
 	uint texW, texH;

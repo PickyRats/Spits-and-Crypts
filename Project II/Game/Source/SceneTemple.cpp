@@ -80,6 +80,9 @@ bool SceneTemple::Start()
 	textPosX = (float)windowW / 2 - (float)texW / 2;
 	textPosY = (float)windowH / 2 - (float)texH / 2;
 
+	temple = app->tex->Load("Assets/Textures/Screens/templo.png");
+
+
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
@@ -96,7 +99,7 @@ bool SceneTemple::PreUpdate()
 // Called each loop iteration
 bool SceneTemple::Update(float dt)
 {
-	/*app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);*/
+	app->render->DrawTexture(temple, 50, 50, NULL, SDL_FLIP_NONE, 1);
 
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;
@@ -133,6 +136,7 @@ bool SceneTemple::CleanUp()
 	LOG("Freeing scene");
 
 	app->map->Disable();
+	app->tex->UnLoad(temple);
 	return true;
 }
 

@@ -115,6 +115,7 @@
 		<!-- Scene -->
 		<map path="Assets/Maps/" name="Map_OasisdelFaraon.tmx"/>
 
+		<taberna texturepath="Assets/Textures/Screens/taberna.png"/>
 		<!-- Player -->
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 		
@@ -141,7 +142,9 @@
 	<!-- sceneTemple -->
 	<sceneTemple>
 		<!-- Scene -->
+		
 		<map path="Assets/Maps/" name="Map_Temple.tmx"/>
+
     <!-- Music -->
 		<TempleMusic path="Assets/Audio/Music/temple_Music.ogg" fadeTime="2" fadeOutTime="2"/>
 

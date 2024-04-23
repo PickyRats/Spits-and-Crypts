@@ -90,6 +90,8 @@ bool SceneVillage::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
+	aldea = app->tex->Load("Assets/Textures/Screens/aldea.png");
+
 	app->audio->PlayMusic(configNode.child("villageAmbient").attribute("path").as_string());
 	return true;
 }
@@ -103,7 +105,7 @@ bool SceneVillage::PreUpdate()
 // Called each loop iteration
 bool SceneVillage::Update(float dt)
 {
-	/*app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);*/
+	app->render->DrawTexture(aldea, -5, 0, NULL, SDL_FLIP_NONE, 1);
 
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;
@@ -140,6 +142,7 @@ bool SceneVillage::CleanUp()
 	LOG("Freeing scene");
 
 	app->map->Disable();
+	app->tex->UnLoad(aldea);
 	return true;
 }
 
