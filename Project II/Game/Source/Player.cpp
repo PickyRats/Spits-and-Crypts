@@ -109,14 +109,15 @@ bool Player::Update(float dt)
 				{
 					if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 					{
-
 						UpMovement();
 					}
-
 					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 					{
-
 						DownMovement();
+					}
+					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE)
+					{
+						vel.y = 0;
 					}
 				}
 				//jump
@@ -252,7 +253,7 @@ void Player::WalkingSound()
 }
 void Player::Jump()
 {
-	vel.y = -speed * 2 * dt;
+	vel.y = -speed * 1.5 * dt;
 	isjumping = true;
 }
 
