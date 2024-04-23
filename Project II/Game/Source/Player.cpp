@@ -213,14 +213,14 @@ void Player::LeftMovement()
 {
 	isFacingRight = false;
 	isWalking = true;	
-	vel.x = -speed * 2 * dt;
+	vel.x = -speed * 1.5f * dt;
 }
 
 void Player::RightMovement()
 {
 	isFacingRight = true;
 	isWalking = true;
-	vel.x = speed * 2 * dt;
+	vel.x = speed * 1.5f * dt;
 }
 
 void Player::UpMovement()
