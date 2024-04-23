@@ -381,7 +381,10 @@ bool Hud::Update(float dt)
 			int index = std::round(percentage * 6);
 			if (index > 0) app->render->DrawTexture(points, 20, 20, &pointsRects[index-1]);
 			else app->render->DrawTexture(points, 20, 20, &pointsRects[0]);
-			app->render->DrawTexture(numeros, 38, 80, &numerosRects[app->sceneCombat->currentEntity->currentPoints]);
+			if (app->sceneCombat->currentEntity->currentPoints >= 1) {
+				app->render->DrawTexture(numeros, 38, 80, &numerosRects[app->sceneCombat->currentEntity->currentPoints]);
+			}
+
 			
 		}
 	}
