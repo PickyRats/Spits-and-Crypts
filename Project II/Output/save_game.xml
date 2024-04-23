@@ -5,10 +5,25 @@
 	<textures />
 	<audio />
 	<physics />
+	<sceneCombat>
+		<status status="1" />
+	</sceneCombat>
 	<sceneVillage>
 		<status status="1" />
 	</sceneVillage>
-	<:anonymous />
+	<sceneShop>
+		<status status="1" />
+	</sceneShop>
+	<sceneOasis>
+		<status status="1" />
+	</sceneOasis>
+	<sceneTemple>
+		<status status="1" />
+	</sceneTemple>
+	<sceneFloor1>
+		<status status="1" />
+	</sceneFloor1>
+	<map />
 	<entitymanager />
 	<particlemanager />
 	<hud />

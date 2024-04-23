@@ -18,7 +18,7 @@ GuiControlSlider::GuiControlSlider(uint32 id, SDL_Rect bounds, SDL_Texture* text
     canClick = true;
     drawBasic = false;
 
-    sliderPosition = bounds.x;
+    
 }
 
 GuiControlSlider::~GuiControlSlider()
@@ -28,6 +28,7 @@ GuiControlSlider::~GuiControlSlider()
 
 bool GuiControlSlider::Update(float dt)
 {
+    sliderPosition = bounds.x;
    
     if (state != GuiControlState::HIDDEN)
     {
