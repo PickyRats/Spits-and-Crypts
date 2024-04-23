@@ -383,6 +383,7 @@ bool Hud::Update(float dt)
 			if (index > 6) index = 6;
 			if (index > 0 && index <= 6) app->render->DrawTexture(points, 20, 20, &pointsRects[index-1]);
 			else app->render->DrawTexture(points, 20, 20, &pointsRects[0]);
+
 			app->render->DrawTexture(numeros, 38, 80, &numerosRects[currentPoints]);
 			
 		}
