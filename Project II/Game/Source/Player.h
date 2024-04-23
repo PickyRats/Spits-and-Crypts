@@ -41,6 +41,10 @@ public:
 
 	void RightMovement();
 
+	void UpMovement();
+
+	void DownMovement();
+
 	void Jump();
 	
 	void WalkingSound();
@@ -71,6 +75,8 @@ public:
 	bool godMode = false;
 
 	bool isjumping = false;
+
+	bool isClimbing = false;
 
 	bool doorAldea = false;
 	bool doorShop = false;
