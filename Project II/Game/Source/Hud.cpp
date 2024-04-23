@@ -535,9 +535,9 @@ bool Hud::Update(float dt)
 				app->sceneMenu->fxHoverPlayed = false;
 				app->sceneMenu->fxClickPlayed = false;
 			}
-			////FullScreen and VSync
-			//if (app->sceneMenu->fullScreen)	SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN);
-			//else SDL_SetWindowFullscreen(app->win->window, 0);
+			//FullScreen and VSync
+			if (app->sceneMenu->fullScreen)	SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN);
+			else SDL_SetWindowFullscreen(app->win->window, 0);
 
 			if (app->sceneMenu->vSync)	app->render->vsync = true;
 			else	app->render->vsync = false;
