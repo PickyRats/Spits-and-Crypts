@@ -10,6 +10,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "SceneShop.h"
+#include "SceneOasisFaraon.h"
 
 DialogTrigger::DialogTrigger() : Entity(EntityType::DIALOG_TRIGGER)
 {
@@ -56,7 +57,7 @@ bool DialogTrigger::Start() {
 
 bool DialogTrigger::Update(float dt)
 {
-	if (app->sceneShop->active && dialogScene== app->sceneShop->sceneNum)
+	if (app->sceneVillage->active && dialogScene== app->sceneVillage->sceneNum)
 	{
 		if (!physCreated)
 		{
@@ -70,12 +71,54 @@ bool DialogTrigger::Update(float dt)
 				faceTexture = app->tex->Load(faceTexturePath);
 			}
 
-			pbody = app->physics->CreateRectangleSensor(position.x, position.y, 100, 100, bodyType::KINEMATIC);
+			pbody = app->physics->CreateRectangleSensor(position.x, position.y, 80, 120, bodyType::KINEMATIC);
 			pbody->listener = this;
 			pbody->ctype = ColliderType::DIALOG_TRIGGER;
 			physCreated = true;
 		}
 		
+	}
+	else if (app->sceneShop->active && dialogScene == app->sceneShop->sceneNum)
+	{
+		if (!physCreated)
+		{
+			//initilize textures
+			if (texture != NULL)
+			{
+				texture = app->tex->Load(texturePath);
+			}
+
+			if (faceTexturePath != "") {
+				faceTexture = app->tex->Load(faceTexturePath);
+			}
+
+			pbody = app->physics->CreateRectangleSensor(position.x, position.y, 80, 120, bodyType::KINEMATIC);
+			pbody->listener = this;
+			pbody->ctype = ColliderType::DIALOG_TRIGGER;
+			physCreated = true;
+		}
+
+	}
+	else if (app->sceneOasisFaraon->active && dialogScene == app->sceneOasisFaraon->sceneNum)
+	{
+		if (!physCreated)
+		{
+			//initilize textures
+			if (texture != NULL)
+			{
+				texture = app->tex->Load(texturePath);
+			}
+
+			if (faceTexturePath != "") {
+				faceTexture = app->tex->Load(faceTexturePath);
+			}
+
+			pbody = app->physics->CreateRectangleSensor(position.x, position.y, 80, 120, bodyType::KINEMATIC);
+			pbody->listener = this;
+			pbody->ctype = ColliderType::DIALOG_TRIGGER;
+			physCreated = true;
+		}
+
 	}
 	else
 	{
