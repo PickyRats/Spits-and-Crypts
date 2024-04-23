@@ -6,6 +6,7 @@
 #include "Npcs.h"
 #include "Piezas_puzle.h"
 #include "GuiControl.h"
+#include "SceneMenu.h"
 #include "GuiControlButton.h"
 #include <vector>
 

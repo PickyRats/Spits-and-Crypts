@@ -104,7 +104,22 @@ bool Player::Update(float dt)
 					isWalking = false;
 					vel.x = 0;
 				}
-
+				//Climbing
+				if (isClimbing)
+				{
+					if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+					{
+						UpMovement();
+					}
+					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+					{
+						DownMovement();
+					}
+					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE)
+					{
+						vel.y = 0;
+					}
+				}
 				//jump
 				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !isjumping)
 				{
@@ -198,16 +213,25 @@ void Player::LeftMovement()
 {
 	isFacingRight = false;
 	isWalking = true;	
-	vel.x = -speed * 2 * dt;
+	vel.x = -speed * 1.5f * dt;
 }
 
 void Player::RightMovement()
 {
 	isFacingRight = true;
 	isWalking = true;
-	vel.x = speed * 2 * dt;
+	vel.x = speed * 1.5f * dt;
 }
 
+void Player::UpMovement()
+{
+	vel.y = -speed * 1 * dt;
+}
+
+void Player::DownMovement()
+{
+	vel.y = speed * 1 * dt;
+}
 void Player::WalkingSound()
 {
 	if (isWalking)// si el bool isWalking es true  y is walking sound playing es false se activa el sonido y se cambia el bool a true
@@ -229,7 +253,7 @@ void Player::WalkingSound()
 }
 void Player::Jump()
 {
-	vel.y = -speed * 2 * dt;
+	vel.y = -speed * 1.5 * dt;
 	isjumping = true;
 }
 
@@ -312,6 +336,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::COMBAT:
 		enterCombat = true;
 		break;
+	case ColliderType::STAIRS:
+		isClimbing = true;
+		break;
 	}
 
 }
@@ -336,6 +363,9 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::COMBAT:
 		enterCombat = false;
+		break;
+	case ColliderType::STAIRS:
+		isClimbing = false;
 		break;
 	}
 

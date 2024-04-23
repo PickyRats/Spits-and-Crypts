@@ -238,7 +238,7 @@ bool SceneCombat::Update(float dt)
 		app->map->player2->isVisible = false;
 		app->sceneFloor1->playerStartPosition = {67*64, 4*64};
 		app->map->player->CreateBody();
-		app->sceneFloor1->levelWidth = 100 * 64;
+		app->sceneFloor1->levelWidth = 110 * 64;
 		app->fade->Fade((Module*)app->sceneCombat, (Module*)app->sceneFloor1, 60.0f);
 	}
 
@@ -255,6 +255,10 @@ bool SceneCombat::PostUpdate()
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
 		pause = !pause;
 		app->hud->onSettings = false;
+		if (!pause)
+		{
+			Mix_VolumeMusic(app->sceneMenu->percentageMusic);
+		};
 	}
 
 	return ret;

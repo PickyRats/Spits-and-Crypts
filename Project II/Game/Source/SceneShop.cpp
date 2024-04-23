@@ -95,6 +95,7 @@ bool SceneShop::Start()
 // Called each loop iteration
 bool SceneShop::PreUpdate()
 {
+
 	return true;
 }
 
@@ -127,8 +128,12 @@ bool SceneShop::PostUpdate()
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
 		pause = !pause;
 		app->hud->onSettings = false;
+		if (!pause)
+		{
+			Mix_VolumeMusic(app->sceneMenu->percentageMusic);
+		};
 	}
-
+	
 	return ret;
 }
 

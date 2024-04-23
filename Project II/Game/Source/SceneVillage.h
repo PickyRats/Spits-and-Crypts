@@ -6,6 +6,7 @@
 #include "Npcs.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
+#include "SceneMenu.h"
 #include <vector>
 
 struct SDL_Texture;

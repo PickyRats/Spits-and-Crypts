@@ -41,6 +41,7 @@ enum class ColliderType {
 	ITERACTABLE,
 	ITEM,
 	ENEMY,
+	STAIRS,
 	UNKNOWN
 	// ..
 };

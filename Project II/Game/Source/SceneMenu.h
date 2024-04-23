@@ -3,8 +3,10 @@
 
 #include "Module.h"
 #include "GuiControlButton.h"
+#include "GuiControlCheckBox.h"
 #include "GuiManager.h"
 #include "GuiControl.h"
+#include "GuiControlSlider.h"
 
 struct SDL_Texture;
 
@@ -30,7 +32,8 @@ public:
 	bool fxClickPlayed = false;
 	bool fullScreen = false;
 	bool vSync = true;
-
+	int currentId= 1;
+	int percentageMusic;
 	GuiControlButton* startButton;
 	GuiControlButton* loadGameButton;
 	GuiControlButton* settingsButton;
@@ -96,9 +99,10 @@ private:
 	GuiControlButton* settingsAudioButton;
 	GuiControlButton* settingsControlsButton;
 	GuiControlButton* settingsFullScreenButton;
-	GuiControlButton* settingsVSyncButton;
-	GuiControlButton* settingsMusicButton;
-	GuiControlButton* settingsFxButton;
+	GuiControlCheckBox* settingsVSyncButton;
+	GuiControlSlider* settingsMusicButton;
+	GuiControlSlider* settingsFxButton;
+	
 
 	GuiControlButton* creditsExitButton;
 

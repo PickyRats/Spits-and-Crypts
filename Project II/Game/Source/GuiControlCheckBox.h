@@ -16,6 +16,7 @@ public:
 
 	// Called each loop iteration
 	bool Update(float dt);
+	bool pressed = false;
 
 private:
 
@@ -29,7 +30,7 @@ private:
 	SDL_Texture* textureNormal;
 	SDL_Texture* textureFocused; 
 	SDL_Texture* texturePressed;
-	bool pressed = false;	
+		
 };
 
 #endif // __GUICONTROLCHECKBOX_H__
