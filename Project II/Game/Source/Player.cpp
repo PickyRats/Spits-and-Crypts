@@ -257,6 +257,7 @@ void Player::Jump()
 
 void Player::Respaw() {
 	app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
+	health = 100;
 	isDead = false;
 }
 
