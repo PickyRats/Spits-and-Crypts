@@ -109,11 +109,11 @@ public:
 
 	bool isDead = false;
 	int health = 100;
-	int totalPoints = 5;
-	int currentPoints = 5;
+	int totalPoints = 6;
+	int currentPoints = 6;
 	int attackRange = 3;
 	bool setLoadPosition = false;
-	int attackDamage = 10;
+	int attackDamage = 40;
 };
 
 #endif // __ENTITY_H__
