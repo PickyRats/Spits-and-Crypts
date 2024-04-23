@@ -225,6 +225,7 @@
 		<Opacity texturepath="Assets/Textures/Screens/Combat/cooldownopacity.png"/>
 		<Personaje1 texturepath="Assets/Textures/Screens/Combat/fotopersonatge.png"/>
 		<Personaje2 texturepath="Assets/Textures/Screens/Combat/fotopersonatge2.png"/>
+		<numeros texturepath="Assets/Textures/Screens/Combat/numeros.png"/>
 		
 		
 	</hud>
