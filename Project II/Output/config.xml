@@ -176,10 +176,10 @@
 		</music>
 		<Floor1Music path="Assets/Audio/Music/Floor1_music.ogg" fadeTime="2" fadeOutTime="2"/>
 		
-		<Piece x="4992" y="448" texturepath="Assets/Textures/items/Piece_1.png" id="1" />
-		<Piece x="5248" y="448" texturepath="Assets/Textures/items/Piece_2.png" id="2" />
-		<Piece x="5632" y="512" texturepath="Assets/Textures/items/Piece_3.png" id="3" />
-		<Piece x="6016" y="448" texturepath="Assets/Textures/items/piece_4.png" id="4" />
+		<Piece x="4928" y="384" texturepath="Assets/Textures/items/Piece_1.png" id="1" />
+		<Piece x="5184" y="384" texturepath="Assets/Textures/items/Piece_2.png" id="2" />
+		<Piece x="5824" y="448" texturepath="Assets/Textures/items/Piece_3.png" id="3" />
+		<Piece x="6144" y="384" texturepath="Assets/Textures/items/piece_4.png" id="4" />
 	</sceneFloor1>
 	
 	<!-- Menu-->
