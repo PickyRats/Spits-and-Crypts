@@ -48,7 +48,7 @@
 		<!-- Player -->
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 				<!-- Mercante  -->
-		<npc x="970" y="500" texturepath="Assets/Textures/Npcs/mercante.png" id="7" scene="3"/>
+		<npc x="970" y="520" texturepath="Assets/Textures/Npcs/mercante.png" id="7" scene="3"/>
 	  
 		<dialogTrigger x="1024" y="576"  name="Mercante" repeat="true" scene="3">
 		  <sentences>
@@ -84,12 +84,12 @@
 		<villageAmbient path="Assets/Audio/Music/Village_ambient.ogg" fadeTime="2" fadeOutTime="2"/>
 
 		<!-- Abuela -->
-		<npc x="300" y="300" texturepath="Assets/Textures/Npcs/abuela.png" id="1" scene="1"/>
+		<npc x="300" y="580" texturepath="Assets/Textures/Npcs/abuela.png" id="1" scene="1"/>
 
 		<!-- Nieta -->
-		<npc x="550" y="550" texturepath="Assets/Textures/Npcs/nieta.png" id="2" scene="1"/>
+		<npc x="550" y="580" texturepath="Assets/Textures/Npcs/nieta.png" id="2" scene="1"/>
 	
-		<dialogTrigger x="350" y="370"  name="La abuela" repeat="true" scene="1">
+		<dialogTrigger x="350" y="640"  name="La abuela" repeat="true" scene="1">
 		  <sentences>
 			  <sentence text="Ayuda, mi nieta se ha quedado atrapada"/>
 			  <sentence text="Necesito alguien poderoso que la salve"/>
@@ -99,7 +99,7 @@
 		  </repeat_sentences>
 	  </dialogTrigger>
 
-		<dialogTrigger x="580" y="630"  name="La nieta" repeat="true" scene="1">
+		<dialogTrigger x="580" y="640"  name="La nieta" repeat="true" scene="1">
 			<sentences>
 				<sentence text="Ayuda, necesito alguien fuerte que me ayude"/>
 				<sentence text="Por favor, estoy asustada"/>
@@ -119,9 +119,9 @@
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 		
 		<!-- Tabernero  -->
-		<npc x="400" y="500" texturepath="Assets/Textures/Npcs/Anhuvihsh.png" id="8" scene="4"/>
+		<npc x="400" y="575" texturepath="Assets/Textures/Npcs/Anhuvihsh.png" id="8" scene="4"/>
 		
-		<dialogTrigger x="480" y="600"  name="Tabernero" repeat="true" scene="4">
+		<dialogTrigger x="440" y="640"  name="Tabernero" repeat="true" scene="4">
 			<sentences>
 				<sentence text="Bienvenido, vendemos todo tipo de productos"/>
 				<sentence text="Desde Arena del desierto hasta ratas disecadas"/>
@@ -146,16 +146,16 @@
 		<TempleMusic path="Assets/Audio/Music/temple_Music.ogg" fadeTime="2" fadeOutTime="2"/>
 
 		<!-- Maat -->
-		<npc x="300" y="300" texturepath="Assets/Textures/Npcs/maat.png" id="3" scene="2"/>
+		<npc x="250" y="386" texturepath="Assets/Textures/Npcs/maat.png" id="3" scene="2"/>
 
 		<!-- Toth -->
-		<npc x="550" y="550" texturepath="Assets/Textures/Npcs/toth.png" id="4" scene="2"/>
+		<npc x="500" y="392" texturepath="Assets/Textures/Npcs/toth.png" id="4" scene="2"/>
 		
 		<!-- Isis -->
-		<npc x="650" y="300" texturepath="Assets/Textures/Npcs/isis.png" id="5" scene="2"/>
+		<npc x="750" y="386" texturepath="Assets/Textures/Npcs/isis.png" id="5" scene="2"/>
 
 		<!-- Horus -->
-		<npc x="750" y="550" texturepath="Assets/Textures/Npcs/horus.png" id="6" scene="2"/>
+		<npc x="1000" y="386" texturepath="Assets/Textures/Npcs/horus.png" id="6" scene="2"/>
 	</sceneTemple>
 
   <map>
