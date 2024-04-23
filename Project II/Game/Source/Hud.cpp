@@ -52,7 +52,7 @@ bool Hud::Start()
 	Personaje1 = app->tex->Load(configNode3.child("Personaje1").attribute("texturepath").as_string());
 	Personaje2 = app->tex->Load(configNode3.child("Personaje2").attribute("texturepath").as_string());
 	Selectorazul = app->tex->Load(configNode3.child("Selectorazul").attribute("texturepath").as_string());
-	Selectornaranja = app->tex->Load(configNode3.child("selectornaranja").attribute("texturepath").as_string());
+	Selectornaranja = app->tex->Load(configNode3.child("Selectornaranja").attribute("texturepath").as_string());
 	Opacity = app->tex->Load(configNode3.child("Opacity").attribute("texturepath").as_string());
 	Cuadrojugador = app->tex->Load(configNode3.child("Cuadrojugador").attribute("texturepath").as_string());
 	numeros = app->tex->Load(configNode3.child("numeros").attribute("texturepath").as_string());
