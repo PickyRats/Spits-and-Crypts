@@ -61,12 +61,6 @@ bool DialogTrigger::Update(float dt)
 	{
 		if (!physCreated)
 		{
-			//initilize textures
-			if (texture != NULL)
-			{
-				texture = app->tex->Load(texturePath);
-			}
-
 			if (faceTexturePath != "") {
 				faceTexture = app->tex->Load(faceTexturePath);
 			}
