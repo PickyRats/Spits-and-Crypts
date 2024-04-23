@@ -45,20 +45,8 @@ bool Hud::Start()
 {
 	// Charge all textures
 	// Combat Mode UI
-	character1 = app->tex->Load(configNode3.child("character1").attribute("texturepath").as_string());
-	fuego = app->tex->Load(configNode3.child("fuego").attribute("texturepath").as_string());
-	life1 = app->tex->Load(configNode3.child("life1").attribute("texturepath").as_string());
-	life2 = app->tex->Load(configNode3.child("life2").attribute("texturepath").as_string());
-	PP = app->tex->Load(configNode3.child("PP").attribute("texturepath").as_string());
-	sword1 = app->tex->Load(configNode3.child("sword1").attribute("texturepath").as_string());
-	sword2 = app->tex->Load(configNode3.child("sword2").attribute("texturepath").as_string());
-	number14 = app->tex->Load(configNode3.child("number14").attribute("texturepath").as_string());
-	L3Move = app->tex->Load(configNode3.child("L3Move").attribute("texturepath").as_string());
-	execute = app->tex->Load(configNode3.child("execute").attribute("texturepath").as_string());
-	Xaccept = app->tex->Load(configNode3.child("Xaccept").attribute("texturepath").as_string());
-	playerverd = app->tex->Load(configNode3.child("playerverd").attribute("texturepath").as_string());
-	enemyrojo = app->tex->Load(configNode3.child("enemyrojo").attribute("texturepath").as_string());
-
+	
+	
 	vidas = app->tex->Load(configNode3.child("vidas").attribute("texturepath").as_string());
 	points = app->tex->Load(configNode3.child("points").attribute("texturepath").as_string());
 	Personaje1 = app->tex->Load(configNode3.child("Personaje1").attribute("texturepath").as_string());
@@ -374,7 +362,6 @@ bool Hud::Update(float dt)
 			////
 			// 
 			////barras vida
-			/*app->render->DrawTexture(vidas, 0, 0, SDL_Rect { 18,51 }, SDL_FLIP_NONE, 0);*/
 			
 			app->render->DrawTexture(vidas, 63, 660, &lifeRects[app->map->player->health / 10]);
 
@@ -393,32 +380,9 @@ bool Hud::Update(float dt)
 			float percentage = (float)app->sceneCombat->currentEntity->currentPoints / (float)app->sceneCombat->currentEntity->totalPoints;
 			int index = std::round(percentage * 6);
 			app->render->DrawTexture(points, 20, 20, &pointsRects[index-1]);
-			app->render->DrawTexture(numeros, 20, 60, &numerosRects[1]);
-			//currentEntity
-			//currentPoints
+			app->render->DrawTexture(numeros, 38, 80, &numerosRects[app->sceneCombat->currentEntity->currentPoints]);
 			
 
-			////
-			//
-			////Sword1
-			app->render->DrawTexture(sword1, 1210, 20, NULL, SDL_FLIP_NONE, 0);
-			////
-			//
-			////14
-			/*app->render->DrawTexture(number14, 52, 46, NULL, SDL_FLIP_NONE, 0);*/
-			////
-			// 
-			////L3Move
-			////
-			//
-			////enemyrojo
-			app->render->DrawTexture(enemyrojo, 1210, 620, NULL, SDL_FLIP_NONE, 0);
-			////
-			//
-			////playerverd
-			app->render->DrawTexture(playerverd, 1180, 620, NULL, SDL_FLIP_NONE, 0);
-			////
-			//
 		}
 	}
 	
@@ -432,6 +396,40 @@ bool Hud::Update(float dt)
 bool Hud::CleanUp()
 {
 	LOG("Freeing Hud");
+
+	app->tex->UnLoad(vidas);
+	app->tex->UnLoad(points);
+	app->tex->UnLoad(Personaje1);
+	app->tex->UnLoad(Personaje2);
+	app->tex->UnLoad(Selectorazul);
+	app->tex->UnLoad(Selectornaranja);
+	app->tex->UnLoad(Opacity);
+	app->tex->UnLoad(Cuadrojugador);
+	app->tex->UnLoad(numeros);
+	app->tex->UnLoad(pause);
+	app->tex->UnLoad(exitNormal);
+	app->tex->UnLoad(exitHover);
+	app->tex->UnLoad(exitClick);
+	app->tex->UnLoad(resumeNormal);
+	app->tex->UnLoad(resumeHover);
+	app->tex->UnLoad(resumeClick);
+	app->tex->UnLoad(settingsNormal);
+	app->tex->UnLoad(settingsHover);
+	app->tex->UnLoad(settingsClick);
+	app->tex->UnLoad(backToTitleNormal);
+	app->tex->UnLoad(backToTitleHover);
+	app->tex->UnLoad(backToTitleClick);
+	app->tex->UnLoad(settingsExitNormal);
+	app->tex->UnLoad(settingsExitHover);
+	app->tex->UnLoad(settingsExitClick);
+	app->tex->UnLoad(settingsReturnNormal);
+	app->tex->UnLoad(settingsReturnHover);
+	app->tex->UnLoad(settingsReturnClick);
+	app->tex->UnLoad(settingsTick);
+	app->tex->UnLoad(settingsSlider);
+	app->tex->UnLoad(settingsBoxNormal);
+	app->tex->UnLoad(settingsBoxHover);
+	app->tex->UnLoad(settings);
 
 	return true;
 }
