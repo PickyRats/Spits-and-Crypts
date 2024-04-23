@@ -52,7 +52,7 @@
 	  
 		<dialogTrigger x="1024" y="576"  name="Mercante" repeat="true" scene="3">
 		  <sentences>
-			  <sentence text="Bienvenido al badulaque"/>
+			  <sentence text="Bienvenido a mi humilde rinconcillo"/>
 			  <sentence text="Si quieres algo, no lo robes"/>
 		  </sentences>
 		  <repeat_sentences>
@@ -92,20 +92,20 @@
 		<dialogTrigger x="350" y="370"  name="La abuela" repeat="true" scene="1">
 		  <sentences>
 			  <sentence text="Ayuda, mi nieta se ha quedado atrapada"/>
-			  <sentence text="Necesito que vayas a Guarroman y la salves"/>
+			  <sentence text="Necesito alguien poderoso que la salve"/>
 		  </sentences>
 		  <repeat_sentences>
-			  <sentence text="Date prisa!"/>
+			  <sentence text="Basta de chachara,date prisa!"/>
 		  </repeat_sentences>
 	  </dialogTrigger>
 
 		<dialogTrigger x="580" y="630"  name="La nieta" repeat="true" scene="1">
 			<sentences>
-				<sentence text="ayuda Pedro, necesito que me apruebes"/>
-				<sentence text="Por favor, soy bueni alumni"/>
+				<sentence text="Ayuda, necesito alguien fuerte que me ayude"/>
+				<sentence text="Por favor, estoy asustada"/>
 			</sentences>
 			<repeat_sentences>
-				<sentence text="U FOCKIN NIGGA"/>
+				<sentence text="No te ha quedado claro ?"/>
 			</repeat_sentences>
 		</dialogTrigger>
 	</sceneVillage>
@@ -123,12 +123,12 @@
 		
 		<dialogTrigger x="480" y="600"  name="Tabernero" repeat="true" scene="4">
 			<sentences>
-				<sentence text="Agua, cerveza cocacola"/>
-				<sentence text="fanta naranja, fanta limon"/>
-				<sentence text="fanta de taronja y fanta de Shimaaaaa"/>
+				<sentence text="Bienvenido, vendemos todo tipo de productos"/>
+				<sentence text="Desde Arena del desierto hasta ratas disecadas"/>
+				<sentence text="Y a buen precio jeje"/>
 			</sentences>
 			<repeat_sentences>
-				<sentence text="BORRACHO"/>
+				<sentence text="Como era la canción esa, Tunak tunak..."/>
 			</repeat_sentences>
 		</dialogTrigger>
     <!-- Music -->
