@@ -59,65 +59,17 @@ bool DialogTrigger::Update(float dt)
 {
 	if (app->sceneVillage->active && dialogScene== app->sceneVillage->sceneNum)
 	{
-		if (!physCreated)
-		{
-			//initilize textures
-			if (texture != NULL)
-			{
-				texture = app->tex->Load(texturePath);
-			}
-
-			if (faceTexturePath != "") {
-				faceTexture = app->tex->Load(faceTexturePath);
-			}
-
-			pbody = app->physics->CreateRectangleSensor(position.x, position.y, 80, 120, bodyType::KINEMATIC);
-			pbody->listener = this;
-			pbody->ctype = ColliderType::DIALOG_TRIGGER;
-			physCreated = true;
-		}
+		if (!physCreated) CreateCollider();
 		
 	}
 	else if (app->sceneShop->active && dialogScene == app->sceneShop->sceneNum)
 	{
-		if (!physCreated)
-		{
-			//initilize textures
-			if (texture != NULL)
-			{
-				texture = app->tex->Load(texturePath);
-			}
-
-			if (faceTexturePath != "") {
-				faceTexture = app->tex->Load(faceTexturePath);
-			}
-
-			pbody = app->physics->CreateRectangleSensor(position.x, position.y, 80, 120, bodyType::KINEMATIC);
-			pbody->listener = this;
-			pbody->ctype = ColliderType::DIALOG_TRIGGER;
-			physCreated = true;
-		}
+		if (!physCreated) CreateCollider();
 
 	}
 	else if (app->sceneOasisFaraon->active && dialogScene == app->sceneOasisFaraon->sceneNum)
 	{
-		if (!physCreated)
-		{
-			//initilize textures
-			if (texture != NULL)
-			{
-				texture = app->tex->Load(texturePath);
-			}
-
-			if (faceTexturePath != "") {
-				faceTexture = app->tex->Load(faceTexturePath);
-			}
-
-			pbody = app->physics->CreateRectangleSensor(position.x, position.y, 80, 120, bodyType::KINEMATIC);
-			pbody->listener = this;
-			pbody->ctype = ColliderType::DIALOG_TRIGGER;
-			physCreated = true;
-		}
+		if (!physCreated) CreateCollider();
 
 	}
 	else
@@ -212,4 +164,12 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 		}
 		break;
 	}
+}
+
+void DialogTrigger::CreateCollider()
+{
+	pbody = app->physics->CreateRectangleSensor(position.x, position.y, 80, 120, bodyType::KINEMATIC);
+	pbody->listener = this;
+	pbody->ctype = ColliderType::DIALOG_TRIGGER;
+	physCreated = true;
 }

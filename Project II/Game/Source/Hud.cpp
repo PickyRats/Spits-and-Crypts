@@ -56,7 +56,7 @@ bool Hud::Start()
 	Personaje1 = app->tex->Load(configNode3.child("Personaje1").attribute("texturepath").as_string());
 	Personaje2 = app->tex->Load(configNode3.child("Personaje2").attribute("texturepath").as_string());
 	Selectorazul = app->tex->Load(configNode3.child("Selectorazul").attribute("texturepath").as_string());
-	Selectornaranja = app->tex->Load(configNode3.child("selectornaranja").attribute("texturepath").as_string());
+	Selectornaranja = app->tex->Load(configNode3.child("Selectornaranja").attribute("texturepath").as_string());
 	Opacity = app->tex->Load(configNode3.child("Opacity").attribute("texturepath").as_string());
 	Cuadrojugador = app->tex->Load(configNode3.child("Cuadrojugador").attribute("texturepath").as_string());
 	numeros = app->tex->Load(configNode3.child("numeros").attribute("texturepath").as_string());
@@ -566,8 +566,9 @@ bool Hud::Update(float dt)
 			
 			app->render->DrawTexture(Cuadrojugador, 10, 660, NULL, SDL_FLIP_NONE, 0);
 			app->render->DrawTexture(Cuadrojugador, 70, 660, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(Selectorazul, 10, 660, NULL, SDL_FLIP_NONE, 0);
-			
+			if (app->sceneCombat->currentPlayerIndex == 0) app->render->DrawTexture(Selectorazul, 10, 660, NULL, SDL_FLIP_NONE, 0);
+			else if (app->sceneCombat->currentPlayerIndex == 1) app->render->DrawTexture(Selectorazul, 70, 660, NULL, SDL_FLIP_NONE, 0);
+
 			app->render->DrawTexture(Personaje1, 20, 660, NULL, SDL_FLIP_NONE, 0);
 			app->render->DrawTexture(Personaje2, 80, 660, NULL, SDL_FLIP_NONE, 0);
 			////
@@ -587,14 +588,18 @@ bool Hud::Update(float dt)
 			app->render->DrawTexture(Selectornaranja, 1210, 660, NULL, SDL_FLIP_NONE, 0);
 			////
 			//
-			float percentage = (float)app->sceneCombat->currentEntity->currentPoints / (float)app->sceneCombat->currentEntity->totalPoints;
-			int index = std::round(percentage * 6);
-			app->render->DrawTexture(points, 20, 20, &pointsRects[index-1]);
-			app->render->DrawTexture(numeros, 38, 80, &numerosRects[app->sceneCombat->currentEntity->currentPoints]);
+			int currentPoints = app->sceneCombat->currentEntity->totalPoints - (app->sceneCombat->tilesCount - 1);
+			float percentage = (float)currentPoints / (float)app->sceneCombat->currentEntity->totalPoints;
+			int index = std::round((percentage + 0.1) * 6);
+			if (index > 6) index = 6;
+			if (index > 0 && index <= 6) app->render->DrawTexture(points, 20, 20, &pointsRects[index-1]);
+			else app->render->DrawTexture(points, 20, 20, &pointsRects[0]);
+
+			app->render->DrawTexture(numeros, 38, 80, &numerosRects[currentPoints]);
 			
 		}
 	}
-	
+
 	return true;
 }
 
