@@ -94,6 +94,10 @@ public:
 	Enemy* enemy[2];
 
 	Entity* currentEntity = nullptr;
+
+	int currentPlayerIndex = 0;
+	int currentEnemyIndex = 0;
+
 private:
 	SDL_Texture* backgroundTexture;
 	SDL_Texture* backgroundTexture2;
@@ -116,8 +120,7 @@ private:
 	bool isPlayerTurn = true;
 	Entity* players[5];
 	Entity* enemies[5];
-	int currentPlayerIndex = 0;
-	int currentEnemyIndex = 0;
+
 	bool enemyCanAttack = false;
 };
 

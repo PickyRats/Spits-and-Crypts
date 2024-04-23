@@ -161,7 +161,7 @@
   <map>
 		<!-- Player -->
 		<player x="64" y="576" texturepath="Assets/Textures/player.png" speed="0.2f" id="1"/>
-		<player2 x="0" y="576" texturepath="Assets/Textures/player.png" speed="0.2f" id="2"/>
+		<player2 x="0" y="576" texturepath="Assets/Textures/player2.png" speed="0.2f" id="2"/>
 	</map>
 	
 	<!-- sceneFloor1 -->

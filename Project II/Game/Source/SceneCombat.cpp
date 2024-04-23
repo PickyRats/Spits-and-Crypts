@@ -91,7 +91,7 @@ bool SceneCombat::Start()
 	players[0] = app->map->player;
 	players[1] = app->map->player2;
 	app->map->player2->isVisible = true;
-  app->map->player2->position = { 0, 576 };
+	app->map->player2->position = { 0, 576 };
 
 	currentEntity = players[currentPlayerIndex];
 	return true;
@@ -220,7 +220,8 @@ bool SceneCombat::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !isMoving)
 	{
-		players[currentPlayerIndex]->currentPoints -= tilesCount;
+		if (tilesCount <= players[currentPlayerIndex]->currentPoints) players[currentPlayerIndex]->currentPoints -= (tilesCount-1);
+		else players[currentPlayerIndex]->currentPoints = 0;
 		MovePlayer(players[currentPlayerIndex]);
 	}
 
@@ -383,6 +384,7 @@ void SceneCombat::UpdatePath()
 	}
 
 	tilesCount = path->Count();
+	LOG("Tiles count: %d", tilesCount);
 
 	//Draw the cursor
 	app->render->DrawTexture(cursorTexture, tilePosition.x, tilePosition.y);
