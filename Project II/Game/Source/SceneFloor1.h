@@ -6,6 +6,7 @@
 #include "Npcs.h"
 #include "Piezas_puzle.h"
 #include "GuiControl.h"
+#include "SceneMenu.h"
 #include "GuiControlButton.h"
 #include <vector>
 
@@ -66,6 +67,7 @@ public:
 private:
 	SDL_Texture* backgroundTexture;
 	SDL_Texture* backgroundTexture2;
+	SDL_Texture* floor1background;
 	SDL_Rect bg;
 	float textPosX, textPosY = 0;
 	uint texW, texH;

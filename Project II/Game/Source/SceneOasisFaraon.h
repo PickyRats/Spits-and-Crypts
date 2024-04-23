@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
+#include "SceneMenu.h"
 #include <vector>
 
 struct SDL_Texture;
@@ -60,7 +61,7 @@ public:
 
 private:
 	SDL_Texture* backgroundTexture;
-	SDL_Texture* backgroundTexture2;
+	SDL_Texture* taberna;
 	SDL_Rect bg;
 	float textPosX, textPosY = 0;
 	uint texW, texH;

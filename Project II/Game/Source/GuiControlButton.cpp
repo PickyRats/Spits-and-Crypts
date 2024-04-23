@@ -3,6 +3,7 @@
 #include "App.h"
 #include "Audio.h"
 #include "GuiManager.h"
+#include "SceneMenu.h"
 
 GuiControlButton::GuiControlButton(uint32 id, SDL_Rect bounds, SDL_Texture* textureDisabled, SDL_Texture* textureNormal, SDL_Texture* textureFocused, SDL_Texture* texturePressed) : GuiControl(GuiControlType::BUTTON, id)
 {
@@ -31,11 +32,11 @@ bool GuiControlButton::Update(float dt)
 
 		//If the position of the mouse if inside the bounds of the button 
 		if (state != GuiControlState::DISABLED) {
-			if (mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h) {
+			if (/*mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h ||*/ app->sceneMenu->currentId == id) {
 
 				state = GuiControlState::FOCUSED;
 
-				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
+				if (/*app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN ||*/ (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)) {
 					state = GuiControlState::PRESSED;
 				}
 

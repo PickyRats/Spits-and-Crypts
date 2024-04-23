@@ -76,6 +76,9 @@ bool SceneOasisFaraon::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
+	//carga assets
+	taberna = app->tex->Load("Assets/Textures/Screens/taberna.png");
+
 	app->audio->PlayMusic(configNodeOasis.child("OasisMusic").attribute("path").as_string());
 
 	return true;
@@ -90,7 +93,7 @@ bool SceneOasisFaraon::PreUpdate()
 // Called each loop iteration
 bool SceneOasisFaraon::Update(float dt)
 {
-	/*app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);*/
+	app->render->DrawTexture(taberna, 100, 400, NULL, SDL_FLIP_NONE, 0);
 
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;
@@ -116,8 +119,12 @@ bool SceneOasisFaraon::PostUpdate()
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
 		pause = !pause;
 		app->hud->onSettings = false;
+		if (!pause)
+		{
+			Mix_VolumeMusic(app->sceneMenu->percentageMusic);
+		};
 	}
-
+	
 	return ret;
 }
 
@@ -127,6 +134,7 @@ bool SceneOasisFaraon::CleanUp()
 	LOG("Freeing scene");
 
 	app->map->Disable();
+	app->tex->UnLoad(taberna);
 	return true;
 }
 

@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "GuiControlButton.h"
+#include "GuiControlCheckBox.h"
 #include "GuiManager.h"
 #include "GuiControl.h"
 #include "Timer.h"
@@ -30,6 +31,7 @@ public:
 	bool playerDeadHud = false;
 	bool spacePressed = false;
 	bool onSettings = false;
+	int currentId = 0;
 private:
 
 
@@ -76,6 +78,19 @@ private:
 	SDL_Texture* backToTitleClick;
 
 	//Settings
+	SDL_Texture* settingsControlsButtonNormal;
+	SDL_Texture* settingsControlsButtonHover;
+
+	SDL_Texture* settingsAudioButtonNormal;
+	SDL_Texture* settingsAudioButtonHover;
+
+	SDL_Texture* settingsOptionsButtonNormal;
+	SDL_Texture* settingsOptionsButtonHover;
+
+	SDL_Texture* settingsAudioPanel;
+	SDL_Texture* settingsControls;
+	SDL_Texture* settingsOptionsPanel;
+
 	SDL_Texture* settingsExitNormal;
 	SDL_Texture* settingsExitHover;
 	SDL_Texture* settingsExitClick;
@@ -119,9 +134,17 @@ private:
 	GuiControlButton* settingsExitButton;
 	GuiControlButton* settingsReturnButton;
 	GuiControlButton* settingsMusicButton;
+	GuiControlButton* settingsOptionsButton;
 	GuiControlButton* settingsFxButton;
 	GuiControlButton* settingsFullScreenButton;
-	GuiControlButton* settingsVSyncButton;
+	GuiControlCheckBox* settingsVSyncButton;
+	GuiControlButton* settingsControlsButton;
+	GuiControlButton* settingsAudioButton;
+
+	bool onSettingsControls = false;
+	bool onSettingsAudio = true;
+	bool onSettingsOptions = false;
+	bool buttonsActivated = false;
 };
 
 #endif // __HUD_H__

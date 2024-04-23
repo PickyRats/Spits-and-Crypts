@@ -78,6 +78,9 @@ bool SceneCombat::Start()
 	selectedTileTexture = app->tex->Load("Assets/Textures/selected_tile.png");
 	cursorTexture = app->tex->Load("Assets/Textures/selection_cursor.png");
 
+	//carga assets
+	floor1background = app->tex->Load("Assets/Textures/Screens/floor1background.png");
+
 	app->map->player->DestroyBody();
 	app->map->player->position = { 64, 576 };
 
@@ -106,7 +109,7 @@ bool SceneCombat::PreUpdate()
 // Called each loop iteration
 bool SceneCombat::Update(float dt)
 {
-	//app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);
+	app->render->DrawTexture(floor1background, 0, 0, NULL, SDL_FLIP_NONE, 1);
 
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;
@@ -263,7 +266,7 @@ bool SceneCombat::Update(float dt)
 		app->map->player2->isVisible = false;
 		app->sceneFloor1->playerStartPosition = {67*64, 4*64};
 		app->map->player->CreateBody();
-		app->sceneFloor1->levelWidth = 100 * 64;
+		app->sceneFloor1->levelWidth = 110 * 64;
 		app->fade->Fade((Module*)app->sceneCombat, (Module*)app->sceneFloor1, 60.0f);
 	}
 
@@ -280,6 +283,10 @@ bool SceneCombat::PostUpdate()
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
 		pause = !pause;
 		app->hud->onSettings = false;
+		if (!pause)
+		{
+			Mix_VolumeMusic(app->sceneMenu->percentageMusic);
+		};
 	}
 
 	return ret;
@@ -291,6 +298,7 @@ bool SceneCombat::CleanUp()
 	LOG("Freeing scene");
 
 	app->map->Disable();
+	app->tex->UnLoad(floor1background);
 	return true;
 }
 
