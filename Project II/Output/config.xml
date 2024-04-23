@@ -48,27 +48,17 @@
 		<!-- Player -->
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 				<!-- Mercante  -->
-		<npc x="1024" y="576" texturepath="Assets/Textures/Npcs/mercante.png" id="7" scene="3"/>
-  
-		<dialogTrigger x="600" y="450"  name="La abuela" repeat="true">
+		<npc x="970" y="500" texturepath="Assets/Textures/Npcs/mercante.png" id="7" scene="3"/>
+	  
+		<dialogTrigger x="1024" y="576"  name="Mercante" repeat="true" scene="3">
 		  <sentences>
-			  <sentence text="Uy nene, no veas como refresca"/>
-			  <sentence text="ponte algo de abrigo que vas a pillar frío"/>
+			  <sentence text="Bienvenido al badulaque"/>
+			  <sentence text="Si quieres algo, no lo robes"/>
 		  </sentences>
 		  <repeat_sentences>
-			  <sentence text="que te abrigues!"/>
+			  <sentence text="Te estoy vigilando..."/>
 		  </repeat_sentences>
 	  </dialogTrigger>
-
-		<dialogTrigger x="800" y="450"  name="La nieta" repeat="true">
-			<sentences>
-				<sentence text="ayuda Pedro, necesito que me apruebes"/>
-				<sentence text="Por favor, me porto bien"/>
-			</sentences>
-			<repeat_sentences>
-				<sentence text="U FOCKIN NIGGA"/>
-			</repeat_sentences>
-		</dialogTrigger>
     
 	</sceneShop>
   
@@ -98,6 +88,26 @@
 
 		<!-- Nieta -->
 		<npc x="550" y="550" texturepath="Assets/Textures/Npcs/nieta.png" id="2" scene="1"/>
+	
+		<dialogTrigger x="350" y="370"  name="La abuela" repeat="true" scene="1">
+		  <sentences>
+			  <sentence text="Ayuda, mi nieta se ha quedado atrapada"/>
+			  <sentence text="Necesito que vayas a Guarroman y la salves"/>
+		  </sentences>
+		  <repeat_sentences>
+			  <sentence text="Date prisa!"/>
+		  </repeat_sentences>
+	  </dialogTrigger>
+
+		<dialogTrigger x="580" y="630"  name="La nieta" repeat="true" scene="1">
+			<sentences>
+				<sentence text="ayuda Pedro, necesito que me apruebes"/>
+				<sentence text="Por favor, soy bueni alumni"/>
+			</sentences>
+			<repeat_sentences>
+				<sentence text="U FOCKIN NIGGA"/>
+			</repeat_sentences>
+		</dialogTrigger>
 	</sceneVillage>
 
 	<!-- sceneOasis -->
@@ -109,7 +119,18 @@
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 		
 		<!-- Tabernero  -->
-		<npc x="300" y="300" texturepath="Assets/Textures/Npcs/Anhuvihsh.png" id="8" scene="4"/>
+		<npc x="400" y="500" texturepath="Assets/Textures/Npcs/Anhuvihsh.png" id="8" scene="4"/>
+		
+		<dialogTrigger x="480" y="600"  name="Tabernero" repeat="true" scene="4">
+			<sentences>
+				<sentence text="Agua, cerveza cocacola"/>
+				<sentence text="fanta naranja, fanta limon"/>
+				<sentence text="fanta de taronja y fanta de Shimaaaaa"/>
+			</sentences>
+			<repeat_sentences>
+				<sentence text="BORRACHO"/>
+			</repeat_sentences>
+		</dialogTrigger>
     <!-- Music -->
 		<music>
 		</music>
@@ -230,21 +251,17 @@
 		<settingsSlider texturepath="Assets/Textures/Screens/More/slider.png"/>
 		<settings texturepath="Assets/Textures/Screens/More/settings.png"/>
 
-		<character1 texturepath="Assets/Textures/Screens/More/character1.png"/>
-		<fuego texturepath="Assets/Textures/Screens/More/fuego.png"/>
-		<life1 texturepath="Assets/Textures/Screens/More/life1.png"/>
-		<life2 texturepath="Assets/Textures/Screens/More/life2.png"/>
-		<PP texturepath="Assets/Textures/Screens/More/PP.png"/>
-		<sword1 texturepath="Assets/Textures/Screens/More/sword1.png"/>
-		<sword2 texturepath="Assets/Textures/Screens/More/sword2.png"/>
-		<number14 texturepath="Assets/Textures/Screens/More/14.png"/>
-		<L3Move texturepath="Assets/Textures/Screens/More/L3Move.png"/>
-		<execute texturepath="Assets/Textures/Screens/More/4execute.png"/>
-		<Xaccept texturepath="Assets/Textures/Screens/More/Xaccept.png"/>
-		<playerverd texturepath="Assets/Textures/Screens/More/playerverd.png"/>
-		<enemyrojo texturepath="Assets/Textures/Screens/More/enemyrojo.png"/>
-		<L1 texturepath="Assets/Textures/Screens/More/L1.png"/>
-		<R1 texturepath="Assets/Textures/Screens/More/R1.png"/>
+
+		<Selectorazul texturepath="Assets/Textures/Screens/Combat/selectorpersonatge.png"/>
+		<Selectornaranja texturepath="Assets/Textures/Screens/Combat/selectorhabilitatorange.png"/>
+		<points texturepath="Assets/Textures/Screens/Combat/points.png"/>
+		<vidas texturepath="Assets/Textures/Screens/Combat/vidas.png"/>
+		<Cuadrojugador texturepath="Assets/Textures/Screens/Combat/habilitatijugador.png"/>
+		<Opacity texturepath="Assets/Textures/Screens/Combat/cooldownopacity.png"/>
+		<Personaje1 texturepath="Assets/Textures/Screens/Combat/fotopersonatge.png"/>
+		<Personaje2 texturepath="Assets/Textures/Screens/Combat/fotopersonatge2.png"/>
+		<numeros texturepath="Assets/Textures/Screens/Combat/numeros.png"/>
+		
 		
 	</hud>
 

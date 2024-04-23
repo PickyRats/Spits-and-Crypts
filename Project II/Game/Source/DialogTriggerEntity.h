@@ -60,6 +60,8 @@ private:
 	//ya se a activado minimo una vez
 	bool repeatDialog = false;
 	bool played = false;
+	bool physCreated = false;
+	int dialogScene;
 
 	//Lista de dialogos a repetir
 	List<Dialog*> dialoguesRepeat;

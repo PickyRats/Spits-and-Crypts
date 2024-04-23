@@ -32,22 +32,23 @@ public:
 	bool onSettings = false;
 private:
 
-	//HUD EXPLORACION
-	SDL_Texture* character1;
-	SDL_Texture* fuego;
-	SDL_Texture* life1;
-	SDL_Texture* life2;
-	SDL_Texture* PP;
-	SDL_Texture* sword1;
-	SDL_Texture* sword2;
-	SDL_Texture* number14;
-	SDL_Texture* L3Move;
-	SDL_Texture* execute;
-	SDL_Texture* Xaccept;
-	SDL_Texture* playerverd;
-	SDL_Texture* enemyrojo;
-	SDL_Texture* L1;
-	SDL_Texture* R1;
+
+	//PUNTOS
+
+	SDL_Texture* vidas;
+	SDL_Texture* points;
+	SDL_Texture* Personaje1;
+	SDL_Texture* Personaje2;
+	SDL_Texture* Selectorazul;
+	SDL_Texture* Selectornaranja;
+	SDL_Texture* Opacity;
+	SDL_Texture* Cuadrojugador;
+	SDL_Texture* numeros;
+
+	//SDL_Rect rect = { 0, 0, 9, 51 };
+	SDL_Rect lifeRects[11] = { {0, 0, 9, 51}, { 9, 0, 9, 51}, { 18, 0, 9, 51}, { 27, 0, 9, 51}, { 36, 0, 9, 51}, { 45, 0, 9, 51}, { 54, 0, 9, 51}, { 63, 0, 9, 51}, { 72, 0, 9, 51}, { 81, 0, 9, 51}, {90, 0, 9 ,51} };
+	SDL_Rect pointsRects[6] = { {0, 0, 82, 121}, {82, 0, 82, 121}, {164, 0, 82, 121}, {246, 0, 82, 121}, {328, 0, 82, 121}, {410, 0, 82, 121} };
+	SDL_Rect numerosRects[9] = { {0, 0, 37, 37}, {37, 0, 37, 37}, {74, 0, 37, 37}, {74, 0, 37, 37}, {145, 0, 37, 37}, {182, 0, 37, 37}, {219, 0, 37, 37}, {256, 0, 37, 37}, {293, 0, 37, 37} };
 
 
 

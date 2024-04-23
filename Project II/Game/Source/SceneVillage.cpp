@@ -46,6 +46,12 @@ bool SceneVillage::Awake(pugi::xml_node& config)
 		npc->parameters = itemNode;
 	}
 
+	for (pugi::xml_node itemNode = config.child("dialogTrigger"); itemNode; itemNode = itemNode.next_sibling("dialogTrigger"))
+	{
+		DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER);
+		dialogTrigger->parameters = itemNode;
+	}
+
 	//if (config.child("map")) {
 	//	//Get the map name from the config file and assigns the value in the module
 	//	app->map->mapName = config.child("map").attribute("name").as_string();

@@ -92,6 +92,8 @@ public:
 	int maxTiles = 12;
 
 	Enemy* enemy[2];
+
+	Entity* currentEntity = nullptr;
 private:
 	SDL_Texture* backgroundTexture;
 	SDL_Texture* backgroundTexture2;
