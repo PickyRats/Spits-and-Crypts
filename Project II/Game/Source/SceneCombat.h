@@ -126,6 +126,8 @@ private:
 	bool enemyCanAttack = false;
 
 	int enemyAttackIndex = 0;
+
+	bool startEnemyTurn = false;
 };
 
 #endif // __SCENECOMBAT_H__

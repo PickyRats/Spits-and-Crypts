@@ -174,8 +174,9 @@ bool SceneCombat::Update(float dt)
 			if (pos.y > tiles[i - 1].position.y) tiles[i] = { pos, 4 };
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || startEnemyTurn)
 		{
+			startEnemyTurn = false;
 			tilesCount = path->Count();
 			app->map->pathfinding->ClearLastPath();
 			int nearestPlayer = 0;
@@ -255,7 +256,7 @@ bool SceneCombat::Update(float dt)
 	else if (!isPlayerTurn && isMoving) MovePlayer(enemies[currentEnemyIndex]);
 
 	// end combat
-	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN || (enemies[0]->isDead && enemies[1]->isDead))
 	{
 		app->map->player->isCombat = false;
 		app->map->player2->isCombat = false;
@@ -484,6 +485,7 @@ void SceneCombat::ChangeTurn()
 		if (players[currentPlayerIndex + 1] != nullptr && !players[currentPlayerIndex + 1]->isDead) currentPlayerIndex++;
 		else currentPlayerIndex = 0;
 		currentEntity = enemies[currentEnemyIndex];
+		startEnemyTurn = true;
 	}
 	else
 	{
