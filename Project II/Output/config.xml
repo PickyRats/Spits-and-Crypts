@@ -168,6 +168,9 @@
 	<sceneFloor1>
 		<!-- Scene -->
 		<map path="Assets/Maps/" name="Map_floor_1.tmx"/>
+		
+		<floor1background texturepath="Assets/Textures/Screens/floor1background.png"/>
+		
 		<!-- Music -->
 		<music>
 		</music>
