@@ -181,7 +181,7 @@ private:
 	int endMapHeight = 12;
 	int startMapWidth = 45;
 	int endMapWidth = 0;
-	int tilesToLoad = 55;
+	int tilesToLoad = 22;
 	int tilesSize = 64;
 };
 

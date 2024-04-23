@@ -69,10 +69,8 @@ bool Player::Update(float dt)
 	{
 		isDead = true;
 	}
-	if (isDead)
-	{
-		Respaw();
-	}
+	if (isDead && !isCombat) Respaw();
+
 	if (isVisible)
 	{
 		if (!isDead && !isCombat)

@@ -119,10 +119,42 @@ bool SceneCombat::Update(float dt)
 
 	if (isPlayerTurn)
 	{
-		maxTiles = 12;
-		UpdatePath();
+		if (!playerCanAttack)
+		{
+			maxTiles = 12;
+			UpdatePath();
 
-		SelectTiles();
+			SelectTiles();
+
+			if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !isMoving)
+			{
+				if (tilesCount <= players[currentPlayerIndex]->currentPoints) players[currentPlayerIndex]->currentPoints -= (tilesCount - 1);
+				else players[currentPlayerIndex]->currentPoints = 0;
+				MovePlayer(players[currentPlayerIndex]);
+			}
+		}
+		else
+		{
+			if (enemies[enemyAttackIndex] != nullptr && !enemies[enemyAttackIndex]->isDead)
+			{
+				app->render->DrawTexture(selectedTileTexture, enemies[enemyAttackIndex]->position.x, enemies[enemyAttackIndex]->position.y);
+				if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+				{
+					int enemyDistance = app->map->pathfinding->CreatePath(app->map->WorldToMap(currentEntity->position.x, currentEntity->position.y), app->map->WorldToMap(enemies[enemyAttackIndex]->position.x, enemies[enemyAttackIndex]->position.y));
+					if (enemyDistance <= currentEntity->attackRange)
+					{
+						currentEntity->currentPoints = 0;
+						enemies[enemyAttackIndex]->health -= currentEntity->attackDamage;
+					}
+					playerCanAttack = false;
+					ChangeTurn();
+				}
+			}
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && enemyAttackIndex > 0 && !enemies[enemyAttackIndex-1]->isDead) enemyAttackIndex--;
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && enemyAttackIndex < 1 && !enemies[enemyAttackIndex+1]->isDead) enemyAttackIndex++;
+
+		}
+		
 	}
 	else
 	{
@@ -218,12 +250,6 @@ bool SceneCombat::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
-	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !isMoving)
-	{
-		if (tilesCount <= players[currentPlayerIndex]->currentPoints) players[currentPlayerIndex]->currentPoints -= (tilesCount-1);
-		else players[currentPlayerIndex]->currentPoints = 0;
-		MovePlayer(players[currentPlayerIndex]);
-	}
 
 	if (isPlayerTurn && isMoving) MovePlayer(players[currentPlayerIndex]);
 	else if (!isPlayerTurn && isMoving) MovePlayer(enemies[currentEnemyIndex]);
@@ -355,8 +381,9 @@ void SceneCombat::MovePlayer(Entity* entity)
 	else // Reset the path
 	{
 		isMoving = false;
-		entity->currentPoints = entity->totalPoints;
-		ChangeTurn();
+		if (!isPlayerTurn) ChangeTurn();
+		else if(currentEntity->currentPoints > 0) playerCanAttack = true;
+		else ChangeTurn();
 	}
 
 	// Move the player
@@ -384,7 +411,6 @@ void SceneCombat::UpdatePath()
 	}
 
 	tilesCount = path->Count();
-	LOG("Tiles count: %d", tilesCount);
 
 	//Draw the cursor
 	app->render->DrawTexture(cursorTexture, tilePosition.x, tilePosition.y);
@@ -444,6 +470,7 @@ void SceneCombat::ResetTilesArray(int max)
 
 void SceneCombat::ChangeTurn()
 {
+	currentEntity->currentPoints = currentEntity->totalPoints;
 	if (isPlayerTurn)
 	{
 		tiles[0] = { enemies[currentEnemyIndex]->position, 0 };
@@ -488,7 +515,7 @@ bool SceneCombat::IsTileOccupied()
 {
 	for (int i = 0; i < 2; i++)
 	{
-		if (players[i]->position.x == tilePosition.x && players[i]->position.y == tilePosition.y) return true;
+		if (players[i]->position.x == tilePosition.x && players[i]->position.y == tilePosition.y && currentEntity != players[i]) return true;
 	}
 	for (int i = 0; i < 2; i++)
 	{
