@@ -39,6 +39,7 @@ In this first version of the game, we have introduced a wide range of features t
 - W -> Move up on ladder
 - S -> Move down on ladder
 - SPACEBAR -> Jump
+- E -> Interact with NPC
 - E -> Jump dialogue already started
 - E -> Selection of options within dialogue
 - E -> Move to next dialogue
@@ -55,6 +56,9 @@ In this first version of the game, we have introduced a wide range of features t
 - F8 -> Activate and deactivate GUI
 - F9 -> Activate and deactivate DebugMode
 - F10 -> Activate and deactivate GodMode
+
+## **CLARIFICATIONS**
+- Mouse interaction within the UI has been restricted, except for adjusting the sound slider. Consequently, you will need to rely on keyboard inputs.
   
 ## **THE TEAM**
 - [Guillem Alqueza Mayench](https://github.com/guillemalqueza) - {LEAD CODE}
