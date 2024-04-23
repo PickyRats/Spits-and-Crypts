@@ -51,7 +51,11 @@ bool Enemy::Update(float dt)
 	
 	/*position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 50;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 42;*/
-	if (app->sceneCombat->active)
+	if (health <= 0 && !isDead)
+	{
+		isDead = true;
+	}
+	if (app->sceneCombat->active && !isDead)
 	{
 		DrawEnemy();
 	}

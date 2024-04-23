@@ -81,8 +81,8 @@ bool Map::Update(float dt)
 
             UpdateTileLoadSize();
 
-            for (int i = startWidth; i < mapData.width; i++) {
-                for (int j = startHeight; j < mapData.height; j++) {
+            for (int i = startWidth; i < endWidth; i++) {
+                for (int j = startHeight; j < endHeight; j++) {
                     //Get the gid from tile
                     int gid = mapLayer->data->Get(i, j);
 
@@ -552,21 +552,10 @@ void Map::DestroyAllColliders()
 
 void Map::UpdateMapSize()
 {
-
-    if (mapIdx == 1)
-    {
-        startMapWidth = 0;
-        startMapHeight = 0;
-        endMapWidth = 45;
-        endMapHeight = 12;
-    }
-    else
-    {
-        startMapWidth = 0;
-        startMapHeight = 0;
-        endMapWidth = mapData.width;
-        endMapHeight = mapData.height;
-    }
+    startMapWidth = 0;
+    startMapHeight = 0;
+    endMapWidth = mapData.width;
+    endMapHeight = mapData.height;
 }
 
 void Map::UpdateTileLoadSize()

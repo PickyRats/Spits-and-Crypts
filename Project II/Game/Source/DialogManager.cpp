@@ -73,9 +73,8 @@ Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, c
 	//Dialogo a crear
 	Dialog* dialog = new Dialog(itemNode.attribute("text").as_string());
 	dialog->name = name;
-	dialog->name = itemNode.attribute("name").as_string(dialog->name.c_str());
-	dialog->face_tex = app->tex->Load(itemNode.attribute("facetexturepath").as_string(faceTexturePath));
-	dialog->font = FontSelector(itemNode.attribute("font").as_string(font));
+	if (faceTexturePath != "") dialog->face_tex = app->tex->Load(faceTexturePath);
+	dialog->font = FontSelector(font);
 
 
 	const char* type = itemNode.attribute("type").as_string("");

@@ -94,7 +94,7 @@ bool SceneCombat::Start()
 	players[0] = app->map->player;
 	players[1] = app->map->player2;
 	app->map->player2->isVisible = true;
-  app->map->player2->position = { 0, 576 };
+	app->map->player2->position = { 0, 576 };
 
 	currentEntity = players[currentPlayerIndex];
 	return true;
@@ -122,10 +122,42 @@ bool SceneCombat::Update(float dt)
 
 	if (isPlayerTurn)
 	{
-		maxTiles = 12;
-		UpdatePath();
+		if (!playerCanAttack)
+		{
+			maxTiles = 12;
+			UpdatePath();
 
-		SelectTiles();
+			SelectTiles();
+
+			if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !isMoving)
+			{
+				if (tilesCount <= players[currentPlayerIndex]->currentPoints) players[currentPlayerIndex]->currentPoints -= (tilesCount - 1);
+				else players[currentPlayerIndex]->currentPoints = 0;
+				MovePlayer(players[currentPlayerIndex]);
+			}
+		}
+		else
+		{
+			if (enemies[enemyAttackIndex] != nullptr && !enemies[enemyAttackIndex]->isDead)
+			{
+				app->render->DrawTexture(selectedTileTexture, enemies[enemyAttackIndex]->position.x, enemies[enemyAttackIndex]->position.y);
+				if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+				{
+					int enemyDistance = app->map->pathfinding->CreatePath(app->map->WorldToMap(currentEntity->position.x, currentEntity->position.y), app->map->WorldToMap(enemies[enemyAttackIndex]->position.x, enemies[enemyAttackIndex]->position.y));
+					if (enemyDistance <= currentEntity->attackRange)
+					{
+						currentEntity->currentPoints = 0;
+						enemies[enemyAttackIndex]->health -= currentEntity->attackDamage;
+					}
+					playerCanAttack = false;
+					ChangeTurn();
+				}
+			}
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && enemyAttackIndex > 0 && !enemies[enemyAttackIndex-1]->isDead) enemyAttackIndex--;
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && enemyAttackIndex < 1 && !enemies[enemyAttackIndex+1]->isDead) enemyAttackIndex++;
+
+		}
+		
 	}
 	else
 	{
@@ -145,8 +177,9 @@ bool SceneCombat::Update(float dt)
 			if (pos.y > tiles[i - 1].position.y) tiles[i] = { pos, 4 };
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || startEnemyTurn)
 		{
+			startEnemyTurn = false;
 			tilesCount = path->Count();
 			app->map->pathfinding->ClearLastPath();
 			int nearestPlayer = 0;
@@ -221,17 +254,12 @@ bool SceneCombat::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
-	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !isMoving)
-	{
-		players[currentPlayerIndex]->currentPoints -= tilesCount;
-		MovePlayer(players[currentPlayerIndex]);
-	}
 
 	if (isPlayerTurn && isMoving) MovePlayer(players[currentPlayerIndex]);
 	else if (!isPlayerTurn && isMoving) MovePlayer(enemies[currentEnemyIndex]);
 
 	// end combat
-	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN || (enemies[0]->isDead && enemies[1]->isDead))
 	{
 		app->map->player->isCombat = false;
 		app->map->player2->isCombat = false;
@@ -362,8 +390,9 @@ void SceneCombat::MovePlayer(Entity* entity)
 	else // Reset the path
 	{
 		isMoving = false;
-		entity->currentPoints = entity->totalPoints;
-		ChangeTurn();
+		if (!isPlayerTurn) ChangeTurn();
+		else if(currentEntity->currentPoints > 0) playerCanAttack = true;
+		else ChangeTurn();
 	}
 
 	// Move the player
@@ -450,6 +479,7 @@ void SceneCombat::ResetTilesArray(int max)
 
 void SceneCombat::ChangeTurn()
 {
+	currentEntity->currentPoints = currentEntity->totalPoints;
 	if (isPlayerTurn)
 	{
 		tiles[0] = { enemies[currentEnemyIndex]->position, 0 };
@@ -463,6 +493,7 @@ void SceneCombat::ChangeTurn()
 		if (players[currentPlayerIndex + 1] != nullptr && !players[currentPlayerIndex + 1]->isDead) currentPlayerIndex++;
 		else currentPlayerIndex = 0;
 		currentEntity = enemies[currentEnemyIndex];
+		startEnemyTurn = true;
 	}
 	else
 	{
@@ -494,7 +525,7 @@ bool SceneCombat::IsTileOccupied()
 {
 	for (int i = 0; i < 2; i++)
 	{
-		if (players[i]->position.x == tilePosition.x && players[i]->position.y == tilePosition.y) return true;
+		if (players[i]->position.x == tilePosition.x && players[i]->position.y == tilePosition.y && currentEntity != players[i]) return true;
 	}
 	for (int i = 0; i < 2; i++)
 	{
