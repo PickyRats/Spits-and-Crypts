@@ -49,19 +49,18 @@ bool Hud::Start()
 {
 	// Charge all textures
 	// Combat Mode UI
-	character1 = app->tex->Load(configNode3.child("character1").attribute("texturepath").as_string());
-	fuego = app->tex->Load(configNode3.child("fuego").attribute("texturepath").as_string());
-	life1 = app->tex->Load(configNode3.child("life1").attribute("texturepath").as_string());
-	life2 = app->tex->Load(configNode3.child("life2").attribute("texturepath").as_string());
-	PP = app->tex->Load(configNode3.child("PP").attribute("texturepath").as_string());
-	sword1 = app->tex->Load(configNode3.child("sword1").attribute("texturepath").as_string());
-	sword2 = app->tex->Load(configNode3.child("sword2").attribute("texturepath").as_string());
-	number14 = app->tex->Load(configNode3.child("number14").attribute("texturepath").as_string());
-	L3Move = app->tex->Load(configNode3.child("L3Move").attribute("texturepath").as_string());
-	execute = app->tex->Load(configNode3.child("execute").attribute("texturepath").as_string());
-	Xaccept = app->tex->Load(configNode3.child("Xaccept").attribute("texturepath").as_string());
-	playerverd = app->tex->Load(configNode3.child("playerverd").attribute("texturepath").as_string());
-	enemyrojo = app->tex->Load(configNode3.child("enemyrojo").attribute("texturepath").as_string());
+	
+	
+	vidas = app->tex->Load(configNode3.child("vidas").attribute("texturepath").as_string());
+	points = app->tex->Load(configNode3.child("points").attribute("texturepath").as_string());
+	Personaje1 = app->tex->Load(configNode3.child("Personaje1").attribute("texturepath").as_string());
+	Personaje2 = app->tex->Load(configNode3.child("Personaje2").attribute("texturepath").as_string());
+	Selectorazul = app->tex->Load(configNode3.child("Selectorazul").attribute("texturepath").as_string());
+	Selectornaranja = app->tex->Load(configNode3.child("selectornaranja").attribute("texturepath").as_string());
+	Opacity = app->tex->Load(configNode3.child("Opacity").attribute("texturepath").as_string());
+	Cuadrojugador = app->tex->Load(configNode3.child("Cuadrojugador").attribute("texturepath").as_string());
+	numeros = app->tex->Load(configNode3.child("numeros").attribute("texturepath").as_string());
+
 
 	//
 	pause = app->tex->Load(configNode3.child("pause").attribute("texturepath").as_string());
@@ -564,71 +563,35 @@ bool Hud::Update(float dt)
 		if (app->sceneCombat->active) {
 			//Combat Mode Drawing
 			////players
-			app->render->DrawTexture(character1, 20, 660, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(character1, 80, 660, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(character1, 140, 660, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(character1, 200, 660, NULL, SDL_FLIP_NONE, 0);
+			
+			app->render->DrawTexture(Cuadrojugador, 10, 660, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(Cuadrojugador, 70, 660, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(Selectorazul, 10, 660, NULL, SDL_FLIP_NONE, 0);
+			
+			app->render->DrawTexture(Personaje1, 20, 660, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(Personaje2, 80, 660, NULL, SDL_FLIP_NONE, 0);
 			////
 			// 
 			////barras vida
-			app->render->DrawTexture(life1, 70, 660, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(life2, 73, 697, NULL, SDL_FLIP_NONE, 0);
+			
+			app->render->DrawTexture(vidas, 63, 660, &lifeRects[app->map->player->health / 10]);
 
-			app->render->DrawTexture(life1, 130, 660, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(life2, 133, 697, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(vidas, 123, 660, &lifeRects[app->map->player2->health / 10]);
 
-			app->render->DrawTexture(life1, 190, 660, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(life2, 193, 697, NULL, SDL_FLIP_NONE, 0);
-
-			app->render->DrawTexture(life1, 250, 660, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(life2, 253, 697, NULL, SDL_FLIP_NONE, 0);
 			////
 			//
 			////botones abajo derecha
-			app->render->DrawTexture(sword2, 1150, 660, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(fuego, 1210, 660, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(Cuadrojugador, 1150, 660, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(Cuadrojugador, 1210, 660, NULL, SDL_FLIP_NONE, 0);
+
+			app->render->DrawTexture(Selectornaranja, 1210, 660, NULL, SDL_FLIP_NONE, 0);
 			////
 			//
-			////PP
-			app->render->DrawTexture(PP, 20, 20, NULL, SDL_FLIP_NONE, 0);
-			////
-			//
-			////Sword1
-			app->render->DrawTexture(sword1, 1210, 20, NULL, SDL_FLIP_NONE, 0);
-			////
-			//
-			////14
-			app->render->DrawTexture(number14, 52, 46, NULL, SDL_FLIP_NONE, 0);
-			////
-			// 
-			////L3Move
-			app->render->DrawTexture(L3Move, 500, 660, NULL, SDL_FLIP_NONE, 0);
-			////
-			//
-			///execute
-			app->render->DrawTexture(execute, 620, 660, NULL, SDL_FLIP_NONE, 0);
-			////
-			//
-			////Xaccept
-			app->render->DrawTexture(Xaccept, 740, 660, NULL, SDL_FLIP_NONE, 0);
-			////
-			//
-			////enemyrojo
-			app->render->DrawTexture(enemyrojo, 1210, 620, NULL, SDL_FLIP_NONE, 0);
-			////
-			//
-			////playerverd
-			app->render->DrawTexture(playerverd, 1180, 620, NULL, SDL_FLIP_NONE, 0);
-			////
-			//
-			////L1
-			app->render->DrawTexture(L1, 520, 620, NULL, SDL_FLIP_NONE, 0);
-			////
-			//
-			////R1
-			app->render->DrawTexture(R1, 1180, 620, NULL, SDL_FLIP_NONE, 0);
-			////
-			//
+			float percentage = (float)app->sceneCombat->currentEntity->currentPoints / (float)app->sceneCombat->currentEntity->totalPoints;
+			int index = std::round(percentage * 6);
+			app->render->DrawTexture(points, 20, 20, &pointsRects[index-1]);
+			app->render->DrawTexture(numeros, 38, 80, &numerosRects[app->sceneCombat->currentEntity->currentPoints]);
+			
 		}
 	}
 	
@@ -639,6 +602,40 @@ bool Hud::Update(float dt)
 bool Hud::CleanUp()
 {
 	LOG("Freeing Hud");
+
+	app->tex->UnLoad(vidas);
+	app->tex->UnLoad(points);
+	app->tex->UnLoad(Personaje1);
+	app->tex->UnLoad(Personaje2);
+	app->tex->UnLoad(Selectorazul);
+	app->tex->UnLoad(Selectornaranja);
+	app->tex->UnLoad(Opacity);
+	app->tex->UnLoad(Cuadrojugador);
+	app->tex->UnLoad(numeros);
+	app->tex->UnLoad(pause);
+	app->tex->UnLoad(exitNormal);
+	app->tex->UnLoad(exitHover);
+	app->tex->UnLoad(exitClick);
+	app->tex->UnLoad(resumeNormal);
+	app->tex->UnLoad(resumeHover);
+	app->tex->UnLoad(resumeClick);
+	app->tex->UnLoad(settingsNormal);
+	app->tex->UnLoad(settingsHover);
+	app->tex->UnLoad(settingsClick);
+	app->tex->UnLoad(backToTitleNormal);
+	app->tex->UnLoad(backToTitleHover);
+	app->tex->UnLoad(backToTitleClick);
+	app->tex->UnLoad(settingsExitNormal);
+	app->tex->UnLoad(settingsExitHover);
+	app->tex->UnLoad(settingsExitClick);
+	app->tex->UnLoad(settingsReturnNormal);
+	app->tex->UnLoad(settingsReturnHover);
+	app->tex->UnLoad(settingsReturnClick);
+	app->tex->UnLoad(settingsTick);
+	app->tex->UnLoad(settingsSlider);
+	app->tex->UnLoad(settingsBoxNormal);
+	app->tex->UnLoad(settingsBoxHover);
+	app->tex->UnLoad(settings);
 
 	return true;
 }

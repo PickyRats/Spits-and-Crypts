@@ -59,65 +59,19 @@ bool Npcs::Update(float dt)
 	//Comprobar si la escena actual es la que tiene el npc y crearlo si es así
 	if (app->sceneVillage->active && sceneVillage == npcScene)
 	{
-		//Crear el cuerpo físico una sola vez
-		if (!physCreated)
-		{
-			pbody = app->physics->CreateRectangle(position.x, position.y, 64,128, bodyType::STATIC);
-			//pbody = app->physics->CreateCircle(position.x , position.y, 22, bodyType::DYNAMIC);
-			pbody->listener = this;
-			pbody->ctype = ColliderType::NPC;
-			physCreated = true;
-		}
-		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x)-32;
-		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y)-64;
 		DrawNpcs();
 	}
 	else if (app->sceneTemple->active && sceneTemple== npcScene)
 	{
-		if (!physCreated)
-		{
-			pbody = app->physics->CreateCircle(position.x, position.y, 22, bodyType::DYNAMIC);
-			pbody->listener = this;
-			pbody->ctype = ColliderType::NPC;
-			physCreated = true;
-		}
-		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x);
-		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y);
 		DrawNpcs();
 	}
 	else if (app->sceneShop->active && sceneShop == npcScene)
 	{
-		if (!physCreated)
-		{
-			pbody = app->physics->CreateRectangle(position.x, position.y, 64, 128, bodyType::STATIC);
-			pbody->listener = this;
-			pbody->ctype = ColliderType::NPC;
-			physCreated = true;
-		}
-		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 32;
-		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 64;
 		DrawNpcs();
 	}
 	else if (app->sceneOasisFaraon->active && sceneOasisFaraon == npcScene)
 	{
-		if (!physCreated)
-		{
-			pbody = app->physics->CreateCircle(position.x , position.y, 22, bodyType::DYNAMIC);
-			pbody->listener = this;
-			pbody->ctype = ColliderType::NPC;
-			physCreated = true;
-		}
-		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x);
-		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y);
 		DrawNpcs();
-	}
-	else
-	{
-		if (physCreated)
-		{
-			app->physics->world->DestroyBody(pbody->body);
-			physCreated = false;
-		}
 	}
 
 	return true;

@@ -39,6 +39,12 @@ bool SceneOasisFaraon::Awake(pugi::xml_node& config)
 		Npcs* npc = (Npcs*)app->entityManager->CreateEntity(EntityType::NPCS);
 		npc->parameters = itemNode;
 	}
+
+	for (pugi::xml_node itemNode = config.child("dialogTrigger"); itemNode; itemNode = itemNode.next_sibling("dialogTrigger"))
+	{
+		DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER);
+		dialogTrigger->parameters = itemNode;
+	}
 	configNodeOasis = config;
 
 	return ret;

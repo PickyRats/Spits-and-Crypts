@@ -11,7 +11,9 @@ class PhysBody;
 enum class EntityType
 {
 	PLAYER,
+	DIALOG_TRIGGER,
 	NPCS,
+	PIEZAS,
 	ENEMY,
 	TRAP,
 	UNKNOWN

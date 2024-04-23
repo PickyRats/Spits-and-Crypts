@@ -29,6 +29,7 @@ class GuiManager;
 class SceneMenu;
 class Hud;
 class SceneIntro;
+class DialogManager;
 class SceneCombat;
 
 class App
@@ -117,6 +118,7 @@ public:
 	SceneMenu* sceneMenu;
 	Hud* hud;
 	SceneIntro* sceneIntro;
+	DialogManager* dialogManager;
 	SceneCombat* sceneCombat;
 
 	uint32 maxFrameDuration = 16;

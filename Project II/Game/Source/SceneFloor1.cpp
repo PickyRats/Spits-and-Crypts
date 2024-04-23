@@ -43,7 +43,11 @@ bool SceneFloor1::Awake(pugi::xml_node& config)
 		Npcs* npc = (Npcs*)app->entityManager->CreateEntity(EntityType::NPCS);
 		npc->parameters = itemNode;
 	}
-
+	for (pugi::xml_node itemNode = config.child("Piece"); itemNode; itemNode = itemNode.next_sibling("Piece"))
+	{
+		Piezas_puzle* pieces = (Piezas_puzle*)app->entityManager->CreateEntity(EntityType::PIEZAS);
+		pieces->parameters = itemNode;
+	}
 	//if (config.child("map")) {
 	//	//Get the map name from the config file and assigns the value in the module
 	//	app->map->mapName = config.child("map").attribute("name").as_string();
@@ -68,7 +72,7 @@ bool SceneFloor1::Start()
 	app->hud->Enable();
 
 	//Load the player in the map
-	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(96), PIXEL_TO_METERS(640)), 0);
+	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(playerStartPosition.x), PIXEL_TO_METERS(playerStartPosition.y)), 0);
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -81,6 +85,9 @@ bool SceneFloor1::Start()
 
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
+
+	//carga assets
+	floor1background = app->tex->Load("Assets/Textures/Screens/floor1background.png");
 
 	app->audio->PlayMusic(configNodeFloor1.child("Floor1Music").attribute("path").as_string());
 	
@@ -96,12 +103,16 @@ bool SceneFloor1::PreUpdate()
 // Called each loop iteration
 bool SceneFloor1::Update(float dt)
 {
-	/*app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);*/
+	//dibuja background
+	app->render->DrawTexture(floor1background, 0, 0, NULL, SDL_FLIP_NONE, 1);
+	app->render->DrawTexture(floor1background, 2940, 0, NULL, SDL_FLIP_NONE, 1);
+	app->render->DrawTexture(floor1background, 5880, 0, NULL, SDL_FLIP_NONE, 1);
+
 
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;
 
-	SetCameraPosition(playerX-550, 48);
+	SetCameraPosition(playerX-550, 0);
 	printf("\r cameraX: %d cameraY: %d playerX: %d playerY %d", cameraX, cameraY, playerX, playerY);
 	ClampCamera();
 
@@ -136,6 +147,8 @@ bool SceneFloor1::PostUpdate()
 	}
 	
 
+
+
 	return ret;
 }
 
@@ -145,6 +158,7 @@ bool SceneFloor1::CleanUp()
 	LOG("Freeing scene");
 	app->map->Disable();
 
+	app->tex->UnLoad(floor1background);
 	return true;
 }
 

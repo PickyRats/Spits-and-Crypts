@@ -36,8 +36,10 @@ enum class ColliderType {
 	COMBAT,
 	WALL,
 	DOOR,
+	DIALOG_TRIGGER,
 	TRAP,
 	ITERACTABLE,
+	ITEM,
 	ENEMY,
 	UNKNOWN
 	// ..
@@ -87,9 +89,7 @@ public:
 	
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
-
 	void EndContact(b2Contact* contact);
-
 
 	// Box2D World
 	b2World* world;

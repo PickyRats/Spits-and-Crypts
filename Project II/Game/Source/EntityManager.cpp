@@ -1,10 +1,12 @@
 #include "EntityManager.h"
 #include "Player.h"
 #include "Npcs.h"
+#include "Piezas_puzle.h"
 #include "Enemy.h"
 #include "App.h"
 #include "Textures.h"
 #include "SceneVillage.h"
+#include "DialogTriggerEntity.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -88,8 +90,14 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::PLAYER:
 		entity = new Player();
 		break;
+	case EntityType::DIALOG_TRIGGER:
+		entity = new DialogTrigger();
+		break;
 	case EntityType::NPCS:
 		entity = new Npcs();
+		break;
+	case EntityType::PIEZAS:
+		entity = new Piezas_puzle();
 		break;
 	case EntityType::ENEMY:
 		entity = new Enemy();
