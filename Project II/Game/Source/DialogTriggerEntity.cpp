@@ -79,11 +79,6 @@ bool DialogTrigger::Update(float dt)
 			physCreated = false;
 		}
 	}
-	if (texture!=NULL)
-	{
-		app->render->DrawTexture(texture, position.x, position.y);
-	}
-
 
 	return true;
 }
