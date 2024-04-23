@@ -389,7 +389,7 @@ bool Hud::Update(float dt)
 			////
 			//
 			////PP
-			float percentage = (float)app->map->player->currentPoints / (float)app->map->player->totalPoints;
+			float percentage = (float)app->sceneCombat->currentEntity->currentPoints / (float)app->sceneCombat->currentEntity->totalPoints;
 			int index = std::round(percentage * 6);
 			app->render->DrawTexture(points, 20, 20, &pointsRects[index-1]);
 
