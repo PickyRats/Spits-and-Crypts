@@ -9,6 +9,8 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "SceneShop.h"
+#include "SceneOasisFaraon.h"
 
 DialogTrigger::DialogTrigger() : Entity(EntityType::DIALOG_TRIGGER)
 {
@@ -29,10 +31,10 @@ bool DialogTrigger::Start() {
 	texturePath = parameters.attribute("texturepath").as_string();
 	faceTexturePath = parameters.attribute("facetexturepath").as_string("");
 	repeatDialog = parameters.attribute("repeat").as_bool(false);
-
-	std::string fontTarget = parameters.attribute("font").as_string("primary");
+	dialogScene = parameters.attribute("scene").as_int();
 
 	played = false;
+	std::string fontTarget = parameters.attribute("font").as_string("primary");
 
 	//Cargar dialogos
 	for (pugi::xml_node itemNode = parameters.child("sentences").child("sentence"); itemNode; itemNode = itemNode.next_sibling("sentence"))
@@ -47,20 +49,7 @@ bool DialogTrigger::Start() {
 			dialoguesRepeat.Add(app->dialogManager->CreateDialog(itemNode, parameters.attribute("name").as_string(), faceTexturePath, fontTarget.c_str()));
 		}
 	}
-
-
-	//initilize textures
-	texture = app->tex->Load(texturePath);
-
-	if (faceTexturePath != "") {
-		faceTexture = app->tex->Load(faceTexturePath);
-	}
-
-	pbody = app->physics->CreateRectangleSensor(position.x, position.y, 100, 100, bodyType::KINEMATIC);
-	pbody->listener = this;
-	pbody->ctype = ColliderType::DIALOG_TRIGGER;
-
-
+	
 
 
 	return true;
@@ -68,7 +57,82 @@ bool DialogTrigger::Start() {
 
 bool DialogTrigger::Update(float dt)
 {
-	app->render->DrawTexture(texture, position.x, position.y);
+	if (app->sceneVillage->active && dialogScene== app->sceneVillage->sceneNum)
+	{
+		if (!physCreated)
+		{
+			//initilize textures
+			if (texture != NULL)
+			{
+				texture = app->tex->Load(texturePath);
+			}
+
+			if (faceTexturePath != "") {
+				faceTexture = app->tex->Load(faceTexturePath);
+			}
+
+			pbody = app->physics->CreateRectangleSensor(position.x, position.y, 80, 120, bodyType::KINEMATIC);
+			pbody->listener = this;
+			pbody->ctype = ColliderType::DIALOG_TRIGGER;
+			physCreated = true;
+		}
+		
+	}
+	else if (app->sceneShop->active && dialogScene == app->sceneShop->sceneNum)
+	{
+		if (!physCreated)
+		{
+			//initilize textures
+			if (texture != NULL)
+			{
+				texture = app->tex->Load(texturePath);
+			}
+
+			if (faceTexturePath != "") {
+				faceTexture = app->tex->Load(faceTexturePath);
+			}
+
+			pbody = app->physics->CreateRectangleSensor(position.x, position.y, 80, 120, bodyType::KINEMATIC);
+			pbody->listener = this;
+			pbody->ctype = ColliderType::DIALOG_TRIGGER;
+			physCreated = true;
+		}
+
+	}
+	else if (app->sceneOasisFaraon->active && dialogScene == app->sceneOasisFaraon->sceneNum)
+	{
+		if (!physCreated)
+		{
+			//initilize textures
+			if (texture != NULL)
+			{
+				texture = app->tex->Load(texturePath);
+			}
+
+			if (faceTexturePath != "") {
+				faceTexture = app->tex->Load(faceTexturePath);
+			}
+
+			pbody = app->physics->CreateRectangleSensor(position.x, position.y, 80, 120, bodyType::KINEMATIC);
+			pbody->listener = this;
+			pbody->ctype = ColliderType::DIALOG_TRIGGER;
+			physCreated = true;
+		}
+
+	}
+	else
+	{
+		if (physCreated)
+		{
+			app->physics->world->DestroyBody(pbody->body);
+			physCreated = false;
+		}
+	}
+	if (texture!=NULL)
+	{
+		app->render->DrawTexture(texture, position.x, position.y);
+	}
+
 
 	return true;
 }
