@@ -168,6 +168,9 @@
 	<sceneFloor1>
 		<!-- Scene -->
 		<map path="Assets/Maps/" name="Map_floor_1.tmx"/>
+		
+		<floor1background texturepath="Assets/Textures/Screens/floor1background.png"/>
+		
 		<!-- Music -->
 		<music>
 		</music>
@@ -248,6 +251,17 @@
 		<settingsSlider texturepath="Assets/Textures/Screens/More/slider.png"/>
 		<settings texturepath="Assets/Textures/Screens/More/settings.png"/>
 
+
+		<settingsControlsButtonNormal texturepath="Assets/Textures/Screens/More/settings_controls_button_normal.png"/>
+		<settingsControlsButtonHover texturepath="Assets/Textures/Screens/More/settings_controls_button_hover.png"/>
+		<settingsAudioButtonNormal texturepath="Assets/Textures/Screens/More/settings_audio_button_normal.png"/>
+		<settingsAudioButtonHover texturepath="Assets/Textures/Screens/More/settings_audio_button_hover.png"/>
+		<settingsOptionsButtonNormal texturepath="Assets/Textures/Screens/More/settings_options_button_normal.png"/>
+		<settingsOptionsButtonHover texturepath="Assets/Textures/Screens/More/settings_options_button_hover.png"/>
+		
+		<settingsControls texturepath="Assets/Textures/Screens/More/settings_controls.png"/>
+		<settingsAudioPanel texturepath="Assets/Textures/Screens/More/settings_audio_panel.png"/>
+		<settingsOptionsPanel texturepath="Assets/Textures/Screens/More/settings_options_panel.png"/>
 
 		<Selectorazul texturepath="Assets/Textures/Screens/Combat/selectorpersonatge.png"/>
 		<Selectornaranja texturepath="Assets/Textures/Screens/Combat/selectorhabilitatorange.png"/>

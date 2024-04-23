@@ -86,6 +86,9 @@ bool SceneFloor1::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
+	//carga assets
+	floor1background = app->tex->Load("Assets/Textures/Screens/floor1background.png");
+
 	app->audio->PlayMusic(configNodeFloor1.child("Floor1Music").attribute("path").as_string());
 	
 	return true;
@@ -100,7 +103,11 @@ bool SceneFloor1::PreUpdate()
 // Called each loop iteration
 bool SceneFloor1::Update(float dt)
 {
-	/*app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);*/
+	//dibuja background
+	app->render->DrawTexture(floor1background, 0, 0, NULL, SDL_FLIP_NONE, 1);
+	app->render->DrawTexture(floor1background, 2940, 0, NULL, SDL_FLIP_NONE, 1);
+	app->render->DrawTexture(floor1background, 5880, 0, NULL, SDL_FLIP_NONE, 1);
+
 
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;
@@ -133,7 +140,14 @@ bool SceneFloor1::PostUpdate()
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
 		pause = !pause;
 		app->hud->onSettings = false;
+		if (!pause)
+		{
+			Mix_VolumeMusic(app->sceneMenu->percentageMusic);
+		};
 	}
+	
+
+
 
 	return ret;
 }
@@ -144,6 +158,7 @@ bool SceneFloor1::CleanUp()
 	LOG("Freeing scene");
 	app->map->Disable();
 
+	app->tex->UnLoad(floor1background);
 	return true;
 }
 
