@@ -67,6 +67,7 @@ bool Hud::Start()
 	Selectornaranja = app->tex->Load(configNode3.child("selectornaranja").attribute("texturepath").as_string());
 	Opacity = app->tex->Load(configNode3.child("Opacity").attribute("texturepath").as_string());
 	Cuadrojugador = app->tex->Load(configNode3.child("Cuadrojugador").attribute("texturepath").as_string());
+	numeros = app->tex->Load(configNode3.child("numeros").attribute("texturepath").as_string());
 
 
 	//
@@ -392,6 +393,10 @@ bool Hud::Update(float dt)
 			float percentage = (float)app->sceneCombat->currentEntity->currentPoints / (float)app->sceneCombat->currentEntity->totalPoints;
 			int index = std::round(percentage * 6);
 			app->render->DrawTexture(points, 20, 20, &pointsRects[index-1]);
+			app->render->DrawTexture(numeros, 20, 60, &numerosRects[1]);
+			//currentEntity
+			//currentPoints
+			
 
 			////
 			//
@@ -400,7 +405,7 @@ bool Hud::Update(float dt)
 			////
 			//
 			////14
-			app->render->DrawTexture(number14, 52, 46, NULL, SDL_FLIP_NONE, 0);
+			/*app->render->DrawTexture(number14, 52, 46, NULL, SDL_FLIP_NONE, 0);*/
 			////
 			// 
 			////L3Move
