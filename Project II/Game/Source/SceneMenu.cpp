@@ -128,9 +128,9 @@ bool SceneMenu::Start()
 bool SceneMenu::Update(float dt)
 {
 	int rangoMusic = settingsMusicButton->sliderBounds.w - 20;
-	int percentageMusic = (((float)settingsMusicButton->sliderPosition - settingsMusicButton->sliderBounds.x) / rangoMusic) * 100;
+	percentageMusic = (((float)settingsMusicButton->sliderPosition - settingsMusicButton->sliderBounds.x) / rangoMusic) * 100;
 	Mix_VolumeMusic(percentageMusic);
-
+	
 
 
 	int rangoFX = settingsFxButton->sliderBounds.w - 20;

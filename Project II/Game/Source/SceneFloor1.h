@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Npcs.h"
 #include "GuiControl.h"
+#include "SceneMenu.h"
 #include "GuiControlButton.h"
 #include <vector>
 

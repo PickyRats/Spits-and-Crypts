@@ -167,6 +167,11 @@ bool Hud::Update(float dt)
 	//Pause menu
 	if (app->sceneVillage->pause || app->sceneShop->pause || app->sceneOasisFaraon->pause || app->sceneTemple->pause || app->sceneFloor1->pause) {
 		//If pause menu is activated, show buttons
+		if (app->sceneMenu->percentageMusic>5)
+		{
+
+			Mix_VolumeMusic(5);
+		}
 		if (resumeButton->state == GuiControlState::HIDDEN)
 		{
 			resumeButton->state = GuiControlState::NORMAL;

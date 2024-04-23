@@ -234,6 +234,10 @@ bool SceneCombat::PostUpdate()
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
 		pause = !pause;
 		app->hud->onSettings = false;
+		if (!pause)
+		{
+			Mix_VolumeMusic(app->sceneMenu->percentageMusic);
+		};
 	}
 
 	return ret;

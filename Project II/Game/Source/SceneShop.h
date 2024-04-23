@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "Player.h"
+#include "SceneMenu.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
 #include <vector>

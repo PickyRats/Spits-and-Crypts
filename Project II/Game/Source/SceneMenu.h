@@ -33,7 +33,7 @@ public:
 	bool fullScreen = false;
 	bool vSync = true;
 	int currentId= 1;
-
+	int percentageMusic;
 	GuiControlButton* startButton;
 	GuiControlButton* loadGameButton;
 	GuiControlButton* settingsButton;
