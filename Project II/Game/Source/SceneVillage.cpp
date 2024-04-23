@@ -10,6 +10,8 @@
 #include "GuiManager.h"
 #include "ParticleManager.h"
 #include "Hud.h"
+#include "DialogManager.h"
+#include "DialogTriggerEntity.h"
 
 #include "Defs.h"
 #include "Log.h"

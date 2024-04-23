@@ -17,6 +17,7 @@
 #include "SceneMenu.h"
 #include "Hud.h"
 #include "SceneIntro.h"
+#include "DialogManager.h"
 #include "SceneCombat.h"
 
 #include "Defs.h"
@@ -54,6 +55,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	sceneMenu = new SceneMenu(false);
 	hud = new Hud(false);
 	sceneIntro = new SceneIntro();
+	dialogManager = new DialogManager();
 	sceneCombat = new SceneCombat(false);
 
 	// Ordered for awake / Start / Update
@@ -79,8 +81,10 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(sceneIntro);
 	AddModule(guiManager);
 	AddModule(fade);
+	AddModule(dialogManager);
 	// Render last to swap buffer
 	AddModule(render);
+
 
 	LOG("Timer App Constructor: %f", timer.ReadMSec());
 }

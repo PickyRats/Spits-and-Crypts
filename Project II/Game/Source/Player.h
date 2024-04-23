@@ -5,6 +5,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "Animation.h"
+#include "DialogTriggerEntity.h"
 #include "SDL/include/SDL.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 
@@ -48,6 +49,8 @@ public:
 
 	void CreateBody();
 
+	void DestroyBody();
+
 public:
 	float speed = 0.2f;
 	int id = 0;
@@ -73,9 +76,11 @@ public:
 	bool doorShop = false;
 	bool doorOasis = false;
 	bool doorTemple = false;
+	bool doorFlor1 = false;
+	bool enterCombat = false;
+
 	bool step = false;
 	bool walkingSoundPlaying = false;
-	bool doorFlor1 = false;
 
 	b2Transform initialTransform;
 
@@ -83,6 +88,8 @@ public:
 
 	float dt;
 
+	bool contactDialogTrigger = false;
+	DialogTrigger* dialogTriggerContact = nullptr;
 	bool isCombat = false;
 	bool isVisible = true;
 

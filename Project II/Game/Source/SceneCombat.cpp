@@ -5,6 +5,7 @@
 #include "Render.h"
 #include "Window.h"
 #include "SceneCombat.h"
+#include "SceneFloor1.h"
 #include "Map.h"
 #include "FadeToBlack.h"
 #include "GuiManager.h"
@@ -77,7 +78,10 @@ bool SceneCombat::Start()
 	selectedTileTexture = app->tex->Load("Assets/Textures/selected_tile.png");
 	cursorTexture = app->tex->Load("Assets/Textures/selection_cursor.png");
 
-	tilePosition = { 64, 64 };
+	app->map->player->DestroyBody();
+	app->map->player->position = { 64, 576 };
+
+	tilePosition = { 64, 576 };
 	app->map->pathfinding->CreatePath(app->map->WorldToMap(app->map->player->position.x, app->map->player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 
 	for (int i = 0; i < 2; i++)
@@ -87,7 +91,7 @@ bool SceneCombat::Start()
 	players[0] = app->map->player;
 	players[1] = app->map->player2;
 	app->map->player2->isVisible = true;
-	app->map->player2->CreateBody();
+  app->map->player2->position = { 0, 576 };
 
 	currentEntity = players[currentPlayerIndex];
 	return true;
@@ -223,6 +227,18 @@ bool SceneCombat::Update(float dt)
 	if (isPlayerTurn && isMoving) MovePlayer(players[currentPlayerIndex]);
 	else if (!isPlayerTurn && isMoving) MovePlayer(enemies[currentEnemyIndex]);
 
+	// end combat
+	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+	{
+		app->map->player->isCombat = false;
+		app->map->player2->isCombat = false;
+		app->map->player2->isVisible = false;
+		app->sceneFloor1->playerStartPosition = {67*64, 4*64};
+		app->map->player->CreateBody();
+		app->sceneFloor1->levelWidth = 100 * 64;
+		app->fade->Fade((Module*)app->sceneCombat, (Module*)app->sceneFloor1, 60.0f);
+	}
+
 	return true;
 }
 
@@ -246,6 +262,7 @@ bool SceneCombat::CleanUp()
 {
 	LOG("Freeing scene");
 
+	app->map->Disable();
 	return true;
 }
 

@@ -376,13 +376,11 @@ bool Hud::Update(float dt)
 			app->render->DrawTexture(Selectornaranja, 1210, 660, NULL, SDL_FLIP_NONE, 0);
 			////
 			//
-			////PP
 			float percentage = (float)app->sceneCombat->currentEntity->currentPoints / (float)app->sceneCombat->currentEntity->totalPoints;
 			int index = std::round(percentage * 6);
 			app->render->DrawTexture(points, 20, 20, &pointsRects[index-1]);
 			app->render->DrawTexture(numeros, 38, 80, &numerosRects[app->sceneCombat->currentEntity->currentPoints]);
 			
-
 		}
 	}
 	

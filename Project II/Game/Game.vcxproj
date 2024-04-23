@@ -95,6 +95,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\DialogManager.cpp" />
+    <ClCompile Include="Source\DialogTriggerEntity.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\FadeToBlack.cpp" />
@@ -129,6 +131,9 @@
     <ClCompile Include="Source\Trap.cpp" />
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\Dialog.h" />
+    <ClInclude Include="Source\DialogManager.h" />
+    <ClInclude Include="Source\DialogTriggerEntity.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
