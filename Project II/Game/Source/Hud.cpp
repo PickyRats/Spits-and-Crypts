@@ -377,17 +377,16 @@ bool Hud::Update(float dt)
 			app->render->DrawTexture(Selectornaranja, 1210, 660, NULL, SDL_FLIP_NONE, 0);
 			////
 			//
-			float percentage = (float)app->sceneCombat->currentEntity->currentPoints / (float)app->sceneCombat->currentEntity->totalPoints;
-			int index = std::round(percentage * 6);
-			if (index > 0) app->render->DrawTexture(points, 20, 20, &pointsRects[index-1]);
+			int currentPoints = app->sceneCombat->currentEntity->totalPoints - (app->sceneCombat->tilesCount - 1);
+			float percentage = (float)currentPoints / (float)app->sceneCombat->currentEntity->totalPoints;
+			int index = std::round((percentage + 0.1) * 6);
+			if (index > 6) index = 6;
+			if (index > 0 && index <= 6) app->render->DrawTexture(points, 20, 20, &pointsRects[index-1]);
 			else app->render->DrawTexture(points, 20, 20, &pointsRects[0]);
-			app->render->DrawTexture(numeros, 38, 80, &numerosRects[app->sceneCombat->currentEntity->currentPoints]);
+			app->render->DrawTexture(numeros, 38, 80, &numerosRects[currentPoints]);
 			
 		}
 	}
-	
-	
-
 
 	return true;
 }
