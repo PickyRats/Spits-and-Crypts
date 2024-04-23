@@ -50,7 +50,7 @@
 				<!-- Mercante  -->
 		<npc x="1024" y="576" texturepath="Assets/Textures/Npcs/mercante.png" id="7" scene="3"/>
   
-		<dialogTrigger x="600" y="450"  name="La abuela" repeat="true">
+		<dialogTrigger x="600" y="450"  name="La abuela" repeat="true" scene="3">
 		  <sentences>
 			  <sentence text="Uy nene, no veas como refresca"/>
 			  <sentence text="ponte algo de abrigo que vas a pillar frío"/>
@@ -60,7 +60,7 @@
 		  </repeat_sentences>
 	  </dialogTrigger>
 
-		<dialogTrigger x="800" y="450"  name="La nieta" repeat="true">
+		<dialogTrigger x="800" y="450"  name="La nieta" repeat="true" scene="3">
 			<sentences>
 				<sentence text="ayuda Pedro, necesito que me apruebes"/>
 				<sentence text="Por favor, me porto bien"/>
