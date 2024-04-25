@@ -38,8 +38,14 @@ public:
 	// Called each loop iteration
 	bool Update(float dt);
 
+	void EndCombat();
+
 	// Enemy attack
 	void EnemyAttack();
+
+	void ResetPlayerTurn();
+
+	void ResetEnemyTurn();
 
 	// Verify if the tile is occupied
 	bool IsTileOccupied();
@@ -130,6 +136,7 @@ private:
 	int enemyAttackIndex = 0;
 
 	bool startEnemyTurn = false;
+	int nearestPlayer = 0;
 };
 
 #endif // __SCENECOMBAT_H__

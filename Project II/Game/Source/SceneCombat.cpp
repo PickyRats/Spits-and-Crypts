@@ -118,7 +118,11 @@ bool SceneCombat::Update(float dt)
 
 	ClampCamera();
 
-	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) ChangeTurn();
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	{
+		playerCanAttack = false;
+		ChangeTurn();
+	}
 
 	if (isPlayerTurn)
 	{
@@ -133,7 +137,8 @@ bool SceneCombat::Update(float dt)
 			{
 				if (tilesCount <= players[currentPlayerIndex]->currentPoints) players[currentPlayerIndex]->currentPoints -= (tilesCount - 1);
 				else players[currentPlayerIndex]->currentPoints = 0;
-				MovePlayer(players[currentPlayerIndex]);
+				if (tilesCount > 1) MovePlayer(players[currentPlayerIndex]);
+				else  playerCanAttack = true;
 			}
 		}
 		else
@@ -182,7 +187,6 @@ bool SceneCombat::Update(float dt)
 			startEnemyTurn = false;
 			tilesCount = path->Count();
 			app->map->pathfinding->ClearLastPath();
-			int nearestPlayer = 0;
 			int playerDistance[2];
 			for (int i = 0; i < 2; i++)
 			{
@@ -261,19 +265,11 @@ bool SceneCombat::Update(float dt)
 	// end combat
 	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN || (enemies[0]->isDead && enemies[1]->isDead))
 	{
-		app->map->player->isCombat = false;
-		app->map->player2->isCombat = false;
-		app->map->player2->isVisible = false;
-		app->sceneFloor1->playerStartPosition = {67*64, 4*64};
-		app->map->player->CreateBody();
-		app->sceneFloor1->levelWidth = 110 * 64;
-		app->fade->Fade((Module*)app->sceneCombat, (Module*)app->sceneFloor1, 60.0f);
+		EndCombat();
 	}
 
 	return true;
 }
-
-
 
 // Called each loop iteration
 bool SceneCombat::PostUpdate()
@@ -480,45 +476,55 @@ void SceneCombat::ResetTilesArray(int max)
 void SceneCombat::ChangeTurn()
 {
 	currentEntity->currentPoints = currentEntity->totalPoints;
-	if (isPlayerTurn)
-	{
-		tiles[0] = { enemies[currentEnemyIndex]->position, 0 };
-		ResetTilesArray(currentTile);
-		tilesCount = 0;
-		movingDirection = 0;
-		currentTile = 1;
-		tilePosition = tiles[0].position;
-		app->map->pathfinding->ClearLastPath();
-		app->map->pathfinding->CreatePath(app->map->WorldToMap(enemies[currentEnemyIndex]->position.x, enemies[currentEnemyIndex]->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
-		if (players[currentPlayerIndex + 1] != nullptr && !players[currentPlayerIndex + 1]->isDead) currentPlayerIndex++;
-		else currentPlayerIndex = 0;
-		currentEntity = enemies[currentEnemyIndex];
-		startEnemyTurn = true;
-	}
+	if (isPlayerTurn) ResetPlayerTurn();
 	else
 	{
 		if (enemyCanAttack) EnemyAttack();
-		tiles[0] = { players[currentPlayerIndex]->position, 0};
-		ResetTilesArray(currentTile);
-		tilesCount = 0;
-		movingDirection = 0;
-		currentTile = 1;
-		tilePosition = tiles[0].position;
-		app->map->pathfinding->ClearLastPath();
-		app->map->pathfinding->CreatePath(app->map->WorldToMap(players[currentPlayerIndex]->position.x, players[currentPlayerIndex]->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
-		if (enemies[currentEnemyIndex + 1] != nullptr && !enemies[currentEnemyIndex + 1]->isDead) currentEnemyIndex++;
-		else currentEnemyIndex = 0;
-		currentEntity = players[currentPlayerIndex];
+		else ResetEnemyTurn();
 	}
-
-	isPlayerTurn = !isPlayerTurn;
 }
 
 void SceneCombat::EnemyAttack()
 {
 	enemyCanAttack = false;
-	players[currentPlayerIndex]->health -= enemies[currentEnemyIndex]->attackDamage;
-	printf("Enemy is attacking player life: %d \n", players[currentPlayerIndex]->health);
+	players[nearestPlayer]->health -= enemies[nearestPlayer]->attackDamage;
+	printf("Enemy is attacking player life: %d \n", players[nearestPlayer]->health);
+
+	ChangeTurn();
+}
+
+void SceneCombat::ResetPlayerTurn()
+{
+	tiles[0] = { enemies[currentEnemyIndex]->position, 0 };
+	ResetTilesArray(currentTile);
+	tilesCount = 0;
+	movingDirection = 0;
+	currentTile = 1;
+	tilePosition = tiles[0].position;
+	app->map->pathfinding->ClearLastPath();
+	app->map->pathfinding->CreatePath(app->map->WorldToMap(enemies[currentEnemyIndex]->position.x, enemies[currentEnemyIndex]->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
+	if (players[currentPlayerIndex + 1] != nullptr && !players[currentPlayerIndex + 1]->isDead) currentPlayerIndex++;
+	else if (!players[0]->isDead) currentPlayerIndex = 0;
+	else EndCombat();
+	currentEntity = enemies[currentEnemyIndex];
+	startEnemyTurn = true;
+	isPlayerTurn = false;
+}
+
+void SceneCombat::ResetEnemyTurn()
+{
+	tiles[0] = { players[currentPlayerIndex]->position, 0 };
+	ResetTilesArray(currentTile);
+	tilesCount = 0;
+	movingDirection = 0;
+	currentTile = 1;
+	tilePosition = tiles[0].position;
+	app->map->pathfinding->ClearLastPath();
+	app->map->pathfinding->CreatePath(app->map->WorldToMap(players[currentPlayerIndex]->position.x, players[currentPlayerIndex]->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
+	if (enemies[currentEnemyIndex + 1] != nullptr && !enemies[currentEnemyIndex + 1]->isDead) currentEnemyIndex++;
+	else currentEnemyIndex = 0;
+	currentEntity = players[currentPlayerIndex];
+	isPlayerTurn = true;
 }
 
 bool SceneCombat::IsTileOccupied()
@@ -532,4 +538,15 @@ bool SceneCombat::IsTileOccupied()
 		if (enemies[i]->position.x == tilePosition.x && enemies[i]->position.y == tilePosition.y) return true;
 	}
 	return false;
+}
+
+void SceneCombat::EndCombat()
+{
+	app->map->player->isCombat = false;
+	app->map->player2->isCombat = false;
+	app->map->player2->isVisible = false;
+	app->sceneFloor1->playerStartPosition = { 67 * 64, 4 * 64 };
+	app->map->player->CreateBody();
+	app->sceneFloor1->levelWidth = 110 * 64;
+	app->fade->Fade((Module*)app->sceneCombat, (Module*)app->sceneFloor1, 60.0f);
 }
