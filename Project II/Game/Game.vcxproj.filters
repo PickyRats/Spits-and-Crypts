@@ -72,9 +72,6 @@
     <ClCompile Include="Source\SceneMenu.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Dialog.cpp">
-      <Filter>Modules\UI\Dialog</Filter>
-    </ClCompile>
     <ClCompile Include="Source\DialogManager.cpp">
       <Filter>Modules\UI\Dialog</Filter>
     </ClCompile>
@@ -105,11 +102,14 @@
     <ClCompile Include="Source\Player.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Piezas_puzle.cpp">
+    <ClCompile Include="Source\PiezasPuzle.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="Source\Trap.cpp">
       <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Puzzle.cpp">
+      <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -230,7 +230,7 @@
     </ClInclude>
     <ClInclude Include="Source\DialogTriggerEntity.h">
       <Filter>Modules\UI\Dialog</Filter>
-     </ClInclude> 
+    </ClInclude>
     <ClInclude Include="Source\SceneCombat.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
@@ -249,7 +249,7 @@
     <ClInclude Include="Source\SceneFloor1.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Piezas_puzle.h">
+    <ClInclude Include="Source\PiezasPuzle.h">
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="Source\Enemy.h">
@@ -257,6 +257,9 @@
     </ClInclude>
     <ClInclude Include="Source\Trap.h">
       <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Puzzle.h">
+      <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

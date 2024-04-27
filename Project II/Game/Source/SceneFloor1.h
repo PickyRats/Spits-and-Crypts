@@ -4,7 +4,7 @@
 #include "Module.h"
 #include "Player.h"
 #include "Npcs.h"
-#include "Piezas_puzle.h"
+#include "PiezasPuzle.h"
 #include "GuiControl.h"
 #include "SceneMenu.h"
 #include "GuiControlButton.h"

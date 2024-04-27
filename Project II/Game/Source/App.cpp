@@ -19,6 +19,7 @@
 #include "SceneIntro.h"
 #include "DialogManager.h"
 #include "SceneCombat.h"
+#include "Puzzle.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -57,6 +58,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	sceneIntro = new SceneIntro();
 	dialogManager = new DialogManager();
 	sceneCombat = new SceneCombat(false);
+	puzzle = new Puzzle(false);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -75,6 +77,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(sceneFloor1);
 	AddModule(map);
 	AddModule(entityManager);
+	AddModule(puzzle);
 	AddModule(particleManager);
 	AddModule(hud);
 	AddModule(sceneMenu);
