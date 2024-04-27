@@ -23,6 +23,8 @@ public:
 
 	bool Update(float dt);
 
+	void ResetPuzzle();
+
 	bool CleanUp();
 
 	void DrawPieces();
@@ -43,6 +45,8 @@ public:
 	bool pieceCollected[4] = { false, false, false, false };
 	float dt;
 	bool showUI = false;
+	bool isPuzzleCompleted = false;
+	bool canInteract = false;
 
 	iPoint slotPos[4] = { {550, 200},{ 650, 200 },{ 550, 300 },{ 650, 300 } };
 

@@ -483,7 +483,12 @@ bool Map::CreateColliders()
                             c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
                             c1->ctype = ColliderType::TRAP;
                             ret = true;
-                            break;      
+                            break;   
+                        case 13:
+                            c1 = app->physics->CreateRectangleSensor(pos.x, pos.y, mapData.tileWidth * 2, mapData.tileHeight * 2, STATIC);
+                            c1->ctype = ColliderType::PUZZLE;
+                            ret = true;
+                            break;
                         case 102:
                             c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
                             c1->ctype = ColliderType::PLATFORM;

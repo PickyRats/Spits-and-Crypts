@@ -16,6 +16,9 @@
  <tileset firstgid="160" name="escaleras" tilewidth="64" tileheight="64" tilecount="12" columns="4">
   <image source="escaleras.png" width="259" height="233"/>
  </tileset>
+ <tileset firstgid="172" name="Pedestal_puzle" tilewidth="64" tileheight="64" tilecount="4" columns="2">
+  <image source="Pedestal_puzle.png" width="128" height="128"/>
+ </tileset>
  <layer id="16" name="Fondo" width="110" height="12" opacity="0.48">
   <properties>
    <property name="Draw" type="bool" value="true"/>
@@ -3049,27 +3052,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile gid="1"/>
    <tile/>
    <tile/>
    <tile/>
@@ -3112,6 +3094,27 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="172"/>
+   <tile gid="173"/>
    <tile/>
    <tile/>
    <tile/>
@@ -3220,8 +3223,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="174"/>
+   <tile gid="175"/>
    <tile/>
    <tile/>
    <tile/>
@@ -3374,12 +3377,6 @@
    <tile gid="112"/>
    <tile/>
    <tile/>
-   <tile gid="1"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile gid="2"/>
    <tile/>
    <tile/>
    <tile/>
@@ -3389,7 +3386,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1"/>
    <tile/>
    <tile/>
    <tile/>
@@ -3399,7 +3395,14 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="2"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile gid="112"/>
@@ -3704,7 +3707,6 @@
    <tile gid="158"/>
    <tile/>
    <tile/>
-   <tile gid="2"/>
    <tile/>
    <tile/>
    <tile/>
@@ -3719,7 +3721,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="2"/>
+   <tile/>
+   <tile/>
    <tile gid="112"/>
    <tile gid="112"/>
    <tile gid="112"/>
@@ -5875,7 +5878,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile gid="3"/>

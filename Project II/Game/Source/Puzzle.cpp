@@ -65,29 +65,36 @@ bool Puzzle::Update(float dt)
 				}
 			}
 		}
-
-		if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				piecePos[i] = pieceInitialPos[i];
-			}
-			for (int i = 0; i < 4; i++)
-			{
-				slotOccupied[i] = false;
-				pieceInSlot[i] = false;
-			}
-			isSelecting = false;
-			selectedPiece = -1;
-		}
+		if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) ResetPuzzle();
 	}
-	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+
+	if (slotOccupied[0] && slotOccupied[1] && slotOccupied[2] && slotOccupied[3])
+	{
+		if (!isPuzzleCompleted) ResetPuzzle();
+	}
+
+	if (canInteract && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 	{
 		showUI = !showUI;
 	}
 	if (showUI) DrawPieces();
 
 	return true;
+}
+
+void Puzzle::ResetPuzzle()
+{
+	for (int i = 0; i < 4; i++)
+	{
+		piecePos[i] = pieceInitialPos[i];
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		slotOccupied[i] = false;
+		pieceInSlot[i] = false;
+	}
+	isSelecting = false;
+	selectedPiece = -1;
 }
 
 void Puzzle::DrawPieces()
