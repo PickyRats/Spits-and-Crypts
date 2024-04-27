@@ -20,6 +20,7 @@
 #include "DialogManager.h"
 #include "SceneCombat.h"
 #include "Puzzle.h"
+#include "Puzzle2.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -59,6 +60,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	dialogManager = new DialogManager();
 	sceneCombat = new SceneCombat(false);
 	puzzle = new Puzzle(false);
+	puzzle2 = new Puzzle2(false);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -78,6 +80,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(entityManager);
 	AddModule(puzzle);
+	AddModule(puzzle2);
 	AddModule(particleManager);
 	AddModule(hud);
 	AddModule(sceneMenu);
