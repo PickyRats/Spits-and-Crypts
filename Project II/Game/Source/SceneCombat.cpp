@@ -299,6 +299,11 @@ bool SceneCombat::CleanUp()
 
 	app->map->Disable();
 	app->tex->UnLoad(floor1background);
+	app->tex->UnLoad(tileTexture);
+	app->tex->UnLoad(tileEnemyTexture);
+	app->tex->UnLoad(selectedTileTexture);
+	app->tex->UnLoad(cursorTexture);
+
 	return true;
 }
 

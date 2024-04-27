@@ -298,7 +298,7 @@ bool SceneMenu::Update(float dt)
 		if (onMenu) {
 			app->render->DrawTexture(background, 0, 0, NULL, SDL_FLIP_NONE, 0);
 			app->render->DrawTexture(settings, 0, 0, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(controlsHint, 30, 670, NULL, SDL_FLIP_NONE, 0);
+			//app->render->DrawTexture(controlsHint, 30, 670, NULL, SDL_FLIP_NONE, 0);
 			if (onSettingsControls)
 			{
 				settingsFxButton->state = GuiControlState::HIDDEN;
@@ -478,7 +478,7 @@ bool SceneMenu::Update(float dt)
 		if (onMenu) {
 			app->render->DrawTexture(background, 0, 0, NULL, SDL_FLIP_NONE, 0);
 			app->render->DrawTexture(credits, 0, 0, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(controlsHint, 30, 670, NULL, SDL_FLIP_NONE, 0);
+			//app->render->DrawTexture(controlsHint, 30, 670, NULL, SDL_FLIP_NONE, 0);
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
@@ -529,14 +529,25 @@ bool SceneMenu::CleanUp()
 	app->tex->UnLoad(exitHover);
 	app->tex->UnLoad(exitClick);
 	app->tex->UnLoad(settings);
-	app->tex->UnLoad(returnNormal);
-	app->tex->UnLoad(returnHover);
-	app->tex->UnLoad(returnClick);
+	app->tex->UnLoad(credits);
 	app->tex->UnLoad(settingsBoxNormal);
 	app->tex->UnLoad(settingsBoxHover);
+	app->tex->UnLoad(settingsControls);
 	app->tex->UnLoad(settingsTick);
 	app->tex->UnLoad(settingsSlider);
-	app->tex->UnLoad(credits);
+	app->tex->UnLoad(settingsAudioPanel);
+	app->tex->UnLoad(settingsOptionsPanel);
+	app->tex->UnLoad(settingsOptionsButtonNormal);
+	app->tex->UnLoad(settingsOptionsButtonHover);
+	app->tex->UnLoad(settingsAudioButtonNormal);
+	app->tex->UnLoad(settingsAudioButtonHover);
+	app->tex->UnLoad(settingsControlsButtonNormal);
+	app->tex->UnLoad(settingsControlsButtonHover);
+	//app->tex->UnLoad(controlsHint);
+
+	//app->audio->UnloadFx(FxButton1);
+	//app->audio->UnloadFx(FxButton2);	
+
 	//Clean Music
 	app->audio->CleanMusic(configNode2.child("musicMenu").attribute("path").as_string(), configNode2.child("musicMenu").attribute("fadeOutTime").as_float());
 	

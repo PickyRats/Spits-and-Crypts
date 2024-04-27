@@ -56,6 +56,7 @@ bool SceneIntro::CleanUp()
 {
 	LOG("Freeing SceneIntro");
 	app->tex->UnLoad(logo);
+	app->audio->UnloadFx(logo_audio);
 	
 	return true;
 }

@@ -214,3 +214,18 @@ void Audio::PauseFx(unsigned int id)
 		}
 	}
 }
+
+void Audio::UnloadFx(unsigned int id)
+{
+	if (!active)
+		return;
+
+	if (id > 0 && id <= fx.Count())
+	{
+		Mix_Chunk* chunkToRemove = fx[id - 1];
+		fx.Del(fx.At(id - 1));
+
+		Mix_FreeChunk(chunkToRemove);
+	}
+}
+

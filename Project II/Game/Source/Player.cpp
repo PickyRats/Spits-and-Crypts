@@ -303,6 +303,7 @@ bool Player::CleanUp()
 {
 	app->tex->UnLoad(texture);
 
+	app->audio->UnloadFx(stepsFx);
 	return true;
 }
 

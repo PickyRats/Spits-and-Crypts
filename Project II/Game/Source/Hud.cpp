@@ -641,6 +641,15 @@ bool Hud::CleanUp()
 	app->tex->UnLoad(settingsBoxNormal);
 	app->tex->UnLoad(settingsBoxHover);
 	app->tex->UnLoad(settings);
+	app->tex->UnLoad(settingsControls);
+	app->tex->UnLoad(settingsAudioPanel);
+	app->tex->UnLoad(settingsOptionsPanel);
+	app->tex->UnLoad(settingsControlsButtonNormal);
+	app->tex->UnLoad(settingsControlsButtonHover);
+	app->tex->UnLoad(settingsAudioButtonNormal);
+	app->tex->UnLoad(settingsAudioButtonHover);
+	app->tex->UnLoad(settingsOptionsButtonNormal);
+	app->tex->UnLoad(settingsOptionsButtonHover);
 
 	return true;
 }
