@@ -10,6 +10,7 @@
 #include "GuiManager.h"
 #include "ParticleManager.h"
 #include "Hud.h"
+#include "Puzzle.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -45,7 +46,7 @@ bool SceneFloor1::Awake(pugi::xml_node& config)
 	}
 	for (pugi::xml_node itemNode = config.child("Piece"); itemNode; itemNode = itemNode.next_sibling("Piece"))
 	{
-		Piezas_puzle* pieces = (Piezas_puzle*)app->entityManager->CreateEntity(EntityType::PIEZAS);
+		PiezasPuzle* pieces = (PiezasPuzle*)app->entityManager->CreateEntity(EntityType::PIEZAS);
 		pieces->parameters = itemNode;
 	}
 	//if (config.child("map")) {
@@ -70,6 +71,7 @@ bool SceneFloor1::Start()
 	app->map->Enable();
 	app->entityManager->Enable();
 	app->hud->Enable();
+	app->puzzle->Enable();
 
 	//Load the player in the map
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(playerStartPosition.x), PIXEL_TO_METERS(playerStartPosition.y)), 0);

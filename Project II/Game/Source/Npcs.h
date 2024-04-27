@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __NPCS_H__
+#define __NPCS_H__
 
 #include "EntityManager.h"
 #include "Entity.h"
@@ -54,3 +55,4 @@ public:
 
 };
 
+#endif // __NPCS_H__

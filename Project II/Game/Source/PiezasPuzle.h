@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __PIEZASPUZLE_H__
+#define __PIEZASPUZLE_H__
 
 #include "EntityManager.h"
 #include "Entity.h"
@@ -9,12 +10,12 @@
 struct SDL_Texture;
 
 
-class Piezas_puzle :public Entity
+class PiezasPuzle :public Entity
 {
 public:
 
-	Piezas_puzle();
-	virtual ~Piezas_puzle();
+	PiezasPuzle();
+	virtual ~PiezasPuzle();
 
 	bool Awake();
 
@@ -26,13 +27,9 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
-	void LoadAnimations();
-
 	void DrawPieces();
 
-	void Interact(int id);
-
-	int sceneNum = 5;
+	void Interact();
 	
 
 public:
@@ -40,16 +37,15 @@ public:
 	const char* texturePath;
 
 	SDL_Texture* texture = NULL;
-	int pieceId; // 1=ABUELA, 2=NIETA
+	int pieceId; 
 
 	PhysBody* pbody;
-	PhysBody* playerPbody;
-	bool physCreated = false;
 
-	Animation* currentAnim;
-	Animation idleAnim;
+	bool physCreated = false;
 
 	float dt;
 
-
 };
+
+
+#endif // __PIEZASPUZLE_H__

@@ -1,4 +1,4 @@
-#include "Piezas_Puzle.h"
+#include "PiezasPuzle.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -13,19 +13,20 @@
 #include "Point.h"
 #include "Physics.h"
 #include "FadeToBlack.h"
-#include "Hud.h""
+#include "Hud.h"
+#include "Puzzle.h"
 
-Piezas_puzle::Piezas_puzle() : Entity(EntityType::PIEZAS)
+PiezasPuzle::PiezasPuzle() : Entity(EntityType::PIEZAS)
 {
 	name.Create("Piece");
 
 }
 
-Piezas_puzle::~Piezas_puzle() {
+PiezasPuzle::~PiezasPuzle() {
 
 }
 
-bool Piezas_puzle::Awake() {
+bool PiezasPuzle::Awake() {
 
 
 	position.x = parameters.attribute("x").as_int();
@@ -36,22 +37,19 @@ bool Piezas_puzle::Awake() {
 	return true;
 }
 
-bool Piezas_puzle::Start() {
+bool PiezasPuzle::Start() {
 
 	//initilize texture
 	texture = app->tex->Load(texturePath);
-	pbody = app->physics->CreateCircle(position.x-30, position.y-16, 22, bodyType::STATIC);
+	pbody = app->physics->CreateRectangleSensor(position.x-30, position.y-16, 22, 22, bodyType::STATIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ITEM;
 	physCreated = true;
-	//LoadAnimations();
-
-	//currentAnim = &idleAnim;
 
 	return true;
 }
 
-bool Piezas_puzle::Update(float dt)
+bool PiezasPuzle::Update(float dt)
 {
 		
 		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 50;
@@ -61,23 +59,21 @@ bool Piezas_puzle::Update(float dt)
 		return true;
 }
 
-void Piezas_puzle::Interact(int id)
+void PiezasPuzle::Interact()
 {
-	
+	app->puzzle->pieceCollected[pieceId] = true;
+	app->physics->world->DestroyBody(pbody->body);
 }
 
 
-
-void Piezas_puzle::DrawPieces()
+void PiezasPuzle::DrawPieces()
 {
 
-	//SDL_Rect rect = currentAnim->GetCurrentFrame();
-
-	app->render->DrawTexture(texture, position.x , position.y );
+	if (!app->puzzle->pieceCollected[pieceId]) app->render->DrawTexture(texture, position.x , position.y );
 
 }
 
-bool Piezas_puzle::CleanUp()
+bool PiezasPuzle::CleanUp()
 {
 	app->tex->UnLoad(texture);
 
@@ -85,7 +81,7 @@ bool Piezas_puzle::CleanUp()
 }
 
 // Handles the collision
-void Piezas_puzle::OnCollision(PhysBody* physA, PhysBody* physB) {
+void PiezasPuzle::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	switch (physB->ctype)
 	{
@@ -94,8 +90,8 @@ void Piezas_puzle::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 
 	case ColliderType::PLAYER:
-		Interact(pieceId);
-		LOG("Collision UNKNOWN");
+		Interact();
+		LOG("Collision PLAYER");
 		break;
 	}
 

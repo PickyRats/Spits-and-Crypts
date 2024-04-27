@@ -14,6 +14,7 @@
 #include "SceneOasisFaraon.h"
 #include "SceneTemple.h"
 #include "SceneFloor1.h"
+#include "Puzzle.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -339,6 +340,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::STAIRS:
 		isClimbing = true;
 		break;
+	case ColliderType::PUZZLE:
+		app->puzzle->canInteract = true;
+		break;
 	}
 
 }
@@ -366,6 +370,10 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::STAIRS:
 		isClimbing = false;
+		break;
+	case ColliderType::PUZZLE:
+		app->puzzle->canInteract = false;
+		app->puzzle->showUI = false;
 		break;
 	}
 
