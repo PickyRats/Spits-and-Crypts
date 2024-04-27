@@ -23,8 +23,6 @@ public:
 
 	bool Update(float dt);
 
-	void ResetPuzzle();
-
 	bool CleanUp();
 
 	void DrawPieces();
@@ -39,6 +37,7 @@ public:
 	iPoint rightPosition[3] = { {700, 185},{800, 185},{880, 185} };
 	iPoint centerPosition = { 465, 185 };
 	iPoint piecePosition[3] = { {0, 0},{ 0, 0 },{ 0, 0 } };
+	bool puzzleCompleted = false;
 };
 
 

@@ -50,6 +50,13 @@ bool Puzzle2::Update(float dt)
 {
 	DrawPieces();
 
+	if (isPieceInserted[0] == 0 && isPieceInserted[1] == 0 && isPieceInserted[2] == 0
+		&& rotation[0] == 90 && rotation[1] == 90 && rotation[2] == 90)
+	{
+		if(!puzzleCompleted) LOG("PUZZLE 2 COMPLETE");
+		puzzleCompleted = true;
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		for (int i = 0; i < 3; i++)
@@ -162,11 +169,6 @@ bool Puzzle2::Update(float dt)
 	return true;
 }
 
-void Puzzle2::ResetPuzzle()
-{
-	
-}
-
 void Puzzle2::DrawPieces()
 {
 	for (int i = 3; i < 6; i++)
@@ -184,6 +186,14 @@ void Puzzle2::DrawPieces()
 
 bool Puzzle2::CleanUp()
 {
-
+	app->tex->UnLoad(texture[0]);
+	app->tex->UnLoad(texture[1]);
+	app->tex->UnLoad(texture[2]);
+	app->tex->UnLoad(texture[3]);
+	app->tex->UnLoad(texture[4]);
+	app->tex->UnLoad(texture[5]);
+	app->tex->UnLoad(texture[6]);
+	app->tex->UnLoad(texture[7]);
+	app->tex->UnLoad(texture[8]);
 	return true;
 }
