@@ -11,6 +11,7 @@
 #include "ParticleManager.h"
 #include "Hud.h"
 #include "Puzzle.h"
+#include "Puzzle2.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -71,7 +72,7 @@ bool SceneFloor1::Start()
 	app->map->Enable();
 	app->entityManager->Enable();
 	app->hud->Enable();
-	app->puzzle->Enable();
+	app->puzzle2->Enable();
 
 	//Load the player in the map
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(playerStartPosition.x), PIXEL_TO_METERS(playerStartPosition.y)), 0);

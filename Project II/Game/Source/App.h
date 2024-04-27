@@ -32,6 +32,7 @@ class SceneIntro;
 class DialogManager;
 class SceneCombat;
 class Puzzle;
+class Puzzle2;
 
 class App
 {
@@ -122,6 +123,7 @@ public:
 	DialogManager* dialogManager;
 	SceneCombat* sceneCombat;
 	Puzzle* puzzle;
+	Puzzle2* puzzle2;
 
 	uint32 maxFrameDuration = 16;
 	uint32 initialMaxFrameDuration = 16;
