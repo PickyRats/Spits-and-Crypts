@@ -40,9 +40,10 @@ public:
 	int selectedPiece = -1;
 	int pieceSlot = -1;
 	bool isSelecting = false;
-	bool slotOccupied[4] = { false, false, false, false };
+	int slotOccupied[4] = { -1, -1, -1, -1 };
 	bool pieceInSlot[4] = { false, false, false, false };
 	bool pieceCollected[4] = { false, false, false, false };
+	int correctPieces[4] = { 2, 3, 1, 0 };
 	float dt;
 	bool showUI = false;
 	bool isPuzzleCompleted = false;

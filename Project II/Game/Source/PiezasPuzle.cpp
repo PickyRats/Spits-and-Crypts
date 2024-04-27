@@ -62,6 +62,7 @@ bool PiezasPuzle::Update(float dt)
 void PiezasPuzle::Interact()
 {
 	app->puzzle->pieceCollected[pieceId] = true;
+	app->physics->world->DestroyBody(pbody->body);
 }
 
 
@@ -90,7 +91,7 @@ void PiezasPuzle::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	case ColliderType::PLAYER:
 		Interact();
-		LOG("Collision UNKNOWN");
+		LOG("Collision PLAYER");
 		break;
 	}
 
