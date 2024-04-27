@@ -31,12 +31,12 @@ public:
 
 public:
 
-	SDL_Texture* texture[6] = { NULL,NULL,NULL };
+	SDL_Texture* texture[9] = { NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL };
 	int isPieceInserted[3] = { 1, 1, 1 };
 	int rotation[6] = { 0, 0, 0, 0, 0, 0 };
 	int selection = 0;
-	iPoint leftPosition = { 200, 185 };
-	iPoint rightPosition = { 800, 185 };
+	iPoint leftPosition[3] = { {250, 185},{150, 185},{70, 185}};
+	iPoint rightPosition[3] = { {700, 185},{800, 185},{880, 185} };
 	iPoint centerPosition = { 465, 185 };
 	iPoint piecePosition[3] = { {0, 0},{ 0, 0 },{ 0, 0 } };
 };
