@@ -178,7 +178,7 @@ bool SceneMenu::Update(float dt)
 				fxClickPlayed = true;
 			}
 
-			app->fade->Fade(this, (Module*)app->sceneFloor1, 60.0f);
+			app->fade->Fade(this, (Module*)app->sceneLight, 60.0f);
 
 		}
 		else if (loadGameButton->state == GuiControlState::FOCUSED)

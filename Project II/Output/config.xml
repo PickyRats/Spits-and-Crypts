@@ -185,6 +185,11 @@
 		<Piece x="6208" y="384" texturepath="Assets/Textures/pieza_puzle_4.png" id="3" />
 	</sceneFloor1>
 	
+	<!-- sceneLight-->
+	<sceneLight>
+		<map path="Assets/Maps/" name="Map_light.tmx"/>
+	</sceneLight>
+	
 	<!-- Menu-->
 	<scenemenu>
 		<background texturepath="Assets/Textures/Screens/main_menu_background.png"/>

@@ -143,6 +143,9 @@ public:
 	void UpdateMapSize();
 	void UpdateTileLoadSize();
 
+
+	void EnableLayer(const char* layerName, bool enable = true);
+
 private:
 
 	bool CreateColliders();
