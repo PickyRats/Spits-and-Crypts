@@ -22,6 +22,11 @@ struct LightMirror
 	int type = 0;
 	int rotation = 0;
 };
+struct Trapdoor
+{
+	iPoint position;
+	int rotation = 0;
+};
 
 class SceneLight : public Module
 {
@@ -88,6 +93,7 @@ private:
 	int rayRotation[4] = { 0, 90, 180, 270 };
 
 	LightMirror lightMirrors[8];
+	Trapdoor trapdoors[2];
 	RayTiles rayTiles[20][18];
 };
 
