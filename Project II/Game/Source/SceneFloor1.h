@@ -61,8 +61,8 @@ public:
 	bool win = false;
 	int sceneNum = 1;
 
-	int levelWidth = 37 * 64;
-	int levelHeight = 12 * 64;
+	int levelWidth = 200 * 64;
+	int levelHeight = 37 * 64;
 
 private:
 	SDL_Texture* backgroundTexture;
