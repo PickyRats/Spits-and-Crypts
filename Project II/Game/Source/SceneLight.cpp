@@ -110,6 +110,12 @@ bool SceneLight::Start()
 	app->map->EnableLayer("Espejo3_1", false);
 	app->map->EnableLayer("Espejo3_2", false);
 	app->map->EnableLayer("Espejo3_3", false);
+	app->map->EnableLayer("Espejo4_0", false);
+	app->map->EnableLayer("Espejo4_1", false);
+	app->map->EnableLayer("Espejo4_2", false);
+	app->map->EnableLayer("Espejo5_0", false);
+	app->map->EnableLayer("Espejo5_1", false);
+	app->map->EnableLayer("Espejo5_2", false);
 
 	playerY = 600;
 
@@ -244,7 +250,13 @@ void SceneLight::SetRays()
 		if (lightMirrors[1].type == 1)
 		{
 			app->map->EnableLayer("Espejo2_0", false);
+			app->map->EnableLayer("Espejo2_1", false);
 			app->map->EnableLayer("Espejo2_3", true);
+
+			app->map->EnableLayer("Espejo3_0", false);
+			app->map->EnableLayer("Espejo3_1", false);
+			app->map->EnableLayer("Espejo3_2", false);
+			app->map->EnableLayer("Espejo3_3", false);
 		}
 		else if (lightMirrors[1].type == 0)
 		{
@@ -282,6 +294,10 @@ void SceneLight::SetRays()
 			else if (trapdoors[0].rotation == 0)
 			{
 				app->map->EnableLayer("Espejo2_1", false);
+				app->map->EnableLayer("Espejo3_0", false);
+				app->map->EnableLayer("Espejo3_1", false);
+				app->map->EnableLayer("Espejo3_2", false);
+				app->map->EnableLayer("Espejo3_3", false);
 			}
 		}
 	}
