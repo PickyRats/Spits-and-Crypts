@@ -97,6 +97,9 @@ bool SceneCombat::Start()
 	app->map->player2->position = { 0, 576 };
 
 	currentEntity = players[currentPlayerIndex];
+
+	app->audio->PlayMusic(configNodeCombat.child("music").child("CombatMusic").attribute("path").as_string());
+
 	return true;
 }
 
