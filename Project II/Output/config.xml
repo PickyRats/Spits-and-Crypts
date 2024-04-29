@@ -28,6 +28,7 @@
 
 		<!-- Music -->
 		<music>
+			<CombatMusic path="Assets/Audio/Music/Combat1_Music.ogg" fadeTime="2" fadeOutTime="2"/>
 		</music>
     
 		<!--Enemy -->
