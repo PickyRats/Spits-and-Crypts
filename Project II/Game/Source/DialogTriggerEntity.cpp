@@ -11,6 +11,7 @@
 #include "Physics.h"
 #include "SceneShop.h"
 #include "SceneOasisFaraon.h"
+#include "SceneTemple.h"
 
 DialogTrigger::DialogTrigger() : Entity(EntityType::DIALOG_TRIGGER)
 {
@@ -69,6 +70,11 @@ bool DialogTrigger::Update(float dt)
 	else if (app->sceneOasisFaraon->active && dialogScene == app->sceneOasisFaraon->sceneNum)
 	{
 		if (!physCreated) CreateCollider();
+
+	}
+	else if (app->sceneTemple->active && dialogScene == app->sceneTemple->sceneNum)
+	{
+		if (!physCreated) CreateColliderBig();
 
 	}
 	else
@@ -163,6 +169,14 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 void DialogTrigger::CreateCollider()
 {
 	pbody = app->physics->CreateRectangleSensor(position.x, position.y, 80, 120, bodyType::KINEMATIC);
+	pbody->listener = this;
+	pbody->ctype = ColliderType::DIALOG_TRIGGER;
+	physCreated = true;
+}
+
+void DialogTrigger::CreateColliderBig()
+{
+	pbody = app->physics->CreateRectangleSensor(position.x, position.y, 100, 300, bodyType::KINEMATIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::DIALOG_TRIGGER;
 	physCreated = true;
