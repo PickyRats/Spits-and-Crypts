@@ -47,6 +47,7 @@ bool Player::Start() {
 	currentAnim = &idleAnim;
 
 	stepsFx = app->audio->LoadFx("Assets/Audio/Fx/Footsteps_Fx.wav");
+	
 	climbFx = app->audio->LoadFx("Assets/Audio/Fx/escaleras_Fx.wav");
 	//ToggleGodMode();
 
@@ -321,6 +322,9 @@ bool Player::CleanUp()
 	app->tex->UnLoad(texture);
 
 	app->audio->UnloadFx(stepsFx);
+	
+	app->audio->UnloadFx(climbFx);
+
 	return true;
 }
 
@@ -359,6 +363,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PUZZLE:
 		app->puzzle->canInteract = true;
+
 		break;
 	}
 

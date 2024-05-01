@@ -40,6 +40,8 @@ public:
 	int pieceId; 
 
 	PhysBody* pbody;
+	
+	uint pickItemFx;
 
 	bool physCreated = false;
 

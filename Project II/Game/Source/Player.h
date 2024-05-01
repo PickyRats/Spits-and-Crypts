@@ -101,6 +101,7 @@ public:
 	bool isVisible = true;
 
 	uint stepsFx;
+
 	uint climbFx;
 
 	bool isDead = false;

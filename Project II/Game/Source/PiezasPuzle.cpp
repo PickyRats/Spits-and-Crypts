@@ -43,6 +43,7 @@ bool PiezasPuzle::Start() {
 	texture = app->tex->Load(texturePath);
 	pbody = app->physics->CreateRectangleSensor(position.x-30, position.y-16, 22, 22, bodyType::STATIC);
 	pbody->listener = this;
+	pickItemFx = app->audio->LoadFx("Assets/Audio/Fx/itemPick_Fx.wav");
 	pbody->ctype = ColliderType::ITEM;
 	physCreated = true;
 
@@ -76,6 +77,7 @@ void PiezasPuzle::DrawPieces()
 bool PiezasPuzle::CleanUp()
 {
 	app->tex->UnLoad(texture);
+	app->audio->UnloadFx(pickItemFx);
 
 	return true;
 }
@@ -92,6 +94,7 @@ void PiezasPuzle::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PLAYER:
 		Interact();
 		LOG("Collision PLAYER");
+		app->audio->PlayFx(pickItemFx);
 		break;
 	}
 
