@@ -47,6 +47,7 @@ bool Player::Start() {
 	currentAnim = &idleAnim;
 
 	stepsFx = app->audio->LoadFx("Assets/Audio/Fx/Footsteps_Fx.wav");
+	climbFx = app->audio->LoadFx("Assets/Audio/Fx/escaleras_Fx.wav");
 	//ToggleGodMode();
 
 	if (id == 1)
@@ -87,7 +88,7 @@ bool Player::Update(float dt)
 				//player movement
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 				{
-
+					
 					LeftMovement();
 				}
 
@@ -106,6 +107,7 @@ bool Player::Update(float dt)
 				//Climbing
 				if (isClimbing)
 				{
+					isWalking = false;
 					if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 					{
 						UpMovement();
@@ -211,14 +213,15 @@ bool Player::Update(float dt)
 void Player::LeftMovement()
 {
 	isFacingRight = false;
-	isWalking = true;	
+	if(!isClimbing) isWalking = true;	
+	
 	vel.x = -speed * 1.5f * dt;
 }
 
 void Player::RightMovement()
 {
 	isFacingRight = true;
-	isWalking = true;
+	if (!isClimbing) isWalking = true;
 	vel.x = speed * 1.5f * dt;
 }
 
@@ -240,13 +243,26 @@ void Player::WalkingSound()
 			app->audio->PlayFx(stepsFx, -1);
 			walkingSoundPlaying = true;
 		}
-		
-	
 	}
 	else if(walkingSoundPlaying) // cuando se cambia el bool a true accede al segundo else que pausa el sonido y cambia el bool a false
 	{
 		app->audio->PauseFx(stepsFx);
 		walkingSoundPlaying = false;
+	}
+
+	if (isClimbing)
+	{
+		if (!climbingSoundPlaying)
+		{
+			app->audio->PlayFx(climbFx, -1);
+			climbingSoundPlaying = true;
+		}
+	}
+	else if (climbingSoundPlaying) // cuando se cambia el bool a true accede al segundo else que pausa el sonido y cambia el bool a false
+	{
+		
+		app->audio->PauseFx(climbFx);
+		climbingSoundPlaying = false;
 	}
 
 }
@@ -339,6 +355,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::STAIRS:
 		isClimbing = true;
+		isWalking = false;
 		break;
 	case ColliderType::PUZZLE:
 		app->puzzle->canInteract = true;
@@ -370,6 +387,7 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::STAIRS:
 		isClimbing = false;
+		
 		break;
 	case ColliderType::PUZZLE:
 		app->puzzle->canInteract = false;
