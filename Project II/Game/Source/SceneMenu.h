@@ -107,6 +107,9 @@ private:
 
 	GuiControlButton* creditsExitButton;
 
+	int x = 1280;
+	double a = 50;
+
 	//add music to the menu
 	uint MenuMusic;
 	

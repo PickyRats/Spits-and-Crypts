@@ -128,12 +128,18 @@ bool SceneMenu::Start()
 
 bool SceneMenu::Update(float dt)
 {
+	//Render background 
+	app->render->DrawTexture(background, 0, 0);
+	if (x > 366) {
+		a = a * exp(-0.055);
+		x -= a;
+	}
+	app->render->DrawTexture(background2, x, 33);
+
 	int rangoMusic = settingsMusicButton->sliderBounds.w - 20;
 	percentageMusic = (((float)settingsMusicButton->sliderPosition - settingsMusicButton->sliderBounds.x) / rangoMusic) * 100;
 	Mix_VolumeMusic(percentageMusic);
 	
-
-
 	int rangoFX = settingsFxButton->sliderBounds.w - 20;
 	int percentageFX = (((float)settingsFxButton->sliderPosition - settingsFxButton->sliderBounds.x) / rangoFX) * 100;
 	Mix_Volume(-1,percentageFX);
@@ -159,11 +165,6 @@ bool SceneMenu::Update(float dt)
 		settingsAudioButton->state = GuiControlState::HIDDEN;
 		settingsControlsButton->state = GuiControlState::HIDDEN;
 		creditsExitButton->state = GuiControlState::HIDDEN;
-
-		//Render background 
-		app->render->DrawTexture(background, 0, 0, NULL, SDL_FLIP_NONE, 0);
-		app->render->DrawTexture(background2, 366, 33, NULL, SDL_FLIP_NONE, 0);
-
 
 		//Check if buttons are focused or pressed. If pressed, do the action. With sound effects.
 		if (startButton->state == GuiControlState::FOCUSED)
@@ -300,8 +301,7 @@ bool SceneMenu::Update(float dt)
 		exitButton->state = GuiControlState::HIDDEN;
 
 		if (onMenu) {
-			app->render->DrawTexture(background, 0, 0, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(background2, 0, 0, NULL, SDL_FLIP_NONE, 0);
+			
 			//app->render->DrawTexture(controlsHint, 30, 670, NULL, SDL_FLIP_NONE, 0);
 			if (onSettingsControls)
 			{
@@ -480,8 +480,7 @@ bool SceneMenu::Update(float dt)
 
 		//Render background and credits
 		if (onMenu) {
-			app->render->DrawTexture(background, 0, 0, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(background2, 0, 0, NULL, SDL_FLIP_NONE, 0);
+			
 			app->render->DrawTexture(credits, 0, 0, NULL, SDL_FLIP_NONE, 0);
 			//app->render->DrawTexture(controlsHint, 30, 670, NULL, SDL_FLIP_NONE, 0);
 		}
