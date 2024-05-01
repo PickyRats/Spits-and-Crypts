@@ -189,6 +189,7 @@
 	<!-- Menu-->
 	<scenemenu>
 		<background texturepath="Assets/Textures/Screens/main_menu_background.png"/>
+		<background2 texturepath="Assets/Textures/Screens/logobackground.png"/>
 		<playNormal texturepath="Assets/Textures/Screens/Play/play_normal.png"/>
 		<playHover texturepath="Assets/Textures/Screens/Play/play_hover.png"/>
 		<playClick texturepath="Assets/Textures/Screens/Play/play_click.png"/>

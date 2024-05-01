@@ -48,6 +48,7 @@ public:
 private:
 
 	SDL_Texture* background;
+	SDL_Texture* background2;
 	SDL_Texture* menu;
 
 	SDL_Texture* playNormal;

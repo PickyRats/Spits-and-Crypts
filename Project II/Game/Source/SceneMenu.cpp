@@ -41,6 +41,7 @@ bool SceneMenu::Start()
 {
 	//Load textures
 	background = app->tex->Load(configNode2.child("background").attribute("texturepath").as_string());
+	background2 = app->tex->Load(configNode2.child("background2").attribute("texturepath").as_string());
 	playNormal = app->tex->Load(configNode2.child("playNormal").attribute("texturepath").as_string());
 	playHover = app->tex->Load(configNode2.child("playHover").attribute("texturepath").as_string());
 	playClick = app->tex->Load(configNode2.child("playClick").attribute("texturepath").as_string());
@@ -161,6 +162,9 @@ bool SceneMenu::Update(float dt)
 
 		//Render background 
 		app->render->DrawTexture(background, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(background2, 366, 33, NULL, SDL_FLIP_NONE, 0);
+
+
 		//Check if buttons are focused or pressed. If pressed, do the action. With sound effects.
 		if (startButton->state == GuiControlState::FOCUSED)
 		{
@@ -297,7 +301,7 @@ bool SceneMenu::Update(float dt)
 
 		if (onMenu) {
 			app->render->DrawTexture(background, 0, 0, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(settings, 0, 0, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(background2, 0, 0, NULL, SDL_FLIP_NONE, 0);
 			//app->render->DrawTexture(controlsHint, 30, 670, NULL, SDL_FLIP_NONE, 0);
 			if (onSettingsControls)
 			{
@@ -477,6 +481,7 @@ bool SceneMenu::Update(float dt)
 		//Render background and credits
 		if (onMenu) {
 			app->render->DrawTexture(background, 0, 0, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(background2, 0, 0, NULL, SDL_FLIP_NONE, 0);
 			app->render->DrawTexture(credits, 0, 0, NULL, SDL_FLIP_NONE, 0);
 			//app->render->DrawTexture(controlsHint, 30, 670, NULL, SDL_FLIP_NONE, 0);
 		}
@@ -512,6 +517,7 @@ bool SceneMenu::CleanUp()
 	LOG("Freeing SceneMenu");
 
 	app->tex->UnLoad(background);
+	app->tex->UnLoad(background2);
 	app->tex->UnLoad(playNormal);
 	app->tex->UnLoad(playHover);
 	app->tex->UnLoad(playClick);
