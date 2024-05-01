@@ -98,7 +98,7 @@ bool SceneCombat::Start()
 
 	currentEntity = players[currentPlayerIndex];
 
-	app->audio->PlayMusic(configNodeCombat.child("music").child("CombatMusic").attribute("path").as_string());
+	/*app->audio->PlayMusic(configNodeCombat.child("music").child("CombatMusic").attribute("path").as_string());*/
 
 	return true;
 }

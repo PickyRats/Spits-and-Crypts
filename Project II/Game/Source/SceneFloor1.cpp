@@ -81,7 +81,7 @@ bool SceneFloor1::Start()
 	app->map->Enable();
 	app->entityManager->Enable();
 	app->hud->Enable();
-	app->puzzle->Enable();
+	app->puzzle2->Enable();
 
 	//Load the player in the map
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(playerStartPosition.x), PIXEL_TO_METERS(playerStartPosition.y)), 0);
@@ -101,7 +101,7 @@ bool SceneFloor1::Start()
 	//carga assets
 	floor1background = app->tex->Load("Assets/Textures/Screens/floor1background.png");
 
-	app->audio->PlayMusic(configNodeFloor1.child("Floor1Music").attribute("path").as_string());
+	/*app->audio->PlayMusic(configNodeFloor1.child("Floor1Music").attribute("path").as_string());*/
 	
 	return true;
 }

@@ -36,8 +36,8 @@ bool Puzzle2::Start() {
 	texture[6] = app->tex->Load("Assets/Textures/Puzzle/piece_big_selected.png");
 	texture[7] = app->tex->Load("Assets/Textures/Puzzle/piece_medium_selected.png");
 	texture[8] = app->tex->Load("Assets/Textures/Puzzle/piece_small_selected.png");
-
-
+	rotateRockFx = app->audio->LoadFx("Assets/Audio/Fx/Rotar_Piezas.wav");
+	placeRockFx = app->audio->LoadFx("Assets/Audio/Fx/Colocar_Piezas.wav");
 	for (int i = 0; i < 3; i++)
 	{
 		piecePosition[i] = leftPosition[i];
@@ -49,6 +49,7 @@ bool Puzzle2::Start() {
 bool Puzzle2::Update(float dt)
 {
 	DrawPieces();
+	PlaySounds();
 
 	if (isPieceInserted[0] == 0 && isPieceInserted[1] == 0 && isPieceInserted[2] == 0
 		&& rotation[0] == 90 && rotation[1] == 90 && rotation[2] == 90)
@@ -63,6 +64,7 @@ bool Puzzle2::Update(float dt)
 		{
 			if (selection == i)
 			{
+				rotated = true;
 				if (rotation[i + 3] >= 90) rotation[i + 3] -= 90;
 				else rotation[i + 3] = 270;
 				if (isPieceInserted[i] == 0)
@@ -80,7 +82,9 @@ bool Puzzle2::Update(float dt)
 		{
 			if (selection == i)
 			{
+				rotated = true;
 				if (rotation[i + 3] < 270) rotation[i + 3] += 90;
+
 				else rotation[i + 3] = 0;
 				if (isPieceInserted[i] == 0)
 				{
@@ -101,6 +105,7 @@ bool Puzzle2::Update(float dt)
 	{
 		if (selection == 0)
 		{
+			placed = true;
 			if ((isPieceInserted[0] == 1 && rotation[3] == 0) 
 				|| (isPieceInserted[0] == 2 && rotation[3] == 180))
 			{
@@ -120,6 +125,7 @@ bool Puzzle2::Update(float dt)
 		}
 		else if (selection == 1)
 		{
+			placed = true;
 			if (isPieceInserted[0] != 0)
 			{
 				if ((isPieceInserted[1] == 1 && rotation[4] == 0 && rotation[3] == 0 && isPieceInserted[0] != 1)
@@ -142,6 +148,7 @@ bool Puzzle2::Update(float dt)
 		}
 		else if (selection == 2)
 		{
+			placed = true;
 			if (isPieceInserted[0] != 0 && isPieceInserted[1] != 0)
 			{
 				if ((isPieceInserted[2] == 1 && rotation[5] == 0 && rotation[3] == 0 && rotation[4] == 0
@@ -184,6 +191,24 @@ void Puzzle2::DrawPieces()
 	
 }
 
+void Puzzle2::PlaySounds()
+{
+	if (rotated)
+	{
+		app->audio->PlayFx(rotateRockFx);
+		rotated = false;
+
+	}
+	if (placed)
+	{
+		
+		app->audio->PlayFx(placeRockFx);
+		placed = false;
+	}
+	
+	
+
+}
 bool Puzzle2::CleanUp()
 {
 	app->tex->UnLoad(texture[0]);

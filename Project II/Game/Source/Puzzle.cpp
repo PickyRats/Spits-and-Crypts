@@ -34,6 +34,8 @@ bool Puzzle::Start() {
 	selectedTexture = app->tex->Load("Assets/Textures/selected_piece.png");
 	backgroundTexture = app->tex->Load("Assets/Textures/puzzle_background.png");
 	backgroundTexture2 = app->tex->Load("Assets/Textures/puzzle_background2.png");
+	startPuzzleFx = app->audio->LoadFx("Assets/Audio/Fx/abrir_Puzle.wav");
+	placeRockFx = app->audio->LoadFx("Assets/Audio/Fx/Colocar_Piezas.wav");
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -45,6 +47,7 @@ bool Puzzle::Start() {
 
 bool Puzzle::Update(float dt)
 {
+	PlaySounds();
 	if (pieceCollected[0] && pieceCollected[1] && pieceCollected[2] && pieceCollected[3])
 	{
 		for (int i = 0; i < 4; ++i)
@@ -55,12 +58,14 @@ bool Puzzle::Update(float dt)
 				{
 					selectedPiece = i;
 					isSelecting = true;
+					
 					pieceInSlot[i] = true;
 				}
 				else if (isSelecting && slotOccupied[i] == -1)
 				{
 					slotOccupied[i] = selectedPiece;
 					piecePos[selectedPiece] = slotPos[i];
+					placedpiece = true;
 					isSelecting = false;
 				}
 			}
@@ -84,6 +89,7 @@ bool Puzzle::Update(float dt)
 
 	if (canInteract && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 	{
+		startPuzzle = true;
 		showUI = !showUI;
 	}
 	if (showUI) DrawPieces();
@@ -125,7 +131,29 @@ void Puzzle::DrawPieces()
 	}
 
 }
-
+void Puzzle::PlaySounds()
+{
+	if (placedpiece)
+	{
+			app->audio->PlayFx(placeRockFx);
+			placedpiece = false;
+		
+	}
+	if (startPuzzle)
+	{
+		if (!startSoundPlaying)
+		{
+			app->audio->PlayFx(startPuzzleFx);
+			startSoundPlaying = true;
+		}
+	}
+	else if(startSoundPlaying)
+	{
+		startSoundPlaying = false;
+		app->audio->PauseFx(startPuzzleFx);
+	}
+	
+}
 bool Puzzle::CleanUp()
 {
 	app->tex->UnLoad(texture[0]);

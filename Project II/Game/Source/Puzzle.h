@@ -28,6 +28,8 @@ public:
 	bool CleanUp();
 
 	void DrawPieces();
+	
+	void PlaySounds();
 
 public:
 
@@ -48,12 +50,18 @@ public:
 	bool showUI = false;
 	bool isPuzzleCompleted = false;
 	bool canInteract = false;
-
+	bool placedpiece = false;
+	bool startPuzzle = false;
+	bool startSoundPlaying = false;
 	iPoint slotPos[4] = { {550, 200},{ 650, 200 },{ 550, 300 },{ 650, 300 } };
 
 	iPoint pieceInitialPos[4] = { {455, 485},{ 550, 485 },{ 645, 485 },{ 740, 485 } };
 
 	iPoint piecePos[4] = {{0,0},{0,0},{0,0},{0,0}};
+
+	uint startPuzzleFx;
+	uint rotateRockFx;
+	uint placeRockFx;
 
 };
 
