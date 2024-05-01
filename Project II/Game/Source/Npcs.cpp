@@ -7,6 +7,7 @@
 #include "SceneVillage.h"
 #include "SceneShop.h"
 #include "SceneOasisFaraon.h"
+#include "SceneFloor1.h"
 #include "SceneTemple.h"
 #include "Log.h"
 #include "Point.h"
@@ -54,6 +55,7 @@ bool Npcs::Update(float dt)
 	int sceneTemple = app->sceneTemple->sceneNum;
 	int sceneShop = app->sceneShop->sceneNum;
 	int sceneOasisFaraon = app->sceneOasisFaraon->sceneNum;
+	int sceneFloor1 = app->sceneFloor1->sceneNum;
 	int npcScene= parameters.attribute("scene").as_int();
 
 	//Comprobar si la escena actual es la que tiene el npc y crearlo si es así
@@ -70,6 +72,10 @@ bool Npcs::Update(float dt)
 		DrawNpcs();
 	}
 	else if (app->sceneOasisFaraon->active && sceneOasisFaraon == npcScene)
+	{
+		DrawNpcs();
+	}
+	else if (app->sceneFloor1->active && sceneFloor1 == npcScene)
 	{
 		DrawNpcs();
 	}
@@ -105,6 +111,9 @@ void Npcs::Interact(int id)
 	case 8:
 		GiveMission(8);
 		break;
+	case 9:
+		GiveMission(9);
+		break;
 	default:
 		break;
 	}
@@ -138,6 +147,9 @@ void Npcs::GiveMission(int idMission)
 		break;
 	case 8:
 		printf(" Soy el tabernero\n");
+		break;
+	case 9:
+		printf(" Que haces pidiendome wishky con cereales \n");
 		break;
 	default:
 		break;

@@ -219,6 +219,20 @@
 		<map path="Assets/Maps/" name="Map_floor_1.tmx"/>
 		
 		<floor1background texturepath="Assets/Textures/Screens/floor1background.png"/>
+
+		<!-- Talia -->
+		<npc x="600" y="400" texturepath="Assets/Textures/Npcs/Talia.png" id="1" scene="5"/>
+
+		<!-- Dialogo Talia -->
+		<dialogTrigger x="670" y="585"  name="Talia" repeat="true" scene="5">
+			<sentences>
+				<sentence text="Hola el Turmo me esta acosando"/>
+				<sentence text="Necesito alguien poderoso que me salve"/>
+			</sentences>
+			<repeat_sentences>
+				<sentence text="Basta de chachara,date prisa!"/>
+			</repeat_sentences>
+		</dialogTrigger>
 		
 		<!-- Music -->
 		<music>
