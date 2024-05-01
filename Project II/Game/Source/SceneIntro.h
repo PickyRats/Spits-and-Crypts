@@ -26,6 +26,9 @@ public:
 private:
 
 	SDL_Texture* logo;
+	SDL_Texture* logo1;
+	int y = 729;
+	double a = 40;
 	Timer timer;
 	bool changingScene = false;
 	int logo_audio;
