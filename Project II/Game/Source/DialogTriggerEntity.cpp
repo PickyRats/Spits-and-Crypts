@@ -11,6 +11,7 @@
 #include "Physics.h"
 #include "SceneShop.h"
 #include "SceneOasisFaraon.h"
+#include "SceneTemple.h"
 #include "SceneFloor1.h"
 
 DialogTrigger::DialogTrigger() : Entity(EntityType::DIALOG_TRIGGER)
@@ -72,19 +73,20 @@ bool DialogTrigger::Update(float dt)
 		if (!physCreated) CreateCollider();
 
 	}
+	else if (app->sceneTemple->active && dialogScene == app->sceneTemple->sceneNum)
+	{
+		if (!physCreated) CreateColliderBig();
+  }
 	else if (app->sceneFloor1->active && dialogScene == app->sceneFloor1->sceneNum)
 	{
 		if (!physCreated) CreateCollider();
 
 	}
-	else
-	{
-		if (physCreated)
-		{
-			app->physics->world->DestroyBody(pbody->body);
-			physCreated = false;
-		}
-	}
+	else if (physCreated)
+  {
+    app->physics->world->DestroyBody(pbody->body);
+    physCreated = false;
+  }
 
 	return true;
 }
@@ -169,6 +171,14 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 void DialogTrigger::CreateCollider()
 {
 	pbody = app->physics->CreateRectangleSensor(position.x, position.y, 80, 120, bodyType::KINEMATIC);
+	pbody->listener = this;
+	pbody->ctype = ColliderType::DIALOG_TRIGGER;
+	physCreated = true;
+}
+
+void DialogTrigger::CreateColliderBig()
+{
+	pbody = app->physics->CreateRectangleSensor(position.x, position.y, 100, 300, bodyType::KINEMATIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::DIALOG_TRIGGER;
 	physCreated = true;

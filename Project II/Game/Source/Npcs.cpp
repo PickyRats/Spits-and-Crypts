@@ -125,28 +125,28 @@ void Npcs::GiveMission(int idMission)
 	switch (idMission)
 	{
 	case 1:
-		printf(" La abuela dijo: Hola soy la abuela \n");
+		printf(" La abuela  \n");
 		break;
 	case 2:
-		printf(" y la nieta respondio: JUEPUTA \n");
+		printf("  la nieta  \n");
 		break;
 	case 3:
-		printf(" Soy maat imbecil \n");
+		printf(" Soy maat \n");
 		break;
 	case 4:
-		printf( "comeme toth la polla \n");
+		printf( " toth  \n");
 		break;
 	case 5:
-		printf(" Soy ISIS (Estado Islamico) \n");
+		printf(" Soy ISIS  \n");
 		break;
 	case 6:
-		printf("Eres Horruroso xd \n");
+		printf(" Horrus  \n");
 		break;
 	case 7:
-		printf(" Salami en mi cum a mi humilde tienda \n");
+		printf("  mi humilde tienda \n");
 		break;
 	case 8:
-		printf(" Que haces pidiendome wishky con cereales \n");
+		printf(" Soy el tabernero\n");
 		break;
 	case 9:
 		printf(" Que haces pidiendome wishky con cereales \n");

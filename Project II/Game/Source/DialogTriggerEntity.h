@@ -29,6 +29,8 @@ public:
 
 	void CreateCollider();
 
+	void CreateColliderBig();
+
 
 private:
 
