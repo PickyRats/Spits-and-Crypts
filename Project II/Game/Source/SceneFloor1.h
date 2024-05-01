@@ -59,7 +59,7 @@ public:
 	iPoint playerStartPosition = { 64,576 };
 	bool notUseChechPoint = false;
 	bool win = false;
-	int sceneNum = 1;
+	int sceneNum = 5;
 
 	int levelWidth = 37 * 64;
 	int levelHeight = 12 * 64;
