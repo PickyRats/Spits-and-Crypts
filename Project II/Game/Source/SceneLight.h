@@ -92,7 +92,7 @@ private:
 	int mirrorRotation[4] = { 0, 90, 180, 270 };
 	int rayRotation[4] = { 0, 90, 180, 270 };
 
-	LightMirror lightMirrors[8];
+	LightMirror lightMirrors[11];
 	Trapdoor trapdoors[2];
 	RayTiles rayTiles[20][18];
 };

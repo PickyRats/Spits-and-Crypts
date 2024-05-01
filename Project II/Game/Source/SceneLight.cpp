@@ -84,6 +84,12 @@ bool SceneLight::Start()
 	lightMirrors[1].rotation = 90;
 	lightMirrors[2].position = { 4 * 64, 14 * 64 };
 	lightMirrors[2].type = 0;
+	lightMirrors[3].position = { 6 * 64, 10 * 64 };
+	lightMirrors[3].type = 0;
+	lightMirrors[3].rotation = -90;
+	lightMirrors[4].position = { 10 * 64, 0 * 64 };
+	lightMirrors[4].type = 2;
+	lightMirrors[4].rotation = -90;
 
 	lightMirrors[5].position = { 19 * 64, 1 * 64 };
 	lightMirrors[5].type = 0;
@@ -93,9 +99,20 @@ bool SceneLight::Start()
 	lightMirrors[6].rotation = 180;
 	lightMirrors[7].position = { 0 * 64, 10 * 64 };
 	lightMirrors[7].type = 2;
-	lightMirrors[7].rotation = 180;
+	lightMirrors[7].rotation = 0;
+	lightMirrors[8].position = { 0 * 64, 4 * 64 };
+	lightMirrors[8].type = 0;
+	lightMirrors[8].rotation = 90;
+	lightMirrors[9].position = { 4 * 64, 0 * 64 };
+	lightMirrors[9].type = 2;
+	lightMirrors[9].rotation = -90;
+	lightMirrors[10].position = { 10 * 64, 17 * 64 };
+	lightMirrors[10].type = 2;
+	lightMirrors[10].rotation = 90;
 
 	trapdoors[0].position = { 15 * 64, 5 * 64 + 32};
+	trapdoors[1].position = { 10 * 64, 14 * 64 + 32 + 13};
+	trapdoors[1].rotation = -90;
 
 	app->map->EnableLayer("Ray", true);
 	app->map->EnableLayer("Espejo1_0", true);
@@ -202,8 +219,42 @@ bool SceneLight::Update(float dt)
 	}
 	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
 	{
+		if (lightMirrors[3].type == 0)
+		{
+			lightMirrors[3].type = 2;
+			lightMirrors[3].rotation = 0;
+		}
+		else
+		{
+			lightMirrors[3].type = 0;
+			lightMirrors[3].rotation = -90;
+		}
+		SetRays();
+	}
+	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
+	{
+		if (lightMirrors[4].type == 0)
+		{
+			lightMirrors[4].type = 2;
+			lightMirrors[4].rotation = -90;
+		}
+		else
+		{
+			lightMirrors[4].type = 0;
+			lightMirrors[4].rotation = 180;
+		}
+		SetRays();
+	}
+	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
+	{
 		if (trapdoors[0].rotation == 0) trapdoors[0].rotation = -90;
 		else trapdoors[0].rotation = 0;
+		SetRays();
+	}
+	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
+	{
+		if (trapdoors[1].rotation == 0) trapdoors[1].rotation = -90;
+		else trapdoors[1].rotation = 0;
 		SetRays();
 	}
 
@@ -257,6 +308,14 @@ void SceneLight::SetRays()
 			app->map->EnableLayer("Espejo3_1", false);
 			app->map->EnableLayer("Espejo3_2", false);
 			app->map->EnableLayer("Espejo3_3", false);
+
+			app->map->EnableLayer("Espejo4_0", false);
+			app->map->EnableLayer("Espejo4_1", false);
+			app->map->EnableLayer("Espejo4_2", false);
+
+			app->map->EnableLayer("Espejo5_0", false);
+			app->map->EnableLayer("Espejo5_1", false);
+			app->map->EnableLayer("Espejo5_2", false);
 		}
 		else if (lightMirrors[1].type == 0)
 		{
@@ -279,11 +338,51 @@ void SceneLight::SetRays()
 				{
 					app->map->EnableLayer("Espejo3_1", false);
 					app->map->EnableLayer("Espejo3_3", true);
+
+					if (lightMirrors[3].type == 0)
+					{
+						app->map->EnableLayer("Espejo4_0", false);
+						app->map->EnableLayer("Espejo4_1", true);
+					}
+					else if (lightMirrors[3].type == 2)
+					{
+						app->map->EnableLayer("Espejo4_1", false);
+						app->map->EnableLayer("Espejo4_0", true);
+
+						if (lightMirrors[4].type == 0)
+						{ 
+							app->map->EnableLayer("Espejo5_1", false);
+							app->map->EnableLayer("Espejo5_2", false);
+							app->map->EnableLayer("Espejo5_0", true);
+						}
+						else if (lightMirrors[4].type == 2)
+						{
+							app->map->EnableLayer("Espejo5_0", false);
+							if (trapdoors[1].rotation == -90)
+							{
+								app->map->EnableLayer("Espejo5_2", false);
+								app->map->EnableLayer("Espejo5_1", true);
+							}
+							else if (trapdoors[1].rotation == 0)
+							{
+								app->map->EnableLayer("Espejo5_1", false);
+								app->map->EnableLayer("Espejo5_2", true);
+							}
+						}
+					}
 				}
 				else if (lightMirrors[2].type == 0 && lightMirrors[2].rotation == 0)
 				{
 					app->map->EnableLayer("Espejo3_3", false);
 					app->map->EnableLayer("Espejo3_0", true);
+
+					app->map->EnableLayer("Espejo4_0", false);
+					app->map->EnableLayer("Espejo4_1", false);
+					app->map->EnableLayer("Espejo4_2", false);
+
+					app->map->EnableLayer("Espejo5_0", false);
+					app->map->EnableLayer("Espejo5_1", false);
+					app->map->EnableLayer("Espejo5_2", false);
 				}
 				else if (lightMirrors[2].type == 0 && lightMirrors[2].rotation == 90)
 				{
@@ -298,6 +397,14 @@ void SceneLight::SetRays()
 				app->map->EnableLayer("Espejo3_1", false);
 				app->map->EnableLayer("Espejo3_2", false);
 				app->map->EnableLayer("Espejo3_3", false);
+
+				app->map->EnableLayer("Espejo4_0", false);
+				app->map->EnableLayer("Espejo4_1", false);
+				app->map->EnableLayer("Espejo4_2", false);
+
+				app->map->EnableLayer("Espejo5_0", false);
+				app->map->EnableLayer("Espejo5_1", false);
+				app->map->EnableLayer("Espejo5_2", false);
 			}
 		}
 	}
@@ -314,6 +421,14 @@ void SceneLight::SetRays()
 		app->map->EnableLayer("Espejo3_1", false);
 		app->map->EnableLayer("Espejo3_2", false);
 		app->map->EnableLayer("Espejo3_3", false);
+
+		app->map->EnableLayer("Espejo4_0", false);
+		app->map->EnableLayer("Espejo4_1", false);
+		app->map->EnableLayer("Espejo4_2", false);
+
+		app->map->EnableLayer("Espejo5_0", false);
+		app->map->EnableLayer("Espejo5_1", false);
+		app->map->EnableLayer("Espejo5_2", false);
 	}
 	else if (lightMirrors[0].type == 2)
 	{
@@ -336,11 +451,13 @@ void SceneLight::SetRays()
 
 void SceneLight::DrawLightMirrors()
 {
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 11; i++)
 	{
-		app->render->DrawTexture(lightMirrorTexture, lightMirrors[i].position.x, lightMirrors[i].position.y, &lightMirrorRect[lightMirrors[i].type], SDL_FLIP_NONE, 1.0f, lightMirrors[i].rotation);
+		SDL_RendererFlip flip = SDL_FLIP_NONE;
+		if (i == 7) flip = SDL_FLIP_HORIZONTAL;
+		app->render->DrawTexture(lightMirrorTexture, lightMirrors[i].position.x, lightMirrors[i].position.y, &lightMirrorRect[lightMirrors[i].type], flip, 1.0f, lightMirrors[i].rotation);
 	}
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		app->render->DrawTexture(lightMirrorTexture, trapdoors[i].position.x, trapdoors[i].position.y, &lightMirrorRect[3], SDL_FLIP_NONE, 1.0f, trapdoors[i].rotation);
 	}
