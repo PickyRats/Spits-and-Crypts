@@ -87,6 +87,7 @@ public:
 
 	bool step = false;
 	bool walkingSoundPlaying = false;
+	bool climbingSoundPlaying = false;
 
 	b2Transform initialTransform;
 
@@ -100,6 +101,8 @@ public:
 	bool isVisible = true;
 
 	uint stepsFx;
+
+	uint climbFx;
 
 	bool isDead = false;
 

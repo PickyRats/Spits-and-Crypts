@@ -101,7 +101,7 @@ bool SceneFloor1::Start()
 	//carga assets
 	floor1background = app->tex->Load("Assets/Textures/Screens/floor1background.png");
 
-	app->audio->PlayMusic(configNodeFloor1.child("Floor1Music").attribute("path").as_string());
+	/*app->audio->PlayMusic(configNodeFloor1.child("Floor1Music").attribute("path").as_string());*/
 	
 	return true;
 }

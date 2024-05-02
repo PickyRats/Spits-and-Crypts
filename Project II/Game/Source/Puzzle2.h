@@ -27,6 +27,8 @@ public:
 
 	void DrawPieces();
 
+	void PlaySounds();
+
 public:
 
 	SDL_Texture* texture[9] = { NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL };
@@ -38,6 +40,11 @@ public:
 	iPoint centerPosition = { 465, 185 };
 	iPoint piecePosition[3] = { {0, 0},{ 0, 0 },{ 0, 0 } };
 	bool puzzleCompleted = false;
+	uint rotateRockFx;
+	uint placeRockFx;
+
+	bool rotated = false;
+	bool placed = false;
 };
 
 
