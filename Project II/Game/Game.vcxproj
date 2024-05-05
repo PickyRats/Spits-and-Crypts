@@ -119,6 +119,7 @@
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\Puzzle.cpp" />
     <ClCompile Include="Source\Puzzle2.cpp" />
+    <ClCompile Include="Source\SceneChoza.cpp" />
     <ClCompile Include="Source\SceneFloor1.cpp" />
     <ClCompile Include="Source\SceneShop.cpp" />
     <ClCompile Include="Source\SceneOasisFaraon.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="Source\Puzzle.h" />
     <ClInclude Include="Source\Puzzle2.h" />
     <ClInclude Include="Source\Queue.h" />
+    <ClInclude Include="Source\SceneChoza.h" />
     <ClInclude Include="Source\SceneFloor1.h" />
     <ClInclude Include="Source\SceneShop.h" />
     <ClInclude Include="Source\SceneOasisFaraon.h" />

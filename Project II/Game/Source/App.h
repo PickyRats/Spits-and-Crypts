@@ -19,6 +19,7 @@ class SceneVillage;
 class SceneShop;
 class SceneOasisFaraon;
 class SceneTemple;
+class SceneChoza;
 class SceneFloor1;
 class EntityManager;
 class Map;
@@ -33,6 +34,7 @@ class DialogManager;
 class SceneCombat;
 class Puzzle;
 class Puzzle2;
+
 
 class App
 {
@@ -110,6 +112,7 @@ public:
 	SceneShop* sceneShop;
 	SceneOasisFaraon* sceneOasisFaraon;
 	SceneTemple* sceneTemple;
+	SceneChoza* sceneChoza;
 	SceneFloor1* sceneFloor1;
 	EntityManager* entityManager;
 	Map* map;

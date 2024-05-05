@@ -49,6 +49,7 @@ public:
 
 	Animation* currentAnim;
 	Animation idleAnim;
+	bool mission1 = false;
 
 	float dt;
 
