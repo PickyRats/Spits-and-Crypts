@@ -48,6 +48,7 @@ public:
 private:
 
 	SDL_Texture* background;
+	SDL_Texture* background2;
 	SDL_Texture* menu;
 
 	SDL_Texture* playNormal;
@@ -105,6 +106,9 @@ private:
 	
 
 	GuiControlButton* creditsExitButton;
+
+	int x = 1280;
+	double a = 50;
 
 	//add music to the menu
 	uint MenuMusic;
