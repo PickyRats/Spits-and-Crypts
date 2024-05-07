@@ -89,6 +89,9 @@ bool SceneVillage::Start()
 
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
+	int i = 1;
+	piedra=app->physics->CreateCircle(200, 640, 30, DYNAMIC);
+	
 
 	aldea = app->tex->Load("Assets/Textures/Screens/aldea.png");
 

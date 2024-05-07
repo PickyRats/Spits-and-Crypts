@@ -73,6 +73,7 @@ private:
 
 	int levelWidth = 45 * 64;
 	int levelHeight = 12 * 64;
+	PhysBody* piedra=nullptr;
 
 	int playerX, playerY, cameraX, cameraY;
 	bool changingLevel = false;
