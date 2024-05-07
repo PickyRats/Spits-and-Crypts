@@ -76,11 +76,11 @@ bool SceneMenu::Start()
 	FxButton2 = app->audio->LoadFx(configNode2.child("buttonFx2").attribute("path").as_string());
 
 	//Menu Buttons
-	startButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, NULL, playNormal, playHover, playClick, { 100, 250, 400, 50 }, this);//primer numero la posicion en x, 2ndo la pos en y, 3r el largo del boton y 4t el alto del boton.
-	loadGameButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, loadGameDisabled, loadGameNormal, loadGameHover, loadGameClick, { 100, 330, 400, 50 }, this);
-	settingsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, NULL, settingsNormal, settingsHover, settingsClick, { 100, 410, 400, 50 }, this);
-	creditsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, NULL, creditsNormal, creditsHover, creditsClick, { 100, 490, 400, 50 }, this);
-	exitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, NULL, exitNormal, exitHover, exitClick, { 100, 570, 400, 50 }, this);
+	startButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, NULL, playNormal, playHover, playClick, { 54, 198, 240, 55 }, this);//primer numero la posicion en x, 2ndo la pos en y, 3r el largo del boton y 4t el alto del boton.
+	loadGameButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, loadGameDisabled, loadGameNormal, loadGameHover, loadGameClick, { 54, 266, 240, 55 }, this);
+	settingsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, NULL, settingsNormal, settingsHover, settingsClick, { 54, 334, 240, 55 }, this);
+	creditsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, NULL, creditsNormal, creditsHover, creditsClick, { 54, 402, 240, 55 }, this);
+	exitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, NULL, exitNormal, exitHover, exitClick, { 54, 470, 240, 55 }, this);
 
 	startButton->state = GuiControlState::NORMAL;
 	loadGameButton->state = GuiControlState::DISABLED;
