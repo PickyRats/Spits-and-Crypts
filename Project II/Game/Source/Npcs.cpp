@@ -127,7 +127,7 @@ void Npcs::GiveMission(int idMission)
 	case 1:
 		mission1 = true;
 		printf("ves a buscar a mi nieta  \n");
-		break;
+		break;                   
 	case 2:
 		printf("  la nieta  \n");
 		break;

@@ -46,6 +46,7 @@ bool DialogManager::Start() {
 
 
 	background_tex = app->tex->Load(background_tex_path.c_str());
+	background_mission = app->tex->Load(background_mission_path.c_str());
 
 	return ret;
 }
