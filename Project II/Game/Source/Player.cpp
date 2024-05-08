@@ -194,6 +194,11 @@ bool Player::Update(float dt)
 				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneTemple, 60.0f);
 				doorTemple = false;
 			}
+			else if (doorChoza)
+			{
+				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneChoza, 60.0f);
+				doorChoza = false;
+			}
 			else if (doorFlor1)
 			{
 				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneFloor1, 60.0f);
@@ -348,6 +353,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::DOOR_TEMPLE:
 		doorTemple = true;
 		break;
+	case ColliderType::DOOR_CHOZA:
+		doorChoza = true;
+		break;
 	case ColliderType::DOOR_FLOOR_1:
 		doorFlor1 = true;
 		break;
@@ -380,6 +388,9 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::DOOR_OASIS:
 		doorOasis = false;
+		break;
+	case ColliderType::DOOR_CHOZA:
+		doorChoza = false;
 		break;
 	case ColliderType::DOOR_TEMPLE:
 		doorTemple = false;
