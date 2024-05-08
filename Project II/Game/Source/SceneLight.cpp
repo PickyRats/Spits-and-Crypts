@@ -183,11 +183,13 @@ bool SceneLight::Update(float dt)
 		{
 			lightMirrors[0].type = 2;
 			lightMirrors[0].rotation = 90;
+			app->audio->PlayFx(mirror_rotationFx);
 		}
 		else
 		{
 			lightMirrors[0].type = 0;
 			lightMirrors[0].rotation = 0;
+			app->audio->PlayFx(mirror_rotationFx);
 		}
 		SetRays();
 	}
@@ -199,6 +201,7 @@ bool SceneLight::Update(float dt)
 			lightMirrors[1].type = 0;
 			lightMirrors[1].rotation = 90;
 		}
+		app->audio->PlayFx(mirror_rotationFx);
 		SetRays();
 	}
 	if (app->input->GetKey(SDL_SCANCODE_U) == KEY_DOWN)
@@ -219,6 +222,7 @@ bool SceneLight::Update(float dt)
 			lightMirrors[2].type = 0;
 			lightMirrors[2].rotation = 0;
 		}
+		app->audio->PlayFx(mirror_rotationFx);
 		SetRays();
 	}
 	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
@@ -233,6 +237,7 @@ bool SceneLight::Update(float dt)
 			lightMirrors[3].type = 0;
 			lightMirrors[3].rotation = -90;
 		}
+		app->audio->PlayFx(mirror_rotationFx);
 		SetRays();
 	}
 	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
@@ -247,6 +252,7 @@ bool SceneLight::Update(float dt)
 			lightMirrors[4].type = 0;
 			lightMirrors[4].rotation = 180;
 		}
+		app->audio->PlayFx(mirror_rotationFx);
 		SetRays();
 	}
 	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
@@ -254,12 +260,14 @@ bool SceneLight::Update(float dt)
 		
 		if (trapdoors[0].rotation == 0) trapdoors[0].rotation = -90;
 		else trapdoors[0].rotation = 0;
+		app->audio->PlayFx(trampillafx);
 		SetRays();
 	}
 	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 	{
 		if (trapdoors[1].rotation == 0) trapdoors[1].rotation = -90;
 		else trapdoors[1].rotation = 0;
+		app->audio->PlayFx(trampillafx);
 		SetRays();
 	}
 
