@@ -53,6 +53,10 @@ bool SceneLight::Start()
 	lightMirrorTexture = app->tex->Load("Assets/Textures/Puzzle/light_mirror.png");
 	lightRayTexture = app->tex->Load("Assets/Textures/Puzzle/light_ray.png");
 
+	//load audios
+	trampillafx = app->audio->LoadFx("Assets/Audio/Fx/trampilla.wav");
+	mirror_rotationFx = app->audio->LoadFx("Assets/Audio/Fx/rotacion_espejo.wav");
+
 	//Load the player in the map
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(96), PIXEL_TO_METERS(640)), 0);
 
@@ -247,6 +251,7 @@ bool SceneLight::Update(float dt)
 	}
 	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
 	{
+		
 		if (trapdoors[0].rotation == 0) trapdoors[0].rotation = -90;
 		else trapdoors[0].rotation = 0;
 		SetRays();

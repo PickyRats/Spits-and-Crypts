@@ -89,6 +89,11 @@ private:
 	SDL_Texture* lightRayTexture;
 	SDL_Rect lightMirrorRect[4] = { {0,0,64,64}, {64,0,64,64}, {128,0,64,64}, {192,0,64,64} };
 	SDL_Rect lightRayRect[4] = { {0,0,64,64}, {64,0,64,64}, {128,0,64,64}, {192,0,64,64} };
+
+	//audios
+	uint trampillafx;
+	uint mirror_rotationFx;
+
 	int mirrorRotation[4] = { 0, 90, 180, 270 };
 	int rayRotation[4] = { 0, 90, 180, 270 };
 
