@@ -90,13 +90,13 @@ bool SceneMenu::Start()
 
 	//Settings Buttons
 	settingsExitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, NULL, exitNormal, exitHover, exitClick, { 1419, 92, 63, 63 }, this);
-	settingsFullScreenButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 7, NULL, settingsBoxNormal, settingsBoxHover, settingsTick, { 661, 250, 89, 89 }, this);
-	settingsVSyncButton = (GuiControlCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 8, NULL, settingsBoxNormal, settingsBoxHover, settingsTick, { 661, 350, 89, 89 }, this);
-	settingsMusicButton = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 231, NULL, settingsSlider, settingsSlider, settingsSlider, { 893, 245, 30, 80 }, this, { 643, 245, 280, 80 });
-	settingsFxButton = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 21, NULL, settingsSlider, settingsSlider, settingsSlider, { 893, 355, 30, 80 }, this, { 643, 355, 280, 80 });
-	settingsOptionsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, NULL, settingsOptionsButtonNormal, settingsOptionsButtonHover, exitClick, { 40, 150, 400, 50 }, this);
-	settingsAudioButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, NULL, settingsAudioButtonNormal, settingsAudioButtonHover, exitClick, { 440, 150, 400, 50 }, this);
-	settingsControlsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, NULL, settingsControlsButtonNormal, settingsControlsButtonHover, exitClick, { 840, 150, 400, 50 }, this);
+	settingsFullScreenButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 7, NULL, settingsBoxNormal, settingsBoxNormal, settingsTick, { 750, 187, 60, 32 }, this);
+	settingsVSyncButton = (GuiControlCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 8, NULL, settingsBoxNormal, settingsBoxNormal, settingsTick, { 750, 257, 89, 89 }, this);
+	settingsMusicButton = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 231, NULL, settingsSlider, settingsSlider, settingsSlider, { 795, 197, 30, 30 }, this, { 570, 182, 225, 50 });
+	settingsFxButton = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 21, NULL, settingsSlider, settingsSlider, settingsSlider, { 795, 263, 30, 30 }, this, { 570, 248, 225, 50 });
+	settingsOptionsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, NULL, settingsOptionsButtonNormal, settingsOptionsButtonHover, settingsOptionsButtonHover, { 378, 116, 170, 30 }, this);
+	settingsAudioButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, NULL, settingsAudioButtonNormal, settingsAudioButtonHover, settingsAudioButtonHover, { 560, 116, 170, 30 }, this);
+	settingsControlsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, NULL, settingsControlsButtonNormal, settingsControlsButtonHover, settingsControlsButtonHover, { 742, 116, 170, 30 }, this);
 
 	settingsExitButton->state = GuiControlState::NORMAL;
 	settingsFullScreenButton->state = GuiControlState::NORMAL;
@@ -305,11 +305,11 @@ bool SceneMenu::Update(float dt)
 				settingsMusicButton->state = GuiControlState::HIDDEN;
 				settingsFullScreenButton->state = GuiControlState::HIDDEN;
 				settingsVSyncButton->state = GuiControlState::HIDDEN;
-				app->render->DrawTexture(settingsControls, 145, 200, NULL, SDL_FLIP_NONE, 0);
+				app->render->DrawTexture(settingsControls, 0, 0, NULL, SDL_FLIP_NONE, 0);
 			}
 			else if (onSettingsAudio)
 			{
-				app->render->DrawTexture(settingsAudioPanel,340, 200, NULL, SDL_FLIP_NONE, 0);
+				app->render->DrawTexture(settingsAudioPanel,0, 0, NULL, SDL_FLIP_NONE, 0);
 				settingsFxButton->state = GuiControlState::NORMAL;
 				settingsMusicButton->state = GuiControlState::NORMAL;
 				settingsFullScreenButton->state = GuiControlState::HIDDEN;
@@ -331,7 +331,7 @@ bool SceneMenu::Update(float dt)
 					fxHoverPlayed = false;
 					fxClickPlayed = false;
 				}
-				app->render->DrawTexture(settingsOptionsPanel, 340, 200, NULL, SDL_FLIP_NONE, 0);
+				app->render->DrawTexture(settingsOptionsPanel, 0, 0, NULL, SDL_FLIP_NONE, 0);
 				if (buttonsActivated)
 				{
 					buttonsActivated = false;
