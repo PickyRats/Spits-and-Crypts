@@ -545,6 +545,9 @@ void Map::DestroyAllColliders()
                 || ctype == ColliderType::DOOR_TEMPLE
                 || ctype == ColliderType::DOOR_ALDEA
                 || ctype == ColliderType::DOOR_FLOOR_1
+                || ctype == ColliderType::TRAP
+                || ctype == ColliderType::STAIRS
+                || ctype == ColliderType::PUZZLE
                 || ctype == ColliderType:: COMBAT)
             {
                 physicsWorld->DestroyBody(body);

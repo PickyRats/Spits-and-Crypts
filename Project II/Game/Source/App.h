@@ -20,6 +20,7 @@ class SceneShop;
 class SceneOasisFaraon;
 class SceneTemple;
 class SceneFloor1;
+class SceneEnding;
 class EntityManager;
 class Map;
 class Physics;
@@ -110,6 +111,7 @@ public:
 	SceneShop* sceneShop;
 	SceneOasisFaraon* sceneOasisFaraon;
 	SceneTemple* sceneTemple;
+	SceneEnding* sceneEnding;
 	SceneFloor1* sceneFloor1;
 	EntityManager* entityManager;
 	Map* map;

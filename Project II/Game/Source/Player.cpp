@@ -47,8 +47,8 @@ bool Player::Start() {
 	currentAnim = &idleAnim;
 
 	stepsFx = app->audio->LoadFx("Assets/Audio/Fx/Footsteps_Fx.wav");
-	
-	climbFx = app->audio->LoadFx("Assets/Audio/Fx/escaleras_Fx.wav");
+	jumpFx = app->audio->LoadFx("Assets/Audio/Fx/jump_FX.wav");
+	climbFx = app->audio->LoadFx("Assets/Audio/Fx/Footsteps_Fx.wav");
 	//ToggleGodMode();
 
 	if (id == 1)
@@ -85,17 +85,16 @@ bool Player::Update(float dt)
 			if (!godMode)
 			{
 				//Funcion para hacer sonidos
-				WalkingSound();
+				SoundManager();
+
 				//player movement
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 				{
-					
 					LeftMovement();
 				}
 
 				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 				{
-
 					RightMovement();
 				}
 
@@ -235,9 +234,23 @@ void Player::DownMovement()
 {
 	vel.y = speed * 1 * dt;
 }
-void Player::WalkingSound()
+void Player::SoundManager()
 {
-	if (isWalking)// si el bool isWalking es true  y is walking sound playing es false se activa el sonido y se cambia el bool a true
+	if (isjumping)
+	{
+		if (!jumpingSoundPlaying)
+		{
+			app->audio->PlayFx(jumpFx, 0);
+			jumpingSoundPlaying = true;
+		}
+	}
+	else if (jumpingSoundPlaying) // cuando se cambia el bool a true accede al segundo else que pausa el sonido y cambia el bool a false
+	{
+		app->audio->PauseFx(jumpFx);
+		jumpingSoundPlaying = false;
+	}
+
+	if (isWalking && !isjumping)// si el bool isWalking es true  y is walking sound playing es false se activa el sonido y se cambia el bool a true
 	{
 		if (!walkingSoundPlaying)
 		{
@@ -274,9 +287,10 @@ void Player::Jump()
 }
 
 void Player::Respaw() {
-	app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
 	health = 100;
 	isDead = false;
+	LOG("Respawn");
+	app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneEnding, 60.0f);
 }
 
 void Player::DrawPlayer()
