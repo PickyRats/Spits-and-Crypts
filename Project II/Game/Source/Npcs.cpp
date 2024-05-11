@@ -79,7 +79,6 @@ bool Npcs::Update(float dt)
 	{
 		DrawNpcs();
 	}
-
 	return true;
 }
 

@@ -110,6 +110,14 @@ bool Hud::Start()
 	settingsOptionsButtonNormal = app->tex->Load(configNode3.child("settingsOptionsButtonNormal").attribute("texturepath").as_string());
 	settingsOptionsButtonHover = app->tex->Load(configNode3.child("settingsOptionsButtonHover").attribute("texturepath").as_string());
 
+	//Inventory
+	inventoryTexture = app->tex->Load(configNode3.child("inventory").attribute("texturepath").as_string());
+	inventoryItem1 = app->tex->Load(configNode3.child("inventoryItem1").attribute("texturepath").as_string());
+	inventoryItem2 = app->tex->Load(configNode3.child("inventoryItem2").attribute("texturepath").as_string());
+	inventoryItem3 = app->tex->Load(configNode3.child("inventoryItem3").attribute("texturepath").as_string());
+
+	shopTexture = app->tex->Load(configNode3.child("shopTexture").attribute("texturepath").as_string());
+
 	//Create Buttons
 	exitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 0, NULL, exitNormal, exitHover, exitClick, { 1419, 92, 63, 63 }, this);
 	resumeButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, NULL, resumeNormal, resumeHover, resumeClick, { 657, 305, 281, 64 }, this);
@@ -163,6 +171,12 @@ bool Hud::Start()
 
 bool Hud::Update(float dt)
 {
+	//Inventory
+	
+	Inventory();
+	//Shop
+	
+	Shop();
 	//Pause menu
 	if (app->sceneVillage->pause || app->sceneShop->pause || app->sceneOasisFaraon->pause || app->sceneTemple->pause || app->sceneFloor1->pause) {
 		//If pause menu is activated, show buttons
@@ -603,6 +617,48 @@ bool Hud::Update(float dt)
 	return true;
 }
 
+void Hud::Inventory()
+{
+	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
+	{
+		inventory = !inventory;
+
+	}
+	if (inventory)
+	{
+		app->render->DrawTexture(inventoryTexture, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		
+		if (huecos[0] == 1)
+		{
+			app->render->DrawTexture(inventoryItem1, 0, 20, NULL, SDL_FLIP_NONE, 0);
+		}
+		if (huecos[1] == 1)
+		{
+			app->render->DrawTexture(inventoryItem2, 150, 20, NULL, SDL_FLIP_NONE, 0);
+		}
+		if (huecos[2] == 1)
+		{
+			app->render->DrawTexture(inventoryItem3, 300, 20, NULL, SDL_FLIP_NONE, 0);
+		}
+	}
+		
+}
+
+void Hud::Shop()
+{
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+	{
+		shop = !shop;
+
+	}
+	if (shop)
+	{
+		app->render->DrawTexture(shopTexture, 0, 0, NULL, SDL_FLIP_NONE, 0);
+	}
+}
+
+
+
 
 bool Hud::CleanUp()
 {
@@ -650,6 +706,11 @@ bool Hud::CleanUp()
 	app->tex->UnLoad(settingsAudioButtonHover);
 	app->tex->UnLoad(settingsOptionsButtonNormal);
 	app->tex->UnLoad(settingsOptionsButtonHover);
+	app->tex->UnLoad(inventoryTexture);
+	app->tex->UnLoad(inventoryItem1);
+	app->tex->UnLoad(inventoryItem2);
+	app->tex->UnLoad(inventoryItem3);
+	app->tex->UnLoad(shopTexture);
 
 	return true;
 }

@@ -24,6 +24,10 @@ public:
 
 	bool Update(float dt);
 
+	void Inventory();
+
+	void Shop();
+
 	bool CleanUp();
 
 	void DrawTimer();
@@ -123,6 +127,19 @@ private:
 	SDL_Texture* settingsBoxHover;
 
 	SDL_Texture* settings;
+
+	//Inventory
+
+	SDL_Texture* inventoryTexture;
+	SDL_Texture* inventoryItem1;
+	SDL_Texture* inventoryItem2;
+	SDL_Texture* inventoryItem3;
+	bool inventory = false;
+	int huecos[3] = { 0, 0, 0 };
+
+	//Shop
+	SDL_Texture* shopTexture;
+	bool shop = false;
 
 
 	GuiControlButton* exitButton;
