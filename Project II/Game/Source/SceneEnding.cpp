@@ -34,7 +34,7 @@ bool SceneEnding::Awake(pugi::xml_node& config)
 
 bool SceneEnding::Start()
 {
-	endingImage = app->tex->Load("Assets/Textures/Screens/Ending/Ending.png");
+	endingImage = app->tex->Load("Assets/Textures/Screens/Ending/defeat_screen.png");
 	//credits = app->tex->Load("Assets/Textures/Screens/logo1.png");
 	timer = Timer();
 	timer.Start();
@@ -47,10 +47,11 @@ bool SceneEnding::Start()
 
 bool SceneEnding::Update(float dt)
 {
-	if (timer.ReadSec() > 25 && !changingScene)
+	LOG("%d", timer.ReadSec());
+
+	if (timer.ReadSec() > 5)
 	{
-		app->fade->Fade(this, (Module*)app->sceneVillage, 30);
-		changingScene = true;
+		app->fade->Fade(this, (Module*)app->sceneFloor1, 30);
 	}
 
 	app->render->DrawTexture(endingImage, 0, 0 , NULL, SDL_FLIP_NONE, 0);
