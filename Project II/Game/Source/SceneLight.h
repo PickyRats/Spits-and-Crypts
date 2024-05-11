@@ -87,7 +87,7 @@ private:
 
 	SDL_Texture* lightMirrorTexture;
 	SDL_Texture* lightRayTexture;
-	SDL_Rect lightMirrorRect[4] = { {0,0,64,64}, {64,0,64,64}, {128,0,64,64}, {192,0,64,64} };
+	SDL_Rect lightMirrorRect[8] = { {0,0,64,64}, {64,0,64,64}, {128,0,64,64}, {192,0,64,64}, {0,64,64,64}, {64,64,64,64}, {128,64,64,64}, {192,64,64,64} };
 	SDL_Rect lightRayRect[4] = { {0,0,64,64}, {64,0,64,64}, {128,0,64,64}, {192,0,64,64} };
 
 	//audios
@@ -100,6 +100,9 @@ private:
 	LightMirror lightMirrors[11];
 	Trapdoor trapdoors[2];
 	RayTiles rayTiles[20][18];
+
+	int mirrorIndex = 0;
+	int trapdoorIndex = 0;
 };
 
 #endif // __SCENELIGHT_H__
