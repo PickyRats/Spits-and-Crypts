@@ -226,8 +226,8 @@
 		<!-- Dialogo Talia -->
 		<dialogTrigger x="670" y="585"  name="Talia" repeat="true" scene="5">
 			<sentences>
-				<sentence text="Hola el Turmo me esta acosando"/>
-				<sentence text="Necesito alguien poderoso que me salve"/>
+				<sentence text="Hola veo que estas algo malherido"/>
+				<sentence text="yo me encargare de tus heridas no te preocupes"/>
 			</sentences>
 			<repeat_sentences>
 				<sentence text="Basta de chachara,date prisa!"/>
