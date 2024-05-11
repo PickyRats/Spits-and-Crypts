@@ -3,10 +3,8 @@
 
 #include "Module.h"
 #include "Player.h"
-#include "Npcs.h"
-#include "GuiControl.h"
-#include "GuiControlButton.h"
 #include "SceneMenu.h"
+#include "Timer.h"
 #include <vector>
 
 struct SDL_Texture;
@@ -49,6 +47,8 @@ public:
 	// Called each loop iteration
 	bool Update(float dt);
 
+	void ShowNotification();
+
 	// Called before all Updates
 	bool PostUpdate();
 
@@ -85,6 +85,7 @@ private:
 
 	int playerX, playerY, cameraX, cameraY;
 
+	SDL_Texture* notificationTexture;
 	SDL_Texture* lightMirrorTexture;
 	SDL_Texture* lightRayTexture;
 	SDL_Rect lightMirrorRect[8] = { {0,0,64,64}, {64,0,64,64}, {128,0,64,64}, {192,0,64,64}, {0,64,64,64}, {64,64,64,64}, {128,64,64,64}, {192,64,64,64} };
@@ -103,6 +104,13 @@ private:
 
 	int mirrorIndex = 0;
 	int trapdoorIndex = 0;
+
+	bool notificationCreated = false;
+	bool isVisible = false;
+	bool isUp = false;
+	bool isDown = false;
+	int offset[5] = { 680, 690, 660, 1000, 1000 };
+	Timer timer;
 };
 
 #endif // __SCENELIGHT_H__

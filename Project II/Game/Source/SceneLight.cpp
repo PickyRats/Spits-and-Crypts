@@ -50,6 +50,7 @@ bool SceneLight::Start()
 	app->entityManager->Enable();
 	app->hud->Enable();
 
+	notificationTexture = app->tex->Load("Assets/Textures/Puzzle/triangulo.png");
 	lightMirrorTexture = app->tex->Load("Assets/Textures/Puzzle/light_mirror.png");
 	lightRayTexture = app->tex->Load("Assets/Textures/Puzzle/light_ray.png");
 	backgroundTexture = app->tex->Load("Assets/Textures/Screens/floor1background.png");
@@ -142,6 +143,8 @@ bool SceneLight::Start()
 	playerY = 600;
 
 	app->audio->PlayMusic(configNodeLight.child("villageAmbient").attribute("path").as_string());
+
+	timer = Timer();
 	return true;
 }
 
@@ -283,7 +286,41 @@ bool SceneLight::Update(float dt)
 		SetRays();
 	}
 
+	ShowNotification();
+
 	return true;
+}
+
+void SceneLight::ShowNotification()
+{
+	if (!notificationCreated)
+	{
+		LOG("CameraY: %d", cameraY);
+		LOG("MirrorY: %d", lightMirrors[mirrorIndex].position.y);
+		if (cameraY > lightMirrors[mirrorIndex].position.y) isUp = true;
+		else isUp = false;
+		if (cameraY + offset[mirrorIndex] < lightMirrors[mirrorIndex].position.y) isDown = true;
+		else isDown = false;
+		if (isUp || isDown)
+		{
+			notificationCreated = true;
+			timer.Start();
+		}
+	}
+	else
+	{
+		if (timer.ReadMSec() < 400)
+		{
+			if (isUp) app->render->DrawTexture(notificationTexture, lightMirrors[mirrorIndex].position.x + 20, 100, NULL, SDL_FLIP_NONE, 0);
+			else if (isDown) app->render->DrawTexture(notificationTexture, lightMirrors[mirrorIndex].position.x + 20, 620, NULL, SDL_FLIP_VERTICAL, 0);
+		}
+		else if (timer.ReadMSec() >= 600)
+		{
+			notificationCreated = false;
+		}
+	}
+	
+	
 }
 
 // Called each loop iteration
