@@ -66,9 +66,13 @@ public:
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
-	GuiControlButton* gcButtom;
-
 	bool pause = false;
+
+	bool interactMirror = false;
+	bool interactTrapdoor = false;	
+	
+	bool isInteractingMirror = false;
+	bool isInteractingTrapdoor = false;
 
 private:
 	SDL_Texture* backgroundTexture;
@@ -88,7 +92,9 @@ private:
 	SDL_Texture* notificationTexture;
 	SDL_Texture* lightMirrorTexture;
 	SDL_Texture* lightRayTexture;
-	SDL_Rect lightMirrorRect[8] = { {0,0,64,64}, {64,0,64,64}, {128,0,64,64}, {192,0,64,64}, {0,64,64,64}, {64,64,64,64}, {128,64,64,64}, {192,64,64,64} };
+	SDL_Rect lightMirrorRect[10] = { {0,0,64,64}, {64,0,64,64}, {128,0,64,64}, {192,0,64,64}, 
+									{0,64,64,64}, {64,64,64,64}, {128,64,64,64}, {192,64,64,64}, 
+									{0,128,64,64}, {64,128,64,64} };
 	SDL_Rect lightRayRect[4] = { {0,0,64,64}, {64,0,64,64}, {128,0,64,64}, {192,0,64,64} };
 
 	//audios
@@ -109,8 +115,13 @@ private:
 	bool isVisible = false;
 	bool isUp = false;
 	bool isDown = false;
-	int offset[5] = { 680, 690, 660, 1000, 1000 };
+	int offset[7] = { 680, 690, 660, 1000, 1000, 650, 650 };
 	Timer timer;
+
+	PhysBody* mirrorBody = nullptr;
+	PhysBody* trapdoorBody = nullptr;
+
+
 };
 
 #endif // __SCENELIGHT_H__

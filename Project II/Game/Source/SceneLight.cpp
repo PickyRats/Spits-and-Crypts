@@ -120,6 +120,11 @@ bool SceneLight::Start()
 	trapdoors[1].position = { 10 * 64, 14 * 64 + 32 + 13};
 	trapdoors[1].rotation = -90;
 
+	mirrorBody = app->physics->CreateRectangleSensor(5 * 64 + 32, 18 * 64 - 32, 64, 64, bodyType::STATIC);
+	mirrorBody->ctype = ColliderType::LIGHT1;
+	trapdoorBody = app->physics->CreateRectangleSensor(8 * 64 + 32, 18 * 64 - 32, 64, 64, bodyType::STATIC);
+	trapdoorBody->ctype = ColliderType::LIGHT2;
+
 	app->map->EnableLayer("Ray", true);
 	app->map->EnableLayer("Espejo1_0", true);
 	app->map->EnableLayer("Espejo1_1", false);
@@ -171,118 +176,139 @@ bool SceneLight::Update(float dt)
 	app->render->camera.x += (-cameraX - app->render->camera.x);
 	app->render->camera.y += (-cameraY - app->render->camera.y);
 
-	//SetRays();
 
-	//DrawLightRays();
 	DrawLightMirrors();
 
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	{
+		isInteractingMirror = false;
+		isInteractingTrapdoor = false;
+		if (interactMirror) isInteractingMirror = true;
+		else if (interactTrapdoor) isInteractingTrapdoor = true;
+	}
+
+	// Change mirror and trapdoor
 	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
 	{
-		if (mirrorIndex > 0) mirrorIndex--;
-		else mirrorIndex = 4;
+		if (isInteractingMirror)
+		{
+			if (mirrorIndex > 0) mirrorIndex--;
+			else mirrorIndex = 4;
+		}
+		else if (isInteractingTrapdoor)
+		{
+			if (trapdoorIndex > 0) trapdoorIndex--;
+			else trapdoorIndex = 1;
+		}
 	}
 	if (app->input->GetKey(SDL_SCANCODE_Y) == KEY_DOWN)
 	{
-		if (mirrorIndex < 4) mirrorIndex++;
-		else mirrorIndex = 0;
-	}
-	if (app->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN)
-	{
-		if (trapdoorIndex == 0) trapdoorIndex = 1;
-		else trapdoorIndex = 0;
+		if (isInteractingMirror)
+		{
+			if (mirrorIndex < 4) mirrorIndex++;
+			else mirrorIndex = 0;
+		}
+		else if (isInteractingTrapdoor)
+		{
+			if (trapdoorIndex < 1) trapdoorIndex++;
+			else trapdoorIndex = 0;
+		}
 	}
 
+	// Rotate mirror
 	if (app->input->GetKey(SDL_SCANCODE_U) == KEY_DOWN)
 	{
-		if (mirrorIndex == 0)
+		if (isInteractingMirror)
 		{
-			if (lightMirrors[0].type == 0) lightMirrors[0].type = 1;
-			else if (lightMirrors[0].type == 1)
+			if (mirrorIndex == 0)
 			{
-				lightMirrors[0].type = 2;
-				lightMirrors[0].rotation = 90;
+				if (lightMirrors[0].type == 0) lightMirrors[0].type = 1;
+				else if (lightMirrors[0].type == 1)
+				{
+					lightMirrors[0].type = 2;
+					lightMirrors[0].rotation = 90;
+				}
+				else
+				{
+					lightMirrors[0].type = 0;
+					lightMirrors[0].rotation = 0;
+				}
 			}
-			else
+			else if (mirrorIndex == 1)
 			{
-				lightMirrors[0].type = 0;
-				lightMirrors[0].rotation = 0;
+				if (lightMirrors[1].type == 0) lightMirrors[1].type = 1;
+				else
+				{
+					lightMirrors[1].type = 0;
+					lightMirrors[1].rotation = 90;
+				}
 			}
+			else if (mirrorIndex == 2)
+			{
+				if (lightMirrors[2].type == 0 && lightMirrors[2].rotation == 0) lightMirrors[2].rotation = 90;
+				else if (lightMirrors[2].type == 0 && lightMirrors[2].rotation == 90)
+				{
+					lightMirrors[2].type = 1;
+					lightMirrors[2].rotation = 0;
+				}
+				else if (lightMirrors[2].type == 1)
+				{
+					lightMirrors[2].type = 2;
+					lightMirrors[2].rotation = 90;
+				}
+				else
+				{
+					lightMirrors[2].type = 0;
+					lightMirrors[2].rotation = 0;
+				}
+			}
+			else if (mirrorIndex == 3)
+			{
+				if (lightMirrors[3].type == 0)
+				{
+					lightMirrors[3].type = 2;
+					lightMirrors[3].rotation = 0;
+				}
+				else
+				{
+					lightMirrors[3].type = 0;
+					lightMirrors[3].rotation = -90;
+				}
+			}
+			else if (mirrorIndex == 4)
+			{
+				if (lightMirrors[4].type == 0)
+				{
+					lightMirrors[4].type = 2;
+					lightMirrors[4].rotation = -90;
+				}
+				else
+				{
+					lightMirrors[4].type = 0;
+					lightMirrors[4].rotation = 180;
+				}
+			}
+			app->audio->PlayFx(mirror_rotationFx);
 		}
-		else if (mirrorIndex == 1)
+		else if (isInteractingTrapdoor)
 		{
-			if (lightMirrors[1].type == 0) lightMirrors[1].type = 1;
-			else
+			// Rotate trapdoor
+			if (trapdoorIndex == 0)
 			{
-				lightMirrors[1].type = 0;
-				lightMirrors[1].rotation = 90;
+				if (trapdoors[0].rotation == 0) trapdoors[0].rotation = -90;
+				else trapdoors[0].rotation = 0;
+
 			}
+			else if (trapdoorIndex == 1)
+			{
+				if (trapdoors[1].rotation == 0) trapdoors[1].rotation = -90;
+				else trapdoors[1].rotation = 0;
+			}
+			app->audio->PlayFx(trampillafx);
 		}
-		else if (mirrorIndex == 2)
-		{
-			if (lightMirrors[2].type == 0 && lightMirrors[2].rotation == 0) lightMirrors[2].rotation = 90;
-			else if (lightMirrors[2].type == 0 && lightMirrors[2].rotation == 90)
-			{
-				lightMirrors[2].type = 1;
-				lightMirrors[2].rotation = 0;
-			}
-			else if (lightMirrors[2].type == 1)
-			{
-				lightMirrors[2].type = 2;
-				lightMirrors[2].rotation = 90;
-			}
-			else
-			{
-				lightMirrors[2].type = 0;
-				lightMirrors[2].rotation = 0;
-			}
-		}
-		else if (mirrorIndex == 3)
-		{
-			if (lightMirrors[3].type == 0)
-			{
-				lightMirrors[3].type = 2;
-				lightMirrors[3].rotation = 0;
-			}
-			else
-			{
-				lightMirrors[3].type = 0;
-				lightMirrors[3].rotation = -90;
-			}
-		}
-		else if (mirrorIndex == 4)
-		{
-			if (lightMirrors[4].type == 0)
-			{
-				lightMirrors[4].type = 2;
-				lightMirrors[4].rotation = -90;
-			}
-			else
-			{
-				lightMirrors[4].type = 0;
-				lightMirrors[4].rotation = 180;
-			}
-		}
-		app->audio->PlayFx(mirror_rotationFx);
-		SetRays();
-	}
-	
-	if (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
-	{
-		if (trapdoorIndex == 0)
-		{
-			if (trapdoors[0].rotation == 0) trapdoors[0].rotation = -90;
-			else trapdoors[0].rotation = 0;
-			
-		}
-		else if (trapdoorIndex == 1)
-		{
-			if (trapdoors[1].rotation == 0) trapdoors[1].rotation = -90;
-			else trapdoors[1].rotation = 0;
-		}
-		app->audio->PlayFx(trampillafx);
 		SetRays();
 	}
 
@@ -295,12 +321,21 @@ void SceneLight::ShowNotification()
 {
 	if (!notificationCreated)
 	{
-		LOG("CameraY: %d", cameraY);
-		LOG("MirrorY: %d", lightMirrors[mirrorIndex].position.y);
-		if (cameraY > lightMirrors[mirrorIndex].position.y) isUp = true;
-		else isUp = false;
-		if (cameraY + offset[mirrorIndex] < lightMirrors[mirrorIndex].position.y) isDown = true;
-		else isDown = false;
+		if (isInteractingMirror)
+		{
+			if (cameraY > lightMirrors[mirrorIndex].position.y) isUp = true;
+			else isUp = false;
+			if (cameraY + offset[mirrorIndex] < lightMirrors[mirrorIndex].position.y) isDown = true;
+			else isDown = false;
+		}
+		else if (isInteractingTrapdoor)
+		{
+			if (cameraY > trapdoors[trapdoorIndex].position.y) isUp = true;
+			else isUp = false;
+			if (cameraY + offset[trapdoorIndex + 4] < trapdoors[trapdoorIndex].position.y) isDown = true;
+			else isDown = false;
+		}
+		
 		if (isUp || isDown)
 		{
 			notificationCreated = true;
@@ -311,12 +346,22 @@ void SceneLight::ShowNotification()
 	{
 		if (timer.ReadMSec() < 400)
 		{
-			if (isUp) app->render->DrawTexture(notificationTexture, lightMirrors[mirrorIndex].position.x + 20, 100, NULL, SDL_FLIP_NONE, 0);
-			else if (isDown) app->render->DrawTexture(notificationTexture, lightMirrors[mirrorIndex].position.x + 20, 620, NULL, SDL_FLIP_VERTICAL, 0);
+			if (isInteractingMirror)
+			{
+				if (isUp) app->render->DrawTexture(notificationTexture, lightMirrors[mirrorIndex].position.x + 20, 100, NULL, SDL_FLIP_NONE, 0);
+				else if (isDown) app->render->DrawTexture(notificationTexture, lightMirrors[mirrorIndex].position.x + 20, 620, NULL, SDL_FLIP_VERTICAL, 0);
+			}
+			else if (isInteractingTrapdoor)
+			{
+				if (isUp) app->render->DrawTexture(notificationTexture, trapdoors[trapdoorIndex].position.x + 10, 100, NULL, SDL_FLIP_NONE, 0);
+				else if (isDown) app->render->DrawTexture(notificationTexture, trapdoors[trapdoorIndex].position.x + 10, 620, NULL, SDL_FLIP_VERTICAL, 0);
+			}
 		}
 		else if (timer.ReadMSec() >= 600)
 		{
 			notificationCreated = false;
+			isUp = false;
+			isDown = false;
 		}
 	}
 	
@@ -521,15 +566,56 @@ void SceneLight::DrawLightMirrors()
 	{
 		SDL_RendererFlip flip = SDL_FLIP_NONE;
 		if (i == 7) flip = SDL_FLIP_HORIZONTAL;
-		app->render->DrawTexture(lightMirrorTexture, lightMirrors[i].position.x, lightMirrors[i].position.y, &lightMirrorRect[lightMirrors[i].type], flip, 1.0f, lightMirrors[i].rotation);
+		app->render->DrawTexture(
+			lightMirrorTexture, 
+			lightMirrors[i].position.x, 
+			lightMirrors[i].position.y, 
+			&lightMirrorRect[lightMirrors[i].type], 
+			flip, 
+			1.0f, 
+			lightMirrors[i].rotation
+		);
 	}
 	for (int i = 0; i < 2; i++)
 	{
-		app->render->DrawTexture(lightMirrorTexture, trapdoors[i].position.x, trapdoors[i].position.y, &lightMirrorRect[3], SDL_FLIP_NONE, 1.0f, trapdoors[i].rotation);
+		app->render->DrawTexture(
+			lightMirrorTexture, 
+			trapdoors[i].position.x, 
+			trapdoors[i].position.y, 
+			&lightMirrorRect[3], 
+			SDL_FLIP_NONE, 
+			1.0f, 
+			trapdoors[i].rotation
+		);
 	}
 	
-	app->render->DrawTexture(lightMirrorTexture, lightMirrors[mirrorIndex].position.x, lightMirrors[mirrorIndex].position.y, &lightMirrorRect[lightMirrors[mirrorIndex].type + 4], SDL_FLIP_NONE, 1.0f, lightMirrors[mirrorIndex].rotation);
-	app->render->DrawTexture(lightMirrorTexture, trapdoors[trapdoorIndex].position.x, trapdoors[trapdoorIndex].position.y, &lightMirrorRect[7], SDL_FLIP_NONE, 1.0f, trapdoors[trapdoorIndex].rotation);
+	if (isInteractingMirror)
+	{
+		app->render->DrawTexture(
+			lightMirrorTexture, 
+			lightMirrors[mirrorIndex].position.x, 
+			lightMirrors[mirrorIndex].position.y, 
+			&lightMirrorRect[lightMirrors[mirrorIndex].type + 4], 
+			SDL_FLIP_NONE, 
+			1.0f, 
+			lightMirrors[mirrorIndex].rotation
+		);
+	}
+	if (isInteractingTrapdoor)
+	{
+		app->render->DrawTexture(
+			lightMirrorTexture,
+			trapdoors[trapdoorIndex].position.x,
+			trapdoors[trapdoorIndex].position.y,
+			&lightMirrorRect[7],
+			SDL_FLIP_NONE,
+			1.0f,
+			trapdoors[trapdoorIndex].rotation
+		);
+	}
+
+	app->render->DrawTexture(lightMirrorTexture, 5 * 64, 17 * 64, &lightMirrorRect[8]);
+	app->render->DrawTexture(lightMirrorTexture, 8 * 64, 17 * 64, &lightMirrorRect[9]);
 }
 
 void SceneLight::SetCameraPosition(int x, int y)
