@@ -4,6 +4,8 @@
 #include "Module.h"
 #include "GuiControlButton.h"
 #include "GuiControlCheckBox.h"
+#include "GuiControlSlider.h"
+
 #include "GuiManager.h"
 #include "GuiControl.h"
 #include "Timer.h"
@@ -133,9 +135,10 @@ private:
 
 	GuiControlButton* settingsExitButton;
 	GuiControlButton* settingsReturnButton;
-	GuiControlButton* settingsMusicButton;
+	GuiControlSlider* settingsMusicButton;
+	GuiControlSlider* settingsFxButton;
 	GuiControlButton* settingsOptionsButton;
-	GuiControlButton* settingsFxButton;
+
 	GuiControlButton* settingsFullScreenButton;
 	GuiControlCheckBox* settingsVSyncButton;
 	GuiControlButton* settingsControlsButton;
