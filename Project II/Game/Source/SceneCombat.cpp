@@ -151,7 +151,9 @@ bool SceneCombat::Update(float dt)
 					app->render->DrawTexture(selectedTileTexture, enemies[enemyAttackIndex]->position.x, enemies[enemyAttackIndex]->position.y);
 					if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 					{
+						maxTiles = 50;
 						int enemyDistance = app->map->pathfinding->CreatePath(app->map->WorldToMap(currentEntity->position.x, currentEntity->position.y), app->map->WorldToMap(enemies[enemyAttackIndex]->position.x, enemies[enemyAttackIndex]->position.y));
+
 						if (enemyDistance <= currentEntity->attackRange)
 						{
 							currentEntity->currentPoints = 0;

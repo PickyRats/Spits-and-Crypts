@@ -579,6 +579,19 @@ bool Hud::Update(float dt)
 
 			app->render->DrawTexture(vidas, 123, 660, &lifeRects[app->map->player2->health / 10]);
 
+			for (int i = 0; i < 2; i++)
+			{
+				app->render->DrawTexture(
+					vidas, 
+					app->sceneCombat->enemies[i]->position.x + 24, 
+					app->sceneCombat->enemies[i]->position.y - 50, 
+					&lifeRects[app->sceneCombat->enemies[i]->health / 10],
+					SDL_FLIP_NONE,
+					0,
+					90
+				);
+			}
+
 			////
 			//
 			////botones abajo derecha
