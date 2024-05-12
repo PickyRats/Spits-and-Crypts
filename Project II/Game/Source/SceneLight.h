@@ -59,6 +59,12 @@ public:
 
 	void DrawLightMirrors();
 
+	void StartCameraShakeX(float duration, float intensity);
+
+	void StartCameraShakeY(float duration, float intensity);
+
+	void UpdateCameraShake();
+
 	void SetCameraPosition(int x, int y);
 
 	void ClampCamera();
@@ -75,6 +81,14 @@ public:
 	bool isInteractingTrapdoor = false;
 
 private:
+
+	bool cameraInitialized = false;
+	bool shakingCameraX = false;
+	bool shakingCameraY = false;
+	float shakeDuration;
+	float shakeIntensity;
+	float shakeTimer;
+
 	SDL_Texture* backgroundTexture;
 
 	SDL_Rect bg;

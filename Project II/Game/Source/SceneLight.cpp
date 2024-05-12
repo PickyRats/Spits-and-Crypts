@@ -60,7 +60,7 @@ bool SceneLight::Start()
 	mirror_rotationFx = app->audio->LoadFx("Assets/Audio/Fx/rotacion_espejo.wav");
 
 	//Load the player in the map
-	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(96), PIXEL_TO_METERS(640)), 0);
+	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(96), PIXEL_TO_METERS(1000)), 0);
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -172,10 +172,13 @@ bool SceneLight::Update(float dt)
 	SetCameraPosition(playerX - 550, playerY);
 
 	ClampCamera();
+	UpdateCameraShake();
 
-	app->render->camera.x += (-cameraX - app->render->camera.x);
-	app->render->camera.y += (-cameraY - app->render->camera.y);
-
+	if (cameraInitialized)
+	{
+		app->render->camera.x += (-cameraX - app->render->camera.x);
+		app->render->camera.y += (-cameraY - app->render->camera.y);
+	}
 
 	DrawLightMirrors();
 
@@ -617,6 +620,49 @@ void SceneLight::DrawLightMirrors()
 	app->render->DrawTexture(lightMirrorTexture, 5 * 64, 17 * 64, &lightMirrorRect[8]);
 	app->render->DrawTexture(lightMirrorTexture, 8 * 64, 17 * 64, &lightMirrorRect[9]);
 }
+
+void SceneLight::StartCameraShakeX(float duration, float intensity)
+{
+	shakingCameraX = true;
+	shakeTimer = duration;
+	shakeIntensity = intensity;
+	cameraInitialized = false;
+}
+
+void SceneLight::StartCameraShakeY(float duration, float intensity)
+{
+	shakingCameraY = true;
+	shakeTimer = duration;
+	shakeIntensity = intensity;
+	cameraInitialized = false;
+}
+
+void SceneLight::UpdateCameraShake()
+{
+	// Update camera shake
+	if (shakingCameraX)
+	{
+		if (shakeTimer > 0)
+		{
+			float offsetX = sin(shakeTimer * 20.0f) * shakeIntensity;
+			app->render->camera.x += static_cast<int>(offsetX);
+			shakeTimer -= 1.0f;
+		}
+		else shakingCameraX = false;
+	}
+	else if (shakingCameraY)
+	{
+		if (shakeTimer > 0)
+		{
+			float offsetY = sin(shakeTimer * 20.0f) * shakeIntensity;
+			app->render->camera.y += static_cast<int>(offsetY);
+			shakeTimer -= 1.0f;
+		}
+		else shakingCameraY = false;
+	}
+	else cameraInitialized = true;
+}
+
 
 void SceneLight::SetCameraPosition(int x, int y)
 {
