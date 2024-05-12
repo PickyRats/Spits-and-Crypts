@@ -72,7 +72,6 @@ bool Map::Update(float dt)
 
     ListItem<MapLayer*>* mapLayer;
     mapLayer = mapData.layers.start;
-
     // iterates the layers in the map
     while (mapLayer != NULL) {
         //Check if the property Draw exist get the value, if it's true draw the lawyer
@@ -631,4 +630,15 @@ void Map::CreateEntities(const char* nodeName, EntityType entityType, iPoint pos
     entity->parameters = entityNode;
     entity->position = iPoint(pos.x, pos.y);
     
+}
+
+void Map::EnableLayer(const char* layerName, bool enable)
+{
+    ListItem<MapLayer*>* mapLayer;
+    mapLayer = mapData.layers.start;
+
+    while (mapLayer != NULL) {
+        if (mapLayer->data->name == layerName) mapLayer->data->properties.GetProperty("Draw")->value = enable;
+        mapLayer = mapLayer->next;
+    }
 }
