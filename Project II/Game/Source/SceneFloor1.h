@@ -52,7 +52,7 @@ public:
 	bool SaveState(pugi::xml_node node);
 
 	GuiControlButton* gcButtom;
-
+	PhysBody* wall;
 	bool pause = false;
 	bool isTorchActive = false;
 	bool checkPoint = false;
@@ -61,6 +61,7 @@ public:
 	bool win = false;
 	int sceneNum = 5;
 
+	bool combatFinished = false;
 	int levelWidth = 200 * 64;
 	int levelHeight = 37 * 64;
 
@@ -72,9 +73,9 @@ private:
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	uint windowW, windowH;
-
+	
 	float cameraSmoothingFactor = 0.04f;
-
+	
 	int playerX, playerY, cameraX, cameraY;
 	bool changingLevel = false;
 	bool isLoading = false;
