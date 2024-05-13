@@ -36,6 +36,8 @@ bool Puzzle::Start() {
 	backgroundTexture2 = app->tex->Load("Assets/Textures/puzzle_background2.png");
 	startPuzzleFx = app->audio->LoadFx("Assets/Audio/Fx/abrir_Puzle.wav");
 	placeRockFx = app->audio->LoadFx("Assets/Audio/Fx/Colocar_Piezas.wav");
+	failPuzzleFx = app->audio->LoadFx("Assets/Audio/Fx/failPuzzleFx.wav");
+	completedPuzzleFx = app->audio->LoadFx("Assets/Audio/Fx/completedPuzzleFx.wav");
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -75,15 +77,16 @@ bool Puzzle::Update(float dt)
 
 	if (slotOccupied[0] != -1 && slotOccupied[1] != -1 && slotOccupied[2] != -1 && slotOccupied[3] != -1 && !isPuzzleCompleted)
 	{
-		if (slotOccupied[0] == correctPieces[0] 
-			&& slotOccupied[1] == correctPieces[1] 
-			&& slotOccupied[2] == correctPieces[2] 
+		if (slotOccupied[0] == correctPieces[0]
+			&& slotOccupied[1] == correctPieces[1]
+			&& slotOccupied[2] == correctPieces[2]
 			&& slotOccupied[3] == correctPieces[3])
 		{
 			isPuzzleCompleted = true;
+			app->audio->PlayFx(completedPuzzleFx);
 		}
 
-		if (!isPuzzleCompleted) ResetPuzzle();
+		if (!isPuzzleCompleted)	ResetPuzzle();
 		else LOG("PUZZLE COMPLETED");
 	}
 
@@ -108,6 +111,7 @@ void Puzzle::ResetPuzzle()
 		slotOccupied[i] = -1;
 		pieceInSlot[i] = false;
 	}
+	app->audio->PlayFx(failPuzzleFx);
 	isSelecting = false;
 	selectedPiece = -1;
 	isPuzzleCompleted = false;

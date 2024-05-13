@@ -82,9 +82,10 @@ bool SceneFloor1::Start()
 	app->map->Enable();
 	app->entityManager->Enable();
 	app->hud->Enable();
-	app->puzzle2->Enable();
+  
+  app->puzzle->Enable();
 	if(combatFinished)app->sceneFloor1->wall = app->physics->CreateRectangle(37 * 64, 9 * 64, 10, 2 * 64, STATIC);
-	
+
 	//Load the player in the map
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(playerStartPosition.x), PIXEL_TO_METERS(playerStartPosition.y)), 0);
 
@@ -98,7 +99,7 @@ bool SceneFloor1::Start()
 	textPosY = (float)windowH / 2 - (float)texH / 2;
 
 	app->render->camera.x = 0;
-	app->render->camera.y = 0;
+	app->render->camera.y = 2368;
 
 	//carga assets
 	floor1background = app->tex->Load("Assets/Textures/Screens/floor1background.png");
@@ -126,7 +127,7 @@ bool SceneFloor1::Update(float dt)
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;
 
-	SetCameraPosition(playerX-550, 0);
+	SetCameraPosition(playerX-550, playerY-360);
 	printf("\r cameraX: %d cameraY: %d playerX: %d playerY %d", cameraX, cameraY, playerX, playerY);
 	ClampCamera();
 

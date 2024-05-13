@@ -48,8 +48,8 @@ bool Player::Start() {
 	currentAnim = &idleAnim;
 
 	stepsFx = app->audio->LoadFx("Assets/Audio/Fx/Footsteps_Fx.wav");
-	
 	climbFx = app->audio->LoadFx("Assets/Audio/Fx/escaleras_Fx.wav");
+	doorFx = app->audio->LoadFx("Assets/Audio/Fx/trampilla.wav");
 	//ToggleGodMode();
 
 	if (id == 1)
@@ -166,42 +166,62 @@ bool Player::Update(float dt)
 		{
 			// death
 			pbody->body->SetLinearVelocity({ 0, 0 });
+
 		}
 
 		DrawPlayer();
-
+		printf("\r playerX: %d playerY: %d", position.x, position.y);////////////
 		currentAnim->Update();
 		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 		{
+			
 			if (doorAldea) {
-				if (app->sceneShop->active) app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
-				else if (app->sceneOasisFaraon->active) app->fade->Fade((Module*)app->sceneOasisFaraon, (Module*)app->sceneVillage, 60.0f);
-				else if (app->sceneTemple->active) app->fade->Fade((Module*)app->sceneTemple, (Module*)app->sceneVillage, 60.0f);
-				else if (app->sceneFloor1->active) app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
+				app->audio->PlayFx(doorFx);
+				if (app->sceneShop->active) {
+					app->sceneVillage->spawnPosition = { 481, 675 };
+					app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
+				}
+				else if (app->sceneOasisFaraon->active) {
+					app->sceneVillage->spawnPosition = { 1380, 675 };
+					app->fade->Fade((Module*)app->sceneOasisFaraon, (Module*)app->sceneVillage, 60.0f);
+				}
+				else if (app->sceneTemple->active) {
+					app->sceneVillage->spawnPosition = { 2269, 675 };
+					app->fade->Fade((Module*)app->sceneTemple, (Module*)app->sceneVillage, 60.0f);
+				}
+				else if (app->sceneFloor1->active) {
+					app->sceneVillage->spawnPosition = { 2787, 675 };
+					app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
+				}
 				doorAldea = false;
 			}
 			else if (doorOasis)
 			{
+				app->audio->PlayFx(doorFx);
 				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneOasisFaraon, 60.0f);
 				doorOasis = false;
 			}
 			else if (doorShop)
 			{
+				app->audio->PlayFx(doorFx);
 				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneShop, 60.0f);
 				doorShop = false;
 			}
 			else if (doorTemple)
 			{
+				app->audio->PlayFx(doorFx);
 				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneTemple, 60.0f);
 				doorTemple = false;
 			}
 			else if (doorFlor1)
 			{
+				app->audio->PlayFx(doorFx);
 				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneFloor1, 60.0f);
 				doorFlor1 = false;
 			}
 			else if (enterCombat)
 			{
+				app->audio->PlayFx(doorFx);
 				app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneCombat, 60.0f);
 				enterCombat = false;
 			}
@@ -321,10 +341,9 @@ void Player::ToggleGodMode()
 bool Player::CleanUp()
 {
 	app->tex->UnLoad(texture);
-
 	app->audio->UnloadFx(stepsFx);
-	
 	app->audio->UnloadFx(climbFx);
+	app->audio->UnloadFx(doorFx);
 
 	return true;
 }

@@ -56,13 +56,14 @@ public:
 	bool pause = false;
 	bool isTorchActive = false;
 	bool checkPoint = false;
-	iPoint playerStartPosition = { 64,576 };
+	iPoint playerStartPosition = { 128,35*64 };
 	bool notUseChechPoint = false;
 	bool win = false;
 	int sceneNum = 5;
+
 	bool combatFinished = false;
-	int levelWidth = 37 * 64;
-	int levelHeight = 12 * 64;
+	int levelWidth = 200 * 64;
+	int levelHeight = 37 * 64;
 
 private:
 	SDL_Texture* backgroundTexture;
