@@ -96,7 +96,7 @@ bool SceneFloor1::Start()
 	textPosY = (float)windowH / 2 - (float)texH / 2;
 
 	app->render->camera.x = 0;
-	app->render->camera.y = 0;
+	app->render->camera.y = 2368;
 
 	//carga assets
 	floor1background = app->tex->Load("Assets/Textures/Screens/floor1background.png");
@@ -124,7 +124,7 @@ bool SceneFloor1::Update(float dt)
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;
 
-	SetCameraPosition(playerX-550, 0);
+	SetCameraPosition(playerX-550, playerY-360);
 	printf("\r cameraX: %d cameraY: %d playerX: %d playerY %d", cameraX, cameraY, playerX, playerY);
 	ClampCamera();
 
