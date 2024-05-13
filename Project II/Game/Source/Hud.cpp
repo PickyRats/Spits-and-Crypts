@@ -232,7 +232,7 @@ bool Hud::Update(float dt)
 					app->audio->PlayFx(app->sceneMenu->FxButton2);
 					app->sceneMenu->fxClickPlayed = true;
 				}
-				currentId = 9;
+				app->sceneMenu->currentId = 9;
 				onSettings = true;
 				settingsControlsButton->state = GuiControlState::NORMAL;
 				settingsAudioButton->state = GuiControlState::NORMAL;
@@ -322,24 +322,24 @@ bool Hud::Update(float dt)
 		{
 			if ((app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN))
 			{
-				if (currentId >= 9 && currentId < 12)
+				if (app->sceneMenu->currentId >= 9 && app->sceneMenu->currentId < 12)
 				{
-					currentId = 12;
+					app->sceneMenu->currentId = 12;
 				}
-				else if (currentId >= 6 && currentId < 9)
+				else if (app->sceneMenu->currentId >= 6 && app->sceneMenu->currentId < 9)
 				{
-					currentId = 9;
+					app->sceneMenu->currentId = 9;
 				}
 			}
 			else if ((app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN))
 			{
-				if (currentId >= 12)
+				if (app->sceneMenu->currentId >= 12)
 				{
-					currentId = 9;
+					app->sceneMenu->currentId = 9;
 				}
-				else if (currentId >= 9 && currentId < 12)
+				else if (app->sceneMenu->currentId >= 9 && app->sceneMenu->currentId < 12)
 				{
-					currentId = 6;
+					app->sceneMenu->currentId = 6;
 				}
 			}
 			//Hide previous buttons
@@ -380,15 +380,15 @@ bool Hud::Update(float dt)
 			}
 			else if (onSettingsOptions)
 			{
-				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && currentId != 8)
+				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && app->sceneMenu->currentId != 8)
 				{
-					currentId++;
+					app->sceneMenu->currentId++;
 					app->sceneMenu->fxHoverPlayed = false;
 					app->sceneMenu->fxClickPlayed = false;
 				}
-				else if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && currentId != 6)
+				else if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && app->sceneMenu->currentId != 6)
 				{
-					currentId--;
+					app->sceneMenu->currentId--;
 					app->sceneMenu->fxHoverPlayed = false;
 					app->sceneMenu->fxClickPlayed = false;
 				}
@@ -406,7 +406,7 @@ bool Hud::Update(float dt)
 		}
 			if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 			{
-				currentId = 1;
+				app->sceneMenu->currentId = 1;
 				onSettings = false;
 				//Show menu buttons
 				resumeButton->state = GuiControlState::NORMAL;
@@ -418,13 +418,11 @@ bool Hud::Update(float dt)
 			else if (settingsOptionsButton->state == GuiControlState::FOCUSED)
 			{
 				if (app->sceneMenu->fxHoverPlayed == false)
-				
-					
+				{
 					app->audio->PlayFx(app->sceneMenu->FxButton1);
-				app->sceneMenu->fxHoverPlayed = true;
+					app->sceneMenu->fxHoverPlayed = true;
+				}
 			}
-
-	
 			else if (settingsOptionsButton->state == GuiControlState::PRESSED)
 			{
 				if (app->sceneMenu->fxClickPlayed == false)
