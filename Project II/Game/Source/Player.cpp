@@ -166,20 +166,33 @@ bool Player::Update(float dt)
 		{
 			// death
 			pbody->body->SetLinearVelocity({ 0, 0 });
+
 		}
 
 		DrawPlayer();
-
+		printf("\r playerX: %d playerY: %d", position.x, position.y);////////////
 		currentAnim->Update();
 		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 		{
 			
 			if (doorAldea) {
 				app->audio->PlayFx(doorFx);
-				if (app->sceneShop->active) app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
-				else if (app->sceneOasisFaraon->active) app->fade->Fade((Module*)app->sceneOasisFaraon, (Module*)app->sceneVillage, 60.0f);
-				else if (app->sceneTemple->active) app->fade->Fade((Module*)app->sceneTemple, (Module*)app->sceneVillage, 60.0f);
-				else if (app->sceneFloor1->active) app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
+				if (app->sceneShop->active) {
+					app->sceneVillage->spawnPosition = { 481, 675 };
+					app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
+				}
+				else if (app->sceneOasisFaraon->active) {
+					app->sceneVillage->spawnPosition = { 1380, 675 };
+					app->fade->Fade((Module*)app->sceneOasisFaraon, (Module*)app->sceneVillage, 60.0f);
+				}
+				else if (app->sceneTemple->active) {
+					app->sceneVillage->spawnPosition = { 2269, 675 };
+					app->fade->Fade((Module*)app->sceneTemple, (Module*)app->sceneVillage, 60.0f);
+				}
+				else if (app->sceneFloor1->active) {
+					app->sceneVillage->spawnPosition = { 2787, 675 };
+					app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
+				}
 				doorAldea = false;
 			}
 			else if (doorOasis)
