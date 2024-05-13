@@ -9,6 +9,20 @@
 #include "Timer.h"
 
 struct SDL_Texture;
+struct Slot {
+	iPoint position = { 0, 0 };
+	SDL_Texture* texture = nullptr;
+	bool isEmpty = true;
+};
+
+struct Item {
+	const char* name = nullptr;
+	const char* description = nullptr;
+	int health = 0;
+	int attack = 0;
+	int price = 0;
+	SDL_Texture* texture = nullptr;
+};
 
 class Hud : public Module
 {
@@ -36,6 +50,11 @@ public:
 	bool spacePressed = false;
 	bool onSettings = false;
 	int currentId = 0;
+
+	Slot inventorySlots[3];
+	Item items[3];
+
+	Slot shopSlots[3];
 private:
 
 
@@ -135,7 +154,6 @@ private:
 	SDL_Texture* inventoryItem2;
 	SDL_Texture* inventoryItem3;
 	bool inventory = false;
-	int huecos[3] = { 0, 0, 0 };
 
 	//Shop
 	SDL_Texture* shopTexture;

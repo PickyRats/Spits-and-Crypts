@@ -117,6 +117,18 @@ bool Hud::Start()
 	inventoryItem3 = app->tex->Load(configNode3.child("inventoryItem3").attribute("texturepath").as_string());
 
 	shopTexture = app->tex->Load(configNode3.child("shopTexture").attribute("texturepath").as_string());
+	items[0] = {"Pocion", "Heals 50 health points", 50, 0, 10, inventoryItem1};
+	items[1] = {"Collar", "Increases attack by 10", 0, 10, 20, inventoryItem2};
+	items[2] = {"Escudo", "Increases health by 10", 0, 0, 30, inventoryItem3};
+
+	inventorySlots[0].position = { 0, 20 };
+	inventorySlots[1].position = { 150, 20 };
+	inventorySlots[2].position = { 300, 20 };
+
+	shopSlots[0].position = { 0, 20 };
+	shopSlots[1].position = { 150, 20 };
+	shopSlots[2].position = { 300, 20 };
+
 
 	//Create Buttons
 	exitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 0, NULL, exitNormal, exitHover, exitClick, { 1419, 92, 63, 63 }, this);
@@ -172,11 +184,11 @@ bool Hud::Start()
 bool Hud::Update(float dt)
 {
 	//Inventory
-	
 	Inventory();
+
 	//Shop
-	
 	Shop();
+
 	//Pause menu
 	if (app->sceneVillage->pause || app->sceneShop->pause || app->sceneOasisFaraon->pause || app->sceneTemple->pause || app->sceneFloor1->pause) {
 		//If pause menu is activated, show buttons
@@ -628,17 +640,10 @@ void Hud::Inventory()
 	{
 		app->render->DrawTexture(inventoryTexture, 0, 0, NULL, SDL_FLIP_NONE, 0);
 		
-		if (huecos[0] == 1)
-		{
-			app->render->DrawTexture(inventoryItem1, 0, 20, NULL, SDL_FLIP_NONE, 0);
-		}
-		if (huecos[1] == 1)
-		{
-			app->render->DrawTexture(inventoryItem2, 150, 20, NULL, SDL_FLIP_NONE, 0);
-		}
-		if (huecos[2] == 1)
-		{
-			app->render->DrawTexture(inventoryItem3, 300, 20, NULL, SDL_FLIP_NONE, 0);
+		for (int i = 0; i < 3; i++) {
+			if (!inventorySlots[i].isEmpty) {
+				app->render->DrawTexture(inventorySlots[i].texture, inventorySlots[i].position.x, inventorySlots[i].position.y, NULL, SDL_FLIP_NONE, 0);
+			}
 		}
 	}
 		
@@ -654,6 +659,25 @@ void Hud::Shop()
 	if (shop)
 	{
 		app->render->DrawTexture(shopTexture, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		
+		if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+		{
+			for (int i = 0; i < 4; i++) {
+				if (inventorySlots[i].isEmpty) {
+					inventorySlots[i].isEmpty = false;
+					inventorySlots[i].texture = items[i].texture;
+					break;
+				}
+			}
+
+		}
+		/*for (int i = 0; i < 3; i++) {
+			if (!slots[i].isEmpty) {
+				app->render->DrawTexture(slots[i].texture, slots[i].position.x, slots[i].position.y, NULL, SDL_FLIP_NONE, 0);
+			}
+		}*/
+
+		
 	}
 }
 
