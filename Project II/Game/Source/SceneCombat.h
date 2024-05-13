@@ -106,7 +106,9 @@ public:
 	int currentEnemyIndex = 0;
 
 	Entity* players[5];
-	Entity* enemies[5];
+	Entity* enemies[5];	
+	
+	bool isPlayerTurn = true;
 
 private:
 	SDL_Texture* backgroundTexture;
@@ -128,7 +130,7 @@ private:
 	SDL_Texture* tileTexture;
 	SDL_Texture* tileEnemyTexture;
 	SDL_Texture* selectedTileTexture;
-	bool isPlayerTurn = true;
+
 
 	bool playerCanAttack = false;
 	bool enemyCanAttack = false;
