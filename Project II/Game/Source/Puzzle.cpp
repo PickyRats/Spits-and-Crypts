@@ -8,6 +8,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "FadeToBlack.h"
+#include "SceneFloor1.h"
 
 Puzzle::Puzzle(bool enabled) : Module(enabled)
 {
@@ -87,7 +88,11 @@ bool Puzzle::Update(float dt)
 		}
 
 		if (!isPuzzleCompleted)	ResetPuzzle();
-		else LOG("PUZZLE COMPLETED");
+		else {
+			LOG("PUZZLE COMPLETED");
+			app->sceneFloor1->levelWidth = 147 * 64;
+		
+		}
 	}
 
 	if (canInteract && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
@@ -164,6 +169,10 @@ bool Puzzle::CleanUp()
 	app->tex->UnLoad(texture[1]);
 	app->tex->UnLoad(texture[2]);
 	app->tex->UnLoad(texture[3]);
+	app->audio->UnloadFx(startPuzzleFx);
+	app->audio->UnloadFx(placeRockFx);
+	app->audio->UnloadFx(failPuzzleFx);
+	app->audio->UnloadFx(completedPuzzleFx);
 
 	return true;
 }
