@@ -14,6 +14,7 @@
 #include "Hud.h"
 #include "Puzzle.h"
 #include "Puzzle2.h"
+#include "Player.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -82,7 +83,8 @@ bool SceneFloor1::Start()
 	app->entityManager->Enable();
 	app->hud->Enable();
 	app->puzzle2->Enable();
-
+	if(combatFinished)app->sceneFloor1->wall = app->physics->CreateRectangle(37 * 64, 9 * 64, 10, 2 * 64, STATIC);
+	
 	//Load the player in the map
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(playerStartPosition.x), PIXEL_TO_METERS(playerStartPosition.y)), 0);
 
@@ -134,6 +136,7 @@ bool SceneFloor1::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
+	
 	//if (app->render->camera.x - playerX - 100 <= -200 && app->render->camera.x - playerX - 100 >= -12850) {
 	//	app->render->camera.x = -(playerX - 100);
 
