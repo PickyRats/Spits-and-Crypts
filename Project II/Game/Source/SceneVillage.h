@@ -59,6 +59,7 @@ public:
 	bool notUseChechPoint = false;
 	bool win = false;
 	int sceneNum = 1;
+	iPoint spawnPosition = { 0, 0 };
 
 private:
 	SDL_Texture* backgroundTexture;
