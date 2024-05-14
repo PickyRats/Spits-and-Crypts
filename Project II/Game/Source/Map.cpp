@@ -434,7 +434,7 @@ bool Map::CreateColliders()
                         switch (mapLayerItem->data->Get(x, y))
                         {
                         case 1:
-                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y-32 , mapData.tileWidth/4, mapData.tileHeight*3, STATIC);
                             c1->ctype = ColliderType::STAIRS;
                             ret = true;
                             break;

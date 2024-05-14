@@ -90,14 +90,19 @@ bool Player::Update(float dt)
 				//player movement
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 				{
-					
-					LeftMovement();
+					if (!Turmoclimbing)
+					{
+						LeftMovement();
+					}
 				}
 
 				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 				{
 
-					RightMovement();
+					if (!Turmoclimbing)
+					{
+						RightMovement();
+					}
 				}
 
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE)
@@ -114,15 +119,18 @@ bool Player::Update(float dt)
 					if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 					{
 						UpMovement();
+						Turmoclimbing = true;
 					}
 					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 					{
 						DownMovement();
+						Turmoclimbing = true;
 					}
 					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE)
 					{
-						vel.y = -0.165;
+						vel.y = 0;
 					}
+					
 				}
 				//jump
 				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !isjumping)
@@ -362,6 +370,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::STAIRS:
 		isClimbing = true;
 		isWalking = false;
+		pbody->body->SetGravityScale(0.0f);
 		break;
 	case ColliderType::PUZZLE:
 		app->puzzle->canInteract = true;
@@ -400,6 +409,8 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::STAIRS:
 		isClimbing = false;
+		pbody->body->SetGravityScale(1.0f);
+		Turmoclimbing = false;
 		
 		break;
 	case ColliderType::PUZZLE:
