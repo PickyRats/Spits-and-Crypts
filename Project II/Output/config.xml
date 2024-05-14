@@ -238,11 +238,11 @@
 		<music>
 		</music>
 		<Floor1Music path="Assets/Audio/Music/Floor1_music.ogg" fadeTime="2" fadeOutTime="2"/>
-		
-		<Piece x="4928" y="384" texturepath="Assets/Textures/pieza_puzle_1.png" id="0" />
-		<Piece x="5184" y="384" texturepath="Assets/Textures/pieza_puzle_2.png" id="1" />
-		<Piece x="5824" y="448" texturepath="Assets/Textures/pieza_puzle_3.png" id="2" />
-		<Piece x="6208" y="384" texturepath="Assets/Textures/pieza_puzle_4.png" id="3" />
+		<!-- PUZZLE -->
+		<Piece x="4928" y="1984" texturepath="Assets/Textures/pieza_puzle_1.png" id="0" />
+		<Piece x="5184" y="1984" texturepath="Assets/Textures/pieza_puzle_2.png" id="1" />
+		<Piece x="5824" y="2048" texturepath="Assets/Textures/pieza_puzle_3.png" id="2" />
+		<Piece x="6208" y="1984" texturepath="Assets/Textures/pieza_puzle_4.png" id="3" />
 	</sceneFloor1>
 	
 	<!-- sceneLight-->
