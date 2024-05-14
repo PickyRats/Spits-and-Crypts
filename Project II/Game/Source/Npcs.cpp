@@ -83,79 +83,7 @@ bool Npcs::Update(float dt)
 	return true;
 }
 
-void Npcs::Interact(int id) 
-{
-	switch (id)
-	{
-	case 1:
-		GiveMission(1);
-		break;
-	case 2:
-		GiveMission(2);
-		break;
-	case 3:
-		GiveMission(3);
-		break;
-	case 4:
-		GiveMission(4);
-		break;
-	case 5:
-		GiveMission(5);
-		break;
-	case 6:
-		GiveMission(6);
-		break;
-	case 7:
-		GiveMission(7);
-		break;
-	case 8:
-		GiveMission(8);
-		break;
-	case 9:
-		GiveMission(9);
-		break;
-	default:
-		break;
-	}
 
-}
-
-void Npcs::GiveMission(int idMission) 
-{
-	switch (idMission)
-	{
-	case 1:
-		mission1 = true;
-		printf("ves a buscar a mi nieta  \n");
-		break;                   
-	case 2:
-		printf("  la nieta  \n");
-		break;
-	case 3:
-		printf(" Soy maat \n");
-		break;
-	case 4:
-		printf( " toth  \n");
-		break;
-	case 5:
-		printf(" Soy ISIS  \n");
-		break;
-	case 6:
-		printf(" Horrus  \n");
-		break;
-	case 7:
-		printf("  mi humilde tienda \n");
-		break;
-	case 8:
-		printf(" Soy el tabernero\n");
-		break;
-	case 9:
-		printf(" Que haces pidiendome wishky con cereales \n");
-		break;
-	default:
-		break;
-	}
-}
 
 void Npcs::DrawNpcs()
 {
@@ -179,11 +107,6 @@ void Npcs::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::UNKNOWN:
-		LOG("Collision UNKNOWN");
-		break;
-
-	case ColliderType::PLAYER:
-		Interact(npcId);
 		LOG("Collision UNKNOWN");
 		break;
 	}
