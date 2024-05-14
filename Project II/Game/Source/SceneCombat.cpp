@@ -267,10 +267,13 @@ bool SceneCombat::Update(float dt)
 		app->map->player->isCombat = false;
 		app->map->player2->isCombat = false;
 		app->map->player2->isVisible = false;
+		app->physics->world->DestroyBody(app->sceneFloor1->wall->body);
+		app->sceneFloor1->combatFinished = true;
 		app->sceneFloor1->playerStartPosition = {67*64, 4*64};
 		app->map->player->CreateBody();
 		app->sceneFloor1->levelWidth = 110 * 64;
 		app->fade->Fade((Module*)app->sceneCombat, (Module*)app->sceneFloor1, 60.0f);
+		
 	}
 
 	return true;
