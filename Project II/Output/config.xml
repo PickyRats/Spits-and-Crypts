@@ -301,7 +301,9 @@
 		<backToTitleNormal texturepath="Assets/Textures/Screens/Pause/back_to_title_normal.png"/>
 		<backToTitleHover texturepath="Assets/Textures/Screens/Pause/back_to_title_hover.png"/>
 		<backToTitleClick texturepath="Assets/Textures/Screens/Pause/back_to_title_click.png"/>
-
+		<saveHover texturepath="Assets/Textures/Screens/Pause/save_hover.png"/>
+		<saveNormal texturepath="Assets/Textures/Screens/Pause/save_normal.png"/>
+		<settingsHover texturepath="Assets/Textures/Screens/Pause/settings_hover.png"/>
 		<settingsExitNormal texturepath="Assets/Textures/Screens/More/exit_normal.png"/>
 		<settingsExitHover texturepath="Assets/Textures/Screens/More/exit_hover.png"/>
 		<settingsExitClick texturepath="Assets/Textures/Screens/More/exit_click.png"/>

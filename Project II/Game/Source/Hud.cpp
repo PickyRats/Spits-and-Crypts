@@ -73,6 +73,9 @@ bool Hud::Start()
 	settingsNormal = app->tex->Load(configNode3.child("settingsNormal").attribute("texturepath").as_string());
 	settingsHover = app->tex->Load(configNode3.child("settingsHover").attribute("texturepath").as_string());
 	settingsClick = app->tex->Load(configNode3.child("settingsClick").attribute("texturepath").as_string());
+	saveNormal = app->tex->Load(configNode3.child("saveNormal").attribute("texturepath").as_string());
+	saveHover = app->tex->Load(configNode3.child("saveHover").attribute("texturepath").as_string());
+	saveClick = app->tex->Load(configNode3.child("saveClick").attribute("texturepath").as_string());
 	backToTitleNormal = app->tex->Load(configNode3.child("backToTitleNormal").attribute("texturepath").as_string());
 	backToTitleHover = app->tex->Load(configNode3.child("backToTitleHover").attribute("texturepath").as_string());
 	backToTitleClick = app->tex->Load(configNode3.child("backToTitleClick").attribute("texturepath").as_string());
@@ -114,7 +117,8 @@ bool Hud::Start()
 	exitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 0, NULL, exitNormal, exitHover, exitHover, { 1419, 92, 63, 63 }, this);
 	resumeButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, NULL, resumeNormal, resumeHover, resumeHover, { 54, 198, 240, 55 }, this);
 	settingsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, NULL, settingsNormal, settingsHover, settingsHover, { 54, 266, 240, 55 }, this);
-	backToTitleButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, NULL, backToTitleNormal, backToTitleHover, backToTitleHover, { 54, 334, 240, 55 }, this);
+	saveButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, NULL, saveNormal, saveHover, saveHover, { 54, 334, 240, 55 }, this);
+	backToTitleButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, NULL, backToTitleNormal, backToTitleHover, backToTitleHover, { 54, 402, 240, 55 }, this);
 
 	settingsReturnButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, NULL, returnNormal, returnHover, returnHover, { 133, 92, 63, 63 }, this);
 	settingsExitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, NULL, exitNormal, exitHover, exitClick, { 1419, 92, 63, 63 }, this);
@@ -137,6 +141,7 @@ bool Hud::Start()
 	exitButton->state = GuiControlState::HIDDEN;
 	resumeButton->state = GuiControlState::HIDDEN;
 	settingsButton->state = GuiControlState::HIDDEN;
+	saveButton->state = GuiControlState::HIDDEN;
 	backToTitleButton->state = GuiControlState::HIDDEN;
 	settingsReturnButton->state = GuiControlState::HIDDEN;
 	settingsExitButton->state = GuiControlState::HIDDEN;
@@ -176,6 +181,7 @@ bool Hud::Update(float dt)
 			resumeButton->state = GuiControlState::NORMAL;
 			settingsButton->state = GuiControlState::NORMAL;
 			backToTitleButton->state = GuiControlState::NORMAL;
+			saveButton->state = GuiControlState::NORMAL;
 			exitButton->state = GuiControlState::NORMAL;
 
 		}
@@ -191,7 +197,7 @@ bool Hud::Update(float dt)
 			//Render pause
 			app->render->DrawTexture(pause, 0, 0, NULL, SDL_FLIP_NONE, 0);
 
-			if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && app->sceneMenu->currentId < 3))
+			if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && app->sceneMenu->currentId < 4))
 			{
 				app->sceneMenu->currentId++;
 
@@ -262,6 +268,7 @@ bool Hud::Update(float dt)
 				backToTitleButton->state = GuiControlState::HIDDEN;
 				resumeButton->state = GuiControlState::HIDDEN;
 				settingsButton->state = GuiControlState::HIDDEN;
+				saveButton->state = GuiControlState::HIDDEN;
 				exitButton->state = GuiControlState::HIDDEN;
 
 				if(app->sceneVillage->active)
@@ -346,6 +353,7 @@ bool Hud::Update(float dt)
 			resumeButton->state = GuiControlState::HIDDEN;
 			settingsButton->state = GuiControlState::HIDDEN;
 			backToTitleButton->state = GuiControlState::HIDDEN;
+			saveButton->state = GuiControlState::HIDDEN;
 			exitButton->state = GuiControlState::HIDDEN;
 
 			//Render settings menu
@@ -412,6 +420,7 @@ bool Hud::Update(float dt)
 				resumeButton->state = GuiControlState::NORMAL;
 				settingsButton->state = GuiControlState::NORMAL;
 				backToTitleButton->state = GuiControlState::NORMAL;
+				saveButton->state = GuiControlState::NORMAL;
 				exitButton->state = GuiControlState::NORMAL;
 
 			}
@@ -532,6 +541,7 @@ bool Hud::Update(float dt)
 		resumeButton->state = GuiControlState::HIDDEN;
 		settingsButton->state = GuiControlState::HIDDEN;
 		backToTitleButton->state = GuiControlState::HIDDEN;
+		saveButton->state = GuiControlState::HIDDEN;
 		exitButton->state = GuiControlState::HIDDEN;
 		settingsReturnButton->state = GuiControlState::HIDDEN;
 		settingsExitButton->state = GuiControlState::HIDDEN;
