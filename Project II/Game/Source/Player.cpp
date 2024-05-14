@@ -106,6 +106,7 @@ bool Player::Update(float dt)
 					isWalking = false;
 					vel.x = 0;
 				}
+				
 				//Climbing
 				if (isClimbing)
 				{
@@ -120,7 +121,7 @@ bool Player::Update(float dt)
 					}
 					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE)
 					{
-						vel.y = 0;
+						vel.y = -0.165;
 					}
 				}
 				//jump
