@@ -220,17 +220,18 @@
 		
 		<floor1background texturepath="Assets/Textures/Screens/floor1background.png"/>
 
-		<!-- Talia -->
-		<npc x="600" y="400" texturepath="Assets/Textures/Npcs/Talia.png" id="1" scene="5"/>
+		<!-- Paalaya -->
+		<npc x="600" y="2004" texturepath="Assets/Textures/Npcs/Talia.png" id="1" scene="5"/>
 
-		<!-- Dialogo Talia -->
-		<dialogTrigger x="670" y="585"  name="Talia" repeat="true" scene="5">
+		<!-- Dialogo Paalaya -->
+		<dialogTrigger x="670" y="2184"  name="Paalaya" repeat="true" scene="5">
 			<sentences>
-				<sentence text="Hola el Turmo me esta acosando"/>
-				<sentence text="Necesito alguien poderoso que me salve"/>
+				<sentence text="¡Bienvenido forastero!"/>
+				<sentence text="Dejame encargarme de tus heridas."/>
+				<sentence text="Cuando necesites curarte, ven a mi."/>
 			</sentences>
 			<repeat_sentences>
-				<sentence text="Basta de chachara,date prisa!"/>
+				<sentence text="¿Quieres que te cure?"/>
 			</repeat_sentences>
 		</dialogTrigger>
 		
