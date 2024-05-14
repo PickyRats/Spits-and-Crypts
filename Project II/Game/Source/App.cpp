@@ -19,6 +19,7 @@
 #include "Hud.h"
 #include "SceneIntro.h"
 #include "DialogManager.h"
+#include "MissionManager.h"
 #include "SceneCombat.h"
 #include "Puzzle.h"
 #include "Puzzle2.h"
@@ -91,6 +92,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(guiManager);
 	AddModule(fade);
 	AddModule(dialogManager);
+	AddModule(missionManager);
 	// Render last to swap buffer
 	AddModule(render);
 

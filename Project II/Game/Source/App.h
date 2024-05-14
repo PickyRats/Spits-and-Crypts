@@ -31,6 +31,7 @@ class SceneMenu;
 class Hud;
 class SceneIntro;
 class DialogManager;
+class MissionManager;
 class SceneCombat;
 class Puzzle;
 class Puzzle2;
@@ -124,6 +125,8 @@ public:
 	Hud* hud;
 	SceneIntro* sceneIntro;
 	DialogManager* dialogManager;
+	MissionManager* missionManager;
+
 	SceneCombat* sceneCombat;
 	Puzzle* puzzle;
 	Puzzle2* puzzle2;

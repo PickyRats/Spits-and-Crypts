@@ -237,7 +237,10 @@ void DialogTrigger::GiveMission(int idMission)
 	{
 	case 1:
 		mission1 = true;
-		printf("ves a buscar a mi nieta  \n");
+		while (mission1)
+		{
+			missionManager->ExecuteMission("Mision1");
+		}
 		break;
 	case 2:
 		printf("  la nieta  \n");

@@ -4,6 +4,7 @@
 #include "Dialog.h"
 #include "List.h"
 #include "Point.h"
+#include "MissionManager.h"
 #include "SDL/include/SDL.h"
 
 struct SDL_Texture;
@@ -38,13 +39,6 @@ public:
 
 private:
 
-
-
-
-public:
-
-private:
-
 	//En caso de querer añadirle una textura a la entidad
 	SDL_Texture* texture;
 
@@ -72,6 +66,8 @@ private:
 	bool mission1 = false;
 	int dialogScene;
 	int id;
+
+	MissionManager* missionManager;
 
 	//Lista de dialogos a repetir
 	List<Dialog*> dialoguesRepeat;

@@ -245,6 +245,20 @@
 		<Piece x="6208" y="384" texturepath="Assets/Textures/pieza_puzle_4.png" id="3" />
 	</sceneFloor1>
 	
+	<!-- Misiones -->
+	<missions>
+		<!-- Misión 1 -->
+		<mission name="Mision1">
+			<text value="Ves a la choza a salvar a la nieta" />
+		</mission>
+
+		<!-- Misión 2 -->
+		<mission name="Mision2">
+			<text value="mision 2" />
+		</mission>
+	</missions>
+	
+	
 	<!-- Menu-->
 	<scenemenu>
 		<background texturepath="Assets/Textures/Screens/main_menu_background.png"/>
