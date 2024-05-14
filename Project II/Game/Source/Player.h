@@ -76,6 +76,8 @@ public:
 
 	bool isjumping = false;
 
+	bool canmove = false;
+
 	bool isClimbing = false;
 	bool Turmoclimbing = false;
 

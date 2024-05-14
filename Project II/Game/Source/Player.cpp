@@ -90,7 +90,7 @@ bool Player::Update(float dt)
 				//player movement
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 				{
-					if (!Turmoclimbing)
+					if (!Turmoclimbing && canmove)
 					{
 						LeftMovement();
 					}
@@ -99,7 +99,7 @@ bool Player::Update(float dt)
 				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 				{
 
-					if (!Turmoclimbing)
+					if (!Turmoclimbing && canmove)
 					{
 						RightMovement();
 					}
@@ -113,18 +113,29 @@ bool Player::Update(float dt)
 				}
 				
 				//Climbing
-				if (isClimbing)
+				if (isClimbing && !isjumping)
 				{
 					isWalking = false;
 					if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 					{
 						UpMovement();
-						Turmoclimbing = true;
+						if (!canmove)
+						{
+							Turmoclimbing = true;
+							canmove = false;
+							pbody->body->SetGravityScale(0.0f);
+						}
+						
 					}
 					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 					{
 						DownMovement();
-						Turmoclimbing = true;
+						if (!canmove)
+						{
+							Turmoclimbing = true;
+							canmove = false;
+							pbody->body->SetGravityScale(0.0f);
+						}
 					}
 					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE)
 					{
@@ -133,7 +144,7 @@ bool Player::Update(float dt)
 					
 				}
 				//jump
-				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !isjumping)
+				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !isjumping && !isClimbing)
 				{
 					Jump();
 				}
@@ -345,6 +356,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::PLATFORM:
 		isjumping = false;
+		Turmoclimbing = false;
+		canmove = true;
 		break;
 	case ColliderType::DOOR_ALDEA:
 		doorAldea = true;
@@ -370,7 +383,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::STAIRS:
 		isClimbing = true;
 		isWalking = false;
-		pbody->body->SetGravityScale(0.0f);
 		break;
 	case ColliderType::PUZZLE:
 		app->puzzle->canInteract = true;
