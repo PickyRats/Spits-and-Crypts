@@ -62,6 +62,8 @@ public:
 	uint startPuzzleFx;
 	uint rotateRockFx;
 	uint placeRockFx;
+	uint failPuzzleFx;
+	uint completedPuzzleFx;
 
 };
 

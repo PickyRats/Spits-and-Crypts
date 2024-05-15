@@ -220,8 +220,9 @@
 		
 		<floor1background texturepath="Assets/Textures/Screens/floor1background.png"/>
 
-		<!-- Talia -->
-		<npc x="600" y="400" texturepath="Assets/Textures/Npcs/Talia.png" id="1" scene="5"/>
+		<!-- Paalaya -->
+		<npc x="600" y="2004" texturepath="Assets/Textures/Npcs/Talia.png" id="1" scene="5"/>
+
 
 		<!-- Dialogo Talia -->
 		<dialogTrigger x="670" y="585"  name="Paayla" repeat="true" scene="5" audio_1="Assets/Audio/Fx/paayla/voz_paayla_1.wav" audio_2="Assets/Audio/Fx/paayla/voz_paayla_2.wav" audio_3="Assets/Audio/Fx/paayla/voz_paayla_3.wav">
@@ -238,12 +239,17 @@
 		<music>
 		</music>
 		<Floor1Music path="Assets/Audio/Music/Floor1_music.ogg" fadeTime="2" fadeOutTime="2"/>
-		
-		<Piece x="4928" y="384" texturepath="Assets/Textures/pieza_puzle_1.png" id="0" />
-		<Piece x="5184" y="384" texturepath="Assets/Textures/pieza_puzle_2.png" id="1" />
-		<Piece x="5824" y="448" texturepath="Assets/Textures/pieza_puzle_3.png" id="2" />
-		<Piece x="6208" y="384" texturepath="Assets/Textures/pieza_puzle_4.png" id="3" />
+		<!-- PUZZLE -->
+		<Piece x="4928" y="1984" texturepath="Assets/Textures/pieza_puzle_1.png" id="0" />
+		<Piece x="5184" y="1984" texturepath="Assets/Textures/pieza_puzle_2.png" id="1" />
+		<Piece x="5824" y="2048" texturepath="Assets/Textures/pieza_puzle_3.png" id="2" />
+		<Piece x="6208" y="1984" texturepath="Assets/Textures/pieza_puzle_4.png" id="3" />
 	</sceneFloor1>
+	
+	<!-- sceneLight-->
+	<sceneLight>
+		<map path="Assets/Maps/" name="Map_light.tmx"/>
+	</sceneLight>
 	
 	<!-- Menu-->
 	<scenemenu>

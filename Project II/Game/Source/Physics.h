@@ -43,6 +43,8 @@ enum class ColliderType {
 	ITEM,
 	ENEMY,
 	STAIRS,
+	LIGHT1,
+	LIGHT2,
 	UNKNOWN
 	// ..
 };
