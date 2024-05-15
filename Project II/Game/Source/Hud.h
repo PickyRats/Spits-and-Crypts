@@ -28,6 +28,8 @@ public:
 
 	void DrawTimer();
 
+	void HabilityTree();
+
 	bool playerDeadHud = false;
 	bool spacePressed = false;
 	bool onSettings = false;

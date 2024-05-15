@@ -19,6 +19,7 @@
 #include "Log.h"
 #include "SceneMenu.h"
 #include "SceneCombat.h"
+#include "SceneTemple.h"
 
 #include <iostream>
 #include <iomanip>
@@ -163,6 +164,12 @@ bool Hud::Start()
 
 bool Hud::Update(float dt)
 {
+	//Hability Tree
+	if (app->sceneTemple->active && app->input->GetKey(SDL_SCANCODE_O)==KEY_REPEAT)
+	{
+		HabilityTree();
+	}
+
 	//Pause menu
 	if (app->sceneVillage->pause || app->sceneShop->pause || app->sceneOasisFaraon->pause || app->sceneTemple->pause || app->sceneFloor1->pause) {
 		//If pause menu is activated, show buttons
@@ -603,6 +610,10 @@ bool Hud::Update(float dt)
 	return true;
 }
 
+void Hud::HabilityTree()
+{
+
+}
 
 bool Hud::CleanUp()
 {
