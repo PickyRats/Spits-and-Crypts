@@ -150,6 +150,11 @@ bool Hud::Start()
 	settingsAudioButton->state = GuiControlState::HIDDEN;
 	settingsOptionsButton->state = GuiControlState::HIDDEN;
 
+	//Hability Tree
+
+	//Tree Buttons
+
+
 	if (app->sceneMenu->vSync == true)
 	{
 		settingsVSyncButton->pressed = true;

@@ -143,12 +143,12 @@ private:
 
 	SDL_Texture* habilitytree;
 
-	GuiControlButton* talent_1;
-	GuiControlButton* talent_2;
-	GuiControlButton* talent_3;
-	GuiControlButton* talent_4;
-	GuiControlButton* talent_5;
-	GuiControlButton* talent_6;
+	SDL_Texture* talent_1;
+	SDL_Texture* talent_2;
+	SDL_Texture* talent_3;
+	SDL_Texture* talent_4;
+	SDL_Texture* talent_5;
+	SDL_Texture* talent_6;
 
 	bool onSettingsControls = false;
 	bool onSettingsAudio = true;
