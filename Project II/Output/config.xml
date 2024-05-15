@@ -246,17 +246,22 @@
 	</sceneFloor1>
 	
 	<!-- Misiones -->
-	<missions>
-		<!-- Misión 1 -->
-		<mission name="Mision1">
-			<text value="Ves a la choza a salvar a la nieta" />
-		</mission>
+	<missionmanager>
+		<textures>
+			<background_mission texturepath="Assets/Textures/cuadroDialogo.png"/>
+		</textures>
+		<missions>
+			<!-- Misión 1 -->
+			<mission name="Mision1">
+				<text value="Ves a la choza a salvar a la nieta" />
+			</mission>
 
-		<!-- Misión 2 -->
-		<mission name="Mision2">
-			<text value="mision 2" />
-		</mission>
-	</missions>
+			<!-- Misión 2 -->
+			<mission name="Mision2">
+				<text value="mision 2" />
+			</mission>
+		</missions>
+	</missionmanager>
 	
 	
 	<!-- Menu-->

@@ -61,6 +61,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	hud = new Hud(false);
 	sceneIntro = new SceneIntro();
 	dialogManager = new DialogManager();
+	missionManager = new MissionManager();
 	sceneCombat = new SceneCombat(false);
 	puzzle = new Puzzle(false);
 	puzzle2 = new Puzzle2(false);

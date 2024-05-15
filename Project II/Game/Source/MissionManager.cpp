@@ -122,16 +122,16 @@ bool MissionManager::ShowDialog(Dialog* dialog)
 
 
 
-Dialog* MissionManager::ExecuteMission(const std::string& missionName)
+Dialog* MissionManager::ExecuteMission(pugi::xml_node itemNode, std::string name, const char* font)
 {
-	Dialog* missionDialog = new Dialog(missions[missionName]);
-	app->dialogManager->AddDialog(missionDialog);
+	/*Dialog* missionDialog = new Dialog(missions[missionName]);
+	app->dialogManager->AddDialog(missionDialog);*/
 
-	/*Dialog* dialog = new Dialog(itemNode.attribute("value").as_string());
+	Dialog* dialog = new Dialog(itemNode.attribute("value").as_string());
 	dialog->name = name;
-	dialog->font = FontSelector(font);*/
+	dialog->font = FontSelector(font);
 
-	return missionDialog;
+	return dialog;
 }
 
 SDL_Texture* MissionManager::CreateTextTexture(TTF_Font* font, const char* text, SDL_Color color, int textBoundWidth)

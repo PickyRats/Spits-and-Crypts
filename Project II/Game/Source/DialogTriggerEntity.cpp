@@ -37,6 +37,11 @@ bool DialogTrigger::Start() {
 	dialogScene = parameters.attribute("scene").as_int();
 	id = parameters.attribute("id").as_int();
 
+	/*
+	Meter en este apartado del config las misiones para poder pasarlas en el momento en el que se acabe
+	de esta manera puede que funcione. probar a ver que tal, sinó cargarse la clase y volver a empezar.
+	*/
+
 	played = false;
 	std::string fontTarget = parameters.attribute("font").as_string("primary");
 
@@ -237,9 +242,14 @@ void DialogTrigger::GiveMission(int idMission)
 	{
 	case 1:
 		mission1 = true;
-		while (mission1)
+		if (mission1)
 		{
-			missionManager->ExecuteMission("Mision1");
+			std::string fontTarget = parameters.attribute("font").as_string("primary");
+			for (pugi::xml_node itemNode = parameters.child("missions").child("mission"); itemNode; itemNode = itemNode.next_sibling("mission"))
+			{
+				dialogues.Add(missionManager->ExecuteMission(itemNode, parameters.attribute("name").as_string(), fontTarget.c_str()));
+			}
+			
 		}
 		break;
 	case 2:

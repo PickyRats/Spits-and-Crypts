@@ -31,7 +31,7 @@ class MissionManager: public Module
 
 	
 	//Funcion para añadir a la lista de dialogos
-	Dialog* ExecuteMission(const std::string& missionName);
+	Dialog* ExecuteMission(pugi::xml_node itemNode, std::string name, const char* font);
 
 	private:
 		//Funcion que se encarga de mostrar los dialogos
