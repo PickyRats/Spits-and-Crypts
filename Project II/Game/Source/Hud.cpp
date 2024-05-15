@@ -303,6 +303,12 @@ bool Hud::Update(float dt)
 				app->hud->Disable();
 				
 			}
+			else if (saveButton->state==GuiControlState::PRESSED)
+			{
+				app->audio->PlayFx(app->sceneMenu->FxButton1);
+				app->sceneMenu->fxHoverPlayed = true;
+				app->SaveRequest();
+			}
 			else if (exitButton->state == GuiControlState::FOCUSED) {
 				if (app->sceneMenu->fxHoverPlayed == false)
 				{

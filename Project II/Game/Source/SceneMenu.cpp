@@ -16,6 +16,8 @@
 
 #include "Defs.h"
 #include "Log.h"
+#include <iostream>
+#include <fstream>
 
 SceneMenu::SceneMenu(bool enabled) : Module(enabled)
 {
@@ -77,13 +79,19 @@ bool SceneMenu::Start()
 
 	//Menu Buttons
 	startButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, NULL, playNormal, playHover, playHover, { 54, 198, 240, 55 }, this);//primer numero la posicion en x, 2ndo la pos en y, 3r el largo del boton y 4t el alto del boton.
-	loadGameButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, loadGameDisabled, loadGameNormal, loadGameHover, loadGameClick, { 54, 266, 240, 55 }, this);
+	loadGameButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2,loadGameDisabled, loadGameNormal, loadGameHover, loadGameHover, { 54, 266, 240, 55 }, this);
 	settingsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, NULL, settingsNormal, settingsHover, settingsHover, { 54, 334, 240, 55 }, this);
 	creditsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, NULL, creditsNormal, creditsHover, creditsHover, { 54, 402, 240, 55 }, this);
 	exitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, NULL, exitNormal, exitHover, exitHover, { 54, 470, 240, 55 }, this);
 
 	startButton->state = GuiControlState::NORMAL;
 	loadGameButton->state = GuiControlState::DISABLED;
+	pugi::xml_document saveFile;
+	pugi::xml_parse_result result = saveFile.load_file("save_game.xml");
+	if(saveFile.child("game_state"))
+	{
+		loadGameButton->state = GuiControlState::NORMAL;
+	}
 	settingsButton->state = GuiControlState::NORMAL;
 	creditsButton->state = GuiControlState::NORMAL;
 	exitButton->state = GuiControlState::NORMAL;
@@ -196,6 +204,8 @@ bool SceneMenu::Update(float dt)
 			{
 				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
+				app->LoadRequest();
+				app->fade->Fade(this, (Module*)app->sceneFloor1, 60.0f);
 			}
 		}
 		else if (settingsButton->state == GuiControlState::FOCUSED)
@@ -507,6 +517,14 @@ bool SceneMenu::Update(float dt)
 	return true;
 }
 
+bool SceneMenu::SaveState(pugi::xml_node node)
+{
+	pugi::xml_node status = node.append_child("saved");
+	status.append_attribute("saved").set_value(1);
+
+	return true;
+}
+
 bool SceneMenu::CleanUp()
 {
 	LOG("Freeing SceneMenu");
@@ -515,7 +533,6 @@ bool SceneMenu::CleanUp()
 	app->tex->UnLoad(playNormal);
 	app->tex->UnLoad(playHover);
 	app->tex->UnLoad(playClick);
-	app->tex->UnLoad(loadGameDisabled);
 	app->tex->UnLoad(loadGameNormal);
 	app->tex->UnLoad(loadGameHover);
 	app->tex->UnLoad(loadGameClick);
