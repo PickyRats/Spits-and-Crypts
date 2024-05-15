@@ -111,6 +111,7 @@
     <ClCompile Include="Source\Puzzle.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Puzzle2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -261,6 +262,7 @@
     <ClInclude Include="Source\Puzzle.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Puzzle2.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
