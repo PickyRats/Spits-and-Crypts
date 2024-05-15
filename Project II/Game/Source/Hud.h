@@ -54,9 +54,6 @@ private:
 	SDL_Rect pointsRects[6] = { {0, 0, 82, 121}, {82, 0, 82, 121}, {164, 0, 82, 121}, {246, 0, 82, 121}, {328, 0, 82, 121}, {410, 0, 82, 121} };
 	SDL_Rect numerosRects[9] = { {0, 0, 37, 37}, {37, 0, 37, 37}, {74, 0, 37, 37}, {111, 0, 37, 37}, {148, 0, 37, 37}, {185, 0, 37, 37}, {222, 0, 37, 37}, {259, 0, 37, 37}, {296, 0, 37, 37} };
 
-
-
-
 	SDL_Texture* exitNormal;
 	SDL_Texture* exitHover;
 	SDL_Texture* exitClick;
@@ -126,7 +123,6 @@ private:
 
 	SDL_Texture* settings;
 
-
 	GuiControlButton* exitButton;
 	GuiControlButton* returnButton;
 	GuiControlButton* resumeButton;
@@ -142,6 +138,17 @@ private:
 	GuiControlCheckBox* settingsVSyncButton;
 	GuiControlButton* settingsControlsButton;
 	GuiControlButton* settingsAudioButton;
+
+	//HabilityTree
+
+	SDL_Texture* habilitytree;
+
+	GuiControlButton* talent_1;
+	GuiControlButton* talent_2;
+	GuiControlButton* talent_3;
+	GuiControlButton* talent_4;
+	GuiControlButton* talent_5;
+	GuiControlButton* talent_6;
 
 	bool onSettingsControls = false;
 	bool onSettingsAudio = true;
