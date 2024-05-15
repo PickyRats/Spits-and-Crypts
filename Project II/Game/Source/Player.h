@@ -78,8 +78,8 @@ public:
 
 	bool canmove = false;
 
+	bool canClimb = false;
 	bool isClimbing = false;
-	bool Turmoclimbing = false;
 
 	bool doorAldea = false;
 	bool doorShop = false;
