@@ -76,6 +76,9 @@ public:
 
 	bool isjumping = false;
 
+	bool canmove = false;
+
+	bool canClimb = false;
 	bool isClimbing = false;
 
 	bool doorAldea = false;
