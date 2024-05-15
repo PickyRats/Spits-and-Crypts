@@ -21,6 +21,7 @@ struct Item {
 	int health = 0;
 	int attack = 0;
 	int price = 0;
+
 	SDL_Texture* texture = nullptr;
 };
 
@@ -156,7 +157,10 @@ private:
 	bool inventory = false;
 
 	//Shop
+	int itemId = 0;
 	SDL_Texture* shopTexture;
+	SDL_Texture* emptyslotTexture;
+	SDL_Texture* selectorItemTexture;
 	bool shop = false;
 
 

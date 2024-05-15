@@ -343,6 +343,8 @@
 		<inventoryItem3 texturepath="Assets/Textures/Screens/Inventory/Inventoryitem3.png"/>
 
 		<shopTexture texturepath="Assets/Textures/Screens/Shop/shop.png"/>
+		<emptyslotTexture texturepath="Assets/Textures/Screens/Shop/emptyslot.png"/>
+		<selectorItemTexture texturepath="Assets/Textures/Screens/Shop/selectorItem.png"/>
 		
 		
 	</hud>

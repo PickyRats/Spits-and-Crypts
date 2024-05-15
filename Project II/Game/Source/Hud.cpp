@@ -116,7 +116,6 @@ bool Hud::Start()
 	inventoryItem2 = app->tex->Load(configNode3.child("inventoryItem2").attribute("texturepath").as_string());
 	inventoryItem3 = app->tex->Load(configNode3.child("inventoryItem3").attribute("texturepath").as_string());
 
-	shopTexture = app->tex->Load(configNode3.child("shopTexture").attribute("texturepath").as_string());
 	items[0] = {"Pocion", "Heals 50 health points", 50, 0, 10, inventoryItem1};
 	items[1] = {"Collar", "Increases attack by 10", 0, 10, 20, inventoryItem2};
 	items[2] = {"Escudo", "Increases health by 10", 0, 0, 30, inventoryItem3};
@@ -125,9 +124,16 @@ bool Hud::Start()
 	inventorySlots[1].position = { 150, 20 };
 	inventorySlots[2].position = { 300, 20 };
 
-	shopSlots[0].position = { 0, 20 };
-	shopSlots[1].position = { 150, 20 };
-	shopSlots[2].position = { 300, 20 };
+	//SHOP
+	shopTexture = app->tex->Load(configNode3.child("shopTexture").attribute("texturepath").as_string());
+
+	shopSlots[0] = { {0, 20},items[0].texture, false };
+	shopSlots[1] = { {150, 20},items[1].texture, false };
+	shopSlots[2] = { {300, 20},items[2].texture, false };
+	
+
+	emptyslotTexture = app->tex->Load(configNode3.child("emptyslotTexture").attribute("texturepath").as_string());
+	selectorItemTexture = app->tex->Load(configNode3.child("selectorItemTexture").attribute("texturepath").as_string());
 
 
 	//Create Buttons
@@ -660,16 +666,38 @@ void Hud::Shop()
 	{
 		app->render->DrawTexture(shopTexture, 0, 0, NULL, SDL_FLIP_NONE, 0);
 		
+		
+		for (int i = 0; i < 4; i++) {
+			if (shopSlots[i].isEmpty) {
+				app->render->DrawTexture(emptyslotTexture, shopSlots[i].position.x, shopSlots[i].position.y, NULL, SDL_FLIP_NONE, 0);
+			}
+			else {
+				app->render->DrawTexture(shopSlots[i].texture, shopSlots[i].position.x, shopSlots[i].position.y, NULL, SDL_FLIP_NONE, 0);
+			}
+		}
+
+		app->render->DrawTexture(selectorItemTexture, shopSlots[itemId].position.x, shopSlots[itemId].position.y, NULL, SDL_FLIP_NONE, 0);
+
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && itemId > 0  )
+		{
+			itemId--;
+
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && itemId < 2)
+		{
+			itemId++;
+		}
+
 		if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 		{
 			for (int i = 0; i < 4; i++) {
 				if (inventorySlots[i].isEmpty) {
 					inventorySlots[i].isEmpty = false;
-					inventorySlots[i].texture = items[i].texture;
+					inventorySlots[i].texture = items[itemId].texture;
+					shopSlots[itemId].isEmpty = true;
 					break;
 				}
 			}
-
 		}
 		/*for (int i = 0; i < 3; i++) {
 			if (!slots[i].isEmpty) {
@@ -735,6 +763,7 @@ bool Hud::CleanUp()
 	app->tex->UnLoad(inventoryItem2);
 	app->tex->UnLoad(inventoryItem3);
 	app->tex->UnLoad(shopTexture);
+	app->tex->UnLoad(emptyslotTexture);
 
 	return true;
 }
