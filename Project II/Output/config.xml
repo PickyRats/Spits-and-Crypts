@@ -338,9 +338,9 @@
 		<numeros texturepath="Assets/Textures/Screens/Combat/numeros.png"/>
 
 		<inventory texturepath="Assets/Textures/Screens/Inventory/inventory.png"/>
-		<inventoryItem1 texturepath="Assets/Textures/Screens/Inventory/Inventoryitem1.png"/>
-		<inventoryItem2 texturepath="Assets/Textures/Screens/Inventory/Inventoryitem2.png"/>
-		<inventoryItem3 texturepath="Assets/Textures/Screens/Inventory/Inventoryitem3.png"/>
+		<inventoryItem1 texturepath="Assets/Textures/Screens/Inventory/Amulet_Escarabat.png"/>
+		<inventoryItem2 texturepath="Assets/Textures/Screens/Inventory/Amulet_Serps.png"/>
+		<inventoryItem3 texturepath="Assets/Textures/Screens/Inventory/Amulet_Ull.png"/>
 
 		<shopTexture texturepath="Assets/Textures/Screens/Shop/shop.png"/>
 		<emptyslotTexture texturepath="Assets/Textures/Screens/Shop/emptyslot.png"/>

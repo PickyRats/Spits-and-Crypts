@@ -162,6 +162,7 @@ private:
 	SDL_Texture* emptyslotTexture;
 	SDL_Texture* selectorItemTexture;
 	bool shop = false;
+	bool isBought = false;
 
 
 	GuiControlButton* exitButton;
