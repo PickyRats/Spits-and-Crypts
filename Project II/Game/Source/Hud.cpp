@@ -688,14 +688,16 @@ void Hud::Shop()
 			itemId++;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN && !isBought)
+		if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN && !shopSlots[itemId].isBought)
 		{
 			for (int i = 0; i < 4; i++) {
 				if (inventorySlots[i].isEmpty) {
 					inventorySlots[i].isEmpty = false;
 					inventorySlots[i].texture = items[itemId].texture;
 					shopSlots[itemId].isEmpty = true;
-					isBought = true;
+					shopSlots[itemId].isBought = true;
+				
+					
 					break;
 				}
 			}

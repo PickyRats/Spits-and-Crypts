@@ -13,6 +13,7 @@ struct Slot {
 	iPoint position = { 0, 0 };
 	SDL_Texture* texture = nullptr;
 	bool isEmpty = true;
+	bool isBought = false;
 };
 
 struct Item {
@@ -162,7 +163,7 @@ private:
 	SDL_Texture* emptyslotTexture;
 	SDL_Texture* selectorItemTexture;
 	bool shop = false;
-	bool isBought = false;
+	
 
 
 	GuiControlButton* exitButton;
