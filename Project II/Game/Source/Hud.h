@@ -141,14 +141,46 @@ private:
 
 	//HabilityTree
 
-	SDL_Texture* habilitytree;
+	bool habilityTree = false;
 
-	SDL_Texture* talent_1;
-	SDL_Texture* talent_2;
-	SDL_Texture* talent_3;
-	SDL_Texture* talent_4;
-	SDL_Texture* talent_5;
-	SDL_Texture* talent_6;
+	SDL_Texture* Habilitytree;
+
+	SDL_Texture* Talent_1;
+	SDL_Texture* Talent_2;
+	SDL_Texture* Talent_3;
+	SDL_Texture* Talent_4;
+	SDL_Texture* Talent_5;
+	SDL_Texture* Talent_6;
+	SDL_Texture* Talent_7;
+
+	//Talent 1
+	bool talent1selected = false;
+
+	//Talent 2
+	bool talent2selected = false;
+	bool talent2locked = false;
+
+	//Talent 3
+	bool talent3selected = false;
+	bool talent3locked = false;
+
+	//Talent 4
+	bool talent4selected = false;
+	bool talent4locked = false;
+
+	//Talent 5
+	bool talent5selected = false;
+	bool talent5locked = false;
+
+	//Talent 6
+	bool talent6selected = false;
+	bool talent6locked = false;
+
+	//Talent 7
+	bool talent7selected = false;
+	bool talent7locked = false;
+
+
 
 	bool onSettingsControls = false;
 	bool onSettingsAudio = true;

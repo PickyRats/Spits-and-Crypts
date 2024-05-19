@@ -342,6 +342,20 @@
 		<Personaje2 texturepath="Assets/Textures/Screens/Combat/fotopersonatge2.png"/>
 		<numeros texturepath="Assets/Textures/Screens/Combat/numeros.png"/>
 		
+		<HabilityTree texturepath="Assets/Textures/HabilityTree/HabilityTree.png"/>
+		<Unlocked_1 texturepath="Assets/Textures/HabilityTree/Unlocked_1.png"/>
+		<Unlocked_2 texturepath="Assets/Textures/HabilityTree/Unlocked_2.png"/>
+		<Unlockable_1 texturepath="Assets/Textures/HabilityTree/Unlockable_1.png"/>
+		<Unlockable_2 texturepath="Assets/Textures/HabilityTree/Unlockable_2.png"/>
+		<Buyable_1 texturepath="Assets/Textures/HabilityTree/Buyable_1.png"/>
+		<Buyable_2 texturepath="Assets/Textures/HabilityTree/Buyable_2.png"/>
+		<Locked_1 texturepath="Assets/Textures/HabilityTree/Locked_1.png"/>
+		<Locked_2 texturepath="Assets/Textures/HabilityTree/Locked_2.png"/>
+		<Superlocked_1 texturepath="Assets/Textures/HabilityTree/Superlocked_1.png"/>
+		<Superlocked_2 texturepath="Assets/Textures/HabilityTree/Superlocked_2.png"/>
+		
+
+		
 		
 	</hud>
 
