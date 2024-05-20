@@ -28,13 +28,13 @@ public:
 
 	void DrawTimer();
 
-	void HabilityTree();
+	void SkillTree();
 
 	bool playerDeadHud = false;
 	bool spacePressed = false;
 	bool onSettings = false;
 	int currentId = 0;
-	bool habilityTree = false;
+	bool abilityTree = false;
 private:
 
 
@@ -149,8 +149,7 @@ private:
 	SDL_Texture* Talent_3;
 	SDL_Texture* Talent_4;
 	SDL_Texture* Talent_5;
-	SDL_Texture* Talent_6;
-	SDL_Texture* Talent_7;
+
 
 	SDL_Texture* Unlocked_1;
 	SDL_Texture* Unlocked_2;
@@ -158,10 +157,6 @@ private:
 	SDL_Texture* Unlockable_2;
 	SDL_Texture* Buyable_1;
 	SDL_Texture* Buyable_2;
-	SDL_Texture* Locked_1;
-	SDL_Texture* Locked_2;
-	SDL_Texture* Superlocked_1;
-	SDL_Texture* Superlocked_2;
 
 	//Talent 1
 	bool talent1selected = true;
