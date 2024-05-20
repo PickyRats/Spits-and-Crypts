@@ -152,7 +152,7 @@ bool Hud::Start()
 	Talent_2 = Unlockable_1;
 	Talent_3 = Unlockable_1;
 	Talent_4 = Buyable_1;
-	Talent_5 = Locked_1;
+	//Talent_5 = Locked_1;
 	Talent_6 = Locked_1;
 	Talent_7 = Superlocked_1;
 
@@ -707,7 +707,7 @@ void Hud::HabilityTree()
 	app->render->DrawTexture(Talent_2, 315, 50, NULL, SDL_FLIP_NONE, 0);
 	app->render->DrawTexture(Talent_3, 170, 50, NULL, SDL_FLIP_NONE, 0);
 	app->render->DrawTexture(Talent_4, 462, 154, NULL, SDL_FLIP_NONE, 0);
-	app->render->DrawTexture(Talent_5, 315, 154, NULL, SDL_FLIP_NONE, 0);
+	//app->render->DrawTexture(Talent_5, 315, 154, NULL, SDL_FLIP_NONE, 0);
 	app->render->DrawTexture(Talent_6, 170, 154, NULL, SDL_FLIP_NONE, 0);
 	app->render->DrawTexture(Talent_7, 316, 258, NULL, SDL_FLIP_NONE, 0);
 
@@ -733,7 +733,6 @@ void Hud::HabilityTree()
 		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 		{
 			talent2locked = true;
-			Talent_5 = Unlockable_1;
 		}
 
 		if (talent2locked)
@@ -762,19 +761,6 @@ void Hud::HabilityTree()
 		{
 			talent2selected = false;
 			talent3selected = true;
-			if (talent2locked)
-			{
-				Talent_2 = Unlocked_1;
-			}
-			else
-			{
-				Talent_2 = Unlockable_1;
-			}
-		}
-		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
-		{
-			talent2selected = false;
-			talent5selected = true;
 			if (talent2locked)
 			{
 				Talent_2 = Unlocked_1;
@@ -872,79 +858,6 @@ void Hud::HabilityTree()
 			else
 			{
 				Talent_4 = Buyable_1;
-			}
-		}
-	}
-
-	if (talent5selected)
-	{
-		if (talent2locked && app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
-		{
-			talent5locked = true;
-		}
-
-		if (talent2locked)
-		{
-			Talent_5 = Unlockable_2;
-		}
-		if (talent5locked && talent2locked)
-		{
-			Talent_5 = Unlocked_2;
-		}
-		else
-		{
-			Talent_5 = Locked_2;
-		}
-
-		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
-		{
-			talent5selected = false;
-			talent4selected = true;
-			if (talent2locked)
-			{
-				Talent_5 = Unlockable_1;
-			}
-			if (talent5locked && talent2locked)
-			{
-				Talent_5 = Unlocked_1;
-			}
-			else
-			{
-				Talent_5 = Locked_1;
-			}
-		}
-		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
-		{
-			talent5selected = false;
-			talent6selected = true;
-			if (talent2locked)
-			{
-				Talent_5 = Unlockable_1;
-			}
-			if (talent5locked&& talent2locked)
-			{
-				Talent_5 = Unlocked_1;
-			}
-			else
-			{
-				Talent_5 = Locked_1;
-			}
-		}
-		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
-		{
-			talent5selected = false;
-			talent2selected = true;
-			if (talent2locked)
-			{
-				Talent_5 = Unlockable_1;
-			}
-			if (talent5locked && talent2locked)
-			{
-				Talent_5 = Unlocked_1;
-			}
-			else
-			{
-				Talent_5 = Locked_1;
 			}
 		}
 	}
