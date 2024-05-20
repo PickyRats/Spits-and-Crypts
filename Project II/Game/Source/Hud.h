@@ -34,6 +34,7 @@ public:
 	bool spacePressed = false;
 	bool onSettings = false;
 	int currentId = 0;
+	bool habilityTree = false;
 private:
 
 
@@ -141,8 +142,6 @@ private:
 
 	//HabilityTree
 
-	bool habilityTree = false;
-
 	SDL_Texture* Habilitytree;
 
 	SDL_Texture* Talent_1;
@@ -153,8 +152,19 @@ private:
 	SDL_Texture* Talent_6;
 	SDL_Texture* Talent_7;
 
+	SDL_Texture* Unlocked_1;
+	SDL_Texture* Unlocked_2;
+	SDL_Texture* Unlockable_1;
+	SDL_Texture* Unlockable_2;
+	SDL_Texture* Buyable_1;
+	SDL_Texture* Buyable_2;
+	SDL_Texture* Locked_1;
+	SDL_Texture* Locked_2;
+	SDL_Texture* Superlocked_1;
+	SDL_Texture* Superlocked_2;
+
 	//Talent 1
-	bool talent1selected = false;
+	bool talent1selected = true;
 
 	//Talent 2
 	bool talent2selected = false;

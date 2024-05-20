@@ -135,15 +135,26 @@ bool Hud::Start()
 	app->sceneMenu->exitButton->state = GuiControlState::HIDDEN;
 
 	//Hability Tree
-	Habilitytree = app->tex->Load(configNode3.child("Habilitytree").attribute("texturepath").as_string());
+	Habilitytree = app->tex->Load(configNode3.child("HabilityTree").attribute("texturepath").as_string());
 
-	Talent_1 = app->tex->Load(configNode3.child("Unlocked_1").attribute("texturepath").as_string());
-	Talent_2 = app->tex->Load(configNode3.child("Unlockable_1").attribute("texturepath").as_string());
-	Talent_3 = app->tex->Load(configNode3.child("Unlockable_1").attribute("texturepath").as_string());
-	Talent_4 = app->tex->Load(configNode3.child("Buyable_1").attribute("texturepath").as_string());
-	Talent_5 = app->tex->Load(configNode3.child("Locked_1").attribute("texturepath").as_string());
-	Talent_6 = app->tex->Load(configNode3.child("Locked_1").attribute("texturepath").as_string());
-	Talent_7 = app->tex->Load(configNode3.child("Superlocked_1").attribute("texturepath").as_string());
+	Unlocked_1 = app->tex->Load(configNode3.child("Unlocked_1").attribute("texturepath").as_string());
+	Unlocked_2 = app->tex->Load(configNode3.child("Unlocked_2").attribute("texturepath").as_string());
+	Unlockable_1 = app->tex->Load(configNode3.child("Unlockable_1").attribute("texturepath").as_string());
+	Unlockable_2 = app->tex->Load(configNode3.child("Unlockable_2").attribute("texturepath").as_string());
+	Buyable_1 = app->tex->Load(configNode3.child("Buyable_1").attribute("texturepath").as_string());
+	Buyable_2 = app->tex->Load(configNode3.child("Buyable_2").attribute("texturepath").as_string());
+	Locked_1 = app->tex->Load(configNode3.child("Locked_1").attribute("texturepath").as_string());
+	Locked_2 = app->tex->Load(configNode3.child("Locked_2").attribute("texturepath").as_string());
+	Superlocked_1 = app->tex->Load(configNode3.child("Superlocked_1").attribute("texturepath").as_string());
+	Superlocked_2 = app->tex->Load(configNode3.child("Superlocked_2").attribute("texturepath").as_string());
+
+	Talent_1 = Unlocked_1;
+	Talent_2 = Unlockable_1;
+	Talent_3 = Unlockable_1;
+	Talent_4 = Buyable_1;
+	Talent_5 = Locked_1;
+	Talent_6 = Locked_1;
+	Talent_7 = Superlocked_1;
 
 
 	exitButton->state = GuiControlState::HIDDEN;
@@ -184,6 +195,9 @@ bool Hud::Update(float dt)
 	if (app->sceneTemple->active && app->input->GetKey(SDL_SCANCODE_H)==KEY_REPEAT && !habilityTree)
 	{
 		habilityTree = true;
+	}
+	if (habilityTree)
+	{
 		HabilityTree();
 	}
 
@@ -699,65 +713,258 @@ void Hud::HabilityTree()
 
 	if (talent1selected)
 	{
-		Talent_1 = app->tex->Load(configNode3.child("Unlocked_2").attribute("texturepath").as_string());
-	}
-	else
-	{
-		Talent_1 = app->tex->Load(configNode3.child("Unlocked_1").attribute("texturepath").as_string());
+		Talent_1 = Unlocked_2;
+		if (app->input->GetKey(SDL_SCANCODE_LEFT)==KEY_DOWN)
+		{
+			talent1selected = false;
+			talent2selected = true;
+			Talent_1 = Unlocked_1;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_DOWN)==KEY_DOWN)
+		{
+			talent1selected = false;
+			talent4selected = true;
+			Talent_1 = Unlocked_1;
+		}
 	}
 
 	if (talent2selected)
 	{
-		Talent_2 = app->tex->Load(configNode3.child("Unlockable_2").attribute("texturepath").as_string());
-	}
-	else
-	{
-		Talent_2 = app->tex->Load(configNode3.child("Unlockable_1").attribute("texturepath").as_string());
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+		{
+			talent2locked = true;
+			Talent_5 = Unlockable_1;
+		}
+
+		if (talent2locked)
+		{
+			Talent_2 = Unlocked_2;
+		}
+		else
+		{
+			Talent_2 = Unlockable_2;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+		{
+			talent2selected = false;
+			talent1selected = true;
+			if (talent2locked)
+			{
+				Talent_2 = Unlocked_1;
+			}
+			else
+			{
+				Talent_2 = Unlockable_1;
+			}
+		}
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+		{
+			talent2selected = false;
+			talent3selected = true;
+			if (talent2locked)
+			{
+				Talent_2 = Unlocked_1;
+			}
+			else
+			{
+				Talent_2 = Unlockable_1;
+			}
+		}
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+		{
+			talent2selected = false;
+			talent5selected = true;
+			if (talent2locked)
+			{
+				Talent_2 = Unlocked_1;
+			}
+			else
+			{
+				Talent_2 = Unlockable_1;
+			}
+		}
 	}
 
 	if (talent3selected)
 	{
-		Talent_3 = app->tex->Load(configNode3.child("Unlockable_2").attribute("texturepath").as_string());
-	}
-	else
-	{
-		Talent_3 = app->tex->Load(configNode3.child("Unlockable_1").attribute("texturepath").as_string());
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+		{
+			talent3locked = true;
+		}
+
+		if (talent3locked)
+		{
+			Talent_3 = Unlocked_2;
+		}
+		else
+		{
+			Talent_3 = Unlockable_2;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+		{
+			talent3selected = false;
+			talent2selected = true;
+
+			if (talent3locked)
+			{
+				Talent_3 = Unlocked_1;
+			}
+			else
+			{
+				Talent_3 = Unlockable_1;
+			}
+		}
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+		{
+			talent3selected = false;
+			talent6selected = true;
+
+			if (talent3locked)
+			{
+				Talent_3 = Unlocked_1;
+			}
+			else
+			{
+				Talent_3 = Unlockable_1;
+			}
+		}
 	}
 
 	if (talent4selected)
 	{
-		Talent_4 = app->tex->Load(configNode3.child("Buyable_2").attribute("texturepath").as_string());
-	}
-	else
-	{
-		Talent_4 = app->tex->Load(configNode3.child("Buyable_1").attribute("texturepath").as_string());
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+		{
+			talent4locked = true;
+		}
+
+		if (talent4locked)
+		{
+			Talent_4 = Unlocked_2;
+		}
+		else
+		{
+			Talent_4 = Buyable_2;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		{
+			talent4selected = false;
+			talent1selected = true;
+			if (talent4locked)
+			{
+				Talent_4 = Unlocked_1;
+			}
+			else
+			{
+				Talent_4 = Buyable_1;
+			}
+		}
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+		{
+			talent4selected = false;
+			talent5selected = true;
+			if (talent4locked)
+			{
+				Talent_4 = Unlocked_1;
+			}
+			else
+			{
+				Talent_4 = Buyable_1;
+			}
+		}
 	}
 
 	if (talent5selected)
 	{
-		Talent_5 = app->tex->Load(configNode3.child("Locked_2").attribute("texturepath").as_string());
-	}
-	else
-	{
-		Talent_5 = app->tex->Load(configNode3.child("Locked_1").attribute("texturepath").as_string());
+		if (talent2locked && app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+		{
+			talent5locked = true;
+		}
+
+		if (talent2locked)
+		{
+			Talent_5 = Unlockable_2;
+		}
+		if (talent5locked && talent2locked)
+		{
+			Talent_5 = Unlocked_2;
+		}
+		else
+		{
+			Talent_5 = Locked_2;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+		{
+			talent5selected = false;
+			talent4selected = true;
+			if (talent2locked)
+			{
+				Talent_5 = Unlockable_1;
+			}
+			if (talent5locked && talent2locked)
+			{
+				Talent_5 = Unlocked_1;
+			}
+			else
+			{
+				Talent_5 = Locked_1;
+			}
+		}
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+		{
+			talent5selected = false;
+			talent6selected = true;
+			if (talent2locked)
+			{
+				Talent_5 = Unlockable_1;
+			}
+			if (talent5locked&& talent2locked)
+			{
+				Talent_5 = Unlocked_1;
+			}
+			else
+			{
+				Talent_5 = Locked_1;
+			}
+		}
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		{
+			talent5selected = false;
+			talent2selected = true;
+			if (talent2locked)
+			{
+				Talent_5 = Unlockable_1;
+			}
+			if (talent5locked && talent2locked)
+			{
+				Talent_5 = Unlocked_1;
+			}
+			else
+			{
+				Talent_5 = Locked_1;
+			}
+		}
 	}
 
 	if (talent6selected)
 	{
-		Talent_6 = app->tex->Load(configNode3.child("Locked_2").attribute("texturepath").as_string());
-	}
-	else
-	{
-		Talent_6 = app->tex->Load(configNode3.child("Locked_1").attribute("texturepath").as_string());
+		Talent_6 = Locked_2;
+		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+		{
+			talent6selected = false;
+			talent5selected = true;
+			Talent_6 = Locked_1;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		{
+			talent6selected = false;
+			talent3selected = true;
+			Talent_6 = Locked_1;
+		}
 	}
 
-	if (talent7selected)
-	{
-		Talent_7 = app->tex->Load(configNode3.child("Superlocked_2").attribute("texturepath").as_string());
-	}
-	else
-	{
-		Talent_7 = app->tex->Load(configNode3.child("Superlocked_1").attribute("texturepath").as_string());
-	}
 }
 
