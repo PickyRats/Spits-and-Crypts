@@ -239,6 +239,7 @@ void DialogTrigger::GiveMission(int idMission)
 		break;
 	case 3:
 		printf(" Soy maat \n");
+		app->hud->abilityTree = true;
 		break;
 	case 4:
 		printf(" toth  \n");

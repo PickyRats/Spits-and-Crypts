@@ -214,7 +214,7 @@ bool Hud::Update(float dt)
 	//Ability Tree
 	if (app->sceneTemple->active && app->input->GetKey(SDL_SCANCODE_H)==KEY_DOWN)
 	{
-		abilityTree = !abilityTree;
+		abilityTree = false;
 	}
 	if (abilityTree)
 	{
