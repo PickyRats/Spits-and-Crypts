@@ -141,10 +141,7 @@ void DialogTrigger::PlayDialog()
 			app->dialogManager->AddDialog(pDialog);
 		}
 		played = true;
-		if (played=true)
-		{
-			Interact(id);
-		}
+		
 
 		//Play el dialogo repetido
 	}
@@ -159,8 +156,9 @@ void DialogTrigger::PlayDialog()
 			pDialog = item->data;
 			app->dialogManager->AddDialog(pDialog);
 		}
-		Interact(id);
+	
 	}
+	Interact(id);
 
 }
 
