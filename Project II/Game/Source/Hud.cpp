@@ -657,9 +657,9 @@ void Hud::Inventory()
 
 void Hud::Shop()
 {
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && shop)
 	{
-		shop = !shop;
+		shop = false;
 
 	}
 	if (shop)

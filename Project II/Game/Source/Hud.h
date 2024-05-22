@@ -57,6 +57,8 @@ public:
 	Item items[3];
 
 	Slot shopSlots[3];
+	bool shop = false;
+
 private:
 
 
@@ -162,7 +164,7 @@ private:
 	SDL_Texture* shopTexture;
 	SDL_Texture* emptyslotTexture;
 	SDL_Texture* selectorItemTexture;
-	bool shop = false;
+	
 	
 
 
