@@ -4,6 +4,8 @@
 #include "Module.h"
 #include "GuiControlButton.h"
 #include "GuiControlCheckBox.h"
+#include "GuiControlSlider.h"
+
 #include "GuiManager.h"
 #include "GuiControl.h"
 #include "Timer.h"
@@ -31,7 +33,7 @@ public:
 	bool playerDeadHud = false;
 	bool spacePressed = false;
 	bool onSettings = false;
-	int currentId = 0;
+	
 private:
 
 
@@ -62,6 +64,10 @@ private:
 	SDL_Texture* returnNormal;
 	SDL_Texture* returnHover;
 	SDL_Texture* returnClick;
+
+	SDL_Texture* saveNormal;
+	SDL_Texture* saveHover;
+	SDL_Texture* saveClick;
 
 	SDL_Texture* pause;
 
@@ -128,14 +134,16 @@ private:
 	GuiControlButton* exitButton;
 	GuiControlButton* returnButton;
 	GuiControlButton* resumeButton;
+	GuiControlButton* saveButton;
 	GuiControlButton* settingsButton;
 	GuiControlButton* backToTitleButton;
 
 	GuiControlButton* settingsExitButton;
 	GuiControlButton* settingsReturnButton;
-	GuiControlButton* settingsMusicButton;
+	GuiControlSlider* settingsMusicButton;
+	GuiControlSlider* settingsFxButton;
 	GuiControlButton* settingsOptionsButton;
-	GuiControlButton* settingsFxButton;
+
 	GuiControlButton* settingsFullScreenButton;
 	GuiControlCheckBox* settingsVSyncButton;
 	GuiControlButton* settingsControlsButton;

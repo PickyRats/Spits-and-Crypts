@@ -62,15 +62,15 @@ bool GuiControlCheckBox::Update(float dt)
 			app->render->DrawTexture(textureDisabled, bounds.x, bounds.y, NULL, SDL_FLIP_NONE, 0);
 		case GuiControlState::NORMAL:
 			app->render->DrawTexture(textureNormal, bounds.x, bounds.y, NULL, SDL_FLIP_NONE, 0);
-			if (pressed) app->render->DrawTexture(texturePressed, bounds.x + 5, bounds.y - 20, NULL, SDL_FLIP_NONE, 0);
+			if (pressed) app->render->DrawTexture(texturePressed, bounds.x, bounds.y , NULL, SDL_FLIP_NONE, 0);
 			break;
 		case GuiControlState::FOCUSED:
 			app->render->DrawTexture(textureFocused, bounds.x, bounds.y, NULL, SDL_FLIP_NONE, 0);
-			if (pressed) app->render->DrawTexture(texturePressed, bounds.x + 5, bounds.y - 20, NULL, SDL_FLIP_NONE, 0);
+			if (pressed) app->render->DrawTexture(texturePressed, bounds.x, bounds.y , NULL, SDL_FLIP_NONE, 0);
 			break;
 		case GuiControlState::PRESSED:
 			app->render->DrawTexture(textureFocused, bounds.x, bounds.y, NULL, SDL_FLIP_NONE, 0);
-			if (pressed) app->render->DrawTexture(texturePressed, bounds.x + 5, bounds.y - 20, NULL, SDL_FLIP_NONE, 0);
+			if (pressed) app->render->DrawTexture(texturePressed, bounds.x , bounds.y , NULL, SDL_FLIP_NONE, 0);
 			break;
 		}
 	}

@@ -24,6 +24,8 @@ public:
 
 	bool Update(float dt);
 
+	bool SaveState(pugi::xml_node node);
+
 	bool CleanUp();
 	uint FxButton1;
 	uint FxButton2;
