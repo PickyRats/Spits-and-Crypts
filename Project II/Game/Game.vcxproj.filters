@@ -115,9 +115,6 @@
     <ClCompile Include="Source\SceneChoza.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MissionManager.cpp">
-      <Filter>Modules\UI\Mission</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -272,9 +269,6 @@
     <ClInclude Include="Source\SceneChoza.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\MissionManager.h">
-      <Filter>Modules\UI\Mission</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -303,9 +297,6 @@
     </Filter>
     <Filter Include="Modules\UI\Dialog">
       <UniqueIdentifier>{5fcec38a-419f-4f66-9efe-267c7c63427c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\UI\Mission">
-      <UniqueIdentifier>{484748ed-b3b0-4341-8934-c3d41491a841}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

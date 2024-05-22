@@ -244,11 +244,6 @@ void DialogTrigger::GiveMission(int idMission)
 		mission1 = true;
 		if (mission1)
 		{
-			std::string fontTarget = parameters.attribute("font").as_string("primary");
-			for (pugi::xml_node itemNode = parameters.child("missions").child("mission"); itemNode; itemNode = itemNode.next_sibling("mission"))
-			{
-				dialogues.Add(missionManager->ExecuteMission(itemNode, parameters.attribute("name").as_string(), fontTarget.c_str()));
-			}
 			
 		}
 		break;
