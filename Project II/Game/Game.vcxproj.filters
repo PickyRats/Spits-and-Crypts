@@ -111,6 +111,12 @@
     <ClCompile Include="Source\Puzzle.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Puzzle2.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneLight.cpp">
+      <Filter>Modules\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -260,6 +266,12 @@
     </ClInclude>
     <ClInclude Include="Source\Puzzle.h">
       <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Puzzle2.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneLight.h">
+      <Filter>Modules\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

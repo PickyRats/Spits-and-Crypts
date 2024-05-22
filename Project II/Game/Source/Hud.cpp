@@ -19,6 +19,7 @@
 #include "Log.h"
 #include "SceneMenu.h"
 #include "SceneCombat.h"
+#include "SceneTemple.h"
 
 #include <iostream>
 #include <iomanip>
@@ -159,6 +160,23 @@ bool Hud::Start()
 	app->sceneMenu->creditsButton->state = GuiControlState::HIDDEN;
 	app->sceneMenu->exitButton->state = GuiControlState::HIDDEN;
 
+	//Ability Tree
+	Habilitytree = app->tex->Load(configNode3.child("HabilityTree").attribute("texturepath").as_string());
+
+	Unlocked_1 = app->tex->Load(configNode3.child("Unlocked_1").attribute("texturepath").as_string());
+	Unlocked_2 = app->tex->Load(configNode3.child("Unlocked_2").attribute("texturepath").as_string());
+	Unlockable_1 = app->tex->Load(configNode3.child("Unlockable_1").attribute("texturepath").as_string());
+	Unlockable_2 = app->tex->Load(configNode3.child("Unlockable_2").attribute("texturepath").as_string());
+	Buyable_1 = app->tex->Load(configNode3.child("Buyable_1").attribute("texturepath").as_string());
+	Buyable_2 = app->tex->Load(configNode3.child("Buyable_2").attribute("texturepath").as_string());
+
+	Talent_1 = Unlocked_1;
+	Talent_2 = Unlockable_1;
+	Talent_3 = Unlockable_1;
+	Talent_4 = Buyable_1;
+	Talent_5 = Unlockable_1;;
+
+
 
 	exitButton->state = GuiControlState::HIDDEN;
 	resumeButton->state = GuiControlState::HIDDEN;
@@ -175,6 +193,10 @@ bool Hud::Start()
 	settingsAudioButton->state = GuiControlState::HIDDEN;
 	settingsOptionsButton->state = GuiControlState::HIDDEN;
 
+
+	//Tree Buttons
+
+
 	if (app->sceneMenu->vSync == true)
 	{
 		settingsVSyncButton->pressed = true;
@@ -189,6 +211,16 @@ bool Hud::Start()
 
 bool Hud::Update(float dt)
 {
+	//Ability Tree
+	if (app->sceneTemple->active && app->input->GetKey(SDL_SCANCODE_H)==KEY_DOWN)
+	{
+		abilityTree = !abilityTree;
+	}
+	if (abilityTree)
+	{
+		SkillTree();
+	}
+  
 	//Inventory
 	Inventory();
 
@@ -758,6 +790,12 @@ bool Hud::CleanUp()
 	app->tex->UnLoad(settingsAudioButtonHover);
 	app->tex->UnLoad(settingsOptionsButtonNormal);
 	app->tex->UnLoad(settingsOptionsButtonHover);
+	app->tex->UnLoad(Habilitytree);
+	app->tex->UnLoad(Talent_1);
+	app->tex->UnLoad(Talent_2);
+	app->tex->UnLoad(Talent_3);
+	app->tex->UnLoad(Talent_4);
+	app->tex->UnLoad(Talent_5);
 	app->tex->UnLoad(inventoryTexture);
 	app->tex->UnLoad(inventoryItem1);
 	app->tex->UnLoad(inventoryItem2);
@@ -765,5 +803,183 @@ bool Hud::CleanUp()
 	app->tex->UnLoad(shopTexture);
 	app->tex->UnLoad(emptyslotTexture);
 
+
 	return true;
 }
+
+void Hud::SkillTree()
+{
+	app->render->DrawTexture(Habilitytree, 0, 0, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Talent_1, 315, 50, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Talent_2, 462, 50, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Talent_3, 170, 50, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Talent_4, 462, 154, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Talent_5, 170, 154, NULL, SDL_FLIP_NONE, 0);
+
+	if (talent1selected)
+	{
+		Talent_1 = Unlocked_2;
+		if (app->input->GetKey(SDL_SCANCODE_LEFT)==KEY_REPEAT)
+		{
+			talent1selected = false;
+			talent3selected = true;
+			Talent_1 = Unlocked_1;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		{
+			talent1selected = false;
+			talent2selected = true;
+			Talent_1 = Unlocked_1;
+		}
+	}
+
+	if (talent2selected)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT)
+		{
+			talent2locked = true;
+		}
+
+		if (talent2locked)
+		{
+			Talent_2 = Unlocked_2;
+		}
+		else
+		{
+			Talent_2 = Unlockable_2;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		{
+			talent2selected = false;
+			talent1selected = true;
+			if (talent2locked)
+			{
+				Talent_2 = Unlocked_1;
+			}
+			else
+			{
+				Talent_2 = Unlockable_1;
+			}
+		}
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		{
+			talent2selected = false;
+			talent4selected = true;
+			if (talent2locked)
+			{
+				Talent_2 = Unlocked_1;
+			}
+			else
+			{
+				Talent_2 = Unlockable_1;
+			}
+		}
+	}
+
+	if (talent3selected)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT)
+		{
+			talent3locked = true;
+		}
+
+		if (talent3locked)
+		{
+			Talent_3 = Unlocked_2;
+		}
+		else
+		{
+			Talent_3 = Unlockable_2;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		{
+			talent3selected = false;
+			talent1selected = true;
+			if (talent3locked)
+			{
+				Talent_3 = Unlocked_1;
+			}
+			else
+			{
+				Talent_3 = Unlockable_1;
+			}
+		}
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		{
+			talent3selected = false;
+			talent5selected = true;
+			if (talent3locked)
+			{
+				Talent_3 = Unlocked_1;
+			}
+			else
+			{
+				Talent_3 = Unlockable_1;
+			}
+		}
+	}
+
+	if (talent4selected)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT && talent2locked)
+		{
+			talent4locked = true;
+		}
+
+		if (talent4locked)
+		{
+			Talent_4 = Unlocked_2;
+		}
+		else
+		{
+			Talent_4 = Buyable_2;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		{
+			talent4selected = false;
+			talent2selected = true;
+			if (talent4locked)
+			{
+				Talent_4 = Unlocked_1;
+			}
+			else
+			{
+				Talent_4 = Buyable_1;
+			}
+		}
+	}
+
+	if (talent5selected)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT && talent3locked)
+		{
+			talent5locked = true;
+		}
+
+		if (talent5locked)
+		{
+			Talent_5 = Unlocked_2;
+		}
+		else
+		{
+			Talent_5 = Unlockable_2;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		{
+			talent5selected = false;
+			talent3selected = true;
+			if (talent5locked)
+			{
+				Talent_5 = Unlocked_1;
+			}
+			else
+			{
+				Talent_5 = Unlockable_1;
+			}
+		}
+	}
+
+
+}
+

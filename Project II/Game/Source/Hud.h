@@ -48,10 +48,13 @@ public:
 
 	void DrawTimer();
 
+	void SkillTree();
+
 	bool playerDeadHud = false;
 	bool spacePressed = false;
 	bool onSettings = false;
 	int currentId = 0;
+	bool abilityTree = false;
 
 	Slot inventorySlots[3];
 	Item items[3];
@@ -78,9 +81,6 @@ private:
 	SDL_Rect lifeRects[11] = { {0, 0, 9, 51}, { 9, 0, 9, 51}, { 18, 0, 9, 51}, { 27, 0, 9, 51}, { 36, 0, 9, 51}, { 45, 0, 9, 51}, { 54, 0, 9, 51}, { 63, 0, 9, 51}, { 72, 0, 9, 51}, { 81, 0, 9, 51}, {90, 0, 9 ,51} };
 	SDL_Rect pointsRects[6] = { {0, 0, 82, 121}, {82, 0, 82, 121}, {164, 0, 82, 121}, {246, 0, 82, 121}, {328, 0, 82, 121}, {410, 0, 82, 121} };
 	SDL_Rect numerosRects[9] = { {0, 0, 37, 37}, {37, 0, 37, 37}, {74, 0, 37, 37}, {111, 0, 37, 37}, {148, 0, 37, 37}, {185, 0, 37, 37}, {222, 0, 37, 37}, {259, 0, 37, 37}, {296, 0, 37, 37} };
-
-
-
 
 	SDL_Texture* exitNormal;
 	SDL_Texture* exitHover;
@@ -165,9 +165,6 @@ private:
 	SDL_Texture* emptyslotTexture;
 	SDL_Texture* selectorItemTexture;
 	
-	
-
-
 	GuiControlButton* exitButton;
 	GuiControlButton* returnButton;
 	GuiControlButton* resumeButton;
@@ -183,6 +180,53 @@ private:
 	GuiControlCheckBox* settingsVSyncButton;
 	GuiControlButton* settingsControlsButton;
 	GuiControlButton* settingsAudioButton;
+
+	//HabilityTree
+
+	SDL_Texture* Habilitytree;
+
+	SDL_Texture* Talent_1;
+	SDL_Texture* Talent_2;
+	SDL_Texture* Talent_3;
+	SDL_Texture* Talent_4;
+	SDL_Texture* Talent_5;
+
+
+	SDL_Texture* Unlocked_1;
+	SDL_Texture* Unlocked_2;
+	SDL_Texture* Unlockable_1;
+	SDL_Texture* Unlockable_2;
+	SDL_Texture* Buyable_1;
+	SDL_Texture* Buyable_2;
+
+	//Talent 1
+	bool talent1selected = true;
+
+	//Talent 2
+	bool talent2selected = false;
+	bool talent2locked = false;
+
+	//Talent 3
+	bool talent3selected = false;
+	bool talent3locked = false;
+
+	//Talent 4
+	bool talent4selected = false;
+	bool talent4locked = false;
+
+	//Talent 5
+	bool talent5selected = false;
+	bool talent5locked = false;
+
+	//Talent 6
+	bool talent6selected = false;
+	bool talent6locked = false;
+
+	//Talent 7
+	bool talent7selected = false;
+	bool talent7locked = false;
+
+
 
 	bool onSettingsControls = false;
 	bool onSettingsAudio = true;
