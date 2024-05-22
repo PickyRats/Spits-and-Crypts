@@ -52,13 +52,13 @@
 		<npc x="970" y="520" texturepath="Assets/Textures/Npcs/mercante.png" id="7" scene="3"/>
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="1024" y="576"  name="Mercante" repeat="true" scene="3">
+		<dialogTrigger x="1024" y="576"  name="Mercante" repeat="true" scene="3" id="7">
 		  <sentences>
 			  <sentence text="Bienvenido a mi humilde rinconcillo"/>
-			  <sentence text="Si quieres algo, no lo robes"/>
+			  <sentence text="Quieres entrar a mi tienda?"/>
 		  </sentences>
 		  <repeat_sentences>
-			  <sentence text="Te estoy vigilando..."/>
+			  <sentence text="Tanto quieres comprar?"/>
 		  </repeat_sentences>
 	  </dialogTrigger>
     
@@ -341,6 +341,15 @@
 		<Personaje1 texturepath="Assets/Textures/Screens/Combat/fotopersonatge.png"/>
 		<Personaje2 texturepath="Assets/Textures/Screens/Combat/fotopersonatge2.png"/>
 		<numeros texturepath="Assets/Textures/Screens/Combat/numeros.png"/>
+
+		<inventory texturepath="Assets/Textures/Screens/Inventory/inventory.png"/>
+		<inventoryItem1 texturepath="Assets/Textures/Screens/Inventory/Amulet_Escarabat.png"/>
+		<inventoryItem2 texturepath="Assets/Textures/Screens/Inventory/Amulet_Serps.png"/>
+		<inventoryItem3 texturepath="Assets/Textures/Screens/Inventory/Amulet_Ull.png"/>
+
+		<shopTexture texturepath="Assets/Textures/Screens/Shop/shop.png"/>
+		<emptyslotTexture texturepath="Assets/Textures/Screens/Shop/emptyslot.png"/>
+		<selectorItemTexture texturepath="Assets/Textures/Screens/Shop/selectorItem.png"/>
 		
 		<HabilityTree texturepath="Assets/Textures/HabilityTree/HabilityTree.png"/>
 		<Unlocked_1 texturepath="Assets/Textures/HabilityTree/Unlocked_1.png"/>

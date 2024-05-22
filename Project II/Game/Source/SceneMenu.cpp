@@ -185,6 +185,7 @@ bool SceneMenu::Update(float dt)
 			//Primera escena
 			app->fade->Fade(this, (Module*)app->sceneTemple, 60.0f);
 
+
 		}
 		else if (loadGameButton->state == GuiControlState::FOCUSED)
 		{
