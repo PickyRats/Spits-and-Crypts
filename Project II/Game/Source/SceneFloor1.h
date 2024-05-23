@@ -62,7 +62,7 @@ public:
 	int sceneNum = 5;
 
 
-	int levelWidth = 208 * 64;
+	int levelWidth = 37 * 64;
 	int levelHeight = 37 * 64;
 
 	bool combatFinished = false;
