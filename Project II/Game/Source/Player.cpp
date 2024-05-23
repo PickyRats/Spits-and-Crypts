@@ -90,14 +90,19 @@ bool Player::Update(float dt)
 				//player movement
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 				{
-					
-					LeftMovement();
+					if (!isClimbing)
+					{
+						LeftMovement();
+					}
 				}
 
 				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 				{
 
-					RightMovement();
+					if (!isClimbing)
+					{
+						RightMovement();
+					}
 				}
 
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE)
@@ -106,24 +111,30 @@ bool Player::Update(float dt)
 					isWalking = false;
 					vel.x = 0;
 				}
+				
 				//Climbing
-				if (isClimbing)
+				if (canClimb && !isjumping && vel.y<=0)
 				{
 					isWalking = false;
 					if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 					{
 						UpMovement();
+						isClimbing = true;
+						pbody->body->SetGravityScale(0.0f);
 					}
 					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 					{
 						DownMovement();
+						/*isClimbing = true;*/
+						pbody->body->SetGravityScale(0.0f);
 					}
 					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE)
 					{
 						vel.y = 0;
 					}
+					
 				}
-				//jump
+				//Jump
 				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !isjumping)
 				{
 					Jump();
@@ -235,7 +246,7 @@ bool Player::Update(float dt)
 void Player::LeftMovement()
 {
 	isFacingRight = false;
-	if(!isClimbing) isWalking = true;	
+	if(!canClimb) isWalking = true;	
 	
 	vel.x = -speed * 1.5f * dt;
 }
@@ -243,7 +254,7 @@ void Player::LeftMovement()
 void Player::RightMovement()
 {
 	isFacingRight = true;
-	if (!isClimbing) isWalking = true;
+	if (!canClimb) isWalking = true;
 	vel.x = speed * 1.5f * dt;
 }
 
@@ -272,7 +283,7 @@ void Player::WalkingSound()
 		walkingSoundPlaying = false;
 	}
 
-	if (isClimbing)
+	if (canClimb)
 	{
 		if (!climbingSoundPlaying)
 		{
@@ -355,6 +366,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::PLATFORM:
 		isjumping = false;
+		isClimbing = false;
 		break;
 	case ColliderType::DOOR_ALDEA:
 		doorAldea = true;
@@ -378,7 +390,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		enterCombat = true;
 		break;
 	case ColliderType::STAIRS:
-		isClimbing = true;
+		canClimb = true;
 		isWalking = false;
 		break;
 	case ColliderType::PUZZLE:
@@ -417,8 +429,9 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 		enterCombat = false;
 		break;
 	case ColliderType::STAIRS:
+		canClimb = false;
 		isClimbing = false;
-		
+		pbody->body->SetGravityScale(1.0f);
 		break;
 	case ColliderType::PUZZLE:
 		app->puzzle->canInteract = false;
