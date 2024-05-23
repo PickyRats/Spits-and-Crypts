@@ -51,7 +51,7 @@ bool SceneEnding::Update(float dt)
 
 	if (timer.ReadSec() > 5)
 	{
-		app->fade->Fade(this, (Module*)app->sceneFloor1, 30);
+		app->fade->Fade(this, (Module*)app->sceneVillage, 30);
 	}
 
 	app->render->DrawTexture(endingImage, 0, 0 , NULL, SDL_FLIP_NONE, 0);
