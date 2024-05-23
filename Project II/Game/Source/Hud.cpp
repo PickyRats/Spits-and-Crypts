@@ -616,7 +616,8 @@ bool Hud::Update(float dt)
 	{
 		mission10Active= false;
 		mission11Active = false;
-		mission1Complete = false;
+		app->tex->UnLoad(mission1i1);
+		app->tex->UnLoad(mission1i0);
 	}
 	return true;
 }

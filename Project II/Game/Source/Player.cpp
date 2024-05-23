@@ -197,6 +197,11 @@ bool Player::Update(float dt)
 			else if (doorChoza)
 			{
 				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneChoza, 60.0f);
+				if (app->hud->mission10Active)
+				{
+					app->hud->mission11Active = true;
+					app->hud->mission10Active = false;
+				}
 				doorChoza = false;
 			}
 			else if (doorFlor1)
