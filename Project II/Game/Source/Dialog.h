@@ -6,7 +6,7 @@
 #include "Render.h"
 #include "List.h"
 
-#include "SDL/include/SDL.h"
+
 enum class DialogType
 {
 	TEXT,

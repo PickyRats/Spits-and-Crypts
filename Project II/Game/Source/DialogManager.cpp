@@ -46,7 +46,6 @@ bool DialogManager::Start() {
 
 
 	background_tex = app->tex->Load(background_tex_path.c_str());
-	background_mission = app->tex->Load(background_mission_path.c_str());
 
 	return ret;
 }
@@ -235,7 +234,7 @@ bool DialogManager::Update(float dt) {
 
 
 		Dialog* actualDialog = dialogues.At(0)->data;
-		dialogFinished = ShowDialog(actualDialog);
+		bool dialogFinished = ShowDialog(actualDialog);
 
 
 
@@ -250,8 +249,14 @@ bool DialogManager::Update(float dt) {
 
 		//Siguiente dialogo
 		if (dialogFinished && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && actualDialog->type != DialogType::CHOOSE) {
+
+
 			indexText = 1;
 			dialogues.Del(dialogues.At(0));
+
+
+
+
 		}
 		//Gestion de las opciones
 		else if (dialogFinished && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && optionSelected != 0 && actualDialog->type == DialogType::CHOOSE) {

@@ -10,7 +10,6 @@
 #include "SceneEnding.h"
 #include "SceneTemple.h"
 #include "SceneFloor1.h"
-#include "SceneChoza.h"
 #include "SceneLight.h"
 #include "Map.h"
 #include "Physics.h"
@@ -53,7 +52,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	sceneShop = new SceneShop(false);
 	sceneOasisFaraon = new SceneOasisFaraon(false);
 	sceneTemple = new SceneTemple(false);
-	sceneChoza = new SceneChoza(false);
 	sceneFloor1 = new SceneFloor1(false);
 	sceneLight = new SceneLight(false);
 	map = new Map(false);
@@ -84,7 +82,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(sceneShop);
 	AddModule(sceneOasisFaraon);
 	AddModule(sceneTemple);
-	AddModule(sceneChoza);
 	AddModule(sceneFloor1);
 	AddModule(sceneLight);
 	AddModule(map);

@@ -9,12 +9,10 @@
 #include "SceneOasisFaraon.h"
 #include "SceneFloor1.h"
 #include "SceneTemple.h"
-#include "Hud.h"
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
 #include "FadeToBlack.h"
-#include "SceneChoza.h"
 #include "Hud.h""
 
 Npcs::Npcs() : Entity(EntityType::NPCS)
@@ -58,10 +56,9 @@ bool Npcs::Update(float dt)
 	int sceneShop = app->sceneShop->sceneNum;
 	int sceneOasisFaraon = app->sceneOasisFaraon->sceneNum;
 	int sceneFloor1 = app->sceneFloor1->sceneNum;
-	int sceneChoza = app->sceneChoza->sceneNum;
 	int npcScene= parameters.attribute("scene").as_int();
 
-	//Comprobar si la escena actual es la que tiene el npc y crearlo si es asÃ­
+	//Comprobar si la escena actual es la que tiene el npc y crearlo si es así
 	if (app->sceneVillage->active && sceneVillage == npcScene)
 	{
 		DrawNpcs();
@@ -82,15 +79,82 @@ bool Npcs::Update(float dt)
 	{
 		DrawNpcs();
 	}
-	else if (app->sceneChoza->active && sceneChoza == npcScene)
-	{
-		DrawNpcs();
-	}
 
 	return true;
 }
 
+void Npcs::Interact(int id) 
+{
+	switch (id)
+	{
+	case 1:
+		GiveMission(1);
+		break;
+	case 2:
+		GiveMission(2);
+		break;
+	case 3:
+		GiveMission(3);
+		break;
+	case 4:
+		GiveMission(4);
+		break;
+	case 5:
+		GiveMission(5);
+		break;
+	case 6:
+		GiveMission(6);
+		break;
+	case 7:
+		GiveMission(7);
+		break;
+	case 8:
+		GiveMission(8);
+		break;
+	case 9:
+		GiveMission(9);
+		break;
+	default:
+		break;
+	}
 
+}
+
+void Npcs::GiveMission(int idMission) 
+{
+	switch (idMission)
+	{
+	case 1:
+		printf(" La abuela  \n");
+		break;
+	case 2:
+		printf("  la nieta  \n");
+		break;
+	case 3:
+		printf(" Soy maat \n");
+		break;
+	case 4:
+		printf( " toth  \n");
+		break;
+	case 5:
+		printf(" Soy ISIS  \n");
+		break;
+	case 6:
+		printf(" Horrus  \n");
+		break;
+	case 7:
+		printf("  mi humilde tienda \n");
+		break;
+	case 8:
+		printf(" Soy el tabernero\n");
+		break;
+	case 9:
+		printf(" Que haces pidiendome wishky con cereales \n");
+		break;
+	default:
+		break;
+	}
+}
 
 void Npcs::DrawNpcs()
 {
@@ -118,10 +182,9 @@ void Npcs::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 
 	case ColliderType::PLAYER:
-		//Interact(npcId);
+		Interact(npcId);
 		LOG("Collision UNKNOWN");
 		break;
-
 	}
 	
 }
