@@ -488,6 +488,11 @@ bool Map::CreateColliders()
                             c1->ctype = ColliderType::PUZZLE;
                             ret = true;
                             break;
+                        case 14:
+                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::DOOR_CHOZA;
+                            ret = true;
+                            break;
                         case 102:
                             c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
                             c1->ctype = ColliderType::PLATFORM;
@@ -501,6 +506,11 @@ bool Map::CreateColliders()
                         case 122:
                             c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
                             c1->ctype = ColliderType::WALL;
+                            ret = true;
+                            break;
+                        case 103:
+                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y, mapData.tileWidth, mapData.tileHeight * 2, STATIC);
+                            c1->ctype = ColliderType::DOOR_FLOOR_1;
                             ret = true;
                             break;
                        /* case 5:

@@ -38,14 +38,7 @@ public:
 
 private:
 
-
-
-
-public:
-
-private:
-
-	//En caso de querer añadirle una textura a la entidad
+	//En caso de querer aÃ±adirle una textura a la entidad
 	SDL_Texture* texture;
 
 	//La textura de la cara general para el dialogo
@@ -71,6 +64,7 @@ private:
 	bool physCreated = false;
 	int dialogScene;
 	int id;
+
 
 	//Lista de dialogos a repetir
 	List<Dialog*> dialoguesRepeat;

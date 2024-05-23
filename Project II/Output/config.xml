@@ -77,6 +77,30 @@
 	<sceneintro>
 		<logoFx path="Assets/Audio/Fx/Logo.wav"/>
 	</sceneintro>
+	
+	<!-- sceneChoza -->
+	<sceneChoza>
+		<!-- Scene -->
+		<map path="Assets/Maps/" name="Map_Shop.tmx"/>
+		<!-- Music -->
+		<music>
+			<ChozaMusic path="Assets/Audio/Music/choza_Music.ogg" fadeTime="10" fadeOutTime="2"/>
+		</music>
+
+		<!-- Player -->
+		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
+		<!-- Nieta  -->
+		<npc x="550" y="580" texturepath="Assets/Textures/Npcs/nieta.png" id="2" scene="6"/>
+
+		<!-- Dialogos  -->
+		<dialogTrigger x="580" y="640"  name="La nieta" repeat="true" scene="6" id="2">
+			<sentences>
+				<sentence text="Ayuda, necesito alguien fuerte que me ayude"/>
+				<sentence text="Por favor, estoy asustada"/>
+			</sentences>
+		</dialogTrigger>
+		
+	</sceneChoza>
 
 	<!-- sceneVillage -->
 	<sceneVillage>
@@ -95,7 +119,7 @@
 		<npc x="550" y="580" texturepath="Assets/Textures/Npcs/nieta.png" id="2" scene="1"/>
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="350" y="640"  name="La abuela" repeat="true" scene="1">
+		<dialogTrigger x="350" y="640"  name="La abuela" repeat="true" scene="1" id	="1">
 		  <sentences>
 			  <sentence text="Ayuda, mi nieta se ha quedado atrapada"/>
 			  <sentence text="Necesito alguien poderoso que la salve"/>
@@ -104,16 +128,6 @@
 			  <sentence text="Basta de chachara,date prisa!"/>
 		  </repeat_sentences>
 	  </dialogTrigger>
-
-		<dialogTrigger x="580" y="640"  name="La nieta" repeat="true" scene="1">
-			<sentences>
-				<sentence text="Ayuda, necesito alguien fuerte que me ayude"/>
-				<sentence text="Por favor, estoy asustada"/>
-			</sentences>
-			<repeat_sentences>
-				<sentence text="No te ha quedado claro ?"/>
-			</repeat_sentences>
-		</dialogTrigger>
 	</sceneVillage>
 
 	<!-- sceneOasis -->
@@ -129,7 +143,7 @@
 		<npc x="400" y="575" texturepath="Assets/Textures/Npcs/Anhuvihsh.png" id="8" scene="4"/>
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="440" y="640"  name="Tabernero" repeat="true" scene="4">
+		<dialogTrigger x="440" y="640"  name="Tabernero" repeat="true" scene="4" id="8">
 			<sentences>
 				<sentence text="Bienvenido, vendemos todo tipo de productos"/>
 				<sentence text="Desde Arena del desierto hasta ratas disecadas"/>
@@ -178,7 +192,7 @@
 			</repeat_sentences>
 		</dialogTrigger>
 		
-		<dialogTrigger x="570" y="540"  name="Toth" repeat="true" scene="2">
+		<dialogTrigger x="570" y="540"  name="Toth" repeat="true" scene="2" id="4">
 			<sentences>
 				<sentence text="Soy Toth, puedo mejorar tus armas"/>
 				<sentence text="Selecciona la que quieras en el menú"/>
@@ -188,7 +202,8 @@
 			</repeat_sentences>
 		</dialogTrigger>
 		
-		<dialogTrigger x="820" y="540"  name="Isis" repeat="true" scene="2" >
+
+		<dialogTrigger x="820" y="540"  name="Isis" repeat="true" scene="2" id="5">
 			<sentences>
 				<sentence text="Soy Isis, puedo mejorar tus armas"/>
 				<sentence text="Selecciona la que quieras en el menú"/>
@@ -198,7 +213,7 @@
 			</repeat_sentences>
 		</dialogTrigger>
 		
-		<dialogTrigger x="1070" y="540"  name="Horus" repeat="true" scene="2">
+		<dialogTrigger x="1070" y="540"  name="Horus" repeat="true" scene="2" id="6">
 			<sentences>
 				<sentence text="Soy Horus, puedo mejorar tus armas"/>
 				<sentence text="Selecciona la que quieras en el menú"/>
@@ -227,7 +242,7 @@
 		<npc x="600" y="400" texturepath="Assets/Textures/Npcs/Talia.png" id="1" scene="5"/>
 
 		<!-- Dialogo Talia -->
-		<dialogTrigger x="670" y="585"  name="Talia" repeat="true" scene="5">
+		<dialogTrigger x="670" y="585"  name="Talia" repeat="true" scene="5" id="9">
 			<sentences>
 				<sentence text="Hola el Turmo me esta acosando"/>
 				<sentence text="Necesito alguien poderoso que me salve"/>
@@ -323,7 +338,6 @@
 		<settingsSlider texturepath="Assets/Textures/Screens/More/slider.png"/>
 		<settings texturepath="Assets/Textures/Screens/More/settings.png"/>
 
-
 		<settingsControlsButtonNormal texturepath="Assets/Textures/Screens/More/settings_controls_button_normal.png"/>
 		<settingsControlsButtonHover texturepath="Assets/Textures/Screens/More/settings_controls_button_hover.png"/>
 		<settingsAudioButtonNormal texturepath="Assets/Textures/Screens/More/settings_audio_button_normal.png"/>
@@ -344,6 +358,11 @@
 		<Personaje1 texturepath="Assets/Textures/Screens/Combat/fotopersonatge.png"/>
 		<Personaje2 texturepath="Assets/Textures/Screens/Combat/fotopersonatge2.png"/>
 		<numeros texturepath="Assets/Textures/Screens/Combat/numeros.png"/>
+
+
+		<mission1i0 texturepath="Assets/Textures/Screens/Missions/mission1i0.png"/>
+		<mission1i1 texturepath="Assets/Textures/Screens/Missions/mission1i1.png"/>
+		<mission1i2 texturepath="Assets/Textures/Screens/Missions/mission1i2.png"/>
 
 		<inventory texturepath="Assets/Textures/Screens/Inventory/inventory.png"/>
 		<inventoryItem1 texturepath="Assets/Textures/Screens/Inventory/Amulet_Escarabat.png"/>
@@ -384,8 +403,7 @@
 		<SkillTreerama_3_1 texturepath="Assets/Textures/SkillTree/SkillTreerama_3_1.png"/>
 		<SkillTreerama_3_2 texturepath="Assets/Textures/SkillTree/SkillTreerama_3_2.png"/>
 		
-		
-
+	
 		
 		
 	</hud>

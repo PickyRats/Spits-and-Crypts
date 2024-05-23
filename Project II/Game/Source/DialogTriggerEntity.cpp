@@ -1,4 +1,6 @@
 #include "DialogTriggerEntity.h"
+#include "App.h"
+#include "Hud.h"
 #include "DialogManager.h"
 #include "App.h"
 #include "Textures.h"
@@ -14,6 +16,13 @@
 #include "SceneOasisFaraon.h"
 #include "SceneTemple.h"
 #include "SceneFloor1.h"
+#include "FadeToBlack.h"
+#include "SceneChoza.h"
+#include "Npcs.h"
+
+#include <thread>
+#include <chrono>
+#include <future>
 
 DialogTrigger::DialogTrigger() : Entity(EntityType::DIALOG_TRIGGER)
 {
@@ -36,7 +45,6 @@ bool DialogTrigger::Start() {
 	repeatDialog = parameters.attribute("repeat").as_bool(false);
 	dialogScene = parameters.attribute("scene").as_int();
 	id = parameters.attribute("id").as_int();
-
 
 	played = false;
 	std::string fontTarget = parameters.attribute("font").as_string("primary");
@@ -79,17 +87,22 @@ bool DialogTrigger::Update(float dt)
 	else if (app->sceneTemple->active && dialogScene == app->sceneTemple->sceneNum)
 	{
 		if (!physCreated) CreateColliderBig();
-  }
+	}
 	else if (app->sceneFloor1->active && dialogScene == app->sceneFloor1->sceneNum)
 	{
 		if (!physCreated) CreateCollider();
 
 	}
+	else if (app->sceneChoza->active && dialogScene == app->sceneChoza->sceneNum)
+	{
+		if (!physCreated) CreateCollider();
+
+	}
 	else if (physCreated)
-  {
+	{
     app->physics->world->DestroyBody(pbody->body);
     physCreated = false;
-  }
+	}
 
 	return true;
 }
@@ -159,7 +172,6 @@ void DialogTrigger::PlayDialog()
 	
 	}
 	Interact(id);
-
 }
 
 void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
@@ -232,10 +244,13 @@ void DialogTrigger::GiveMission(int idMission)
 	switch (idMission)
 	{
 	case 1:
-		printf(" La abuela  \n");
+		app->hud->mission10Active = true;
 		break;
 	case 2:
-		printf("  la nieta  \n");
+		app->hud->mission11Active= false;
+		app->hud->mission1Complete = true;
+		app->fade->Fade((Module*)app->sceneChoza, (Module*)app->sceneVillage, 280.0f);
+		printf(" La abuela  \n");
 		break;
 	case 3:
 		printf(" Soy maat \n");

@@ -48,12 +48,20 @@ public:
 
 	void DrawTimer();
 
+
+	void Missions(int mission1);
 	void SkillTree();
 
 	bool playerDeadHud = false;
 	bool spacePressed = false;
 	bool onSettings = false;
 	int currentId = 0;
+
+	int mission1 = 3;
+	bool mission10Active = false;
+	bool mission11Active = false;
+	bool mission1Complete = false;
+
 	bool abilityTree = false;
 
 	Slot inventorySlots[3];
@@ -61,6 +69,7 @@ public:
 
 	Slot shopSlots[3];
 	bool shop = false;
+
 
 private:
 
@@ -148,6 +157,10 @@ private:
 
 	SDL_Texture* settingsBoxNormal;
 	SDL_Texture* settingsBoxHover;
+
+	SDL_Texture* mission1i0;
+	SDL_Texture* mission1i1;
+	SDL_Texture* mission1i2;
 
 	SDL_Texture* settings;
 
