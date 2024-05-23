@@ -264,6 +264,7 @@ bool SceneCombat::Update(float dt)
 	// end combat
 	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN || (enemies[0]->isDead && enemies[1]->isDead))
 	{
+		SDL_JoystickSetLED(app->input->joy, 255, 255, 0);
 		app->map->player->isCombat = false;
 		app->map->player2->isCombat = false;
 		app->map->player2->isVisible = false;
@@ -490,6 +491,7 @@ void SceneCombat::ChangeTurn()
 	currentEntity->currentPoints = currentEntity->totalPoints;
 	if (isPlayerTurn)
 	{
+		SDL_JoystickSetLED(app->input->joy, 255, 0, 0);
 		tiles[0] = { enemies[currentEnemyIndex]->position, 0 };
 		ResetTilesArray(currentTile);
 		tilesCount = 0;
@@ -505,6 +507,7 @@ void SceneCombat::ChangeTurn()
 	}
 	else
 	{
+		SDL_JoystickSetLED(app->input->joy, 0, 0, 255);
 		if (enemyCanAttack) EnemyAttack();
 		tiles[0] = { players[currentPlayerIndex]->position, 0};
 		ResetTilesArray(currentTile);

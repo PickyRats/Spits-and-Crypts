@@ -2,6 +2,7 @@
 #define __INPUT_H__
 
 #include "Module.h"
+#include "SDL/include/SDL_gamecontroller.h"
 
 //#define NUM_KEYS 352
 #define NUM_MOUSE_BUTTONS 5
@@ -104,6 +105,7 @@ public:
 	void GetMousePosition(int &x, int &y);
 	void GetMouseMotion(int& x, int& y);
 
+	SDL_Joystick* joy = nullptr;
 private:
 	bool windowEvents[WE_COUNT];
 	KeyState*	keyboard;

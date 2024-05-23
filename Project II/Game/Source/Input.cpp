@@ -57,6 +57,8 @@ bool Input::Awake(pugi::xml_node& config)
 bool Input::Start()
 {
 	SDL_StopTextInput();
+	joy = SDL_JoystickOpen(0);
+	SDL_JoystickSetLED(joy, 255, 255, 0);
 	return true;
 }
 
