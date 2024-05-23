@@ -138,13 +138,6 @@ bool SceneFloor1::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
 	
-	//if (app->render->camera.x - playerX - 100 <= -200 && app->render->camera.x - playerX - 100 >= -12850) {
-	//	app->render->camera.x = -(playerX - 100);
-
-	//}
-	//if (app->render->camera.x - playerX - 100 <= -12900) {
-	//	app->render->camera.x = -6333;
-	//}
 	return true;
 }
 
