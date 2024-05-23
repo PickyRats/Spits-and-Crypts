@@ -15,8 +15,13 @@
 #include "SceneOasisFaraon.h"
 #include "SceneTemple.h"
 #include "SceneFloor1.h"
+#include "FadeToBlack.h"
 #include "SceneChoza.h"
 #include "Npcs.h"
+
+#include <thread>
+#include <chrono>
+#include <future>
 
 DialogTrigger::DialogTrigger() : Entity(EntityType::DIALOG_TRIGGER)
 {
@@ -246,6 +251,7 @@ void DialogTrigger::GiveMission(int idMission)
 		app->hud->mission10Active = true;
 		break;
 	case 2:
+		app->fade->Fade((Module*)app->sceneChoza, (Module*)app->sceneVillage, 300.0f);
 		printf("  la nieta  \n");
 		break;
 	case 3:

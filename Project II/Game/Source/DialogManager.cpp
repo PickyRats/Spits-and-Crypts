@@ -235,7 +235,7 @@ bool DialogManager::Update(float dt) {
 
 
 		Dialog* actualDialog = dialogues.At(0)->data;
-		bool dialogFinished = ShowDialog(actualDialog);
+		dialogFinished = ShowDialog(actualDialog);
 
 
 

@@ -125,16 +125,6 @@
 			  <sentence text="Basta de chachara,date prisa!"/>
 		  </repeat_sentences>
 	  </dialogTrigger>
-
-		<dialogTrigger x="580" y="640"  name="La nieta" repeat="true" scene="1" id="2">
-			<sentences>
-				<sentence text="Ayuda, necesito alguien fuerte que me ayude"/>
-				<sentence text="Por favor, estoy asustada"/>
-			</sentences>
-			<repeat_sentences>
-				<sentence text="No te ha quedado claro ?"/>
-			</repeat_sentences>
-		</dialogTrigger>
 	</sceneVillage>
 
 	<!-- sceneOasis -->

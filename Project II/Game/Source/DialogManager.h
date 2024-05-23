@@ -49,6 +49,7 @@ public:
 	List<Dialog*> dialogues;
 
 	bool isPlaying;
+	bool dialogFinished;
 
 
 private:
