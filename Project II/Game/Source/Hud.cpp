@@ -20,6 +20,7 @@
 #include "Log.h"
 #include "SceneMenu.h"
 #include "SceneCombat.h"
+#include "Map.h"
 
 #include <iostream>
 #include <iomanip>
@@ -889,6 +890,7 @@ void Hud::SkillTree()
 		Rama2_1 = skillTreerama_2_1;
 		Rama3_1 = skillTreerama_3_1;
 		Talent2 = SkillTreeLife_2;
+		app->map->player->health += 5;
 	}
 	if (talent3locked)
 	{
@@ -902,6 +904,7 @@ void Hud::SkillTree()
 		Rama2_2 = skillTreerama_2_1;
 		Rama3_2 = skillTreerama_3_1;
 		Talent4 = SkillTreeAtack_1_2;
+		app->map->player->attackDamage += 5;
 	}
 	if (talent5locked)
 	{
@@ -930,6 +933,7 @@ void Hud::SkillTree()
 		app->render->DrawTexture(Selection, 450, 263);
 		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 		{
+			app->audio->PlayFx(app->sceneMenu->FxButton1);
 			talent2locked = true;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
@@ -948,6 +952,7 @@ void Hud::SkillTree()
 		app->render->DrawTexture(Selection, 450, 358);
 		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && talent2locked)
 		{
+			app->audio->PlayFx(app->sceneMenu->FxButton1);
 			talent3locked = true;
 		}
 		if (talent3locked)
@@ -967,6 +972,7 @@ void Hud::SkillTree()
 		app->render->DrawTexture(Selection, 213, 263);
 		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 		{
+			app->audio->PlayFx(app->sceneMenu->FxButton1);
 			talent4locked = true;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
@@ -985,6 +991,7 @@ void Hud::SkillTree()
 		app->render->DrawTexture(Selection, 213, 358);
 		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && talent4locked)
 		{
+			app->audio->PlayFx(app->sceneMenu->FxButton1);
 			talent5locked = true;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
