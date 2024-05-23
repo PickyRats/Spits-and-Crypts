@@ -352,6 +352,35 @@
 		<Personaje1 texturepath="Assets/Textures/Screens/Combat/fotopersonatge.png"/>
 		<Personaje2 texturepath="Assets/Textures/Screens/Combat/fotopersonatge2.png"/>
 		<numeros texturepath="Assets/Textures/Screens/Combat/numeros.png"/>
+
+		<SkillTree texturepath="Assets/Textures/SkillTree/SkillTree.png"/>
+		<SkillTreeTalent texturepath="Assets/Textures/SkillTree/SkillTreeTalent.png"/>
+		<SkillTreeLife_1 texturepath="Assets/Textures/SkillTree/SkillTreeLife_1.png"/>
+		<SkillTreeLife_2 texturepath="Assets/Textures/SkillTree/SkillTreeLife_2.png"/>
+		<SkillTreeSpeed_1 texturepath="Assets/Textures/SkillTree/SkillTreeSpeed_1.png"/>
+		<SkillTreeSpeed_2 texturepath="Assets/Textures/SkillTree/SkillTreeSpeed_2.png"/>
+		<SkillTreeAtack_1_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_1_1.png"/>
+		<SkillTreeAtack_1_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_1_2.png"/>
+		<SkillTreeAtack_2_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_2_1.png"/>
+		<SkillTreeAtack_2_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_2_2.png"/>
+		<SkillTreeAtack_3_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_3_1.png"/>
+		<SkillTreeAtack_3_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_3_2.png"/>
+		<SkillTreeAtack_4_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_4_1.png"/>
+		<SkillTreeAtack_4_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_4_2.png"/>
+		<SkillTreeAtack_5_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_5_1.png"/>
+		<SkillTreeAtack_5_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_5_2.png"/>
+		<SkillTreeAtack_6_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_6_1.png"/>
+		<SkillTreeAtack_6_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_6_2.png"/>
+		<SkillTreeAtack_7_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_7_1.png"/>
+		<SkillTreeAtack_7_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_7_2.png"/>
+		<SkillTreeAtack_8_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_8_1.png"/>
+		<SkillTreeAtack_8_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_8_2.png"/>
+		<Selection texturepath="Assets/Textures/SkillTree/Selection.png"/>
+		<SkillTreerama_1 texturepath="Assets/Textures/SkillTree/SkillTreerama_1.png"/>
+		<SkillTreerama_2_1 texturepath="Assets/Textures/SkillTree/SkillTreerama_2_1.png"/>
+		<SkillTreerama_2_2 texturepath="Assets/Textures/SkillTree/SkillTreerama_2_2.png"/>
+		<SkillTreerama_3_1 texturepath="Assets/Textures/SkillTree/SkillTreerama_3_1.png"/>
+		<SkillTreerama_3_2 texturepath="Assets/Textures/SkillTree/SkillTreerama_3_2.png"/>
 		
 		
 	</hud>
