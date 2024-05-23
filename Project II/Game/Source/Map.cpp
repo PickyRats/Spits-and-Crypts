@@ -72,7 +72,6 @@ bool Map::Update(float dt)
 
     ListItem<MapLayer*>* mapLayer;
     mapLayer = mapData.layers.start;
-
     // iterates the layers in the map
     while (mapLayer != NULL) {
         //Check if the property Draw exist get the value, if it's true draw the lawyer
@@ -435,7 +434,7 @@ bool Map::CreateColliders()
                         switch (mapLayerItem->data->Get(x, y))
                         {
                         case 1:
-                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y, mapData.tileWidth, mapData.tileHeight * 4, STATIC);
+                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y-32 , mapData.tileWidth/4, mapData.tileHeight*3.0f, STATIC);
                             c1->ctype = ColliderType::STAIRS;
                             ret = true;
                             break;
@@ -634,4 +633,15 @@ void Map::CreateEntities(const char* nodeName, EntityType entityType, iPoint pos
     entity->parameters = entityNode;
     entity->position = iPoint(pos.x, pos.y);
     
+}
+
+void Map::EnableLayer(const char* layerName, bool enable)
+{
+    ListItem<MapLayer*>* mapLayer;
+    mapLayer = mapData.layers.start;
+
+    while (mapLayer != NULL) {
+        if (mapLayer->data->name == layerName) mapLayer->data->properties.GetProperty("Draw")->value = enable;
+        mapLayer = mapLayer->next;
+    }
 }
