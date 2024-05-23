@@ -765,8 +765,10 @@ void Hud::Shop()
 					inventorySlots[i].texture = items[itemId].texture;
 					shopSlots[itemId].isEmpty = true;
 					shopSlots[itemId].isBought = true;
-
+					break;
 				}
+
+
 			}
 			
 		}
