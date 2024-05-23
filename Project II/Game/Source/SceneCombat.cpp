@@ -98,8 +98,13 @@ bool SceneCombat::Start()
 
 	currentEntity = players[currentPlayerIndex];
 
-	/*app->audio->PlayMusic(configNodeCombat.child("music").child("CombatMusic").attribute("path").as_string());*/
+	app->audio->PlayMusic(configNodeCombat.child("music").child("CombatMusic").attribute("path").as_string());
 
+
+	atack = app->audio->LoadFx("Assets/Audio/Fx/combate/espada_Fx.wav");
+	move_Tile = app->audio->LoadFx("Assets/Audio/Fx/combate/tile-Selection_Fx.wav");
+	pass_Turn = app->audio->LoadFx("Assets/Audio/Fx/combate/pasar-turno_Fx.wav");
+	victory = app->audio->LoadFx("Assets/Audio/Fx/combate/victory_Fx.wav");
 	return true;
 }
 
@@ -121,7 +126,11 @@ bool SceneCombat::Update(float dt)
 
 	ClampCamera();
 
-	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) ChangeTurn();
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	{
+		ChangeTurn();
+		app->audio->PlayFx(pass_Turn);
+	}
 
 	if (isPlayerTurn)
 	{
@@ -442,7 +451,7 @@ void SceneCombat::SelectTiles()
 	Entity* player = players[currentPlayerIndex];
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && !isMoving)
 	{
-
+		app->audio->PlayFx(move_Tile);
 		tilePosition.x += 64;
 		if (!IsTileOccupied())
 		{
@@ -452,6 +461,7 @@ void SceneCombat::SelectTiles()
 	}
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && !isMoving)
 	{
+		app->audio->PlayFx(move_Tile);
 		tilePosition.x -= 64;
 		if (!IsTileOccupied())
 		{
@@ -464,6 +474,7 @@ void SceneCombat::SelectTiles()
 		tilePosition.y -= (64 * 3);
 		if (!IsTileOccupied())
 		{
+			app->audio->PlayFx(move_Tile);
 			ResetTilesArray(100);
 			app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 
@@ -474,6 +485,7 @@ void SceneCombat::SelectTiles()
 		tilePosition.y += (64 * 3);
 		if (!IsTileOccupied())
 		{
+			app->audio->PlayFx(move_Tile);
 			ResetTilesArray(100);
 			app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 		}
@@ -490,6 +502,7 @@ void SceneCombat::ResetTilesArray(int max)
 
 void SceneCombat::ChangeTurn()
 {
+	app->audio->PlayFx(pass_Turn);
 	currentEntity->currentPoints = currentEntity->totalPoints;
 	if (isPlayerTurn)
 	{
@@ -527,6 +540,7 @@ void SceneCombat::ChangeTurn()
 
 void SceneCombat::EnemyAttack()
 {
+	app->audio->PlayFx(atack);
 	enemyCanAttack = false;
 	players[currentPlayerIndex]->health -= enemies[currentEnemyIndex]->attackDamage;
 	printf("Enemy is attacking player life: %d \n", players[currentPlayerIndex]->health);
