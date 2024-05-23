@@ -30,9 +30,17 @@ public:
 
 	void DrawTimer();
 
+	void Missions(int mission1);
+
 	bool playerDeadHud = false;
 	bool spacePressed = false;
 	bool onSettings = false;
+	int currentId = 0;
+
+	int mission1 = 3;
+	bool mission10Active = false;
+	bool mission11Active = false;
+	bool mission1Complete = false;
 	
 private:
 
@@ -148,6 +156,10 @@ private:
 	GuiControlCheckBox* settingsVSyncButton;
 	GuiControlButton* settingsControlsButton;
 	GuiControlButton* settingsAudioButton;
+
+	SDL_Texture* mission1i0;
+	SDL_Texture* mission1i1;
+	SDL_Texture* mission1i2;
 
 	bool onSettingsControls = false;
 	bool onSettingsAudio = true;

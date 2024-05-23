@@ -121,6 +121,9 @@
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Source\CutscenePlayer.cpp" />
+    <ClCompile Include="Source\SceneChoza.cpp">
+      <Filter>Modules\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -281,6 +284,9 @@
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\CutscenePlayer.h" />
+    <ClInclude Include="Source\SceneChoza.h">
+      <Filter>Modules\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

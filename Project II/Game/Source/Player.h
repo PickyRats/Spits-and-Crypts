@@ -92,6 +92,7 @@ public:
 	bool walkingSoundPlaying = false;
 	bool jumpingSoundPlaying = false;
 	bool climbingSoundPlaying = false;
+	bool doorChoza = false;
 
 	b2Transform initialTransform;
 
