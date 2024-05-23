@@ -52,12 +52,6 @@ bool SceneVillage::Awake(pugi::xml_node& config)
 		dialogTrigger->parameters = itemNode;
 	}
 
-	//if (config.child("map")) {
-	//	//Get the map name from the config file and assigns the value in the module
-	//	app->map->mapName = config.child("map").attribute("name").as_string();
-	//	app->map->path = config.child("map").attribute("path").as_string();
-	//}
-
 	configNode = config;
 
 	return ret;
@@ -90,7 +84,13 @@ bool SceneVillage::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 	int i = 1;
-	piedra=app->physics->CreateCircle(200, 640, 30, DYNAMIC);
+	if(!piedraHecha)
+	{
+		piedra = app->physics->CreateRectangle(200, 640, 100, 100, DYNAMIC);
+		piedraHecha = true;
+	}
+	
+	piedra->body->SetGravityScale(15);
 	
 
 	aldea = app->tex->Load("Assets/Textures/Screens/aldea.png");

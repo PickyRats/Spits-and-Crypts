@@ -490,7 +490,7 @@ bool Map::CreateColliders()
                             ret = true;
                             break;
                         case 14:
-                            c1 = app->physics->CreateRectangleSensor(pos.x, pos.y, mapData.tileWidth, mapData.tileHeight * 2, STATIC);
+                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
                             c1->ctype = ColliderType::DOOR_CHOZA;
                             ret = true;
                             break;

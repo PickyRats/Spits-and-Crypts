@@ -21,14 +21,14 @@ using namespace std;
 
 SceneChoza::SceneChoza(bool enabled) : Module(enabled)
 {
-	name.Create("SceneChoza");
+	name.Create("sceneChoza");
 }
 
 // Destructor
 SceneChoza::~SceneChoza()
 {}
 
-//pugi::xml_node configNode;
+pugi::xml_node configNodeChoza;
 
 // Called before render is available
 bool SceneChoza::Awake(pugi::xml_node& config)
@@ -59,7 +59,7 @@ bool SceneChoza::Awake(pugi::xml_node& config)
 	//	app->map->path = config.child("map").attribute("path").as_string();
 	//}
 
-	//configNode = config;
+	configNodeChoza = config;
 
 	return ret;
 }
@@ -67,10 +67,10 @@ bool SceneChoza::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool SceneChoza::Start()
 {
-	/*if (configNode.child("map")) {
+	if (configNodeChoza.child("map")) {
 		//Get the map name from the config file and assigns the value in the module
-		app->map->mapName = configNode.child("map").attribute("name").as_string();
-		app->map->path = configNode.child("map").attribute("path").as_string();
+		app->map->mapName = configNodeChoza.child("map").attribute("name").as_string();
+		app->map->path = configNodeChoza.child("map").attribute("path").as_string();
 	}
 	app->map->Enable();
 	app->entityManager->Enable();
@@ -91,9 +91,9 @@ bool SceneChoza::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
-	aldea = app->tex->Load("Assets/Textures/Screens/aldea.png");
+	aldea = app->tex->Load("Assets/Textures/Screens/choza.png");
 
-	app->audio->PlayMusic(configNode.child("villageAmbient").attribute("path").as_string());*/
+	app->audio->PlayMusic(configNodeChoza.child("villageAmbient").attribute("path").as_string());
 	return true;
 }
 

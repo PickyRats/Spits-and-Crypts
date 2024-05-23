@@ -78,6 +78,7 @@ private:
 	int playerX, playerY, cameraX, cameraY;
 	bool changingLevel = false;
 	bool isLoading = false;
+	bool piedraHecha = false;
 
 	int VillageMusic;
 };

@@ -41,8 +41,6 @@ public:
 	// Handles multiple Gui Event methods
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
-	void CreateEntities(pugi::xml_node& config, const char* nodeName, EntityType entityType);
-
 	void SetCameraPosition(int x, int y);
 
 	void ClampCamera();
@@ -58,7 +56,7 @@ public:
 	iPoint lastTorchPos = { 0, 0 };
 	bool notUseChechPoint = false;
 	bool win = false;
-	int sceneNum = 1;
+	int sceneNum = 6;
 
 private:
 	SDL_Texture* backgroundTexture;

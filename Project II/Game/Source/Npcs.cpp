@@ -13,6 +13,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "FadeToBlack.h"
+#include "SceneChoza.h"
 #include "Hud.h""
 
 Npcs::Npcs() : Entity(EntityType::NPCS)
@@ -56,6 +57,7 @@ bool Npcs::Update(float dt)
 	int sceneShop = app->sceneShop->sceneNum;
 	int sceneOasisFaraon = app->sceneOasisFaraon->sceneNum;
 	int sceneFloor1 = app->sceneFloor1->sceneNum;
+	int sceneChoza = app->sceneChoza->sceneNum;
 	int npcScene= parameters.attribute("scene").as_int();
 
 	//Comprobar si la escena actual es la que tiene el npc y crearlo si es así
@@ -76,6 +78,10 @@ bool Npcs::Update(float dt)
 		DrawNpcs();
 	}
 	else if (app->sceneFloor1->active && sceneFloor1 == npcScene)
+	{
+		DrawNpcs();
+	}
+	else if (app->sceneChoza->active && sceneChoza == npcScene)
 	{
 		DrawNpcs();
 	}

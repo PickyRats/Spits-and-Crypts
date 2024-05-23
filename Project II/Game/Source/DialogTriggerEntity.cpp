@@ -15,6 +15,7 @@
 #include "SceneOasisFaraon.h"
 #include "SceneTemple.h"
 #include "SceneFloor1.h"
+#include "SceneChoza.h"
 #include "Npcs.h"
 
 DialogTrigger::DialogTrigger() : Entity(EntityType::DIALOG_TRIGGER)
@@ -87,6 +88,11 @@ bool DialogTrigger::Update(float dt)
 		if (!physCreated) CreateColliderBig();
 	}
 	else if (app->sceneFloor1->active && dialogScene == app->sceneFloor1->sceneNum)
+	{
+		if (!physCreated) CreateCollider();
+
+	}
+	else if (app->sceneChoza->active && dialogScene == app->sceneChoza->sceneNum)
 	{
 		if (!physCreated) CreateCollider();
 
