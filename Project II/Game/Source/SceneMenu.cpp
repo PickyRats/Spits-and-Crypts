@@ -41,6 +41,7 @@ bool SceneMenu::Start()
 {
 	//Load textures
 	background = app->tex->Load(configNode2.child("background").attribute("texturepath").as_string());
+	background2 = app->tex->Load(configNode2.child("background2").attribute("texturepath").as_string());
 	playNormal = app->tex->Load(configNode2.child("playNormal").attribute("texturepath").as_string());
 	playHover = app->tex->Load(configNode2.child("playHover").attribute("texturepath").as_string());
 	playClick = app->tex->Load(configNode2.child("playClick").attribute("texturepath").as_string());
@@ -127,12 +128,18 @@ bool SceneMenu::Start()
 
 bool SceneMenu::Update(float dt)
 {
+	//Render background 
+	app->render->DrawTexture(background, 0, 0);
+	if (x > 366) {
+		a = a * exp(-0.055);
+		x -= a;
+	}
+	app->render->DrawTexture(background2, x, 33);
+
 	int rangoMusic = settingsMusicButton->sliderBounds.w - 20;
 	percentageMusic = (((float)settingsMusicButton->sliderPosition - settingsMusicButton->sliderBounds.x) / rangoMusic) * 100;
 	Mix_VolumeMusic(percentageMusic);
 	
-
-
 	int rangoFX = settingsFxButton->sliderBounds.w - 20;
 	int percentageFX = (((float)settingsFxButton->sliderPosition - settingsFxButton->sliderBounds.x) / rangoFX) * 100;
 	Mix_Volume(-1,percentageFX);
@@ -159,8 +166,6 @@ bool SceneMenu::Update(float dt)
 		settingsControlsButton->state = GuiControlState::HIDDEN;
 		creditsExitButton->state = GuiControlState::HIDDEN;
 
-		//Render background 
-		app->render->DrawTexture(background, 0, 0, NULL, SDL_FLIP_NONE, 0);
 		//Check if buttons are focused or pressed. If pressed, do the action. With sound effects.
 		if (startButton->state == GuiControlState::FOCUSED)
 		{
@@ -177,6 +182,7 @@ bool SceneMenu::Update(float dt)
 				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 			}
+			//Primera escena
 
 			app->fade->Fade(this, (Module*)app->sceneVillage, 60.0f);
 
@@ -296,8 +302,7 @@ bool SceneMenu::Update(float dt)
 		exitButton->state = GuiControlState::HIDDEN;
 
 		if (onMenu) {
-			app->render->DrawTexture(background, 0, 0, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(settings, 0, 0, NULL, SDL_FLIP_NONE, 0);
+			
 			//app->render->DrawTexture(controlsHint, 30, 670, NULL, SDL_FLIP_NONE, 0);
 			if (onSettingsControls)
 			{
@@ -476,7 +481,7 @@ bool SceneMenu::Update(float dt)
 
 		//Render background and credits
 		if (onMenu) {
-			app->render->DrawTexture(background, 0, 0, NULL, SDL_FLIP_NONE, 0);
+			
 			app->render->DrawTexture(credits, 0, 0, NULL, SDL_FLIP_NONE, 0);
 			//app->render->DrawTexture(controlsHint, 30, 670, NULL, SDL_FLIP_NONE, 0);
 		}
@@ -512,6 +517,7 @@ bool SceneMenu::CleanUp()
 	LOG("Freeing SceneMenu");
 
 	app->tex->UnLoad(background);
+	app->tex->UnLoad(background2);
 	app->tex->UnLoad(playNormal);
 	app->tex->UnLoad(playHover);
 	app->tex->UnLoad(playClick);

@@ -33,12 +33,12 @@ public:
 
 	void Interact(int id);
 
-	void GiveMission(int id);
+	void GiveMission(int idMission);
 
 
 private:
 
-	//En caso de querer añadirle una textura a la entidad
+	//En caso de querer aÃ±adirle una textura a la entidad
 	SDL_Texture* texture;
 
 	//La textura de la cara general para el dialogo

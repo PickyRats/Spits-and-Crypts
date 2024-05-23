@@ -9,6 +9,7 @@
 #include "SceneOasisFaraon.h"
 #include "SceneFloor1.h"
 #include "SceneTemple.h"
+#include "Hud.h"
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
@@ -60,7 +61,7 @@ bool Npcs::Update(float dt)
 	int sceneChoza = app->sceneChoza->sceneNum;
 	int npcScene= parameters.attribute("scene").as_int();
 
-	//Comprobar si la escena actual es la que tiene el npc y crearlo si es así
+	//Comprobar si la escena actual es la que tiene el npc y crearlo si es asÃ­
 	if (app->sceneVillage->active && sceneVillage == npcScene)
 	{
 		DrawNpcs();
@@ -115,6 +116,12 @@ void Npcs::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
+
+	case ColliderType::PLAYER:
+		//Interact(npcId);
+		LOG("Collision UNKNOWN");
+		break;
+
 	}
 	
 }

@@ -15,6 +15,7 @@
 #include "SceneTemple.h"
 #include "SceneFloor1.h"
 #include "Puzzle.h"
+#include "SceneLight.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -216,7 +217,7 @@ bool Player::Update(float dt)
 			}
 		}
 	}
-	//printf("\r cameraX: %d cameraY: %d positionX: %d positionY %d", app->render->camera.x, app->render->camera.y, position.x, position.y);
+	printf("\r cameraX: %d cameraY: %d positionX: %d positionY %d", app->render->camera.x, app->render->camera.y, position.x, position.y);
 	
 	return true;
 }
@@ -378,6 +379,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		app->puzzle->canInteract = true;
 
 		break;
+	case ColliderType::LIGHT1:
+		app->sceneLight->interactMirror = true;
+		break;
+	case ColliderType::LIGHT2:
+		app->sceneLight->interactTrapdoor = true;
+		break;
 	}
 
 }
@@ -413,6 +420,14 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PUZZLE:
 		app->puzzle->canInteract = false;
 		app->puzzle->showUI = false;
+		break;
+	case ColliderType::LIGHT1:
+		app->sceneLight->interactMirror = false;
+		app->sceneLight->isInteractingMirror = false;
+		break;
+	case ColliderType::LIGHT2:
+		app->sceneLight->interactTrapdoor = false;
+		app->sceneLight->isInteractingTrapdoor = false;
 		break;
 	}
 

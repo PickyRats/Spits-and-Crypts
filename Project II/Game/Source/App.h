@@ -21,6 +21,7 @@ class SceneOasisFaraon;
 class SceneTemple;
 class SceneChoza;
 class SceneFloor1;
+class SceneLight;
 class EntityManager;
 class Map;
 class Physics;
@@ -114,6 +115,7 @@ public:
 	SceneTemple* sceneTemple;
 	SceneChoza* sceneChoza;
 	SceneFloor1* sceneFloor1;
+	SceneLight* sceneLight;
 	EntityManager* entityManager;
 	Map* map;
 	Physics* physics;

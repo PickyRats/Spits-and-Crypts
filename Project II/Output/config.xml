@@ -40,7 +40,10 @@
   <sceneShop>
 		<!-- Scene -->
 		<map path="Assets/Maps/" name="Map_Shop.tmx"/>
-
+		
+		<!--Texture-->
+		<store texturepath="Assets/Textures/Screens/Shop/Store.png"/>
+	  
 		<!-- Music -->
 		<music>
 			<ShopMusic path="Assets/Audio/Music/Shop_Music.ogg" fadeTime="10" fadeOutTime="2"/>
@@ -55,10 +58,10 @@
 		<dialogTrigger x="1024" y="576"  name="Mercante" repeat="true" scene="3" id="7">
 		  <sentences>
 			  <sentence text="Bienvenido a mi humilde rinconcillo"/>
-			  <sentence text="Si quieres algo, no lo robes"/>
+			  <sentence text="Quieres entrar a mi tienda?"/>
 		  </sentences>
 		  <repeat_sentences>
-			  <sentence text="Te estoy vigilando..."/>
+			  <sentence text="Tanto quieres comprar?"/>
 		  </repeat_sentences>
 	  </dialogTrigger>
     
@@ -199,6 +202,7 @@
 			</repeat_sentences>
 		</dialogTrigger>
 		
+
 		<dialogTrigger x="820" y="540"  name="Isis" repeat="true" scene="2" id="5">
 			<sentences>
 				<sentence text="Soy Isis, puedo mejorar tus armas"/>
@@ -259,10 +263,15 @@
 		<Piece x="6208" y="384" texturepath="Assets/Textures/pieza_puzle_4.png" id="3" />
 	</sceneFloor1>
 	
+	<!-- sceneLight-->
+	<sceneLight>
+		<map path="Assets/Maps/" name="Map_light.tmx"/>
+	</sceneLight>
 	
 	<!-- Menu-->
 	<scenemenu>
 		<background texturepath="Assets/Textures/Screens/main_menu_background.png"/>
+		<background2 texturepath="Assets/Textures/Screens/logobackground.png"/>
 		<playNormal texturepath="Assets/Textures/Screens/Play/play_normal.png"/>
 		<playHover texturepath="Assets/Textures/Screens/Play/play_hover.png"/>
 		<playClick texturepath="Assets/Textures/Screens/Play/play_click.png"/>
@@ -350,9 +359,51 @@
 		<Personaje2 texturepath="Assets/Textures/Screens/Combat/fotopersonatge2.png"/>
 		<numeros texturepath="Assets/Textures/Screens/Combat/numeros.png"/>
 
+
 		<mission1i0 texturepath="Assets/Textures/Screens/Missions/mission1i0.png"/>
 		<mission1i1 texturepath="Assets/Textures/Screens/Missions/mission1i1.png"/>
 		<mission1i2 texturepath="Assets/Textures/Screens/Missions/mission1i2.png"/>
+
+		<inventory texturepath="Assets/Textures/Screens/Inventory/inventory.png"/>
+		<inventoryItem1 texturepath="Assets/Textures/Screens/Inventory/Amulet_Escarabat.png"/>
+		<inventoryItem2 texturepath="Assets/Textures/Screens/Inventory/Amulet_Serps.png"/>
+		<inventoryItem3 texturepath="Assets/Textures/Screens/Inventory/Amulet_Ull.png"/>
+
+		<shopTexture texturepath="Assets/Textures/Screens/Shop/shop.png"/>
+		<emptyslotTexture texturepath="Assets/Textures/Screens/Shop/emptyslot.png"/>
+		<selectorItemTexture texturepath="Assets/Textures/Screens/Shop/selectorItem.png"/>
+		
+		
+		<SkillTree texturepath="Assets/Textures/SkillTree/SkillTree.png"/>
+		<SkillTreeTalent texturepath="Assets/Textures/SkillTree/SkillTreeTalent.png"/>
+		<SkillTreeLife_1 texturepath="Assets/Textures/SkillTree/SkillTreeLife_1.png"/>
+		<SkillTreeLife_2 texturepath="Assets/Textures/SkillTree/SkillTreeLife_2.png"/>
+		<SkillTreeSpeed_1 texturepath="Assets/Textures/SkillTree/SkillTreeSpeed_1.png"/>
+		<SkillTreeSpeed_2 texturepath="Assets/Textures/SkillTree/SkillTreeSpeed_2.png"/>
+		<SkillTreeAtack_1_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_1_1.png"/>
+		<SkillTreeAtack_1_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_1_2.png"/>
+		<SkillTreeAtack_2_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_2_1.png"/>
+		<SkillTreeAtack_2_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_2_2.png"/>
+		<SkillTreeAtack_3_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_3_1.png"/>
+		<SkillTreeAtack_3_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_3_2.png"/>
+		<SkillTreeAtack_4_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_4_1.png"/>
+		<SkillTreeAtack_4_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_4_2.png"/>
+		<SkillTreeAtack_5_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_5_1.png"/>
+		<SkillTreeAtack_5_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_5_2.png"/>
+		<SkillTreeAtack_6_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_6_1.png"/>
+		<SkillTreeAtack_6_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_6_2.png"/>
+		<SkillTreeAtack_7_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_7_1.png"/>
+		<SkillTreeAtack_7_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_7_2.png"/>
+		<SkillTreeAtack_8_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_8_1.png"/>
+		<SkillTreeAtack_8_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_8_2.png"/>
+		<Selection texturepath="Assets/Textures/SkillTree/Selection.png"/>
+		<SkillTreerama_1 texturepath="Assets/Textures/SkillTree/SkillTreerama_1.png"/>
+		<SkillTreerama_2_1 texturepath="Assets/Textures/SkillTree/SkillTreerama_2_1.png"/>
+		<SkillTreerama_2_2 texturepath="Assets/Textures/SkillTree/SkillTreerama_2_2.png"/>
+		<SkillTreerama_3_1 texturepath="Assets/Textures/SkillTree/SkillTreerama_3_1.png"/>
+		<SkillTreerama_3_2 texturepath="Assets/Textures/SkillTree/SkillTreerama_3_2.png"/>
+		
+	
 		
 		
 	</hud>

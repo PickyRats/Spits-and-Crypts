@@ -10,6 +10,7 @@
 #include "SceneTemple.h"
 #include "SceneFloor1.h"
 #include "SceneChoza.h"
+#include "SceneLight.h"
 #include "Map.h"
 #include "Physics.h"
 #include "FadeToBlack.h"
@@ -51,6 +52,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	sceneTemple = new SceneTemple(false);
 	sceneChoza = new SceneChoza(false);
 	sceneFloor1 = new SceneFloor1(false);
+	sceneLight = new SceneLight(false);
 	map = new Map(false);
 	entityManager = new EntityManager(false);
 	fade = new FadeToBlack();
@@ -80,6 +82,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(sceneTemple);
 	AddModule(sceneChoza);
 	AddModule(sceneFloor1);
+	AddModule(sceneLight);
 	AddModule(map);
 	AddModule(entityManager);
 	AddModule(puzzle);

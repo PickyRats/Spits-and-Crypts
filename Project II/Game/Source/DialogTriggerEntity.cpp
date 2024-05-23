@@ -8,6 +8,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "SceneVillage.h"
+#include "Hud.h"
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
@@ -44,11 +45,6 @@ bool DialogTrigger::Start() {
 	repeatDialog = parameters.attribute("repeat").as_bool(false);
 	dialogScene = parameters.attribute("scene").as_int();
 	id = parameters.attribute("id").as_int();
-
-	/*
-	Meter en este apartado del config las misiones para poder pasarlas en el momento en el que se acabe
-	de esta manera puede que funcione. probar a ver que tal, sinó cargarse la clase y volver a empezar.
-	*/
 
 	played = false;
 	std::string fontTarget = parameters.attribute("font").as_string("primary");
@@ -160,7 +156,6 @@ void DialogTrigger::PlayDialog()
 		played = true;
 		
 
-
 		//Play el dialogo repetido
 	}
 	else if (played && repeatDialog) {
@@ -174,6 +169,7 @@ void DialogTrigger::PlayDialog()
 			pDialog = item->data;
 			app->dialogManager->AddDialog(pDialog);
 		}
+	
 	}
 	Interact(id);
 }
@@ -254,10 +250,11 @@ void DialogTrigger::GiveMission(int idMission)
 		app->hud->mission11Active= false;
 		app->hud->mission1Complete = true;
 		app->fade->Fade((Module*)app->sceneChoza, (Module*)app->sceneVillage, 280.0f);
-		printf("  la nieta  \n");
+		printf(" La abuela  \n");
 		break;
 	case 3:
 		printf(" Soy maat \n");
+		app->hud->abilityTree = true;
 		break;
 	case 4:
 		printf(" toth  \n");
@@ -270,6 +267,7 @@ void DialogTrigger::GiveMission(int idMission)
 		break;
 	case 7:
 		printf("  mi humilde tienda \n");
+		app->hud->shop = true;
 		break;
 	case 8:
 		printf(" Soy el tabernero\n");
