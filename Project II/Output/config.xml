@@ -375,6 +375,11 @@
 		<SkillTreeAtack_8_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_8_1.png"/>
 		<SkillTreeAtack_8_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_8_2.png"/>
 		<Selection texturepath="Assets/Textures/SkillTree/Selection.png"/>
+		<SkillTreerama_1 texturepath="Assets/Textures/SkillTree/SkillTreerama_1.png"/>
+		<SkillTreerama_2_1 texturepath="Assets/Textures/SkillTree/SkillTreerama_2_1.png"/>
+		<SkillTreerama_2_2 texturepath="Assets/Textures/SkillTree/SkillTreerama_2_2.png"/>
+		<SkillTreerama_3_1 texturepath="Assets/Textures/SkillTree/SkillTreerama_3_1.png"/>
+		<SkillTreerama_3_2 texturepath="Assets/Textures/SkillTree/SkillTreerama_3_2.png"/>
 		
 		
 

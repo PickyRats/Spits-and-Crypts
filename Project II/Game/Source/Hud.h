@@ -184,6 +184,11 @@ private:
 	//HabilityTree
 
 	SDL_Texture* skillTree;
+	SDL_Texture* skillTreerama_1;
+	SDL_Texture* skillTreerama_2_1;
+	SDL_Texture* skillTreerama_2_2;
+	SDL_Texture* skillTreerama_3_1;
+	SDL_Texture* skillTreerama_3_2;
 
 	SDL_Texture* SkillTreeTalent;
 
@@ -218,6 +223,14 @@ private:
 	SDL_Texture* Talent3;
 	SDL_Texture* Talent4;
 	SDL_Texture* Talent5;
+
+	SDL_Texture* Rama1_1=NULL;
+	SDL_Texture* Rama1_2=NULL;
+	SDL_Texture* Rama2_1=NULL;
+	SDL_Texture* Rama2_2=NULL;
+	SDL_Texture* Rama3_1=NULL;
+	SDL_Texture* Rama3_2=NULL;
+
 
 
 

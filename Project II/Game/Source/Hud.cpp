@@ -162,6 +162,11 @@ bool Hud::Start()
 
 	//SkillTree
 	skillTree = app->tex->Load(configNode3.child("SkillTree").attribute("texturepath").as_string());
+	skillTreerama_1 = app->tex->Load(configNode3.child("SkillTreerama_1").attribute("texturepath").as_string());
+	skillTreerama_2_1 = app->tex->Load(configNode3.child("SkillTreerama_2_1").attribute("texturepath").as_string());
+	skillTreerama_2_2 = app->tex->Load(configNode3.child("SkillTreerama_2_2").attribute("texturepath").as_string());
+	skillTreerama_3_1 = app->tex->Load(configNode3.child("SkillTreerama_3_1").attribute("texturepath").as_string());
+	skillTreerama_3_2 = app->tex->Load(configNode3.child("SkillTreerama_3_2").attribute("texturepath").as_string());
 
 	//SkillTree Buttons
 	SkillTreeTalent = app->tex->Load(configNode3.child("SkillTreeTalent").attribute("texturepath").as_string());
@@ -844,12 +849,47 @@ bool Hud::CleanUp()
 void Hud::SkillTree()
 {
 	app->render->DrawTexture(skillTree, 0, 0, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Rama1_1, 405, 199, NULL, SDL_FLIP_HORIZONTAL, 0);
+	app->render->DrawTexture(Rama1_2, 252, 199, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Rama2_1, 486, 336, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Rama2_2, 252, 336, NULL, SDL_FLIP_NONE, 0);	
+	app->render->DrawTexture(Rama3_1, 388, 436, NULL, SDL_FLIP_HORIZONTAL, 0);
+	app->render->DrawTexture(Rama3_2, 251, 435, NULL, SDL_FLIP_NONE, 0);
+
 	app->render->DrawTexture(Talent1, 333, 162, NULL, SDL_FLIP_NONE, 0);
 	app->render->DrawTexture(Talent2, 450, 263, NULL, SDL_FLIP_NONE, 0);
 	app->render->DrawTexture(Talent3, 450, 358, NULL, SDL_FLIP_NONE, 0);
 	app->render->DrawTexture(Talent4, 213, 263, NULL, SDL_FLIP_NONE, 0);
 	app->render->DrawTexture(Talent5, 213, 358, NULL, SDL_FLIP_NONE, 0);
 
+	if (talent2locked)
+	{
+		Rama1_1 = skillTreerama_1;
+		Rama2_1 = skillTreerama_2_1;
+		Rama3_1 = skillTreerama_3_1;
+		Talent2 = SkillTreeLife_2;
+	}
+	if (talent3locked)
+	{
+		Rama2_1 = skillTreerama_2_2;
+		Rama3_1 = skillTreerama_3_2;
+		Talent3 = SkillTreeSpeed_2;
+	}
+	if (talent4locked)
+	{
+		Rama1_2 = skillTreerama_1;
+		Rama2_2 = skillTreerama_2_1;
+		Rama3_2 = skillTreerama_3_1;
+		Talent4 = SkillTreeAtack_1_2;
+	}
+	if (talent5locked)
+	{
+		Rama2_2 = skillTreerama_2_2;
+		Rama3_2 = skillTreerama_3_2;
+		Talent5 = SkillTreeAtack_2_2;
+	}
+
+	//Move the selection
 	if (talent1selected)
 	{
 		app->render->DrawTexture(Selection, 333, 162);
@@ -864,17 +904,12 @@ void Hud::SkillTree()
 			talent4selected = true;
 		}
 	}
-
 	if (talent2selected)
 	{
 		app->render->DrawTexture(Selection, 450, 263);
 		if (app->input->GetKey(SDL_SCANCODE_M)==KEY_DOWN)
 		{
 			talent2locked = true;
-		}
-		if (talent2locked)
-		{
-			Talent2 = SkillTreeLife_2;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_UP)==KEY_DOWN)
 		{
@@ -887,7 +922,6 @@ void Hud::SkillTree()
 			talent3selected = true;
 		}
 	}
-
 	if (talent3selected)
 	{
 		app->render->DrawTexture(Selection, 450, 358);
@@ -898,6 +932,8 @@ void Hud::SkillTree()
 		if (talent3locked)
 		{
 			Talent3 = SkillTreeSpeed_2;
+			app->render->DrawTexture(skillTreerama_2_2, 486, 336);
+			app->render->DrawTexture(skillTreerama_3_2, 388, 436, NULL, SDL_FLIP_HORIZONTAL);
 		}
 		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
 		{
@@ -905,17 +941,12 @@ void Hud::SkillTree()
 			talent2selected = true;
 		}
 	}
-
 	if (talent4selected)
 	{
 		app->render->DrawTexture(Selection, 213, 263);
 		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 		{
 			talent4locked = true;
-		}
-		if (talent4locked)
-		{
-			Talent4 = SkillTreeAtack_1_2;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
 		{
@@ -928,7 +959,6 @@ void Hud::SkillTree()
 			talent5selected = true;
 		}
 	}
-
 	if (talent5selected)
 	{
 		app->render->DrawTexture(Selection, 213, 358);
@@ -936,17 +966,11 @@ void Hud::SkillTree()
 		{
 			talent5locked = true;
 		}
-		if (talent5locked)
-		{
-			Talent5 = SkillTreeAtack_2_2;
-		}
 		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
 		{
 			talent5selected = false;
 			talent4selected = true;
 		}
 	}
-
-
 }
 
