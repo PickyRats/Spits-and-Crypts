@@ -78,6 +78,11 @@
 		<logoFx path="Assets/Audio/Fx/Logo.wav"/>
 	</sceneintro>
 
+	<!-- Ending -->
+	<sceneending>
+		<musicEnding path="Assets/Audio/Music/Ending_music.ogg" fadeTime="2" fadeOutTime="2"/>
+	</sceneending>
+
 	<!-- sceneVillage -->
 	<sceneVillage>
 		<!-- Scene -->
