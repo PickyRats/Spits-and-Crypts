@@ -7,6 +7,7 @@
 #include "SceneVillage.h"
 #include "SceneShop.h"
 #include "SceneOasisFaraon.h"
+#include "SceneEnding.h"
 #include "SceneTemple.h"
 #include "SceneFloor1.h"
 #include "SceneLight.h"
@@ -47,6 +48,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	audio = new Audio();
 	physics = new Physics();
 	sceneVillage = new SceneVillage(false);
+	sceneEnding = new SceneEnding(false);
 	sceneShop = new SceneShop(false);
 	sceneOasisFaraon = new SceneOasisFaraon(false);
 	sceneTemple = new SceneTemple(false);
@@ -90,6 +92,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(hud);
 	AddModule(sceneMenu);
 	AddModule(sceneIntro);
+	AddModule(sceneEnding);
 	AddModule(guiManager);
 	AddModule(fade);
 	AddModule(dialogManager);

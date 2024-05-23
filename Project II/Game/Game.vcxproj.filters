@@ -111,6 +111,9 @@
     <ClCompile Include="Source\Puzzle.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Puzzle2.cpp" />
+    <ClCompile Include="Source\SceneEnding.cpp">
+    </ClCompile>
     <ClCompile Include="Source\Puzzle2.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
@@ -267,6 +270,9 @@
     </ClInclude>
     <ClInclude Include="Source\Puzzle.h">
       <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Puzzle2.h" />
+    <ClInclude Include="Source\SceneEnding.h">
     </ClInclude>
     <ClInclude Include="Source\Puzzle2.h">
       <Filter>Modules</Filter>

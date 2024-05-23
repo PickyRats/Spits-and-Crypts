@@ -15,6 +15,7 @@
 #include "FadeToBlack.h"
 #include "GuiManager.h"
 #include "ParticleManager.h"
+#include "DialogManager.h"
 #include "Defs.h"
 #include "Log.h"
 #include "SceneMenu.h"
@@ -301,6 +302,8 @@ bool Hud::Update(float dt)
 				app->particleManager->Disable();
 				app->entityManager->Disable();
 				app->hud->Disable();
+				//app->dialogManager->Disable();
+				//app->physics->Disable();
 				
 			}
 			else if (saveButton->state==GuiControlState::PRESSED)
