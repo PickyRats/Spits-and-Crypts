@@ -7,6 +7,7 @@
 #include "SceneVillage.h"
 #include "SceneShop.h"
 #include "SceneOasisFaraon.h"
+#include "SceneEnding.h"
 #include "SceneTemple.h"
 #include "SceneFloor1.h"
 #include "SceneChoza.h"
@@ -23,6 +24,7 @@
 #include "SceneCombat.h"
 #include "Puzzle.h"
 #include "Puzzle2.h"
+#include "CutscenePlayer.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -47,6 +49,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	audio = new Audio();
 	physics = new Physics();
 	sceneVillage = new SceneVillage(false);
+	sceneEnding = new SceneEnding(false);
 	sceneShop = new SceneShop(false);
 	sceneOasisFaraon = new SceneOasisFaraon(false);
 	sceneTemple = new SceneTemple(false);
@@ -65,6 +68,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	sceneCombat = new SceneCombat(false);
 	puzzle = new Puzzle(false);
 	puzzle2 = new Puzzle2(false);
+	cutscenePlayer = new CutscenePlayer();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -91,11 +95,13 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(hud);
 	AddModule(sceneMenu);
 	AddModule(sceneIntro);
+	AddModule(sceneEnding);
 	AddModule(guiManager);
 	AddModule(fade);
 	AddModule(dialogManager);
 	// Render last to swap buffer
 	AddModule(render);
+	AddModule(cutscenePlayer);
 
 
 	LOG("Timer App Constructor: %f", timer.ReadMSec());

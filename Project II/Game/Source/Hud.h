@@ -4,6 +4,8 @@
 #include "Module.h"
 #include "GuiControlButton.h"
 #include "GuiControlCheckBox.h"
+#include "GuiControlSlider.h"
+
 #include "GuiManager.h"
 #include "GuiControl.h"
 #include "Timer.h"
@@ -99,6 +101,10 @@ private:
 	SDL_Texture* returnHover;
 	SDL_Texture* returnClick;
 
+	SDL_Texture* saveNormal;
+	SDL_Texture* saveHover;
+	SDL_Texture* saveClick;
+
 	SDL_Texture* pause;
 
 	SDL_Texture* resumeNormal;
@@ -181,14 +187,16 @@ private:
 	GuiControlButton* exitButton;
 	GuiControlButton* returnButton;
 	GuiControlButton* resumeButton;
+	GuiControlButton* saveButton;
 	GuiControlButton* settingsButton;
 	GuiControlButton* backToTitleButton;
 
 	GuiControlButton* settingsExitButton;
 	GuiControlButton* settingsReturnButton;
-	GuiControlButton* settingsMusicButton;
+	GuiControlSlider* settingsMusicButton;
+	GuiControlSlider* settingsFxButton;
 	GuiControlButton* settingsOptionsButton;
-	GuiControlButton* settingsFxButton;
+
 	GuiControlButton* settingsFullScreenButton;
 	GuiControlCheckBox* settingsVSyncButton;
 	GuiControlButton* settingsControlsButton;

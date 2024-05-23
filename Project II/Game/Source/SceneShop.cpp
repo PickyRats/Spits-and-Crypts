@@ -65,8 +65,8 @@ bool SceneShop::Awake(pugi::xml_node& config)
 bool SceneShop::Start()
 {
 	if (configNodeShop.child("map")) {
-    		//Get the map name from the config file and assigns the value in the module
-    		app->map->mapName = configNodeShop.child("map").attribute("name").as_string();
+    	//Get the map name from the config file and assigns the value in the module
+    	app->map->mapName = configNodeShop.child("map").attribute("name").as_string();
    		app->map->path = configNodeShop.child("map").attribute("path").as_string();
 		
 	}
@@ -77,6 +77,8 @@ bool SceneShop::Start()
 
 	storeTexture = app->tex->Load(configNodeShop.child("store").attribute("texturepath").as_string());
 	
+	backgroundTexture = app->tex->Load("Assets/Textures/Screens/taberna.png");
+
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(96), PIXEL_TO_METERS(640)), 0);
 	
 	//Get the size of the window
@@ -104,7 +106,7 @@ bool SceneShop::PreUpdate()
 // Called each loop iteration
 bool SceneShop::Update(float dt)
 {
-	app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);
+	app->render->DrawTexture(backgroundTexture, 300, 400, NULL, SDL_FLIP_NONE, 0.0f);
 
 	app->render->DrawTexture(storeTexture, 0, 0);
 

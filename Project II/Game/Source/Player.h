@@ -47,7 +47,7 @@ public:
 
 	void Jump();
 	
-	void WalkingSound();
+	void SoundManager();
 
 	void Respaw();
 
@@ -76,6 +76,9 @@ public:
 
 	bool isjumping = false;
 
+	bool canmove = false;
+
+	bool canClimb = false;
 	bool isClimbing = false;
 
 	bool doorAldea = false;
@@ -88,6 +91,7 @@ public:
 
 	bool step = false;
 	bool walkingSoundPlaying = false;
+	bool jumpingSoundPlaying = false;
 	bool climbingSoundPlaying = false;
 
 	b2Transform initialTransform;
@@ -102,8 +106,10 @@ public:
 	bool isVisible = true;
 
 	uint stepsFx;
-
+	uint jumpFx;
 	uint climbFx;
+	uint doorFx;
+
 
 	bool isDead = false;
 

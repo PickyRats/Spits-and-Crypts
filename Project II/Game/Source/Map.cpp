@@ -434,7 +434,7 @@ bool Map::CreateColliders()
                         switch (mapLayerItem->data->Get(x, y))
                         {
                         case 1:
-                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y, mapData.tileWidth, mapData.tileHeight * 4, STATIC);
+                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y-32 , mapData.tileWidth/4, mapData.tileHeight*3.0f, STATIC);
                             c1->ctype = ColliderType::STAIRS;
                             ret = true;
                             break;
@@ -554,6 +554,9 @@ void Map::DestroyAllColliders()
                 || ctype == ColliderType::DOOR_TEMPLE
                 || ctype == ColliderType::DOOR_ALDEA
                 || ctype == ColliderType::DOOR_FLOOR_1
+                || ctype == ColliderType::TRAP
+                || ctype == ColliderType::STAIRS
+                || ctype == ColliderType::PUZZLE
                 || ctype == ColliderType:: COMBAT)
             {
                 physicsWorld->DestroyBody(body);

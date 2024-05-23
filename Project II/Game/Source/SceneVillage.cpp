@@ -52,6 +52,14 @@ bool SceneVillage::Awake(pugi::xml_node& config)
 		dialogTrigger->parameters = itemNode;
 	}
 
+	//if (config.child("map")) {
+	//	//Get the map name from the config file and assigns the value in the module
+	//	app->map->mapName = config.child("map").attribute("name").as_string();
+	//	app->map->path = config.child("map").attribute("path").as_string();
+	//}
+
+	spawnPosition = { 96, 675 };
+
 	configNode = config;
 
 	return ret;
@@ -70,7 +78,7 @@ bool SceneVillage::Start()
 	app->hud->Enable();
 
 	//Load the player in the map
-	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(96), PIXEL_TO_METERS(640)), 0);
+	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(spawnPosition.x), PIXEL_TO_METERS(spawnPosition.y)), 0);
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);

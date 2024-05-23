@@ -130,6 +130,11 @@ private:
 	int enemyAttackIndex = 0;
 
 	bool startEnemyTurn = false;
+
+	uint atack;
+	uint move_Tile;
+	uint pass_Turn;
+	uint victory;
 };
 
 #endif // __SCENECOMBAT_H__

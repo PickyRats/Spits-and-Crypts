@@ -61,6 +61,7 @@ public:
 	int sceneNum = 1;
 	PhysBody* piedra = nullptr;
 	bool piedraHecha = false;
+	iPoint spawnPosition = { 0, 0 };
 
 private:
 	SDL_Texture* backgroundTexture;

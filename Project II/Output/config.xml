@@ -30,7 +30,10 @@
 		<music>
 			<CombatMusic path="Assets/Audio/Music/Combat1_Music.ogg" fadeTime="2" fadeOutTime="2"/>
 		</music>
-    
+
+		<atack path="Assets/Audio/Fx/combate/espada_Fx.wav"/>
+		<pass path="Assets/Audio/Fx/combate/pasar-turno_Fx.wav"/>
+		<tilemove path="Assets/Audio/Fx/combate/tile-Selection_Fx.wav"/>
 		<!--Enemy -->
 		<enemy x="1216" y="384" texturepath="Assets/Textures/enemy.png" id="1"/>
 		<enemy x="704" y="192" texturepath="Assets/Textures/enemy.png" id="2"/>
@@ -55,7 +58,8 @@
 		<npc x="970" y="520" texturepath="Assets/Textures/Npcs/mercante.png" id="7" scene="3"/>
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="1024" y="576"  name="Mercante" repeat="true" scene="3" id="7">
+		<dialogTrigger x="1024" y="576"  name="Mercante" repeat="true" scene="3" id="7" audio_1="Assets/Audio/Fx/tienda/voz_tienda_1.wav" audio_2="Assets/Audio/Fx/tienda/voz_tienda_2.wav" audio_3="Assets/Audio/Fx/tienda/voz_tienda_3.wav">
+
 		  <sentences>
 			  <sentence text="Bienvenido a mi humilde rinconcillo"/>
 			  <sentence text="Quieres entrar a mi tienda?"/>
@@ -102,6 +106,11 @@
 		
 	</sceneChoza>
 
+	<!-- Ending -->
+	<sceneending>
+		<musicEnding path="Assets/Audio/Music/Ending_music.ogg" fadeTime="2" fadeOutTime="2"/>
+	</sceneending>
+
 	<!-- sceneVillage -->
 	<sceneVillage>
 		<!-- Scene -->
@@ -143,7 +152,8 @@
 		<npc x="400" y="575" texturepath="Assets/Textures/Npcs/Anhuvihsh.png" id="8" scene="4"/>
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="440" y="640"  name="Tabernero" repeat="true" scene="4" id="8">
+
+		<dialogTrigger x="440" y="640"  name="Tabernero" repeat="true" scene="4" id="8" audio_1="Assets/Audio/Fx/anubish/voz_anubish_1.wav" audio_2="Assets/Audio/Fx/anubish/voz_anubish_2.wav" audio_3="Assets/Audio/Fx/anubish/voz_anubish_3.wav">
 			<sentences>
 				<sentence text="Bienvenido, vendemos todo tipo de productos"/>
 				<sentence text="Desde Arena del desierto hasta ratas disecadas"/>
@@ -182,7 +192,7 @@
 		<npc x="1000" y="386" texturepath="Assets/Textures/Npcs/horus.png" id="6" scene="2"/>
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="320" y="540"  name="Maat" repeat="true" scene="2" id="3">
+		<dialogTrigger x="320" y="540"  name="Maat" repeat="true" scene="2" id="3" audio_1="Assets/Audio/Fx/maat/voz_maat_1.wav" audio_2="Assets/Audio/Fx/maat/voz_maat_2.wav" audio_3="Assets/Audio/Fx/maat/voz_maat_3.wav">
 			<sentences>
 				<sentence text="Soy Maat, ¿Qué atributos quieres que te mejore?"/>
 				<sentence text="No sea tímido..."/>
@@ -192,7 +202,8 @@
 			</repeat_sentences>
 		</dialogTrigger>
 		
-		<dialogTrigger x="570" y="540"  name="Toth" repeat="true" scene="2" id="4">
+
+		<dialogTrigger x="570" y="540"  name="Toth" repeat="true" scene="2" id="4" audio_1="Assets/Audio/Fx/toth/voz_toth_1.wav" audio_2="Assets/Audio/Fx/toth/voz_toth_2.wav" audio_3="Assets/Audio/Fx/toth/voz_toth_3.wav">
 			<sentences>
 				<sentence text="Soy Toth, puedo mejorar tus armas"/>
 				<sentence text="Selecciona la que quieras en el menú"/>
@@ -202,8 +213,7 @@
 			</repeat_sentences>
 		</dialogTrigger>
 		
-
-		<dialogTrigger x="820" y="540"  name="Isis" repeat="true" scene="2" id="5">
+		<dialogTrigger x="820" y="540"  name="Isis" repeat="true" scene="2" id="5" audio_1="Assets/Audio/Fx/isis/voz_isis_1.wav" audio_2="Assets/Audio/Fx/isis/voz_isis_2.wav" audio_3="Assets/Audio/Fx/isis/voz_isis_3.wav">
 			<sentences>
 				<sentence text="Soy Isis, puedo mejorar tus armas"/>
 				<sentence text="Selecciona la que quieras en el menú"/>
@@ -213,7 +223,8 @@
 			</repeat_sentences>
 		</dialogTrigger>
 		
-		<dialogTrigger x="1070" y="540"  name="Horus" repeat="true" scene="2" id="6">
+
+		<dialogTrigger x="1070" y="540"  name="Horus" repeat="true" scene="2" id="6" audio_1="Assets/Audio/Fx/horus/voz_horus_1.wav" audio_2="Assets/Audio/Fx/horus/voz_horus_2.wav" audio_3="Assets/Audio/Fx/horus/voz_horus_3.wav">
 			<sentences>
 				<sentence text="Soy Horus, puedo mejorar tus armas"/>
 				<sentence text="Selecciona la que quieras en el menú"/>
@@ -238,17 +249,19 @@
 		
 		<floor1background texturepath="Assets/Textures/Screens/floor1background.png"/>
 
-		<!-- Talia -->
-		<npc x="600" y="400" texturepath="Assets/Textures/Npcs/Talia.png" id="1" scene="5"/>
+		<!-- Paalaya -->
+		<npc x="600" y="2004" texturepath="Assets/Textures/Npcs/Talia.png" id="1" scene="5"/>
+
 
 		<!-- Dialogo Talia -->
-		<dialogTrigger x="670" y="585"  name="Talia" repeat="true" scene="5" id="9">
+		<dialogTrigger x="670" y="585"  name="Paayla" repeat="true" scene="5" id="9" audio_1="Assets/Audio/Fx/paayla/voz_paayla_1.wav" audio_2="Assets/Audio/Fx/paayla/voz_paayla_2.wav" audio_3="Assets/Audio/Fx/paayla/voz_paayla_3.wav">
+
 			<sentences>
-				<sentence text="Hola el Turmo me esta acosando"/>
-				<sentence text="Necesito alguien poderoso que me salve"/>
+				<sentence text="Hola, veo que estas algo malherido."/>
+				<sentence text="Yo me encargaré de tus heridas, no te preocupes."/>
 			</sentences>
 			<repeat_sentences>
-				<sentence text="Basta de chachara,date prisa!"/>
+				<sentence text="Vuelve cuando necesites que sane tus heridas."/>
 			</repeat_sentences>
 		</dialogTrigger>
 		
@@ -256,11 +269,11 @@
 		<music>
 		</music>
 		<Floor1Music path="Assets/Audio/Music/Floor1_music.ogg" fadeTime="2" fadeOutTime="2"/>
-		
-		<Piece x="4928" y="384" texturepath="Assets/Textures/pieza_puzle_1.png" id="0" />
-		<Piece x="5184" y="384" texturepath="Assets/Textures/pieza_puzle_2.png" id="1" />
-		<Piece x="5824" y="448" texturepath="Assets/Textures/pieza_puzle_3.png" id="2" />
-		<Piece x="6208" y="384" texturepath="Assets/Textures/pieza_puzle_4.png" id="3" />
+		<!-- PUZZLE -->
+		<Piece x="4928" y="1984" texturepath="Assets/Textures/pieza_puzle_1.png" id="0" />
+		<Piece x="5184" y="1984" texturepath="Assets/Textures/pieza_puzle_2.png" id="1" />
+		<Piece x="5824" y="2048" texturepath="Assets/Textures/pieza_puzle_3.png" id="2" />
+		<Piece x="6208" y="1984" texturepath="Assets/Textures/pieza_puzle_4.png" id="3" />
 	</sceneFloor1>
 	
 	<!-- sceneLight-->
@@ -325,7 +338,9 @@
 		<backToTitleNormal texturepath="Assets/Textures/Screens/Pause/back_to_title_normal.png"/>
 		<backToTitleHover texturepath="Assets/Textures/Screens/Pause/back_to_title_hover.png"/>
 		<backToTitleClick texturepath="Assets/Textures/Screens/Pause/back_to_title_click.png"/>
-
+		<saveHover texturepath="Assets/Textures/Screens/Pause/save_hover.png"/>
+		<saveNormal texturepath="Assets/Textures/Screens/Pause/save_normal.png"/>
+		<settingsHover texturepath="Assets/Textures/Screens/Pause/settings_hover.png"/>
 		<settingsExitNormal texturepath="Assets/Textures/Screens/More/exit_normal.png"/>
 		<settingsExitHover texturepath="Assets/Textures/Screens/More/exit_hover.png"/>
 		<settingsExitClick texturepath="Assets/Textures/Screens/More/exit_click.png"/>
