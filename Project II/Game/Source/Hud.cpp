@@ -103,6 +103,11 @@ bool Hud::Start()
 	settingsBoxHover = app->tex->Load(configNode3.child("settingsBoxHover").attribute("texturepath").as_string());
 	settings = app->tex->Load(configNode3.child("settings").attribute("texturepath").as_string());
 
+	mission1i0= app->tex->Load(configNode3.child("mission1i0").attribute("texturepath").as_string());
+	mission1i1 = app->tex->Load(configNode3.child("mission1i1").attribute("texturepath").as_string());
+	mission1i2 = app->tex->Load(configNode3.child("mission1i2").attribute("texturepath").as_string());
+
+
 	settingsControlsButtonNormal = app->tex->Load(configNode3.child("settingsControlsButtonNormal").attribute("texturepath").as_string());
 	settingsControlsButtonHover = app->tex->Load(configNode3.child("settingsControlsButtonHover").attribute("texturepath").as_string());
 	settingsAudioButtonNormal = app->tex->Load(configNode3.child("settingsAudioButtonNormal").attribute("texturepath").as_string());
@@ -599,8 +604,31 @@ bool Hud::Update(float dt)
 			
 		}
 	}
-
+	if(mission10Active)
+	{
+		Missions(0);
+	}
+	else if (mission11Active)
+	{
+		Missions(1);
+	}
 	return true;
+}
+
+void Hud::Missions(int mission1) 
+{
+	//SDL_Rect rect = { 0, 0, 1920, 1080 };
+	switch (mission1)
+	{
+	case 0:
+		app->render->DrawTexture(mission1i0, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		break;
+	case 1:
+		app->render->DrawTexture(mission1i1, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		break;
+	default:
+		break;
+	}
 }
 
 

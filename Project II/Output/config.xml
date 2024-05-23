@@ -52,7 +52,7 @@
 		<npc x="970" y="520" texturepath="Assets/Textures/Npcs/mercante.png" id="7" scene="3"/>
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="1024" y="576"  name="Mercante" repeat="true" scene="3" id="3">
+		<dialogTrigger x="1024" y="576"  name="Mercante" repeat="true" scene="3" id="7">
 		  <sentences>
 			  <sentence text="Bienvenido a mi humilde rinconcillo"/>
 			  <sentence text="Si quieres algo, no lo robes"/>
@@ -126,7 +126,7 @@
 		<npc x="400" y="575" texturepath="Assets/Textures/Npcs/Anhuvihsh.png" id="8" scene="4"/>
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="440" y="640"  name="Tabernero" repeat="true" scene="4" id="4">
+		<dialogTrigger x="440" y="640"  name="Tabernero" repeat="true" scene="4" id="8">
 			<sentences>
 				<sentence text="Bienvenido, vendemos todo tipo de productos"/>
 				<sentence text="Desde Arena del desierto hasta ratas disecadas"/>
@@ -165,7 +165,7 @@
 		<npc x="1000" y="386" texturepath="Assets/Textures/Npcs/horus.png" id="6" scene="2"/>
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="320" y="540"  name="Maat" repeat="true" scene="2" id="5">
+		<dialogTrigger x="320" y="540"  name="Maat" repeat="true" scene="2" id="3">
 			<sentences>
 				<sentence text="Soy Maat, ¿Qué atributos quieres que te mejore?"/>
 				<sentence text="No sea tímido..."/>
@@ -175,7 +175,7 @@
 			</repeat_sentences>
 		</dialogTrigger>
 		
-		<dialogTrigger x="570" y="540"  name="Toth" repeat="true" scene="2" id="6">
+		<dialogTrigger x="570" y="540"  name="Toth" repeat="true" scene="2" id="4">
 			<sentences>
 				<sentence text="Soy Toth, puedo mejorar tus armas"/>
 				<sentence text="Selecciona la que quieras en el menú"/>
@@ -185,7 +185,7 @@
 			</repeat_sentences>
 		</dialogTrigger>
 		
-		<dialogTrigger x="820" y="540"  name="Isis" repeat="true" scene="2" id="7">
+		<dialogTrigger x="820" y="540"  name="Isis" repeat="true" scene="2" id="5">
 			<sentences>
 				<sentence text="Soy Isis, puedo mejorar tus armas"/>
 				<sentence text="Selecciona la que quieras en el menú"/>
@@ -195,7 +195,7 @@
 			</repeat_sentences>
 		</dialogTrigger>
 		
-		<dialogTrigger x="1070" y="540"  name="Horus" repeat="true" scene="2" id="8">
+		<dialogTrigger x="1070" y="540"  name="Horus" repeat="true" scene="2" id="6">
 			<sentences>
 				<sentence text="Soy Horus, puedo mejorar tus armas"/>
 				<sentence text="Selecciona la que quieras en el menú"/>
@@ -244,24 +244,6 @@
 		<Piece x="5824" y="448" texturepath="Assets/Textures/pieza_puzle_3.png" id="2" />
 		<Piece x="6208" y="384" texturepath="Assets/Textures/pieza_puzle_4.png" id="3" />
 	</sceneFloor1>
-	
-	<!-- Misiones -->
-	<missionmanager>
-		<textures>
-			<background_mission texturepath="Assets/Textures/cuadroDialogo.png"/>
-		</textures>
-		<missions>
-			<!-- Misión 1 -->
-			<mission name="Mision1">
-				<text value="Ves a la choza a salvar a la nieta" />
-			</mission>
-
-			<!-- Misión 2 -->
-			<mission name="Mision2">
-				<text value="mision 2" />
-			</mission>
-		</missions>
-	</missionmanager>
 	
 	
 	<!-- Menu-->
@@ -333,7 +315,6 @@
 		<settingsSlider texturepath="Assets/Textures/Screens/More/slider.png"/>
 		<settings texturepath="Assets/Textures/Screens/More/settings.png"/>
 
-
 		<settingsControlsButtonNormal texturepath="Assets/Textures/Screens/More/settings_controls_button_normal.png"/>
 		<settingsControlsButtonHover texturepath="Assets/Textures/Screens/More/settings_controls_button_hover.png"/>
 		<settingsAudioButtonNormal texturepath="Assets/Textures/Screens/More/settings_audio_button_normal.png"/>
@@ -354,6 +335,10 @@
 		<Personaje1 texturepath="Assets/Textures/Screens/Combat/fotopersonatge.png"/>
 		<Personaje2 texturepath="Assets/Textures/Screens/Combat/fotopersonatge2.png"/>
 		<numeros texturepath="Assets/Textures/Screens/Combat/numeros.png"/>
+
+		<mission1i0 texturepath="Assets/Textures/Screens/Missions/mission1i0.png"/>
+		<mission1i1 texturepath="Assets/Textures/Screens/Missions/mission1i1.png"/>
+		<mission1i2 texturepath="Assets/Textures/Screens/Missions/mission1i2.png"/>
 		
 		
 	</hud>

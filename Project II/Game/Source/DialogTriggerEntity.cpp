@@ -1,4 +1,6 @@
 #include "DialogTriggerEntity.h"
+#include "App.h"
+#include "Hud.h"
 #include "DialogManager.h"
 #include "App.h"
 #include "Textures.h"
@@ -95,11 +97,6 @@ bool DialogTrigger::Update(float dt)
     physCreated = false;
 	}
 
-	if (mission1)
-	{
-
-	}
-	
 	return true;
 }
 
@@ -149,7 +146,6 @@ void DialogTrigger::PlayDialog()
 			pDialog = item->data;
 			app->dialogManager->AddDialog(pDialog);
 		}
-		Interact(id);
 		played = true;
 		
 
@@ -168,7 +164,7 @@ void DialogTrigger::PlayDialog()
 			app->dialogManager->AddDialog(pDialog);
 		}
 	}
-
+	Interact(id);
 }
 
 void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
@@ -241,11 +237,7 @@ void DialogTrigger::GiveMission(int idMission)
 	switch (idMission)
 	{
 	case 1:
-		mission1 = true;
-		if (mission1)
-		{
-			
-		}
+		app->hud->mission10Active = true;
 		break;
 	case 2:
 		printf("  la nieta  \n");

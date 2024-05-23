@@ -4,7 +4,6 @@
 #include "Dialog.h"
 #include "List.h"
 #include "Point.h"
-#include "MissionManager.h"
 #include "SDL/include/SDL.h"
 
 struct SDL_Texture;
@@ -63,11 +62,9 @@ private:
 	bool repeatDialog = false;
 	bool played = false;
 	bool physCreated = false;
-	bool mission1 = false;
 	int dialogScene;
 	int id;
 
-	MissionManager* missionManager;
 
 	//Lista de dialogos a repetir
 	List<Dialog*> dialoguesRepeat;
