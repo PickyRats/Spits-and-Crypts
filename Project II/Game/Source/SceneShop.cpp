@@ -74,6 +74,8 @@ bool SceneShop::Start()
 	app->map->Enable();
 	app->entityManager->Enable();
 	app->hud->Enable();
+
+	storeTexture = app->tex->Load(configNodeShop.child("store").attribute("texturepath").as_string());
 	
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(96), PIXEL_TO_METERS(640)), 0);
 	
@@ -103,6 +105,8 @@ bool SceneShop::PreUpdate()
 bool SceneShop::Update(float dt)
 {
 	app->render->DrawTexture(backgroundTexture2, 0, 0, &bg, SDL_FLIP_NONE, 0.0f);
+
+	app->render->DrawTexture(storeTexture, 0, 0);
 
 	playerX = app->map->player->position.x;
   	playerY = app->map->player->position.y;

@@ -40,7 +40,10 @@
   <sceneShop>
 		<!-- Scene -->
 		<map path="Assets/Maps/" name="Map_Shop.tmx"/>
-
+		
+		<!--Texture-->
+		<store texturepath="Assets/Textures/Screens/Shop/Store.png"/>
+	  
 		<!-- Music -->
 		<music>
 			<ShopMusic path="Assets/Audio/Music/Shop_Music.ogg" fadeTime="10" fadeOutTime="2"/>
