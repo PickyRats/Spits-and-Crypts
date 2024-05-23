@@ -34,7 +34,9 @@ bool DialogTrigger::Start() {
 	faceTexturePath = parameters.attribute("facetexturepath").as_string("");
 	repeatDialog = parameters.attribute("repeat").as_bool(false);
 	dialogScene = parameters.attribute("scene").as_int();
-
+	dialogs[0] = app->audio->LoadFx(parameters.attribute("audio_1").as_string());
+	dialogs[1] = app->audio->LoadFx(parameters.attribute("audio_2").as_string());
+	dialogs[2] = app->audio->LoadFx(parameters.attribute("audio_3").as_string());
 	played = false;
 	std::string fontTarget = parameters.attribute("font").as_string("primary");
 
@@ -131,9 +133,10 @@ void DialogTrigger::PlayDialog()
 	if ((played && !repeatDialog) || !played) {
 		ListItem<Dialog*>* item;
 		Dialog* pDialog = nullptr;
-
+		app->audio->PlayFx(dialogs[rand()%2]);
 		for (item = dialogues.start; item != NULL; item = item->next)
 		{
+			
 			pDialog = item->data;
 			app->dialogManager->AddDialog(pDialog);
 		}
@@ -146,7 +149,7 @@ void DialogTrigger::PlayDialog()
 
 		ListItem<Dialog*>* item;
 		Dialog* pDialog = nullptr;
-
+		app->audio->PlayFx(dialogs[rand() % 2]);;
 		for (item = dialoguesRepeat.start; item != NULL; item = item->next)
 		{
 			pDialog = item->data;

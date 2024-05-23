@@ -67,6 +67,8 @@ private:
 	bool physCreated = false;
 	int dialogScene;
 
+	uint dialogs[3];
+	
 	//Lista de dialogos a repetir
 	List<Dialog*> dialoguesRepeat;
 
