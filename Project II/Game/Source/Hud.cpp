@@ -928,6 +928,7 @@ void Hud::SkillTree()
 		app->render->DrawTexture(Selection, 450, 263);
 		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 		{
+			app->audio->PlayFx(app->sceneMenu->FxButton1);
 			talent2locked = true;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
@@ -946,6 +947,7 @@ void Hud::SkillTree()
 		app->render->DrawTexture(Selection, 450, 358);
 		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && talent2locked)
 		{
+			app->audio->PlayFx(app->sceneMenu->FxButton1);
 			talent3locked = true;
 		}
 		if (talent3locked)
@@ -965,6 +967,7 @@ void Hud::SkillTree()
 		app->render->DrawTexture(Selection, 213, 263);
 		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 		{
+			app->audio->PlayFx(app->sceneMenu->FxButton1);
 			talent4locked = true;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
@@ -983,6 +986,7 @@ void Hud::SkillTree()
 		app->render->DrawTexture(Selection, 213, 358);
 		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && talent4locked)
 		{
+			app->audio->PlayFx(app->sceneMenu->FxButton1);
 			talent5locked = true;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
