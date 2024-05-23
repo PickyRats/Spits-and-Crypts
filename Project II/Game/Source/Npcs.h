@@ -31,10 +31,6 @@ public:
 
 	void DrawNpcs();
 
-	void Interact(int id);
-	
-	// Funcion para dar misiones
-	void GiveMission(int idMission);
 
 public:
 

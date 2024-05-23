@@ -85,6 +85,7 @@ public:
 	bool doorShop = false;
 	bool doorOasis = false;
 	bool doorTemple = false;
+	bool doorChoza = false;
 	bool doorFlor1 = false;
 	bool enterCombat = false;
 

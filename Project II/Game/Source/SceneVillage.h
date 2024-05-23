@@ -59,12 +59,15 @@ public:
 	bool notUseChechPoint = false;
 	bool win = false;
 	int sceneNum = 1;
+	PhysBody* piedra = nullptr;
+	bool piedraHecha = false;
 	iPoint spawnPosition = { 0, 0 };
 
 private:
 	SDL_Texture* backgroundTexture;
 	SDL_Texture* backgroundTexture2;
 	SDL_Texture* aldea;
+	SDL_Texture* piedraTexture;
 	SDL_Rect bg;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
@@ -74,10 +77,12 @@ private:
 
 	int levelWidth = 45 * 64;
 	int levelHeight = 12 * 64;
+	
 
 	int playerX, playerY, cameraX, cameraY;
 	bool changingLevel = false;
 	bool isLoading = false;
+
 
 	int VillageMusic;
 };

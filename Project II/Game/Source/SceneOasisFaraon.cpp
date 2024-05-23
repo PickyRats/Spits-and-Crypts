@@ -78,6 +78,7 @@ bool SceneOasisFaraon::Start()
 
 	//carga assets
 	taberna = app->tex->Load("Assets/Textures/Screens/taberna.png");
+	taberna1 = app->tex->Load("Assets/Textures/Screens/taberna1.png");
 
 	app->audio->PlayMusic(configNodeOasis.child("OasisMusic").attribute("path").as_string());
 
@@ -93,7 +94,7 @@ bool SceneOasisFaraon::PreUpdate()
 // Called each loop iteration
 bool SceneOasisFaraon::Update(float dt)
 {
-	app->render->DrawTexture(taberna, 100, 400, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(taberna, 0, 380, NULL, SDL_FLIP_NONE, 0);
 
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;

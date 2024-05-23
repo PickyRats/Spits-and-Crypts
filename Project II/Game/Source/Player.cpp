@@ -230,6 +230,17 @@ bool Player::Update(float dt)
 				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneTemple, 60.0f);
 				doorTemple = false;
 			}
+			else if (doorChoza)
+			{
+				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneChoza, 60.0f);
+				if (app->hud->mission10Active)
+				{
+					app->hud->mission11Active = true;
+					app->hud->mission10Active = false;
+					app->sceneVillage->piedra->body->SetTransform({ 0, 0 }, 0);
+				}
+				doorChoza = false;
+			}
 			else if (doorFlor1)
 			{
 				app->audio->PlayFx(doorFx);
@@ -244,7 +255,7 @@ bool Player::Update(float dt)
 			}
 		}
 	}
-	//printf("\r cameraX: %d cameraY: %d positionX: %d positionY %d", app->render->camera.x, app->render->camera.y, position.x, position.y);
+	printf("\r cameraX: %d cameraY: %d positionX: %d positionY %d", app->render->camera.x, app->render->camera.y, position.x, position.y);
 	
 	return true;
 }
@@ -412,6 +423,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::DOOR_TEMPLE:
 		doorTemple = true;
 		break;
+	case ColliderType::DOOR_CHOZA:
+		doorChoza = true;
+		break;
 	case ColliderType::DOOR_FLOOR_1:
 		doorFlor1 = true;
 		break;
@@ -450,6 +464,9 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::DOOR_OASIS:
 		doorOasis = false;
+		break;
+	case ColliderType::DOOR_CHOZA:
+		doorChoza = false;
 		break;
 	case ColliderType::DOOR_TEMPLE:
 		doorTemple = false;

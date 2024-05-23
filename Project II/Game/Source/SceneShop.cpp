@@ -74,6 +74,8 @@ bool SceneShop::Start()
 	app->map->Enable();
 	app->entityManager->Enable();
 	app->hud->Enable();
+
+	storeTexture = app->tex->Load(configNodeShop.child("store").attribute("texturepath").as_string());
 	
 	backgroundTexture = app->tex->Load("Assets/Textures/Screens/taberna.png");
 
@@ -106,8 +108,11 @@ bool SceneShop::Update(float dt)
 {
 	app->render->DrawTexture(backgroundTexture, 300, 400, NULL, SDL_FLIP_NONE, 0.0f);
 
+	app->render->DrawTexture(storeTexture, 0, 0);
+
 	playerX = app->map->player->position.x;
   	playerY = app->map->player->position.y;
+
 
 	SetCameraPosition(0, 0);
 
@@ -115,6 +120,7 @@ bool SceneShop::Update(float dt)
 
 	app->render->camera.x += (-cameraX - app->render->camera.x) * cameraSmoothingFactor;
 	app->render->camera.y += (-cameraY - app->render->camera.y) * cameraSmoothingFactor;
+
 
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();

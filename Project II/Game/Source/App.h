@@ -19,6 +19,7 @@ class SceneVillage;
 class SceneShop;
 class SceneOasisFaraon;
 class SceneTemple;
+class SceneChoza;
 class SceneFloor1;
 class SceneEnding;
 class SceneLight;
@@ -36,6 +37,7 @@ class SceneCombat;
 class Puzzle;
 class Puzzle2;
 class CutscenePlayer;
+
 
 class App
 {
@@ -113,6 +115,7 @@ public:
 	SceneShop* sceneShop;
 	SceneOasisFaraon* sceneOasisFaraon;
 	SceneTemple* sceneTemple;
+	SceneChoza* sceneChoza;
 	SceneEnding* sceneEnding;
 	SceneFloor1* sceneFloor1;
 	SceneLight* sceneLight;
@@ -126,6 +129,7 @@ public:
 	Hud* hud;
 	SceneIntro* sceneIntro;
 	DialogManager* dialogManager;
+
 	SceneCombat* sceneCombat;
 	Puzzle* puzzle;
 	Puzzle2* puzzle2;

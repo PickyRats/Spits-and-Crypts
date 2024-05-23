@@ -193,6 +193,7 @@ bool SceneMenu::Update(float dt)
 				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 			}
+			//Primera escena
 
 			app->fade->Fade(this, (Module*)app->sceneVillage, 60.0f);
 
