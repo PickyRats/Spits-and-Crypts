@@ -136,7 +136,6 @@ bool SceneMenu::Start()
 
 bool SceneMenu::Update(float dt)
 {
-	GamePad& pad = app->input->pads[0];
 	//Render background 
 	app->render->DrawTexture(background, 0, 0);
 	if (x > 366) {
@@ -153,15 +152,14 @@ bool SceneMenu::Update(float dt)
 	int percentageFX = (((float)settingsFxButton->sliderPosition - settingsFxButton->sliderBounds.x) / rangoFX) * 100;
 	Mix_Volume(-1,percentageFX);
 	//On menu screen
-
 	if(onMenu && !onSettings && !onCredits){
 
-		if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.l_y > -0.2) && currentId < 5)
+		if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && currentId < 5))
 		{
 				currentId++;
 
 		}
-		if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.l_y <0.2 ) && currentId > 1)
+		if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && currentId > 1))
 		{
 			currentId--;
 		}
@@ -283,7 +281,7 @@ bool SceneMenu::Update(float dt)
 	//On settings screen
 	else if (onSettings)
 	{
-		if ((app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || pad.r1 == KEY_DOWN))
+		if ((app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN))
 		{
 			if (currentId >= 9 && currentId < 12)
 			{
@@ -294,7 +292,7 @@ bool SceneMenu::Update(float dt)
 				currentId = 9;
 			}
 		}
-		else if((app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN || pad.l1 == KEY_DOWN))
+		else if((app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN))
 		{
 			if (currentId >= 12)
 			{
@@ -333,16 +331,15 @@ bool SceneMenu::Update(float dt)
 				
 
 			}
-
 			else if (onSettingsOptions)
 			{	
-				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.l_y < -0.2 == KEY_DOWN && currentId != 8)
+				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && currentId != 8)
 				{
 					currentId++;
 					fxHoverPlayed = false;
 					fxClickPlayed = false;
 				}
-				else if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.l_y >0.2 == KEY_DOWN && currentId != 6)
+				else if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && currentId != 6)
 				{
 					currentId--;
 					fxHoverPlayed = false;
@@ -360,7 +357,7 @@ bool SceneMenu::Update(float dt)
 			}
 		}
 		//return control
-		if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN ||pad.b == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 		{
 			currentId = 1;
 			onSettings = false;
@@ -498,7 +495,7 @@ bool SceneMenu::Update(float dt)
 			//app->render->DrawTexture(controlsHint, 30, 670, NULL, SDL_FLIP_NONE, 0);
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN ||pad.b == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 		{
 			if (fxClickPlayed == false)
 			{
