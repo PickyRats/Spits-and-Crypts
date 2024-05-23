@@ -13,6 +13,7 @@
 #include "GuiManager.h"
 #include "ParticleManager.h"
 #include "Hud.h"
+#include "CutscenePlayer.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -254,6 +255,7 @@ bool SceneMenu::Update(float dt)
 				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 				onCredits = true;
+				app->cutscenePlayer->ConvertPixels(0, 1);
 			}
 		}
 		else if (exitButton->state == GuiControlState::FOCUSED)
@@ -500,7 +502,11 @@ bool SceneMenu::Update(float dt)
 
 		if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 		{
-			onCredits = false;
+			if (onCredits)
+			{
+				onCredits = false;
+				app->cutscenePlayer->Disable();
+			}
 
 			//Show menu buttons
 			startButton->state = GuiControlState::NORMAL;

@@ -120,6 +120,7 @@
     <ClCompile Include="Source\SceneLight.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\CutscenePlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -279,6 +280,7 @@
     <ClInclude Include="Source\SceneLight.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\CutscenePlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

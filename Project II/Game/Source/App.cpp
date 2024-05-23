@@ -23,6 +23,7 @@
 #include "SceneCombat.h"
 #include "Puzzle.h"
 #include "Puzzle2.h"
+#include "CutscenePlayer.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -65,6 +66,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	sceneCombat = new SceneCombat(false);
 	puzzle = new Puzzle(false);
 	puzzle2 = new Puzzle2(false);
+	cutscenePlayer = new CutscenePlayer();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -96,6 +98,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(dialogManager);
 	// Render last to swap buffer
 	AddModule(render);
+	AddModule(cutscenePlayer);
 
 
 	LOG("Timer App Constructor: %f", timer.ReadMSec());
