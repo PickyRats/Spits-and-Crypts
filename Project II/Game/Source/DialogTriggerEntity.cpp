@@ -134,14 +134,15 @@ void DialogTrigger::PlayDialog()
 	if ((played && !repeatDialog) || !played) {
 		ListItem<Dialog*>* item;
 		Dialog* pDialog = nullptr;
-		app->audio->PlayFx(dialogs[rand()%2]);
+		app->audio->PlayFx(dialogs[rand() % 2]);
 		for (item = dialogues.start; item != NULL; item = item->next)
 		{
-			
+
 			pDialog = item->data;
 			app->dialogManager->AddDialog(pDialog);
 		}
 		played = true;
+
 
 		//Play el dialogo repetido
 	}
@@ -156,6 +157,7 @@ void DialogTrigger::PlayDialog()
 			pDialog = item->data;
 			app->dialogManager->AddDialog(pDialog);
 		}
+
 	}
 	Interact(id);
 

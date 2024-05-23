@@ -52,10 +52,13 @@ public:
 
 	void SkillTree();
 
+
+
 	bool playerDeadHud = false;
 	bool spacePressed = false;
 	bool onSettings = false;
 	bool abilityTree = false;
+	int currentId = 0;
 
 	Slot inventorySlots[3];
 	Item items[3];
