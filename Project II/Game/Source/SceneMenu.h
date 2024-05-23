@@ -8,6 +8,7 @@
 #include "GuiControl.h"
 #include "GuiControlSlider.h"
 
+
 struct SDL_Texture;
 
 class SceneMenu : public Module

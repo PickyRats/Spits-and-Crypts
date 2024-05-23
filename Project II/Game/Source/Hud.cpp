@@ -168,6 +168,7 @@ bool Hud::Start()
 
 bool Hud::Update(float dt)
 {
+	
 	//Pause menu
 	if (app->sceneVillage->pause || app->sceneShop->pause || app->sceneOasisFaraon->pause || app->sceneTemple->pause || app->sceneFloor1->pause) {
 		//If pause menu is activated, show buttons
@@ -197,7 +198,7 @@ bool Hud::Update(float dt)
 			//Render pause
 			app->render->DrawTexture(pause, 0, 0, NULL, SDL_FLIP_NONE, 0);
 
-			if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && app->sceneMenu->currentId < 4))
+			if ((app->input->GetKey(SDL_SCANCODE_DOWN)  == KEY_DOWN && app->sceneMenu->currentId < 4))
 			{
 				app->sceneMenu->currentId++;
 
