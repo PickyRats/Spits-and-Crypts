@@ -20,19 +20,31 @@
 	<sceneTemple>
 		<status status="1" />
 	</sceneTemple>
+	<sceneChoza>
+		<status status="1" />
+	</sceneChoza>
 	<sceneFloor1>
 		<status status="1" />
 	</sceneFloor1>
+	<sceneLight>
+		<status status="1" />
+	</sceneLight>
 	<map />
 	<entitymanager />
+	<Puzzle />
+	<Puzzle2 />
 	<particlemanager />
 	<hud />
-	<scenemenu />
+	<scenemenu>
+		<saved saved="1" />
+	</scenemenu>
 	<sceneintro />
+	<sceneending />
 	<guiManager />
 	<fadetoblack />
 	<dialogmanager />
 	<renderer>
-		<camera x="0" y="0" />
+		<camera x="-460" y="-48" />
 	</renderer>
+	<cutsceneplayer />
 </game_state>

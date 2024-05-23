@@ -247,8 +247,7 @@ void DialogTrigger::GiveMission(int idMission)
 		printf("  la nieta  \n");
 		app->hud->mission11Active = false;
 		app->hud->mission1Complete = true;
-		app->fade->Fade((Module*)app->sceneChoza, (Module*)app->sceneVillage, 280.0f);
-		printf(" La abuela  \n");
+		app->fade->Fade((Module*)app->sceneChoza, (Module*)app->sceneVillage, 200.0f);
 		break;
 	case 3:
 		printf(" Soy maat \n");

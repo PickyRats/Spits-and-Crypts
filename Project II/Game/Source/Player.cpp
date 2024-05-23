@@ -248,6 +248,7 @@ bool Player::Update(float dt)
 				{
 					app->hud->mission11Active = true;
 					app->hud->mission10Active = false;
+					app->sceneVillage->piedra->body->SetTransform({ 0,0 }, 0);
 				}
 				doorChoza = false;
 			}

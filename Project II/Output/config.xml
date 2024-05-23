@@ -119,9 +119,6 @@
 
 		<!-- Abuela -->
 		<npc x="300" y="580" texturepath="Assets/Textures/Npcs/abuela.png" id="1" scene="1"/>
-
-		<!-- Nieta -->
-		<npc x="550" y="580" texturepath="Assets/Textures/Npcs/nieta.png" id="2" scene="1"/>
 		
 		<!-- Dialogos -->
 		<dialogTrigger x="350" y="640"  name="La abuela" repeat="true" scene="1"  id="1">
