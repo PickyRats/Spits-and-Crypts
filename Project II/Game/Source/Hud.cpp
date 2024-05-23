@@ -820,28 +820,34 @@ bool Hud::CleanUp()
 	app->tex->UnLoad(inventoryItem3);
 	app->tex->UnLoad(shopTexture);
 	app->tex->UnLoad(emptyslotTexture);
-	//app->tex->UnLoad(skillTree);
-	//app->tex->UnLoad(SkillTreeTalent);
-	//app->tex->UnLoad(SkillTreeLife_1);
-	//app->tex->UnLoad(SkillTreeLife_2);
-	//app->tex->UnLoad(SkillTreeSpeed_1);
-	//app->tex->UnLoad(SkillTreeSpeed_2);
-	//app->tex->UnLoad(SkillTreeAtack_1_1);
-	//app->tex->UnLoad(SkillTreeAtack_1_2);
-	//app->tex->UnLoad(SkillTreeAtack_2_1);
-	//app->tex->UnLoad(SkillTreeAtack_2_2);
-	//app->tex->UnLoad(SkillTreeAtack_3_1);
-	//app->tex->UnLoad(SkillTreeAtack_3_2);
-	//app->tex->UnLoad(SkillTreeAtack_4_1);
-	//app->tex->UnLoad(SkillTreeAtack_4_2);
-	//app->tex->UnLoad(SkillTreeAtack_5_1);
-	//app->tex->UnLoad(SkillTreeAtack_5_2);
-	//app->tex->UnLoad(SkillTreeAtack_6_1);
-	//app->tex->UnLoad(SkillTreeAtack_6_2);
-	//app->tex->UnLoad(SkillTreeAtack_7_1);
-	//app->tex->UnLoad(SkillTreeAtack_7_2);
-	//app->tex->UnLoad(SkillTreeAtack_8_1);
-	//app->tex->UnLoad(SkillTreeAtack_8_2);
+	app->tex->UnLoad(skillTree);
+	app->tex->UnLoad(skillTreerama_1);
+	app->tex->UnLoad(skillTreerama_2_1);
+	app->tex->UnLoad(skillTreerama_3_1);
+	app->tex->UnLoad(skillTreerama_2_2);
+	app->tex->UnLoad(skillTreerama_3_2);
+	app->tex->UnLoad(SkillTreeTalent);
+	app->tex->UnLoad(SkillTreeLife_1);
+	app->tex->UnLoad(SkillTreeLife_2);
+	app->tex->UnLoad(SkillTreeSpeed_1);
+	app->tex->UnLoad(SkillTreeSpeed_2);
+	app->tex->UnLoad(SkillTreeAtack_1_1);
+	app->tex->UnLoad(SkillTreeAtack_1_2);
+	app->tex->UnLoad(SkillTreeAtack_2_1);
+	app->tex->UnLoad(SkillTreeAtack_2_2);
+	app->tex->UnLoad(SkillTreeAtack_3_1);
+	app->tex->UnLoad(SkillTreeAtack_3_2);
+	app->tex->UnLoad(SkillTreeAtack_4_1);
+	app->tex->UnLoad(SkillTreeAtack_4_2);
+	app->tex->UnLoad(SkillTreeAtack_5_1);
+	app->tex->UnLoad(SkillTreeAtack_5_2);
+	app->tex->UnLoad(SkillTreeAtack_6_1);
+	app->tex->UnLoad(SkillTreeAtack_6_2);
+	app->tex->UnLoad(SkillTreeAtack_7_1);
+	app->tex->UnLoad(SkillTreeAtack_7_2);
+	app->tex->UnLoad(SkillTreeAtack_8_1);
+	app->tex->UnLoad(SkillTreeAtack_8_2);
+	app->tex->UnLoad(Selection);
 
 	return true;
 }
@@ -862,6 +868,7 @@ void Hud::SkillTree()
 	app->render->DrawTexture(Talent4, 213, 263, NULL, SDL_FLIP_NONE, 0);
 	app->render->DrawTexture(Talent5, 213, 358, NULL, SDL_FLIP_NONE, 0);
 
+	//Change sprites if talents are locked
 	if (talent2locked)
 	{
 		Rama1_1 = skillTreerama_1;
