@@ -62,6 +62,7 @@ public:
 private:
 	SDL_Texture* backgroundTexture;
 	SDL_Texture* taberna;
+	SDL_Texture* taberna1;
 	SDL_Rect bg;
 	float textPosX, textPosY = 0;
 	uint texW, texH;

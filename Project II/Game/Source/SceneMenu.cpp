@@ -183,7 +183,7 @@ bool SceneMenu::Update(float dt)
 				fxClickPlayed = true;
 			}
 			//Primera escena
-			app->fade->Fade(this, (Module*)app->sceneOasisFaraon, 60.0f);
+			app->fade->Fade(this, (Module*)app->sceneShop, 60.0f);
 
 
 		}

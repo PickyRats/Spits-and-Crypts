@@ -78,6 +78,7 @@ bool SceneOasisFaraon::Start()
 
 	//carga assets
 	taberna = app->tex->Load("Assets/Textures/Screens/taberna.png");
+	taberna1 = app->tex->Load("Assets/Textures/Screens/taberna1.png");
 
 	app->audio->PlayMusic(configNodeOasis.child("OasisMusic").attribute("path").as_string());
 
