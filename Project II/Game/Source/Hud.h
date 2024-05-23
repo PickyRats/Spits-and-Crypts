@@ -183,21 +183,43 @@ private:
 
 	//HabilityTree
 
-	SDL_Texture* Habilitytree;
+	SDL_Texture* skillTree;
 
-	SDL_Texture* Talent_1;
-	SDL_Texture* Talent_2;
-	SDL_Texture* Talent_3;
-	SDL_Texture* Talent_4;
-	SDL_Texture* Talent_5;
+	SDL_Texture* SkillTreeTalent;
+
+	SDL_Texture* SkillTreeLife_1;
+	SDL_Texture* SkillTreeLife_2;
+	SDL_Texture* SkillTreeSpeed_1;
+	SDL_Texture* SkillTreeSpeed_2;
+
+	SDL_Texture* SkillTreeAtack_1_1;
+	SDL_Texture* SkillTreeAtack_1_2;
+	SDL_Texture* SkillTreeAtack_2_1;
+	SDL_Texture* SkillTreeAtack_2_2;
+	SDL_Texture* SkillTreeAtack_3_1;
+	SDL_Texture* SkillTreeAtack_3_2;
+	SDL_Texture* SkillTreeAtack_4_1;
+	SDL_Texture* SkillTreeAtack_4_2;
+	SDL_Texture* SkillTreeAtack_5_1;
+	SDL_Texture* SkillTreeAtack_5_2;
+	SDL_Texture* SkillTreeAtack_6_1;
+	SDL_Texture* SkillTreeAtack_6_2;
+	SDL_Texture* SkillTreeAtack_7_1;
+	SDL_Texture* SkillTreeAtack_7_2;
+	SDL_Texture* SkillTreeAtack_8_1;
+	SDL_Texture* SkillTreeAtack_8_2;
+
+	SDL_Texture* Selection;
+
+	
+	//Talents
+	SDL_Texture* Talent1;
+	SDL_Texture* Talent2;
+	SDL_Texture* Talent3;
+	SDL_Texture* Talent4;
+	SDL_Texture* Talent5;
 
 
-	SDL_Texture* Unlocked_1;
-	SDL_Texture* Unlocked_2;
-	SDL_Texture* Unlockable_1;
-	SDL_Texture* Unlockable_2;
-	SDL_Texture* Buyable_1;
-	SDL_Texture* Buyable_2;
 
 	//Talent 1
 	bool talent1selected = true;
@@ -217,14 +239,6 @@ private:
 	//Talent 5
 	bool talent5selected = false;
 	bool talent5locked = false;
-
-	//Talent 6
-	bool talent6selected = false;
-	bool talent6locked = false;
-
-	//Talent 7
-	bool talent7selected = false;
-	bool talent7locked = false;
 
 
 

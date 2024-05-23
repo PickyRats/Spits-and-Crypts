@@ -160,22 +160,41 @@ bool Hud::Start()
 	app->sceneMenu->creditsButton->state = GuiControlState::HIDDEN;
 	app->sceneMenu->exitButton->state = GuiControlState::HIDDEN;
 
-	//Ability Tree
-	Habilitytree = app->tex->Load(configNode3.child("HabilityTree").attribute("texturepath").as_string());
+	//SkillTree
+	skillTree = app->tex->Load(configNode3.child("SkillTree").attribute("texturepath").as_string());
 
-	Unlocked_1 = app->tex->Load(configNode3.child("Unlocked_1").attribute("texturepath").as_string());
-	Unlocked_2 = app->tex->Load(configNode3.child("Unlocked_2").attribute("texturepath").as_string());
-	Unlockable_1 = app->tex->Load(configNode3.child("Unlockable_1").attribute("texturepath").as_string());
-	Unlockable_2 = app->tex->Load(configNode3.child("Unlockable_2").attribute("texturepath").as_string());
-	Buyable_1 = app->tex->Load(configNode3.child("Buyable_1").attribute("texturepath").as_string());
-	Buyable_2 = app->tex->Load(configNode3.child("Buyable_2").attribute("texturepath").as_string());
+	//SkillTree Buttons
+	SkillTreeTalent = app->tex->Load(configNode3.child("SkillTreeTalent").attribute("texturepath").as_string());
 
-	Talent_1 = Unlocked_1;
-	Talent_2 = Unlockable_1;
-	Talent_3 = Unlockable_1;
-	Talent_4 = Buyable_1;
-	Talent_5 = Unlockable_1;;
+	SkillTreeLife_1 = app->tex->Load(configNode3.child("SkillTreeLife_1").attribute("texturepath").as_string());
+	SkillTreeLife_2 = app->tex->Load(configNode3.child("SkillTreeLife_2").attribute("texturepath").as_string());
+	SkillTreeSpeed_1 = app->tex->Load(configNode3.child("SkillTreeSpeed_1").attribute("texturepath").as_string());
+	SkillTreeSpeed_2 = app->tex->Load(configNode3.child("SkillTreeSpeed_2").attribute("texturepath").as_string());
 
+	SkillTreeAtack_1_1 = app->tex->Load(configNode3.child("SkillTreeAtack_1_1").attribute("texturepath").as_string());
+	SkillTreeAtack_1_2 = app->tex->Load(configNode3.child("SkillTreeAtack_1_2").attribute("texturepath").as_string());
+	SkillTreeAtack_2_1 = app->tex->Load(configNode3.child("SkillTreeAtack_2_1").attribute("texturepath").as_string());
+	SkillTreeAtack_2_2 = app->tex->Load(configNode3.child("SkillTreeAtack_2_2").attribute("texturepath").as_string());
+	SkillTreeAtack_3_1 = app->tex->Load(configNode3.child("SkillTreeAtack_3_1").attribute("texturepath").as_string());
+	SkillTreeAtack_3_2 = app->tex->Load(configNode3.child("SkillTreeAtack_3_2").attribute("texturepath").as_string());
+	SkillTreeAtack_4_1 = app->tex->Load(configNode3.child("SkillTreeAtack_4_1").attribute("texturepath").as_string());
+	SkillTreeAtack_4_2 = app->tex->Load(configNode3.child("SkillTreeAtack_4_2").attribute("texturepath").as_string());
+	SkillTreeAtack_5_1 = app->tex->Load(configNode3.child("SkillTreeAtack_5_1").attribute("texturepath").as_string());
+	SkillTreeAtack_5_2 = app->tex->Load(configNode3.child("SkillTreeAtack_5_2").attribute("texturepath").as_string());
+	SkillTreeAtack_6_1 = app->tex->Load(configNode3.child("SkillTreeAtack_6_1").attribute("texturepath").as_string());
+	SkillTreeAtack_6_2 = app->tex->Load(configNode3.child("SkillTreeAtack_6_2").attribute("texturepath").as_string());
+	SkillTreeAtack_7_1 = app->tex->Load(configNode3.child("SkillTreeAtack_7_1").attribute("texturepath").as_string());
+	SkillTreeAtack_7_2 = app->tex->Load(configNode3.child("SkillTreeAtack_7_2").attribute("texturepath").as_string());
+	SkillTreeAtack_8_1 = app->tex->Load(configNode3.child("SkillTreeAtack_8_1").attribute("texturepath").as_string());
+	SkillTreeAtack_8_2 = app->tex->Load(configNode3.child("SkillTreeAtack_8_2").attribute("texturepath").as_string());
+
+	Selection = app->tex->Load(configNode3.child("Selection").attribute("texturepath").as_string());
+
+	Talent1 = SkillTreeTalent;
+	Talent2 = SkillTreeLife_1;
+	Talent3 = SkillTreeSpeed_1;
+	Talent4 = SkillTreeAtack_1_1;
+	Talent5 = SkillTreeAtack_2_1;
 
 
 	exitButton->state = GuiControlState::HIDDEN;
@@ -790,193 +809,141 @@ bool Hud::CleanUp()
 	app->tex->UnLoad(settingsAudioButtonHover);
 	app->tex->UnLoad(settingsOptionsButtonNormal);
 	app->tex->UnLoad(settingsOptionsButtonHover);
-	app->tex->UnLoad(Habilitytree);
-	app->tex->UnLoad(Talent_1);
-	app->tex->UnLoad(Talent_2);
-	app->tex->UnLoad(Talent_3);
-	app->tex->UnLoad(Talent_4);
-	app->tex->UnLoad(Talent_5);
 	app->tex->UnLoad(inventoryTexture);
 	app->tex->UnLoad(inventoryItem1);
 	app->tex->UnLoad(inventoryItem2);
 	app->tex->UnLoad(inventoryItem3);
 	app->tex->UnLoad(shopTexture);
 	app->tex->UnLoad(emptyslotTexture);
-
+	//app->tex->UnLoad(skillTree);
+	//app->tex->UnLoad(SkillTreeTalent);
+	//app->tex->UnLoad(SkillTreeLife_1);
+	//app->tex->UnLoad(SkillTreeLife_2);
+	//app->tex->UnLoad(SkillTreeSpeed_1);
+	//app->tex->UnLoad(SkillTreeSpeed_2);
+	//app->tex->UnLoad(SkillTreeAtack_1_1);
+	//app->tex->UnLoad(SkillTreeAtack_1_2);
+	//app->tex->UnLoad(SkillTreeAtack_2_1);
+	//app->tex->UnLoad(SkillTreeAtack_2_2);
+	//app->tex->UnLoad(SkillTreeAtack_3_1);
+	//app->tex->UnLoad(SkillTreeAtack_3_2);
+	//app->tex->UnLoad(SkillTreeAtack_4_1);
+	//app->tex->UnLoad(SkillTreeAtack_4_2);
+	//app->tex->UnLoad(SkillTreeAtack_5_1);
+	//app->tex->UnLoad(SkillTreeAtack_5_2);
+	//app->tex->UnLoad(SkillTreeAtack_6_1);
+	//app->tex->UnLoad(SkillTreeAtack_6_2);
+	//app->tex->UnLoad(SkillTreeAtack_7_1);
+	//app->tex->UnLoad(SkillTreeAtack_7_2);
+	//app->tex->UnLoad(SkillTreeAtack_8_1);
+	//app->tex->UnLoad(SkillTreeAtack_8_2);
 
 	return true;
 }
 
 void Hud::SkillTree()
 {
-	app->render->DrawTexture(Habilitytree, 0, 0, NULL, SDL_FLIP_NONE, 0);
-	app->render->DrawTexture(Talent_1, 315, 50, NULL, SDL_FLIP_NONE, 0);
-	app->render->DrawTexture(Talent_2, 462, 50, NULL, SDL_FLIP_NONE, 0);
-	app->render->DrawTexture(Talent_3, 170, 50, NULL, SDL_FLIP_NONE, 0);
-	app->render->DrawTexture(Talent_4, 462, 154, NULL, SDL_FLIP_NONE, 0);
-	app->render->DrawTexture(Talent_5, 170, 154, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(skillTree, 0, 0, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Talent1, 333, 162, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Talent2, 450, 263, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Talent3, 450, 358, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Talent4, 213, 263, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Talent5, 213, 358, NULL, SDL_FLIP_NONE, 0);
 
 	if (talent1selected)
 	{
-		Talent_1 = Unlocked_2;
-		if (app->input->GetKey(SDL_SCANCODE_LEFT)==KEY_REPEAT)
-		{
-			talent1selected = false;
-			talent3selected = true;
-			Talent_1 = Unlocked_1;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		app->render->DrawTexture(Selection, 333, 162);
+		if (app->input->GetKey(SDL_SCANCODE_RIGHT)==KEY_DOWN)
 		{
 			talent1selected = false;
 			talent2selected = true;
-			Talent_1 = Unlocked_1;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+		{
+			talent1selected = false;
+			talent4selected = true;
 		}
 	}
 
 	if (talent2selected)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT)
+		app->render->DrawTexture(Selection, 450, 263);
+		if (app->input->GetKey(SDL_SCANCODE_M)==KEY_DOWN)
 		{
 			talent2locked = true;
 		}
-
 		if (talent2locked)
 		{
-			Talent_2 = Unlocked_2;
+			Talent2 = SkillTreeLife_2;
 		}
-		else
-		{
-			Talent_2 = Unlockable_2;
-		}
-
-		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		if (app->input->GetKey(SDL_SCANCODE_UP)==KEY_DOWN)
 		{
 			talent2selected = false;
 			talent1selected = true;
-			if (talent2locked)
-			{
-				Talent_2 = Unlocked_1;
-			}
-			else
-			{
-				Talent_2 = Unlockable_1;
-			}
 		}
-		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
 		{
 			talent2selected = false;
-			talent4selected = true;
-			if (talent2locked)
-			{
-				Talent_2 = Unlocked_1;
-			}
-			else
-			{
-				Talent_2 = Unlockable_1;
-			}
+			talent3selected = true;
 		}
 	}
 
 	if (talent3selected)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT)
+		app->render->DrawTexture(Selection, 450, 358);
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && talent2locked)
 		{
 			talent3locked = true;
 		}
-
 		if (talent3locked)
 		{
-			Talent_3 = Unlocked_2;
+			Talent3 = SkillTreeSpeed_2;
 		}
-		else
-		{
-			Talent_3 = Unlockable_2;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
 		{
 			talent3selected = false;
-			talent1selected = true;
-			if (talent3locked)
-			{
-				Talent_3 = Unlocked_1;
-			}
-			else
-			{
-				Talent_3 = Unlockable_1;
-			}
-		}
-		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		{
-			talent3selected = false;
-			talent5selected = true;
-			if (talent3locked)
-			{
-				Talent_3 = Unlocked_1;
-			}
-			else
-			{
-				Talent_3 = Unlockable_1;
-			}
+			talent2selected = true;
 		}
 	}
 
 	if (talent4selected)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT && talent2locked)
+		app->render->DrawTexture(Selection, 213, 263);
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 		{
 			talent4locked = true;
 		}
-
 		if (talent4locked)
 		{
-			Talent_4 = Unlocked_2;
+			Talent4 = SkillTreeAtack_1_2;
 		}
-		else
-		{
-			Talent_4 = Buyable_2;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
 		{
 			talent4selected = false;
-			talent2selected = true;
-			if (talent4locked)
-			{
-				Talent_4 = Unlocked_1;
-			}
-			else
-			{
-				Talent_4 = Buyable_1;
-			}
+			talent1selected = true;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+		{
+			talent4selected = false;
+			talent5selected = true;
 		}
 	}
 
 	if (talent5selected)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT && talent3locked)
+		app->render->DrawTexture(Selection, 213, 358);
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && talent4locked)
 		{
 			talent5locked = true;
 		}
-
 		if (talent5locked)
 		{
-			Talent_5 = Unlocked_2;
+			Talent5 = SkillTreeAtack_2_2;
 		}
-		else
-		{
-			Talent_5 = Unlockable_2;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
 		{
 			talent5selected = false;
-			talent3selected = true;
-			if (talent5locked)
-			{
-				Talent_5 = Unlocked_1;
-			}
-			else
-			{
-				Talent_5 = Unlockable_1;
-			}
+			talent4selected = true;
 		}
 	}
 
