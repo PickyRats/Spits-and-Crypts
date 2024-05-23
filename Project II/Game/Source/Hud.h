@@ -37,6 +37,7 @@ public:
 	int mission1 = 3;
 	bool mission10Active = false;
 	bool mission11Active = false;
+	bool mission1Complete = false;
 
 private:
 

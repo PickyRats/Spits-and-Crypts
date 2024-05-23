@@ -252,6 +252,7 @@ void DialogTrigger::GiveMission(int idMission)
 		break;
 	case 2:
 		app->fade->Fade((Module*)app->sceneChoza, (Module*)app->sceneVillage, 300.0f);
+		app->hud->mission1Complete = true;
 		printf("  la nieta  \n");
 		break;
 	case 3:

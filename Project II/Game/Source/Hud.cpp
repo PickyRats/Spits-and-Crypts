@@ -612,12 +612,17 @@ bool Hud::Update(float dt)
 	{
 		Missions(1);
 	}
+	else if (mission1Complete)
+	{
+		mission10Active= false;
+		mission11Active = false;
+		mission1Complete = false;
+	}
 	return true;
 }
 
 void Hud::Missions(int mission1) 
 {
-	//SDL_Rect rect = { 0, 0, 1920, 1080 };
 	switch (mission1)
 	{
 	case 0:
