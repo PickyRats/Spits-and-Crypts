@@ -139,6 +139,8 @@ private:
 
 	bool startEnemyTurn = false;
 	int nearestPlayer = 0;
+
+	uint victory;
 };
 
 #endif // __SCENECOMBAT_H__

@@ -97,6 +97,8 @@ bool SceneCombat::Start()
 	app->map->player2->position = { 0, 576 };
 
 	currentEntity = players[currentPlayerIndex];
+
+	victory = app->audio->LoadFx("Assets/Audio/Fx/victoryFx.wav");
 	return true;
 }
 
@@ -556,6 +558,7 @@ bool SceneCombat::IsTileOccupied()
 
 void SceneCombat::EndCombat()
 {
+	app->audio->PlayFx(victory);
 	app->map->player->isCombat = false;
 	app->map->player2->isCombat = false;
 	app->map->player2->isVisible = false;
