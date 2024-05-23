@@ -631,6 +631,19 @@ bool Hud::Update(float dt)
 
 			app->render->DrawTexture(vidas, 123, 660, &lifeRects[app->map->player2->health / 10]);
 
+			for (int i = 0; i < 2; i++)
+			{
+				app->render->DrawTexture(
+					vidas, 
+					app->sceneCombat->enemies[i]->position.x + 24, 
+					app->sceneCombat->enemies[i]->position.y - 50, 
+					&lifeRects[app->sceneCombat->enemies[i]->health / 10],
+					SDL_FLIP_NONE,
+					0,
+					90
+				);
+			}
+
 			////
 			//
 			////botones abajo derecha
@@ -644,11 +657,12 @@ bool Hud::Update(float dt)
 			float percentage = (float)currentPoints / (float)app->sceneCombat->currentEntity->totalPoints;
 			int index = std::round((percentage + 0.1) * 6);
 			if (index > 6) index = 6;
-			if (index > 0 && index <= 6) app->render->DrawTexture(points, 20, 20, &pointsRects[index-1]);
-			else app->render->DrawTexture(points, 20, 20, &pointsRects[0]);
-
-			app->render->DrawTexture(numeros, 38, 80, &numerosRects[currentPoints]);
-			
+			if (app->sceneCombat->isPlayerTurn)
+			{
+				if (index > 0 && index <= 6) app->render->DrawTexture(points, 20, 20, &pointsRects[index-1]);
+				else app->render->DrawTexture(points, 20, 20, &pointsRects[0]);
+				app->render->DrawTexture(numeros, 38, 80, &numerosRects[currentPoints]);
+			}
 		}
 	}
 

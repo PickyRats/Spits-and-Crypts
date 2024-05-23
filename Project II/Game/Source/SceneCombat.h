@@ -38,8 +38,14 @@ public:
 	// Called each loop iteration
 	bool Update(float dt);
 
+	void EndCombat();
+
 	// Enemy attack
 	void EnemyAttack();
+
+	void ResetPlayerTurn();
+
+	void ResetEnemyTurn();
 
 	// Verify if the tile is occupied
 	bool IsTileOccupied();
@@ -99,6 +105,11 @@ public:
 	int currentPlayerIndex = 0;
 	int currentEnemyIndex = 0;
 
+	Entity* players[5];
+	Entity* enemies[5];	
+	
+	bool isPlayerTurn = true;
+
 private:
 	SDL_Texture* backgroundTexture;
 	SDL_Texture* backgroundTexture2;
@@ -119,10 +130,7 @@ private:
 	SDL_Texture* tileTexture;
 	SDL_Texture* tileEnemyTexture;
 	SDL_Texture* selectedTileTexture;
-	bool isPlayerTurn = true;
 
-	Entity* players[5];
-	Entity* enemies[5];
 
 	bool playerCanAttack = false;
 	bool enemyCanAttack = false;
@@ -130,6 +138,8 @@ private:
 	int enemyAttackIndex = 0;
 
 	bool startEnemyTurn = false;
+
+	int nearestPlayer = 0;
 
 	uint atack;
 	uint move_Tile;
