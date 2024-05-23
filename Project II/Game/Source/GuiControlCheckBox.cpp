@@ -26,7 +26,7 @@ GuiControlCheckBox::~GuiControlCheckBox()
 
 bool GuiControlCheckBox::Update(float dt)
 {
-
+	GamePad& pad = app->input->pads[0];
 	if (state != GuiControlState::HIDDEN)
 	{
 		// L15: DONE 3: Update the state of the GUiButton according to the mouse position
@@ -37,7 +37,7 @@ bool GuiControlCheckBox::Update(float dt)
 		
 			state = GuiControlState::FOCUSED;
 
-			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN || (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)) {
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN || (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN||pad.a==KEY_DOWN)) {
 				state = GuiControlState::PRESSED;
 				pressed = !pressed;
 			}

@@ -64,6 +64,7 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
+	GamePad& pad = app->input->pads[0];
 	this->dt = dt;
 
 	//godmode
@@ -95,6 +96,13 @@ bool Player::Update(float dt)
 						LeftMovement();
 					}
 				}
+				if (pad.l_x>0.2 )
+				{
+					if (!isClimbing)
+					{
+						LeftMovement();
+					}
+				}
 
 				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 				{
@@ -104,8 +112,16 @@ bool Player::Update(float dt)
 						RightMovement();
 					}
 				}
+				if (pad.l_x < -0.2)
+				{
+					if (!isClimbing)
+					{
+						LeftMovement();
+					}
+				}
 
-				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE)
+				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE
+					&&pad.l_x==0)
 				{
 
 					isWalking = false;
@@ -135,7 +151,7 @@ bool Player::Update(float dt)
 					
 				}
 				//Jump
-				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !isjumping)
+				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN|| pad.a && !isjumping)
 				{
 					Jump();
 				}
@@ -182,7 +198,7 @@ bool Player::Update(float dt)
 		DrawPlayer();
 
 		currentAnim->Update();
-		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN||pad.x==KEY_DOWN)
 		{
 			if (doorAldea) {
 				if (app->sceneShop->active) app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
