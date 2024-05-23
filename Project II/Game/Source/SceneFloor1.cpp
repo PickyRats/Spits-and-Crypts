@@ -84,7 +84,7 @@ bool SceneFloor1::Start()
 	app->hud->Enable();
   
   app->puzzle->Enable();
-	if(combatFinished)app->sceneFloor1->wall = app->physics->CreateRectangle(37 * 64, 9 * 64, 10, 2 * 64, STATIC);
+	if(!combatFinished)app->sceneFloor1->wall = app->physics->CreateRectangle(37 * 64, 34 * 64, 10, 2 * 64, STATIC);
 
 	//Load the player in the map
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(playerStartPosition.x), PIXEL_TO_METERS(playerStartPosition.y)), 0);
