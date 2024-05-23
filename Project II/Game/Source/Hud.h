@@ -4,6 +4,8 @@
 #include "Module.h"
 #include "GuiControlButton.h"
 #include "GuiControlCheckBox.h"
+#include "GuiControlSlider.h"
+
 #include "GuiManager.h"
 #include "GuiControl.h"
 #include "Timer.h"
@@ -28,10 +30,13 @@ public:
 
 	void DrawTimer();
 
+	void SkillTree();
+
 	bool playerDeadHud = false;
 	bool spacePressed = false;
 	bool onSettings = false;
-	int currentId = 0;
+	bool abilityTree = false;
+	
 private:
 
 
@@ -62,6 +67,10 @@ private:
 	SDL_Texture* returnNormal;
 	SDL_Texture* returnHover;
 	SDL_Texture* returnClick;
+
+	SDL_Texture* saveNormal;
+	SDL_Texture* saveHover;
+	SDL_Texture* saveClick;
 
 	SDL_Texture* pause;
 
@@ -128,18 +137,90 @@ private:
 	GuiControlButton* exitButton;
 	GuiControlButton* returnButton;
 	GuiControlButton* resumeButton;
+	GuiControlButton* saveButton;
 	GuiControlButton* settingsButton;
 	GuiControlButton* backToTitleButton;
 
 	GuiControlButton* settingsExitButton;
 	GuiControlButton* settingsReturnButton;
-	GuiControlButton* settingsMusicButton;
+	GuiControlSlider* settingsMusicButton;
+	GuiControlSlider* settingsFxButton;
 	GuiControlButton* settingsOptionsButton;
-	GuiControlButton* settingsFxButton;
+
 	GuiControlButton* settingsFullScreenButton;
 	GuiControlCheckBox* settingsVSyncButton;
 	GuiControlButton* settingsControlsButton;
 	GuiControlButton* settingsAudioButton;
+
+	//HabilityTree
+
+	SDL_Texture* skillTree;
+	SDL_Texture* skillTreerama_1;
+	SDL_Texture* skillTreerama_2_1;
+	SDL_Texture* skillTreerama_2_2;
+	SDL_Texture* skillTreerama_3_1;
+	SDL_Texture* skillTreerama_3_2;
+
+	SDL_Texture* SkillTreeTalent;
+
+	SDL_Texture* SkillTreeLife_1;
+	SDL_Texture* SkillTreeLife_2;
+	SDL_Texture* SkillTreeSpeed_1;
+	SDL_Texture* SkillTreeSpeed_2;
+
+	SDL_Texture* SkillTreeAtack_1_1;
+	SDL_Texture* SkillTreeAtack_1_2;
+	SDL_Texture* SkillTreeAtack_2_1;
+	SDL_Texture* SkillTreeAtack_2_2;
+	SDL_Texture* SkillTreeAtack_3_1;
+	SDL_Texture* SkillTreeAtack_3_2;
+	SDL_Texture* SkillTreeAtack_4_1;
+	SDL_Texture* SkillTreeAtack_4_2;
+	SDL_Texture* SkillTreeAtack_5_1;
+	SDL_Texture* SkillTreeAtack_5_2;
+	SDL_Texture* SkillTreeAtack_6_1;
+	SDL_Texture* SkillTreeAtack_6_2;
+	SDL_Texture* SkillTreeAtack_7_1;
+	SDL_Texture* SkillTreeAtack_7_2;
+	SDL_Texture* SkillTreeAtack_8_1;
+	SDL_Texture* SkillTreeAtack_8_2;
+
+	SDL_Texture* Selection;
+
+
+	//Talents
+	SDL_Texture* Talent1;
+	SDL_Texture* Talent2;
+	SDL_Texture* Talent3;
+	SDL_Texture* Talent4;
+	SDL_Texture* Talent5;
+
+	SDL_Texture* Rama1_1 = NULL;
+	SDL_Texture* Rama1_2 = NULL;
+	SDL_Texture* Rama2_1 = NULL;
+	SDL_Texture* Rama2_2 = NULL;
+	SDL_Texture* Rama3_1 = NULL;
+	SDL_Texture* Rama3_2 = NULL;
+
+	//Talent 1
+	bool talent1selected = true;
+
+	//Talent 2
+	bool talent2selected = false;
+	bool talent2locked = false;
+
+	//Talent 3
+	bool talent3selected = false;
+	bool talent3locked = false;
+
+	//Talent 4
+	bool talent4selected = false;
+	bool talent4locked = false;
+
+	//Talent 5
+	bool talent5selected = false;
+	bool talent5locked = false;
+
 
 	bool onSettingsControls = false;
 	bool onSettingsAudio = true;

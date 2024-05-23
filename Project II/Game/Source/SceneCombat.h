@@ -138,8 +138,12 @@ private:
 	int enemyAttackIndex = 0;
 
 	bool startEnemyTurn = false;
+
 	int nearestPlayer = 0;
 
+	uint atack;
+	uint move_Tile;
+	uint pass_Turn;
 	uint victory;
 };
 

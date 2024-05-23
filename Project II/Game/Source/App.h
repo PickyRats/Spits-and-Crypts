@@ -20,6 +20,8 @@ class SceneShop;
 class SceneOasisFaraon;
 class SceneTemple;
 class SceneFloor1;
+class SceneEnding;
+class SceneLight;
 class EntityManager;
 class Map;
 class Physics;
@@ -31,6 +33,9 @@ class Hud;
 class SceneIntro;
 class DialogManager;
 class SceneCombat;
+class Puzzle;
+class Puzzle2;
+class CutscenePlayer;
 
 class App
 {
@@ -108,7 +113,9 @@ public:
 	SceneShop* sceneShop;
 	SceneOasisFaraon* sceneOasisFaraon;
 	SceneTemple* sceneTemple;
+	SceneEnding* sceneEnding;
 	SceneFloor1* sceneFloor1;
+	SceneLight* sceneLight;
 	EntityManager* entityManager;
 	Map* map;
 	Physics* physics;
@@ -120,6 +127,9 @@ public:
 	SceneIntro* sceneIntro;
 	DialogManager* dialogManager;
 	SceneCombat* sceneCombat;
+	Puzzle* puzzle;
+	Puzzle2* puzzle2;
+	CutscenePlayer* cutscenePlayer;
 
 	uint32 maxFrameDuration = 16;
 	uint32 initialMaxFrameDuration = 16;

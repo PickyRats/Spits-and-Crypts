@@ -72,7 +72,6 @@ bool Map::Update(float dt)
 
     ListItem<MapLayer*>* mapLayer;
     mapLayer = mapData.layers.start;
-
     // iterates the layers in the map
     while (mapLayer != NULL) {
         //Check if the property Draw exist get the value, if it's true draw the lawyer
@@ -435,7 +434,7 @@ bool Map::CreateColliders()
                         switch (mapLayerItem->data->Get(x, y))
                         {
                         case 1:
-                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y, mapData.tileWidth, mapData.tileHeight * 4, STATIC);
+                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y-32 , mapData.tileWidth/4, mapData.tileHeight*3.0f, STATIC);
                             c1->ctype = ColliderType::STAIRS;
                             ret = true;
                             break;
@@ -483,7 +482,12 @@ bool Map::CreateColliders()
                             c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
                             c1->ctype = ColliderType::TRAP;
                             ret = true;
-                            break;      
+                            break;   
+                        case 13:
+                            c1 = app->physics->CreateRectangleSensor(pos.x, pos.y, mapData.tileWidth * 2, mapData.tileHeight * 2, STATIC);
+                            c1->ctype = ColliderType::PUZZLE;
+                            ret = true;
+                            break;
                         case 102:
                             c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
                             c1->ctype = ColliderType::PLATFORM;
@@ -540,6 +544,9 @@ void Map::DestroyAllColliders()
                 || ctype == ColliderType::DOOR_TEMPLE
                 || ctype == ColliderType::DOOR_ALDEA
                 || ctype == ColliderType::DOOR_FLOOR_1
+                || ctype == ColliderType::TRAP
+                || ctype == ColliderType::STAIRS
+                || ctype == ColliderType::PUZZLE
                 || ctype == ColliderType:: COMBAT)
             {
                 physicsWorld->DestroyBody(body);
@@ -626,4 +633,15 @@ void Map::CreateEntities(const char* nodeName, EntityType entityType, iPoint pos
     entity->parameters = entityNode;
     entity->position = iPoint(pos.x, pos.y);
     
+}
+
+void Map::EnableLayer(const char* layerName, bool enable)
+{
+    ListItem<MapLayer*>* mapLayer;
+    mapLayer = mapData.layers.start;
+
+    while (mapLayer != NULL) {
+        if (mapLayer->data->name == layerName) mapLayer->data->properties.GetProperty("Draw")->value = enable;
+        mapLayer = mapLayer->next;
+    }
 }

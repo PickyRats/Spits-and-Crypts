@@ -7,8 +7,10 @@
 #include "SceneVillage.h"
 #include "SceneShop.h"
 #include "SceneOasisFaraon.h"
+#include "SceneEnding.h"
 #include "SceneTemple.h"
 #include "SceneFloor1.h"
+#include "SceneLight.h"
 #include "Map.h"
 #include "Physics.h"
 #include "FadeToBlack.h"
@@ -19,6 +21,9 @@
 #include "SceneIntro.h"
 #include "DialogManager.h"
 #include "SceneCombat.h"
+#include "Puzzle.h"
+#include "Puzzle2.h"
+#include "CutscenePlayer.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -43,10 +48,12 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	audio = new Audio();
 	physics = new Physics();
 	sceneVillage = new SceneVillage(false);
+	sceneEnding = new SceneEnding(false);
 	sceneShop = new SceneShop(false);
 	sceneOasisFaraon = new SceneOasisFaraon(false);
 	sceneTemple = new SceneTemple(false);
 	sceneFloor1 = new SceneFloor1(false);
+	sceneLight = new SceneLight(false);
 	map = new Map(false);
 	entityManager = new EntityManager(false);
 	fade = new FadeToBlack();
@@ -57,6 +64,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	sceneIntro = new SceneIntro();
 	dialogManager = new DialogManager();
 	sceneCombat = new SceneCombat(false);
+	puzzle = new Puzzle(false);
+	puzzle2 = new Puzzle2(false);
+	cutscenePlayer = new CutscenePlayer();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -73,17 +83,22 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(sceneOasisFaraon);
 	AddModule(sceneTemple);
 	AddModule(sceneFloor1);
+	AddModule(sceneLight);
 	AddModule(map);
 	AddModule(entityManager);
+	AddModule(puzzle);
+	AddModule(puzzle2);
 	AddModule(particleManager);
 	AddModule(hud);
 	AddModule(sceneMenu);
 	AddModule(sceneIntro);
+	AddModule(sceneEnding);
 	AddModule(guiManager);
 	AddModule(fade);
 	AddModule(dialogManager);
 	// Render last to swap buffer
 	AddModule(render);
+	AddModule(cutscenePlayer);
 
 
 	LOG("Timer App Constructor: %f", timer.ReadMSec());

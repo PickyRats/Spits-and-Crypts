@@ -35,6 +35,8 @@ public:
 	// Pause FX audio
 	void PauseFx(unsigned int id);
 
+	void UnloadFx(unsigned int id);
+
 	// Clean Music
 	void CleanMusic(const char* path, float fadeOutTime = DEFAULT_MUSIC_FADE_TIME);
 

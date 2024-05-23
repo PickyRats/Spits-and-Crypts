@@ -72,9 +72,6 @@
     <ClCompile Include="Source\SceneMenu.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Dialog.cpp">
-      <Filter>Modules\UI\Dialog</Filter>
-    </ClCompile>
     <ClCompile Include="Source\DialogManager.cpp">
       <Filter>Modules\UI\Dialog</Filter>
     </ClCompile>
@@ -105,12 +102,25 @@
     <ClCompile Include="Source\Player.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Piezas_puzle.cpp">
+    <ClCompile Include="Source\PiezasPuzle.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="Source\Trap.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Puzzle.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Puzzle2.cpp" />
+    <ClCompile Include="Source\SceneEnding.cpp">
+    </ClCompile>
+    <ClCompile Include="Source\Puzzle2.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneLight.cpp">
+      <Filter>Modules\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CutscenePlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -230,7 +240,7 @@
     </ClInclude>
     <ClInclude Include="Source\DialogTriggerEntity.h">
       <Filter>Modules\UI\Dialog</Filter>
-     </ClInclude> 
+    </ClInclude>
     <ClInclude Include="Source\SceneCombat.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
@@ -249,7 +259,7 @@
     <ClInclude Include="Source\SceneFloor1.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Piezas_puzle.h">
+    <ClInclude Include="Source\PiezasPuzle.h">
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="Source\Enemy.h">
@@ -258,6 +268,19 @@
     <ClInclude Include="Source\Trap.h">
       <Filter>Entities</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Puzzle.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Puzzle2.h" />
+    <ClInclude Include="Source\SceneEnding.h">
+    </ClInclude>
+    <ClInclude Include="Source\Puzzle2.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneLight.h">
+      <Filter>Modules\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CutscenePlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

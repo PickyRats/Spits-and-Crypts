@@ -15,6 +15,7 @@
 #include "FadeToBlack.h"
 #include "GuiManager.h"
 #include "ParticleManager.h"
+#include "DialogManager.h"
 #include "Defs.h"
 #include "Log.h"
 #include "SceneMenu.h"
@@ -73,6 +74,9 @@ bool Hud::Start()
 	settingsNormal = app->tex->Load(configNode3.child("settingsNormal").attribute("texturepath").as_string());
 	settingsHover = app->tex->Load(configNode3.child("settingsHover").attribute("texturepath").as_string());
 	settingsClick = app->tex->Load(configNode3.child("settingsClick").attribute("texturepath").as_string());
+	saveNormal = app->tex->Load(configNode3.child("saveNormal").attribute("texturepath").as_string());
+	saveHover = app->tex->Load(configNode3.child("saveHover").attribute("texturepath").as_string());
+	saveClick = app->tex->Load(configNode3.child("saveClick").attribute("texturepath").as_string());
 	backToTitleNormal = app->tex->Load(configNode3.child("backToTitleNormal").attribute("texturepath").as_string());
 	backToTitleHover = app->tex->Load(configNode3.child("backToTitleHover").attribute("texturepath").as_string());
 	backToTitleClick = app->tex->Load(configNode3.child("backToTitleClick").attribute("texturepath").as_string());
@@ -111,20 +115,21 @@ bool Hud::Start()
 	settingsOptionsButtonHover = app->tex->Load(configNode3.child("settingsOptionsButtonHover").attribute("texturepath").as_string());
 
 	//Create Buttons
-	exitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 0, NULL, exitNormal, exitHover, exitClick, { 1419, 92, 63, 63 }, this);
-	resumeButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, NULL, resumeNormal, resumeHover, resumeClick, { 657, 305, 281, 64 }, this);
-	settingsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, NULL, settingsNormal, settingsHover, settingsClick, { 657, 418, 279, 64 }, this);
-	backToTitleButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, NULL, backToTitleNormal, backToTitleHover, backToTitleClick, { 599, 531, 399, 64 }, this);
+	exitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 0, NULL, exitNormal, exitHover, exitHover, { 1419, 92, 63, 63 }, this);
+	resumeButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, NULL, resumeNormal, resumeHover, resumeHover, { 54, 198, 240, 55 }, this);
+	settingsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, NULL, settingsNormal, settingsHover, settingsHover, { 54, 266, 240, 55 }, this);
+	saveButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, NULL, saveNormal, saveHover, saveHover, { 54, 334, 240, 55 }, this);
+	backToTitleButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, NULL, backToTitleNormal, backToTitleHover, backToTitleHover, { 54, 402, 240, 55 }, this);
 
-	settingsReturnButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, NULL, returnNormal, returnHover, returnClick, { 133, 92, 63, 63 }, this);
+	settingsReturnButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, NULL, returnNormal, returnHover, returnHover, { 133, 92, 63, 63 }, this);
 	settingsExitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, NULL, exitNormal, exitHover, exitClick, { 1419, 92, 63, 63 }, this);
-	settingsFullScreenButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 7, NULL, settingsBoxNormal, settingsBoxHover, settingsTick, { 661, 250, 89, 89 }, this);
-	settingsVSyncButton = (GuiControlCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 8, NULL, settingsBoxNormal, settingsBoxHover, settingsTick, { 661, 350, 89, 89 }, this);
-	settingsMusicButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 10, NULL, settingsSlider, settingsSlider, settingsSlider, { 1124, 259, 30, 80 }, this, { 663, 259, 613, 80 });
-	settingsFxButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 11, NULL, settingsSlider, settingsSlider, settingsSlider, { 1124, 376, 30, 80 }, this, { 663, 376, 613, 80 });
-	settingsControlsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, NULL, settingsControlsButtonNormal, settingsControlsButtonHover, exitClick, { 840, 150, 400, 50 }, this);
-	settingsAudioButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, NULL, settingsAudioButtonNormal, settingsAudioButtonHover, exitClick, { 440, 150, 400, 50 }, this);
-	settingsOptionsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, NULL, settingsOptionsButtonNormal, settingsOptionsButtonHover, exitClick, { 40, 150, 400, 50 }, this);
+	settingsFullScreenButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 7, NULL, settingsBoxNormal, settingsBoxNormal, settingsTick, { 750, 187, 60, 32 }, this);
+	settingsVSyncButton = (GuiControlCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 8, NULL, settingsBoxNormal, settingsBoxNormal, settingsTick, { 750, 257, 89, 89 }, this);
+	settingsMusicButton =(GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 231, NULL, settingsSlider, settingsSlider, settingsSlider, { 795, 197, 30, 30 }, this, { 570, 182, 225, 50 });
+	settingsFxButton=(GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 21, NULL, settingsSlider, settingsSlider, settingsSlider, { 795, 263, 30, 30 }, this, { 570, 248, 225, 50 });
+	settingsOptionsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, NULL, settingsOptionsButtonNormal, settingsOptionsButtonHover, settingsOptionsButtonHover, { 378, 116, 170, 30 }, this);
+	settingsAudioButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, NULL, settingsAudioButtonNormal, settingsAudioButtonHover, settingsAudioButtonHover, { 560, 116, 170, 30 }, this);
+	settingsControlsButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, NULL, settingsControlsButtonNormal, settingsControlsButtonHover, settingsControlsButtonHover, { 742, 116, 170, 30 }, this);
 
 	app->sceneMenu->loadGameButton->state = GuiControlState::HIDDEN;
 	app->sceneMenu->startButton->state = GuiControlState::HIDDEN;
@@ -133,10 +138,52 @@ bool Hud::Start()
 	app->sceneMenu->creditsButton->state = GuiControlState::HIDDEN;
 	app->sceneMenu->exitButton->state = GuiControlState::HIDDEN;
 
+	//SkillTree
+	skillTree = app->tex->Load(configNode3.child("SkillTree").attribute("texturepath").as_string());
+	skillTreerama_1 = app->tex->Load(configNode3.child("SkillTreerama_1").attribute("texturepath").as_string());
+	skillTreerama_2_1 = app->tex->Load(configNode3.child("SkillTreerama_2_1").attribute("texturepath").as_string());
+	skillTreerama_2_2 = app->tex->Load(configNode3.child("SkillTreerama_2_2").attribute("texturepath").as_string());
+	skillTreerama_3_1 = app->tex->Load(configNode3.child("SkillTreerama_3_1").attribute("texturepath").as_string());
+	skillTreerama_3_2 = app->tex->Load(configNode3.child("SkillTreerama_3_2").attribute("texturepath").as_string());
+
+	//SkillTree Buttons
+	SkillTreeTalent = app->tex->Load(configNode3.child("SkillTreeTalent").attribute("texturepath").as_string());
+
+	SkillTreeLife_1 = app->tex->Load(configNode3.child("SkillTreeLife_1").attribute("texturepath").as_string());
+	SkillTreeLife_2 = app->tex->Load(configNode3.child("SkillTreeLife_2").attribute("texturepath").as_string());
+	SkillTreeSpeed_1 = app->tex->Load(configNode3.child("SkillTreeSpeed_1").attribute("texturepath").as_string());
+	SkillTreeSpeed_2 = app->tex->Load(configNode3.child("SkillTreeSpeed_2").attribute("texturepath").as_string());
+
+	SkillTreeAtack_1_1 = app->tex->Load(configNode3.child("SkillTreeAtack_1_1").attribute("texturepath").as_string());
+	SkillTreeAtack_1_2 = app->tex->Load(configNode3.child("SkillTreeAtack_1_2").attribute("texturepath").as_string());
+	SkillTreeAtack_2_1 = app->tex->Load(configNode3.child("SkillTreeAtack_2_1").attribute("texturepath").as_string());
+	SkillTreeAtack_2_2 = app->tex->Load(configNode3.child("SkillTreeAtack_2_2").attribute("texturepath").as_string());
+	SkillTreeAtack_3_1 = app->tex->Load(configNode3.child("SkillTreeAtack_3_1").attribute("texturepath").as_string());
+	SkillTreeAtack_3_2 = app->tex->Load(configNode3.child("SkillTreeAtack_3_2").attribute("texturepath").as_string());
+	SkillTreeAtack_4_1 = app->tex->Load(configNode3.child("SkillTreeAtack_4_1").attribute("texturepath").as_string());
+	SkillTreeAtack_4_2 = app->tex->Load(configNode3.child("SkillTreeAtack_4_2").attribute("texturepath").as_string());
+	SkillTreeAtack_5_1 = app->tex->Load(configNode3.child("SkillTreeAtack_5_1").attribute("texturepath").as_string());
+	SkillTreeAtack_5_2 = app->tex->Load(configNode3.child("SkillTreeAtack_5_2").attribute("texturepath").as_string());
+	SkillTreeAtack_6_1 = app->tex->Load(configNode3.child("SkillTreeAtack_6_1").attribute("texturepath").as_string());
+	SkillTreeAtack_6_2 = app->tex->Load(configNode3.child("SkillTreeAtack_6_2").attribute("texturepath").as_string());
+	SkillTreeAtack_7_1 = app->tex->Load(configNode3.child("SkillTreeAtack_7_1").attribute("texturepath").as_string());
+	SkillTreeAtack_7_2 = app->tex->Load(configNode3.child("SkillTreeAtack_7_2").attribute("texturepath").as_string());
+	SkillTreeAtack_8_1 = app->tex->Load(configNode3.child("SkillTreeAtack_8_1").attribute("texturepath").as_string());
+	SkillTreeAtack_8_2 = app->tex->Load(configNode3.child("SkillTreeAtack_8_2").attribute("texturepath").as_string());
+
+	Selection = app->tex->Load(configNode3.child("Selection").attribute("texturepath").as_string());
+
+	Talent1 = SkillTreeTalent;
+	Talent2 = SkillTreeLife_1;
+	Talent3 = SkillTreeSpeed_1;
+	Talent4 = SkillTreeAtack_1_1;
+	Talent5 = SkillTreeAtack_2_1;
+
 
 	exitButton->state = GuiControlState::HIDDEN;
 	resumeButton->state = GuiControlState::HIDDEN;
 	settingsButton->state = GuiControlState::HIDDEN;
+	saveButton->state = GuiControlState::HIDDEN;
 	backToTitleButton->state = GuiControlState::HIDDEN;
 	settingsReturnButton->state = GuiControlState::HIDDEN;
 	settingsExitButton->state = GuiControlState::HIDDEN;
@@ -163,6 +210,15 @@ bool Hud::Start()
 
 bool Hud::Update(float dt)
 {
+	//Ability Tree
+	if (app->sceneTemple->active && app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
+	{
+		abilityTree = !abilityTree;
+	}
+	if (abilityTree)
+	{
+		SkillTree();
+	}
 	//Pause menu
 	if (app->sceneVillage->pause || app->sceneShop->pause || app->sceneOasisFaraon->pause || app->sceneTemple->pause || app->sceneFloor1->pause) {
 		//If pause menu is activated, show buttons
@@ -176,6 +232,7 @@ bool Hud::Update(float dt)
 			resumeButton->state = GuiControlState::NORMAL;
 			settingsButton->state = GuiControlState::NORMAL;
 			backToTitleButton->state = GuiControlState::NORMAL;
+			saveButton->state = GuiControlState::NORMAL;
 			exitButton->state = GuiControlState::NORMAL;
 
 		}
@@ -186,12 +243,12 @@ bool Hud::Update(float dt)
 			settingsMusicButton->state = GuiControlState::HIDDEN;
 			settingsFxButton->state = GuiControlState::HIDDEN;
 			settingsOptionsButton->state = GuiControlState::HIDDEN;
-			settingsAudioButton->state = GuiControlState::HIDDEN;
+			settingsAudioButton->state = GuiControlState::HIDDEN;	
 			settingsControlsButton->state = GuiControlState::HIDDEN;
 			//Render pause
 			app->render->DrawTexture(pause, 0, 0, NULL, SDL_FLIP_NONE, 0);
 
-			if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && app->sceneMenu->currentId < 3))
+			if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && app->sceneMenu->currentId < 4))
 			{
 				app->sceneMenu->currentId++;
 
@@ -232,6 +289,7 @@ bool Hud::Update(float dt)
 					app->audio->PlayFx(app->sceneMenu->FxButton2);
 					app->sceneMenu->fxClickPlayed = true;
 				}
+				app->sceneMenu->currentId = 9;
 				onSettings = true;
 				settingsControlsButton->state = GuiControlState::NORMAL;
 				settingsAudioButton->state = GuiControlState::NORMAL;
@@ -261,6 +319,7 @@ bool Hud::Update(float dt)
 				backToTitleButton->state = GuiControlState::HIDDEN;
 				resumeButton->state = GuiControlState::HIDDEN;
 				settingsButton->state = GuiControlState::HIDDEN;
+				saveButton->state = GuiControlState::HIDDEN;
 				exitButton->state = GuiControlState::HIDDEN;
 
 				if(app->sceneVillage->active)
@@ -293,7 +352,15 @@ bool Hud::Update(float dt)
 				app->particleManager->Disable();
 				app->entityManager->Disable();
 				app->hud->Disable();
+				//app->dialogManager->Disable();
+				//app->physics->Disable();
 				
+			}
+			else if (saveButton->state==GuiControlState::PRESSED)
+			{
+				app->audio->PlayFx(app->sceneMenu->FxButton1);
+				app->sceneMenu->fxHoverPlayed = true;
+				app->SaveRequest();
 			}
 			else if (exitButton->state == GuiControlState::FOCUSED) {
 				if (app->sceneMenu->fxHoverPlayed == false)
@@ -317,16 +384,40 @@ bool Hud::Update(float dt)
 			}
 		}
 		//Settings menu on pause
-		else if (onSettings) {
+		else if (onSettings)
+		{
+			if ((app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN))
+			{
+				if (app->sceneMenu->currentId >= 9 && app->sceneMenu->currentId < 12)
+				{
+					app->sceneMenu->currentId = 12;
+				}
+				else if (app->sceneMenu->currentId >= 6 && app->sceneMenu->currentId < 9)
+				{
+					app->sceneMenu->currentId = 9;
+				}
+			}
+			else if ((app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN))
+			{
+				if (app->sceneMenu->currentId >= 12)
+				{
+					app->sceneMenu->currentId = 9;
+				}
+				else if (app->sceneMenu->currentId >= 9 && app->sceneMenu->currentId < 12)
+				{
+					app->sceneMenu->currentId = 6;
+				}
+			}
 			//Hide previous buttons
 			resumeButton->state = GuiControlState::HIDDEN;
 			settingsButton->state = GuiControlState::HIDDEN;
 			backToTitleButton->state = GuiControlState::HIDDEN;
+			saveButton->state = GuiControlState::HIDDEN;
 			exitButton->state = GuiControlState::HIDDEN;
 
 			//Render settings menu
 			app->render->DrawTexture(settings, 0, 0, NULL, SDL_FLIP_NONE, 0);
-			
+
 			//Check if buttons are focused or pressed. If pressed, do the action. With sound effects.
 			/*if (settingsReturnButton->state == GuiControlState::FOCUSED)
 			{
@@ -336,7 +427,7 @@ bool Hud::Update(float dt)
 					app->sceneMenu->fxHoverPlayed = true;
 				}
 			}*/
-			
+
 			//onSettingsControls
 			if (onSettingsControls)
 			{
@@ -344,11 +435,11 @@ bool Hud::Update(float dt)
 				settingsMusicButton->state = GuiControlState::HIDDEN;
 				settingsFullScreenButton->state = GuiControlState::HIDDEN;
 				settingsVSyncButton->state = GuiControlState::HIDDEN;
-				app->render->DrawTexture(settingsControls, 145, 200, NULL, SDL_FLIP_NONE, 0);
+				app->render->DrawTexture(settingsControls, 0, 0, NULL, SDL_FLIP_NONE, 0);
 			}
 			else if (onSettingsAudio)
 			{
-				app->render->DrawTexture(settingsAudioPanel, 340, 200, NULL, SDL_FLIP_NONE, 0);
+				app->render->DrawTexture(settingsAudioPanel, 0, 0, NULL, SDL_FLIP_NONE, 0);
 				settingsFxButton->state = GuiControlState::NORMAL;
 				settingsMusicButton->state = GuiControlState::NORMAL;
 				settingsFullScreenButton->state = GuiControlState::HIDDEN;
@@ -356,146 +447,106 @@ bool Hud::Update(float dt)
 			}
 			else if (onSettingsOptions)
 			{
-				/*if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && currentId != 8)
+				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && app->sceneMenu->currentId != 8)
 				{
-					currentId++;
-					fxHoverPlayed = false;
-					fxClickPlayed = false;
+					app->sceneMenu->currentId++;
+					app->sceneMenu->fxHoverPlayed = false;
+					app->sceneMenu->fxClickPlayed = false;
 				}
-				else if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && currentId != 6)
+				else if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && app->sceneMenu->currentId != 6)
 				{
-					currentId--;
-					fxHoverPlayed = false;
-					fxClickPlayed = false;
-				}*/
-				app->render->DrawTexture(settingsOptionsPanel, 340, 200, NULL, SDL_FLIP_NONE, 0);
-				
+					app->sceneMenu->currentId--;
+					app->sceneMenu->fxHoverPlayed = false;
+					app->sceneMenu->fxClickPlayed = false;
+				}
+				app->render->DrawTexture(settingsOptionsPanel, 0, 0, NULL, SDL_FLIP_NONE, 0);
+
 				if (buttonsActivated)
 				{
 					buttonsActivated = false;
-					
 					settingsVSyncButton->state = GuiControlState::NORMAL;
 					settingsFullScreenButton->state = GuiControlState::NORMAL;
 					settingsFxButton->state = GuiControlState::HIDDEN;
 					settingsMusicButton->state = GuiControlState::HIDDEN;
 				}
 			}
-
+		}
 			if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 			{
-				currentId = 1;
+				app->sceneMenu->currentId = 1;
 				onSettings = false;
 				//Show menu buttons
 				resumeButton->state = GuiControlState::NORMAL;
 				settingsButton->state = GuiControlState::NORMAL;
 				backToTitleButton->state = GuiControlState::NORMAL;
+				saveButton->state = GuiControlState::NORMAL;
 				exitButton->state = GuiControlState::NORMAL;
 
 			}
-			else if (settingsControlsButton->state == GuiControlState::FOCUSED)
-			{
-				/*if (fxHoverPlayed == false)
-				{
-					app->audio->PlayFx(FxButton1);
-					fxHoverPlayed = true;
-				}*/
-			}
-			else if (settingsControlsButton->state == GuiControlState::PRESSED)
-			{
-				/*if (!fxClickPlayed)
-				{
-					app->audio->PlayFx(FxButton2);
-					fxClickPlayed = true;
-				}*/
-				onSettingsControls = true;
-				onSettingsOptions = false;
-				onSettingsAudio = false;
-				buttonsActivated = true;
-			}
-			else if (settingsAudioButton->state == GuiControlState::FOCUSED)
-			{
-				/*if (fxHoverPlayed == false)
-				{
-					app->audio->PlayFx(FxButton1);
-					fxHoverPlayed = true;
-				}*/
-			}
-			else if (settingsAudioButton->state == GuiControlState::PRESSED)
-			{
-				/*if (fxClickPlayed == false)
-				{
-					app->audio->PlayFx(FxButton2);
-					fxClickPlayed = true;
-				}*/
-				onSettingsControls = false;
-				onSettingsOptions = false;
-				onSettingsAudio = true;
-				buttonsActivated = true;
-			}
 			else if (settingsOptionsButton->state == GuiControlState::FOCUSED)
 			{
-				/*if (fxHoverPlayed == false)
+				if (app->sceneMenu->fxHoverPlayed == false)
 				{
-					app->audio->PlayFx(FxButton1);
-					fxHoverPlayed = true;
-				}*/
+					app->audio->PlayFx(app->sceneMenu->FxButton1);
+					app->sceneMenu->fxHoverPlayed = true;
+				}
 			}
 			else if (settingsOptionsButton->state == GuiControlState::PRESSED)
 			{
-				/*if (fxClickPlayed == false)
+				if (app->sceneMenu->fxClickPlayed == false)
 				{
-					app->audio->PlayFx(FxButton2);
-					fxClickPlayed = true;
-				}*/
-				//fxClickPlayed = false;
+					app->audio->PlayFx(app->sceneMenu->FxButton2);
+					app->sceneMenu->fxClickPlayed = true;
+				}
+				app->sceneMenu->fxClickPlayed = false;
 				onSettingsControls = false;
 				onSettingsOptions = true;
 				onSettingsAudio = false;
 				buttonsActivated = true;
 			}
-			//if (onSettingsControls)
-			//{
-			//	settingsFxButton->state = GuiControlState::HIDDEN;
-			//	settingsMusicButton->state = GuiControlState::HIDDEN;
-			//	settingsFullScreenButton->state = GuiControlState::HIDDEN;
-			//	settingsVSyncButton->state = GuiControlState::HIDDEN;
-			//	app->render->DrawTexture(settingsControls, 145, 200, NULL, SDL_FLIP_NONE, 0);
-			//}
-			//else if (settingsReturnButton->state == GuiControlState::PRESSED)
-			//{
-			//	if (app->sceneMenu->fxClickPlayed == false)
-			//	{
-			//		app->audio->PlayFx(app->sceneMenu->FxButton2);
-			//		app->sceneMenu->fxClickPlayed = true;
-			//		onSettings = false;
-			//		resumeButton->state = GuiControlState::NORMAL;
-			//		settingsButton->state = GuiControlState::NORMAL;
-			//		backToTitleButton->state = GuiControlState::NORMAL;
-			//		exitButton->state = GuiControlState::NORMAL;
-			//	}
-			//}
-			//else if (settingsExitButton->state == GuiControlState::FOCUSED)
-			//{
-			//	if (app->sceneMenu->fxHoverPlayed == false)
-			//	{
-			//		app->audio->PlayFx(app->sceneMenu->FxButton1);
-			//		app->sceneMenu->fxHoverPlayed = true;
-			//	}
-			//}
-			//else if (settingsExitButton->state == GuiControlState::PRESSED)
-			//{
-			//	
-			//	if (app->sceneMenu->fxClickPlayed == false)
-			//	{
-			//		app->audio->PlayFx(app->sceneMenu->FxButton2);
-			//		app->sceneMenu->fxClickPlayed = true;
-			//		onSettings = false;
-			//		SDL_Quit();
-			//	}
-			//}
-			else if (settingsFullScreenButton->state == GuiControlState::FOCUSED)
+			else if (settingsAudioButton->state == GuiControlState::FOCUSED)
 			{
 				if (app->sceneMenu->fxHoverPlayed == false)
+				{
+					app->audio->PlayFx(app->sceneMenu->FxButton1);
+					app->sceneMenu->fxHoverPlayed = true;
+				}
+			}
+			else if (settingsAudioButton->state == GuiControlState::PRESSED)
+			{
+				if (app->sceneMenu->fxClickPlayed == false)
+				{
+					app->audio->PlayFx(app->sceneMenu->FxButton2);
+					app->sceneMenu->fxClickPlayed = true;
+				}
+				onSettingsControls = false;
+				onSettingsOptions = false;
+				onSettingsAudio = true;
+				buttonsActivated = true;
+			}
+			else if (settingsControlsButton->state == GuiControlState::FOCUSED)
+			{
+				if (app->sceneMenu->fxHoverPlayed == false)
+				{
+					app->audio->PlayFx(app->sceneMenu->FxButton1);
+					app->sceneMenu->fxHoverPlayed = true;
+				}
+			}
+			else if (settingsControlsButton->state == GuiControlState::PRESSED)
+			{
+				if (!app->sceneMenu->fxClickPlayed)
+				{
+					app->audio->PlayFx(app->sceneMenu->FxButton2);
+					app->sceneMenu->fxClickPlayed = true;
+				}
+				onSettingsControls = true;
+				onSettingsOptions = false;
+				onSettingsAudio = false;
+				buttonsActivated = true;
+			}
+			else if (settingsFullScreenButton->state == GuiControlState::FOCUSED)
+			{
+				if (!app->sceneMenu->fxHoverPlayed)
 				{
 					app->audio->PlayFx(app->sceneMenu->FxButton1);
 					app->sceneMenu->fxHoverPlayed = true;
@@ -540,8 +591,8 @@ bool Hud::Update(float dt)
 
 			if (app->sceneMenu->vSync)	app->render->vsync = true;
 			else	app->render->vsync = false;
-		}
-	}
+				
+	}		
 	else
 	{
 		//If pause menu is deactivated, hide buttons
@@ -549,6 +600,7 @@ bool Hud::Update(float dt)
 		resumeButton->state = GuiControlState::HIDDEN;
 		settingsButton->state = GuiControlState::HIDDEN;
 		backToTitleButton->state = GuiControlState::HIDDEN;
+		saveButton->state = GuiControlState::HIDDEN;
 		exitButton->state = GuiControlState::HIDDEN;
 		settingsReturnButton->state = GuiControlState::HIDDEN;
 		settingsExitButton->state = GuiControlState::HIDDEN;
@@ -655,6 +707,144 @@ bool Hud::CleanUp()
 	app->tex->UnLoad(settingsBoxNormal);
 	app->tex->UnLoad(settingsBoxHover);
 	app->tex->UnLoad(settings);
+	app->tex->UnLoad(settingsControls);
+	app->tex->UnLoad(settingsAudioPanel);
+	app->tex->UnLoad(settingsOptionsPanel);
+	app->tex->UnLoad(settingsControlsButtonNormal);
+	app->tex->UnLoad(settingsControlsButtonHover);
+	app->tex->UnLoad(settingsAudioButtonNormal);
+	app->tex->UnLoad(settingsAudioButtonHover);
+	app->tex->UnLoad(settingsOptionsButtonNormal);
+	app->tex->UnLoad(settingsOptionsButtonHover);
 
 	return true;
+}
+
+void Hud::SkillTree()
+{
+	app->render->DrawTexture(skillTree, 0, 0, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Rama1_1, 405, 199, NULL, SDL_FLIP_HORIZONTAL, 0);
+	app->render->DrawTexture(Rama1_2, 252, 199, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Rama2_1, 486, 336, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Rama2_2, 252, 336, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Rama3_1, 388, 436, NULL, SDL_FLIP_HORIZONTAL, 0);
+	app->render->DrawTexture(Rama3_2, 251, 435, NULL, SDL_FLIP_NONE, 0);
+
+	app->render->DrawTexture(Talent1, 333, 162, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Talent2, 450, 263, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Talent3, 450, 358, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Talent4, 213, 263, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Talent5, 213, 358, NULL, SDL_FLIP_NONE, 0);
+
+	//Change sprites if talents are locked
+	if (talent2locked)
+	{
+		Rama1_1 = skillTreerama_1;
+		Rama2_1 = skillTreerama_2_1;
+		Rama3_1 = skillTreerama_3_1;
+		Talent2 = SkillTreeLife_2;
+	}
+	if (talent3locked)
+	{
+		Rama2_1 = skillTreerama_2_2;
+		Rama3_1 = skillTreerama_3_2;
+		Talent3 = SkillTreeSpeed_2;
+	}
+	if (talent4locked)
+	{
+		Rama1_2 = skillTreerama_1;
+		Rama2_2 = skillTreerama_2_1;
+		Rama3_2 = skillTreerama_3_1;
+		Talent4 = SkillTreeAtack_1_2;
+	}
+	if (talent5locked)
+	{
+		Rama2_2 = skillTreerama_2_2;
+		Rama3_2 = skillTreerama_3_2;
+		Talent5 = SkillTreeAtack_2_2;
+	}
+
+	//Move the selection
+	if (talent1selected)
+	{
+		app->render->DrawTexture(Selection, 333, 162);
+		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+		{
+			talent1selected = false;
+			talent2selected = true;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+		{
+			talent1selected = false;
+			talent4selected = true;
+		}
+	}
+	if (talent2selected)
+	{
+		app->render->DrawTexture(Selection, 450, 263);
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+		{
+			talent2locked = true;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		{
+			talent2selected = false;
+			talent1selected = true;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+		{
+			talent2selected = false;
+			talent3selected = true;
+		}
+	}
+	if (talent3selected)
+	{
+		app->render->DrawTexture(Selection, 450, 358);
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && talent2locked)
+		{
+			talent3locked = true;
+		}
+		if (talent3locked)
+		{
+			Talent3 = SkillTreeSpeed_2;
+			app->render->DrawTexture(skillTreerama_2_2, 486, 336);
+			app->render->DrawTexture(skillTreerama_3_2, 388, 436, NULL, SDL_FLIP_HORIZONTAL);
+		}
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		{
+			talent3selected = false;
+			talent2selected = true;
+		}
+	}
+	if (talent4selected)
+	{
+		app->render->DrawTexture(Selection, 213, 263);
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+		{
+			talent4locked = true;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		{
+			talent4selected = false;
+			talent1selected = true;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+		{
+			talent4selected = false;
+			talent5selected = true;
+		}
+	}
+	if (talent5selected)
+	{
+		app->render->DrawTexture(Selection, 213, 358);
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && talent4locked)
+		{
+			talent5locked = true;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		{
+			talent5selected = false;
+			talent4selected = true;
+		}
+	}
 }

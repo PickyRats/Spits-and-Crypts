@@ -33,6 +33,7 @@ bool SceneIntro::Awake(pugi::xml_node& config)
 bool SceneIntro::Start()
 {
 	logo = app->tex->Load("Assets/Textures/Screens/logo.png");
+	logo1 = app->tex->Load("Assets/Textures/Screens/logo1.png");
 	timer = Timer();
 	timer.Start();
 	logo_audio = app->audio->LoadFx(configNode4.child("logoFx").attribute("path").as_string());
@@ -47,7 +48,14 @@ bool SceneIntro::Update(float dt)
 		app->fade->Fade(this, (Module*)app->sceneMenu, 30);
 		changingScene = true;
 	}
+
 	app->render->DrawTexture(logo, 0, 0);
+	
+	if (y > 189) {
+		a = a * exp(-0.075);
+		y -= a;
+	}
+	app->render->DrawTexture(logo1, 462, y);
 
 	return true;
 }
@@ -56,6 +64,9 @@ bool SceneIntro::CleanUp()
 {
 	LOG("Freeing SceneIntro");
 	app->tex->UnLoad(logo);
+	app->tex->UnLoad(logo1);
+	app->audio->UnloadFx(logo_audio);
+
 	
 	return true;
 }

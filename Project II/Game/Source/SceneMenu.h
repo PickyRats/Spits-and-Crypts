@@ -24,6 +24,8 @@ public:
 
 	bool Update(float dt);
 
+	bool SaveState(pugi::xml_node node);
+
 	bool CleanUp();
 	uint FxButton1;
 	uint FxButton2;
@@ -48,6 +50,7 @@ public:
 private:
 
 	SDL_Texture* background;
+	SDL_Texture* background2;
 	SDL_Texture* menu;
 
 	SDL_Texture* playNormal;
@@ -105,6 +108,9 @@ private:
 	
 
 	GuiControlButton* creditsExitButton;
+
+	int x = 1280;
+	double a = 50;
 
 	//add music to the menu
 	uint MenuMusic;

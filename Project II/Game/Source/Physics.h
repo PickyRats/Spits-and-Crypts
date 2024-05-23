@@ -38,10 +38,13 @@ enum class ColliderType {
 	DOOR,
 	DIALOG_TRIGGER,
 	TRAP,
+	PUZZLE,
 	ITERACTABLE,
 	ITEM,
 	ENEMY,
 	STAIRS,
+	LIGHT1,
+	LIGHT2,
 	UNKNOWN
 	// ..
 };

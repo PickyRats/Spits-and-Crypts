@@ -14,6 +14,10 @@
 #include "SceneOasisFaraon.h"
 #include "SceneTemple.h"
 #include "SceneFloor1.h"
+#include "Puzzle.h"
+#include "SceneLight.h"
+#include "SceneCombat.h"
+#include "Map.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -46,6 +50,9 @@ bool Player::Start() {
 	currentAnim = &idleAnim;
 
 	stepsFx = app->audio->LoadFx("Assets/Audio/Fx/Footsteps_Fx.wav");
+	jumpFx = app->audio->LoadFx("Assets/Audio/Fx/jump_FX.wav");
+	climbFx = app->audio->LoadFx("Assets/Audio/Fx/escaleras_Fx.wav");
+	doorFx = app->audio->LoadFx("Assets/Audio/Fx/trampilla.wav");
 	//ToggleGodMode();
 
 	if (id == 1)
@@ -65,9 +72,12 @@ bool Player::Update(float dt)
 	//godmode
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN && !isCombat) ToggleGodMode();
 
-	if (health <= 0 && !isDead)
+	if (health <= 0 && !isDead && app->map->player2->health <= 0)
 	{
 		isDead = true;
+		isCombat = false;
+		app->map->player2->isVisible = false;
+		app->map->player2->isCombat = false;
 	}
 	if (isDead && !isCombat) Respaw();
 
@@ -82,18 +92,23 @@ bool Player::Update(float dt)
 			if (!godMode)
 			{
 				//Funcion para hacer sonidos
-				WalkingSound();
+				SoundManager();
+
 				//player movement
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 				{
-
-					LeftMovement();
+					if (!isClimbing)
+					{
+						LeftMovement();
+					}
 				}
 
 				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 				{
-
-					RightMovement();
+					if (!isClimbing)
+					{
+						RightMovement();
+					}
 				}
 
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE)
@@ -102,23 +117,30 @@ bool Player::Update(float dt)
 					isWalking = false;
 					vel.x = 0;
 				}
+				
 				//Climbing
-				if (isClimbing)
+				if (canClimb && !isjumping && vel.y<=0)
 				{
+					isWalking = false;
 					if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 					{
 						UpMovement();
+						isClimbing = true;
+						pbody->body->SetGravityScale(0.0f);
 					}
 					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 					{
 						DownMovement();
+						/*isClimbing = true;*/
+						pbody->body->SetGravityScale(0.0f);
 					}
 					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE)
 					{
 						vel.y = 0;
 					}
+					
 				}
-				//jump
+				//Jump
 				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !isjumping)
 				{
 					Jump();
@@ -161,42 +183,62 @@ bool Player::Update(float dt)
 		{
 			// death
 			pbody->body->SetLinearVelocity({ 0, 0 });
+
 		}
 
 		DrawPlayer();
-
+		printf("\r playerX: %d playerY: %d", position.x, position.y);////////////
 		currentAnim->Update();
 		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 		{
+			
 			if (doorAldea) {
-				if (app->sceneShop->active) app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
-				else if (app->sceneOasisFaraon->active) app->fade->Fade((Module*)app->sceneOasisFaraon, (Module*)app->sceneVillage, 60.0f);
-				else if (app->sceneTemple->active) app->fade->Fade((Module*)app->sceneTemple, (Module*)app->sceneVillage, 60.0f);
-				else if (app->sceneFloor1->active) app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
+				app->audio->PlayFx(doorFx);
+				if (app->sceneShop->active) {
+					app->sceneVillage->spawnPosition = { 481, 675 };
+					app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
+				}
+				else if (app->sceneOasisFaraon->active) {
+					app->sceneVillage->spawnPosition = { 1380, 675 };
+					app->fade->Fade((Module*)app->sceneOasisFaraon, (Module*)app->sceneVillage, 60.0f);
+				}
+				else if (app->sceneTemple->active) {
+					app->sceneVillage->spawnPosition = { 2269, 675 };
+					app->fade->Fade((Module*)app->sceneTemple, (Module*)app->sceneVillage, 60.0f);
+				}
+				else if (app->sceneFloor1->active) {
+					app->sceneVillage->spawnPosition = { 2787, 675 };
+					app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
+				}
 				doorAldea = false;
 			}
 			else if (doorOasis)
 			{
+				app->audio->PlayFx(doorFx);
 				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneOasisFaraon, 60.0f);
 				doorOasis = false;
 			}
 			else if (doorShop)
 			{
+				app->audio->PlayFx(doorFx);
 				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneShop, 60.0f);
 				doorShop = false;
 			}
 			else if (doorTemple)
 			{
+				app->audio->PlayFx(doorFx);
 				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneTemple, 60.0f);
 				doorTemple = false;
 			}
 			else if (doorFlor1)
 			{
+				app->audio->PlayFx(doorFx);
 				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneFloor1, 60.0f);
 				doorFlor1 = false;
 			}
 			else if (enterCombat)
 			{
+				app->audio->PlayFx(doorFx);
 				app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneCombat, 60.0f);
 				enterCombat = false;
 			}
@@ -210,14 +252,15 @@ bool Player::Update(float dt)
 void Player::LeftMovement()
 {
 	isFacingRight = false;
-	isWalking = true;	
+	if(!canClimb) isWalking = true;	
+	
 	vel.x = -speed * 1.5f * dt;
 }
 
 void Player::RightMovement()
 {
 	isFacingRight = true;
-	isWalking = true;
+	if (!canClimb) isWalking = true;
 	vel.x = speed * 1.5f * dt;
 }
 
@@ -230,22 +273,49 @@ void Player::DownMovement()
 {
 	vel.y = speed * 1 * dt;
 }
-void Player::WalkingSound()
+void Player::SoundManager()
 {
-	if (isWalking)// si el bool isWalking es true  y is walking sound playing es false se activa el sonido y se cambia el bool a true
+	if (isjumping)
+	{
+		if (!jumpingSoundPlaying)
+		{
+			app->audio->PlayFx(jumpFx, 0);
+			jumpingSoundPlaying = true;
+		}
+	}
+	else if (jumpingSoundPlaying) // cuando se cambia el bool a true accede al segundo else que pausa el sonido y cambia el bool a false
+	{
+		app->audio->PauseFx(jumpFx);
+		jumpingSoundPlaying = false;
+	}
+
+	if (isWalking && !isjumping)// si el bool isWalking es true  y is walking sound playing es false se activa el sonido y se cambia el bool a true
 	{
 		if (!walkingSoundPlaying)
 		{
 			app->audio->PlayFx(stepsFx, -1);
 			walkingSoundPlaying = true;
 		}
-		
-	
 	}
 	else if(walkingSoundPlaying) // cuando se cambia el bool a true accede al segundo else que pausa el sonido y cambia el bool a false
 	{
 		app->audio->PauseFx(stepsFx);
 		walkingSoundPlaying = false;
+	}
+
+	if (canClimb)
+	{
+		if (!climbingSoundPlaying)
+		{
+			app->audio->PlayFx(climbFx, -1);
+			climbingSoundPlaying = true;
+		}
+	}
+	else if (climbingSoundPlaying) // cuando se cambia el bool a true accede al segundo else que pausa el sonido y cambia el bool a false
+	{
+		
+		app->audio->PauseFx(climbFx);
+		climbingSoundPlaying = false;
 	}
 
 }
@@ -256,9 +326,21 @@ void Player::Jump()
 }
 
 void Player::Respaw() {
-	app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
-	health = 100;
+	if (app->sceneCombat->active)
+	{
+		app->fade->Fade((Module*)app->sceneCombat, (Module*)app->sceneEnding, 60.0f);
+		app->map->player->health = 100;
+		app->map->player2->health = 100;
+		CreateBody();
+	}
+	else
+	{
+		app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneEnding, 60.0f);
+	}
+
 	isDead = false;
+	health = 100;
+	LOG("Respawn");
 }
 
 void Player::DrawPlayer()
@@ -302,6 +384,9 @@ void Player::ToggleGodMode()
 bool Player::CleanUp()
 {
 	app->tex->UnLoad(texture);
+	app->audio->UnloadFx(stepsFx);
+	app->audio->UnloadFx(climbFx);
+	app->audio->UnloadFx(doorFx);
 
 	return true;
 }
@@ -313,6 +398,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::PLATFORM:
 		isjumping = false;
+		isClimbing = false;
 		break;
 	case ColliderType::DOOR_ALDEA:
 		doorAldea = true;
@@ -336,7 +422,18 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		enterCombat = true;
 		break;
 	case ColliderType::STAIRS:
-		isClimbing = true;
+		canClimb = true;
+		isWalking = false;
+		break;
+	case ColliderType::PUZZLE:
+		app->puzzle->canInteract = true;
+
+		break;
+	case ColliderType::LIGHT1:
+		app->sceneLight->interactMirror = true;
+		break;
+	case ColliderType::LIGHT2:
+		app->sceneLight->interactTrapdoor = true;
 		break;
 	}
 
@@ -364,7 +461,21 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 		enterCombat = false;
 		break;
 	case ColliderType::STAIRS:
+		canClimb = false;
 		isClimbing = false;
+		pbody->body->SetGravityScale(1.0f);
+		break;
+	case ColliderType::PUZZLE:
+		app->puzzle->canInteract = false;
+		app->puzzle->showUI = false;
+		break;
+	case ColliderType::LIGHT1:
+		app->sceneLight->interactMirror = false;
+		app->sceneLight->isInteractingMirror = false;
+		break;
+	case ColliderType::LIGHT2:
+		app->sceneLight->interactTrapdoor = false;
+		app->sceneLight->isInteractingTrapdoor = false;
 		break;
 	}
 

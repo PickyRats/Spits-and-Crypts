@@ -9,7 +9,12 @@
 #include "FadeToBlack.h"
 #include "GuiManager.h"
 #include "ParticleManager.h"
+#include "DialogManager.h"
+#include "DialogTriggerEntity.h"
 #include "Hud.h"
+#include "Puzzle.h"
+#include "Puzzle2.h"
+#include "Player.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -45,9 +50,16 @@ bool SceneFloor1::Awake(pugi::xml_node& config)
 	}
 	for (pugi::xml_node itemNode = config.child("Piece"); itemNode; itemNode = itemNode.next_sibling("Piece"))
 	{
-		Piezas_puzle* pieces = (Piezas_puzle*)app->entityManager->CreateEntity(EntityType::PIEZAS);
+		PiezasPuzle* pieces = (PiezasPuzle*)app->entityManager->CreateEntity(EntityType::PIEZAS);
 		pieces->parameters = itemNode;
 	}
+
+	for (pugi::xml_node itemNode = config.child("dialogTrigger"); itemNode; itemNode = itemNode.next_sibling("dialogTrigger"))
+	{
+		DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER);
+		dialogTrigger->parameters = itemNode;
+	}
+
 	//if (config.child("map")) {
 	//	//Get the map name from the config file and assigns the value in the module
 	//	app->map->mapName = config.child("map").attribute("name").as_string();
@@ -70,6 +82,9 @@ bool SceneFloor1::Start()
 	app->map->Enable();
 	app->entityManager->Enable();
 	app->hud->Enable();
+  
+  app->puzzle->Enable();
+	if(!combatFinished)app->sceneFloor1->wall = app->physics->CreateRectangle(37 * 64, 34 * 64, 10, 2 * 64, STATIC);
 
 	//Load the player in the map
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(playerStartPosition.x), PIXEL_TO_METERS(playerStartPosition.y)), 0);
@@ -84,7 +99,7 @@ bool SceneFloor1::Start()
 	textPosY = (float)windowH / 2 - (float)texH / 2;
 
 	app->render->camera.x = 0;
-	app->render->camera.y = 0;
+	app->render->camera.y = 2368;
 
 	//carga assets
 	floor1background = app->tex->Load("Assets/Textures/Screens/floor1background.png");
@@ -112,7 +127,7 @@ bool SceneFloor1::Update(float dt)
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;
 
-	SetCameraPosition(playerX-550, 0);
+	SetCameraPosition(playerX-550, playerY-360);
 	printf("\r cameraX: %d cameraY: %d playerX: %d playerY %d", cameraX, cameraY, playerX, playerY);
 	ClampCamera();
 
@@ -122,13 +137,7 @@ bool SceneFloor1::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
-	//if (app->render->camera.x - playerX - 100 <= -200 && app->render->camera.x - playerX - 100 >= -12850) {
-	//	app->render->camera.x = -(playerX - 100);
-
-	//}
-	//if (app->render->camera.x - playerX - 100 <= -12900) {
-	//	app->render->camera.x = -6333;
-	//}
+	
 	return true;
 }
 
