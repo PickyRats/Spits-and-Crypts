@@ -138,6 +138,47 @@ bool Hud::Start()
 	app->sceneMenu->creditsButton->state = GuiControlState::HIDDEN;
 	app->sceneMenu->exitButton->state = GuiControlState::HIDDEN;
 
+	//SkillTree
+	skillTree = app->tex->Load(configNode3.child("SkillTree").attribute("texturepath").as_string());
+	skillTreerama_1 = app->tex->Load(configNode3.child("SkillTreerama_1").attribute("texturepath").as_string());
+	skillTreerama_2_1 = app->tex->Load(configNode3.child("SkillTreerama_2_1").attribute("texturepath").as_string());
+	skillTreerama_2_2 = app->tex->Load(configNode3.child("SkillTreerama_2_2").attribute("texturepath").as_string());
+	skillTreerama_3_1 = app->tex->Load(configNode3.child("SkillTreerama_3_1").attribute("texturepath").as_string());
+	skillTreerama_3_2 = app->tex->Load(configNode3.child("SkillTreerama_3_2").attribute("texturepath").as_string());
+
+	//SkillTree Buttons
+	SkillTreeTalent = app->tex->Load(configNode3.child("SkillTreeTalent").attribute("texturepath").as_string());
+
+	SkillTreeLife_1 = app->tex->Load(configNode3.child("SkillTreeLife_1").attribute("texturepath").as_string());
+	SkillTreeLife_2 = app->tex->Load(configNode3.child("SkillTreeLife_2").attribute("texturepath").as_string());
+	SkillTreeSpeed_1 = app->tex->Load(configNode3.child("SkillTreeSpeed_1").attribute("texturepath").as_string());
+	SkillTreeSpeed_2 = app->tex->Load(configNode3.child("SkillTreeSpeed_2").attribute("texturepath").as_string());
+
+	SkillTreeAtack_1_1 = app->tex->Load(configNode3.child("SkillTreeAtack_1_1").attribute("texturepath").as_string());
+	SkillTreeAtack_1_2 = app->tex->Load(configNode3.child("SkillTreeAtack_1_2").attribute("texturepath").as_string());
+	SkillTreeAtack_2_1 = app->tex->Load(configNode3.child("SkillTreeAtack_2_1").attribute("texturepath").as_string());
+	SkillTreeAtack_2_2 = app->tex->Load(configNode3.child("SkillTreeAtack_2_2").attribute("texturepath").as_string());
+	SkillTreeAtack_3_1 = app->tex->Load(configNode3.child("SkillTreeAtack_3_1").attribute("texturepath").as_string());
+	SkillTreeAtack_3_2 = app->tex->Load(configNode3.child("SkillTreeAtack_3_2").attribute("texturepath").as_string());
+	SkillTreeAtack_4_1 = app->tex->Load(configNode3.child("SkillTreeAtack_4_1").attribute("texturepath").as_string());
+	SkillTreeAtack_4_2 = app->tex->Load(configNode3.child("SkillTreeAtack_4_2").attribute("texturepath").as_string());
+	SkillTreeAtack_5_1 = app->tex->Load(configNode3.child("SkillTreeAtack_5_1").attribute("texturepath").as_string());
+	SkillTreeAtack_5_2 = app->tex->Load(configNode3.child("SkillTreeAtack_5_2").attribute("texturepath").as_string());
+	SkillTreeAtack_6_1 = app->tex->Load(configNode3.child("SkillTreeAtack_6_1").attribute("texturepath").as_string());
+	SkillTreeAtack_6_2 = app->tex->Load(configNode3.child("SkillTreeAtack_6_2").attribute("texturepath").as_string());
+	SkillTreeAtack_7_1 = app->tex->Load(configNode3.child("SkillTreeAtack_7_1").attribute("texturepath").as_string());
+	SkillTreeAtack_7_2 = app->tex->Load(configNode3.child("SkillTreeAtack_7_2").attribute("texturepath").as_string());
+	SkillTreeAtack_8_1 = app->tex->Load(configNode3.child("SkillTreeAtack_8_1").attribute("texturepath").as_string());
+	SkillTreeAtack_8_2 = app->tex->Load(configNode3.child("SkillTreeAtack_8_2").attribute("texturepath").as_string());
+
+	Selection = app->tex->Load(configNode3.child("Selection").attribute("texturepath").as_string());
+
+	Talent1 = SkillTreeTalent;
+	Talent2 = SkillTreeLife_1;
+	Talent3 = SkillTreeSpeed_1;
+	Talent4 = SkillTreeAtack_1_1;
+	Talent5 = SkillTreeAtack_2_1;
+
 
 	exitButton->state = GuiControlState::HIDDEN;
 	resumeButton->state = GuiControlState::HIDDEN;
