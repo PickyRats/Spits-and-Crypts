@@ -20,6 +20,7 @@
 #include "Log.h"
 #include "SceneMenu.h"
 #include "SceneCombat.h"
+#include "Map.h"
 
 #include <iostream>
 #include <iomanip>
@@ -884,6 +885,7 @@ void Hud::SkillTree()
 		Rama2_1 = skillTreerama_2_1;
 		Rama3_1 = skillTreerama_3_1;
 		Talent2 = SkillTreeLife_2;
+		app->map->player->health += 5;
 	}
 	if (talent3locked)
 	{
@@ -897,6 +899,7 @@ void Hud::SkillTree()
 		Rama2_2 = skillTreerama_2_1;
 		Rama3_2 = skillTreerama_3_1;
 		Talent4 = SkillTreeAtack_1_2;
+		app->map->player->attackDamage += 5;
 	}
 	if (talent5locked)
 	{
