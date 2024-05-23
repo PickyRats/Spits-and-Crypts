@@ -169,6 +169,15 @@ bool Hud::Start()
 
 bool Hud::Update(float dt)
 {
+	//Ability Tree
+	if (app->sceneTemple->active && app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
+	{
+		abilityTree = !abilityTree;
+	}
+	if (abilityTree)
+	{
+		SkillTree();
+	}
 	//Pause menu
 	if (app->sceneVillage->pause || app->sceneShop->pause || app->sceneOasisFaraon->pause || app->sceneTemple->pause || app->sceneFloor1->pause) {
 		//If pause menu is activated, show buttons
@@ -654,4 +663,133 @@ bool Hud::CleanUp()
 	app->tex->UnLoad(settingsOptionsButtonHover);
 
 	return true;
+}
+
+void Hud::SkillTree()
+{
+	app->render->DrawTexture(skillTree, 0, 0, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Rama1_1, 405, 199, NULL, SDL_FLIP_HORIZONTAL, 0);
+	app->render->DrawTexture(Rama1_2, 252, 199, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Rama2_1, 486, 336, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Rama2_2, 252, 336, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Rama3_1, 388, 436, NULL, SDL_FLIP_HORIZONTAL, 0);
+	app->render->DrawTexture(Rama3_2, 251, 435, NULL, SDL_FLIP_NONE, 0);
+
+	app->render->DrawTexture(Talent1, 333, 162, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Talent2, 450, 263, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Talent3, 450, 358, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Talent4, 213, 263, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Talent5, 213, 358, NULL, SDL_FLIP_NONE, 0);
+
+	//Change sprites if talents are locked
+	if (talent2locked)
+	{
+		Rama1_1 = skillTreerama_1;
+		Rama2_1 = skillTreerama_2_1;
+		Rama3_1 = skillTreerama_3_1;
+		Talent2 = SkillTreeLife_2;
+	}
+	if (talent3locked)
+	{
+		Rama2_1 = skillTreerama_2_2;
+		Rama3_1 = skillTreerama_3_2;
+		Talent3 = SkillTreeSpeed_2;
+	}
+	if (talent4locked)
+	{
+		Rama1_2 = skillTreerama_1;
+		Rama2_2 = skillTreerama_2_1;
+		Rama3_2 = skillTreerama_3_1;
+		Talent4 = SkillTreeAtack_1_2;
+	}
+	if (talent5locked)
+	{
+		Rama2_2 = skillTreerama_2_2;
+		Rama3_2 = skillTreerama_3_2;
+		Talent5 = SkillTreeAtack_2_2;
+	}
+
+	//Move the selection
+	if (talent1selected)
+	{
+		app->render->DrawTexture(Selection, 333, 162);
+		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+		{
+			talent1selected = false;
+			talent2selected = true;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+		{
+			talent1selected = false;
+			talent4selected = true;
+		}
+	}
+	if (talent2selected)
+	{
+		app->render->DrawTexture(Selection, 450, 263);
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+		{
+			talent2locked = true;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		{
+			talent2selected = false;
+			talent1selected = true;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+		{
+			talent2selected = false;
+			talent3selected = true;
+		}
+	}
+	if (talent3selected)
+	{
+		app->render->DrawTexture(Selection, 450, 358);
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && talent2locked)
+		{
+			talent3locked = true;
+		}
+		if (talent3locked)
+		{
+			Talent3 = SkillTreeSpeed_2;
+			app->render->DrawTexture(skillTreerama_2_2, 486, 336);
+			app->render->DrawTexture(skillTreerama_3_2, 388, 436, NULL, SDL_FLIP_HORIZONTAL);
+		}
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		{
+			talent3selected = false;
+			talent2selected = true;
+		}
+	}
+	if (talent4selected)
+	{
+		app->render->DrawTexture(Selection, 213, 263);
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+		{
+			talent4locked = true;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		{
+			talent4selected = false;
+			talent1selected = true;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+		{
+			talent4selected = false;
+			talent5selected = true;
+		}
+	}
+	if (talent5selected)
+	{
+		app->render->DrawTexture(Selection, 213, 358);
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && talent4locked)
+		{
+			talent5locked = true;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		{
+			talent5selected = false;
+			talent4selected = true;
+		}
+	}
 }
