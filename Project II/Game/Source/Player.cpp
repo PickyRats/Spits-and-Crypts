@@ -16,6 +16,8 @@
 #include "SceneFloor1.h"
 #include "Puzzle.h"
 #include "SceneLight.h"
+#include "SceneCombat.h"
+#include "Map.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -70,9 +72,12 @@ bool Player::Update(float dt)
 	//godmode
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN && !isCombat) ToggleGodMode();
 
-	if (health <= 0 && !isDead)
+	if (health <= 0 && !isDead && app->map->player2->health <= 0)
 	{
 		isDead = true;
+		isCombat = false;
+		app->map->player2->isVisible = false;
+		app->map->player2->isCombat = false;
 	}
 	if (isDead && !isCombat) Respaw();
 
@@ -321,10 +326,21 @@ void Player::Jump()
 }
 
 void Player::Respaw() {
-	health = 100;
+	if (app->sceneCombat->active)
+	{
+		app->fade->Fade((Module*)app->sceneCombat, (Module*)app->sceneEnding, 60.0f);
+		app->map->player->health = 100;
+		app->map->player2->health = 100;
+		CreateBody();
+	}
+	else
+	{
+		app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneEnding, 60.0f);
+	}
+
 	isDead = false;
+	health = 100;
 	LOG("Respawn");
-	app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneEnding, 60.0f);
 }
 
 void Player::DrawPlayer()
