@@ -91,16 +91,7 @@ bool SceneVillage::Start()
 
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
-	int i = 1;
-	if(!piedraHecha)
-	{
-		piedra = app->physics->CreateRectangle(200, 640, 100, 100, DYNAMIC);
-		piedraHecha = true;
-	}
-	
-	piedra->body->SetGravityScale(15);
 
-	piedraTexture=app->tex->Load("Assets/Textures/Items/piedra.png");
 	aldea = app->tex->Load("Assets/Textures/Screens/aldea.png");
 
 	app->audio->PlayMusic(configNode.child("villageAmbient").attribute("path").as_string());
@@ -117,10 +108,6 @@ bool SceneVillage::PreUpdate()
 bool SceneVillage::Update(float dt)
 {
 	app->render->DrawTexture(aldea, -5, 0, NULL, SDL_FLIP_NONE, 1);
-
-	int piedraX = METERS_TO_PIXELS(piedra->body->GetPosition().x);
-	int piedraY = METERS_TO_PIXELS(piedra->body->GetPosition().y);
-	app->render->DrawTexture(piedraTexture, piedraX-50, piedraY-50);
 
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;

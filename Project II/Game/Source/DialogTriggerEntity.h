@@ -31,14 +31,17 @@ public:
 
 	void CreateColliderBig();
 
-	void Interact(int id);
-
-	void GiveMission(int idMission);
-
 
 private:
 
-	//En caso de querer aÃ±adirle una textura a la entidad
+
+
+
+public:
+
+private:
+
+	//En caso de querer añadirle una textura a la entidad
 	SDL_Texture* texture;
 
 	//La textura de la cara general para el dialogo
@@ -63,8 +66,6 @@ private:
 	bool played = false;
 	bool physCreated = false;
 	int dialogScene;
-	int id;
-
 
 	uint dialogs[3];
 	

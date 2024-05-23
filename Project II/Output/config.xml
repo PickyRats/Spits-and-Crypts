@@ -43,10 +43,7 @@
   <sceneShop>
 		<!-- Scene -->
 		<map path="Assets/Maps/" name="Map_Shop.tmx"/>
-		
-		<!--Texture-->
-		<store texturepath="Assets/Textures/Screens/Shop/Store.png"/>
-	  
+
 		<!-- Music -->
 		<music>
 			<ShopMusic path="Assets/Audio/Music/Shop_Music.ogg" fadeTime="10" fadeOutTime="2"/>
@@ -58,14 +55,13 @@
 		<npc x="970" y="520" texturepath="Assets/Textures/Npcs/mercante.png" id="7" scene="3"/>
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="1024" y="576"  name="Mercante" repeat="true" scene="3" id="7" audio_1="Assets/Audio/Fx/tienda/voz_tienda_1.wav" audio_2="Assets/Audio/Fx/tienda/voz_tienda_2.wav" audio_3="Assets/Audio/Fx/tienda/voz_tienda_3.wav">
-
+		<dialogTrigger x="1024" y="576"  name="Mercante" repeat="true" scene="3"  audio_1="Assets/Audio/Fx/tienda/voz_tienda_1.wav" audio_2="Assets/Audio/Fx/tienda/voz_tienda_2.wav" audio_3="Assets/Audio/Fx/tienda/voz_tienda_3.wav">
 		  <sentences>
 			  <sentence text="Bienvenido a mi humilde rinconcillo"/>
-			  <sentence text="Quieres entrar a mi tienda?"/>
+			  <sentence text="Si quieres algo, no lo robes"/>
 		  </sentences>
 		  <repeat_sentences>
-			  <sentence text="Tanto quieres comprar?"/>
+			  <sentence text="Te estoy vigilando..."/>
 		  </repeat_sentences>
 	  </dialogTrigger>
     
@@ -81,30 +77,6 @@
 	<sceneintro>
 		<logoFx path="Assets/Audio/Fx/Logo.wav"/>
 	</sceneintro>
-	
-	<!-- sceneChoza -->
-	<sceneChoza>
-		<!-- Scene -->
-		<map path="Assets/Maps/" name="Map_Shop.tmx"/>
-		<!-- Music -->
-		<music>
-			<ChozaMusic path="Assets/Audio/Music/choza_Music.ogg" fadeTime="10" fadeOutTime="2"/>
-		</music>
-
-		<!-- Player -->
-		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
-		<!-- Nieta  -->
-		<npc x="550" y="580" texturepath="Assets/Textures/Npcs/nieta.png" id="2" scene="6"/>
-
-		<!-- Dialogos  -->
-		<dialogTrigger x="580" y="640"  name="La nieta" repeat="true" scene="6" id="2">
-			<sentences>
-				<sentence text="Ayuda, necesito alguien fuerte que me ayude"/>
-				<sentence text="Por favor, estoy asustada"/>
-			</sentences>
-		</dialogTrigger>
-		
-	</sceneChoza>
 
 	<!-- Ending -->
 	<sceneending>
@@ -128,7 +100,7 @@
 		<npc x="550" y="580" texturepath="Assets/Textures/Npcs/nieta.png" id="2" scene="1"/>
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="350" y="640"  name="La abuela" repeat="true" scene="1" id	="1">
+		<dialogTrigger x="350" y="640"  name="La abuela" repeat="true" scene="1">
 		  <sentences>
 			  <sentence text="Ayuda, mi nieta se ha quedado atrapada"/>
 			  <sentence text="Necesito alguien poderoso que la salve"/>
@@ -137,6 +109,16 @@
 			  <sentence text="Basta de chachara,date prisa!"/>
 		  </repeat_sentences>
 	  </dialogTrigger>
+
+		<dialogTrigger x="580" y="640"  name="La nieta" repeat="true" scene="1">
+			<sentences>
+				<sentence text="Ayuda, necesito alguien fuerte que me ayude"/>
+				<sentence text="Por favor, estoy asustada"/>
+			</sentences>
+			<repeat_sentences>
+				<sentence text="No te ha quedado claro ?"/>
+			</repeat_sentences>
+		</dialogTrigger>
 	</sceneVillage>
 
 	<!-- sceneOasis -->
@@ -152,8 +134,7 @@
 		<npc x="400" y="575" texturepath="Assets/Textures/Npcs/Anhuvihsh.png" id="8" scene="4"/>
 		
 		<!-- Dialogos -->
-
-		<dialogTrigger x="440" y="640"  name="Tabernero" repeat="true" scene="4" id="8" audio_1="Assets/Audio/Fx/anubish/voz_anubish_1.wav" audio_2="Assets/Audio/Fx/anubish/voz_anubish_2.wav" audio_3="Assets/Audio/Fx/anubish/voz_anubish_3.wav">
+		<dialogTrigger x="440" y="640"  name="Tabernero" repeat="true" scene="4" audio_1="Assets/Audio/Fx/anubish/voz_anubish_1.wav" audio_2="Assets/Audio/Fx/anubish/voz_anubish_2.wav" audio_3="Assets/Audio/Fx/anubish/voz_anubish_3.wav">
 			<sentences>
 				<sentence text="Bienvenido, vendemos todo tipo de productos"/>
 				<sentence text="Desde Arena del desierto hasta ratas disecadas"/>
@@ -192,7 +173,7 @@
 		<npc x="1000" y="386" texturepath="Assets/Textures/Npcs/horus.png" id="6" scene="2"/>
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="320" y="540"  name="Maat" repeat="true" scene="2" id="3" audio_1="Assets/Audio/Fx/maat/voz_maat_1.wav" audio_2="Assets/Audio/Fx/maat/voz_maat_2.wav" audio_3="Assets/Audio/Fx/maat/voz_maat_3.wav">
+		<dialogTrigger x="320" y="540"  name="Maat" repeat="true" scene="2" audio_1="Assets/Audio/Fx/maat/voz_maat_1.wav" audio_2="Assets/Audio/Fx/maat/voz_maat_2.wav" audio_3="Assets/Audio/Fx/maat/voz_maat_3.wav">
 			<sentences>
 				<sentence text="Soy Maat, ¿Qué atributos quieres que te mejore?"/>
 				<sentence text="No sea tímido..."/>
@@ -202,8 +183,7 @@
 			</repeat_sentences>
 		</dialogTrigger>
 		
-
-		<dialogTrigger x="570" y="540"  name="Toth" repeat="true" scene="2" id="4" audio_1="Assets/Audio/Fx/toth/voz_toth_1.wav" audio_2="Assets/Audio/Fx/toth/voz_toth_2.wav" audio_3="Assets/Audio/Fx/toth/voz_toth_3.wav">
+		<dialogTrigger x="570" y="540"  name="Toth" repeat="true" scene="2" audio_1="Assets/Audio/Fx/toth/voz_toth_1.wav" audio_2="Assets/Audio/Fx/toth/voz_toth_2.wav" audio_3="Assets/Audio/Fx/toth/voz_toth_3.wav">
 			<sentences>
 				<sentence text="Soy Toth, puedo mejorar tus armas"/>
 				<sentence text="Selecciona la que quieras en el menú"/>
@@ -213,7 +193,7 @@
 			</repeat_sentences>
 		</dialogTrigger>
 		
-		<dialogTrigger x="820" y="540"  name="Isis" repeat="true" scene="2" id="5" audio_1="Assets/Audio/Fx/isis/voz_isis_1.wav" audio_2="Assets/Audio/Fx/isis/voz_isis_2.wav" audio_3="Assets/Audio/Fx/isis/voz_isis_3.wav">
+		<dialogTrigger x="820" y="540"  name="Isis" repeat="true" scene="2" audio_1="Assets/Audio/Fx/isis/voz_isis_1.wav" audio_2="Assets/Audio/Fx/isis/voz_isis_2.wav" audio_3="Assets/Audio/Fx/isis/voz_isis_3.wav">
 			<sentences>
 				<sentence text="Soy Isis, puedo mejorar tus armas"/>
 				<sentence text="Selecciona la que quieras en el menú"/>
@@ -223,8 +203,7 @@
 			</repeat_sentences>
 		</dialogTrigger>
 		
-
-		<dialogTrigger x="1070" y="540"  name="Horus" repeat="true" scene="2" id="6" audio_1="Assets/Audio/Fx/horus/voz_horus_1.wav" audio_2="Assets/Audio/Fx/horus/voz_horus_2.wav" audio_3="Assets/Audio/Fx/horus/voz_horus_3.wav">
+		<dialogTrigger x="1070" y="540"  name="Horus" repeat="true" scene="2" audio_1="Assets/Audio/Fx/horus/voz_horus_1.wav" audio_2="Assets/Audio/Fx/horus/voz_horus_2.wav" audio_3="Assets/Audio/Fx/horus/voz_horus_3.wav">
 			<sentences>
 				<sentence text="Soy Horus, puedo mejorar tus armas"/>
 				<sentence text="Selecciona la que quieras en el menú"/>
@@ -254,8 +233,7 @@
 
 
 		<!-- Dialogo Talia -->
-		<dialogTrigger x="670" y="585"  name="Paayla" repeat="true" scene="5" id="9" audio_1="Assets/Audio/Fx/paayla/voz_paayla_1.wav" audio_2="Assets/Audio/Fx/paayla/voz_paayla_2.wav" audio_3="Assets/Audio/Fx/paayla/voz_paayla_3.wav">
-
+		<dialogTrigger x="670" y="585"  name="Paayla" repeat="true" scene="5" audio_1="Assets/Audio/Fx/paayla/voz_paayla_1.wav" audio_2="Assets/Audio/Fx/paayla/voz_paayla_2.wav" audio_3="Assets/Audio/Fx/paayla/voz_paayla_3.wav">
 			<sentences>
 				<sentence text="Hola, veo que estas algo malherido."/>
 				<sentence text="Yo me encargaré de tus heridas, no te preocupes."/>
@@ -353,6 +331,7 @@
 		<settingsSlider texturepath="Assets/Textures/Screens/More/slider.png"/>
 		<settings texturepath="Assets/Textures/Screens/More/settings.png"/>
 
+
 		<settingsControlsButtonNormal texturepath="Assets/Textures/Screens/More/settings_controls_button_normal.png"/>
 		<settingsControlsButtonHover texturepath="Assets/Textures/Screens/More/settings_controls_button_hover.png"/>
 		<settingsAudioButtonNormal texturepath="Assets/Textures/Screens/More/settings_audio_button_normal.png"/>
@@ -373,52 +352,6 @@
 		<Personaje1 texturepath="Assets/Textures/Screens/Combat/fotopersonatge.png"/>
 		<Personaje2 texturepath="Assets/Textures/Screens/Combat/fotopersonatge2.png"/>
 		<numeros texturepath="Assets/Textures/Screens/Combat/numeros.png"/>
-
-
-		<mission1i0 texturepath="Assets/Textures/Screens/Missions/mission1i0.png"/>
-		<mission1i1 texturepath="Assets/Textures/Screens/Missions/mission1i1.png"/>
-		<mission1i2 texturepath="Assets/Textures/Screens/Missions/mission1i2.png"/>
-
-		<inventory texturepath="Assets/Textures/Screens/Inventory/inventory.png"/>
-		<inventoryItem1 texturepath="Assets/Textures/Screens/Inventory/Amulet_Escarabat.png"/>
-		<inventoryItem2 texturepath="Assets/Textures/Screens/Inventory/Amulet_Serps.png"/>
-		<inventoryItem3 texturepath="Assets/Textures/Screens/Inventory/Amulet_Ull.png"/>
-
-		<shopTexture texturepath="Assets/Textures/Screens/Shop/shop.png"/>
-		<emptyslotTexture texturepath="Assets/Textures/Screens/Shop/emptyslot.png"/>
-		<selectorItemTexture texturepath="Assets/Textures/Screens/Shop/selectorItem.png"/>
-		
-		
-		<SkillTree texturepath="Assets/Textures/SkillTree/SkillTree.png"/>
-		<SkillTreeTalent texturepath="Assets/Textures/SkillTree/SkillTreeTalent.png"/>
-		<SkillTreeLife_1 texturepath="Assets/Textures/SkillTree/SkillTreeLife_1.png"/>
-		<SkillTreeLife_2 texturepath="Assets/Textures/SkillTree/SkillTreeLife_2.png"/>
-		<SkillTreeSpeed_1 texturepath="Assets/Textures/SkillTree/SkillTreeSpeed_1.png"/>
-		<SkillTreeSpeed_2 texturepath="Assets/Textures/SkillTree/SkillTreeSpeed_2.png"/>
-		<SkillTreeAtack_1_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_1_1.png"/>
-		<SkillTreeAtack_1_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_1_2.png"/>
-		<SkillTreeAtack_2_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_2_1.png"/>
-		<SkillTreeAtack_2_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_2_2.png"/>
-		<SkillTreeAtack_3_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_3_1.png"/>
-		<SkillTreeAtack_3_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_3_2.png"/>
-		<SkillTreeAtack_4_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_4_1.png"/>
-		<SkillTreeAtack_4_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_4_2.png"/>
-		<SkillTreeAtack_5_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_5_1.png"/>
-		<SkillTreeAtack_5_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_5_2.png"/>
-		<SkillTreeAtack_6_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_6_1.png"/>
-		<SkillTreeAtack_6_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_6_2.png"/>
-		<SkillTreeAtack_7_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_7_1.png"/>
-		<SkillTreeAtack_7_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_7_2.png"/>
-		<SkillTreeAtack_8_1 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_8_1.png"/>
-		<SkillTreeAtack_8_2 texturepath="Assets/Textures/SkillTree/SkillTreeAtack_8_2.png"/>
-		<Selection texturepath="Assets/Textures/SkillTree/Selection.png"/>
-		<SkillTreerama_1 texturepath="Assets/Textures/SkillTree/SkillTreerama_1.png"/>
-		<SkillTreerama_2_1 texturepath="Assets/Textures/SkillTree/SkillTreerama_2_1.png"/>
-		<SkillTreerama_2_2 texturepath="Assets/Textures/SkillTree/SkillTreerama_2_2.png"/>
-		<SkillTreerama_3_1 texturepath="Assets/Textures/SkillTree/SkillTreerama_3_1.png"/>
-		<SkillTreerama_3_2 texturepath="Assets/Textures/SkillTree/SkillTreerama_3_2.png"/>
-		
-	
 		
 		
 	</hud>

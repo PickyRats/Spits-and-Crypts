@@ -20,7 +20,6 @@
 #include "Log.h"
 #include "SceneMenu.h"
 #include "SceneCombat.h"
-#include "SceneTemple.h"
 
 #include <iostream>
 #include <iomanip>
@@ -108,43 +107,12 @@ bool Hud::Start()
 	settingsBoxHover = app->tex->Load(configNode3.child("settingsBoxHover").attribute("texturepath").as_string());
 	settings = app->tex->Load(configNode3.child("settings").attribute("texturepath").as_string());
 
-	mission1i0= app->tex->Load(configNode3.child("mission1i0").attribute("texturepath").as_string());
-	mission1i1 = app->tex->Load(configNode3.child("mission1i1").attribute("texturepath").as_string());
-	mission1i2 = app->tex->Load(configNode3.child("mission1i2").attribute("texturepath").as_string());
-
-
 	settingsControlsButtonNormal = app->tex->Load(configNode3.child("settingsControlsButtonNormal").attribute("texturepath").as_string());
 	settingsControlsButtonHover = app->tex->Load(configNode3.child("settingsControlsButtonHover").attribute("texturepath").as_string());
 	settingsAudioButtonNormal = app->tex->Load(configNode3.child("settingsAudioButtonNormal").attribute("texturepath").as_string());
 	settingsAudioButtonHover = app->tex->Load(configNode3.child("settingsAudioButtonHover").attribute("texturepath").as_string());
 	settingsOptionsButtonNormal = app->tex->Load(configNode3.child("settingsOptionsButtonNormal").attribute("texturepath").as_string());
 	settingsOptionsButtonHover = app->tex->Load(configNode3.child("settingsOptionsButtonHover").attribute("texturepath").as_string());
-
-	//Inventory
-	inventoryTexture = app->tex->Load(configNode3.child("inventory").attribute("texturepath").as_string());
-	inventoryItem1 = app->tex->Load(configNode3.child("inventoryItem1").attribute("texturepath").as_string());
-	inventoryItem2 = app->tex->Load(configNode3.child("inventoryItem2").attribute("texturepath").as_string());
-	inventoryItem3 = app->tex->Load(configNode3.child("inventoryItem3").attribute("texturepath").as_string());
-
-	items[0] = {"Pocion", "Heals 50 health points", 50, 0, 10, inventoryItem1};
-	items[1] = {"Collar", "Increases attack by 10", 0, 10, 20, inventoryItem2};
-	items[2] = {"Escudo", "Increases health by 10", 0, 0, 30, inventoryItem3};
-
-	inventorySlots[0].position = { 0, 20 };
-	inventorySlots[1].position = { 150, 20 };
-	inventorySlots[2].position = { 300, 20 };
-
-	//SHOP
-	shopTexture = app->tex->Load(configNode3.child("shopTexture").attribute("texturepath").as_string());
-
-	shopSlots[0] = { {0, 20},items[0].texture, false };
-	shopSlots[1] = { {150, 20},items[1].texture, false };
-	shopSlots[2] = { {300, 20},items[2].texture, false };
-	
-
-	emptyslotTexture = app->tex->Load(configNode3.child("emptyslotTexture").attribute("texturepath").as_string());
-	selectorItemTexture = app->tex->Load(configNode3.child("selectorItemTexture").attribute("texturepath").as_string());
-
 
 	//Create Buttons
 	exitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 0, NULL, exitNormal, exitHover, exitHover, { 1419, 92, 63, 63 }, this);
@@ -170,47 +138,6 @@ bool Hud::Start()
 	app->sceneMenu->creditsButton->state = GuiControlState::HIDDEN;
 	app->sceneMenu->exitButton->state = GuiControlState::HIDDEN;
 
-	//SkillTree
-	skillTree = app->tex->Load(configNode3.child("SkillTree").attribute("texturepath").as_string());
-	skillTreerama_1 = app->tex->Load(configNode3.child("SkillTreerama_1").attribute("texturepath").as_string());
-	skillTreerama_2_1 = app->tex->Load(configNode3.child("SkillTreerama_2_1").attribute("texturepath").as_string());
-	skillTreerama_2_2 = app->tex->Load(configNode3.child("SkillTreerama_2_2").attribute("texturepath").as_string());
-	skillTreerama_3_1 = app->tex->Load(configNode3.child("SkillTreerama_3_1").attribute("texturepath").as_string());
-	skillTreerama_3_2 = app->tex->Load(configNode3.child("SkillTreerama_3_2").attribute("texturepath").as_string());
-
-	//SkillTree Buttons
-	SkillTreeTalent = app->tex->Load(configNode3.child("SkillTreeTalent").attribute("texturepath").as_string());
-
-	SkillTreeLife_1 = app->tex->Load(configNode3.child("SkillTreeLife_1").attribute("texturepath").as_string());
-	SkillTreeLife_2 = app->tex->Load(configNode3.child("SkillTreeLife_2").attribute("texturepath").as_string());
-	SkillTreeSpeed_1 = app->tex->Load(configNode3.child("SkillTreeSpeed_1").attribute("texturepath").as_string());
-	SkillTreeSpeed_2 = app->tex->Load(configNode3.child("SkillTreeSpeed_2").attribute("texturepath").as_string());
-
-	SkillTreeAtack_1_1 = app->tex->Load(configNode3.child("SkillTreeAtack_1_1").attribute("texturepath").as_string());
-	SkillTreeAtack_1_2 = app->tex->Load(configNode3.child("SkillTreeAtack_1_2").attribute("texturepath").as_string());
-	SkillTreeAtack_2_1 = app->tex->Load(configNode3.child("SkillTreeAtack_2_1").attribute("texturepath").as_string());
-	SkillTreeAtack_2_2 = app->tex->Load(configNode3.child("SkillTreeAtack_2_2").attribute("texturepath").as_string());
-	SkillTreeAtack_3_1 = app->tex->Load(configNode3.child("SkillTreeAtack_3_1").attribute("texturepath").as_string());
-	SkillTreeAtack_3_2 = app->tex->Load(configNode3.child("SkillTreeAtack_3_2").attribute("texturepath").as_string());
-	SkillTreeAtack_4_1 = app->tex->Load(configNode3.child("SkillTreeAtack_4_1").attribute("texturepath").as_string());
-	SkillTreeAtack_4_2 = app->tex->Load(configNode3.child("SkillTreeAtack_4_2").attribute("texturepath").as_string());
-	SkillTreeAtack_5_1 = app->tex->Load(configNode3.child("SkillTreeAtack_5_1").attribute("texturepath").as_string());
-	SkillTreeAtack_5_2 = app->tex->Load(configNode3.child("SkillTreeAtack_5_2").attribute("texturepath").as_string());
-	SkillTreeAtack_6_1 = app->tex->Load(configNode3.child("SkillTreeAtack_6_1").attribute("texturepath").as_string());
-	SkillTreeAtack_6_2 = app->tex->Load(configNode3.child("SkillTreeAtack_6_2").attribute("texturepath").as_string());
-	SkillTreeAtack_7_1 = app->tex->Load(configNode3.child("SkillTreeAtack_7_1").attribute("texturepath").as_string());
-	SkillTreeAtack_7_2 = app->tex->Load(configNode3.child("SkillTreeAtack_7_2").attribute("texturepath").as_string());
-	SkillTreeAtack_8_1 = app->tex->Load(configNode3.child("SkillTreeAtack_8_1").attribute("texturepath").as_string());
-	SkillTreeAtack_8_2 = app->tex->Load(configNode3.child("SkillTreeAtack_8_2").attribute("texturepath").as_string());
-
-	Selection = app->tex->Load(configNode3.child("Selection").attribute("texturepath").as_string());
-
-	Talent1 = SkillTreeTalent;
-	Talent2 = SkillTreeLife_1;
-	Talent3 = SkillTreeSpeed_1;
-	Talent4 = SkillTreeAtack_1_1;
-	Talent5 = SkillTreeAtack_2_1;
-
 
 	exitButton->state = GuiControlState::HIDDEN;
 	resumeButton->state = GuiControlState::HIDDEN;
@@ -228,10 +155,6 @@ bool Hud::Start()
 	settingsAudioButton->state = GuiControlState::HIDDEN;
 	settingsOptionsButton->state = GuiControlState::HIDDEN;
 
-
-	//Tree Buttons
-
-
 	if (app->sceneMenu->vSync == true)
 	{
 		settingsVSyncButton->pressed = true;
@@ -246,22 +169,6 @@ bool Hud::Start()
 
 bool Hud::Update(float dt)
 {
-	//Ability Tree
-	if (app->sceneTemple->active && app->input->GetKey(SDL_SCANCODE_H)==KEY_DOWN)
-	{
-		abilityTree = false;
-	}
-	if (abilityTree)
-	{
-		SkillTree();
-	}
-  
-	//Inventory
-	Inventory();
-
-	//Shop
-	Shop();
-
 	//Pause menu
 	if (app->sceneVillage->pause || app->sceneShop->pause || app->sceneOasisFaraon->pause || app->sceneTemple->pause || app->sceneFloor1->pause) {
 		//If pause menu is activated, show buttons
@@ -694,113 +601,9 @@ bool Hud::Update(float dt)
 			
 		}
 	}
-	if(mission10Active)
-	{
-		Missions(0);
-	}
-	else if (mission11Active)
-	{
-		Missions(1);
-	}
-	else if (mission1Complete)
-	{
-		mission10Active= false;
-		mission11Active = false;
-		app->tex->UnLoad(mission1i1);
-		app->tex->UnLoad(mission1i0);
-	}
+
 	return true;
 }
-
-void Hud::Missions(int mission1) 
-{
-	switch (mission1)
-	{
-	case 0:
-		app->render->DrawTexture(mission1i0, 0, 0, NULL, SDL_FLIP_NONE, 0);
-		break;
-	case 1:
-		app->render->DrawTexture(mission1i1, 0, 0, NULL, SDL_FLIP_NONE, 0);
-		break;
-	default:
-		break;
-	}
-}
-
-void Hud::Inventory()
-{
-	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
-	{
-		inventory = !inventory;
-
-	}
-	if (inventory)
-	{
-		app->render->DrawTexture(inventoryTexture, 0, 0, NULL, SDL_FLIP_NONE, 0);
-		
-		for (int i = 0; i < 3; i++) {
-			if (!inventorySlots[i].isEmpty) {
-				app->render->DrawTexture(inventorySlots[i].texture, inventorySlots[i].position.x, inventorySlots[i].position.y, NULL, SDL_FLIP_NONE, 0);
-			}
-		}
-	}
-		
-}
-
-void Hud::Shop()
-{
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && shop)
-	{
-		shop = false;
-
-	}
-	if (shop)
-	{
-		app->render->DrawTexture(shopTexture, 0, 0, NULL, SDL_FLIP_NONE, 0);
-		
-		
-		for (int i = 0; i < 4; i++) {
-			if (shopSlots[i].isEmpty) {
-				app->render->DrawTexture(emptyslotTexture, shopSlots[i].position.x, shopSlots[i].position.y, NULL, SDL_FLIP_NONE, 0);
-			}
-			else {
-				app->render->DrawTexture(shopSlots[i].texture, shopSlots[i].position.x, shopSlots[i].position.y, NULL, SDL_FLIP_NONE, 0);
-			}
-		}
-
-		app->render->DrawTexture(selectorItemTexture, shopSlots[itemId].position.x, shopSlots[itemId].position.y, NULL, SDL_FLIP_NONE, 0);
-
-		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && itemId > 0  )
-		{
-			itemId--;
-
-		}
-		else if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && itemId < 2)
-		{
-			itemId++;
-		}
-
-		if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN && !shopSlots[itemId].isBought)
-		{
-			
-			if (inventorySlots[itemId].isEmpty) {
-				inventorySlots[itemId].isEmpty = false;
-				inventorySlots[itemId].texture = items[itemId].texture;
-				shopSlots[itemId].isEmpty = true;
-				shopSlots[itemId].isBought = true;
-
-			}
-		}
-		/*for (int i = 0; i < 3; i++) {
-			if (!slots[i].isEmpty) {
-				app->render->DrawTexture(slots[i].texture, slots[i].position.x, slots[i].position.y, NULL, SDL_FLIP_NONE, 0);
-			}
-		}*/
-
-		
-	}
-}
-
 
 
 bool Hud::CleanUp()
@@ -849,170 +652,6 @@ bool Hud::CleanUp()
 	app->tex->UnLoad(settingsAudioButtonHover);
 	app->tex->UnLoad(settingsOptionsButtonNormal);
 	app->tex->UnLoad(settingsOptionsButtonHover);
-	app->tex->UnLoad(inventoryTexture);
-	app->tex->UnLoad(inventoryItem1);
-	app->tex->UnLoad(inventoryItem2);
-	app->tex->UnLoad(inventoryItem3);
-	app->tex->UnLoad(shopTexture);
-	app->tex->UnLoad(emptyslotTexture);
-	app->tex->UnLoad(skillTree);
-	app->tex->UnLoad(skillTreerama_1);
-	app->tex->UnLoad(skillTreerama_2_1);
-	app->tex->UnLoad(skillTreerama_3_1);
-	app->tex->UnLoad(skillTreerama_2_2);
-	app->tex->UnLoad(skillTreerama_3_2);
-	app->tex->UnLoad(SkillTreeTalent);
-	app->tex->UnLoad(SkillTreeLife_1);
-	app->tex->UnLoad(SkillTreeLife_2);
-	app->tex->UnLoad(SkillTreeSpeed_1);
-	app->tex->UnLoad(SkillTreeSpeed_2);
-	app->tex->UnLoad(SkillTreeAtack_1_1);
-	app->tex->UnLoad(SkillTreeAtack_1_2);
-	app->tex->UnLoad(SkillTreeAtack_2_1);
-	app->tex->UnLoad(SkillTreeAtack_2_2);
-	app->tex->UnLoad(SkillTreeAtack_3_1);
-	app->tex->UnLoad(SkillTreeAtack_3_2);
-	app->tex->UnLoad(SkillTreeAtack_4_1);
-	app->tex->UnLoad(SkillTreeAtack_4_2);
-	app->tex->UnLoad(SkillTreeAtack_5_1);
-	app->tex->UnLoad(SkillTreeAtack_5_2);
-	app->tex->UnLoad(SkillTreeAtack_6_1);
-	app->tex->UnLoad(SkillTreeAtack_6_2);
-	app->tex->UnLoad(SkillTreeAtack_7_1);
-	app->tex->UnLoad(SkillTreeAtack_7_2);
-	app->tex->UnLoad(SkillTreeAtack_8_1);
-	app->tex->UnLoad(SkillTreeAtack_8_2);
-	app->tex->UnLoad(Selection);
 
 	return true;
 }
-
-void Hud::SkillTree()
-{
-	app->render->DrawTexture(skillTree, 0, 0, NULL, SDL_FLIP_NONE, 0);
-	app->render->DrawTexture(Rama1_1, 405, 199, NULL, SDL_FLIP_HORIZONTAL, 0);
-	app->render->DrawTexture(Rama1_2, 252, 199, NULL, SDL_FLIP_NONE, 0);
-	app->render->DrawTexture(Rama2_1, 486, 336, NULL, SDL_FLIP_NONE, 0);
-	app->render->DrawTexture(Rama2_2, 252, 336, NULL, SDL_FLIP_NONE, 0);	
-	app->render->DrawTexture(Rama3_1, 388, 436, NULL, SDL_FLIP_HORIZONTAL, 0);
-	app->render->DrawTexture(Rama3_2, 251, 435, NULL, SDL_FLIP_NONE, 0);
-
-	app->render->DrawTexture(Talent1, 333, 162, NULL, SDL_FLIP_NONE, 0);
-	app->render->DrawTexture(Talent2, 450, 263, NULL, SDL_FLIP_NONE, 0);
-	app->render->DrawTexture(Talent3, 450, 358, NULL, SDL_FLIP_NONE, 0);
-	app->render->DrawTexture(Talent4, 213, 263, NULL, SDL_FLIP_NONE, 0);
-	app->render->DrawTexture(Talent5, 213, 358, NULL, SDL_FLIP_NONE, 0);
-
-	//Change sprites if talents are locked
-	if (talent2locked)
-	{
-		Rama1_1 = skillTreerama_1;
-		Rama2_1 = skillTreerama_2_1;
-		Rama3_1 = skillTreerama_3_1;
-		Talent2 = SkillTreeLife_2;
-	}
-	if (talent3locked)
-	{
-		Rama2_1 = skillTreerama_2_2;
-		Rama3_1 = skillTreerama_3_2;
-		Talent3 = SkillTreeSpeed_2;
-	}
-	if (talent4locked)
-	{
-		Rama1_2 = skillTreerama_1;
-		Rama2_2 = skillTreerama_2_1;
-		Rama3_2 = skillTreerama_3_1;
-		Talent4 = SkillTreeAtack_1_2;
-	}
-	if (talent5locked)
-	{
-		Rama2_2 = skillTreerama_2_2;
-		Rama3_2 = skillTreerama_3_2;
-		Talent5 = SkillTreeAtack_2_2;
-	}
-
-	//Move the selection
-	if (talent1selected)
-	{
-		app->render->DrawTexture(Selection, 333, 162);
-		if (app->input->GetKey(SDL_SCANCODE_RIGHT)==KEY_DOWN)
-		{
-			talent1selected = false;
-			talent2selected = true;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
-		{
-			talent1selected = false;
-			talent4selected = true;
-		}
-	}
-	if (talent2selected)
-	{
-		app->render->DrawTexture(Selection, 450, 263);
-		if (app->input->GetKey(SDL_SCANCODE_M)==KEY_DOWN)
-		{
-			talent2locked = true;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_UP)==KEY_DOWN)
-		{
-			talent2selected = false;
-			talent1selected = true;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
-		{
-			talent2selected = false;
-			talent3selected = true;
-		}
-	}
-	if (talent3selected)
-	{
-		app->render->DrawTexture(Selection, 450, 358);
-		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && talent2locked)
-		{
-			talent3locked = true;
-		}
-		if (talent3locked)
-		{
-			Talent3 = SkillTreeSpeed_2;
-			app->render->DrawTexture(skillTreerama_2_2, 486, 336);
-			app->render->DrawTexture(skillTreerama_3_2, 388, 436, NULL, SDL_FLIP_HORIZONTAL);
-		}
-		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
-		{
-			talent3selected = false;
-			talent2selected = true;
-		}
-	}
-	if (talent4selected)
-	{
-		app->render->DrawTexture(Selection, 213, 263);
-		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
-		{
-			talent4locked = true;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
-		{
-			talent4selected = false;
-			talent1selected = true;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
-		{
-			talent4selected = false;
-			talent5selected = true;
-		}
-	}
-	if (talent5selected)
-	{
-		app->render->DrawTexture(Selection, 213, 358);
-		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && talent4locked)
-		{
-			talent5locked = true;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
-		{
-			talent5selected = false;
-			talent4selected = true;
-		}
-	}
-}
-

@@ -1,6 +1,4 @@
 #include "DialogTriggerEntity.h"
-#include "App.h"
-#include "Hud.h"
 #include "DialogManager.h"
 #include "App.h"
 #include "Textures.h"
@@ -8,7 +6,6 @@
 #include "Input.h"
 #include "Render.h"
 #include "SceneVillage.h"
-#include "Hud.h"
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
@@ -16,13 +13,6 @@
 #include "SceneOasisFaraon.h"
 #include "SceneTemple.h"
 #include "SceneFloor1.h"
-#include "FadeToBlack.h"
-#include "SceneChoza.h"
-#include "Npcs.h"
-
-#include <thread>
-#include <chrono>
-#include <future>
 
 DialogTrigger::DialogTrigger() : Entity(EntityType::DIALOG_TRIGGER)
 {
@@ -44,8 +34,6 @@ bool DialogTrigger::Start() {
 	faceTexturePath = parameters.attribute("facetexturepath").as_string("");
 	repeatDialog = parameters.attribute("repeat").as_bool(false);
 	dialogScene = parameters.attribute("scene").as_int();
-	id = parameters.attribute("id").as_int();
-
 	dialogs[0] = app->audio->LoadFx(parameters.attribute("audio_1").as_string());
 	dialogs[1] = app->audio->LoadFx(parameters.attribute("audio_2").as_string());
 	dialogs[2] = app->audio->LoadFx(parameters.attribute("audio_3").as_string());
@@ -90,22 +78,17 @@ bool DialogTrigger::Update(float dt)
 	else if (app->sceneTemple->active && dialogScene == app->sceneTemple->sceneNum)
 	{
 		if (!physCreated) CreateColliderBig();
-	}
+  }
 	else if (app->sceneFloor1->active && dialogScene == app->sceneFloor1->sceneNum)
 	{
 		if (!physCreated) CreateCollider();
 
 	}
-	else if (app->sceneChoza->active && dialogScene == app->sceneChoza->sceneNum)
-	{
-		if (!physCreated) CreateCollider();
-
-	}
 	else if (physCreated)
-	{
+  {
     app->physics->world->DestroyBody(pbody->body);
     physCreated = false;
-	}
+  }
 
 	return true;
 }
@@ -158,7 +141,6 @@ void DialogTrigger::PlayDialog()
 			app->dialogManager->AddDialog(pDialog);
 		}
 		played = true;
-		
 
 		//Play el dialogo repetido
 	}
@@ -173,9 +155,8 @@ void DialogTrigger::PlayDialog()
 			pDialog = item->data;
 			app->dialogManager->AddDialog(pDialog);
 		}
-	
 	}
-	Interact(id);
+
 }
 
 void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
@@ -204,82 +185,4 @@ void DialogTrigger::CreateColliderBig()
 	pbody->listener = this;
 	pbody->ctype = ColliderType::DIALOG_TRIGGER;
 	physCreated = true;
-}
-
-void DialogTrigger::Interact(int id)
-{
-	switch (id)
-	{
-	case 1:
-		GiveMission(1);
-		break;
-	case 2:
-		GiveMission(2);
-		break;
-	case 3:
-		GiveMission(3);
-		break;
-	case 4:
-		GiveMission(4);
-		break;
-	case 5:
-		GiveMission(5);
-		break;
-	case 6:
-		GiveMission(6);
-		break;
-	case 7:
-		GiveMission(7);
-		break;
-	case 8:
-		GiveMission(8);
-		break;
-	case 9:
-		GiveMission(9);
-		break;
-	default:
-		break;
-	}
-
-}
-
-void DialogTrigger::GiveMission(int idMission)
-{
-	switch (idMission)
-	{
-	case 1:
-		app->hud->mission10Active = true;
-		break;
-	case 2:
-		app->hud->mission11Active= false;
-		app->hud->mission1Complete = true;
-		app->fade->Fade((Module*)app->sceneChoza, (Module*)app->sceneVillage, 280.0f);
-		printf(" La abuela  \n");
-		break;
-	case 3:
-		printf(" Soy maat \n");
-		app->hud->abilityTree = true;
-		break;
-	case 4:
-		printf(" toth  \n");
-		break;
-	case 5:
-		printf(" Soy ISIS  \n");
-		break;
-	case 6:
-		printf(" Horrus  \n");
-		break;
-	case 7:
-		printf("  mi humilde tienda \n");
-		app->hud->shop = true;
-		break;
-	case 8:
-		printf(" Soy el tabernero\n");
-		break;
-	case 9:
-		printf(" Que haces pidiendome wishky con cereales \n");
-		break;
-	default:
-		break;
-	}
 }
