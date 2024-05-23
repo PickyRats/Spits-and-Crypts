@@ -55,7 +55,7 @@
 		<npc x="970" y="520" texturepath="Assets/Textures/Npcs/mercante.png" id="7" scene="3"/>
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="1024" y="576"  name="Mercante" repeat="true" scene="3"  audio_1="Assets/Audio/Fx/tienda/voz_tienda_1.wav" audio_2="Assets/Audio/Fx/tienda/voz_tienda_2.wav" audio_3="Assets/Audio/Fx/tienda/voz_tienda_3.wav">
+		<dialogTrigger x="1024" y="576"  name="Mercante" repeat="true" scene="3" id="7" audio_1="Assets/Audio/Fx/tienda/voz_tienda_1.wav" audio_2="Assets/Audio/Fx/tienda/voz_tienda_2.wav" audio_3="Assets/Audio/Fx/tienda/voz_tienda_3.wav">
 		  <sentences>
 			  <sentence text="Bienvenido a mi humilde rinconcillo"/>
 			  <sentence text="Si quieres algo, no lo robes"/>
@@ -173,7 +173,7 @@
 		<npc x="1000" y="386" texturepath="Assets/Textures/Npcs/horus.png" id="6" scene="2"/>
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="320" y="540"  name="Maat" repeat="true" scene="2" audio_1="Assets/Audio/Fx/maat/voz_maat_1.wav" audio_2="Assets/Audio/Fx/maat/voz_maat_2.wav" audio_3="Assets/Audio/Fx/maat/voz_maat_3.wav">
+		<dialogTrigger x="320" y="540"  name="Maat" repeat="true" scene="2" id="3" audio_1="Assets/Audio/Fx/maat/voz_maat_1.wav" audio_2="Assets/Audio/Fx/maat/voz_maat_2.wav" audio_3="Assets/Audio/Fx/maat/voz_maat_3.wav">
 			<sentences>
 				<sentence text="Soy Maat, ¿Qué atributos quieres que te mejore?"/>
 				<sentence text="No sea tímido..."/>
@@ -352,6 +352,15 @@
 		<Personaje1 texturepath="Assets/Textures/Screens/Combat/fotopersonatge.png"/>
 		<Personaje2 texturepath="Assets/Textures/Screens/Combat/fotopersonatge2.png"/>
 		<numeros texturepath="Assets/Textures/Screens/Combat/numeros.png"/>
+
+		<inventory texturepath="Assets/Textures/Screens/Inventory/inventory.png"/>
+		<inventoryItem1 texturepath="Assets/Textures/Screens/Inventory/Amulet_Escarabat.png"/>
+		<inventoryItem2 texturepath="Assets/Textures/Screens/Inventory/Amulet_Serps.png"/>
+		<inventoryItem3 texturepath="Assets/Textures/Screens/Inventory/Amulet_Ull.png"/>
+
+		<shopTexture texturepath="Assets/Textures/Screens/Shop/shop.png"/>
+		<emptyslotTexture texturepath="Assets/Textures/Screens/Shop/emptyslot.png"/>
+		<selectorItemTexture texturepath="Assets/Textures/Screens/Shop/selectorItem.png"/>
 
 		<SkillTree texturepath="Assets/Textures/SkillTree/SkillTree.png"/>
 		<SkillTreeTalent texturepath="Assets/Textures/SkillTree/SkillTreeTalent.png"/>

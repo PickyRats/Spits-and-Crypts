@@ -11,6 +11,22 @@
 #include "Timer.h"
 
 struct SDL_Texture;
+struct Slot {
+	iPoint position = { 0, 0 };
+	SDL_Texture* texture = nullptr;
+	bool isEmpty = true;
+	bool isBought = false;
+};
+
+struct Item {
+	const char* name = nullptr;
+	const char* description = nullptr;
+	int health = 0;
+	int attack = 0;
+	int price = 0;
+
+	SDL_Texture* texture = nullptr;
+};
 
 class Hud : public Module
 {
@@ -26,16 +42,29 @@ public:
 
 	bool Update(float dt);
 
+	void Inventory();
+
+	void Shop();
+
 	bool CleanUp();
 
 	void DrawTimer();
 
 	void SkillTree();
 
+
+
 	bool playerDeadHud = false;
 	bool spacePressed = false;
 	bool onSettings = false;
 	bool abilityTree = false;
+	int currentId = 0;
+
+	Slot inventorySlots[3];
+	Item items[3];
+
+	Slot shopSlots[3];
+	bool shop = false;
 	
 private:
 
@@ -132,6 +161,20 @@ private:
 	SDL_Texture* settingsBoxHover;
 
 	SDL_Texture* settings;
+
+	//Inventory
+
+	SDL_Texture* inventoryTexture;
+	SDL_Texture* inventoryItem1;
+	SDL_Texture* inventoryItem2;
+	SDL_Texture* inventoryItem3;
+	bool inventory = false;
+
+	//Shop
+	int itemId = 0;
+	SDL_Texture* shopTexture;
+	SDL_Texture* emptyslotTexture;
+	SDL_Texture* selectorItemTexture;
 
 
 	GuiControlButton* exitButton;
