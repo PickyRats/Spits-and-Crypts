@@ -22,7 +22,6 @@
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
-
 }
 
 Player::~Player() {
@@ -242,6 +241,17 @@ bool Player::Update(float dt)
 				app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneCombat, 60.0f);
 				enterCombat = false;
 			}
+			else if (doorChoza)
+			{
+				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneChoza, 60.0f);
+				if (app->hud->mission10Active)
+				{
+					app->hud->mission11Active = true;
+					app->hud->mission10Active = false;
+					app->sceneVillage->piedra->body->SetTransform({ 0,0 }, 0);
+				}
+				doorChoza = false;
+			}
 		}
 	}
 	//printf("\r cameraX: %d cameraY: %d positionX: %d positionY %d", app->render->camera.x, app->render->camera.y, position.x, position.y);
@@ -435,6 +445,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::LIGHT2:
 		app->sceneLight->interactTrapdoor = true;
 		break;
+	case ColliderType::DOOR_CHOZA:
+		doorChoza = true;
+		break;
 	}
 
 }
@@ -476,6 +489,9 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::LIGHT2:
 		app->sceneLight->interactTrapdoor = false;
 		app->sceneLight->isInteractingTrapdoor = false;
+		break;
+	case ColliderType::DOOR_CHOZA:
+		doorChoza = false;
 		break;
 	}
 

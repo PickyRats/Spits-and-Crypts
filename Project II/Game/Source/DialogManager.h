@@ -49,7 +49,7 @@ public:
 	List<Dialog*> dialogues;
 
 	bool isPlaying;
-
+	bool dialogFinished;
 
 private:
 
@@ -83,6 +83,8 @@ private:
 
 	SDL_Texture* background_tex;
 	std::string background_tex_path;
+	SDL_Texture* background_mission;
+	std::string background_mission_path;
 	int indexText;
 	Timer charTimer;
 	int optionSelected = 0;

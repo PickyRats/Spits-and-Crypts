@@ -50,13 +50,21 @@ public:
 
 	void DrawTimer();
 
+	void Missions(int mission1);
 	void SkillTree();
-
 
 
 	bool playerDeadHud = false;
 	bool spacePressed = false;
 	bool onSettings = false;
+
+	int currentId = 0;
+
+	int mission1 = 3;
+	bool mission10Active = false;
+	bool mission11Active = false;
+	bool mission1Complete = false;
+
 	bool abilityTree = false;
 	int currentId = 0;
 
@@ -65,6 +73,7 @@ public:
 
 	Slot shopSlots[3];
 	bool shop = false;
+
 	
 private:
 
@@ -195,6 +204,11 @@ private:
 	GuiControlButton* settingsControlsButton;
 	GuiControlButton* settingsAudioButton;
 
+
+	SDL_Texture* mission1i0;
+	SDL_Texture* mission1i1;
+	SDL_Texture* mission1i2;
+
 	//HabilityTree
 
 	SDL_Texture* skillTree;
@@ -263,7 +277,6 @@ private:
 	//Talent 5
 	bool talent5selected = false;
 	bool talent5locked = false;
-
 
 	bool onSettingsControls = false;
 	bool onSettingsAudio = true;

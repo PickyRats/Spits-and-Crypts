@@ -19,6 +19,7 @@ class SceneVillage;
 class SceneShop;
 class SceneOasisFaraon;
 class SceneTemple;
+class SceneChoza;
 class SceneFloor1;
 class SceneEnding;
 class SceneLight;
@@ -112,6 +113,7 @@ public:
 	SceneVillage* sceneVillage;
 	SceneShop* sceneShop;
 	SceneOasisFaraon* sceneOasisFaraon;
+	SceneChoza* sceneChoza;
 	SceneTemple* sceneTemple;
 	SceneEnding* sceneEnding;
 	SceneFloor1* sceneFloor1;

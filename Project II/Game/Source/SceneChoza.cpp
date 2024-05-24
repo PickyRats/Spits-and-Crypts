@@ -1,3 +1,4 @@
+#include "SceneChoza.h"
 #include "App.h"
 #include "Input.h"
 #include "Textures.h"
@@ -18,19 +19,18 @@
 
 using namespace std;
 
-SceneVillage::SceneVillage(bool enabled) : Module(enabled)
+SceneChoza::SceneChoza(bool enabled) : Module(enabled)
 {
-	name.Create("sceneVillage");
+	name.Create("sceneChoza");
 }
-
 // Destructor
-SceneVillage::~SceneVillage()
+SceneChoza::~SceneChoza()
 {}
 
-pugi::xml_node configNode;
+pugi::xml_node configNodeChoza;
 
 // Called before render is available
-bool SceneVillage::Awake(pugi::xml_node& config)
+bool SceneChoza::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
@@ -45,7 +45,6 @@ bool SceneVillage::Awake(pugi::xml_node& config)
 		Npcs* npc = (Npcs*)app->entityManager->CreateEntity(EntityType::NPCS);
 		npc->parameters = itemNode;
 	}
-
 	for (pugi::xml_node itemNode = config.child("dialogTrigger"); itemNode; itemNode = itemNode.next_sibling("dialogTrigger"))
 	{
 		DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER);
@@ -58,27 +57,25 @@ bool SceneVillage::Awake(pugi::xml_node& config)
 	//	app->map->path = config.child("map").attribute("path").as_string();
 	//}
 
-	spawnPosition = { 96, 675 };
-
-	configNode = config;
+	configNodeChoza = config;
 
 	return ret;
 }
 
 // Called before the first frame
-bool SceneVillage::Start()
+bool SceneChoza::Start()
 {
-	if (configNode.child("map")) {
+	if (configNodeChoza.child("map")) {
 		//Get the map name from the config file and assigns the value in the module
-		app->map->mapName = configNode.child("map").attribute("name").as_string();
-		app->map->path = configNode.child("map").attribute("path").as_string();
+		app->map->mapName = configNodeChoza.child("map").attribute("name").as_string();
+		app->map->path = configNodeChoza.child("map").attribute("path").as_string();
 	}
 	app->map->Enable();
 	app->entityManager->Enable();
 	app->hud->Enable();
 
 	//Load the player in the map
-	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(spawnPosition.x), PIXEL_TO_METERS(spawnPosition.y)), 0);
+	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(96), PIXEL_TO_METERS(640)), 0);
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -91,43 +88,25 @@ bool SceneVillage::Start()
 
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
+	aldea = app->tex->Load("Assets/Textures/Screens/choza.png");
 
-	int i = 1;
-	if (!piedraHecha)
-	{
-		piedra = app->physics->CreateRectangle(200, 640, 100, 100, DYNAMIC);
-		piedraHecha = true;
-	}
-
-	piedra->body->SetGravityScale(15);
-
-	piedraTexture = app->tex->Load("Assets/Textures/Items/piedra.png");
-
-	aldea = app->tex->Load("Assets/Textures/Screens/aldea.png");
-
-	app->audio->PlayMusic(configNode.child("villageAmbient").attribute("path").as_string());
+	app->audio->PlayMusic(configNodeChoza.child("villageAmbient").attribute("path").as_string());
 	return true;
 }
 
 // Called each loop iteration
-bool SceneVillage::PreUpdate()
+bool SceneChoza::PreUpdate()
 {
 	return true;
 }
-
-// Called each loop iteration
-bool SceneVillage::Update(float dt)
+bool SceneChoza::Update(float dt)
 {
 	app->render->DrawTexture(aldea, -5, 0, NULL, SDL_FLIP_NONE, 1);
-
-	int piedraX = METERS_TO_PIXELS(piedra->body->GetPosition().x);
-	int piedraY = METERS_TO_PIXELS(piedra->body->GetPosition().y);
-	app->render->DrawTexture(piedraTexture, piedraX - 50, piedraY - 50);
 
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;
 
-	SetCameraPosition(playerX-550, 48);
+	SetCameraPosition(playerX - 550, 48);
 
 	ClampCamera();
 
@@ -139,9 +118,8 @@ bool SceneVillage::Update(float dt)
 
 	return true;
 }
-
 // Called each loop iteration
-bool SceneVillage::PostUpdate()
+bool SceneChoza::PostUpdate()
 {
 	bool ret = true;
 
@@ -153,12 +131,12 @@ bool SceneVillage::PostUpdate()
 			Mix_VolumeMusic(app->sceneMenu->percentageMusic);
 		};
 	}
-	
+
 	return ret;
 }
 
 // Called before quitting
-bool SceneVillage::CleanUp()
+bool SceneChoza::CleanUp()
 {
 	LOG("Freeing scene");
 
@@ -166,14 +144,13 @@ bool SceneVillage::CleanUp()
 	app->tex->UnLoad(aldea);
 	return true;
 }
-
-void SceneVillage::SetCameraPosition(int x, int y)
+void SceneChoza::SetCameraPosition(int x, int y)
 {
 	cameraX = x;
 	cameraY = y;
 }
 
-void SceneVillage::ClampCamera()
+void SceneChoza::ClampCamera()
 {
 	// Clamp camera
 
@@ -182,10 +159,8 @@ void SceneVillage::ClampCamera()
 
 	if (cameraY < 0) cameraY = 0;
 	else if (cameraY + windowH > levelHeight) cameraY = levelHeight - windowH;
-	
-}
 
-bool SceneVillage::LoadState(pugi::xml_node node)
+}bool SceneChoza::LoadState(pugi::xml_node node)
 {
 	pugi::xml_node status = node.append_child("status");
 	status.attribute("status").as_bool();
@@ -193,7 +168,7 @@ bool SceneVillage::LoadState(pugi::xml_node node)
 	return true;
 }
 
-bool SceneVillage::SaveState(pugi::xml_node node)
+bool SceneChoza::SaveState(pugi::xml_node node)
 {
 	pugi::xml_node status = node.append_child("status");
 	status.append_attribute("status").set_value(1);
@@ -201,7 +176,7 @@ bool SceneVillage::SaveState(pugi::xml_node node)
 	return true;
 }
 
-bool SceneVillage::OnGuiMouseClickEvent(GuiControl* control)
+bool SceneChoza::OnGuiMouseClickEvent(GuiControl* control)
 {
 	LOG("Press Gui Control: %d", control->id);
 

@@ -40,11 +40,6 @@ private:
 
 
 
-
-public:
-
-private:
-
 	//En caso de querer añadirle una textura a la entidad
 	SDL_Texture* texture;
 

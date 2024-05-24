@@ -1,6 +1,7 @@
 #include "DialogTriggerEntity.h"
 #include "DialogManager.h"
 #include "App.h"
+#include "Hud.h"
 #include "Textures.h"
 #include "Audio.h"
 #include "Input.h"
@@ -14,6 +15,13 @@
 #include "SceneOasisFaraon.h"
 #include "SceneTemple.h"
 #include "SceneFloor1.h"
+#include "FadeToBlack.h"
+#include "SceneChoza.h"
+#include "Npcs.h"
+
+#include <thread>
+#include <chrono>
+#include <future>
 
 DialogTrigger::DialogTrigger() : Entity(EntityType::DIALOG_TRIGGER)
 {
@@ -35,9 +43,8 @@ bool DialogTrigger::Start() {
 	faceTexturePath = parameters.attribute("facetexturepath").as_string("");
 	repeatDialog = parameters.attribute("repeat").as_bool(false);
 	dialogScene = parameters.attribute("scene").as_int();
-	dialogs[0] = app->audio->LoadFx(parameters.attribute("audio_1").as_string());
-	dialogs[1] = app->audio->LoadFx(parameters.attribute("audio_2").as_string());
-	dialogs[2] = app->audio->LoadFx(parameters.attribute("audio_3").as_string());
+	id = parameters.attribute("id").as_int();
+
 	played = false;
 	std::string fontTarget = parameters.attribute("font").as_string("primary");
 
@@ -79,17 +86,22 @@ bool DialogTrigger::Update(float dt)
 	else if (app->sceneTemple->active && dialogScene == app->sceneTemple->sceneNum)
 	{
 		if (!physCreated) CreateColliderBig();
-  }
+	}
 	else if (app->sceneFloor1->active && dialogScene == app->sceneFloor1->sceneNum)
 	{
 		if (!physCreated) CreateCollider();
 
 	}
+	else if (app->sceneChoza->active && dialogScene == app->sceneChoza->sceneNum)
+	{
+		if (!physCreated) CreateCollider();
+
+	}
 	else if (physCreated)
-  {
+	{
     app->physics->world->DestroyBody(pbody->body);
     physCreated = false;
-  }
+	}
 
 	return true;
 }
@@ -160,7 +172,6 @@ void DialogTrigger::PlayDialog()
 
 	}
 	Interact(id);
-
 }
 
 void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
@@ -234,14 +245,19 @@ void DialogTrigger::GiveMission(int idMission)
 	{
 	case 1:
 
+		printf(" La abuela  \n");
+		app->hud->mission10Active = true;
 		break;
 	case 2:
-
-		printf(" La abuela  \n");
+		printf("  la nieta  \n");
+		app->hud->mission11Active = false;
+		app->hud->mission1Complete = true;
+		app->fade->Fade((Module*)app->sceneChoza, (Module*)app->sceneVillage, 60.0f);
 		break;
 	case 3:
 		printf(" Soy maat \n");
-		app->hud->abilityTree = true;
+    app->hud->abilityTree = true;
+
 		break;
 	case 4:
 		printf(" toth  \n");

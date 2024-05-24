@@ -1530,7 +1530,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="22"/>
+   <tile gid="155"/>
    <tile/>
    <tile gid="22"/>
    <tile/>
@@ -1575,7 +1575,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="22"/>
+   <tile gid="158"/>
    <tile/>
    <tile gid="22"/>
    <tile/>
@@ -2122,7 +2122,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="14"/>
    <tile/>
    <tile/>
    <tile/>
