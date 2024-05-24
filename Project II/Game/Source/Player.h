@@ -113,7 +113,6 @@ public:
 
 	bool isDead = false;
 
-
 };
 
 #endif // __PLAYER_H__

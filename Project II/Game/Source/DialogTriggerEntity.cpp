@@ -7,6 +7,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "SceneVillage.h"
+#include "Hud.h"
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
@@ -145,14 +146,15 @@ void DialogTrigger::PlayDialog()
 	if ((played && !repeatDialog) || !played) {
 		ListItem<Dialog*>* item;
 		Dialog* pDialog = nullptr;
-		app->audio->PlayFx(dialogs[rand()%2]);
+		app->audio->PlayFx(dialogs[rand() % 2]);
 		for (item = dialogues.start; item != NULL; item = item->next)
 		{
-			
+
 			pDialog = item->data;
 			app->dialogManager->AddDialog(pDialog);
 		}
 		played = true;
+
 
 		//Play el dialogo repetido
 	}
@@ -167,6 +169,7 @@ void DialogTrigger::PlayDialog()
 			pDialog = item->data;
 			app->dialogManager->AddDialog(pDialog);
 		}
+
 	}
 	Interact(id);
 }
@@ -198,6 +201,7 @@ void DialogTrigger::CreateColliderBig()
 	pbody->ctype = ColliderType::DIALOG_TRIGGER;
 	physCreated = true;
 }
+
 void DialogTrigger::Interact(int id)
 {
 	switch (id)
@@ -240,6 +244,7 @@ void DialogTrigger::GiveMission(int idMission)
 	switch (idMission)
 	{
 	case 1:
+
 		printf(" La abuela  \n");
 		app->hud->mission10Active = true;
 		break;
@@ -251,6 +256,8 @@ void DialogTrigger::GiveMission(int idMission)
 		break;
 	case 3:
 		printf(" Soy maat \n");
+    app->hud->abilityTree = true;
+
 		break;
 	case 4:
 		printf(" toth  \n");
@@ -263,6 +270,7 @@ void DialogTrigger::GiveMission(int idMission)
 		break;
 	case 7:
 		printf("  mi humilde tienda \n");
+		app->hud->shop = true;
 		break;
 	case 8:
 		printf(" Soy el tabernero\n");

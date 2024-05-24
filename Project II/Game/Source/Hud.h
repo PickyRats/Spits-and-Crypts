@@ -11,6 +11,22 @@
 #include "Timer.h"
 
 struct SDL_Texture;
+struct Slot {
+	iPoint position = { 0, 0 };
+	SDL_Texture* texture = nullptr;
+	bool isEmpty = true;
+	bool isBought = false;
+};
+
+struct Item {
+	const char* name = nullptr;
+	const char* description = nullptr;
+	int health = 0;
+	int attack = 0;
+	int price = 0;
+
+	SDL_Texture* texture = nullptr;
+};
 
 class Hud : public Module
 {
@@ -26,21 +42,38 @@ public:
 
 	bool Update(float dt);
 
+	void Inventory();
+
+	void Shop();
+
 	bool CleanUp();
 
 	void DrawTimer();
 
 	void Missions(int mission1);
+	void SkillTree();
+
 
 	bool playerDeadHud = false;
 	bool spacePressed = false;
 	bool onSettings = false;
+
 	int currentId = 0;
 
 	int mission1 = 3;
 	bool mission10Active = false;
 	bool mission11Active = false;
 	bool mission1Complete = false;
+
+	bool abilityTree = false;
+	int currentId = 0;
+
+	Slot inventorySlots[3];
+	Item items[3];
+
+	Slot shopSlots[3];
+	bool shop = false;
+
 	
 private:
 
@@ -138,6 +171,20 @@ private:
 
 	SDL_Texture* settings;
 
+	//Inventory
+
+	SDL_Texture* inventoryTexture;
+	SDL_Texture* inventoryItem1;
+	SDL_Texture* inventoryItem2;
+	SDL_Texture* inventoryItem3;
+	bool inventory = false;
+
+	//Shop
+	int itemId = 0;
+	SDL_Texture* shopTexture;
+	SDL_Texture* emptyslotTexture;
+	SDL_Texture* selectorItemTexture;
+
 
 	GuiControlButton* exitButton;
 	GuiControlButton* returnButton;
@@ -157,9 +204,79 @@ private:
 	GuiControlButton* settingsControlsButton;
 	GuiControlButton* settingsAudioButton;
 
+
 	SDL_Texture* mission1i0;
 	SDL_Texture* mission1i1;
 	SDL_Texture* mission1i2;
+
+	//HabilityTree
+
+	SDL_Texture* skillTree;
+	SDL_Texture* skillTreerama_1;
+	SDL_Texture* skillTreerama_2_1;
+	SDL_Texture* skillTreerama_2_2;
+	SDL_Texture* skillTreerama_3_1;
+	SDL_Texture* skillTreerama_3_2;
+
+	SDL_Texture* SkillTreeTalent;
+
+	SDL_Texture* SkillTreeLife_1;
+	SDL_Texture* SkillTreeLife_2;
+	SDL_Texture* SkillTreeSpeed_1;
+	SDL_Texture* SkillTreeSpeed_2;
+
+	SDL_Texture* SkillTreeAtack_1_1;
+	SDL_Texture* SkillTreeAtack_1_2;
+	SDL_Texture* SkillTreeAtack_2_1;
+	SDL_Texture* SkillTreeAtack_2_2;
+	SDL_Texture* SkillTreeAtack_3_1;
+	SDL_Texture* SkillTreeAtack_3_2;
+	SDL_Texture* SkillTreeAtack_4_1;
+	SDL_Texture* SkillTreeAtack_4_2;
+	SDL_Texture* SkillTreeAtack_5_1;
+	SDL_Texture* SkillTreeAtack_5_2;
+	SDL_Texture* SkillTreeAtack_6_1;
+	SDL_Texture* SkillTreeAtack_6_2;
+	SDL_Texture* SkillTreeAtack_7_1;
+	SDL_Texture* SkillTreeAtack_7_2;
+	SDL_Texture* SkillTreeAtack_8_1;
+	SDL_Texture* SkillTreeAtack_8_2;
+
+	SDL_Texture* Selection;
+
+
+	//Talents
+	SDL_Texture* Talent1;
+	SDL_Texture* Talent2;
+	SDL_Texture* Talent3;
+	SDL_Texture* Talent4;
+	SDL_Texture* Talent5;
+
+	SDL_Texture* Rama1_1 = NULL;
+	SDL_Texture* Rama1_2 = NULL;
+	SDL_Texture* Rama2_1 = NULL;
+	SDL_Texture* Rama2_2 = NULL;
+	SDL_Texture* Rama3_1 = NULL;
+	SDL_Texture* Rama3_2 = NULL;
+
+	//Talent 1
+	bool talent1selected = true;
+
+	//Talent 2
+	bool talent2selected = false;
+	bool talent2locked = false;
+
+	//Talent 3
+	bool talent3selected = false;
+	bool talent3locked = false;
+
+	//Talent 4
+	bool talent4selected = false;
+	bool talent4locked = false;
+
+	//Talent 5
+	bool talent5selected = false;
+	bool talent5locked = false;
 
 	bool onSettingsControls = false;
 	bool onSettingsAudio = true;

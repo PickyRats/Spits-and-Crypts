@@ -118,6 +118,17 @@ bool SceneFloor1::PreUpdate()
 // Called each loop iteration
 bool SceneFloor1::Update(float dt)
 {
+	if (app->input->GetKey(SDL_SCANCODE_F1)==KEY_DOWN)
+	{
+		app->puzzle2->Enable();
+	}
+	if (app->input->GetKey(SDL_SCANCODE_F2)==KEY_DOWN)
+	{
+		//Hazme una fade a scenelight
+		app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneLight, 60.0f);
+		app->puzzle2->Disable();
+	}
+
 	//dibuja background
 	app->render->DrawTexture(floor1background, 0, 0, NULL, SDL_FLIP_NONE, 1);
 	app->render->DrawTexture(floor1background, 2940, 0, NULL, SDL_FLIP_NONE, 1);
