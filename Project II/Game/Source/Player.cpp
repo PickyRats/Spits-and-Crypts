@@ -96,7 +96,7 @@ bool Player::Update(float dt)
 						LeftMovement();
 					}
 				}
-				if (pad.l_x>0.2 )
+				if (pad.l_x <= -0.2)
 				{
 					if (!isClimbing)
 					{
@@ -112,16 +112,16 @@ bool Player::Update(float dt)
 						RightMovement();
 					}
 				}
-				if (pad.l_x < -0.2)
+				if (pad.l_x >= 0.2)
 				{
 					if (!isClimbing)
 					{
-						LeftMovement();
+						RightMovement();
 					}
 				}
 
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE
-					&&pad.l_x==0)
+					&& (pad.l_x < 0.2 && pad.l_x > -0.2))
 				{
 
 					isWalking = false;
@@ -235,7 +235,6 @@ bool Player::Update(float dt)
 		}
 	}
 	//printf("\r cameraX: %d cameraY: %d positionX: %d positionY %d", app->render->camera.x, app->render->camera.y, position.x, position.y);
-	
 	return true;
 }
 
