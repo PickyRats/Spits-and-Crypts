@@ -57,6 +57,7 @@ bool Puzzle::Update(float dt)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_1 + i) == KEY_DOWN)
 			{
+				SDL_JoystickSetLED(app->input->joy, 255, 255, 0);
 				if (!isSelecting && !pieceInSlot[i])
 				{
 					selectedPiece = i;
@@ -87,9 +88,11 @@ bool Puzzle::Update(float dt)
 			app->audio->PlayFx(completedPuzzleFx);
 		}
 
-		if (!isPuzzleCompleted)	ResetPuzzle();
-		else {
+		if (!isPuzzleCompleted) ResetPuzzle();
+		else
+		{
 			LOG("PUZZLE COMPLETED");
+			SDL_JoystickSetLED(app->input->joy, 0, 255, 0);
 			app->sceneFloor1->levelWidth = 147 * 64;
 		
 		}
@@ -107,6 +110,7 @@ bool Puzzle::Update(float dt)
 
 void Puzzle::ResetPuzzle()
 {
+	SDL_JoystickSetLED(app->input->joy, 255, 0, 0);
 	for (int i = 0; i < 4; i++)
 	{
 		piecePos[i] = pieceInitialPos[i];

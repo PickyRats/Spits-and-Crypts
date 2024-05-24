@@ -291,7 +291,7 @@ bool SceneCombat::Update(float dt)
 	// end combat
 	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN || (enemies[0]->isDead && enemies[1]->isDead))
 	{
-
+		SDL_JoystickSetLED(app->input->joy, 255, 255, 0);
 		EndCombat();
 	}
 
@@ -512,6 +512,8 @@ void SceneCombat::ChangeTurn()
 {
 	app->audio->PlayFx(pass_Turn);
 	currentEntity->currentPoints = currentEntity->totalPoints;
+
+	
 	if (isPlayerTurn) ResetPlayerTurn();
 	else
 	{
@@ -532,6 +534,7 @@ void SceneCombat::EnemyAttack()
 
 void SceneCombat::ResetPlayerTurn()
 {
+  SDL_JoystickSetLED(app->input->joy, 255, 0, 0);
 	tiles[0] = { enemies[currentEnemyIndex]->position, 0 };
 	ResetTilesArray(currentTile);
 	tilesCount = 0;
@@ -550,6 +553,7 @@ void SceneCombat::ResetPlayerTurn()
 
 void SceneCombat::ResetEnemyTurn()
 {
+  SDL_JoystickSetLED(app->input->joy, 0, 0, 255);
 	tiles[0] = { players[currentPlayerIndex]->position, 0 };
 	ResetTilesArray(currentTile);
 	tilesCount = 0;

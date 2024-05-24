@@ -118,6 +118,7 @@ bool SceneFloor1::PreUpdate()
 // Called each loop iteration
 bool SceneFloor1::Update(float dt)
 {
+
 	if (app->input->GetKey(SDL_SCANCODE_F1)==KEY_DOWN)
 	{
 		app->puzzle2->Enable();
