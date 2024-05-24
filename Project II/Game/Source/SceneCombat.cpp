@@ -587,7 +587,7 @@ void SceneCombat::EndCombat()
 	app->map->player->isCombat = false;
 	app->map->player2->isCombat = false;
 	app->map->player2->isVisible = false;
-	app->sceneFloor1->playerStartPosition = { 67 * 64, 4 * 64 };
+	app->sceneFloor1->playerStartPosition = { 67 * 64, 28 * 64 };
 	app->map->player->CreateBody();
 	app->sceneFloor1->levelWidth = 110 * 64;
 	app->fade->Fade((Module*)app->sceneCombat, (Module*)app->sceneFloor1, 60.0f);

@@ -66,7 +66,6 @@ public:
 	bool mission1Complete = false;
 
 	bool abilityTree = false;
-	int currentId = 0;
 
 	Slot inventorySlots[3];
 	Item items[3];
