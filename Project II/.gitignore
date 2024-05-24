@@ -32,6 +32,14 @@
 !Game/Source/External/Box2D/libx86/ReleaseLib/Box2D.lib
 !Game/Source/External/SDL_ttf/libx86/SDL2_ttf.lib
 !Game/Source/External/OPtick/lib/OptickCore.lib
+!Game/Source/External/ffmpeg/libx86/avcodec.lib
+!Game/Source/External/ffmpeg/libx86/avdevice.lib
+!Game/Source/External/ffmpeg/libx86/avfilter.lib
+!Game/Source/External/ffmpeg/libx86/avformat.lib
+!Game/Source/External/ffmpeg/libx86/avutil.lib
+!Game/Source/External/ffmpeg/libx86/postproc.lib
+!Game/Source/External/ffmpeg/libx86/swresample.lib
+!Game/Source/External/ffmpeg/libx86/swscale.lib
 
 # Executables
 *.exe

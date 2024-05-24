@@ -41,6 +41,8 @@ bool Enemy::Start() {
 
 	//currentAnim = &idleAnim;
 
+	attackDamage = 10;
+
 	return true;
 }
 

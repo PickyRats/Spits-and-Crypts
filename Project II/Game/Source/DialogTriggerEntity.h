@@ -31,6 +31,10 @@ public:
 
 	void CreateColliderBig();
 
+	void Interact(int id);
+
+	void GiveMission(int idMission);
+
 
 private:
 
@@ -66,7 +70,10 @@ private:
 	bool played = false;
 	bool physCreated = false;
 	int dialogScene;
+	int id;
 
+	uint dialogs[3];
+	
 	//Lista de dialogos a repetir
 	List<Dialog*> dialoguesRepeat;
 

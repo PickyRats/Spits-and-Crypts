@@ -111,12 +111,16 @@
     <ClCompile Include="Source\Puzzle.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Puzzle2.cpp" />
+    <ClCompile Include="Source\SceneEnding.cpp">
+    </ClCompile>
     <ClCompile Include="Source\Puzzle2.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="Source\SceneLight.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\CutscenePlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -267,12 +271,16 @@
     <ClInclude Include="Source\Puzzle.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Puzzle2.h" />
+    <ClInclude Include="Source\SceneEnding.h">
+    </ClInclude>
     <ClInclude Include="Source\Puzzle2.h">
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="Source\SceneLight.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\CutscenePlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

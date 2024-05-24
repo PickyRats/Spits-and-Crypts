@@ -6,6 +6,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "SceneVillage.h"
+#include "Hud.h"
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
@@ -34,7 +35,9 @@ bool DialogTrigger::Start() {
 	faceTexturePath = parameters.attribute("facetexturepath").as_string("");
 	repeatDialog = parameters.attribute("repeat").as_bool(false);
 	dialogScene = parameters.attribute("scene").as_int();
-
+	dialogs[0] = app->audio->LoadFx(parameters.attribute("audio_1").as_string());
+	dialogs[1] = app->audio->LoadFx(parameters.attribute("audio_2").as_string());
+	dialogs[2] = app->audio->LoadFx(parameters.attribute("audio_3").as_string());
 	played = false;
 	std::string fontTarget = parameters.attribute("font").as_string("primary");
 
@@ -131,13 +134,15 @@ void DialogTrigger::PlayDialog()
 	if ((played && !repeatDialog) || !played) {
 		ListItem<Dialog*>* item;
 		Dialog* pDialog = nullptr;
-
+		app->audio->PlayFx(dialogs[rand() % 2]);
 		for (item = dialogues.start; item != NULL; item = item->next)
 		{
+
 			pDialog = item->data;
 			app->dialogManager->AddDialog(pDialog);
 		}
 		played = true;
+
 
 		//Play el dialogo repetido
 	}
@@ -146,13 +151,15 @@ void DialogTrigger::PlayDialog()
 
 		ListItem<Dialog*>* item;
 		Dialog* pDialog = nullptr;
-
+		app->audio->PlayFx(dialogs[rand() % 2]);;
 		for (item = dialoguesRepeat.start; item != NULL; item = item->next)
 		{
 			pDialog = item->data;
 			app->dialogManager->AddDialog(pDialog);
 		}
+
 	}
+	Interact(id);
 
 }
 
@@ -182,4 +189,80 @@ void DialogTrigger::CreateColliderBig()
 	pbody->listener = this;
 	pbody->ctype = ColliderType::DIALOG_TRIGGER;
 	physCreated = true;
+}
+
+void DialogTrigger::Interact(int id)
+{
+	switch (id)
+	{
+	case 1:
+		GiveMission(1);
+		break;
+	case 2:
+		GiveMission(2);
+		break;
+	case 3:
+		GiveMission(3);
+		break;
+	case 4:
+		GiveMission(4);
+		break;
+	case 5:
+		GiveMission(5);
+		break;
+	case 6:
+		GiveMission(6);
+		break;
+	case 7:
+		GiveMission(7);
+		break;
+	case 8:
+		GiveMission(8);
+		break;
+	case 9:
+		GiveMission(9);
+		break;
+	default:
+		break;
+	}
+
+}
+
+void DialogTrigger::GiveMission(int idMission)
+{
+	switch (idMission)
+	{
+	case 1:
+
+		break;
+	case 2:
+
+		printf(" La abuela  \n");
+		break;
+	case 3:
+		printf(" Soy maat \n");
+		app->hud->abilityTree = true;
+		break;
+	case 4:
+		printf(" toth  \n");
+		break;
+	case 5:
+		printf(" Soy ISIS  \n");
+		break;
+	case 6:
+		printf(" Horrus  \n");
+		break;
+	case 7:
+		printf("  mi humilde tienda \n");
+		app->hud->shop = true;
+		break;
+	case 8:
+		printf(" Soy el tabernero\n");
+		break;
+	case 9:
+		printf(" Que haces pidiendome wishky con cereales \n");
+		break;
+	default:
+		break;
+	}
 }

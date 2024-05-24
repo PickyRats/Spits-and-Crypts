@@ -13,6 +13,7 @@
 #include "GuiManager.h"
 #include "ParticleManager.h"
 #include "Hud.h"
+#include "CutscenePlayer.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -42,39 +43,41 @@ bool SceneMenu::Awake(pugi::xml_node& config)
 bool SceneMenu::Start()
 {
 	//Load textures
-	background = app->tex->Load(configNode2.child("background").attribute("texturepath").as_string());
-	background2 = app->tex->Load(configNode2.child("background2").attribute("texturepath").as_string());
-	playNormal = app->tex->Load(configNode2.child("playNormal").attribute("texturepath").as_string());
-	playHover = app->tex->Load(configNode2.child("playHover").attribute("texturepath").as_string());
-	playClick = app->tex->Load(configNode2.child("playClick").attribute("texturepath").as_string());
-	loadGameDisabled = app->tex->Load(configNode2.child("loadGameDisabled").attribute("texturepath").as_string());
-	loadGameNormal = app->tex->Load(configNode2.child("loadGameNormal").attribute("texturepath").as_string());
-	loadGameHover = app->tex->Load(configNode2.child("loadGameHover").attribute("texturepath").as_string());
-	loadGameClick = app->tex->Load(configNode2.child("loadGameClick").attribute("texturepath").as_string());
-	settingsNormal = app->tex->Load(configNode2.child("settingsNormal").attribute("texturepath").as_string());
-	settingsHover = app->tex->Load(configNode2.child("settingsHover").attribute("texturepath").as_string());
-	settingsClick = app->tex->Load(configNode2.child("settingsClick").attribute("texturepath").as_string());
-	creditsNormal = app->tex->Load(configNode2.child("creditsNormal").attribute("texturepath").as_string());
-	creditsHover = app->tex->Load(configNode2.child("creditsHover").attribute("texturepath").as_string());
-	creditsClick = app->tex->Load(configNode2.child("creditsClick").attribute("texturepath").as_string());
-	exitNormal = app->tex->Load(configNode2.child("exitNormal").attribute("texturepath").as_string());
-	exitHover = app->tex->Load(configNode2.child("exitHover").attribute("texturepath").as_string());
-	exitClick = app->tex->Load(configNode2.child("exitClick").attribute("texturepath").as_string());
-	settings = app->tex->Load(configNode2.child("settings").attribute("texturepath").as_string());
-	credits = app->tex->Load(configNode2.child("credits").attribute("texturepath").as_string());
-	settingsBoxNormal = app->tex->Load(configNode2.child("settingsBoxNormal").attribute("texturepath").as_string());
-	settingsBoxHover = app->tex->Load(configNode2.child("settingsBoxHover").attribute("texturepath").as_string());
-	settingsControls = app->tex->Load(configNode2.child("settingsControls").attribute("texturepath").as_string());
-	settingsTick = app->tex->Load(configNode2.child("settingsTick").attribute("texturepath").as_string());
-	settingsSlider = app->tex->Load(configNode2.child("settingsSlider").attribute("texturepath").as_string());
-	settingsAudioPanel = app->tex->Load(configNode2.child("settingsAudioPanel").attribute("texturepath").as_string());
-	settingsOptionsPanel = app->tex->Load(configNode2.child("settingsOptionsPanel").attribute("texturepath").as_string());
-	settingsOptionsButtonNormal = app->tex->Load(configNode2.child("settingsOptionsButtonNormal").attribute("texturepath").as_string());
-	settingsOptionsButtonHover = app->tex->Load(configNode2.child("settingsOptionsButtonHover").attribute("texturepath").as_string());
-	settingsAudioButtonNormal = app->tex->Load(configNode2.child("settingsAudioButtonNormal").attribute("texturepath").as_string());
-	settingsAudioButtonHover = app->tex->Load(configNode2.child("settingsAudioButtonHover").attribute("texturepath").as_string());
-	settingsControlsButtonNormal = app->tex->Load(configNode2.child("settingsControlsButtonNormal").attribute("texturepath").as_string());
-	settingsControlsButtonHover = app->tex->Load(configNode2.child("settingsControlsButtonHover").attribute("texturepath").as_string());
+	background = app->tex->Load(configNode2.child("background").attribute("texturepath").as_string());//Cleaned
+	background2 = app->tex->Load(configNode2.child("background2").attribute("texturepath").as_string());//Cleaned
+	playNormal = app->tex->Load(configNode2.child("playNormal").attribute("texturepath").as_string());//Cleaned
+	playHover = app->tex->Load(configNode2.child("playHover").attribute("texturepath").as_string());//Cleaned
+	playClick = app->tex->Load(configNode2.child("playClick").attribute("texturepath").as_string());//Cleaned
+	loadGameDisabled = app->tex->Load(configNode2.child("loadGameDisabled").attribute("texturepath").as_string());//Cleaned
+	loadGameNormal = app->tex->Load(configNode2.child("loadGameNormal").attribute("texturepath").as_string());//Cleaned
+	loadGameHover = app->tex->Load(configNode2.child("loadGameHover").attribute("texturepath").as_string());//Cleaned
+	loadGameClick = app->tex->Load(configNode2.child("loadGameClick").attribute("texturepath").as_string());//Cleaned
+	settingsNormal = app->tex->Load(configNode2.child("settingsNormal").attribute("texturepath").as_string());//Cleaned
+	settingsHover = app->tex->Load(configNode2.child("settingsHover").attribute("texturepath").as_string());//Cleaned
+	settingsClick = app->tex->Load(configNode2.child("settingsClick").attribute("texturepath").as_string());//Cleaned
+	creditsNormal = app->tex->Load(configNode2.child("creditsNormal").attribute("texturepath").as_string());//Cleaned
+	creditsHover = app->tex->Load(configNode2.child("creditsHover").attribute("texturepath").as_string());//Cleaned
+	creditsClick = app->tex->Load(configNode2.child("creditsClick").attribute("texturepath").as_string());//Cleaned
+	exitNormal = app->tex->Load(configNode2.child("exitNormal").attribute("texturepath").as_string());//Cleaned
+	exitHover = app->tex->Load(configNode2.child("exitHover").attribute("texturepath").as_string());//Cleaned
+	exitClick = app->tex->Load(configNode2.child("exitClick").attribute("texturepath").as_string());//Cleaned
+	settings = app->tex->Load(configNode2.child("settings").attribute("texturepath").as_string());//Cleaned
+	credits = app->tex->Load(configNode2.child("credits").attribute("texturepath").as_string());//Cleaned
+	settingsBoxNormal = app->tex->Load(configNode2.child("settingsBoxNormal").attribute("texturepath").as_string());//Cleaned
+	settingsBoxHover = app->tex->Load(configNode2.child("settingsBoxHover").attribute("texturepath").as_string());//Cleaned
+	settingsControls = app->tex->Load(configNode2.child("settingsControls").attribute("texturepath").as_string());//Cleaned
+	settingsTick = app->tex->Load(configNode2.child("settingsTick").attribute("texturepath").as_string());//Cleaned
+	settingsSlider = app->tex->Load(configNode2.child("settingsSlider").attribute("texturepath").as_string());//Cleaned
+	settingsAudioPanel = app->tex->Load(configNode2.child("settingsAudioPanel").attribute("texturepath").as_string());//Cleaned
+	settingsOptionsPanel = app->tex->Load(configNode2.child("settingsOptionsPanel").attribute("texturepath").as_string());//Cleaned
+	settingsOptionsButtonNormal = app->tex->Load(configNode2.child("settingsOptionsButtonNormal").attribute("texturepath").as_string());//Cleaned
+	settingsOptionsButtonHover = app->tex->Load(configNode2.child("settingsOptionsButtonHover").attribute("texturepath").as_string());//Cleaned
+	settingsAudioButtonNormal = app->tex->Load(configNode2.child("settingsAudioButtonNormal").attribute("texturepath").as_string());//Cleaned
+	settingsAudioButtonHover = app->tex->Load(configNode2.child("settingsAudioButtonHover").attribute("texturepath").as_string());//Cleaned
+	settingsControlsButtonNormal = app->tex->Load(configNode2.child("settingsControlsButtonNormal").attribute("texturepath").as_string());//Cleaned
+	settingsControlsButtonHover = app->tex->Load(configNode2.child("settingsControlsButtonHover").attribute("texturepath").as_string());//Cleaned
+
+	//Load Music
 	FxButton1 = app->audio->LoadFx(configNode2.child("buttonFx1").attribute("path").as_string());
 	FxButton2 = app->audio->LoadFx(configNode2.child("buttonFx2").attribute("path").as_string());
 
@@ -193,7 +196,7 @@ bool SceneMenu::Update(float dt)
 				fxClickPlayed = true;
 			}
 
-			app->fade->Fade(this, (Module*)app->sceneFloor1, 60.0f);
+			app->fade->Fade(this, (Module*)app->sceneTemple, 60.0f);
 
 		}
 		else if (loadGameButton->state == GuiControlState::FOCUSED)
@@ -254,6 +257,7 @@ bool SceneMenu::Update(float dt)
 				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 				onCredits = true;
+				app->cutscenePlayer->ConvertPixels(0, 1);
 			}
 		}
 		else if (exitButton->state == GuiControlState::FOCUSED)
@@ -374,7 +378,7 @@ bool SceneMenu::Update(float dt)
 		//return control
 		if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || pad.b == KEY_DOWN)
 		{
-			currentId = 1;
+			currentId = 3;
 			onSettings = false;
 			//Show menu buttons
 			startButton->state = GuiControlState::NORMAL;
@@ -496,6 +500,7 @@ bool SceneMenu::Update(float dt)
 	//On credits screen
 	else if (onCredits)
 	{
+		currentId = 1;
 		//Hide menu buttons
 		startButton->state = GuiControlState::HIDDEN;
 		loadGameButton->state = GuiControlState::HIDDEN;
@@ -512,18 +517,18 @@ bool SceneMenu::Update(float dt)
 
 		if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || pad.b == KEY_DOWN)
 		{
-			if (fxClickPlayed == false)
+			if (onCredits)
 			{
-				app->audio->PlayFx(FxButton2);
-				fxClickPlayed = true;
 				onCredits = false;
-				//Show menu buttons
-				startButton->state = GuiControlState::NORMAL;
-				loadGameButton->state = GuiControlState::NORMAL;
-				settingsButton->state = GuiControlState::NORMAL;
-				creditsButton->state = GuiControlState::NORMAL;
-				exitButton->state = GuiControlState::NORMAL;
+				app->cutscenePlayer->Disable();
 			}
+
+			//Show menu buttons
+			startButton->state = GuiControlState::NORMAL;
+			loadGameButton->state = GuiControlState::DISABLED;
+			settingsButton->state = GuiControlState::NORMAL;
+			creditsButton->state = GuiControlState::NORMAL;
+			exitButton->state = GuiControlState::NORMAL;
 		}
 		else
 		{
@@ -548,6 +553,7 @@ bool SceneMenu::CleanUp()
 {
 	LOG("Freeing SceneMenu");
 
+	//Clean Textures
 	app->tex->UnLoad(background);
 	app->tex->UnLoad(background2);
 	app->tex->UnLoad(playNormal);
@@ -580,10 +586,10 @@ bool SceneMenu::CleanUp()
 	app->tex->UnLoad(settingsAudioButtonHover);
 	app->tex->UnLoad(settingsControlsButtonNormal);
 	app->tex->UnLoad(settingsControlsButtonHover);
-	//app->tex->UnLoad(controlsHint);
+	app->tex->UnLoad(controlsHint);
 
 	//app->audio->UnloadFx(FxButton1);
-	//app->audio->UnloadFx(FxButton2);	
+	//app->audio->UnloadFx(FxButton2);
 
 	//Clean Music
 	app->audio->CleanMusic(configNode2.child("musicMenu").attribute("path").as_string(), configNode2.child("musicMenu").attribute("fadeOutTime").as_float());
