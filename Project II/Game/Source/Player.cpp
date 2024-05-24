@@ -46,7 +46,7 @@ bool Player::Start() {
 
 	LoadAnimations();
 
-	currentAnim = &idleAnim;
+	currentAnim = &walkAnim;
 
 	stepsFx = app->audio->LoadFx("Assets/Audio/Fx/Footsteps_Fx.wav");
 	jumpFx = app->audio->LoadFx("Assets/Audio/Fx/jump_FX.wav");
@@ -85,7 +85,6 @@ bool Player::Update(float dt)
 	{
 		if (!isDead && !isCombat)
 		{
-			currentAnim = &idleAnim;
 
 			vel = pbody->body->GetLinearVelocity();
 
@@ -128,13 +127,13 @@ bool Player::Update(float dt)
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE
 					&& (pad.l_x < 0.2 && pad.l_x > -0.2))
 				{
-
+					if (!isJumping && !isClimbing) currentAnim = &idleAnim;
 					isWalking = false;
 					vel.x = 0;
 				}
 				
 				//Climbing
-				if (canClimb && !isjumping && vel.y<=0)
+				if (canClimb && !isJumping && vel.y<=0)
 				{
 					isWalking = false;
 					if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
@@ -156,7 +155,7 @@ bool Player::Update(float dt)
 					
 				}
 				//Jump
-				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN|| pad.a && !isjumping)
+				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN|| pad.a && !isJumping)
 				{
 					Jump();
 				}
@@ -276,6 +275,8 @@ bool Player::Update(float dt)
 
 void Player::LeftMovement()
 {
+	if (!isJumping) currentAnim = &walkAnim;
+
 	isFacingRight = false;
 	if(!canClimb) isWalking = true;	
 	
@@ -284,23 +285,38 @@ void Player::LeftMovement()
 
 void Player::RightMovement()
 {
+	if (!isJumping) currentAnim = &walkAnim;
+
 	isFacingRight = true;
 	if (!canClimb) isWalking = true;
+
 	vel.x = speed * 1.5f * dt;
 }
 
 void Player::UpMovement()
 {
+	currentAnim = &climbAnim;
+	if (currentAnim->HasFinished())
+	{
+		currentAnim->ResetLoopCount();
+		currentAnim->Reset();
+	}
 	vel.y = -speed * 1 * dt;
 }
 
 void Player::DownMovement()
 {
+	currentAnim = &climbAnim;
+	if (currentAnim->HasFinished())
+	{
+		currentAnim->ResetLoopCount();
+		currentAnim->Reset();
+	}
 	vel.y = speed * 1 * dt;
 }
 void Player::SoundManager()
 {
-	if (isjumping)
+	if (isJumping)
 	{
 		if (!jumpingSoundPlaying)
 		{
@@ -314,7 +330,7 @@ void Player::SoundManager()
 		jumpingSoundPlaying = false;
 	}
 
-	if (isWalking && !isjumping)// si el bool isWalking es true  y is walking sound playing es false se activa el sonido y se cambia el bool a true
+	if (isWalking && !isJumping)// si el bool isWalking es true  y is walking sound playing es false se activa el sonido y se cambia el bool a true
 	{
 		if (!walkingSoundPlaying)
 		{
@@ -346,8 +362,10 @@ void Player::SoundManager()
 }
 void Player::Jump()
 {
+	currentAnim = &jumpAnim;
+	currentAnim->Reset();
 	vel.y = -speed * 1.5 * dt;
-	isjumping = true;
+	isJumping = true;
 }
 
 void Player::Respaw() {
@@ -375,11 +393,11 @@ void Player::DrawPlayer()
 
 	if (isFacingRight)
 	{
-		app->render->DrawTexture(texture, position.x, position.y, &rect);
+		app->render->DrawTexture(texture, position.x - 30, position.y - 85, &rect);
 	}
 	else
 	{
-		app->render->DrawTexture(texture, position.x, position.y, &rect, SDL_FLIP_HORIZONTAL);
+		app->render->DrawTexture(texture, position.x - 30, position.y - 85, &rect, SDL_FLIP_HORIZONTAL);
 	}
 }
 
@@ -422,7 +440,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
-		isjumping = false;
+		isJumping = false;
 		isClimbing = false;
 		break;
 	case ColliderType::DOOR_ALDEA:
@@ -516,6 +534,9 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 void Player::LoadAnimations()
 {
 	idleAnim.LoadAnimations("idleAnim", "player");
+	walkAnim.LoadAnimations("walkAnim", "player");
+	jumpAnim.LoadAnimations("jumpAnim", "player");
+	climbAnim.LoadAnimations("climbAnim", "player");
 }
 
 void Player::CreateBody()

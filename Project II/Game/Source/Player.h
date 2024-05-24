@@ -66,7 +66,10 @@ public:
 	PhysBody* playerPbody;
 
 	Animation* currentAnim;
-	Animation idleAnim;
+	Animation	idleAnim,
+				walkAnim,
+				jumpAnim,
+				climbAnim;
 
 	bool isWalking = false;
 
@@ -74,7 +77,7 @@ public:
 
 	bool godMode = false;
 
-	bool isjumping = false;
+	bool isJumping = false;
 
 	bool canmove = false;
 
