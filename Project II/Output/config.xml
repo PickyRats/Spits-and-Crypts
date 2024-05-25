@@ -412,30 +412,23 @@
 	<animations>
 		<!-- Player Animations-->
 		<player>
-			<idleAnim loop="true" speed=" 0.4f">
-				<animation x="0" y="760" w="170" h="152"/>
-				<animation x="0" y="760" w="170" h="152"/>
-				<animation x="0" y="760" w="170" h="152"/>
-				<animation x="0" y="760" w="170" h="152"/>
-				
-				<animation x="170" y="760" w="170" h="152"/>
-				<animation x="170" y="760" w="170" h="152"/>
-				<animation x="170" y="760" w="170" h="152"/>
-				
-				<animation x="340" y="760" w="170" h="152"/>
-				<animation x="340" y="760" w="170" h="152"/>
-				<animation x="340" y="760" w="170" h="152"/>
-				<animation x="340" y="760" w="170" h="152"/>
-				
-				<animation x="510" y="760" w="170" h="152"/>
-				<animation x="510" y="760" w="170" h="152"/>
-				<animation x="510" y="760" w="170" h="152"/>
-				
-				<animation x="680" y="760" w="170" h="152"/>
-				<animation x="680" y="760" w="170" h="152"/>
-				<animation x="680" y="760" w="170" h="152"/>
-				<animation x="680" y="760" w="170" h="152"/>
+			<idleAnim loop="true" speed=" 0.1f">
+				<animation x="170" y="0" w="170" h="152"/>
+				<animation x="170" y="152" w="170" h="152"/>
+				<animation x="170" y="304" w="170" h="152"/>
 			</idleAnim>
+			
+			<turn1 loop="false" speed=" 0.2f">
+				<animation x="170" y="0" w="170" h="152"/>
+				<animation x="340" y="0" w="170" h="152"/>
+				<animation x="510" y="0" w="170" h="152"/>
+				<animation x="680" y="0" w="170" h="152"/>
+			</turn1>
+
+			<turn2 loop="false" speed=" 0.2f">
+				<animation x="510" y="0" w="170" h="152"/>
+				<animation x="680" y="0" w="170" h="152"/>
+			</turn2>
 
 			<walkAnim loop="true" speed=" 0.4f">
 				<animation x="0" y="456" w="170" h="152"/>

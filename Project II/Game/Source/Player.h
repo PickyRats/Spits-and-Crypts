@@ -25,6 +25,10 @@ public:
 
 	bool Update(float dt);
 
+	void EnterDoor();
+
+	void EnteringDoor();
+
 	bool CleanUp();
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
@@ -67,11 +71,15 @@ public:
 
 	Animation* currentAnim;
 	Animation	idleAnim,
+				turn1,
+				turn2,
 				walkAnim,
 				jumpAnim,
 				climbAnim;
 
 	bool isWalking = false;
+
+	bool isEnteringDoor = false;
 
 	bool isFacingRight = true;
 

@@ -96,14 +96,14 @@ bool Player::Update(float dt)
 				//player movement
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 				{
-					if (!isClimbing)
+					if (!isClimbing && !isEnteringDoor)
 					{
 						LeftMovement();
 					}
 				}
 				if (pad.l_x <= -0.2)
 				{
-					if (!isClimbing)
+					if (!isClimbing && !isEnteringDoor)
 					{
 						LeftMovement();
 					}
@@ -111,14 +111,14 @@ bool Player::Update(float dt)
 
 				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 				{
-					if (!isClimbing)
+					if (!isClimbing && !isEnteringDoor)
 					{
 						RightMovement();
 					}
 				}
 				if (pad.l_x >= 0.2)
 				{
-					if (!isClimbing)
+					if (!isClimbing && !isEnteringDoor)
 					{
 						RightMovement();
 					}
@@ -127,7 +127,7 @@ bool Player::Update(float dt)
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE
 					&& (pad.l_x < 0.2 && pad.l_x > -0.2))
 				{
-					if (!isJumping && !isClimbing) currentAnim = &idleAnim;
+					if (!isJumping && !isClimbing && !isEnteringDoor) currentAnim = &idleAnim;
 					isWalking = false;
 					vel.x = 0;
 				}
@@ -203,74 +203,93 @@ bool Player::Update(float dt)
 		DrawPlayer();
 		printf("\r playerX: %d playerY: %d", position.x, position.y);////////////
 		currentAnim->Update();
-		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN||pad.x==KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || pad.x==KEY_DOWN)
 		{
-			
-			if (doorAldea) {
-				app->audio->PlayFx(doorFx);
-				if (app->sceneShop->active) {
-					app->sceneVillage->spawnPosition = { 481, 675 };
-					app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
-				}
-				else if (app->sceneOasisFaraon->active) {
-					app->sceneVillage->spawnPosition = { 1380, 675 };
-					app->fade->Fade((Module*)app->sceneOasisFaraon, (Module*)app->sceneVillage, 60.0f);
-				}
-				else if (app->sceneTemple->active) {
-					app->sceneVillage->spawnPosition = { 2269, 675 };
-					app->fade->Fade((Module*)app->sceneTemple, (Module*)app->sceneVillage, 60.0f);
-				}
-				else if (app->sceneFloor1->active) {
-					app->sceneVillage->spawnPosition = { 2787, 675 };
-					app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
-				}
-				doorAldea = false;
-			}
-			else if (doorOasis)
-			{
-				app->audio->PlayFx(doorFx);
-				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneOasisFaraon, 60.0f);
-				doorOasis = false;
-			}
-			else if (doorShop)
-			{
-				app->audio->PlayFx(doorFx);
-				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneShop, 60.0f);
-				doorShop = false;
-			}
-			else if (doorTemple)
-			{
-				app->audio->PlayFx(doorFx);
-				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneTemple, 60.0f);
-				doorTemple = false;
-			}
-			else if (doorFlor1)
-			{
-				app->audio->PlayFx(doorFx);
-				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneFloor1, 60.0f);
-				doorFlor1 = false;
-			}
-			else if (enterCombat)
-			{
-				app->audio->PlayFx(doorFx);
-				app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneCombat, 60.0f);
-				enterCombat = false;
-			}
-			else if (doorChoza)
-			{
-				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneChoza, 60.0f);
-				if (app->hud->mission10Active)
-				{
-					app->hud->mission11Active = true;
-					app->hud->mission10Active = false;
-					app->sceneVillage->piedra->body->SetTransform({ 0,0 }, 0);
-				}
-				doorChoza = false;
-			}
+			EnterDoor();
 		}
 	}
+
 	//printf("\r cameraX: %d cameraY: %d positionX: %d positionY %d", app->render->camera.x, app->render->camera.y, position.x, position.y);
 	return true;
+}
+
+void Player::EnterDoor()
+{
+
+	if (doorAldea) {
+
+		EnteringDoor();
+		if (app->sceneShop->active) {
+			app->sceneVillage->spawnPosition = { 481, 675 };
+			app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
+		}
+		else if (app->sceneOasisFaraon->active) {
+			app->sceneVillage->spawnPosition = { 1380, 675 };
+			app->fade->Fade((Module*)app->sceneOasisFaraon, (Module*)app->sceneVillage, 60.0f);
+		}
+		else if (app->sceneTemple->active) {
+			app->sceneVillage->spawnPosition = { 2269, 675 };
+			app->fade->Fade((Module*)app->sceneTemple, (Module*)app->sceneVillage, 60.0f);
+		}
+		else if (app->sceneFloor1->active) {
+			app->sceneVillage->spawnPosition = { 2787, 675 };
+			app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
+		}
+		doorAldea = false;
+	}
+	else if (doorOasis)
+	{
+		EnteringDoor();
+		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneOasisFaraon, 60.0f);
+		doorOasis = false;
+	}
+	else if (doorShop)
+	{
+		EnteringDoor();
+		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneShop, 60.0f);
+		doorShop = false;
+	}
+	else if (doorTemple)
+	{
+		EnteringDoor();
+		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneTemple, 60.0f);
+		doorTemple = false;
+	}
+	else if (doorFlor1)
+	{
+		EnteringDoor();
+		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneFloor1, 60.0f);
+		doorFlor1 = false;
+	}
+	else if (enterCombat)
+	{
+		EnteringDoor();
+		app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneCombat, 60.0f);
+		enterCombat = false;
+	}
+	else if (doorChoza)
+	{
+		EnteringDoor();
+		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneChoza, 60.0f);
+		if (app->hud->mission10Active)
+		{
+			app->hud->mission11Active = true;
+			app->hud->mission10Active = false;
+			app->sceneVillage->piedra->body->SetTransform({ 0,0 }, 0);
+		}
+		doorChoza = false;
+	}
+}
+
+void Player::EnteringDoor()
+{
+	isEnteringDoor = true;
+
+	if (!isWalking) currentAnim = &turn1;
+	else currentAnim = &turn2;
+	currentAnim->ResetLoopCount();
+	currentAnim->Reset();
+	app->audio->PlayFx(doorFx);
 }
 
 void Player::LeftMovement()
@@ -534,6 +553,8 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 void Player::LoadAnimations()
 {
 	idleAnim.LoadAnimations("idleAnim", "player");
+	turn1.LoadAnimations("turn1", "player");
+	turn2.LoadAnimations("turn2", "player");
 	walkAnim.LoadAnimations("walkAnim", "player");
 	jumpAnim.LoadAnimations("jumpAnim", "player");
 	climbAnim.LoadAnimations("climbAnim", "player");
