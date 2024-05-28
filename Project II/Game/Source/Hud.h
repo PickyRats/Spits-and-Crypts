@@ -10,6 +10,8 @@
 #include "GuiControl.h"
 #include "Timer.h"
 
+#include <vector>
+
 struct SDL_Texture;
 struct Slot {
 	iPoint position = { 0, 0 };
@@ -26,6 +28,15 @@ struct Item {
 	int price = 0;
 
 	SDL_Texture* texture = nullptr;
+};
+
+struct Skill {
+	SDL_Texture* texture;
+	SDL_Rect position;
+	bool locked;
+	bool selected;
+	int unlockRequirement; // ID de la habilidad que debe estar desbloqueada para desbloquear esta
+	int id; // ID de la clase a la que pertenece
 };
 
 class Hud : public Module
@@ -50,9 +61,11 @@ public:
 
 	void DrawTimer();
 
-	void Missions(int mission1);
-	void SkillTree();
+	//void Missions(int mission1);
 
+	void SkillTree();
+	void ApplySkillEffects(int skillIndex);
+	void HandleSelection(int currentIndex);
 
 	bool playerDeadHud = false;
 	bool spacePressed = false;
@@ -73,6 +86,7 @@ public:
 	Slot shopSlots[3];
 	bool shop = false;
 
+	int classid = 1;
 	
 private:
 
@@ -243,6 +257,7 @@ private:
 
 	SDL_Texture* Selection;
 
+	std::vector<Skill> skillTreenode;
 
 	//Talents
 	SDL_Texture* Talent1;

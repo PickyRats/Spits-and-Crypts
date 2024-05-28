@@ -210,7 +210,15 @@ bool Hud::Start()
 	Talent3 = SkillTreeSpeed_1;
 	Talent4 = SkillTreeAtack_1_1;
 	Talent5 = SkillTreeAtack_2_1;
-
+	
+	skillTreenode = {
+	{ Talent1, {333, 162, 77, 77}, false, false, -1, classid}, // Habilidad 1
+	{ Talent2, {450, 263, 77, 77}, true, false, -1, classid },  // Habilidad 2, depende de Habilidad 1
+	{ Talent3, {450, 358, 77, 77}, true, false, 1, classid },  // Habilidad 3, depende de Habilidad 2
+	{ Talent4, {213, 263, 77, 77}, true, false, -1, classid },  // Habilidad 4, depende de Habilidad 1
+	{ Talent5, {213, 358, 77, 77}, true, false, 3, classid },  // Habilidad 5, depende de Habilidad 4
+	};
+	skillTreenode[0].selected = true;
 
 	exitButton->state = GuiControlState::HIDDEN;
 	resumeButton->state = GuiControlState::HIDDEN;
@@ -705,39 +713,39 @@ bool Hud::Update(float dt)
 			}
 		}
 	}
-	if (mission10Active)
-	{
-		Missions(0);
-	}
-	else if (mission11Active)
-	{
-		Missions(1);
-	}
-	else if (mission1Complete)
-	{
-		mission10Active = false;
-		mission11Active = false;
-		app->tex->UnLoad(mission1i1);
-		app->tex->UnLoad(mission1i0);
-	}
+	//if (mission10Active)
+	//{
+	//	Missions(0);
+	//}
+	//else if (mission11Active)
+	//{
+	//	Missions(1);
+	//}
+	//else if (mission1Complete)
+	//{
+	//	mission10Active = false;
+	//	mission11Active = false;
+	//	app->tex->UnLoad(mission1i1);
+	//	app->tex->UnLoad(mission1i0);
+	//}
 	return true;
 }
 
 
-void Hud::Missions(int mission1)
-{
-	switch (mission1)
-	{
-	case 0:
-		app->render->DrawTexture(mission1i0, 0, 0, NULL, SDL_FLIP_NONE, 0);
-		break;
-	case 1:
-		app->render->DrawTexture(mission1i1, 0, 0, NULL, SDL_FLIP_NONE, 0);
-		break;
-	default:
-		break;
-	}
-}
+//void Hud::Missions(int mission1)
+//{
+//	switch (mission1)
+//	{
+//	case 0:
+//		app->render->DrawTexture(mission1i0, 0, 0, NULL, SDL_FLIP_NONE, 0);
+//		break;
+//	case 1:
+//		app->render->DrawTexture(mission1i1, 0, 0, NULL, SDL_FLIP_NONE, 0);
+//		break;
+//	default:
+//		break;
+//	}
+//}
 
 void Hud::Inventory()
 {
@@ -904,6 +912,7 @@ bool Hud::CleanUp()
 
 void Hud::SkillTree()
 {
+	// Dibuja el fondo del árbol de habilidades
 	app->render->DrawTexture(skillTree, 0, 0, NULL, SDL_FLIP_NONE, 0);
 	app->render->DrawTexture(Rama1_1, 405, 199, NULL, SDL_FLIP_HORIZONTAL, 0);
 	app->render->DrawTexture(Rama1_2, 252, 199, NULL, SDL_FLIP_NONE, 0);
@@ -912,127 +921,98 @@ void Hud::SkillTree()
 	app->render->DrawTexture(Rama3_1, 388, 436, NULL, SDL_FLIP_HORIZONTAL, 0);
 	app->render->DrawTexture(Rama3_2, 251, 435, NULL, SDL_FLIP_NONE, 0);
 
-	app->render->DrawTexture(Talent1, 333, 162, NULL, SDL_FLIP_NONE, 0);
-	app->render->DrawTexture(Talent2, 450, 263, NULL, SDL_FLIP_NONE, 0);
-	app->render->DrawTexture(Talent3, 450, 358, NULL, SDL_FLIP_NONE, 0);
-	app->render->DrawTexture(Talent4, 213, 263, NULL, SDL_FLIP_NONE, 0);
-	app->render->DrawTexture(Talent5, 213, 358, NULL, SDL_FLIP_NONE, 0);
+	// Itera sobre cada nodo de habilidad y dibuja su textura
+	for (const auto& node : skillTreenode) {
+		app->render->DrawTexture(node.texture, node.position.x, node.position.y, NULL, SDL_FLIP_NONE, 0);
 
-	//Change sprites if talents are locked
-	if (talent2locked)
-	{
+		if (node.selected) {
+			app->render->DrawTexture(Selection, node.position.x, node.position.y);
+		}
+	}
+
+	// Maneja la selección y el desbloqueo de habilidades
+	for (int i = 0; i < skillTreenode.size(); ++i) {
+		auto& node = skillTreenode[i];
+
+		if (node.selected) {
+			if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && (node.unlockRequirement == -1 || skillTreenode[node.unlockRequirement].locked == false)) {
+				app->audio->PlayFx(app->sceneMenu->FxButton1);
+				node.locked = false;
+				// Aplica efectos según el tipo de habilidad desbloqueada
+				ApplySkillEffects(i);
+			}
+
+			// Maneja el movimiento de la selección
+			HandleSelection(i);
+		}
+	}
+}
+
+void Hud::ApplySkillEffects(int skillIndex) {
+	switch (skillIndex) {
+	case 1:
+		skillTreenode[1].texture = SkillTreeLife_2;
 		Rama1_1 = skillTreerama_1;
 		Rama2_1 = skillTreerama_2_1;
 		Rama3_1 = skillTreerama_3_1;
-		Talent2 = SkillTreeLife_2;
 		app->map->player->health += 5;
-	}
-	if (talent3locked)
-	{
+		break;
+	case 2:
+		skillTreenode[2].texture = SkillTreeSpeed_2;
 		Rama2_1 = skillTreerama_2_2;
 		Rama3_1 = skillTreerama_3_2;
-		Talent3 = SkillTreeSpeed_2;
-	}
-	if (talent4locked)
-	{
+		break;
+	case 3:
+		skillTreenode[3].texture = SkillTreeAtack_1_2;
 		Rama1_2 = skillTreerama_1;
 		Rama2_2 = skillTreerama_2_1;
 		Rama3_2 = skillTreerama_3_1;
-		Talent4 = SkillTreeAtack_1_2;
 		app->map->player->attackDamage += 5;
-	}
-	if (talent5locked)
-	{
+		break;
+	case 4:
+		skillTreenode[4].texture = SkillTreeAtack_2_2;
 		Rama2_2 = skillTreerama_2_2;
 		Rama3_2 = skillTreerama_3_2;
-		Talent5 = SkillTreeAtack_2_2;
+		break;
+		// Añade más casos según sea necesario
 	}
+}
 
-	//Move the selection
-	if (talent1selected)
-	{
-		app->render->DrawTexture(Selection, 333, 162);
-		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
-		{
-			talent1selected = false;
-			talent2selected = true;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
-		{
-			talent1selected = false;
-			talent4selected = true;
+void Hud::HandleSelection(int currentIndex) {
+	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
+		if (currentIndex == 0) {
+			skillTreenode[1].selected = true;
+			skillTreenode[currentIndex].selected = false;
 		}
 	}
-	if (talent2selected)
-	{
-		app->render->DrawTexture(Selection, 450, 263);
-		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
-		{
-			app->audio->PlayFx(app->sceneMenu->FxButton1);
-			talent2locked = true;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
-		{
-			talent2selected = false;
-			talent1selected = true;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
-		{
-			talent2selected = false;
-			talent3selected = true;
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {
+		if (currentIndex == 0) {
+			skillTreenode[3].selected = true;
+			skillTreenode[currentIndex].selected = false;
 		}
 	}
-	if (talent3selected)
-	{
-		app->render->DrawTexture(Selection, 450, 358);
-		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && talent2locked)
-		{
-			app->audio->PlayFx(app->sceneMenu->FxButton1);
-			talent3locked = true;
+	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
+		if (currentIndex == 2) {
+			skillTreenode[1].selected = true;
+			skillTreenode[currentIndex].selected = false;
 		}
-		if (talent3locked)
-		{
-			Talent3 = SkillTreeSpeed_2;
-			app->render->DrawTexture(skillTreerama_2_2, 486, 336);
-			app->render->DrawTexture(skillTreerama_3_2, 388, 436, NULL, SDL_FLIP_HORIZONTAL);
+		else if (currentIndex == 4) {
+			skillTreenode[3].selected = true;
+			skillTreenode[currentIndex].selected = false;
 		}
-		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
-		{
-			talent3selected = false;
-			talent2selected = true;
+		else if (currentIndex == 1 || currentIndex == 3) {
+			skillTreenode[0].selected = true;
+			skillTreenode[currentIndex].selected = false;
 		}
 	}
-	if (talent4selected)
-	{
-		app->render->DrawTexture(Selection, 213, 263);
-		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
-		{
-			app->audio->PlayFx(app->sceneMenu->FxButton1);
-			talent4locked = true;
+	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
+		if (currentIndex == 1) {
+			skillTreenode[2].selected = true;
+			skillTreenode[currentIndex].selected = false;
 		}
-		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
-		{
-			talent4selected = false;
-			talent1selected = true;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
-		{
-			talent4selected = false;
-			talent5selected = true;
-		}
-	}
-	if (talent5selected)
-	{
-		app->render->DrawTexture(Selection, 213, 358);
-		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && talent4locked)
-		{
-			app->audio->PlayFx(app->sceneMenu->FxButton1);
-			talent5locked = true;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
-		{
-			talent5selected = false;
-			talent4selected = true;
+		else if (currentIndex == 3) {
+			skillTreenode[4].selected = true;
+			skillTreenode[currentIndex].selected = false;
 		}
 	}
 }
