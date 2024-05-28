@@ -71,11 +71,17 @@ public:
 
 	Animation* currentAnim;
 	Animation	idleAnim,
-				turn1,
-				turn2,
+				turnAnim,
+				talkAnim,
 				walkAnim,
+				climbAnim,
+				hitAnim,
+				attackAnim,
 				jumpAnim,
-				climbAnim;
+				deathAnim,
+				idleBattleAnim,
+				abilityAnim,
+				walkBattleAnim;
 
 	bool isWalking = false;
 

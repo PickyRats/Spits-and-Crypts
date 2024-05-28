@@ -284,9 +284,7 @@ void Player::EnterDoor()
 void Player::EnteringDoor()
 {
 	isEnteringDoor = true;
-
-	if (!isWalking) currentAnim = &turn1;
-	else currentAnim = &turn2;
+	currentAnim = &turnAnim;
 	currentAnim->ResetLoopCount();
 	currentAnim->Reset();
 	app->audio->PlayFx(doorFx);
@@ -553,11 +551,17 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 void Player::LoadAnimations()
 {
 	idleAnim.LoadAnimations("idleAnim", "player");
-	turn1.LoadAnimations("turn1", "player");
-	turn2.LoadAnimations("turn2", "player");
+	turnAnim.LoadAnimations("turnAnim", "player");
+	talkAnim.LoadAnimations("talkAnim", "player");
 	walkAnim.LoadAnimations("walkAnim", "player");
-	jumpAnim.LoadAnimations("jumpAnim", "player");
 	climbAnim.LoadAnimations("climbAnim", "player");
+	hitAnim.LoadAnimations("hitAnim", "player");
+	attackAnim.LoadAnimations("attackAnim", "player");
+	jumpAnim.LoadAnimations("jumpAnim", "player");
+	deathAnim.LoadAnimations("deathAnim", "player");
+	idleBattleAnim.LoadAnimations("idleBattleAnim", "player");
+	abilityAnim.LoadAnimations("abilityAnim", "player");
+	walkBattleAnim.LoadAnimations("walkBattleAnim", "player");
 }
 
 void Player::CreateBody()
