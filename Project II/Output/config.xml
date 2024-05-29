@@ -774,6 +774,7 @@
 
 		<!-- Taila Animations-->
 		<player2>
+			
 			<idleAnim loop="true" speed=" 0.4f">
 				<animation x="0" y="0" w="218" h="128"/>
 				<animation x="0" y="0" w="218" h="128"/>
@@ -838,34 +839,7 @@
 				<animation x="654" y="640" w="218" h="128"/>
 				
 			</walkBattleAnim>
-
-			<attackAnim loop="false" speed=" 0.4f">
-				
-				<animation x="0" y="1024" w="218" h="128"/>
-				<animation x="0" y="1024" w="218" h="128"/>
-
-				<animation x="218" y="1024" w="218" h="128"/>
-				<animation x="218" y="1024" w="218" h="128"/>
-				<animation x="218" y="1024" w="218" h="128"/>
-
-				<animation x="436" y="1024" w="218" h="128"/>
-				<animation x="436" y="1024" w="218" h="128"/>
-
-				<animation x="654" y="1024" w="218" h="128"/>
-				<animation x="654" y="1024" w="218" h="128"/>
-
-				<animation x="872" y="1024" w="218" h="128"/>
-				<animation x="872" y="1024" w="218" h="128"/>
-				<animation x="872" y="1024" w="218" h="128"/>
-
-				<animation x="1090" y="1024" w="218" h="128"/>
-				<animation x="1090" y="1024" w="218" h="128"/>
-
-				<animation x="1308" y="1024" w="218" h="128"/>
-				<animation x="1308" y="1024" w="218" h="128"/>
-				
-			</attackAnim>
-
+			
 			<climbAnim loop="false" speed=" 0.4f">
 
 				<animation x="0" y="768" w="218" h="128"/>
@@ -902,7 +876,156 @@
 
 			</climbAnim>
 
-		</player2>
+			<attackAnim loop="false" speed=" 0.4f">
+				
+				<animation x="0" y="1024" w="218" h="128"/>
+				<animation x="0" y="1024" w="218" h="128"/>
+
+				<animation x="218" y="1024" w="218" h="128"/>
+				<animation x="218" y="1024" w="218" h="128"/>
+				<animation x="218" y="1024" w="218" h="128"/>
+
+				<animation x="436" y="1024" w="218" h="128"/>
+				<animation x="436" y="1024" w="218" h="128"/>
+
+				<animation x="654" y="1024" w="218" h="128"/>
+				<animation x="654" y="1024" w="218" h="128"/>
+
+				<animation x="872" y="1024" w="218" h="128"/>
+				<animation x="872" y="1024" w="218" h="128"/>
+				<animation x="872" y="1024" w="218" h="128"/>
+
+				<animation x="1090" y="1024" w="218" h="128"/>
+				<animation x="1090" y="1024" w="218" h="128"/>
+
+				<animation x="1308" y="1024" w="218" h="128"/>
+				<animation x="1308" y="1024" w="218" h="128"/>
+				
+			</attackAnim>
+
+			<abilityAnim loop="false" speed=" 0.4f">
+				<animation x="0" y="1408" w="218" h="128"/>
+
+				<animation x="218" y="1408" w="218" h="128"/>
+
+				<animation x="436" y="1408" w="218" h="128"/>
+
+				<animation x="654" y="1408" w="218" h="128"/>
+
+				<animation x="872" y="1408" w="218" h="128"/>
+
+				<animation x="1090" y="1408" w="218" h="128"/>
+
+				<animation x="1308" y="1408" w="218" h="128"/>
+				
+				<animation x="1526" y="1408" w="218" h="128"/>
+				
+				<animation x="1744" y="1408" w="218" h="128"/>
+				
+				<animation x="1962" y="1408" w="218" h="128"/>
+				
+				<animation x="2180" y="1408" w="218" h="128"/>
+				
+				<animation x="2398" y="1408" w="218" h="128"/>
+				
+				<animation x="0" y="1536" w="218" h="128"/>
+				
+				<animation x="218" y="1536" w="218" h="128"/>
+				
+				<animation x="436" y="1536" w="218" h="128"/>
+				
+				<animation x="654" y="1536" w="218" h="128"/>
+				
+				<animation x="872" y="1536" w="218" h="128"/>
+				
+				<animation x="1090" y="1536" w="218" h="128"/>
+				
+				<animation x="1308" y="1536" w="218" h="128"/>
+				
+				<animation x="1526" y="1536" w="218" h="128"/>
+				
+				<animation x="1744" y="1536" w="218" h="128"/>
+				
+				<animation x="1962" y="1536" w="218" h="128"/>
+				
+				<animation x="2180" y="1536" w="218" h="128"/>
+
+			</abilityAnim>
+
+			<hitAnim loop="false" speed=" 0.4f">
+				<animation x="0" y="896" w="218" h="128"/>
+				<animation x="0" y="896" w="218" h="128"/>
+
+				<animation x="218" y="896" w="218" h="128"/>
+				<animation x="218" y="896" w="218" h="128"/>
+
+				<animation x="436" y="896" w="218" h="128"/>
+				<animation x="436" y="896" w="218" h="128"/>
+
+				<animation x="654" y="896" w="218" h="128"/>
+				<animation x="654" y="896" w="218" h="128"/>
+				<animation x="654" y="896" w="218" h="128"/>
+				
+				<animation x="872" y="896" w="218" h="128"/>
+				<animation x="872" y="896" w="218" h="128"/>
+				<animation x="872" y="896" w="218" h="128"/>
+				
+				<animation x="1090" y="896" w="218" h="128"/>
+				<animation x="1090" y="896" w="218" h="128"/>
+				
+				<animation x="1308" y="896" w="218" h="128"/>
+				<animation x="1308" y="896" w="218" h="128"/>
+				<animation x="1308" y="896" w="218" h="128"/>
+				<animation x="1308" y="896" w="218" h="128"/>
+			</hitAnim>
+
+			<deathAnim loop="false" speed=" 0.4f">
+				<animation x="0" y="1664" w="218" h="128"/>
+				<animation x="0" y="1664" w="218" h="128"/>
+				<animation x="0" y="1664" w="218" h="128"/>
+
+				<animation x="218" y="1664" w="218" h="128"/>
+				<animation x="218" y="1664" w="218" h="128"/>
+
+				<animation x="436" y="1664" w="218" h="128"/>
+				<animation x="436" y="1664" w="218" h="128"/>
+				<animation x="436" y="1664" w="218" h="128"/>
+				<animation x="436" y="1664" w="218" h="128"/>
+
+				<animation x="654" y="1664" w="218" h="128"/>
+				<animation x="654" y="1664" w="218" h="128"/>
+				<animation x="654" y="1664" w="218" h="128"/>
+				<animation x="654" y="1664" w="218" h="128"/>
+				<animation x="654" y="1664" w="218" h="128"/>
+
+				<animation x="872" y="1664" w="218" h="128"/>
+				<animation x="872" y="1664" w="218" h="128"/>
+				<animation x="872" y="1664" w="218" h="128"/>
+
+				<animation x="1090" y="1664" w="218" h="128"/>
+				<animation x="1090" y="1664" w="218" h="128"/>
+				<animation x="1090" y="1664" w="218" h="128"/>
+
+				<animation x="1308" y="1664" w="218" h="128"/>
+				
+			</deathAnim>
+
+		
+	</player2>
+
+		<enemy1>
+			
+			<idleAnim loop="true" speed=" 0.4f">
+				
+				<animation x="0" y="0" w="218" h="128"/>
+
+				<animation x="218" y="0" w="218" h="128"/>
+
+				<animation x="436" y="0" w="218" h="128"/>
+				
+			</idleAnim>
+			
+		</enemy1>
 
 	</animations>
 	
