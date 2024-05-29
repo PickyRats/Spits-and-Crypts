@@ -86,7 +86,7 @@ public:
 	Slot shopSlots[3];
 	bool shop = false;
 
-	int classid = 4;
+	int classid = 3;
 	
 private:
 
