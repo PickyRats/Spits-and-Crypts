@@ -78,7 +78,7 @@ bool SceneMenu::Start()
 
 	//settings
 	settingsOptionsFullScreenHover = app->tex->Load(configNode2.child("settingsOptionsFullScreenHover").attribute("texturepath").as_string());//Cleaned
-	settingsOptionsFullScreenNormal = app->tex->Load(configNode2.child("settingsOptionsFullScreenNormal").attribute("texturepath").as_string());//Cleaned
+	settingsOptionsPanel = app->tex->Load(configNode2.child("settingsOptionsPanel").attribute("texturepath").as_string());//Cleaned
 
 	//Load Music
 	FxButton1 = app->audio->LoadFx(configNode2.child("buttonFx1").attribute("path").as_string());
@@ -356,6 +356,7 @@ void SceneMenu::OnSettings(GamePad& pad)
 			app->render->DrawTexture(settingsAudioButtonHover, 560, 110, NULL, SDL_FLIP_NONE, 0);
 			app->render->DrawTexture(settingsOptionsButtonNormal, 378, 110, NULL, SDL_FLIP_NONE, 0);
 
+			app->render->DrawTexture(settingsAudioPanel, 0, 0, NULL, SDL_FLIP_NONE, 0);
 			//app->render->DrawTexture(settingsAudioPanel, 0, 0, NULL, SDL_FLIP_NONE, 0);
 
 			/*settingsFxButton->state = GuiControlState::NORMAL;
@@ -401,11 +402,11 @@ void SceneMenu::OnSettings(GamePad& pad)
 			app->render->DrawTexture(settingsAudioButtonNormal, 560, 110, NULL, SDL_FLIP_NONE, 0);
 			app->render->DrawTexture(settingsOptionsButtonHover, 378, 110, NULL, SDL_FLIP_NONE, 0);
 
-			app->render->DrawTexture(settingsOptionsFullScreenNormal, 450, 195, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(settingsOptionsPanel, 0, 0, NULL, SDL_FLIP_NONE, 0);
 
 			if (currentId == 7)
 			{
-				app->render->DrawTexture(settingsOptionsFullScreenHover, 450, 195, NULL, SDL_FLIP_NONE, 0);
+				app->render->DrawTexture(settingsOptionsFullScreenHover, 465, 196, NULL, SDL_FLIP_NONE, 0);
 			}
 			else if (currentId == 8)
 			{
@@ -413,19 +414,6 @@ void SceneMenu::OnSettings(GamePad& pad)
 			}
 
 		}
-	}
-	//return control
-	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || pad.b == KEY_DOWN)
-	{
-		currentId = 3;
-		onSettings = false;
-		//Show menu buttons
-		startButton->state = GuiControlState::NORMAL;
-		loadGameButton->state = GuiControlState::DISABLED;
-		settingsButton->state = GuiControlState::NORMAL;
-		creditsButton->state = GuiControlState::NORMAL;
-		exitButton->state = GuiControlState::NORMAL;
-
 	}
 
 	if (settingsFullScreenButton->state == GuiControlState::FOCUSED)
@@ -436,7 +424,6 @@ void SceneMenu::OnSettings(GamePad& pad)
 			fxHoverPlayed = true;
 		}
 	}
-
 	if (settingsFullScreenButton->state == GuiControlState::PRESSED)
 	{
 		if (fullScreen == false) fullScreen = true;
@@ -471,13 +458,21 @@ void SceneMenu::OnSettings(GamePad& pad)
 		fxClickPlayed = false;
 	}
 
-	LOG("%d", fullScreen);
 	//FullScreen and VSync
 	if (fullScreen)	SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN);
 	else SDL_SetWindowFullscreen(app->win->window, 0);
 
 	if (vSync)	app->render->vsync = true;
 	else	app->render->vsync = false;
+
+	if (!onSettings)
+	{
+		startButton->state = GuiControlState::NORMAL;
+		loadGameButton->state = GuiControlState::DISABLED;
+		settingsButton->state = GuiControlState::NORMAL;
+		creditsButton->state = GuiControlState::NORMAL;
+		exitButton->state = GuiControlState::NORMAL;
+	}
 }
 
 void SceneMenu::InputSettings(GamePad& pad)
@@ -492,7 +487,6 @@ void SceneMenu::InputSettings(GamePad& pad)
 	{
 		wasDownPressed = false;
 	}
-
 
 	if (pad.up == KEY_DOWN && !wasUpPressed &&  currentId != 6 && currentId != 10 && currentId != 12)
 	{
@@ -536,6 +530,12 @@ void SceneMenu::InputSettings(GamePad& pad)
 	else if (pad.l1 != KEY_DOWN)
 	{
 		wasL1Pressed = false;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || pad.b == KEY_DOWN)
+	{
+		currentId = 3;
+		onSettings = false;
 	}
 }
 
@@ -618,7 +618,7 @@ bool SceneMenu::CleanUp()
 	app->tex->UnLoad(settingsSlider);
 	app->tex->UnLoad(settingsAudioPanel);
 	app->tex->UnLoad(settingsOptionsFullScreenHover);
-	app->tex->UnLoad(settingsOptionsFullScreenNormal);
+	app->tex->UnLoad(settingsOptionsPanel);
 	app->tex->UnLoad(settingsOptionsButtonNormal);
 	app->tex->UnLoad(settingsOptionsButtonHover);
 	app->tex->UnLoad(settingsAudioButtonNormal);

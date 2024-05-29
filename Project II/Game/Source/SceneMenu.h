@@ -97,8 +97,8 @@ private:
 	SDL_Texture* settingsTick;
 	SDL_Texture* settingsSlider;
 	SDL_Texture* settingsAudioPanel;
+	SDL_Texture* settingsOptionsPanel;
 	SDL_Texture* settingsOptionsFullScreenHover;
-	SDL_Texture* settingsOptionsFullScreenNormal;
 	SDL_Texture* settingsOptionsButtonNormal;
 	SDL_Texture* settingsOptionsButtonHover;
 	SDL_Texture* settingsAudioButtonNormal;
