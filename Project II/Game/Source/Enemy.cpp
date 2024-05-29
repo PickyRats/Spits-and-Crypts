@@ -67,9 +67,9 @@ bool Enemy::Update(float dt)
 void Enemy::DrawEnemy()
 {
 
-	//SDL_Rect rect = currentAnim->GetCurrentFrame();
+	SDL_Rect rect = currentAnim->GetCurrentFrame();
 
-	app->render->DrawTexture(texture, position.x, position.y);
+	app->render->DrawTexture(texture, position.x, position.y, &rect);
 
 }
 
@@ -96,7 +96,16 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 // Loads the animations
 void Enemy::LoadAnimations()
 {
-	idleAnim.LoadAnimations("idleAnim", "enemy");
+	if (enemyId == 1)
+	{
+		idleAnim.LoadAnimations("idleAnim", "enemy1");
+		walkAnim.LoadAnimations("walkAnim", "enemy1");
+		climbAnim.LoadAnimations("climbAnim", "enemy1");
+		attackAnim.LoadAnimations("attackAnim", "enemy1");
+		abilityAnim.LoadAnimations("abilityAnim", "enemy1");
+		hitAnim.LoadAnimations("hitAnim", "enemy1");
+		deathAnim.LoadAnimations("deathAnim", "enemy1");
+	}
 }
 
 void Enemy::SetCombatAnimation(int animationIndex)
@@ -105,6 +114,30 @@ void Enemy::SetCombatAnimation(int animationIndex)
 	{
 	case 0:
 		currentAnim = &idleAnim;
+		break;
+	case 1:
+		currentAnim = &walkAnim;
+		break;
+	case 2:
+		currentAnim = &climbAnim;
+		break;
+	case 3:
+		currentAnim = &attackAnim;
+		currentAnim->ResetLoopCount();
+		currentAnim->Reset();
+		break;
+	case 4:
+		currentAnim = &abilityAnim;
+		currentAnim->ResetLoopCount();
+		currentAnim->Reset();
+		break;
+	case 5:
+		currentAnim = &hitAnim;
+		currentAnim->ResetLoopCount();
+		currentAnim->Reset();
+		break;
+	case 6:
+		currentAnim = &deathAnim;
 		break;
 	}
 }
