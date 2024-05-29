@@ -68,7 +68,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	sceneCombat = new SceneCombat(false);
 	puzzle = new Puzzle(false);
 	puzzle2 = new Puzzle2(false);
-	cutscenePlayer = new CutscenePlayer();
+	cutscenePlayer = new CutscenePlayer(false);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp

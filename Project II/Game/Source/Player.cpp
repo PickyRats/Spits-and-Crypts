@@ -34,6 +34,7 @@ bool Player::Awake() {
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 	speed = parameters.attribute("speed").as_float();
+	classId = parameters.attribute("classId").as_int();
 	id = parameters.attribute("id").as_int();
 
 	return true;
@@ -410,11 +411,13 @@ void Player::DrawPlayer()
 
 	if (isFacingRight)
 	{
-		app->render->DrawTexture(texture, position.x - 30, position.y - 85, &rect);
+		if (id == 1) app->render->DrawTexture(texture, position.x - 30, position.y - 86, &rect);
+		else if (id == 2) app->render->DrawTexture(texture, position.x - 58, position.y - 64, &rect);
 	}
 	else
 	{
-		app->render->DrawTexture(texture, position.x - 30, position.y - 85, &rect, SDL_FLIP_HORIZONTAL);
+		if (id == 1) app->render->DrawTexture(texture, position.x - 30, position.y - 86, &rect, SDL_FLIP_HORIZONTAL);
+		else if (id == 2) app->render->DrawTexture(texture, position.x - 58, position.y - 64, &rect, SDL_FLIP_HORIZONTAL);
 	}
 }
 
@@ -550,18 +553,58 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 // Loads the animations
 void Player::LoadAnimations()
 {
-	idleAnim.LoadAnimations("idleAnim", "player");
-	turnAnim.LoadAnimations("turnAnim", "player");
-	talkAnim.LoadAnimations("talkAnim", "player");
-	walkAnim.LoadAnimations("walkAnim", "player");
-	climbAnim.LoadAnimations("climbAnim", "player");
-	hitAnim.LoadAnimations("hitAnim", "player");
-	attackAnim.LoadAnimations("attackAnim", "player");
-	jumpAnim.LoadAnimations("jumpAnim", "player");
-	deathAnim.LoadAnimations("deathAnim", "player");
-	idleBattleAnim.LoadAnimations("idleBattleAnim", "player");
-	abilityAnim.LoadAnimations("abilityAnim", "player");
-	walkBattleAnim.LoadAnimations("walkBattleAnim", "player");
+	if (id == 1) // Main character
+	{
+		idleAnim.LoadAnimations("idleAnim", "player");
+		turnAnim.LoadAnimations("turnAnim", "player");
+		talkAnim.LoadAnimations("talkAnim", "player");
+		walkAnim.LoadAnimations("walkAnim", "player");
+		climbAnim.LoadAnimations("climbAnim", "player");
+		hitAnim.LoadAnimations("hitAnim", "player");
+	
+		jumpAnim.LoadAnimations("jumpAnim", "player");
+		deathAnim.LoadAnimations("deathAnim", "player");
+		idleBattleAnim.LoadAnimations("idleBattleAnim", "player");
+	
+		walkBattleAnim.LoadAnimations("walkBattleAnim", "player");
+
+		if (classId == 0)
+		{
+			attackAnim.LoadAnimations("attackAnim", "player");
+			abilityAnim.LoadAnimations("abilityAnim", "player");
+		}
+		else if (classId == 1)
+		{
+			attackAnim.LoadAnimations("attack1Anim", "player");
+			abilityAnim.LoadAnimations("ability1Anim", "player");
+		}
+		else if (classId == 2)
+		{
+			attackAnim.LoadAnimations("attack2Anim", "player");
+			abilityAnim.LoadAnimations("ability2Anim", "player");
+		}
+		else if (classId == 3)
+		{
+			attackAnim.LoadAnimations("attack3Anim", "player");
+			abilityAnim.LoadAnimations("ability3Anim", "player");
+		}
+	}
+	else if (id == 2) // Taila
+	{
+		idleAnim.LoadAnimations("idleAnim", "player2");
+		turnAnim.LoadAnimations("turnAnim", "player2");
+		talkAnim.LoadAnimations("talkAnim", "player2");
+		walkAnim.LoadAnimations("walkAnim", "player2");
+		climbAnim.LoadAnimations("climbAnim", "player2");
+		hitAnim.LoadAnimations("hitAnim", "player2");
+		jumpAnim.LoadAnimations("jumpAnim", "player2");
+		deathAnim.LoadAnimations("deathAnim", "player2");
+		idleBattleAnim.LoadAnimations("idleBattleAnim", "player2");
+		walkBattleAnim.LoadAnimations("walkBattleAnim", "player2");
+		attackAnim.LoadAnimations("attackAnim", "player2");
+		abilityAnim.LoadAnimations("abilityAnim", "player2");
+	}
+	
 }
 
 void Player::CreateBody()
@@ -580,4 +623,38 @@ void Player::DestroyBody()
 {
 	app->physics->world->DestroyBody(pbody->body);
 	app->physics->world->DestroyBody(playerPbody->body);
+}
+
+void Player::SetCombatAnimation(int animationIndex)
+{
+	switch (animationIndex)
+	{
+	case 0:
+		currentAnim = &idleBattleAnim;
+		break;
+	case 1:
+		currentAnim = &walkBattleAnim;
+		break;
+	case 2:
+		currentAnim = &attackAnim;
+		currentAnim->ResetLoopCount();
+		currentAnim->Reset();
+		break;
+	case 3:
+		currentAnim = &abilityAnim;
+		currentAnim->ResetLoopCount();
+		currentAnim->Reset();
+		break;
+	case 4:
+		currentAnim = &hitAnim;
+		break;
+	case 5:
+		currentAnim = &deathAnim;
+		break;
+	}
+}
+
+bool Player::AnimationFinished()
+{
+	return currentAnim->HasFinished();
 }

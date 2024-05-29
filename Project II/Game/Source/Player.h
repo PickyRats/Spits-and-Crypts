@@ -35,6 +35,10 @@ public:
 
 	void OnExitCollision(PhysBody* physA, PhysBody* physB);
 
+	void SetCombatAnimation(int animationIndex);
+
+	bool AnimationFinished();
+
 	void LoadAnimations();
 	
 	void ToggleGodMode();
@@ -62,6 +66,7 @@ public:
 public:
 	float speed = 0.2f;
 	int id = 0;
+	int classId = 0;
 	const char* texturePath;
 
 	SDL_Texture* texture = NULL;

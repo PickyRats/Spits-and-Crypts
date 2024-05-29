@@ -83,6 +83,19 @@ public:
 		return currentPoints >= pointsCost;
 	}
 
+	virtual void SetCombatAnimation(int animationIndex) {
+		// 0 = idle
+		// 1 = walk
+		// 2 = attack
+		// 3 = ability
+		// 4 = hit
+		// 5 = death
+	};
+
+	virtual bool AnimationFinished() {
+		return true;
+	};
+
 	virtual void OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	};

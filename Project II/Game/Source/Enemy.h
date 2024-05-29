@@ -30,6 +30,10 @@ public:
 
 	void DrawEnemy();
 
+	void SetCombatAnimation(int animationIndex);
+
+	bool AnimationFinished();
+
 public:
 
 	const char* texturePath;

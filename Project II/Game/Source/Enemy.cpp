@@ -98,3 +98,19 @@ void Enemy::LoadAnimations()
 {
 	idleAnim.LoadAnimations("idleAnim", "enemy");
 }
+
+void Enemy::SetCombatAnimation(int animationIndex)
+{
+	switch (animationIndex)
+	{
+	case 0:
+		currentAnim = &idleAnim;
+		break;
+	}
+}
+
+
+bool Enemy::AnimationFinished()
+{
+	return currentAnim->HasFinished();
+}
