@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="20" height="19" tilewidth="64" tileheight="64" infinite="0" nextlayerid="53" nextobjectid="8">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="20" height="19" tilewidth="64" tileheight="64" infinite="0" nextlayerid="53" nextobjectid="8">
  <properties>
   <property name="Draw" type="bool" value="false"/>
   <property name="Navigation" type="bool" value="true"/>
@@ -15,6 +15,9 @@
  </tileset>
  <tileset firstgid="160" name="light_ray" tilewidth="64" tileheight="64" tilecount="28" columns="7">
   <image source="light_ray.png" width="448" height="256"/>
+ </tileset>
+ <tileset firstgid="188" name="Tile_Sheet" tilewidth="64" tileheight="64" tilecount="77" columns="11">
+  <image source="Tile_Sheet.png" width="704" height="448"/>
  </tileset>
  <layer id="16" name="Fondo" width="20" height="19" opacity="0.48">
   <properties>
@@ -795,27 +798,29 @@
    <property name="Draw" type="bool" value="true"/>
   </properties>
   <data>
-   <tile gid="112"/>
-   <tile gid="112"/>
-   <tile gid="112"/>
+   <tile gid="206"/>
+   <tile gid="223"/>
+   <tile gid="224"/>
    <tile/>
    <tile/>
+   <tile gid="222"/>
+   <tile gid="223"/>
+   <tile gid="223"/>
+   <tile gid="224"/>
    <tile/>
-   <tile gid="112"/>
-   <tile gid="112"/>
-   <tile gid="112"/>
    <tile/>
    <tile/>
+   <tile gid="222"/>
+   <tile gid="224"/>
    <tile/>
-   <tile gid="112"/>
-   <tile gid="112"/>
    <tile/>
+   <tile gid="226"/>
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="213"/>
    <tile/>
    <tile/>
-   <tile gid="112"/>
    <tile/>
    <tile/>
    <tile/>
@@ -833,9 +838,9 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="224"/>
    <tile/>
    <tile/>
-   <tile gid="112"/>
    <tile/>
    <tile/>
    <tile/>
@@ -872,9 +877,9 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="200"/>
    <tile/>
    <tile/>
-   <tile gid="112"/>
    <tile/>
    <tile/>
    <tile/>
@@ -892,9 +897,9 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="211"/>
    <tile/>
    <tile/>
-   <tile gid="112"/>
    <tile/>
    <tile/>
    <tile/>
@@ -912,10 +917,10 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="211"/>
+   <tile gid="202"/>
    <tile/>
    <tile/>
-   <tile gid="112"/>
-   <tile gid="112"/>
    <tile/>
    <tile/>
    <tile/>
@@ -932,10 +937,10 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="211"/>
+   <tile gid="213"/>
    <tile/>
    <tile/>
-   <tile gid="112"/>
-   <tile gid="112"/>
    <tile/>
    <tile/>
    <tile/>
@@ -952,10 +957,10 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="222"/>
+   <tile gid="224"/>
    <tile/>
    <tile/>
-   <tile gid="112"/>
-   <tile gid="112"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1032,6 +1037,8 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="247"/>
+   <tile gid="202"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1051,6 +1058,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="213"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1070,6 +1078,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="213"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1089,13 +1098,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="224"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1135,7 +1138,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="112"/>
+   <tile/>
    <tile gid="158"/>
    <tile/>
    <tile/>
@@ -1154,27 +1157,27 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="112"/>
-   <tile gid="112"/>
-   <tile gid="102"/>
-   <tile gid="102"/>
-   <tile gid="102"/>
-   <tile gid="102"/>
-   <tile gid="102"/>
-   <tile gid="102"/>
-   <tile gid="102"/>
-   <tile gid="102"/>
-   <tile gid="102"/>
-   <tile gid="102"/>
-   <tile gid="102"/>
-   <tile gid="102"/>
-   <tile gid="102"/>
-   <tile gid="102"/>
-   <tile gid="102"/>
-   <tile gid="102"/>
-   <tile gid="102"/>
-   <tile gid="102"/>
-   <tile gid="112"/>
+   <tile/>
+   <tile gid="201"/>
+   <tile gid="201"/>
+   <tile gid="201"/>
+   <tile gid="201"/>
+   <tile gid="201"/>
+   <tile gid="201"/>
+   <tile gid="201"/>
+   <tile gid="201"/>
+   <tile gid="201"/>
+   <tile gid="201"/>
+   <tile gid="201"/>
+   <tile gid="201"/>
+   <tile gid="201"/>
+   <tile gid="201"/>
+   <tile gid="201"/>
+   <tile gid="201"/>
+   <tile gid="201"/>
+   <tile gid="201"/>
+   <tile gid="201"/>
+   <tile gid="201"/>
   </data>
  </layer>
  <layer id="34" name="Ray" width="20" height="19">
@@ -1564,7 +1567,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="37" name="Espejo1_0" width="20" height="19" visible="0">
+ <layer id="37" name="Espejo1_0" width="20" height="19">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -2338,7 +2341,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="36" name="Espejo1_2" width="20" height="19" visible="0">
+ <layer id="36" name="Espejo1_2" width="20" height="19">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -2725,7 +2728,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="42" name="Espejo1_3" width="20" height="19" visible="0">
+ <layer id="42" name="Espejo1_3" width="20" height="19">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -3886,7 +3889,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="40" name="Espejo2_2" width="20" height="19" visible="0">
+ <layer id="40" name="Espejo2_2" width="20" height="19">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -4273,7 +4276,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="41" name="Espejo2_3" width="20" height="19" visible="0">
+ <layer id="41" name="Espejo2_3" width="20" height="19">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -4660,7 +4663,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="43" name="Espejo3_0" width="20" height="19" visible="0">
+ <layer id="43" name="Espejo3_0" width="20" height="19">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -5047,7 +5050,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="44" name="Espejo3_1" width="20" height="19" visible="0">
+ <layer id="44" name="Espejo3_1" width="20" height="19">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -5434,7 +5437,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="45" name="Espejo3_2" width="20" height="19" visible="0">
+ <layer id="45" name="Espejo3_2" width="20" height="19">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -6595,7 +6598,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="48" name="Espejo4_1" width="20" height="19" visible="0">
+ <layer id="48" name="Espejo4_1" width="20" height="19">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -6982,7 +6985,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="49" name="Espejo4_2" width="20" height="19" visible="0">
+ <layer id="49" name="Espejo4_2" width="20" height="19">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -7369,7 +7372,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="50" name="Espejo5_0" width="20" height="19" visible="0">
+ <layer id="50" name="Espejo5_0" width="20" height="19">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -7756,7 +7759,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="51" name="Espejo5_1" width="20" height="19" visible="0">
+ <layer id="51" name="Espejo5_1" width="20" height="19">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -8143,7 +8146,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="52" name="Espejo5_2" width="20" height="19" visible="0">
+ <layer id="52" name="Espejo5_2" width="20" height="19">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>

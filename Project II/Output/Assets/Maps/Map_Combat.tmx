@@ -14,16 +14,16 @@
   <image source="escaleras.png" width="259" height="233"/>
  </tileset>
  <tileset firstgid="163" name="Tile_Sheet" tilewidth="64" tileheight="64" tilecount="77" columns="11">
-  <image source="../../../../../../../Downloads/Tile_Sheet.png" width="704" height="448"/>
+  <image source="Tile_Sheet.png" width="704" height="448"/>
  </tileset>
  <tileset firstgid="240" name="Tile_Sheet_Detalles" tilewidth="64" tileheight="64" tilecount="77" columns="11">
-  <image source="../../../../../../../Downloads/Tile_Sheet_Detalles.png" width="704" height="448"/>
+  <image source="Tile_Sheet_Detalles.png" width="704" height="448"/>
  </tileset>
  <tileset firstgid="317" name="Tile_Sheet_Variaciones" tilewidth="64" tileheight="64" tilecount="77" columns="11">
-  <image source="../../../../../../../Downloads/Tile_Sheet_Variaciones.png" width="704" height="448"/>
+  <image source="Tile_Sheet_Variaciones.png" width="704" height="448"/>
  </tileset>
  <tileset firstgid="394" name="Tile_Sheet_Props" tilewidth="64" tileheight="64" tilecount="143" columns="11">
-  <image source="../../../../../../../Downloads/Tile_Sheet_Props.png" width="704" height="832"/>
+  <image source="Tile_Sheet_Props.png" width="704" height="832"/>
  </tileset>
  <layer id="16" name="Fondo" width="27" height="12">
   <properties>
@@ -854,34 +854,34 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="188"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile gid="276"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
    <tile/>
    <tile/>
    <tile gid="376"/>
