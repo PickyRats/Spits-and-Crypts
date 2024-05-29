@@ -298,7 +298,8 @@
 		<settingsTick texturepath="Assets/Textures/Screens/More/tick.png"/>
 		<settingsSlider texturepath="Assets/Textures/Screens/More/slider.png"/>
 		<settingsAudioPanel texturepath="Assets/Textures/Screens/More/settings_audio_panel.png"/>
-		<settingsOptionsPanel texturepath="Assets/Textures/Screens/More/settings_options_panel.png"/>
+		<settingsOptionsFullScreenHover texturepath="Assets/Textures/Screens/More/settings_options_fullscreen_hover.png"/>
+		<settingsOptionsFullScreenNormal texturepath="Assets/Textures/Screens/More/settings_options_fullscreen_normal.png"/>
 		<settingsOptionsButtonNormal texturepath="Assets/Textures/Screens/More/settings_options_button_normal.png"/>
 		<settingsOptionsButtonHover texturepath="Assets/Textures/Screens/More/settings_options_button_hover.png"/>
 		<settingsAudioButtonNormal texturepath="Assets/Textures/Screens/More/settings_audio_button_normal.png"/>
