@@ -1009,19 +1009,45 @@
 				<animation x="1308" y="1664" w="218" h="128"/>
 				
 			</deathAnim>
-
 		
-	</player2>
-
+		</player2>
+		
+		<!-- Guardian Animations-->
 		<enemy1>
 			
 			<idleAnim loop="true" speed=" 0.4f">
 				
-				<animation x="0" y="0" w="218" h="128"/>
+				<animation x="0" y="0" w="145" h="128"/>
+				<animation x="0" y="0" w="145" h="128"/>
+				<animation x="0" y="0" w="145" h="128"/>
 
-				<animation x="218" y="0" w="218" h="128"/>
+				<animation x="145" y="0" w="145" h="128"/>
+				<animation x="145" y="0" w="145" h="128"/>
+				<animation x="145" y="0" w="145" h="128"/>
 
-				<animation x="436" y="0" w="218" h="128"/>
+				<animation x="290" y="0" w="145" h="128"/>
+				<animation x="290" y="0" w="145" h="128"/>
+				<animation x="290" y="0" w="145" h="128"/>
+				
+				<animation x="435" y="0" w="145" h="128"/>
+				<animation x="435" y="0" w="145" h="128"/>
+				<animation x="435" y="0" w="145" h="128"/>
+				
+				<animation x="580" y="0" w="145" h="128"/>
+				<animation x="580" y="0" w="145" h="128"/>
+				<animation x="580" y="0" w="145" h="128"/>
+				
+				<animation x="725" y="0" w="145" h="128"/>
+				<animation x="725" y="0" w="145" h="128"/>
+				<animation x="725" y="0" w="145" h="128"/>
+				
+				<animation x="870" y="0" w="145" h="128"/>
+				<animation x="870" y="0" w="145" h="128"/>
+				<animation x="870" y="0" w="145" h="128"/>
+				
+				<animation x="1015" y="0" w="145" h="128"/>
+				<animation x="1015" y="0" w="145" h="128"/>
+				<animation x="1015" y="0" w="145" h="128"/>
 				
 			</idleAnim>
 			
