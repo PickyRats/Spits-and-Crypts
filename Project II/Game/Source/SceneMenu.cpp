@@ -140,6 +140,7 @@ bool SceneMenu::Start()
 bool SceneMenu::Update(float dt)
 {
 	GamePad& pad = app->input->pads[0];
+
 	//Render background 
 	app->render->DrawTexture(background, 0, 0);
 	if (x > 366) {
@@ -160,14 +161,32 @@ bool SceneMenu::Update(float dt)
 
 		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && currentId < 5)
 			currentId++;
-		if ((pad.l_y >0.2 == KEY_DOWN||pad.down== KEY_DOWN) && currentId < 5)
+
+		if (pad.down == KEY_DOWN && !wasDownPressed && currentId < 5)
+		{
 			currentId++;
+			wasDownPressed = true;
+		}
+		else if (pad.down != KEY_DOWN)
+		{
+			wasDownPressed = false;
+		}
+
 		if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && currentId > 1))
 		{
 			currentId--;
 		}
-		if ((pad.l_y <-0.2 == KEY_DOWN || pad.up == KEY_DOWN) && currentId > 1)
+
+		if (pad.up == KEY_DOWN && !wasUpPressed && currentId > 1)
+		{
 			currentId--;
+			wasUpPressed = true;
+		}
+		else if (pad.up != KEY_DOWN)
+		{
+			wasUpPressed = false;
+		}
+
 		//Hide settings buttons
 		settingsExitButton->state = GuiControlState::HIDDEN;
 		settingsFullScreenButton->state = GuiControlState::HIDDEN;

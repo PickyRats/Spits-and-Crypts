@@ -34,6 +34,10 @@ public:
 	bool fxClickPlayed = false;
 	bool fullScreen = false;
 	bool vSync = true;
+
+	bool wasDownPressed = false;
+	bool wasUpPressed = false;
+
 	int currentId= 1;
 	int percentageMusic;
 	GuiControlButton* startButton;
