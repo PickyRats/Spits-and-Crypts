@@ -44,6 +44,7 @@
 		<!-- Scene -->
 		<map path="Assets/Maps/" name="Map_Shop.tmx"/>
 
+	  <shop texturepath="Assets/Textures/Screens/Store.png"/>
 		<!-- Music -->
 		<music>
 			<ShopMusic path="Assets/Audio/Music/Shop_Music.ogg" fadeTime="10" fadeOutTime="2"/>
@@ -137,7 +138,7 @@
 		<!-- Scene -->
 		<map path="Assets/Maps/" name="Map_OasisdelFaraon.tmx"/>
 
-		<taberna texturepath="Assets/Textures/Screens/taberna.png"/>
+		<taberna texturepath="Assets/Textures/Screens/Taberna_Final.png"/>
 		<!-- Player -->
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 		
@@ -369,7 +370,7 @@
 		<inventoryItem2 texturepath="Assets/Textures/Screens/Inventory/Amulet_Serps.png"/>
 		<inventoryItem3 texturepath="Assets/Textures/Screens/Inventory/Amulet_Ull.png"/>
 
-		<shopTexture texturepath="Assets/Textures/Screens/Shop/shop.png"/>
+		<shopTexture texturepath="Assets/Textures/Screens/Shop/Store_UI_def.png"/>
 		<emptyslotTexture texturepath="Assets/Textures/Screens/Shop/emptyslot.png"/>
 		<selectorItemTexture texturepath="Assets/Textures/Screens/Shop/selectorItem.png"/>
 
