@@ -136,6 +136,7 @@ private:
 	bool enemyCanAttack = false;
 
 	bool isAttacking = false;
+	bool isHitted = false;
 
 	int enemyAttackIndex = 0;
 
