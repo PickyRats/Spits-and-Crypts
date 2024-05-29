@@ -62,7 +62,7 @@ public:
 	void DrawTimer();
 
 	//void Missions(int mission1);
-
+	void SkillTreeclass(int classid);
 	void SkillTree();
 	void ApplySkillEffects(int skillIndex);
 	void HandleSelection(int currentIndex);
@@ -86,7 +86,7 @@ public:
 	Slot shopSlots[3];
 	bool shop = false;
 
-	int classid = 1;
+	int classid = 4;
 	
 private:
 
@@ -265,6 +265,11 @@ private:
 	SDL_Texture* Talent3;
 	SDL_Texture* Talent4;
 	SDL_Texture* Talent5;
+
+	SDL_Texture* Bloqueado1_1 = NULL;
+	SDL_Texture* Bloqueado1_2 = NULL;
+	SDL_Texture* Bloqueado2_1 = NULL;
+	SDL_Texture* Bloqueado2_2 = NULL;
 
 	SDL_Texture* Rama1_1 = NULL;
 	SDL_Texture* Rama1_2 = NULL;

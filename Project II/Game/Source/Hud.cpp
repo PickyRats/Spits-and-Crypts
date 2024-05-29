@@ -208,8 +208,8 @@ bool Hud::Start()
 	Talent1 = SkillTreeTalent;
 	Talent2 = SkillTreeLife_1;
 	Talent3 = SkillTreeSpeed_1;
-	Talent4 = SkillTreeAtack_1_1;
-	Talent5 = SkillTreeAtack_2_1;
+	Talent4 = Bloqueado1_1;
+	Talent5 = Bloqueado2_1;
 	
 	skillTreenode = {
 	{ Talent1, {333, 162, 77, 77}, false, false, -1, classid}, // Habilidad 1
@@ -218,6 +218,7 @@ bool Hud::Start()
 	{ Talent4, {213, 263, 77, 77}, true, false, -1, classid },  // Habilidad 4, depende de Habilidad 1
 	{ Talent5, {213, 358, 77, 77}, true, false, 3, classid },  // Habilidad 5, depende de Habilidad 4
 	};
+
 	skillTreenode[0].selected = true;
 
 	exitButton->state = GuiControlState::HIDDEN;
@@ -910,8 +911,7 @@ bool Hud::CleanUp()
 	return true;
 }
 
-void Hud::SkillTree()
-{
+void Hud::SkillTree() {
 	// Dibuja el fondo del árbol de habilidades
 	app->render->DrawTexture(skillTree, 0, 0, NULL, SDL_FLIP_NONE, 0);
 	app->render->DrawTexture(Rama1_1, 405, 199, NULL, SDL_FLIP_HORIZONTAL, 0);
@@ -920,6 +920,9 @@ void Hud::SkillTree()
 	app->render->DrawTexture(Rama2_2, 252, 336, NULL, SDL_FLIP_NONE, 0);
 	app->render->DrawTexture(Rama3_1, 388, 436, NULL, SDL_FLIP_HORIZONTAL, 0);
 	app->render->DrawTexture(Rama3_2, 251, 435, NULL, SDL_FLIP_NONE, 0);
+
+	// Inicializa las texturas de los nodos bloqueados
+	SkillTreeclass(classid);
 
 	// Itera sobre cada nodo de habilidad y dibuja su textura
 	for (const auto& node : skillTreenode) {
@@ -935,7 +938,7 @@ void Hud::SkillTree()
 		auto& node = skillTreenode[i];
 
 		if (node.selected) {
-			if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && (node.unlockRequirement == -1 || skillTreenode[node.unlockRequirement].locked == false)) {
+			if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && (node.unlockRequirement == -1 || !skillTreenode[node.unlockRequirement].locked)) {
 				app->audio->PlayFx(app->sceneMenu->FxButton1);
 				node.locked = false;
 				// Aplica efectos según el tipo de habilidad desbloqueada
@@ -963,18 +966,17 @@ void Hud::ApplySkillEffects(int skillIndex) {
 		Rama3_1 = skillTreerama_3_2;
 		break;
 	case 3:
-		skillTreenode[3].texture = SkillTreeAtack_1_2;
+		skillTreenode[3].texture = Bloqueado1_2;
 		Rama1_2 = skillTreerama_1;
 		Rama2_2 = skillTreerama_2_1;
 		Rama3_2 = skillTreerama_3_1;
 		app->map->player->attackDamage += 5;
 		break;
 	case 4:
-		skillTreenode[4].texture = SkillTreeAtack_2_2;
+		skillTreenode[4].texture = Bloqueado2_2;
 		Rama2_2 = skillTreerama_2_2;
 		Rama3_2 = skillTreerama_3_2;
 		break;
-		// Añade más casos según sea necesario
 	}
 }
 
@@ -1014,5 +1016,44 @@ void Hud::HandleSelection(int currentIndex) {
 			skillTreenode[4].selected = true;
 			skillTreenode[currentIndex].selected = false;
 		}
+	}
+}
+
+void Hud::SkillTreeclass(int classid) {
+	switch (classid)
+	{
+	case 1:
+		Bloqueado1_1 = SkillTreeAtack_1_1;
+		Bloqueado1_2 = SkillTreeAtack_1_2;
+		Bloqueado2_1 = SkillTreeAtack_2_1;
+		Bloqueado2_2 = SkillTreeAtack_2_2;
+		break;
+	case 2:
+		Bloqueado1_1 = SkillTreeAtack_3_1;
+		Bloqueado1_2 = SkillTreeAtack_3_2;
+		Bloqueado2_1 = SkillTreeAtack_4_1;
+		Bloqueado2_2 = SkillTreeAtack_4_2;
+		break;
+	case 3:
+		Bloqueado1_1 = SkillTreeAtack_5_1;
+		Bloqueado1_2 = SkillTreeAtack_5_2;
+		Bloqueado2_1 = SkillTreeAtack_6_1;
+		Bloqueado2_2 = SkillTreeAtack_6_2;
+		break;
+	case 4:
+		Bloqueado1_1 = SkillTreeAtack_7_1;
+		Bloqueado1_2 = SkillTreeAtack_7_2;
+		Bloqueado2_1 = SkillTreeAtack_8_1;
+		Bloqueado2_2 = SkillTreeAtack_8_2;
+		break;
+	}
+
+	if (skillTreenode[3].locked)
+	{
+		skillTreenode[3].texture = Bloqueado1_1;
+	}
+	if (skillTreenode[4].locked)
+	{
+		skillTreenode[4].texture = Bloqueado2_1;
 	}
 }
