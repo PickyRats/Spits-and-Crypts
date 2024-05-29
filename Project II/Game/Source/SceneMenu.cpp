@@ -138,7 +138,7 @@ bool SceneMenu::Start()
 
 bool SceneMenu::Update(float dt)
 {
-
+	LOG("%d", currentId);
 	GamePad& pad = app->input->pads[0];
 
 	//Render background 
@@ -482,8 +482,8 @@ void SceneMenu::OnSettings(GamePad& pad)
 
 void SceneMenu::InputSettings(GamePad& pad)
 {
-	
-	if (pad.down == KEY_DOWN && !wasDownPressed && currentId < 12)
+
+	if (pad.down == KEY_DOWN && !wasDownPressed && currentId != 8 && currentId != 11 && currentId != 12)
 	{
 		currentId++;
 		wasDownPressed = true;
@@ -493,7 +493,8 @@ void SceneMenu::InputSettings(GamePad& pad)
 		wasDownPressed = false;
 	}
 
-	if (pad.up == KEY_DOWN && !wasUpPressed && currentId > 5)
+
+	if (pad.up == KEY_DOWN && !wasUpPressed &&  currentId != 6 && currentId != 10 && currentId != 12)
 	{
 		currentId--;
 		wasUpPressed = true;
