@@ -365,7 +365,7 @@
 		<Personaje2 texturepath="Assets/Textures/Screens/Combat/fotopersonatge2.png"/>
 		<numeros texturepath="Assets/Textures/Screens/Combat/numeros.png"/>
 
-		<inventory texturepath="Assets/Textures/Screens/Inventory/inventory.png"/>
+		<inventory texturepath="Assets/Textures/Screens/Inventory/Inventory.png"/>
 		<inventoryItem1 texturepath="Assets/Textures/Screens/Inventory/Amulet_Escarabat.png"/>
 		<inventoryItem2 texturepath="Assets/Textures/Screens/Inventory/Amulet_Serps.png"/>
 		<inventoryItem3 texturepath="Assets/Textures/Screens/Inventory/Amulet_Ull.png"/>
