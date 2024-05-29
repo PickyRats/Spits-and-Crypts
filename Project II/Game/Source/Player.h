@@ -92,8 +92,6 @@ public:
 
 	bool isEnteringDoor = false;
 
-	bool isFacingRight = true;
-
 	bool godMode = false;
 
 	bool isJumping = false;

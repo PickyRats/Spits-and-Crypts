@@ -120,6 +120,8 @@ public:
 	iPoint position;       
 	bool renderable = true;
 
+	bool isFacingRight = true;
+
 	bool isDead = false;
 	int health = 100;
 	int totalPoints = 6;

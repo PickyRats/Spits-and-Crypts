@@ -90,6 +90,7 @@ bool SceneCombat::Start()
 	for (int i = 0; i < 2; i++)
 	{
 		enemies[i] = enemy[i];
+		enemies[i]->SetCombatAnimation(0);
 	}
 	players[0] = app->map->player;
 	players[0]->SetCombatAnimation(0);
@@ -149,6 +150,15 @@ bool SceneCombat::Update(float dt)
 		}
 	}
 
+	if (isHitted)
+	{
+		if (players[nearestPlayer]->AnimationFinished())
+		{
+			isHitted = false;
+			players[nearestPlayer]->SetCombatAnimation(0);
+		}
+	}
+
 	if (isPlayerTurn)
 	{
 		if (!players[currentPlayerIndex]->isDead)
@@ -180,9 +190,10 @@ bool SceneCombat::Update(float dt)
 
 						if (enemyDistance <= currentEntity->attackRange)
 						{
-							currentEntity->SetCombatAnimation(2);
+							currentEntity->SetCombatAnimation(3);
 							currentEntity->currentPoints = 0;
 							enemies[enemyAttackIndex]->health -= currentEntity->attackDamage;
+							enemies[enemyAttackIndex]->SetCombatAnimation(5);
 							isAttacking = true;
 						}
 						else
@@ -392,31 +403,37 @@ void SceneCombat::MovePlayer(Entity* entity)
 {
 	iPoint* currentPosition = &entity->position;
 
-	entity->SetCombatAnimation(1);
-
 	// Set the destination position
 	if (!isMoving)
 	{
 		if (tiles[currentTile].direction == 1)
 		{
+			entity->SetCombatAnimation(1);
+			entity->isFacingRight = true;
 			destinationPosition = { currentPosition->x + 64, currentPosition->y };
 			movingDirection = 1;
 			isMoving = true;
 		}
 		if (tiles[currentTile].direction == 2)
 		{
+			entity->SetCombatAnimation(1);
+			entity->isFacingRight = false;
 			destinationPosition = { currentPosition->x - 64, currentPosition->y };
 			movingDirection = 2;
 			isMoving = true;
 		}
 		if (tiles[currentTile].direction == 3)
 		{
+			entity->SetCombatAnimation(2);
+			entity->isFacingRight = true;
 			destinationPosition = { currentPosition->x, currentPosition->y - 64 - 64 - 64 };
 			movingDirection = 3;
 			isMoving = true;
 		}
 		if (tiles[currentTile].direction == 4)
 		{
+			entity->SetCombatAnimation(2);
+			entity->isFacingRight = true;
 			destinationPosition = { currentPosition->x, currentPosition->y + 64 + 64 + 64 };
 			movingDirection = 4;
 			isMoving = true;
@@ -547,6 +564,8 @@ void SceneCombat::EnemyAttack()
 	app->audio->PlayFx(atack);
 	enemyCanAttack = false;
 	players[nearestPlayer]->health -= enemies[nearestPlayer]->attackDamage;
+	players[nearestPlayer]->SetCombatAnimation(5);
+	isHitted = true;
 	//printf("Enemy is attacking player life: %d \n", players[nearestPlayer]->health);
 
 	ChangeTurn();

@@ -636,19 +636,24 @@ void Player::SetCombatAnimation(int animationIndex)
 		currentAnim = &walkBattleAnim;
 		break;
 	case 2:
+		currentAnim = &climbAnim;
+		break;
+	case 3:
 		currentAnim = &attackAnim;
 		currentAnim->ResetLoopCount();
 		currentAnim->Reset();
 		break;
-	case 3:
+	case 4:
 		currentAnim = &abilityAnim;
 		currentAnim->ResetLoopCount();
 		currentAnim->Reset();
 		break;
-	case 4:
-		currentAnim = &hitAnim;
-		break;
 	case 5:
+		currentAnim = &hitAnim;
+		currentAnim->ResetLoopCount();
+		currentAnim->Reset();
+		break;
+	case 6:
 		currentAnim = &deathAnim;
 		break;
 	}
