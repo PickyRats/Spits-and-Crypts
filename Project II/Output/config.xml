@@ -35,7 +35,7 @@
 		<pass path="Assets/Audio/Fx/combate/pasar-turno_Fx.wav"/>
 		<tilemove path="Assets/Audio/Fx/combate/tile-Selection_Fx.wav"/>
 		<!--Enemy -->
-		<enemy x="1216" y="384" texturepath="Assets/Textures/enemy.png" id="1"/>
+		<enemy 1="1216" y="384" texturepath="Assets/Textures/Guardian_SpriteSheet.png" id="1"/>
 		<enemy x="704" y="192" texturepath="Assets/Textures/enemy.png" id="2"/>
 
 	</sceneCombat>
