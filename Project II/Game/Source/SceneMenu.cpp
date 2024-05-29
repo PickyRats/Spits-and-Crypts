@@ -105,7 +105,7 @@ bool SceneMenu::Start()
 
 	//Settings Buttons
 	settingsExitButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, NULL, exitNormal, exitHover, exitClick, { 1419, 92, 63, 63 }, this);
-	settingsFullScreenButton = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 7, NULL, settingsBoxNormal, settingsBoxNormal, settingsTick, { 750, 187, 60, 32 }, this);
+	settingsFullScreenButton = (GuiControlCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 7, NULL, settingsBoxNormal, settingsBoxNormal, settingsTick, { 750, 187, 60, 32 }, this);
 	settingsVSyncButton = (GuiControlCheckBox*)app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 8, NULL, settingsBoxNormal, settingsBoxNormal, settingsTick, { 750, 257, 89, 89 }, this);
 	settingsMusicButton = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 231, NULL, settingsSlider, settingsSlider, settingsSlider, { 795, 197, 30, 30 }, this, { 570, 182, 225, 50 });
 	settingsFxButton = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 21, NULL, settingsSlider, settingsSlider, settingsSlider, { 795, 263, 30, 30 }, this, { 570, 248, 225, 50 });
@@ -138,7 +138,6 @@ bool SceneMenu::Start()
 
 bool SceneMenu::Update(float dt)
 {
-	LOG("%d", currentId);
 	GamePad& pad = app->input->pads[0];
 
 	//Render background 
@@ -156,17 +155,9 @@ bool SceneMenu::Update(float dt)
 	int rangoFX = settingsFxButton->sliderBounds.w - 20;
 	int percentageFX = (((float)settingsFxButton->sliderPosition - settingsFxButton->sliderBounds.x) / rangoFX) * 100;
 	Mix_Volume(-1,percentageFX);
+
+
 	//On menu screen
-	if (settingsFullScreenButton->state == GuiControlState::PRESSED)
-	{
-		if (fullScreen == false) fullScreen = true;
-		else fullScreen = false;
-		if (fxClickPlayed == false)
-		{
-			app->audio->PlayFx(FxButton2);
-			fxClickPlayed = true;
-		}
-	}
 
 	if(onMenu && !onSettings && !onCredits){
 
@@ -263,6 +254,7 @@ bool SceneMenu::Update(float dt)
 			}
 			//Show settings buttons
 			onSettings = true;
+			
 		}
 		else if (creditsButton->state == GuiControlState::FOCUSED)
 		{
@@ -392,12 +384,27 @@ void SceneMenu::OnSettings(GamePad& pad)
 			fxClickPlayed = false;
 			}
 			*/
-
-		/*	settingsFullScreenButton->state = GuiControlState::NORMAL;
-			settingsVSyncButton->state = GuiControlState::NORMAL;
 			settingsFxButton->state = GuiControlState::HIDDEN;
-			settingsMusicButton->state = GuiControlState::HIDDEN;*/
+			settingsMusicButton->state = GuiControlState::HIDDEN;
 
+			if (settingsFullScreenButton->state == GuiControlState::PRESSED)
+			{
+				fullScreen = true;
+			}
+			else
+			{
+				fullScreen = false;
+			}
+
+			if (!fullScreen)
+			{
+				settingsFullScreenButton->state = GuiControlState::NORMAL;
+			}
+			else
+			{
+				settingsFullScreenButton->state = GuiControlState::PRESSED;
+			}
+			
 			app->render->DrawTexture(settingsControlsButtonNormal, 742, 110, NULL, SDL_FLIP_NONE, 0);
 			app->render->DrawTexture(settingsAudioButtonNormal, 560, 110, NULL, SDL_FLIP_NONE, 0);
 			app->render->DrawTexture(settingsOptionsButtonHover, 378, 110, NULL, SDL_FLIP_NONE, 0);
@@ -416,25 +423,8 @@ void SceneMenu::OnSettings(GamePad& pad)
 		}
 	}
 
-	if (settingsFullScreenButton->state == GuiControlState::FOCUSED)
-	{
-		if (!fxHoverPlayed)
-		{
-			app->audio->PlayFx(FxButton1);
-			fxHoverPlayed = true;
-		}
-	}
-	if (settingsFullScreenButton->state == GuiControlState::PRESSED)
-	{
-		if (fullScreen == false) fullScreen = true;
-		else fullScreen = false;
-		if (fxClickPlayed == false)
-		{
-			app->audio->PlayFx(FxButton2);
-			fxClickPlayed = true;
-		}
-	}
-	else if (settingsVSyncButton->state == GuiControlState::FOCUSED)
+
+	if (settingsVSyncButton->state == GuiControlState::FOCUSED)
 	{
 		if (fxHoverPlayed == false)
 		{

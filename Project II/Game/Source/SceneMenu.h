@@ -45,6 +45,7 @@ public:
 	bool wasUpPressed = false;
 	bool wasR1Pressed = false;
 	bool wasL1Pressed = false;
+	bool wasAPressed = false;
 
 	int currentId= 1;
 	int percentageMusic;
@@ -114,7 +115,7 @@ private:
 	GuiControlButton* settingsOptionsButton;
 	GuiControlButton* settingsAudioButton;
 	GuiControlButton* settingsControlsButton;
-	GuiControlButton* settingsFullScreenButton;
+	GuiControlCheckBox* settingsFullScreenButton;
 	GuiControlCheckBox* settingsVSyncButton;
 	GuiControlSlider* settingsMusicButton;
 	GuiControlSlider* settingsFxButton;
