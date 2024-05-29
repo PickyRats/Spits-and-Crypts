@@ -37,9 +37,11 @@ bool Enemy::Start() {
 	//initilize texture
 	texture = app->tex->Load(texturePath);
 
-	//LoadAnimations();
+	LoadAnimations();
 
-	//currentAnim = &idleAnim;
+	currentAnim = &idleAnim;
+
+	isFacingRight = false;
 
 	attackDamage = 10;
 
@@ -50,7 +52,7 @@ bool Enemy::Update(float dt)
 {
 	
 	this->dt = dt;
-	
+	currentAnim->Update();
 	/*position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 50;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 42;*/
 	if (health <= 0 && !isDead)
@@ -69,7 +71,8 @@ void Enemy::DrawEnemy()
 
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
 
-	app->render->DrawTexture(texture, position.x, position.y, &rect);
+	if (isFacingRight) app->render->DrawTexture(texture, position.x - 30, position.y - 62, &rect);
+	else app->render->DrawTexture(texture, position.x - 30, position.y - 62, &rect, SDL_FLIP_HORIZONTAL);
 
 }
 
@@ -105,6 +108,16 @@ void Enemy::LoadAnimations()
 		abilityAnim.LoadAnimations("abilityAnim", "enemy1");
 		hitAnim.LoadAnimations("hitAnim", "enemy1");
 		deathAnim.LoadAnimations("deathAnim", "enemy1");
+	}
+	else if (enemyId == 2)
+	{
+		idleAnim.LoadAnimations("idleAnim", "enemy2");
+		walkAnim.LoadAnimations("walkAnim", "enemy2");
+		climbAnim.LoadAnimations("climbAnim", "enemy2");
+		attackAnim.LoadAnimations("attackAnim", "enemy2");
+		abilityAnim.LoadAnimations("abilityAnim", "enemy2");
+		hitAnim.LoadAnimations("hitAnim", "enemy2");
+		deathAnim.LoadAnimations("deathAnim", "enemy2");
 	}
 }
 

@@ -140,22 +140,41 @@ bool SceneCombat::Update(float dt)
 
 	}
 
-	if (isAttacking)
+	if (isPlayerAttacking)
 	{
 		if (currentEntity->AnimationFinished())
 		{
-			isAttacking = false;
+			isPlayerAttacking = false;
 			playerCanAttack = false;
 			ChangeTurn();
 		}
 	}
 
-	if (isHitted)
+	if (isEnemyAttacking)
+	{
+		if (currentEntity->AnimationFinished())
+		{
+			isEnemyAttacking = false;
+			enemyCanAttack = false;
+			ChangeTurn();
+		}
+	}
+
+	if (isPlayerHitted)
 	{
 		if (players[nearestPlayer]->AnimationFinished())
 		{
-			isHitted = false;
+			isPlayerHitted = false;
 			players[nearestPlayer]->SetCombatAnimation(0);
+		}
+	}
+	
+	if (isEnemyHitted)
+	{
+		if (enemies[nearestPlayer]->AnimationFinished())
+		{
+			isEnemyHitted = false;
+			enemies[nearestPlayer]->SetCombatAnimation(0);
 		}
 	}
 
@@ -194,7 +213,8 @@ bool SceneCombat::Update(float dt)
 							currentEntity->currentPoints = 0;
 							enemies[enemyAttackIndex]->health -= currentEntity->attackDamage;
 							enemies[enemyAttackIndex]->SetCombatAnimation(5);
-							isAttacking = true;
+							isPlayerAttacking = true;
+							isEnemyHitted = true;
 						}
 						else
 						{
@@ -562,13 +582,13 @@ void SceneCombat::ChangeTurn()
 void SceneCombat::EnemyAttack()
 {
 	app->audio->PlayFx(atack);
-	enemyCanAttack = false;
+	enemies[currentEnemyIndex]->SetCombatAnimation(3);
 	players[nearestPlayer]->health -= enemies[nearestPlayer]->attackDamage;
 	players[nearestPlayer]->SetCombatAnimation(5);
-	isHitted = true;
+	isPlayerHitted = true;
 	//printf("Enemy is attacking player life: %d \n", players[nearestPlayer]->health);
-
-	ChangeTurn();
+	
+	isEnemyAttacking = true;
 }
 
 void SceneCombat::ResetPlayerTurn()
