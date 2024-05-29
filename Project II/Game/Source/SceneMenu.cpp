@@ -306,7 +306,7 @@ bool SceneMenu::Update(float dt)
 	//On settings screen
 	else if (onSettings)
 	{
-		if ((app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || pad.r1 == KEY_DOWN))
+		if ((app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || pad.r1 == KEY_DOWN && !wasR1Pressed))
 		{
 			if (currentId >= 9 && currentId < 12)
 			{
@@ -316,8 +316,14 @@ bool SceneMenu::Update(float dt)
 			{
 				currentId = 9;
 			}
+			wasR1Pressed = true;
 		}
-		else if((app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN || pad.l1 == KEY_DOWN))
+		else if(pad.r1 != KEY_DOWN)
+		{
+			wasR1Pressed = false;
+		}
+
+		if((app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN || pad.l1 == KEY_DOWN && !wasL1Pressed))
 		{
 			if (currentId >= 12)
 			{
@@ -327,6 +333,11 @@ bool SceneMenu::Update(float dt)
 			{
 				currentId = 6;
 			}
+			wasL1Pressed = true;
+		}
+		else if(pad.l1 != KEY_DOWN)
+		{
+			wasL1Pressed = false;
 		}
 		//Hide menu buttons
 		startButton->state = GuiControlState::HIDDEN;
@@ -337,7 +348,7 @@ bool SceneMenu::Update(float dt)
 
 		if (onMenu) {
 			
-			//app->render->DrawTexture(controlsHint, 30, 670, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(settings, 0, 0, NULL, SDL_FLIP_NONE, 0);
 			if (onSettingsControls)
 			{
 				settingsFxButton->state = GuiControlState::HIDDEN;

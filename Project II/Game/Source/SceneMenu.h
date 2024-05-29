@@ -37,6 +37,8 @@ public:
 
 	bool wasDownPressed = false;
 	bool wasUpPressed = false;
+	bool wasR1Pressed = false;
+	bool wasL1Pressed = false;
 
 	int currentId= 1;
 	int percentageMusic;
