@@ -79,6 +79,7 @@ bool SceneMenu::Start()
 	//settings
 	settingsOptionsFullScreenHover = app->tex->Load(configNode2.child("settingsOptionsFullScreenHover").attribute("texturepath").as_string());//Cleaned
 	settingsOptionsVsyncHover = app->tex->Load(configNode2.child("settingsOptionsVsyncHover").attribute("texturepath").as_string());//Cleaned
+	settingsAudioMusicVolumeHover = app->tex->Load(configNode2.child("settingsAudioMusicVolumeHover").attribute("texturepath").as_string());//Cleaned
 	settingsOptionsPanel = app->tex->Load(configNode2.child("settingsOptionsPanel").attribute("texturepath").as_string());//Cleaned
 
 	//Load Music
@@ -291,8 +292,8 @@ bool SceneMenu::Update(float dt)
 			{
 				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
-				return false;
 			}
+			return false;
 		}
 		else
 		{
@@ -331,6 +332,7 @@ void SceneMenu::OnSettings(GamePad& pad)
 
 		app->render->DrawTexture(settings, 0, 0, NULL, SDL_FLIP_NONE, 0);
 
+		//Controls tab
 		if (currentId == 12)
 		{
 			/*settingsFxButton->state = GuiControlState::HIDDEN;
@@ -345,25 +347,29 @@ void SceneMenu::OnSettings(GamePad& pad)
 
 			app->render->DrawTexture(settingsControls, 0, 0, NULL, SDL_FLIP_NONE, 0);
 		}
-		else if (currentId >= 9 && currentId <= 11)
+		else if (currentId >= 9 && currentId <= 11)//Audio tab
 		{
 			settingsFullScreenButton->state = GuiControlState::HIDDEN;
 			settingsVSyncButton->state = GuiControlState::HIDDEN;
+			settingsMusicButton->state = GuiControlState::NORMAL;
 
-			app->render->DrawTexture(settingsControlsButtonNormal, 742, 110, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(settingsAudioButtonHover, 560, 110, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(settingsOptionsButtonNormal, 378, 110, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(settingsControlsButtonNormal, 742, 110);
+			app->render->DrawTexture(settingsAudioButtonHover, 560, 110);
+			app->render->DrawTexture(settingsOptionsButtonNormal, 378, 110);
 
-			app->render->DrawTexture(settingsAudioPanel, 0, 0, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(settingsAudioPanel, 0, 0);
 			//app->render->DrawTexture(settingsAudioPanel, 0, 0, NULL, SDL_FLIP_NONE, 0);
 
 			/*settingsFxButton->state = GuiControlState::NORMAL;
 			settingsMusicButton->state = GuiControlState::NORMAL;
 			settingsFullScreenButton->state = GuiControlState::HIDDEN;
 			settingsVSyncButton->state = GuiControlState::HIDDEN;*/
-
+			if (currentId == 10)//Fullscreen selected
+			{
+				app->render->DrawTexture(settingsAudioMusicVolumeHover, 420, 193);
+			}
 		}
-		else if (currentId >= 6 && currentId <= 8)
+		else if (currentId >= 6 && currentId <= 8)//Options tab
 		{
 			if (settingsFullScreenButton->state == GuiControlState::PRESSED)
 			{
@@ -393,20 +399,19 @@ void SceneMenu::OnSettings(GamePad& pad)
 			settingsFullScreenButton->state = GuiControlState::NORMAL;
 			settingsVSyncButton->state = GuiControlState::NORMAL;
 
-			app->render->DrawTexture(settingsControlsButtonNormal, 742, 110, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(settingsAudioButtonNormal, 560, 110, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(settingsOptionsButtonHover, 378, 110, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(settingsControlsButtonNormal, 742, 110);
+			app->render->DrawTexture(settingsAudioButtonNormal, 560, 110);
+			app->render->DrawTexture(settingsOptionsButtonHover, 378, 110);
 
-			app->render->DrawTexture(settingsOptionsPanel, 0, 0, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(settingsOptionsPanel, 0, 0);
 
-			if (currentId == 7)
+			if (currentId == 7)//Fullscreen selected
 			{
-				app->render->DrawTexture(settingsOptionsFullScreenHover, 465, 196, NULL, SDL_FLIP_NONE, 0);
+				app->render->DrawTexture(settingsOptionsFullScreenHover, 465, 196);
 			}
-			else if (currentId == 8)
+			else if (currentId == 8)//Vsync selected
 			{
-				//aqui textura hover de vsync
-				app->render->DrawTexture(settingsOptionsVsyncHover, 465, 263, NULL, SDL_FLIP_NONE, 0);
+				app->render->DrawTexture(settingsOptionsVsyncHover, 465, 263);
 			}
 
 		}
@@ -442,7 +447,7 @@ void SceneMenu::InputSettings(GamePad& pad)
 		wasDownPressed = false;
 	}
 
-	if (pad.up == KEY_DOWN && !wasUpPressed &&  currentId != 6 && currentId != 10 && currentId != 12)
+	if (pad.up == KEY_DOWN && !wasUpPressed &&  currentId != 6 && currentId != 9 && currentId != 12)
 	{
 		currentId--;
 		wasUpPressed = true;

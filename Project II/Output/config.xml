@@ -300,6 +300,7 @@
 		<settingsAudioPanel texturepath="Assets/Textures/Screens/More/settings_audio_panel.png"/>
 		<settingsOptionsFullScreenHover texturepath="Assets/Textures/Screens/More/settings_options_fullscreen_hover.png"/>
 		<settingsOptionsVsyncHover texturepath="Assets/Textures/Screens/More/settings_options_vsync_hover.png"/>
+		<settingsAudioMusicVolumeHover texturepath="Assets/Textures/Screens/More/settings_audio_musicvolume_hover.png"/>
 		<settingsOptionsPanel texturepath="Assets/Textures/Screens/More/settings_options_panel.png"/>
 		<settingsOptionsButtonNormal texturepath="Assets/Textures/Screens/More/settings_options_button_normal.png"/>
 		<settingsOptionsButtonHover texturepath="Assets/Textures/Screens/More/settings_options_button_hover.png"/>
