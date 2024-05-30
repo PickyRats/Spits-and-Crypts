@@ -100,6 +100,7 @@ private:
 	SDL_Texture* settingsAudioPanel;
 	SDL_Texture* settingsOptionsPanel;
 	SDL_Texture* settingsOptionsFullScreenHover;
+	SDL_Texture* settingsOptionsVsyncHover;
 	SDL_Texture* settingsOptionsButtonNormal;
 	SDL_Texture* settingsOptionsButtonHover;
 	SDL_Texture* settingsAudioButtonNormal;

@@ -78,6 +78,7 @@ bool SceneMenu::Start()
 
 	//settings
 	settingsOptionsFullScreenHover = app->tex->Load(configNode2.child("settingsOptionsFullScreenHover").attribute("texturepath").as_string());//Cleaned
+	settingsOptionsVsyncHover = app->tex->Load(configNode2.child("settingsOptionsVsyncHover").attribute("texturepath").as_string());//Cleaned
 	settingsOptionsPanel = app->tex->Load(configNode2.child("settingsOptionsPanel").attribute("texturepath").as_string());//Cleaned
 
 	//Load Music
@@ -334,8 +335,10 @@ void SceneMenu::OnSettings(GamePad& pad)
 		{
 			/*settingsFxButton->state = GuiControlState::HIDDEN;
 			settingsMusicButton->state = GuiControlState::HIDDEN;
-			settingsFullScreenButton->state = GuiControlState::HIDDEN;
 			settingsVSyncButton->state = GuiControlState::HIDDEN;*/
+			settingsFullScreenButton->state = GuiControlState::HIDDEN;
+			settingsVSyncButton->state = GuiControlState::HIDDEN;
+
 			app->render->DrawTexture(settingsControlsButtonHover, 742, 110, NULL, SDL_FLIP_NONE, 0);
 			app->render->DrawTexture(settingsAudioButtonNormal, 560, 110, NULL, SDL_FLIP_NONE, 0);
 			app->render->DrawTexture(settingsOptionsButtonNormal, 378, 110, NULL, SDL_FLIP_NONE, 0);
@@ -344,6 +347,9 @@ void SceneMenu::OnSettings(GamePad& pad)
 		}
 		else if (currentId >= 9 && currentId <= 11)
 		{
+			settingsFullScreenButton->state = GuiControlState::HIDDEN;
+			settingsVSyncButton->state = GuiControlState::HIDDEN;
+
 			app->render->DrawTexture(settingsControlsButtonNormal, 742, 110, NULL, SDL_FLIP_NONE, 0);
 			app->render->DrawTexture(settingsAudioButtonHover, 560, 110, NULL, SDL_FLIP_NONE, 0);
 			app->render->DrawTexture(settingsOptionsButtonNormal, 378, 110, NULL, SDL_FLIP_NONE, 0);
@@ -359,52 +365,34 @@ void SceneMenu::OnSettings(GamePad& pad)
 		}
 		else if (currentId >= 6 && currentId <= 8)
 		{
-			/*if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && currentId != 8)
+			if (settingsFullScreenButton->state == GuiControlState::PRESSED)
 			{
-			currentId++;
-			fxHoverPlayed = false;
-			fxClickPlayed = false;
+				if (fullScreen == false) fullScreen = true;
+				else fullScreen = false;
+				if (fxClickPlayed == false)
+				{
+					app->audio->PlayFx(FxButton2);
+					fxClickPlayed = true;
+				}
 			}
-			if ((pad.l_y > 0.2 == KEY_DOWN || pad.down == KEY_DOWN) && currentId < 5)
+
+			if (settingsVSyncButton->state == GuiControlState::PRESSED)
 			{
-			currentId++;
-			fxHoverPlayed = false;
-			fxClickPlayed = false;
+				if (vSync == false) vSync = true;
+				else vSync = false;
+				if (fxClickPlayed == false)
+				{
+					app->audio->PlayFx(FxButton2);
+					fxClickPlayed = true;
+				}
 			}
-			else if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && currentId != 6)
-			{
-			currentId--;
-			fxHoverPlayed = false;
-			fxClickPlayed = false;
-			}
-			else if ((pad.l_y < -0.2 == KEY_DOWN || pad.up == KEY_DOWN) && currentId > 1)
-			{
-			currentId--;
-			fxHoverPlayed = false;
-			fxClickPlayed = false;
-			}
-			*/
+
 			settingsFxButton->state = GuiControlState::HIDDEN;
 			settingsMusicButton->state = GuiControlState::HIDDEN;
 
-			if (settingsFullScreenButton->state == GuiControlState::PRESSED)
-			{
-				fullScreen = true;
-			}
-			else
-			{
-				fullScreen = false;
-			}
+			settingsFullScreenButton->state = GuiControlState::NORMAL;
+			settingsVSyncButton->state = GuiControlState::NORMAL;
 
-			if (!fullScreen)
-			{
-				settingsFullScreenButton->state = GuiControlState::NORMAL;
-			}
-			else
-			{
-				settingsFullScreenButton->state = GuiControlState::PRESSED;
-			}
-			
 			app->render->DrawTexture(settingsControlsButtonNormal, 742, 110, NULL, SDL_FLIP_NONE, 0);
 			app->render->DrawTexture(settingsAudioButtonNormal, 560, 110, NULL, SDL_FLIP_NONE, 0);
 			app->render->DrawTexture(settingsOptionsButtonHover, 378, 110, NULL, SDL_FLIP_NONE, 0);
@@ -418,34 +406,10 @@ void SceneMenu::OnSettings(GamePad& pad)
 			else if (currentId == 8)
 			{
 				//aqui textura hover de vsync
+				app->render->DrawTexture(settingsOptionsVsyncHover, 465, 263, NULL, SDL_FLIP_NONE, 0);
 			}
 
 		}
-	}
-
-
-	if (settingsVSyncButton->state == GuiControlState::FOCUSED)
-	{
-		if (fxHoverPlayed == false)
-		{
-			app->audio->PlayFx(FxButton1);
-			fxHoverPlayed = true;
-		}
-	}
-	else if (settingsVSyncButton->state == GuiControlState::PRESSED)
-	{
-		if (vSync == false) vSync = true;
-		else vSync = false;
-		if (fxClickPlayed == false)
-		{
-			app->audio->PlayFx(FxButton2);
-			fxClickPlayed = true;
-		}
-	}
-	else
-	{
-		fxHoverPlayed = false;
-		fxClickPlayed = false;
 	}
 
 	//FullScreen and VSync
@@ -608,6 +572,7 @@ bool SceneMenu::CleanUp()
 	app->tex->UnLoad(settingsSlider);
 	app->tex->UnLoad(settingsAudioPanel);
 	app->tex->UnLoad(settingsOptionsFullScreenHover);
+	app->tex->UnLoad(settingsOptionsVsyncHover);
 	app->tex->UnLoad(settingsOptionsPanel);
 	app->tex->UnLoad(settingsOptionsButtonNormal);
 	app->tex->UnLoad(settingsOptionsButtonHover);
