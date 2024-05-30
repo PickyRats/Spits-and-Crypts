@@ -30,7 +30,7 @@ public:
     // Additional methods
     void CreateParticles();
     void UpdateParticles(float dt, float time);
-    void TorchParticles(float dt, int initialPositionX, int initialPositionY, float lifeTime, int index);
+    void TorchParticles(float dt, int initialPositionX, int initialPositionY, float lifeTime, int index, int type);
     void DrawParticles();
 
 private:
@@ -39,7 +39,7 @@ private:
     SDL_Texture* texture2;
     SDL_Texture* texture3;
     SDL_Texture* texture4;
-    float timeAccumulator[3];
+    float timeAccumulator[20];
     const float particleInterval = 6.0f;
 };
 

@@ -5,7 +5,7 @@
 
 class Particle {
 public:
-    Particle(SDL_Texture* texture, int x, int y, float lifetime, int xOffset);
+    Particle(SDL_Texture* texture, int x, int y, float lifetime, int xOffset, int type);
 
     void Update(float dt);
     void Draw(SDL_Renderer* renderer);
@@ -21,6 +21,7 @@ private:
     float velocityX, velocityY;
     float alpha;
     int xOffset;
+    int type;
 };
 
 #endif // __PARTICLE_H__

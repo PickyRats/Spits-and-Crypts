@@ -76,9 +76,10 @@ void ParticleManager::UpdateParticles(float dt, float time) {
 
 
     // Create new particle
-    TorchParticles(dt, 180, 395, 600.0f, 0);
-    TorchParticles(dt, 300, 395, 600.0f, 1);
-    TorchParticles(dt, 420, 395, 600.0f, 2);
+    TorchParticles(dt, 180, 395, 500.0f, 0, 0);
+    TorchParticles(dt, 300, 395, 500.0f, 1, 0);
+    TorchParticles(dt, 420, 395, 500.0f, 2, 0);
+    TorchParticles(dt, 600, 395, 600.0f, 3, 1);
 
     // Update existing particles
     for (auto it = particles.begin(); it != particles.end();) {
@@ -94,14 +95,14 @@ void ParticleManager::UpdateParticles(float dt, float time) {
     }
 }
 
-void ParticleManager::TorchParticles(float dt, int initialPositionX, int initialPositionY, float lifeTime, int index)
+void ParticleManager::TorchParticles(float dt, int initialPositionX, int initialPositionY, float lifeTime, int index, int type)
 {
     timeAccumulator[index] += dt;
 
     while (timeAccumulator[index] >= particleInterval) {
         // Create new particle
         SDL_Texture* chosenTexture = nullptr;
-        int randomIndex = rand() % 4;
+        int randomIndex = rand() % 3;
 
         switch (randomIndex) {
         case 0:
@@ -114,15 +115,15 @@ void ParticleManager::TorchParticles(float dt, int initialPositionX, int initial
             chosenTexture = texture3;
             break;
         case 3:
-            chosenTexture = texture4;
-            break;
+			chosenTexture = texture4;
+			break;
         default:
             break;
         }
 
         int x = rand() % (60) + initialPositionX; // X Initial Position
         int y = initialPositionY; // Y Initial position
-        particles.push_back(new Particle(chosenTexture, x, y, lifeTime, initialPositionX + 30)); // Lifetime
+        particles.push_back(new Particle(chosenTexture, x, y, lifeTime, initialPositionX + 30, type)); // Lifetime
 
         timeAccumulator[index] -= particleInterval;
     }
