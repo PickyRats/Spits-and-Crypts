@@ -82,8 +82,9 @@ bool SceneFloor1::Start()
 	app->map->Enable();
 	app->entityManager->Enable();
 	app->hud->Enable();
+	app->particleManager->Enable();
   
-  app->puzzle->Enable();
+	app->puzzle->Enable();
 	if(!combatFinished)app->sceneFloor1->wall = app->physics->CreateRectangle(37 * 64, 34 * 64, 10, 2 * 64, STATIC);
 
 	//Load the player in the map

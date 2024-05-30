@@ -19,6 +19,9 @@
  <tileset firstgid="172" name="Pedestal_puzle" tilewidth="64" tileheight="64" tilecount="4" columns="2">
   <image source="Pedestal_puzle.png" width="128" height="128"/>
  </tileset>
+ <tileset firstgid="176" name="torch" tilewidth="64" tileheight="64" tilecount="1" columns="1">
+  <image source="torch.png" width="64" height="64"/>
+ </tileset>
  <layer id="16" name="Fondo" width="208" height="37" opacity="0.48">
   <properties>
    <property name="Draw" type="bool" value="true"/>
@@ -22089,7 +22092,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="176"/>
    <tile/>
    <tile/>
    <tile/>
