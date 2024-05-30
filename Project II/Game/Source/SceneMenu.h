@@ -46,9 +46,14 @@ public:
 	bool wasR1Pressed = false;
 	bool wasL1Pressed = false;
 	bool wasAPressed = false;
+	bool wasRightPressed = false;
+	bool wasLeftPressed = false;
 
 	int currentId= 1;
 	int percentageMusic;
+
+	float settingsMusicSlider = 0;
+
 	GuiControlButton* startButton;
 	GuiControlButton* loadGameButton;
 	GuiControlButton* settingsButton;
