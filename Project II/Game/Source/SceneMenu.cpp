@@ -80,6 +80,7 @@ bool SceneMenu::Start()
 	settingsOptionsFullScreenHover = app->tex->Load(configNode2.child("settingsOptionsFullScreenHover").attribute("texturepath").as_string());//Cleaned
 	settingsOptionsVsyncHover = app->tex->Load(configNode2.child("settingsOptionsVsyncHover").attribute("texturepath").as_string());//Cleaned
 	settingsAudioMusicVolumeHover = app->tex->Load(configNode2.child("settingsAudioMusicVolumeHover").attribute("texturepath").as_string());//Cleaned
+	settingsSfxButtonHover = app->tex->Load(configNode2.child("settingsSfxButtonHover").attribute("texturepath").as_string());//Cleaned
 	settingsOptionsPanel = app->tex->Load(configNode2.child("settingsOptionsPanel").attribute("texturepath").as_string());//Cleaned
 
 	//Load Music
@@ -368,6 +369,10 @@ void SceneMenu::OnSettings(GamePad& pad)
 			{
 				app->render->DrawTexture(settingsAudioMusicVolumeHover, 420, 193);
 			}
+			if (currentId == 11)//SFX selected
+			{
+				app->render->DrawTexture(settingsSfxButtonHover,420,260);
+			}
 		}
 		else if (currentId >= 6 && currentId <= 8)//Options tab
 		{
@@ -586,7 +591,7 @@ bool SceneMenu::CleanUp()
 	app->tex->UnLoad(settingsControlsButtonNormal);
 	app->tex->UnLoad(settingsControlsButtonHover);
 	app->tex->UnLoad(controlsHint);
-
+	app->tex->UnLoad(settingsSfxButtonHover);
 	//app->audio->UnloadFx(FxButton1);
 	//app->audio->UnloadFx(FxButton2);
 
