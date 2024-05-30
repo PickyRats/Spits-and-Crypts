@@ -75,7 +75,7 @@ bool SceneShop::Start()
 	app->entityManager->Enable();
 	app->hud->Enable();
 	
-	shop = app->tex->Load("Assets/Textures/Screens/Store.png");
+	shop = app->tex->Load("Assets/Textures/Screens/sHOP/Store.png");
 
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(96), PIXEL_TO_METERS(640)), 0);
 	
@@ -104,7 +104,7 @@ bool SceneShop::PreUpdate()
 // Called each loop iteration
 bool SceneShop::Update(float dt)
 {
-	app->render->DrawTexture(shop, 0, 15, NULL, SDL_FLIP_NONE, 0.0f);
+	app->render->DrawTexture(shop, 0, -12, NULL, SDL_FLIP_NONE, 0.0f);
 
 	playerX = app->map->player->position.x;
   	playerY = app->map->player->position.y;
