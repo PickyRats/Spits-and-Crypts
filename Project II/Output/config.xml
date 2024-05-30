@@ -44,6 +44,7 @@
 		<!-- Scene -->
 		<map path="Assets/Maps/" name="Map_Shop.tmx"/>
 
+	  <shop texturepath="Assets/Textures/Screens/Shop/Store.png"/>
 		<!-- Music -->
 		<music>
 			<ShopMusic path="Assets/Audio/Music/Shop_Music.ogg" fadeTime="10" fadeOutTime="2"/>
@@ -137,12 +138,12 @@
 		<!-- Scene -->
 		<map path="Assets/Maps/" name="Map_OasisdelFaraon.tmx"/>
 
-		<taberna texturepath="Assets/Textures/Screens/taberna.png"/>
+		<taberna texturepath="Assets/Textures/Screens/Taberna_M.png"/>
 		<!-- Player -->
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 		
 		<!-- Tabernero  -->
-		<npc x="400" y="575" texturepath="Assets/Textures/Npcs/Anhuvihsh.png" id="8" scene="4" />
+		<npc x="400" y="550" texturepath="Assets/Textures/Npcs/Anhuvihsh.png" id="8" scene="4" />
 		
 		<!-- Dialogos -->
 		<dialogTrigger x="440" y="640"  name="Tabernero" repeat="true" scene="4" id="8" audio_1="Assets/Audio/Fx/anubish/voz_anubish_1.wav" audio_2="Assets/Audio/Fx/anubish/voz_anubish_2.wav" audio_3="Assets/Audio/Fx/anubish/voz_anubish_3.wav">
@@ -364,12 +365,12 @@
 		<Personaje2 texturepath="Assets/Textures/Screens/Combat/fotopersonatge2.png"/>
 		<numeros texturepath="Assets/Textures/Screens/Combat/numeros.png"/>
 
-		<inventory texturepath="Assets/Textures/Screens/Inventory/inventory.png"/>
+		<inventory texturepath="Assets/Textures/Screens/Inventory/Inventory.png"/>
 		<inventoryItem1 texturepath="Assets/Textures/Screens/Inventory/Amulet_Escarabat.png"/>
 		<inventoryItem2 texturepath="Assets/Textures/Screens/Inventory/Amulet_Serps.png"/>
 		<inventoryItem3 texturepath="Assets/Textures/Screens/Inventory/Amulet_Ull.png"/>
 
-		<shopTexture texturepath="Assets/Textures/Screens/Shop/shop.png"/>
+		<shopTexture texturepath="Assets/Textures/Screens/Shop/Store_UI_def.png"/>
 		<emptyslotTexture texturepath="Assets/Textures/Screens/Shop/emptyslot.png"/>
 		<selectorItemTexture texturepath="Assets/Textures/Screens/Shop/selectorItem.png"/>
 
