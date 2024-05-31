@@ -93,7 +93,7 @@ bool Puzzle::Update(float dt)
 		{
 			LOG("PUZZLE COMPLETED");
 			SDL_JoystickSetLED(app->input->joy, 0, 255, 0);
-			app->sceneFloor1->levelWidth = 147 * 64;
+			app->sceneFloor1->levelWidth = 169 * 64;
 		
 		}
 	}
