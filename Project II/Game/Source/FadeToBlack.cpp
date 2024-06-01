@@ -44,6 +44,7 @@ bool FadeToBlack::Update(float dt)
 	}
 	else
 	{
+		app->map->player->isEnteringDoor = false;
 		--frameCount;
 		if (frameCount <= 0)
 		{

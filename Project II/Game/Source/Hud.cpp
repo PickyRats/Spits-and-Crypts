@@ -676,7 +676,7 @@ bool Hud::Update(float dt)
 				app->render->DrawTexture(
 					vidas, 
 					app->sceneCombat->enemies[i]->position.x + 24, 
-					app->sceneCombat->enemies[i]->position.y - 50, 
+					app->sceneCombat->enemies[i]->position.y - 100, 
 					&lifeRects[app->sceneCombat->enemies[i]->health / 10],
 					SDL_FLIP_NONE,
 					0,

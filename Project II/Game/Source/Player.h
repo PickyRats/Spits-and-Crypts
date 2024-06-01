@@ -25,11 +25,19 @@ public:
 
 	bool Update(float dt);
 
+	void EnterDoor();
+
+	void EnteringDoor();
+
 	bool CleanUp();
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
 	void OnExitCollision(PhysBody* physA, PhysBody* physB);
+
+	void SetCombatAnimation(int animationIndex);
+
+	bool AnimationFinished();
 
 	void LoadAnimations();
 	
@@ -58,6 +66,7 @@ public:
 public:
 	float speed = 0.2f;
 	int id = 0;
+	int classId = 0;
 	const char* texturePath;
 
 	SDL_Texture* texture = NULL;
@@ -66,15 +75,26 @@ public:
 	PhysBody* playerPbody;
 
 	Animation* currentAnim;
-	Animation idleAnim;
+	Animation	idleAnim,
+				turnAnim,
+				talkAnim,
+				walkAnim,
+				climbAnim,
+				hitAnim,
+				attackAnim,
+				jumpAnim,
+				deathAnim,
+				idleBattleAnim,
+				abilityAnim,
+				walkBattleAnim;
 
 	bool isWalking = false;
 
-	bool isFacingRight = true;
+	bool isEnteringDoor = false;
 
 	bool godMode = false;
 
-	bool isjumping = false;
+	bool isJumping = false;
 
 	bool canmove = false;
 
