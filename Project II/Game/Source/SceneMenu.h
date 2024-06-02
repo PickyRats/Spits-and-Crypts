@@ -46,6 +46,9 @@ public:
 	bool wasR1Pressed = false;
 	bool wasL1Pressed = false;
 	bool wasAPressed = false;
+
+	bool wasBPressed = false;
+	bool wasYPressed = false;
 	bool wasRightPressed = false;
 	bool wasLeftPressed = false;
 
