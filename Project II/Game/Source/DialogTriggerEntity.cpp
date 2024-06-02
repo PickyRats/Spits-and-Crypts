@@ -255,18 +255,32 @@ void DialogTrigger::GiveMission(int idMission)
 		app->fade->Fade((Module*)app->sceneChoza, (Module*)app->sceneVillage, 60.0f);
 		break;
 	case 3:
-		printf(" Soy maat \n");
-    app->hud->abilityTree = true;
-
+		printf(" Soy Maat \n");
+		if (app->hud->classid == 2)
+		{
+			app->hud->abilityTree = true;
+		}
 		break;
 	case 4:
-		printf(" toth  \n");
+		printf(" Soy Toth  \n");
+		if (app->hud->classid == 1)
+		{
+			app->hud->abilityTree = true;
+		}
 		break;
 	case 5:
-		printf(" Soy ISIS  \n");
+		printf(" Soy Isis  \n");
+		if (app->hud->classid==3)
+		{
+			app->hud->abilityTree = true;
+		}
 		break;
 	case 6:
-		printf(" Horrus  \n");
+		printf(" Soy Horrus  \n");
+		if (app->hud->classid==4)
+		{
+			app->hud->abilityTree = true;
+		}
 		break;
 	case 7:
 		printf("  mi humilde tienda \n");

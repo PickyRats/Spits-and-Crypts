@@ -38,8 +38,6 @@ public:
 
 private:
 
-
-
 	//En caso de querer añadirle una textura a la entidad
 	SDL_Texture* texture;
 
@@ -71,5 +69,7 @@ private:
 	
 	//Lista de dialogos a repetir
 	List<Dialog*> dialoguesRepeat;
+
+	int npcid;
 
 };
