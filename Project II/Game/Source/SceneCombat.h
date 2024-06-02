@@ -109,7 +109,7 @@ public:
 	Entity* enemies[5];	
 	
 	bool isPlayerTurn = true;
-
+	bool wasXPressed = false;
 private:
 	SDL_Texture* backgroundTexture;
 	SDL_Texture* backgroundTexture2;

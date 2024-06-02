@@ -118,6 +118,7 @@ bool SceneCombat::PreUpdate()
 // Called each loop iteration
 bool SceneCombat::Update(float dt)
 {
+	GamePad& pad = app->input->pads[0];
 	printf("\r Player 1 life: %d Player 2 life: %d Enemy 1 life: %d Enemy 2 life: %d", players[0]->health, players[1]->health, enemies[0]->health, enemies[1]->health);
 	app->render->DrawTexture(floor1background, 0, 0, NULL, SDL_FLIP_NONE, 1);
 
@@ -128,13 +129,17 @@ bool SceneCombat::Update(float dt)
 
 	ClampCamera();
 
-	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN||(pad.x == KEY_DOWN && !wasXPressed))
 	{
 
 		playerCanAttack = false;
 		ChangeTurn();
 		app->audio->PlayFx(pass_Turn);
-
+		wasXPressed = true;
+	}
+	else if (pad.x != KEY_DOWN)
+	{
+		wasXPressed = false;
 	}
 
 	if (isPlayerTurn)

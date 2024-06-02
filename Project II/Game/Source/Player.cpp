@@ -143,12 +143,14 @@ bool Player::Update(float dt)
 						isClimbing = true;
 						pbody->body->SetGravityScale(0.0f);
 					}
+					
 					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 					{
 						DownMovement();
 						/*isClimbing = true;*/
 						pbody->body->SetGravityScale(0.0f);
 					}
+					
 					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE)
 					{
 						vel.y = 0;
