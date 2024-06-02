@@ -68,6 +68,7 @@ public:
 	int id = 0;
 	int classId = 0;
 	const char* texturePath;
+	int platformCollisionCount = 0;
 
 	SDL_Texture* texture = NULL;
 
