@@ -153,12 +153,17 @@ bool SceneCombat::Update(float dt)
 
 				SelectTiles();
 
-				if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !isMoving)
+				if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || pad.a == KEY_DOWN && !wasAPressed && !isMoving)
 				{
 					if (tilesCount <= players[currentPlayerIndex]->currentPoints) players[currentPlayerIndex]->currentPoints -= (tilesCount - 1);
 					else players[currentPlayerIndex]->currentPoints = 0;
 					if (tilesCount > 1) MovePlayer(players[currentPlayerIndex]);
 					else  playerCanAttack = true;
+					wasAPressed = true;
+				}
+				else if (pad.a != KEY_DOWN)
+				{
+					wasAPressed = false;
 				}
 			}
 			else
@@ -166,7 +171,7 @@ bool SceneCombat::Update(float dt)
 				if (enemies[enemyAttackIndex] != nullptr && !enemies[enemyAttackIndex]->isDead)
 				{
 					app->render->DrawTexture(selectedTileTexture, enemies[enemyAttackIndex]->position.x, enemies[enemyAttackIndex]->position.y);
-					if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+					if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || pad.a == KEY_DOWN && !wasAPressed)
 					{
 						maxTiles = 50;
 						int enemyDistance = app->map->pathfinding->CreatePath(app->map->WorldToMap(currentEntity->position.x, currentEntity->position.y), app->map->WorldToMap(enemies[enemyAttackIndex]->position.x, enemies[enemyAttackIndex]->position.y));
@@ -177,11 +182,35 @@ bool SceneCombat::Update(float dt)
 							enemies[enemyAttackIndex]->health -= currentEntity->attackDamage;
 						}
 						playerCanAttack = false;
+						wasAPressed = true;
 						ChangeTurn();
 					}
+					else if (pad.a != KEY_DOWN)
+					{
+						wasAPressed = false;
+					}
 				}
-				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && enemyAttackIndex > 0 && !enemies[enemyAttackIndex - 1]->isDead) enemyAttackIndex--;
-				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && enemyAttackIndex < 1 && !enemies[enemyAttackIndex + 1]->isDead) enemyAttackIndex++;
+				
+				
+				if ((app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN || pad.left == KEY_DOWN && !wasLeftPressed) && enemyAttackIndex > 0 && !enemies[enemyAttackIndex - 1]->isDead)
+				{
+						enemyAttackIndex--;
+						wasLeftPressed = true;
+				}
+				else if (pad.left != KEY_DOWN)
+				{
+					wasLeftPressed = false;
+				}
+				if ((app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN || pad.right == KEY_DOWN && !wasRightPressed) && enemyAttackIndex < 1 && !enemies[enemyAttackIndex + 1]->isDead)
+				{
+					enemyAttackIndex++;
+					wasRightPressed = true;
+				}
+				else if (pad.right != KEY_DOWN)
+				{
+					wasRightPressed = false;
+				}
+			
 
 			}
 		}
@@ -306,9 +335,10 @@ bool SceneCombat::Update(float dt)
 // Called each loop iteration
 bool SceneCombat::PostUpdate()
 {
+	GamePad& pad = app->input->pads[0];
 	bool ret = true;
 
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN||pad.start==KEY_DOWN ) {
 		pause = !pause;
 		app->hud->onSettings = false;
 		if (!pause)
@@ -460,9 +490,10 @@ void SceneCombat::UpdatePath()
 
 void SceneCombat::SelectTiles()
 {
+	GamePad& pad = app->input->pads[0];
 	maxTiles = players[0]->currentPoints;
 	Entity* player = players[currentPlayerIndex];
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && !isMoving)
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN || pad.right == KEY_DOWN && !isMoving&& !wasRightPressed)
 	{
 		app->audio->PlayFx(move_Tile);
 		tilePosition.x += 64;
@@ -471,8 +502,14 @@ void SceneCombat::SelectTiles()
 			ResetTilesArray(100);
 			app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 		}
+		wasRightPressed = true;
+
 	}
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && !isMoving)
+	else if (pad.right != KEY_DOWN)
+	{
+		wasRightPressed = false;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN || pad.left == KEY_DOWN && !isMoving && !wasLeftPressed)
 	{
 		app->audio->PlayFx(move_Tile);
 		tilePosition.x -= 64;
@@ -481,8 +518,13 @@ void SceneCombat::SelectTiles()
 			ResetTilesArray(100);
 			app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 		}
+		wasLeftPressed = true;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && !isMoving)
+	else if (pad.left != KEY_DOWN)
+	{
+		wasLeftPressed = false;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN || pad.up == KEY_DOWN && !isMoving && !wasUpPressed)
 	{
 		tilePosition.y -= (64 * 3);
 		if (!IsTileOccupied())
@@ -490,10 +532,15 @@ void SceneCombat::SelectTiles()
 			app->audio->PlayFx(move_Tile);
 			ResetTilesArray(100);
 			app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
-
+			
 		}
+		wasUpPressed = true;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && !isMoving)
+	else if (pad.up != KEY_DOWN)
+	{
+		wasUpPressed = false;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN || pad.down == KEY_DOWN && !isMoving && !wasDownPressed)
 	{
 		tilePosition.y += (64 * 3);
 		if (!IsTileOccupied())
@@ -502,6 +549,11 @@ void SceneCombat::SelectTiles()
 			ResetTilesArray(100);
 			app->map->pathfinding->CreatePath(app->map->WorldToMap(player->position.x, player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
 		}
+		wasDownPressed = true;
+	}
+	else if (pad.down != KEY_DOWN)
+	{
+		wasDownPressed = false;
 	}
 }
 
