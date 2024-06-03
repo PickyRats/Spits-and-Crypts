@@ -33,7 +33,6 @@ public:
 
 	void AddEntity(Entity* entity);
 
-	void GetEnemies(List<Entity*>& skeletonsList, List<Entity*>& ghostsList) const;
 
 public:
 

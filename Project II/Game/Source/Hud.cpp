@@ -131,16 +131,16 @@ bool Hud::Start()
 	items[1] = { "Collar", "Increases attack by 10", 0, 10, 20, inventoryItem2 };
 	items[2] = { "Escudo", "Increases health by 10", 0, 0, 30, inventoryItem3 };
 
-	inventorySlots[0].position = { 0, 20 };
-	inventorySlots[1].position = { 150, 20 };
-	inventorySlots[2].position = { 300, 20 };
+	inventorySlots[0].position = { 442, 272 };
+	inventorySlots[1].position = { 534, 272 };
+	inventorySlots[2].position = { 629, 272 };
 
 	//SHOP
 	shopTexture = app->tex->Load(configNode3.child("shopTexture").attribute("texturepath").as_string());
 
-	shopSlots[0] = { {0, 20},items[0].texture, false };
-	shopSlots[1] = { {150, 20},items[1].texture, false };
-	shopSlots[2] = { {300, 20},items[2].texture, false };
+	shopSlots[0] = { {343, 120},items[0].texture, false };
+	shopSlots[1] = { {532, 246},items[1].texture, false };
+	shopSlots[2] = { {128, 375},items[2].texture, false };
 
 
 	emptyslotTexture = app->tex->Load(configNode3.child("emptyslotTexture").attribute("texturepath").as_string());
@@ -698,7 +698,7 @@ bool Hud::Update(float dt)
 				app->render->DrawTexture(
 					vidas, 
 					app->sceneCombat->enemies[i]->position.x + 24, 
-					app->sceneCombat->enemies[i]->position.y - 50, 
+					app->sceneCombat->enemies[i]->position.y - 100, 
 					&lifeRects[app->sceneCombat->enemies[i]->health / 10],
 					SDL_FLIP_NONE,
 					0,

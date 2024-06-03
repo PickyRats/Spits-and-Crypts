@@ -55,7 +55,9 @@ bool Puzzle2::Update(float dt)
 		&& rotation[0] == 90 && rotation[1] == 90 && rotation[2] == 90)
 	{
 		if(!puzzleCompleted) LOG("PUZZLE 2 COMPLETE");
+		//app->sceneFloor1->levelWidth = 190 * 64;
 		puzzleCompleted = true;
+		
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)

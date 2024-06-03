@@ -37,9 +37,11 @@ bool Enemy::Start() {
 	//initilize texture
 	texture = app->tex->Load(texturePath);
 
-	//LoadAnimations();
+	LoadAnimations();
 
-	//currentAnim = &idleAnim;
+	currentAnim = &idleAnim;
+
+	isFacingRight = false;
 
 	attackDamage = 10;
 
@@ -50,7 +52,7 @@ bool Enemy::Update(float dt)
 {
 	
 	this->dt = dt;
-	
+	currentAnim->Update();
 	/*position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 50;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 42;*/
 	if (health <= 0 && !isDead)
@@ -67,9 +69,10 @@ bool Enemy::Update(float dt)
 void Enemy::DrawEnemy()
 {
 
-	//SDL_Rect rect = currentAnim->GetCurrentFrame();
+	SDL_Rect rect = currentAnim->GetCurrentFrame();
 
-	app->render->DrawTexture(texture, position.x, position.y);
+	if (isFacingRight) app->render->DrawTexture(texture, position.x - 30, position.y - 62, &rect);
+	else app->render->DrawTexture(texture, position.x - 30, position.y - 62, &rect, SDL_FLIP_HORIZONTAL);
 
 }
 
@@ -96,5 +99,64 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 // Loads the animations
 void Enemy::LoadAnimations()
 {
-	idleAnim.LoadAnimations("idleAnim", "enemy");
+	if (enemyId == 1)
+	{
+		idleAnim.LoadAnimations("idleAnim", "enemy1");
+		walkAnim.LoadAnimations("walkAnim", "enemy1");
+		climbAnim.LoadAnimations("climbAnim", "enemy1");
+		attackAnim.LoadAnimations("attackAnim", "enemy1");
+		abilityAnim.LoadAnimations("abilityAnim", "enemy1");
+		hitAnim.LoadAnimations("hitAnim", "enemy1");
+		deathAnim.LoadAnimations("deathAnim", "enemy1");
+	}
+	else if (enemyId == 2)
+	{
+		idleAnim.LoadAnimations("idleAnim", "enemy2");
+		walkAnim.LoadAnimations("walkAnim", "enemy2");
+		climbAnim.LoadAnimations("climbAnim", "enemy2");
+		attackAnim.LoadAnimations("attackAnim", "enemy2");
+		abilityAnim.LoadAnimations("abilityAnim", "enemy2");
+		hitAnim.LoadAnimations("hitAnim", "enemy2");
+		deathAnim.LoadAnimations("deathAnim", "enemy2");
+	}
+}
+
+void Enemy::SetCombatAnimation(int animationIndex)
+{
+	switch (animationIndex)
+	{
+	case 0:
+		currentAnim = &idleAnim;
+		break;
+	case 1:
+		currentAnim = &walkAnim;
+		break;
+	case 2:
+		currentAnim = &climbAnim;
+		break;
+	case 3:
+		currentAnim = &attackAnim;
+		currentAnim->ResetLoopCount();
+		currentAnim->Reset();
+		break;
+	case 4:
+		currentAnim = &abilityAnim;
+		currentAnim->ResetLoopCount();
+		currentAnim->Reset();
+		break;
+	case 5:
+		currentAnim = &hitAnim;
+		currentAnim->ResetLoopCount();
+		currentAnim->Reset();
+		break;
+	case 6:
+		currentAnim = &deathAnim;
+		break;
+	}
+}
+
+
+bool Enemy::AnimationFinished()
+{
+	return currentAnim->HasFinished();
 }

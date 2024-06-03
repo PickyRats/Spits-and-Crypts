@@ -135,6 +135,12 @@ private:
 	bool playerCanAttack = false;
 	bool enemyCanAttack = false;
 
+	bool isPlayerAttacking = false;
+	bool isPlayerHitted = false;
+
+	bool isEnemyAttacking = false;
+	bool isEnemyHitted = false;
+
 	int enemyAttackIndex = 0;
 
 	bool startEnemyTurn = false;

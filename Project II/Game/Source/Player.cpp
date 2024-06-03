@@ -34,6 +34,7 @@ bool Player::Awake() {
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 	speed = parameters.attribute("speed").as_float();
+	classId = parameters.attribute("classId").as_int();
 	id = parameters.attribute("id").as_int();
 
 	return true;
@@ -46,7 +47,7 @@ bool Player::Start() {
 
 	LoadAnimations();
 
-	currentAnim = &idleAnim;
+	currentAnim = &walkAnim;
 
 	stepsFx = app->audio->LoadFx("Assets/Audio/Fx/Footsteps_Fx.wav");
 	jumpFx = app->audio->LoadFx("Assets/Audio/Fx/jump_FX.wav");
@@ -85,7 +86,6 @@ bool Player::Update(float dt)
 	{
 		if (!isDead && !isCombat)
 		{
-			currentAnim = &idleAnim;
 
 			vel = pbody->body->GetLinearVelocity();
 
@@ -97,14 +97,14 @@ bool Player::Update(float dt)
 				//player movement
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 				{
-					if (!isClimbing)
+					if (!isClimbing && !isEnteringDoor)
 					{
 						LeftMovement();
 					}
 				}
 				if (pad.l_x <= -0.2)
 				{
-					if (!isClimbing)
+					if (!isClimbing && !isEnteringDoor)
 					{
 						LeftMovement();
 					}
@@ -112,14 +112,14 @@ bool Player::Update(float dt)
 
 				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 				{
-					if (!isClimbing)
+					if (!isClimbing && !isEnteringDoor)
 					{
 						RightMovement();
 					}
 				}
 				if (pad.l_x >= 0.2)
 				{
-					if (!isClimbing)
+					if (!isClimbing && !isEnteringDoor)
 					{
 						RightMovement();
 					}
@@ -128,36 +128,58 @@ bool Player::Update(float dt)
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE
 					&& (pad.l_x < 0.2 && pad.l_x > -0.2))
 				{
-
+					if (!isJumping && !isClimbing && !isEnteringDoor) currentAnim = &idleAnim;
 					isWalking = false;
 					vel.x = 0;
 				}
 				
 				//Climbing
-				if (canClimb && !isjumping && vel.y<=0)
+				if (canClimb && !isJumping && vel.y<=0)
 				{
+					
 					isWalking = false;
-					if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+					if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 					{
 						UpMovement();
 						isClimbing = true;
 						pbody->body->SetGravityScale(0.0f);
+						if (collisionActivated)
+						{
+							for (int i = 0; i < app->map->tempColliders.Count(); i++)
+							{
+								PhysBody* temp = app->map->tempColliders.At(i)->data;
+								temp->body->SetActive(false);
+							}
+							collisionActivated = false;
+						}
 					}
-					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 					{
 						DownMovement();
-						/*isClimbing = true;*/
+						isClimbing = true;
 						pbody->body->SetGravityScale(0.0f);
+						if (collisionActivated)
+						{
+							for (int i = 0; i < app->map->tempColliders.Count(); i++)
+							{
+								PhysBody* temp = app->map->tempColliders.At(i)->data;
+								temp->body->SetActive(false);
+							}
+							collisionActivated = false;
+						}
+						
 					}
 					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE)
 					{
 						vel.y = 0;
 					}
 					
+					
 				}
 				//Jump
-				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN|| pad.a && !isjumping)
+				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN|| pad.a)
 				{
+					
 					Jump();
 				}
 
@@ -202,80 +224,100 @@ bool Player::Update(float dt)
 		}
 
 		DrawPlayer();
-		printf("\r playerX: %d playerY: %d", position.x, position.y);////////////
+		//printf("\r playerX: %d playerY: %d", position.x, position.y);////////////
+		printf("\r tilecount %d", platformCollisionCount);////////////
 		currentAnim->Update();
-		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN||pad.x==KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || pad.x==KEY_DOWN)
 		{
-			
-			if (doorAldea) {
-				app->audio->PlayFx(doorFx);
-				if (app->sceneShop->active) {
-					app->sceneVillage->spawnPosition = { 481, 675 };
-					app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
-				}
-				else if (app->sceneOasisFaraon->active) {
-					app->sceneVillage->spawnPosition = { 1380, 675 };
-					app->fade->Fade((Module*)app->sceneOasisFaraon, (Module*)app->sceneVillage, 60.0f);
-				}
-				else if (app->sceneTemple->active) {
-					app->sceneVillage->spawnPosition = { 2269, 675 };
-					app->fade->Fade((Module*)app->sceneTemple, (Module*)app->sceneVillage, 60.0f);
-				}
-				else if (app->sceneFloor1->active) {
-					app->sceneVillage->spawnPosition = { 2787, 675 };
-					app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
-				}
-				doorAldea = false;
-			}
-			else if (doorOasis)
-			{
-				app->audio->PlayFx(doorFx);
-				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneOasisFaraon, 60.0f);
-				doorOasis = false;
-			}
-			else if (doorShop)
-			{
-				app->audio->PlayFx(doorFx);
-				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneShop, 60.0f);
-				doorShop = false;
-			}
-			else if (doorTemple)
-			{
-				app->audio->PlayFx(doorFx);
-				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneTemple, 60.0f);
-				doorTemple = false;
-			}
-			else if (doorFlor1)
-			{
-				app->audio->PlayFx(doorFx);
-				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneFloor1, 60.0f);
-				doorFlor1 = false;
-			}
-			else if (enterCombat)
-			{
-				app->audio->PlayFx(doorFx);
-				app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneCombat, 60.0f);
-				enterCombat = false;
-			}
-			else if (doorChoza)
-			{
-				app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneChoza, 60.0f);
-				if (app->hud->mission10Active)
-				{
-					app->hud->mission11Active = true;
-					app->hud->mission10Active = false;
-					app->sceneVillage->piedra->body->SetTransform({ 0,0 }, 0);
-				}
-				doorChoza = false;
-			}
+			EnterDoor();
 		}
 	}
+
 	//printf("\r cameraX: %d cameraY: %d positionX: %d positionY %d", app->render->camera.x, app->render->camera.y, position.x, position.y);
 	return true;
 }
 
+void Player::EnterDoor()
+{
+
+	if (doorAldea) {
+
+		EnteringDoor();
+		if (app->sceneShop->active) {
+			app->sceneVillage->spawnPosition = { 481, 675 };
+			app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
+		}
+		else if (app->sceneOasisFaraon->active) {
+			app->sceneVillage->spawnPosition = { 1380, 675 };
+			app->fade->Fade((Module*)app->sceneOasisFaraon, (Module*)app->sceneVillage, 60.0f);
+		}
+		else if (app->sceneTemple->active) {
+			app->sceneVillage->spawnPosition = { 2269, 675 };
+			app->fade->Fade((Module*)app->sceneTemple, (Module*)app->sceneVillage, 60.0f);
+		}
+		else if (app->sceneFloor1->active) {
+			app->sceneVillage->spawnPosition = { 2787, 675 };
+			app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
+		}
+		doorAldea = false;
+	}
+	else if (doorOasis)
+	{
+		EnteringDoor();
+		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneOasisFaraon, 60.0f);
+		doorOasis = false;
+	}
+	else if (doorShop)
+	{
+		EnteringDoor();
+		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneShop, 60.0f);
+		doorShop = false;
+	}
+	else if (doorTemple)
+	{
+		EnteringDoor();
+		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneTemple, 60.0f);
+		doorTemple = false;
+	}
+	else if (doorFlor1)
+	{
+		EnteringDoor();
+		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneFloor1, 60.0f);
+		doorFlor1 = false;
+	}
+	else if (enterCombat)
+	{
+		EnteringDoor();
+		app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneCombat, 60.0f);
+		enterCombat = false;
+	}
+	else if (doorChoza)
+	{
+		EnteringDoor();
+		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneChoza, 60.0f);
+		if (app->hud->mission10Active)
+		{
+			app->hud->mission11Active = true;
+			app->hud->mission10Active = false;
+			app->sceneVillage->piedra->body->SetTransform({ 0,0 }, 0);
+		}
+		doorChoza = false;
+	}
+}
+
+void Player::EnteringDoor()
+{
+	isEnteringDoor = true;
+	currentAnim = &turnAnim;
+	currentAnim->ResetLoopCount();
+	currentAnim->Reset();
+	app->audio->PlayFx(doorFx);
+}
+
 void Player::LeftMovement()
 {
+	if (!isJumping) currentAnim = &walkAnim;
+
 	isFacingRight = false;
 	if(!canClimb) isWalking = true;	
 	
@@ -284,23 +326,38 @@ void Player::LeftMovement()
 
 void Player::RightMovement()
 {
+	if (!isJumping) currentAnim = &walkAnim;
+
 	isFacingRight = true;
 	if (!canClimb) isWalking = true;
+
 	vel.x = speed * 1.5f * dt;
 }
 
 void Player::UpMovement()
 {
+	currentAnim = &climbAnim;
+	if (currentAnim->HasFinished())
+	{
+		currentAnim->ResetLoopCount();
+		currentAnim->Reset();
+	}
 	vel.y = -speed * 1 * dt;
 }
 
 void Player::DownMovement()
 {
+	currentAnim = &climbAnim;
+	if (currentAnim->HasFinished())
+	{
+		currentAnim->ResetLoopCount();
+		currentAnim->Reset();
+	}
 	vel.y = speed * 1 * dt;
 }
 void Player::SoundManager()
 {
-	if (isjumping)
+	if (isJumping)
 	{
 		if (!jumpingSoundPlaying)
 		{
@@ -314,7 +371,7 @@ void Player::SoundManager()
 		jumpingSoundPlaying = false;
 	}
 
-	if (isWalking && !isjumping)// si el bool isWalking es true  y is walking sound playing es false se activa el sonido y se cambia el bool a true
+	if (isWalking && !isJumping)// si el bool isWalking es true  y is walking sound playing es false se activa el sonido y se cambia el bool a true
 	{
 		if (!walkingSoundPlaying)
 		{
@@ -346,8 +403,14 @@ void Player::SoundManager()
 }
 void Player::Jump()
 {
-	vel.y = -speed * 1.5 * dt;
-	isjumping = true;
+	if (!isJumping)
+	{
+		isJumping = true;
+		currentAnim = &jumpAnim;
+		currentAnim->Reset();
+		vel.y = -speed * 1.5 * dt;
+	}
+	
 }
 
 void Player::Respaw() {
@@ -375,11 +438,13 @@ void Player::DrawPlayer()
 
 	if (isFacingRight)
 	{
-		app->render->DrawTexture(texture, position.x, position.y, &rect);
+		if (id == 1) app->render->DrawTexture(texture, position.x - 30, position.y - 86, &rect);
+		else if (id == 2) app->render->DrawTexture(texture, position.x - 58, position.y - 64, &rect);
 	}
 	else
 	{
-		app->render->DrawTexture(texture, position.x, position.y, &rect, SDL_FLIP_HORIZONTAL);
+		if (id == 1) app->render->DrawTexture(texture, position.x - 30, position.y - 86, &rect, SDL_FLIP_HORIZONTAL);
+		else if (id == 2) app->render->DrawTexture(texture, position.x - 58, position.y - 64, &rect, SDL_FLIP_HORIZONTAL);
 	}
 }
 
@@ -421,9 +486,15 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	switch (physB->ctype)
 	{
+		
 	case ColliderType::PLATFORM:
-		isjumping = false;
+		platformCollisionCount++;
+		isJumping = false;
 		isClimbing = false;
+		if (pbody->body->GetGravityScale() != 1.0f)
+		{
+			pbody->body->SetGravityScale(1.0f);
+		}
 		break;
 	case ColliderType::DOOR_ALDEA:
 		doorAldea = true;
@@ -452,7 +523,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PUZZLE:
 		app->puzzle->canInteract = true;
-
 		break;
 	case ColliderType::LIGHT1:
 		app->sceneLight->interactMirror = true;
@@ -463,6 +533,14 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::DOOR_CHOZA:
 		doorChoza = true;
 		break;
+
+	case ColliderType::TEMP_PLATFORM:
+		platformCollisionCount++;
+		isJumping = false;
+		if (pbody->body->GetGravityScale() != 1.0f)
+		{
+			pbody->body->SetGravityScale(1.0f);
+		}
 	}
 
 }
@@ -470,6 +548,13 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 
 	switch (physB->ctype)
 	{
+	case ColliderType::PLATFORM:
+		platformCollisionCount--;
+		if (platformCollisionCount <= 0) {
+			platformCollisionCount = 0; // Asegurarse de que el contador no sea negativo
+			isJumping = true; // El jugador ha salido de todas las plataformas
+		}
+		break;
 	case ColliderType::DOOR_ALDEA:
 		doorAldea = false;
 		break;
@@ -491,7 +576,17 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::STAIRS:
 		canClimb = false;
 		isClimbing = false;
-		pbody->body->SetGravityScale(1.0f);
+		pbody->body->SetGravityScale(6.0f);
+		if (!collisionActivated)
+		{
+			for (int i = 0; i < app->map->tempColliders.Count(); i++)
+			{
+				PhysBody* temp = app->map->tempColliders.At(i)->data;
+				temp->body->SetActive(true);
+			}
+			collisionActivated = true;
+
+		}
 		break;
 	case ColliderType::PUZZLE:
 		app->puzzle->canInteract = false;
@@ -515,7 +610,58 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 // Loads the animations
 void Player::LoadAnimations()
 {
-	idleAnim.LoadAnimations("idleAnim", "player");
+	if (id == 1) // Main character
+	{
+		idleAnim.LoadAnimations("idleAnim", "player");
+		turnAnim.LoadAnimations("turnAnim", "player");
+		talkAnim.LoadAnimations("talkAnim", "player");
+		walkAnim.LoadAnimations("walkAnim", "player");
+		climbAnim.LoadAnimations("climbAnim", "player");
+		hitAnim.LoadAnimations("hitAnim", "player");
+	
+		jumpAnim.LoadAnimations("jumpAnim", "player");
+		deathAnim.LoadAnimations("deathAnim", "player");
+		idleBattleAnim.LoadAnimations("idleBattleAnim", "player");
+	
+		walkBattleAnim.LoadAnimations("walkBattleAnim", "player");
+
+		if (classId == 0)
+		{
+			attackAnim.LoadAnimations("attackAnim", "player");
+			abilityAnim.LoadAnimations("abilityAnim", "player");
+		}
+		else if (classId == 1)
+		{
+			attackAnim.LoadAnimations("attack1Anim", "player");
+			abilityAnim.LoadAnimations("ability1Anim", "player");
+		}
+		else if (classId == 2)
+		{
+			attackAnim.LoadAnimations("attack2Anim", "player");
+			abilityAnim.LoadAnimations("ability2Anim", "player");
+		}
+		else if (classId == 3)
+		{
+			attackAnim.LoadAnimations("attack3Anim", "player");
+			abilityAnim.LoadAnimations("ability3Anim", "player");
+		}
+	}
+	else if (id == 2) // Taila
+	{
+		idleAnim.LoadAnimations("idleAnim", "player2");
+		turnAnim.LoadAnimations("turnAnim", "player2");
+		talkAnim.LoadAnimations("talkAnim", "player2");
+		walkAnim.LoadAnimations("walkAnim", "player2");
+		climbAnim.LoadAnimations("climbAnim", "player2");
+		hitAnim.LoadAnimations("hitAnim", "player2");
+		jumpAnim.LoadAnimations("jumpAnim", "player2");
+		deathAnim.LoadAnimations("deathAnim", "player2");
+		idleBattleAnim.LoadAnimations("idleBattleAnim", "player2");
+		walkBattleAnim.LoadAnimations("walkBattleAnim", "player2");
+		attackAnim.LoadAnimations("attackAnim", "player2");
+		abilityAnim.LoadAnimations("abilityAnim", "player2");
+	}
+	
 }
 
 void Player::CreateBody()
@@ -534,4 +680,43 @@ void Player::DestroyBody()
 {
 	app->physics->world->DestroyBody(pbody->body);
 	app->physics->world->DestroyBody(playerPbody->body);
+}
+
+void Player::SetCombatAnimation(int animationIndex)
+{
+	switch (animationIndex)
+	{
+	case 0:
+		currentAnim = &idleBattleAnim;
+		break;
+	case 1:
+		currentAnim = &walkBattleAnim;
+		break;
+	case 2:
+		currentAnim = &climbAnim;
+		break;
+	case 3:
+		currentAnim = &attackAnim;
+		currentAnim->ResetLoopCount();
+		currentAnim->Reset();
+		break;
+	case 4:
+		currentAnim = &abilityAnim;
+		currentAnim->ResetLoopCount();
+		currentAnim->Reset();
+		break;
+	case 5:
+		currentAnim = &hitAnim;
+		currentAnim->ResetLoopCount();
+		currentAnim->Reset();
+		break;
+	case 6:
+		currentAnim = &deathAnim;
+		break;
+	}
+}
+
+bool Player::AnimationFinished()
+{
+	return currentAnim->HasFinished();
 }
