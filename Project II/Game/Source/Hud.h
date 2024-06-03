@@ -253,7 +253,34 @@ private:
 	SDL_Texture* SkillTreeAtack_7_1;
 	SDL_Texture* SkillTreeAtack_7_2;
 	SDL_Texture* SkillTreeAtack_8_1;
-	SDL_Texture* SkillTreeAtack_8_2;
+	SDL_Texture* SkillTreeAtack_8_2;	
+	
+	SDL_Texture* Bloqueado1_1 = NULL;
+	SDL_Texture* Bloqueado1_2 = NULL;
+	SDL_Texture* Bloqueado2_1 = NULL;
+	SDL_Texture* Bloqueado2_2 = NULL;
+
+	SDL_Texture* Rama1_1 = NULL;
+	SDL_Texture* Rama1_2 = NULL;
+	SDL_Texture* Rama2_1 = NULL;
+	SDL_Texture* Rama2_2 = NULL;
+	SDL_Texture* Rama3_1 = NULL;
+	SDL_Texture* Rama3_2 = NULL;
+
+	SDL_Texture* Description;
+	SDL_Texture* DescAtackid = NULL;
+	SDL_Texture* DescAtackid2 = NULL;
+	SDL_Texture* DescTree;
+	SDL_Texture* DescLife;
+	SDL_Texture* DescSpeed;
+	SDL_Texture* DescAtack_1;
+	SDL_Texture* DescAtack_2;
+	SDL_Texture* DescAtack_3;
+	SDL_Texture* DescAtack_4;
+	SDL_Texture* DescAtack_5;
+	SDL_Texture* DescAtack_6;
+	SDL_Texture* DescAtack_7;
+	SDL_Texture* DescAtack_8;
 
 	SDL_Texture* Selection;
 
@@ -266,17 +293,7 @@ private:
 	SDL_Texture* Talent4;
 	SDL_Texture* Talent5;
 
-	SDL_Texture* Bloqueado1_1 = NULL;
-	SDL_Texture* Bloqueado1_2 = NULL;
-	SDL_Texture* Bloqueado2_1 = NULL;
-	SDL_Texture* Bloqueado2_2 = NULL;
 
-	SDL_Texture* Rama1_1 = NULL;
-	SDL_Texture* Rama1_2 = NULL;
-	SDL_Texture* Rama2_1 = NULL;
-	SDL_Texture* Rama2_2 = NULL;
-	SDL_Texture* Rama3_1 = NULL;
-	SDL_Texture* Rama3_2 = NULL;
 
 	//Talent 1
 	bool talent1selected = true;

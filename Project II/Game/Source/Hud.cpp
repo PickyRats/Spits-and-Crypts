@@ -203,8 +203,21 @@ bool Hud::Start()
 	SkillTreeAtack_8_1 = app->tex->Load(configNode3.child("SkillTreeAtack_8_1").attribute("texturepath").as_string());
 	SkillTreeAtack_8_2 = app->tex->Load(configNode3.child("SkillTreeAtack_8_2").attribute("texturepath").as_string());
 
+	DescTree = app->tex->Load(configNode3.child("DescTree").attribute("texturepath").as_string());
+	DescLife = app->tex->Load(configNode3.child("DescLife").attribute("texturepath").as_string());
+	DescSpeed = app->tex->Load(configNode3.child("DescSpeed").attribute("texturepath").as_string());
+	DescAtack_1 = app->tex->Load(configNode3.child("DescAtack_1").attribute("texturepath").as_string());
+	DescAtack_2 = app->tex->Load(configNode3.child("DescAtack_2").attribute("texturepath").as_string());
+	DescAtack_3 = app->tex->Load(configNode3.child("DescAtack_3").attribute("texturepath").as_string());
+	DescAtack_4 = app->tex->Load(configNode3.child("DescAtack_4").attribute("texturepath").as_string());
+	DescAtack_5 = app->tex->Load(configNode3.child("DescAtack_5").attribute("texturepath").as_string());
+	DescAtack_6 = app->tex->Load(configNode3.child("DescAtack_6").attribute("texturepath").as_string());
+	DescAtack_7 = app->tex->Load(configNode3.child("DescAtack_7").attribute("texturepath").as_string());
+	DescAtack_8 = app->tex->Load(configNode3.child("DescAtack_8").attribute("texturepath").as_string());
+
 	Selection = app->tex->Load(configNode3.child("Selection").attribute("texturepath").as_string());
 
+	Description = DescTree;
 	Talent1 = SkillTreeTalent;
 	Talent2 = SkillTreeLife_1;
 	Talent3 = SkillTreeSpeed_1;
@@ -213,10 +226,10 @@ bool Hud::Start()
 	
 	skillTreenode = {
 	{ Talent1, {333, 162, 77, 77}, false, false, -1, classid}, // Habilidad 1
-	{ Talent2, {450, 263, 77, 77}, true, false, -1, classid },  // Habilidad 2, depende de Habilidad 1
-	{ Talent3, {450, 358, 77, 77}, true, false, 1, classid },  // Habilidad 3, depende de Habilidad 2
-	{ Talent4, {213, 263, 77, 77}, true, false, -1, classid },  // Habilidad 4, depende de Habilidad 1
-	{ Talent5, {213, 358, 77, 77}, true, false, 3, classid },  // Habilidad 5, depende de Habilidad 4
+	{ Talent2, {450, 263, 77, 77}, true, false, -1, classid },  // Habilidad 2
+	{ Talent3, {450, 358, 77, 77}, true, false, 1, classid },  // Habilidad 3
+	{ Talent4, {213, 263, 77, 77}, true, false, -1, classid },  // Habilidad 4
+	{ Talent5, {213, 358, 77, 77}, true, false, 3, classid },  // Habilidad 5
 	};
 
 	skillTreenode[0].selected = true;
@@ -907,6 +920,17 @@ bool Hud::CleanUp()
 	app->tex->UnLoad(SkillTreeAtack_8_1);
 	app->tex->UnLoad(SkillTreeAtack_8_2);
 	app->tex->UnLoad(Selection);
+	app->tex->UnLoad(DescTree);
+	app->tex->UnLoad(DescLife);
+	app->tex->UnLoad(DescSpeed);
+	app->tex->UnLoad(DescAtack_1);
+	app->tex->UnLoad(DescAtack_2);
+	app->tex->UnLoad(DescAtack_3);
+	app->tex->UnLoad(DescAtack_4);
+	app->tex->UnLoad(DescAtack_5);
+	app->tex->UnLoad(DescAtack_6);
+	app->tex->UnLoad(DescAtack_7);
+	app->tex->UnLoad(DescAtack_8);
 
 	return true;
 }
@@ -920,6 +944,8 @@ void Hud::SkillTree() {
 	app->render->DrawTexture(Rama2_2, 252, 336, NULL, SDL_FLIP_NONE, 0);
 	app->render->DrawTexture(Rama3_1, 388, 436, NULL, SDL_FLIP_HORIZONTAL, 0);
 	app->render->DrawTexture(Rama3_2, 251, 435, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(Description, 877, 275, NULL, SDL_FLIP_NONE, 0);
+
 
 	// Inicializa las texturas de los nodos bloqueados
 	SkillTreeclass(classid);
@@ -985,36 +1011,43 @@ void Hud::HandleSelection(int currentIndex) {
 		if (currentIndex == 0) {
 			skillTreenode[1].selected = true;
 			skillTreenode[currentIndex].selected = false;
+			Description = DescLife;
 		}
 	}
 	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {
 		if (currentIndex == 0) {
 			skillTreenode[3].selected = true;
 			skillTreenode[currentIndex].selected = false;
+			Description = DescAtackid;
 		}
 	}
 	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
 		if (currentIndex == 2) {
 			skillTreenode[1].selected = true;
 			skillTreenode[currentIndex].selected = false;
+			Description = DescLife;
 		}
 		else if (currentIndex == 4) {
 			skillTreenode[3].selected = true;
 			skillTreenode[currentIndex].selected = false;
+			Description = DescAtackid;
 		}
 		else if (currentIndex == 1 || currentIndex == 3) {
 			skillTreenode[0].selected = true;
 			skillTreenode[currentIndex].selected = false;
+			Description = DescTree;
 		}
 	}
 	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
 		if (currentIndex == 1) {
 			skillTreenode[2].selected = true;
 			skillTreenode[currentIndex].selected = false;
+			Description = DescSpeed;
 		}
 		else if (currentIndex == 3) {
 			skillTreenode[4].selected = true;
 			skillTreenode[currentIndex].selected = false;
+			Description = DescAtackid2;
 		}
 	}
 }
@@ -1027,20 +1060,28 @@ void Hud::SkillTreeclass(int classid) {
 		Bloqueado1_2 = SkillTreeAtack_1_2;
 		Bloqueado2_1 = SkillTreeAtack_2_1;
 		Bloqueado2_2 = SkillTreeAtack_2_2;
+		DescAtackid = DescAtack_1;
+		DescAtackid2 = DescAtack_2;
 		break;
 	case 2:
 		Bloqueado1_1 = SkillTreeAtack_3_1;
 		Bloqueado1_2 = SkillTreeAtack_3_2;
 		Bloqueado2_1 = SkillTreeAtack_4_1;
 		Bloqueado2_2 = SkillTreeAtack_4_2;
+		DescAtackid = DescAtack_3;
+		DescAtackid2 = DescAtack_4;
 		break;
 	case 3:
+		DescAtackid = DescAtack_5;
+		DescAtackid2 = DescAtack_6;
 		Bloqueado1_1 = SkillTreeAtack_5_1;
 		Bloqueado1_2 = SkillTreeAtack_5_2;
 		Bloqueado2_1 = SkillTreeAtack_6_1;
 		Bloqueado2_2 = SkillTreeAtack_6_2;
 		break;
 	case 4:
+		DescAtackid = DescAtack_7;
+		DescAtackid2 = DescAtack_8;
 		Bloqueado1_1 = SkillTreeAtack_7_1;
 		Bloqueado1_2 = SkillTreeAtack_7_2;
 		Bloqueado2_1 = SkillTreeAtack_8_1;
