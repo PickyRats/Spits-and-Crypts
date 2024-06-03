@@ -128,9 +128,9 @@ bool Hud::Start()
 	inventoryItem2 = app->tex->Load(configNode3.child("inventoryItem2").attribute("texturepath").as_string());
 	inventoryItem3 = app->tex->Load(configNode3.child("inventoryItem3").attribute("texturepath").as_string());
 
-	items[0] = { "Pocion", "Heals 50 health points", 50, 0, 10, inventoryItem1 };
-	items[1] = { "Collar", "Increases attack by 10", 0, 10, 20, inventoryItem2 };
-	items[2] = { "Escudo", "Increases health by 10", 0, 0, 30, inventoryItem3 };
+	items[0] = { "Pocion", "Heals 50 health points", 50, 0, 10, false, inventoryItem1 };
+	items[1] = { "Collar", "Increases attack by 10", 0, 10, 20, false, inventoryItem2 };
+	items[2] = { "Escudo", "Increases health by 10", 0, 0, 30, false, inventoryItem3 };
 
 	inventorySlots[0].position = { 442, 272 };
 	inventorySlots[1].position = { 534, 272 };
@@ -825,9 +825,17 @@ void Hud::Shop()
 					inventorySlots[i].texture = items[itemId].texture;
 					shopSlots[itemId].isEmpty = true;
 					shopSlots[itemId].isBought = true;
+					items[itemId].isInInventary = true;
 					break;
 				}
-
+				if (items[1].isInInventary)
+				{
+					app->map->player->attackDamage = app->map->player->attackDamage + 10;
+				}
+				if (items[2].isInInventary)
+				{
+					app->map->player->health = app->map->player->health + 50;
+				}
 
 			}
 			

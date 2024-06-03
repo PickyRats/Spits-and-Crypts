@@ -24,6 +24,7 @@ struct Item {
 	int health = 0;
 	int attack = 0;
 	int price = 0;
+	bool isInInventary = false;
 
 	SDL_Texture* texture = nullptr;
 };
