@@ -20,7 +20,8 @@
 #include "SceneMenu.h"
 #include "SceneCombat.h"
 #include "SceneTemple.h"
-#include "Map.h"
+#include "Player.h"
+
 
 #include <iostream>
 #include <iomanip>
@@ -749,6 +750,17 @@ void Hud::Inventory()
 	if (inventory)
 	{
 		app->render->DrawTexture(inventoryTexture, 0, 0, NULL, SDL_FLIP_NONE, 0);
+
+
+		char Vida[20];
+		int vida = app->map->player->health;
+		snprintf(Vida, sizeof(Vida), "%02d", vida);
+		app->render->DrawText(Vida, 60, 580, 30, 18);
+
+		char Armour[20];
+		int daño = app->map->player->attackDamage;
+		snprintf(Armour, sizeof(Armour), "%02d", daño);
+		app->render->DrawText(Armour, 123, 580, 30, 18);
 
 		for (int i = 0; i < 3; i++) {
 			if (!inventorySlots[i].isEmpty) {
