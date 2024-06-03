@@ -405,6 +405,17 @@
 		<SkillTreerama_2_2 texturepath="Assets/Textures/SkillTree/SkillTreerama_2_2.png"/>
 		<SkillTreerama_3_1 texturepath="Assets/Textures/SkillTree/SkillTreerama_3_1.png"/>
 		<SkillTreerama_3_2 texturepath="Assets/Textures/SkillTree/SkillTreerama_3_2.png"/>
+		<DescTree texturepath="Assets/Textures/SkillTree/DescTree.png"/>
+		<DescLife texturepath="Assets/Textures/SkillTree/DescLife.png"/>
+		<DescSpeed texturepath="Assets/Textures/SkillTree/DescSpeed.png"/>
+		<DescAtack_1 texturepath="Assets/Textures/SkillTree/DescAtack_1.png"/>
+		<DescAtack_2 texturepath="Assets/Textures/SkillTree/DescAtack_2.png"/>
+		<DescAtack_3 texturepath="Assets/Textures/SkillTree/DescAtack_3.png"/>
+		<DescAtack_4 texturepath="Assets/Textures/SkillTree/DescAtack_4.png"/>
+		<DescAtack_5 texturepath="Assets/Textures/SkillTree/DescAtack_5.png"/>
+		<DescAtack_6 texturepath="Assets/Textures/SkillTree/DescAtack_6.png"/>
+		<DescAtack_7 texturepath="Assets/Textures/SkillTree/DescAtack_7.png"/>
+		<DescAtack_8 texturepath="Assets/Textures/SkillTree/DescAtack_8.png"/>
 		
 		<mission1i0 texturepath="Assets/Textures/Screens/Missions/mission1i0.png"/>
 		<mission1i1 texturepath="Assets/Textures/Screens/Missions/mission1i1.png"/>
