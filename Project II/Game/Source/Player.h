@@ -68,6 +68,7 @@ public:
 	int id = 0;
 	int classId = 0;
 	const char* texturePath;
+	int platformCollisionCount = 0;
 
 	SDL_Texture* texture = NULL;
 
@@ -100,7 +101,7 @@ public:
 
 	bool canClimb = false;
 	bool isClimbing = false;
-
+	bool collisionActivated = true;
 	bool doorAldea = false;
 	bool doorShop = false;
 	bool doorOasis = false;
