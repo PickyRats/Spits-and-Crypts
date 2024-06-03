@@ -140,7 +140,7 @@ bool SceneFloor1::Update(float dt)
 	playerY = app->map->player->position.y;
 
 	SetCameraPosition(playerX-550, playerY-360);
-	printf("\r cameraX: %d cameraY: %d playerX: %d playerY %d", cameraX, cameraY, playerX, playerY);
+	/*printf("\r cameraX: %d cameraY: %d playerX: %d playerY %d", cameraX, cameraY, playerX, playerY);*/
 	ClampCamera();
 
 	app->render->camera.x += (-cameraX - app->render->camera.x);

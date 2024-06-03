@@ -101,7 +101,7 @@ public:
 
 	bool canClimb = false;
 	bool isClimbing = false;
-
+	bool collisionActivated = true;
 	bool doorAldea = false;
 	bool doorShop = false;
 	bool doorOasis = false;

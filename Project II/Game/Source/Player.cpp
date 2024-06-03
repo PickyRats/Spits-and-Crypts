@@ -138,22 +138,42 @@ bool Player::Update(float dt)
 				{
 					
 					isWalking = false;
-					if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+					if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 					{
 						UpMovement();
 						isClimbing = true;
 						pbody->body->SetGravityScale(0.0f);
+						if (collisionActivated)
+						{
+							for (int i = 0; i < app->map->tempColliders.Count(); i++)
+							{
+								PhysBody* temp = app->map->tempColliders.At(i)->data;
+								temp->body->SetActive(false);
+							}
+							collisionActivated = false;
+						}
 					}
-					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 					{
 						DownMovement();
 						isClimbing = true;
 						pbody->body->SetGravityScale(0.0f);
+						if (collisionActivated)
+						{
+							for (int i = 0; i < app->map->tempColliders.Count(); i++)
+							{
+								PhysBody* temp = app->map->tempColliders.At(i)->data;
+								temp->body->SetActive(false);
+							}
+							collisionActivated = false;
+						}
+						
 					}
 					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE)
 					{
 						vel.y = 0;
 					}
+					
 					
 				}
 				//Jump
@@ -204,7 +224,7 @@ bool Player::Update(float dt)
 		}
 
 		DrawPlayer();
-		printf("\r playerX: %d playerY: %d", position.x, position.y);////////////
+		//printf("\r playerX: %d playerY: %d", position.x, position.y);////////////
 		printf("\r tilecount %d", platformCollisionCount);////////////
 		currentAnim->Update();
 		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || pad.x==KEY_DOWN)
@@ -471,6 +491,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		platformCollisionCount++;
 		isJumping = false;
 		isClimbing = false;
+		if (pbody->body->GetGravityScale() != 1.0f)
+		{
+			pbody->body->SetGravityScale(1.0f);
+		}
 		break;
 	case ColliderType::DOOR_ALDEA:
 		doorAldea = true;
@@ -509,6 +533,14 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::DOOR_CHOZA:
 		doorChoza = true;
 		break;
+
+	case ColliderType::TEMP_PLATFORM:
+		platformCollisionCount++;
+		isJumping = false;
+		if (pbody->body->GetGravityScale() != 1.0f)
+		{
+			pbody->body->SetGravityScale(1.0f);
+		}
 	}
 
 }
@@ -544,7 +576,17 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::STAIRS:
 		canClimb = false;
 		isClimbing = false;
-		pbody->body->SetGravityScale(1.0f);
+		pbody->body->SetGravityScale(6.0f);
+		if (!collisionActivated)
+		{
+			for (int i = 0; i < app->map->tempColliders.Count(); i++)
+			{
+				PhysBody* temp = app->map->tempColliders.At(i)->data;
+				temp->body->SetActive(true);
+			}
+			collisionActivated = true;
+
+		}
 		break;
 	case ColliderType::PUZZLE:
 		app->puzzle->canInteract = false;
