@@ -767,6 +767,18 @@ void Hud::Inventory()
 				app->render->DrawTexture(inventorySlots[i].texture, inventorySlots[i].position.x, inventorySlots[i].position.y, NULL, SDL_FLIP_NONE, 0);
 			}
 		}
+
+		app->render->DrawTexture(selectorItemTexture, inventorySlots[itemId].position.x, inventorySlots[itemId].position.y, NULL, SDL_FLIP_NONE, 0);
+
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && itemId > 0)
+		{
+			itemId--;
+
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && itemId < 2)
+		{
+			itemId++;
+		}
 	}
 
 }
