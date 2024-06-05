@@ -826,17 +826,10 @@ void Hud::Shop()
 					shopSlots[itemId].isEmpty = true;
 					shopSlots[itemId].isBought = true;
 					items[itemId].isInInventary = true;
+					if (itemId == 1) app->map->player->attackDamage += 10;
+					if (itemId == 2) app->map->player->health += 50;
 					break;
 				}
-				if (items[1].isInInventary)
-				{
-					app->map->player->attackDamage = app->map->player->attackDamage + 10;
-				}
-				if (items[2].isInInventary)
-				{
-					app->map->player->health = app->map->player->health + 50;
-				}
-
 			}
 			
 		}
