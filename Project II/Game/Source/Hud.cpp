@@ -797,7 +797,7 @@ void Hud::Inventory() {
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
-			if (items[itemId].isInInventary && !inventorySlots[itemId].isEquiped) {
+			if (!inventorySlots[itemId].isEmpty && !inventorySlots[itemId].isEquiped) {
 				EquipItem(itemId);
 			}
 		}
