@@ -70,6 +70,7 @@ public:
 
 	Slot inventorySlots[3];
 	Item items[3];
+	bool isEquiped = false;
 
 	Slot shopSlots[3];
 	bool shop = false;

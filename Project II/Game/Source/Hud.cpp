@@ -135,6 +135,9 @@ bool Hud::Start()
 	inventorySlots[0].position = { 442, 272 };
 	inventorySlots[1].position = { 534, 272 };
 	inventorySlots[2].position = { 629, 272 };
+	inventorySlots[3].position = { 300, 260 };
+
+
 
 	//SHOP
 	shopTexture = app->tex->Load(configNode3.child("shopTexture").attribute("texturepath").as_string());
@@ -763,7 +766,7 @@ void Hud::Inventory()
 		app->render->DrawText(Armour, 123, 580, 30, 18);
 
 		for (int i = 0; i < 3; i++) {
-			if (!inventorySlots[i].isEmpty) {
+			if (!inventorySlots[i].isEmpty ) {
 				app->render->DrawTexture(inventorySlots[i].texture, inventorySlots[i].position.x, inventorySlots[i].position.y, NULL, SDL_FLIP_NONE, 0);
 			}
 		}
@@ -773,12 +776,42 @@ void Hud::Inventory()
 		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && itemId > 0)
 		{
 			itemId--;
-
 		}
 		else if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && itemId < 2)
 		{
 			itemId++;
 		}
+		for (int i = 0; i < 4; i++)
+		{
+			if (items[itemId].isInInventary && app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && !isEquiped)
+			{
+				app->render->DrawTexture(selectorItemTexture, inventorySlots[i].position.x, inventorySlots[i].position.y, NULL, SDL_FLIP_NONE, 0);
+
+				if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && itemId > 0)
+				{
+					itemId--;
+				}
+				else if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && itemId < 2)
+				{
+					itemId++;
+				}
+				isEquiped = true;
+				inventorySlots[i].position.x = inventorySlots[3].position.x;
+				inventorySlots[i].position.y = inventorySlots[3].position.y;
+				if (isEquiped)
+				{
+					if (itemId == 0) app->map->player->attackDamage += 10;
+					if (itemId == 1) app->map->player->health += 50;
+					if (itemId == 2)
+					{
+						app->map->player->health += 50;
+						app->map->player->attackDamage += 10;
+					}
+				}
+				break;
+			}
+		}	
+
 	}
 
 }
@@ -826,8 +859,8 @@ void Hud::Shop()
 					shopSlots[itemId].isEmpty = true;
 					shopSlots[itemId].isBought = true;
 					items[itemId].isInInventary = true;
-					if (itemId == 1) app->map->player->attackDamage += 10;
-					if (itemId == 2) app->map->player->health += 50;
+					
+						
 					break;
 				}
 			}
