@@ -217,6 +217,8 @@ void SceneCombat::VerifyAnimation()
 
 void SceneCombat::PlayerTurn()
 {
+	static bool autoSelect = true;
+
 	if (!players[currentPlayerIndex]->isDead)
 	{
 		if (!playerCanAttack)
@@ -228,46 +230,81 @@ void SceneCombat::PlayerTurn()
 
 			if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && !isMoving)
 			{
-				if (tilesCount <= players[currentPlayerIndex]->currentPoints) players[currentPlayerIndex]->currentPoints -= (tilesCount - 1);
-				else players[currentPlayerIndex]->currentPoints = 0;
-				if (tilesCount > 1) MovePlayer(players[currentPlayerIndex]);
-				else  playerCanAttack = true;
+				if (tilesCount <= players[currentPlayerIndex]->currentPoints)
+					players[currentPlayerIndex]->currentPoints -= (tilesCount - 1);
+				else
+					players[currentPlayerIndex]->currentPoints = 0;
+
+				if (tilesCount > 1)
+					MovePlayer(players[currentPlayerIndex]);
+				else
+					playerCanAttack = true;
 			}
 		}
 		else
 		{
-			if (enemies[enemyAttackIndex] != nullptr && !enemies[enemyAttackIndex]->isDead)
+			if (autoSelect)
 			{
-				app->render->DrawTexture(selectedTileTexture, enemies[enemyAttackIndex]->position.x, enemies[enemyAttackIndex]->position.y);
-				if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+				float minDistance = FLT_MAX;
+				int closestEnemyIndex = -1;
+				for (int i = 0; i < 2; i++)
 				{
-					maxTiles = 50;
-					int enemyDistance = app->map->pathfinding->CreatePath(app->map->WorldToMap(currentEntity->position.x, currentEntity->position.y), app->map->WorldToMap(enemies[enemyAttackIndex]->position.x, enemies[enemyAttackIndex]->position.y));
-
-					if (enemyDistance <= currentEntity->attackRange)
+					if (!enemies[i]->isDead)
 					{
-						currentEntity->SetCombatAnimation(3);
-						currentEntity->currentPoints = 0;
-						enemies[enemyAttackIndex]->health -= currentEntity->attackDamage;
-						enemies[enemyAttackIndex]->SetCombatAnimation(5);
-						isPlayerAttacking = true;
-						isEnemyHitted = true;
-					}
-					else
-					{
-						playerCanAttack = false;
-						ChangeTurn();
+						float distance = CalculateDistance(players[currentPlayerIndex]->position, enemies[i]->position);
+						if (distance < minDistance)
+						{
+							minDistance = distance;
+							closestEnemyIndex = i;
+						}
 					}
 				}
-			}
-			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && enemyAttackIndex > 0 && !enemies[enemyAttackIndex - 1]->isDead) enemyAttackIndex--;
-			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && enemyAttackIndex < 1 && !enemies[enemyAttackIndex + 1]->isDead) enemyAttackIndex++;
 
+				if (closestEnemyIndex != -1)
+				{
+					enemyAttackIndex = closestEnemyIndex;
+				}
+				autoSelect = false;
+			}
+
+			app->hud->DrawTile(selectedTileTexture, enemies[enemyAttackIndex]->position);
+
+			if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+			{
+				maxTiles = 50;
+				int enemyDistance = app->map->pathfinding->CreatePath(
+					app->map->WorldToMap(currentEntity->position.x, currentEntity->position.y),
+					app->map->WorldToMap(enemies[enemyAttackIndex]->position.x, enemies[enemyAttackIndex]->position.y)
+				);
+
+				if (enemyDistance <= currentEntity->attackRange)
+				{
+					currentEntity->SetCombatAnimation(3);
+					currentEntity->currentPoints = 0;
+					enemies[enemyAttackIndex]->health -= currentEntity->attackDamage;
+					enemies[enemyAttackIndex]->SetCombatAnimation(5);
+					isPlayerAttacking = true;
+					isEnemyHitted = true;
+				}
+				else
+				{
+					playerCanAttack = false;
+					ChangeTurn();
+				}
+			}
+
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && enemyAttackIndex > 0 && !enemies[enemyAttackIndex - 1]->isDead)
+				enemyAttackIndex--;
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && enemyAttackIndex < 1 && !enemies[enemyAttackIndex + 1]->isDead)
+				enemyAttackIndex++;
 		}
 	}
-	else if (players[currentPlayerIndex + 1] != nullptr && !players[currentPlayerIndex + 1]->isDead) currentPlayerIndex++;
-	else if (!players[0]->isDead) currentPlayerIndex = 0;
-	else EndCombat();
+	else if (players[currentPlayerIndex + 1] != nullptr && !players[currentPlayerIndex + 1]->isDead)
+		currentPlayerIndex++;
+	else if (!players[0]->isDead)
+		currentPlayerIndex = 0;
+	else
+		EndCombat();
 }
 
 void SceneCombat::EnemyTurn()
@@ -277,7 +314,7 @@ void SceneCombat::EnemyTurn()
 	{
 		// Draw the path
 		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-		app->render->DrawTexture(tileEnemyTexture, pos.x, pos.y);
+		app->hud->DrawTile(tileEnemyTexture, pos);
 
 		// Set the direction of the tiles
 		if (pos.x > tiles[i - 1].position.x) tiles[i] = { pos, 1 };
@@ -312,7 +349,7 @@ void SceneCombat::EnemyTurn()
 			{
 				// Draw the path
 				iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-				app->render->DrawTexture(tileEnemyTexture, pos.x, pos.y);
+				app->hud->DrawTile(tileEnemyTexture, pos);
 
 				// Set the direction of the tiles
 				if (pos.x > tiles[i - 1].position.x) tiles[i] = { pos, 1 };
@@ -360,6 +397,14 @@ void SceneCombat::EnemyTurn()
 		else EndCombat();
 	}
 }
+
+float SceneCombat::CalculateDistance(iPoint pos1, iPoint pos2)
+{
+	int dx = pos1.x - pos2.x;
+	int dy = pos1.y - pos2.y;
+	return sqrt(dx * dx + dy * dy);
+}
+
 
 // Called each loop iteration
 bool SceneCombat::PostUpdate()
@@ -509,8 +554,8 @@ void SceneCombat::UpdatePath()
 	{
 		// Draw the path
 		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-		if (i == path->Count() - 1) app->render->DrawTexture(selectedTileTexture, pos.x, pos.y);
-		else if (!isMoving || currentTile < i + 2) app->render->DrawTexture(tileTexture, pos.x, pos.y);
+		if (i == path->Count() - 1) app->hud->DrawTile(selectedTileTexture, pos);
+		else if (!isMoving || currentTile < i + 2) app->hud->DrawTile(tileTexture, pos);
 
 		// Set the direction of the tiles
 		if (pos.x > tiles[i - 1].position.x) tiles[i] = { pos, 1 };
@@ -522,7 +567,7 @@ void SceneCombat::UpdatePath()
 	tilesCount = path->Count();
 
 	//Draw the cursor
-	app->render->DrawTexture(cursorTexture, tilePosition.x, tilePosition.y);
+	app->hud->DrawTile(cursorTexture, tilePosition);
 }
 
 void SceneCombat::SelectTiles()

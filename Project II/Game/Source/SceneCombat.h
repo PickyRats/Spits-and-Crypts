@@ -44,6 +44,8 @@ public:
 
 	void EnemyTurn();
 
+	float CalculateDistance(iPoint pos1, iPoint pos2);
+
 	void EndCombat();
 
 	// Enemy attack

@@ -280,7 +280,6 @@ bool Hud::Update(float dt)
 	//Shop
 	Shop();
 
-
 	//Pause menu
 	if (app->sceneVillage->pause || app->sceneShop->pause || app->sceneOasisFaraon->pause || app->sceneTemple->pause || app->sceneFloor1->pause) {
 		//If pause menu is activated, show buttons
@@ -706,6 +705,8 @@ bool Hud::Update(float dt)
 				);
 			}
 
+			RenderStoredTiles();
+
 			////
 			//
 			////botones abajo derecha
@@ -1097,4 +1098,21 @@ void Hud::SkillTreeclass(int classid) {
 	{
 		skillTreenode[4].texture = Bloqueado2_1;
 	}
+}
+
+void Hud::DrawTile(SDL_Texture* texture, iPoint tilePosition)
+{
+	DrawTileCall call;
+	call.texture = texture;
+	call.tilePosition = tilePosition;
+	drawTileCalls.push_back(call);
+}
+
+void Hud::RenderStoredTiles()
+{
+	for (const auto& call : drawTileCalls)
+	{
+		app->render->DrawTexture(call.texture, call.tilePosition.x, call.tilePosition.y + 16);
+	}
+	drawTileCalls.clear();
 }

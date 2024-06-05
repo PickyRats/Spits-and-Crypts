@@ -13,6 +13,13 @@
 #include <vector>
 
 struct SDL_Texture;
+
+struct DrawTileCall
+{
+	SDL_Texture* texture;
+	iPoint tilePosition;
+};
+
 struct Slot {
 	iPoint position = { 0, 0 };
 	SDL_Texture* texture = nullptr;
@@ -66,6 +73,9 @@ public:
 	void SkillTree();
 	void ApplySkillEffects(int skillIndex);
 	void HandleSelection(int currentIndex);
+
+	void DrawTile(SDL_Texture* texture, iPoint position);
+	void RenderStoredTiles();
 
 	bool playerDeadHud = false;
 	bool spacePressed = false;
@@ -318,6 +328,8 @@ private:
 	bool onSettingsAudio = true;
 	bool onSettingsOptions = false;
 	bool buttonsActivated = false;
+
+	std::vector<DrawTileCall> drawTileCalls;
 };
 
 #endif // __HUD_H__
