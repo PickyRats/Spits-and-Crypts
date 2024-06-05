@@ -38,6 +38,12 @@ public:
 	// Called each loop iteration
 	bool Update(float dt);
 
+	void VerifyAnimation();
+
+	void PlayerTurn();
+
+	void EnemyTurn();
+
 	void EndCombat();
 
 	// Enemy attack
