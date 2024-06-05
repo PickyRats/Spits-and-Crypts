@@ -16,16 +16,15 @@ struct Slot {
 	SDL_Texture* texture = nullptr;
 	bool isEmpty = true;
 	bool isBought = false;
+	int itemId = -1;	
+	bool isEquiped = false;
 };
 
 struct Item {
-	const char* name = nullptr;
-	const char* description = nullptr;
 	int health = 0;
 	int attack = 0;
 	int price = 0;
 	bool isInInventary = false;
-
 	SDL_Texture* texture = nullptr;
 };
 
@@ -52,6 +51,8 @@ public:
 	void DrawTimer();
 
 	void Missions(int mission1);
+	void UpdatePlayerStats(Item& item, bool equip);
+	void EquipItem(int itemId);
 	void SkillTree();
 
 
@@ -68,9 +69,8 @@ public:
 
 	bool abilityTree = false;
 
-	Slot inventorySlots[3];
+	Slot inventorySlots[4];
 	Item items[3];
-	bool isEquiped = false;
 
 	Slot shopSlots[3];
 	bool shop = false;
@@ -183,7 +183,6 @@ private:
 	//Shop
 	int itemId = 0;
 	SDL_Texture* shopTexture;
-	SDL_Texture* emptyslotTexture;
 	SDL_Texture* selectorItemTexture;
 
 
