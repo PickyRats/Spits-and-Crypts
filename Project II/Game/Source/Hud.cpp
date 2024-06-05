@@ -127,9 +127,9 @@ bool Hud::Start()
 	inventoryItem1 = app->tex->Load(configNode3.child("inventoryItem1").attribute("texturepath").as_string());
 	inventoryItem2 = app->tex->Load(configNode3.child("inventoryItem2").attribute("texturepath").as_string());
 	inventoryItem3 = app->tex->Load(configNode3.child("inventoryItem3").attribute("texturepath").as_string());
-	ObjectText1 = app->tex->Load(configNode3.child("TextHabilityRed").attribute("texturepath").as_string());
-	ObjectText2 = app->tex->Load(configNode3.child("TextHabilityBlue").attribute("texturepath").as_string());
-	ObjectText3 = app->tex->Load(configNode3.child("TextHabilityTurquese").attribute("texturepath").as_string());
+	ObjectText1 = app->tex->Load(configNode3.child("ObjectText1").attribute("texturepath").as_string());
+	ObjectText2 = app->tex->Load(configNode3.child("ObjectText2").attribute("texturepath").as_string());
+	ObjectText3 = app->tex->Load(configNode3.child("ObjectText3").attribute("texturepath").as_string());
 
 	items[0] = { 50, 0, 10, false, inventoryItem1 , ObjectText1 };
 	items[1] = {  0, 10, 20, false, inventoryItem2 , ObjectText2 };
@@ -747,7 +747,7 @@ void Hud::UpdatePlayerStats(Item& item, bool equip) {
 	int multiplier = equip ? 1 : -1;
 	app->map->player->health += item.health * multiplier;
 	app->map->player->attackDamage += item.attack * multiplier;
-	app->render->DrawTexture(item.ObjectText, 600, 350, NULL, SDL_FLIP_NONE, 0);
+	
 	
 }
 
@@ -793,6 +793,7 @@ void Hud::Inventory() {
 		}
 
 		app->render->DrawTexture(selectorItemTexture, inventorySlots[itemId].position.x - 20, inventorySlots[itemId].position.y - 15, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(items[inventorySlots[itemId].itemId].ObjectText, 900, 300, NULL, SDL_FLIP_NONE, 0);
 
 		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && itemId > 0) {
 			itemId--;
@@ -804,6 +805,7 @@ void Hud::Inventory() {
 		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
 			if (!inventorySlots[itemId].isEmpty && !inventorySlots[itemId].isEquiped) {
 				EquipItem(itemId);
+
 			}
 		}
 	}
@@ -826,6 +828,7 @@ void Hud::Shop() {
 		}
 
 		app->render->DrawTexture(selectorItemTexture, shopSlots[itemId].position.x, shopSlots[itemId].position.y, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(items[shopSlots[itemId].itemId].ObjectText, 750, 200, NULL, SDL_FLIP_NONE, 0);
 
 		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && itemId > 0) {
 			itemId--;

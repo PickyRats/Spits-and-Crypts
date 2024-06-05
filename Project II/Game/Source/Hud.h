@@ -18,6 +18,7 @@ struct Slot {
 	bool isBought = false;
 	int itemId = -1;	
 	bool isEquiped = false;
+
 };
 
 struct Item {
