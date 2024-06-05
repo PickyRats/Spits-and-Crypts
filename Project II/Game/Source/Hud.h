@@ -26,6 +26,7 @@ struct Item {
 	int price = 0;
 	bool isInInventary = false;
 	SDL_Texture* texture = nullptr;
+	SDL_Texture* ObjectText = nullptr;
 };
 
 class Hud : public Module
@@ -178,12 +179,20 @@ private:
 	SDL_Texture* inventoryItem1;
 	SDL_Texture* inventoryItem2;
 	SDL_Texture* inventoryItem3;
+	SDL_Texture* ObjectText1;
+	SDL_Texture* ObjectText2;
+	SDL_Texture* ObjectText3;
+
+
+	
 	bool inventory = false;
 
 	//Shop
 	int itemId = 0;
 	SDL_Texture* shopTexture;
 	SDL_Texture* selectorItemTexture;
+
+	SDL_Texture* Coin;
 
 
 	GuiControlButton* exitButton;

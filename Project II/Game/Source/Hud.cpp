@@ -127,10 +127,13 @@ bool Hud::Start()
 	inventoryItem1 = app->tex->Load(configNode3.child("inventoryItem1").attribute("texturepath").as_string());
 	inventoryItem2 = app->tex->Load(configNode3.child("inventoryItem2").attribute("texturepath").as_string());
 	inventoryItem3 = app->tex->Load(configNode3.child("inventoryItem3").attribute("texturepath").as_string());
+	ObjectText1 = app->tex->Load(configNode3.child("TextHabilityRed").attribute("texturepath").as_string());
+	ObjectText2 = app->tex->Load(configNode3.child("TextHabilityBlue").attribute("texturepath").as_string());
+	ObjectText3 = app->tex->Load(configNode3.child("TextHabilityTurquese").attribute("texturepath").as_string());
 
-	items[0] = { 50, 0, 10, false, inventoryItem1 };
-	items[1] = {  0, 10, 20, false, inventoryItem2 };
-	items[2] = { 10, 0, 30, false, inventoryItem3 };
+	items[0] = { 50, 0, 10, false, inventoryItem1 , ObjectText1 };
+	items[1] = {  0, 10, 20, false, inventoryItem2 , ObjectText2 };
+	items[2] = { 10, 0, 30, false, inventoryItem3 , ObjectText3 };
 
 	inventorySlots[0].position = { 442, 272 };
 	inventorySlots[1].position = { 532, 272 };
@@ -744,6 +747,8 @@ void Hud::UpdatePlayerStats(Item& item, bool equip) {
 	int multiplier = equip ? 1 : -1;
 	app->map->player->health += item.health * multiplier;
 	app->map->player->attackDamage += item.attack * multiplier;
+	app->render->DrawTexture(item.ObjectText, 600, 350, NULL, SDL_FLIP_NONE, 0);
+	
 }
 
 void Hud::EquipItem(int inventorySlotId) {
