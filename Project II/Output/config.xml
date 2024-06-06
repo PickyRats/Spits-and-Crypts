@@ -372,9 +372,9 @@
 		<inventoryItem1 texturepath="Assets/Textures/Screens/Inventory/Amulet_Escarabat.png"/>
 		<inventoryItem2 texturepath="Assets/Textures/Screens/Inventory/Amulet_Serps.png"/>
 		<inventoryItem3 texturepath="Assets/Textures/Screens/Inventory/Amulet_Ull.png"/>
-		<ObjectText1 texturepath="Assets/Textures/Screens/Inventory/TextHabilityRed.png"/>
-		<ObjectText2 texturepath="Assets/Textures/Screens/Inventory/TextHabilityBlue.png"/>
-		<ObjectText3 texturepath="Assets/Textures/Screens/Inventory/TextHabilityTurquese.png"/>
+		<ObjectText1 texturepath="Assets/Textures/Screens/Inventory/TextHabilityBlue.png"/>
+		<ObjectText2 texturepath="Assets/Textures/Screens/Inventory/TextHabilityTurquese.png"/>
+		<ObjectText3 texturepath="Assets/Textures/Screens/Inventory/TextHabilityRed.png"/>
 
 		<shopTexture texturepath="Assets/Textures/Screens/Shop/Store_UI_def.png"/>
 		<emptyslotTexture texturepath="Assets/Textures/Screens/Shop/emptyslot.png"/>

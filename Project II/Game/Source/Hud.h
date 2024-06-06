@@ -73,6 +73,7 @@ public:
 
 	Slot inventorySlots[4];
 	Item items[3];
+	int newItemId;
 
 	Slot shopSlots[3];
 	bool shop = false;

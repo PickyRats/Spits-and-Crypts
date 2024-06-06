@@ -761,7 +761,7 @@ void Hud::EquipItem(int inventorySlotId) {
 		UpdatePlayerStats(items[equippedItemId], false);
 	}
 
-	int newItemId = inventorySlots[inventorySlotId].itemId;
+	newItemId = inventorySlots[inventorySlotId].itemId;
 	inventorySlots[itemId].isEquiped = true;
 	inventorySlots[3].isEmpty = false;
 	inventorySlots[3].texture = items[newItemId].texture;
@@ -828,7 +828,7 @@ void Hud::Shop() {
 		}
 
 		app->render->DrawTexture(selectorItemTexture, shopSlots[itemId].position.x, shopSlots[itemId].position.y, NULL, SDL_FLIP_NONE, 0);
-		app->render->DrawTexture(items[shopSlots[itemId].itemId].ObjectText, 750, 200, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(items[itemId].ObjectText, 750, 200, NULL, SDL_FLIP_NONE, 0);
 
 		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && itemId > 0) {
 			itemId--;
