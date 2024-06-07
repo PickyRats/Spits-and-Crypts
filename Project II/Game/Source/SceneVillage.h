@@ -62,6 +62,7 @@ public:
 	iPoint spawnPosition = { 0, 0 };
 	bool piedraHecha = false;
 	PhysBody* piedra = nullptr;
+	uint rockFx;
 
 private:
 	SDL_Texture* backgroundTexture;

@@ -100,8 +100,10 @@ bool SceneVillage::Start()
 	}
 
 	piedra->body->SetGravityScale(15);
+	piedra->ctype = ColliderType::ROCK;
 
 	piedraTexture = app->tex->Load("Assets/Textures/Items/piedra.png");
+	rockFx = app->audio->LoadFx("Assets/Audio/Fx/RockFx.wav");
 
 	aldea = app->tex->Load("Assets/Textures/Screens/aldea.png");
 
@@ -122,6 +124,8 @@ bool SceneVillage::Update(float dt)
 
 	int piedraX = METERS_TO_PIXELS(piedra->body->GetPosition().x);
 	int piedraY = METERS_TO_PIXELS(piedra->body->GetPosition().y);
+
+	
 	app->render->DrawTexture(piedraTexture, piedraX - 50, piedraY - 50);
 
 	playerX = app->map->player->position.x;

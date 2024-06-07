@@ -130,6 +130,7 @@ public:
 	uint jumpFx;
 	uint climbFx;
 	uint doorFx;
+	uint exitFx;
 
 
 	bool isDead = false;
