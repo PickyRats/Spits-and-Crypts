@@ -116,7 +116,8 @@ public:
 	Entity* players[5];
 	Entity* enemies[5];	
 	
-	bool isPlayerTurn = true;
+	bool isPlayerTurn = true;	
+	bool useAbility = false;
 
 private:
 	SDL_Texture* backgroundTexture;
@@ -152,6 +153,8 @@ private:
 	int enemyAttackIndex = 0;
 
 	bool startEnemyTurn = false;
+
+
 
 	int nearestPlayer = 0;
 

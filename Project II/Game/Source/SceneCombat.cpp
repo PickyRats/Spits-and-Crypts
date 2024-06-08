@@ -131,14 +131,14 @@ bool SceneCombat::Update(float dt)
 
 	ClampCamera();
 
-	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-	{
+	//if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	//{
 
-		playerCanAttack = false;
-		ChangeTurn();
-		app->audio->PlayFx(pass_Turn);
+	//	playerCanAttack = false;
+	//	ChangeTurn();
+	//	app->audio->PlayFx(pass_Turn);
 
-	}
+	//}
 
 	VerifyAnimation();
 
@@ -284,9 +284,17 @@ void SceneCombat::PlayerTurn()
 
 				if (enemyDistance <= currentEntity->attackRange)
 				{
-					currentEntity->SetCombatAnimation(3);
+					if (!useAbility)
+					{
+						currentEntity->SetCombatAnimation(3);
+						enemies[enemyAttackIndex]->health -= currentEntity->attackDamage;
+					}
+					else
+					{
+						currentEntity->SetCombatAnimation(4);
+						enemies[enemyAttackIndex]->health -= currentEntity->attackDamage + currentEntity->abilityDamage;
+					}
 					currentEntity->currentPoints = 0;
-					enemies[enemyAttackIndex]->health -= currentEntity->attackDamage;
 					enemies[enemyAttackIndex]->SetCombatAnimation(5);
 					isPlayerAttacking = true;
 					isEnemyHitted = true;
@@ -302,6 +310,11 @@ void SceneCombat::PlayerTurn()
 				enemyAttackIndex--;
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && enemyAttackIndex < 1 && !enemies[enemyAttackIndex + 1]->isDead)
 				enemyAttackIndex++;
+
+			if (currentEntity->currentPoints >= 2 && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+			{
+				useAbility = !useAbility;
+			}
 		}
 	}
 	else if (players[currentPlayerIndex + 1] != nullptr && !players[currentPlayerIndex + 1]->isDead)
@@ -634,6 +647,7 @@ void SceneCombat::ChangeTurn()
 {
 	app->audio->PlayFx(pass_Turn);
 	currentEntity->currentPoints = currentEntity->totalPoints;
+	useAbility = false;
 	currentEntity->SetCombatAnimation(0);
 	
 	if (isPlayerTurn) ResetPlayerTurn();

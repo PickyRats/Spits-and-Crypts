@@ -713,7 +713,8 @@ bool Hud::Update(float dt)
 			app->render->DrawTexture(Cuadrojugador, 1150, 660, NULL, SDL_FLIP_NONE, 0);
 			app->render->DrawTexture(Cuadrojugador, 1210, 660, NULL, SDL_FLIP_NONE, 0);
 
-			app->render->DrawTexture(Selectornaranja, 1210, 660, NULL, SDL_FLIP_NONE, 0);
+			if (app->sceneCombat->useAbility) app->render->DrawTexture(Selectornaranja, 1210, 660, NULL, SDL_FLIP_NONE, 0);
+			else app->render->DrawTexture(Selectornaranja, 1148, 660, NULL, SDL_FLIP_NONE, 0);
 			////
 			//
 			int currentPoints = app->sceneCombat->currentEntity->totalPoints - (app->sceneCombat->tilesCount - 1);

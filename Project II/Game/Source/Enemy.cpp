@@ -64,7 +64,7 @@ bool Enemy::Update(float dt)
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 42;*/
 	if (health <= 0 && !isDead)
 	{
-		isDead = true;
+		if (AnimationFinished()) isDead = true;
 	}
 	if (app->sceneCombat->active && !isDead)
 	{
