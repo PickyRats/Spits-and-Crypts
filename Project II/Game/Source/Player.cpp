@@ -477,11 +477,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::DOOR_ALDEA:
 		doorAldea = true;
 		if (app->sceneShop->active) {
-			app->sceneVillage->spawnPosition = { 481, 675 };
+			app->sceneVillage->spawnPosition = { 1164, 675 };
 			app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
 		}
 		else if (app->sceneOasisFaraon->active) {
-			app->sceneVillage->spawnPosition = { 1380, 675 };
+			app->sceneVillage->spawnPosition = { 1700, 675 };
 			app->fade->Fade((Module*)app->sceneOasisFaraon, (Module*)app->sceneVillage, 60.0f);
 		}
 		else if (app->sceneTemple->active) {
