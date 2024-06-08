@@ -258,6 +258,7 @@ void DialogTrigger::GiveMission(int idMission)
 		printf(" Soy Maat \n");
 		if (app->hud->classid == 2)
 		{
+			//antes de poder abrir el menú, te manda una misión para que completes el primer combate (Mission3) con la variable checkpoint de sceenFloor1
 			app->hud->abilityTree = true;
 		}
 		break;
@@ -265,6 +266,7 @@ void DialogTrigger::GiveMission(int idMission)
 		printf(" Soy Toth  \n");
 		if (app->hud->classid == 1)
 		{
+			//antes de poder abrir el menú, te manda una misión para que completes el primer combate (Mission3) con la variable checkpoint de sceenFloor1
 			app->hud->abilityTree = true;
 		}
 		break;
@@ -272,6 +274,7 @@ void DialogTrigger::GiveMission(int idMission)
 		printf(" Soy Isis  \n");
 		if (app->hud->classid==3)
 		{
+			//antes de poder abrir el menú, te manda una misión para que completes el primer combate (Mission3) con la variable checkpoint de sceenFloor1
 			app->hud->abilityTree = true;
 		}
 		break;
@@ -279,6 +282,7 @@ void DialogTrigger::GiveMission(int idMission)
 		printf(" Soy Horrus  \n");
 		if (app->hud->classid==4)
 		{
+			//antes de poder abrir el menú, te manda una misión para que completes el primer combate (Mission3) con la variable checkpoint de sceenFloor1
 			app->hud->abilityTree = true;
 		}
 		break;
