@@ -61,7 +61,7 @@ public:
 
 	void DrawTimer();
 
-	//void Missions(int mission1);
+	void Missions(int mission1);
 	void SkillTreeclass(int classid);
 	void SkillTree();
 	void ApplySkillEffects(int skillIndex);

@@ -727,39 +727,40 @@ bool Hud::Update(float dt)
 			}
 		}
 	}
-	//if (mission10Active)
-	//{
-	//	Missions(0);
-	//}
-	//else if (mission11Active)
-	//{
-	//	Missions(1);
-	//}
-	//else if (mission1Complete)
-	//{
-	//	mission10Active = false;
-	//	mission11Active = false;
-	//	app->tex->UnLoad(mission1i1);
-	//	app->tex->UnLoad(mission1i0);
-	//}
+	if (mission10Active)
+	{
+		Missions(0);
+	}
+	else if (mission11Active)
+	{
+		Missions(1);
+	}
+	else if (mission1Complete)
+	{
+		mission10Active = false;
+		mission11Active = false;
+		app->tex->UnLoad(mission1i1);
+		app->tex->UnLoad(mission1i0);
+	}
 	return true;
 }
+//Missions(0)-> mission 1.0
+//Missions(1)-> mission 1.1
 
-
-//void Hud::Missions(int mission1)
-//{
-//	switch (mission1)
-//	{
-//	case 0:
-//		app->render->DrawTexture(mission1i0, 0, 0, NULL, SDL_FLIP_NONE, 0);
-//		break;
-//	case 1:
-//		app->render->DrawTexture(mission1i1, 0, 0, NULL, SDL_FLIP_NONE, 0);
-//		break;
-//	default:
-//		break;
-//	}
-//}
+void Hud::Missions(int mission1)
+{
+	switch (mission1)
+	{
+	case 0:
+		app->render->DrawTexture(mission1i0, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		break;
+	case 1:
+		app->render->DrawTexture(mission1i1, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		break;
+	default:
+		break;
+	}
+}
 
 void Hud::Inventory()
 {
