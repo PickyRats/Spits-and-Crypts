@@ -77,6 +77,10 @@ public:
 
 	Slot shopSlots[3];
 	bool shop = false;
+	
+	int coin= 50;
+	char buffer[20];  // Suficientemente grande para almacenar el entero como cadena
+
 
 	
 private:
@@ -195,6 +199,7 @@ private:
 	SDL_Texture* selectorItemTexture;
 
 	SDL_Texture* Coin;
+
 
 
 	GuiControlButton* exitButton;

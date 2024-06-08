@@ -131,6 +131,8 @@ bool Hud::Start()
 	ObjectText2 = app->tex->Load(configNode3.child("ObjectText2").attribute("texturepath").as_string());
 	ObjectText3 = app->tex->Load(configNode3.child("ObjectText3").attribute("texturepath").as_string());
 
+	Coin = app->tex->Load(configNode3.child("Coin").attribute("texturepath").as_string());
+
 	items[0] = { 50, 0, 10, false, inventoryItem1 , ObjectText1 };
 	items[1] = {  0, 10, 20, false, inventoryItem2 , ObjectText2 };
 	items[2] = { 10, 0, 30, false, inventoryItem3 , ObjectText3 };
@@ -786,6 +788,12 @@ void Hud::Inventory() {
 		snprintf(Armour, sizeof(Armour), "%02d", daño);
 		app->render->DrawText(Armour, 123, 580, 30, 18);
 
+		app->render->DrawTexture(Coin, 1100, 100, NULL, SDL_FLIP_NONE, 0);
+		snprintf(buffer, sizeof(buffer), "%d", coin);
+		const char* miVariable = buffer;
+		app->render->DrawText(miVariable, 1075, 100, 40, 55);
+
+
 		for (int i = 0; i < 4; i++) {
 			if (!inventorySlots[i].isEmpty) {
 				app->render->DrawTexture(inventorySlots[i].texture, inventorySlots[i].position.x, inventorySlots[i].position.y, NULL, SDL_FLIP_NONE, 0);
@@ -819,6 +827,11 @@ void Hud::Shop() {
 	if (shop) {
 		app->render->DrawTexture(shopTexture, 0, 0, NULL, SDL_FLIP_NONE, 0);
 
+		app->render->DrawTexture(Coin, 1100, 100, NULL, SDL_FLIP_NONE, 0);
+		snprintf(buffer, sizeof(buffer), "%d", coin);
+		const char* miVariable = buffer;
+		app->render->DrawText(miVariable, 1075, 100, 40, 55);
+
 		for (int i = 0; i < 3; i++) 
 		{
 			if (!shopSlots[i].isEmpty) 
@@ -837,15 +850,16 @@ void Hud::Shop() {
 			itemId++;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN && !shopSlots[itemId].isBought) {
+		if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN && !shopSlots[itemId].isBought ) {
 			for (int i = 0; i < 3; i++) {
-				if (inventorySlots[i].isEmpty) {
+				if (inventorySlots[i].isEmpty && (coin >= items[itemId].price))	{
 					inventorySlots[i].isEmpty = false;
 					inventorySlots[i].texture = items[itemId].texture;
 					inventorySlots[i].itemId = itemId;
 					shopSlots[itemId].isEmpty = true;
 					shopSlots[itemId].isBought = true;
 					items[itemId].isInInventary = true;
+					coin = coin - items[itemId].price;
 					break;
 				}
 			}
