@@ -242,16 +242,21 @@ bool Hud::Start()
 
 bool Hud::Update(float dt)
 {
+	GamePad& pad = app->input->pads[0];
 	//Ability Tree
-	if (app->sceneTemple->active && app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
+	if (app->sceneTemple->active && app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN || pad.back == KEY_DOWN && !wasSelectPressed)
 	{
 		abilityTree = !abilityTree;
+		wasSelectPressed = true;
 	}
 	if (abilityTree)
 	{
 		SkillTree();
 	}
-
+	else if (pad.back != KEY_DOWN)
+	{
+		wasSelectPressed = false;
+	}
 	//Inventory
 	Inventory();
 
@@ -288,14 +293,19 @@ bool Hud::Update(float dt)
 			//Render pause
 			app->render->DrawTexture(pause, 0, 0, NULL, SDL_FLIP_NONE, 0);
 
-			if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && app->sceneMenu->currentId < 4))
+			if (pad.down == KEY_DOWN && !wasDownPressed && currentId != 8 && currentId != 11 && currentId != 12)
 			{
 				app->sceneMenu->currentId++;
-
+				wasDownPressed = true;
 			}
-			if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && app->sceneMenu->currentId > 1))
+			else if (pad.down != KEY_DOWN)
+			{
+				wasDownPressed = false;
+			}
+			if (pad.up == KEY_DOWN && !wasUpPressed && currentId != 6 && currentId != 9 && currentId != 12)
 			{
 				app->sceneMenu->currentId--;
+				wasUpPressed = true;
 			}
 			//Check if buttons are focused or pressed. If pressed, do the action. With sound effects. 
 			if (resumeButton->state == GuiControlState::FOCUSED) {
@@ -426,7 +436,7 @@ bool Hud::Update(float dt)
 		//Settings menu on pause
 		else if (onSettings)
 		{
-			if ((app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN))
+			if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || pad.r1 == KEY_DOWN && !wasR1Pressed)
 			{
 				if (app->sceneMenu->currentId >= 9 && app->sceneMenu->currentId < 12)
 				{
@@ -436,8 +446,13 @@ bool Hud::Update(float dt)
 				{
 					app->sceneMenu->currentId = 9;
 				}
+				wasR1Pressed = true;
 			}
-			else if ((app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN))
+			else if (pad.r1 != KEY_DOWN)
+			{
+				wasR1Pressed = false;
+			}
+			if ((app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN || pad.l1 == KEY_DOWN && !wasL1Pressed))
 			{
 				if (app->sceneMenu->currentId >= 12)
 				{
@@ -447,6 +462,11 @@ bool Hud::Update(float dt)
 				{
 					app->sceneMenu->currentId = 6;
 				}
+				wasL1Pressed = true;
+			}
+			else if (pad.l1 != KEY_DOWN)
+			{
+				wasL1Pressed = false;
 			}
 			//Hide previous buttons
 			resumeButton->state = GuiControlState::HIDDEN;
@@ -487,17 +507,27 @@ bool Hud::Update(float dt)
 			}
 			else if (onSettingsOptions)
 			{
-				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && app->sceneMenu->currentId != 8)
+				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.down == KEY_DOWN && !wasDownPressed && app->sceneMenu->currentId != 8)
 				{
 					app->sceneMenu->currentId++;
 					app->sceneMenu->fxHoverPlayed = false;
 					app->sceneMenu->fxClickPlayed = false;
+					wasDownPressed = true;
 				}
-				else if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && app->sceneMenu->currentId != 6)
+				else if (pad.down != KEY_DOWN)
+				{
+					wasDownPressed = false;
+				}
+				else if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.up == KEY_DOWN && !wasUpPressed && app->sceneMenu->currentId != 6)
 				{
 					app->sceneMenu->currentId--;
 					app->sceneMenu->fxHoverPlayed = false;
 					app->sceneMenu->fxClickPlayed = false;
+					wasUpPressed = true;
+				}
+				else if (pad.up != KEY_DOWN)
+				{
+					wasUpPressed = false;
 				}
 				app->render->DrawTexture(settingsOptionsPanel, 0, 0, NULL, SDL_FLIP_NONE, 0);
 
@@ -511,7 +541,7 @@ bool Hud::Update(float dt)
 				}
 			}
 		}
-			if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+			if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || pad.b == KEY_DOWN)
 			{
 				app->sceneMenu->currentId = 1;
 				onSettings = false;
@@ -741,10 +771,17 @@ void Hud::Missions(int mission1)
 
 void Hud::Inventory()
 {
-	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
+	GamePad& pad = app->input->pads[0];
+
+	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN || pad.y == KEY_DOWN && !wasYPressed)
 	{
 		inventory = !inventory;
+		wasYPressed = true;
 
+	}
+	else if (pad.y != KEY_DOWN)
+	{
+		wasYPressed = false;
 	}
 	if (inventory)
 	{
@@ -761,6 +798,7 @@ void Hud::Inventory()
 
 void Hud::Shop()
 	{
+	GamePad& pad = app->input->pads[0];
 	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN )
 	{
 		shop = !shop;
@@ -782,16 +820,26 @@ void Hud::Shop()
 
 		app->render->DrawTexture(selectorItemTexture, shopSlots[itemId].position.x, shopSlots[itemId].position.y, NULL, SDL_FLIP_NONE, 0);
 
-		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && itemId > 0)
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || pad.left == KEY_DOWN && !wasLeftPressed && itemId > 0)
 		{
 			itemId--;
+			wasLeftPressed == true;
 
 		}
-		else if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && itemId < 2)
+		else if (pad.left != KEY_DOWN)
+		{
+			wasLeftPressed = false;
+		}
+
+		else if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || pad.right == KEY_DOWN && !wasRightPressed && itemId < 2)
 		{
 			itemId++;
+			wasRightPressed == true;
 		}
-
+		else if (pad.right != KEY_DOWN)
+		{
+			wasRightPressed = false;
+		}
 		if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN && !shopSlots[itemId].isBought)
 		{
 			for (int i = 0; i < 4; i++)
@@ -904,6 +952,7 @@ bool Hud::CleanUp()
 
 void Hud::SkillTree()
 {
+	GamePad& pad = app->input->pads[0];
 	app->render->DrawTexture(skillTree, 0, 0, NULL, SDL_FLIP_NONE, 0);
 	app->render->DrawTexture(Rama1_1, 405, 199, NULL, SDL_FLIP_HORIZONTAL, 0);
 	app->render->DrawTexture(Rama1_2, 252, 199, NULL, SDL_FLIP_NONE, 0);
@@ -952,43 +1001,74 @@ void Hud::SkillTree()
 	if (talent1selected)
 	{
 		app->render->DrawTexture(Selection, 333, 162);
-		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || pad.right == KEY_DOWN && !wasRightPressed)
 		{
 			talent1selected = false;
 			talent2selected = true;
+			wasRightPressed = true;
 		}
-		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+		else if (pad.right != KEY_DOWN)
+		{
+			wasRightPressed = false;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || pad.left == KEY_DOWN && !wasLeftPressed)
 		{
 			talent1selected = false;
 			talent4selected = true;
+			wasLeftPressed = true;
+		}
+		else if (pad.left != KEY_DOWN)
+		{
+			wasLeftPressed = false;
 		}
 	}
 	if (talent2selected)
 	{
 		app->render->DrawTexture(Selection, 450, 263);
-		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN || pad.a == KEY_DOWN && !wasAPressed)
 		{
 			app->audio->PlayFx(app->sceneMenu->FxButton1);
 			talent2locked = true;
+			wasAPressed = true;
 		}
-		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		else if (pad.a != KEY_DOWN)
+		{
+			wasAPressed = false;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.up == KEY_DOWN && !wasUpPressed)
 		{
 			talent2selected = false;
 			talent1selected = true;
+			wasUpPressed = true;
 		}
-		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+		else if (pad.up != KEY_DOWN)
+		{
+			wasUpPressed = false;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.down == KEY_DOWN && !wasDownPressed)
 		{
 			talent2selected = false;
 			talent3selected = true;
+			wasDownPressed = true;
+		}
+		else if (pad.down != KEY_DOWN)
+		{
+			wasDownPressed = false;
 		}
 	}
 	if (talent3selected)
 	{
 		app->render->DrawTexture(Selection, 450, 358);
-		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && talent2locked)
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN || pad.a == KEY_DOWN && !wasAPressed && talent2locked)
 		{
 			app->audio->PlayFx(app->sceneMenu->FxButton1);
 			talent3locked = true;
+			wasAPressed = true;
+		}
+		else if (pad.a != KEY_DOWN)
+		{
+			wasAPressed = false;
 		}
 		if (talent3locked)
 		{
@@ -996,43 +1076,73 @@ void Hud::SkillTree()
 			app->render->DrawTexture(skillTreerama_2_2, 486, 336);
 			app->render->DrawTexture(skillTreerama_3_2, 388, 436, NULL, SDL_FLIP_HORIZONTAL);
 		}
-		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.up == KEY_DOWN && !wasUpPressed)
 		{
 			talent3selected = false;
 			talent2selected = true;
+			wasUpPressed = true;
+		}
+		else if (pad.up != KEY_DOWN)
+		{
+			wasUpPressed = false;
 		}
 	}
 	if (talent4selected)
 	{
 		app->render->DrawTexture(Selection, 213, 263);
-		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN || pad.a == KEY_DOWN && !wasAPressed)
 		{
 			app->audio->PlayFx(app->sceneMenu->FxButton1);
 			talent4locked = true;
+			wasAPressed = true;
 		}
-		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		else if (pad.a != KEY_DOWN)
+		{
+			wasAPressed = false;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.up == KEY_DOWN && !wasUpPressed)
 		{
 			talent4selected = false;
 			talent1selected = true;
+			wasUpPressed = true;
 		}
-		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+		else if (pad.up != KEY_DOWN)
+		{
+			wasUpPressed = false;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.down == KEY_DOWN && !wasDownPressed)
 		{
 			talent4selected = false;
 			talent5selected = true;
+			wasDownPressed = true;
+		}
+		else if (pad.down != KEY_DOWN)
+		{
+			wasDownPressed = false;
 		}
 	}
 	if (talent5selected)
 	{
 		app->render->DrawTexture(Selection, 213, 358);
-		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && talent4locked)
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && talent4locked || pad.a == KEY_DOWN && !wasAPressed)
 		{
 			app->audio->PlayFx(app->sceneMenu->FxButton1);
 			talent5locked = true;
+			wasAPressed = true;
 		}
-		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		else if (pad.a != KEY_DOWN)
+		{
+			wasAPressed = false;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.up == KEY_DOWN && !wasUpPressed)
 		{
 			talent5selected = false;
 			talent4selected = true;
+			wasUpPressed = true;
+		}
+		else if (pad.up != KEY_DOWN)
+		{
+			wasUpPressed = false;
 		}
 	}
 }
