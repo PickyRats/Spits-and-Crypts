@@ -1486,6 +1486,18 @@
 				<animation x="1500" y="256" w="150" h="128"/>	
 			</deathAnim>
 
+			<arrowAnim loop="true" speed=" 0.4f">
+				<animation x="0" y="0" w="150" h="43"/>
+				
+				<animation x="150" y="0" w="150" h="43"/>
+				
+				<animation x="300" y="0" w="150" h="43"/>
+				
+				<animation x="450" y="0" w="150" h="43"/>
+				
+				<animation x="600" y="0" w="150" h="43"/>
+			</arrowAnim>
+
 		</enemy2>
 
 	</animations>

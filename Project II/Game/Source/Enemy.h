@@ -34,11 +34,14 @@ public:
 
 	bool AnimationFinished();
 
+	void ShotArrow();
+
 public:
 
 	const char* texturePath;
 		
 	SDL_Texture* texture = NULL;
+	SDL_Texture* arrowTexture = NULL;
 	int enemyId;
 
 	PhysBody* pbody;
@@ -51,6 +54,9 @@ public:
 				abilityAnim,
 				hitAnim,
 				deathAnim;
+
+	Animation* currentAttackAnim;
+	Animation arrowAnim;
 
 	float dt;
 

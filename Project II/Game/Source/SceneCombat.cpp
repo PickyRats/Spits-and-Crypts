@@ -192,7 +192,12 @@ void SceneCombat::VerifyAnimation()
 		{
 			isEnemyAttacking = false;
 			enemyCanAttack = false;
+			if (enemies[currentEnemyIndex]->useProjectile) enemies[currentEnemyIndex]->arrow = false;
 			ChangeTurn();
+		}
+		if (enemies[currentEnemyIndex]->useProjectile)
+		{
+			currentEntity->ShotArrow();
 		}
 	}
 

@@ -96,6 +96,9 @@ public:
 		return true;
 	};
 
+	virtual void ShotArrow() {
+	};
+
 	virtual void OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	};
@@ -129,6 +132,9 @@ public:
 	int attackRange = 3;
 	bool setLoadPosition = false;
 	int attackDamage = 40;
+	bool arrow = false;
+	bool useProjectile = false;
+	iPoint arrowPos = { 0,0 };
 };
 
 #endif // __ENTITY_H__
