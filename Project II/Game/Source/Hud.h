@@ -10,6 +10,8 @@
 #include "GuiControl.h"
 #include "Timer.h"
 
+#include <vector>
+
 struct SDL_Texture;
 struct Slot {
 	iPoint position = { 0, 0 };
@@ -28,6 +30,15 @@ struct Item {
 	bool isInInventary = false;
 	SDL_Texture* texture = nullptr;
 	SDL_Texture* ObjectText = nullptr;
+};
+
+struct Skill {
+	SDL_Texture* texture;
+	SDL_Rect position;
+	bool locked;
+	bool selected;
+	int unlockRequirement; // ID de la habilidad que debe estar desbloqueada para desbloquear esta
+	int id; // ID de la clase a la que pertenece
 };
 
 class Hud : public Module
@@ -52,11 +63,16 @@ public:
 
 	void DrawTimer();
 
+
 	void Missions(int mission1);
 	void UpdatePlayerStats(Item& item, bool equip);
 	void EquipItem(int itemId);
-	void SkillTree();
 
+	void SkillTreeclass(int classid);
+
+	void SkillTree();
+	void ApplySkillEffects(int skillIndex);
+	void HandleSelection(int currentIndex);
 
 	bool playerDeadHud = false;
 	bool spacePressed = false;
@@ -82,6 +98,7 @@ public:
 	char buffer[20];  // Suficientemente grande para almacenar el entero como cadena
 
 
+	int classid = 1;
 	
 private:
 
@@ -256,10 +273,38 @@ private:
 	SDL_Texture* SkillTreeAtack_7_1;
 	SDL_Texture* SkillTreeAtack_7_2;
 	SDL_Texture* SkillTreeAtack_8_1;
-	SDL_Texture* SkillTreeAtack_8_2;
+	SDL_Texture* SkillTreeAtack_8_2;	
+	
+	SDL_Texture* Bloqueado1_1 = NULL;
+	SDL_Texture* Bloqueado1_2 = NULL;
+	SDL_Texture* Bloqueado2_1 = NULL;
+	SDL_Texture* Bloqueado2_2 = NULL;
+
+	SDL_Texture* Rama1_1 = NULL;
+	SDL_Texture* Rama1_2 = NULL;
+	SDL_Texture* Rama2_1 = NULL;
+	SDL_Texture* Rama2_2 = NULL;
+	SDL_Texture* Rama3_1 = NULL;
+	SDL_Texture* Rama3_2 = NULL;
+
+	SDL_Texture* Description;
+	SDL_Texture* DescAtackid = NULL;
+	SDL_Texture* DescAtackid2 = NULL;
+	SDL_Texture* DescTree;
+	SDL_Texture* DescLife;
+	SDL_Texture* DescSpeed;
+	SDL_Texture* DescAtack_1;
+	SDL_Texture* DescAtack_2;
+	SDL_Texture* DescAtack_3;
+	SDL_Texture* DescAtack_4;
+	SDL_Texture* DescAtack_5;
+	SDL_Texture* DescAtack_6;
+	SDL_Texture* DescAtack_7;
+	SDL_Texture* DescAtack_8;
 
 	SDL_Texture* Selection;
 
+	std::vector<Skill> skillTreenode;
 
 	//Talents
 	SDL_Texture* Talent1;
@@ -268,12 +313,7 @@ private:
 	SDL_Texture* Talent4;
 	SDL_Texture* Talent5;
 
-	SDL_Texture* Rama1_1 = NULL;
-	SDL_Texture* Rama1_2 = NULL;
-	SDL_Texture* Rama2_1 = NULL;
-	SDL_Texture* Rama2_2 = NULL;
-	SDL_Texture* Rama3_1 = NULL;
-	SDL_Texture* Rama3_2 = NULL;
+
 
 	//Talent 1
 	bool talent1selected = true;

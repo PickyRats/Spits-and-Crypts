@@ -136,28 +136,50 @@ bool Player::Update(float dt)
 				//Climbing
 				if (canClimb && !isJumping && vel.y<=0)
 				{
+					
 					isWalking = false;
-					if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+					if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 					{
 						UpMovement();
 						isClimbing = true;
 						pbody->body->SetGravityScale(0.0f);
+						if (collisionActivated)
+						{
+							for (int i = 0; i < app->map->tempColliders.Count(); i++)
+							{
+								PhysBody* temp = app->map->tempColliders.At(i)->data;
+								temp->body->SetActive(false);
+							}
+							collisionActivated = false;
+						}
 					}
-					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 					{
 						DownMovement();
-						/*isClimbing = true;*/
+						isClimbing = true;
 						pbody->body->SetGravityScale(0.0f);
+						if (collisionActivated)
+						{
+							for (int i = 0; i < app->map->tempColliders.Count(); i++)
+							{
+								PhysBody* temp = app->map->tempColliders.At(i)->data;
+								temp->body->SetActive(false);
+							}
+							collisionActivated = false;
+						}
+						
 					}
 					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE)
 					{
 						vel.y = 0;
 					}
 					
+					
 				}
 				//Jump
-				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN|| pad.a && !isJumping)
+				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN|| pad.a)
 				{
+					
 					Jump();
 				}
 
@@ -202,7 +224,8 @@ bool Player::Update(float dt)
 		}
 
 		DrawPlayer();
-		printf("\r playerX: %d playerY: %d", position.x, position.y);////////////
+		//printf("\r playerX: %d playerY: %d", position.x, position.y);////////////
+		printf("\r tilecount %d", platformCollisionCount);////////////
 		currentAnim->Update();
 		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || pad.x==KEY_DOWN)
 		{
@@ -380,10 +403,14 @@ void Player::SoundManager()
 }
 void Player::Jump()
 {
-	currentAnim = &jumpAnim;
-	currentAnim->Reset();
-	vel.y = -speed * 1.5 * dt;
-	isJumping = true;
+	if (!isJumping)
+	{
+		isJumping = true;
+		currentAnim = &jumpAnim;
+		currentAnim->Reset();
+		vel.y = -speed * 1.5 * dt;
+	}
+	
 }
 
 void Player::Respaw() {
@@ -459,9 +486,15 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	switch (physB->ctype)
 	{
+		
 	case ColliderType::PLATFORM:
+		platformCollisionCount++;
 		isJumping = false;
 		isClimbing = false;
+		if (pbody->body->GetGravityScale() != 1.0f)
+		{
+			pbody->body->SetGravityScale(1.0f);
+		}
 		break;
 	case ColliderType::DOOR_ALDEA:
 		doorAldea = true;
@@ -490,7 +523,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PUZZLE:
 		app->puzzle->canInteract = true;
-
 		break;
 	case ColliderType::LIGHT1:
 		app->sceneLight->interactMirror = true;
@@ -501,6 +533,14 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::DOOR_CHOZA:
 		doorChoza = true;
 		break;
+
+	case ColliderType::TEMP_PLATFORM:
+		platformCollisionCount++;
+		isJumping = false;
+		if (pbody->body->GetGravityScale() != 1.0f)
+		{
+			pbody->body->SetGravityScale(1.0f);
+		}
 	}
 
 }
@@ -508,6 +548,13 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 
 	switch (physB->ctype)
 	{
+	case ColliderType::PLATFORM:
+		platformCollisionCount--;
+		if (platformCollisionCount <= 0) {
+			platformCollisionCount = 0; // Asegurarse de que el contador no sea negativo
+			isJumping = true; // El jugador ha salido de todas las plataformas
+		}
+		break;
 	case ColliderType::DOOR_ALDEA:
 		doorAldea = false;
 		break;
@@ -529,7 +576,17 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::STAIRS:
 		canClimb = false;
 		isClimbing = false;
-		pbody->body->SetGravityScale(1.0f);
+		pbody->body->SetGravityScale(6.0f);
+		if (!collisionActivated)
+		{
+			for (int i = 0; i < app->map->tempColliders.Count(); i++)
+			{
+				PhysBody* temp = app->map->tempColliders.At(i)->data;
+				temp->body->SetActive(true);
+			}
+			collisionActivated = true;
+
+		}
 		break;
 	case ColliderType::PUZZLE:
 		app->puzzle->canInteract = false;
