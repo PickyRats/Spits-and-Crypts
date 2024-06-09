@@ -844,7 +844,7 @@ void Hud::Inventory() {
 
 void Hud::Shop() {
 	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) {
-		shop = !shop;
+		shop = false;
 	}
 	if (shop) {
 		app->render->DrawTexture(shopTexture, 0, 0, NULL, SDL_FLIP_NONE, 0);
