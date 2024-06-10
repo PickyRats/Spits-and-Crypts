@@ -738,7 +738,7 @@ bool Hud::Update(float dt)
 	{
 		Missions(1);
 	}
-	else if (mission1Complete)
+	if (mission1Complete)
 	{
 		mission10Active = false;
 		mission11Active = false;
@@ -753,7 +753,7 @@ bool Hud::Update(float dt)
 	{
 		Missions(3);
 	}
-	else if (mission2Complete)
+	if (mission2Complete)
 	{
 		mission20Active = false;
 		mission21Active = false;
@@ -772,7 +772,7 @@ bool Hud::Update(float dt)
 	{
 		Missions(6);
 	}
-	else if (mission3Complete)
+	if (mission3Complete)
 	{
 		mission30Active = false;
 		mission31Active = false;

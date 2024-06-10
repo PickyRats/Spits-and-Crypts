@@ -89,6 +89,7 @@ public:
 
 	bool abilityTree = false;
 
+
 	Slot inventorySlots[3];
 	Item items[3];
 
