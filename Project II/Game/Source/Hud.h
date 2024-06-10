@@ -30,6 +30,7 @@ struct Item {
 	bool isInInventary = false;
 	SDL_Texture* texture = nullptr;
 	SDL_Texture* ObjectText = nullptr;
+	SDL_Texture* ObjectTextShop = nullptr;
 };
 
 struct Skill {
@@ -205,6 +206,11 @@ private:
 	SDL_Texture* ObjectText1;
 	SDL_Texture* ObjectText2;
 	SDL_Texture* ObjectText3;
+	
+	
+	SDL_Texture* ObjectText1Shop;
+	SDL_Texture* ObjectText2Shop;
+	SDL_Texture* ObjectText3Shop;
 
 
 	
