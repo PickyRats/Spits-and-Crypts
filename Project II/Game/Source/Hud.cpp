@@ -112,6 +112,10 @@ bool Hud::Start()
 	mission1i1 = app->tex->Load(configNode3.child("mission1i1").attribute("texturepath").as_string());
 	mission1i2 = app->tex->Load(configNode3.child("mission1i2").attribute("texturepath").as_string());
 
+	mission3i0 = app->tex->Load(configNode3.child("mission3i0").attribute("texturepath").as_string());
+	mission3i1 = app->tex->Load(configNode3.child("mission3i1").attribute("texturepath").as_string());
+	mission3i2 = app->tex->Load(configNode3.child("mission3i2").attribute("texturepath").as_string());
+
 
 	settingsControlsButtonNormal = app->tex->Load(configNode3.child("settingsControlsButtonNormal").attribute("texturepath").as_string());
 	settingsControlsButtonHover = app->tex->Load(configNode3.child("settingsControlsButtonHover").attribute("texturepath").as_string());
@@ -265,10 +269,6 @@ bool Hud::Start()
 bool Hud::Update(float dt)
 {
 	//Ability Tree
-	if (app->sceneTemple->active && app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
-	{
-		abilityTree = !abilityTree;
-	}
 	if (abilityTree)
 	{
 		SkillTree();
@@ -742,6 +742,27 @@ bool Hud::Update(float dt)
 		app->tex->UnLoad(mission1i1);
 		app->tex->UnLoad(mission1i0);
 	}
+	else if (mission30Active)
+	{
+		Missions(4);
+	}
+	else if (mission31Active)
+	{
+		Missions(5);
+	}
+	else if (mission32Active)
+	{
+		Missions(6);
+	}
+	else if (mission3Complete)
+	{
+		mission30Active = false;
+		mission31Active = false;
+		mission32Active = false;
+		app->tex->UnLoad(mission3i1);
+		app->tex->UnLoad(mission3i0);
+		app->tex->UnLoad(mission3i2);
+	}
 	return true;
 }
 //Missions(0)-> mission 1.0
@@ -753,9 +774,23 @@ void Hud::Missions(int mission1)
 	{
 	case 0:
 		app->render->DrawTexture(mission1i0, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		//printf("Mission 1.0\n");
 		break;
 	case 1:
 		app->render->DrawTexture(mission1i1, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		//printf("Mission 1.1\n");
+		break;
+	case 4:
+		app->render->DrawTexture(mission3i0, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		//printf("Mission 3.0\n");
+		break;
+	case 5:
+		app->render->DrawTexture(mission3i1, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		//printf("Mission 3.1\n");
+		break;
+	case 6:
+		app->render->DrawTexture(mission3i2, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		//printf("Mission 3.2\n");
 		break;
 	default:
 		break;
@@ -937,6 +972,11 @@ bool Hud::CleanUp()
 }
 
 void Hud::SkillTree() {
+
+	if (app->sceneTemple->active && app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+	{
+		abilityTree = false;
+	}
 	// Dibuja el fondo del árbol de habilidades
 	app->render->DrawTexture(skillTree, 0, 0, NULL, SDL_FLIP_NONE, 0);
 	app->render->DrawTexture(Rama1_1, 405, 199, NULL, SDL_FLIP_HORIZONTAL, 0);
@@ -956,7 +996,7 @@ void Hud::SkillTree() {
 		app->render->DrawTexture(node.texture, node.position.x, node.position.y, NULL, SDL_FLIP_NONE, 0);
 
 		if (node.selected) {
-			app->render->DrawTexture(Selection, node.position.x, node.position.y);
+			app->render->DrawTexture(Selection, node.position.x+64, node.position.y+45);
 		}
 	}
 

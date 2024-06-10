@@ -343,6 +343,12 @@ bool SceneCombat::Update(float dt)
 		EndCombat();
 	}
 
+	if (combatCompleted && app->hud->mission31Active)
+	{
+		app->hud->mission32Active = true;
+		app->hud->mission31Active = false;
+	}
+
 	return true;
 }
 
@@ -650,4 +656,5 @@ void SceneCombat::EndCombat()
 	app->map->player->CreateBody();
 	app->sceneFloor1->levelWidth = 110 * 64;
 	app->fade->Fade((Module*)app->sceneCombat, (Module*)app->sceneFloor1, 60.0f);
+	combatCompleted = true;
 }

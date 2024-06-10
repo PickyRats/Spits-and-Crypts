@@ -78,6 +78,11 @@ public:
 	bool mission11Active = false;
 	bool mission1Complete = false;
 
+	bool mission30Active = false;
+	bool mission31Active = false;
+	bool mission32Active = false;
+	bool mission3Complete = false;
+
 	bool abilityTree = false;
 
 	Slot inventorySlots[3];
@@ -221,6 +226,10 @@ private:
 	SDL_Texture* mission1i0;
 	SDL_Texture* mission1i1;
 	SDL_Texture* mission1i2;
+
+	SDL_Texture* mission3i0;
+	SDL_Texture* mission3i1;
+	SDL_Texture* mission3i2;
 
 	//HabilityTree
 

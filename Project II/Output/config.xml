@@ -420,8 +420,11 @@
 		<mission1i0 texturepath="Assets/Textures/Screens/Missions/Mision1/mission1i0.png"/>
 		<mission1i1 texturepath="Assets/Textures/Screens/Missions/Mision1/mission1i1.png"/>
 		<mission1i2 texturepath="Assets/Textures/Screens/Missions/Mision1/mission1i2.png"/>
-		<mission2i0 texturepath="Assets/Textures/Screens/Missions/Mision2/mision2-0.png"/>
-		<mission2i1 texturepath="Assets/Textures/Screens/Missions/Mision2/mision2-1.png"/>
+		<mission2i0 texturepath="Assets/Textures/Screens/Missions/Mision2/mision2i0.png"/>
+		<mission2i1 texturepath="Assets/Textures/Screens/Missions/Mision2/mision2i1.png"/>
+		<mission3i0 texturepath="Assets/Textures/Screens/Missions/Mision3/mision3i0.png"/>
+		<mission3i1 texturepath="Assets/Textures/Screens/Missions/Mision3/mision3i1.png"/>
+		<mission3i2 texturepath="Assets/Textures/Screens/Missions/Mision3/mision3i2.png"/>
 		
 
 

@@ -252,11 +252,12 @@ void DialogTrigger::GiveMission(int idMission)
 		printf("  la nieta  \n");
 		app->hud->mission11Active = false;
 		app->hud->mission1Complete = true;
+		//darMonedas
 		app->fade->Fade((Module*)app->sceneChoza, (Module*)app->sceneVillage, 60.0f);
 		break;
 	case 3:
 		printf(" Soy Maat \n");
-		if (app->hud->classid == 2)
+		if (app->hud->classid == 2 )
 		{
 			//antes de poder abrir el menú, te manda una misión para que completes el primer combate (Mission3) con la variable checkpoint de sceenFloor1
 			app->hud->abilityTree = true;
@@ -264,10 +265,19 @@ void DialogTrigger::GiveMission(int idMission)
 		break;
 	case 4:
 		printf(" Soy Toth  \n");
-		if (app->hud->classid == 1)
+		if (app->hud->classid == 1 && app->hud->mission3Complete)
 		{
 			//antes de poder abrir el menú, te manda una misión para que completes el primer combate (Mission3) con la variable checkpoint de sceenFloor1
 			app->hud->abilityTree = true;
+		}
+		else if (!app->hud->mission3Complete && !app->hud->mission32Active)
+		{
+			app->hud->mission30Active = true;
+		}
+		else if (!app->hud->mission3Complete && app->hud->mission32Active)
+		{
+			app->hud->mission3Complete = true;
+			//darMonedas
 		}
 		break;
 	case 5:
