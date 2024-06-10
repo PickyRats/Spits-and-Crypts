@@ -75,7 +75,7 @@ private:
 
 	float cameraSmoothingFactor = 0.04f;
 
-	int levelWidth = 45 * 64;
+	int levelWidth = 90 * 64;
 	int levelHeight = 12 * 64;
 
 

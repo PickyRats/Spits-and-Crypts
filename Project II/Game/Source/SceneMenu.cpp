@@ -216,7 +216,7 @@ bool SceneMenu::Update(float dt)
 				fxClickPlayed = true;
 			}
 
-			app->fade->Fade(this, (Module*)app->sceneVillage, 60.0f);
+			app->fade->Fade(this, (Module*)app->sceneFloor1, 60.0f);
 
 		}
 		else if (loadGameButton->state == GuiControlState::FOCUSED)
@@ -274,6 +274,7 @@ bool SceneMenu::Update(float dt)
 				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 				onCredits = true;
+				app->cutscenePlayer->Enable();
 				app->cutscenePlayer->ConvertPixels(0, 1);
 			}
 		}

@@ -30,6 +30,10 @@ public:
 
 	void DrawEnemy();
 
+	void SetCombatAnimation(int animationIndex);
+
+	bool AnimationFinished();
+
 public:
 
 	const char* texturePath;
@@ -40,7 +44,13 @@ public:
 	PhysBody* pbody;
 
 	Animation* currentAnim;
-	Animation idleAnim;
+	Animation	idleAnim,
+				walkAnim,
+				climbAnim,
+				attackAnim,
+				abilityAnim,
+				hitAnim,
+				deathAnim;
 
 	float dt;
 

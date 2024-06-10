@@ -434,7 +434,7 @@ bool Map::CreateColliders()
                         switch (mapLayerItem->data->Get(x, y))
                         {
                         case 1:
-                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y-32 , mapData.tileWidth/4, mapData.tileHeight*3.0f, STATIC);
+                            c1 = app->physics->CreateRectangleSensor(pos.x + (mapData.tileWidth / 2), pos.y-32 , mapData.tileWidth/4, mapData.tileHeight*3.0f+10, STATIC);
                             c1->ctype = ColliderType::STAIRS;
                             ret = true;
                             break;
@@ -518,6 +518,12 @@ bool Map::CreateColliders()
                             c1->ctype = ColliderType::ITERACTABLE;
                             ret = true;
                             break;*/
+                        case 11:
+                            c1 = app->physics->CreateRectangle(pos.x + (mapData.tileWidth / 2), pos.y + (mapData.tileHeight / 2), mapData.tileWidth, mapData.tileHeight, STATIC);
+                            c1->ctype = ColliderType::TEMP_PLATFORM;
+                            tempColliders.Add(c1);
+                            ret = true;
+                            break;
                         default:
                             break;
                         }

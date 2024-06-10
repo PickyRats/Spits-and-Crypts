@@ -10,22 +10,36 @@
 #include "GuiControl.h"
 #include "Timer.h"
 
+#include <vector>
+
 struct SDL_Texture;
 struct Slot {
 	iPoint position = { 0, 0 };
 	SDL_Texture* texture = nullptr;
 	bool isEmpty = true;
 	bool isBought = false;
+	int itemId = -1;	
+	bool isEquiped = false;
+
 };
 
 struct Item {
-	const char* name = nullptr;
-	const char* description = nullptr;
 	int health = 0;
 	int attack = 0;
 	int price = 0;
-
+	bool isInInventary = false;
 	SDL_Texture* texture = nullptr;
+	SDL_Texture* ObjectText = nullptr;
+	SDL_Texture* ObjectTextShop = nullptr;
+};
+
+struct Skill {
+	SDL_Texture* texture;
+	SDL_Rect position;
+	bool locked;
+	bool selected;
+	int unlockRequirement; // ID de la habilidad que debe estar desbloqueada para desbloquear esta
+	int id; // ID de la clase a la que pertenece
 };
 
 class Hud : public Module
@@ -50,9 +64,16 @@ public:
 
 	void DrawTimer();
 
-	void Missions(int mission1);
-	void SkillTree();
 
+	void Missions(int mission1);
+	void UpdatePlayerStats(Item& item, bool equip);
+	void EquipItem(int itemId);
+
+	void SkillTreeclass(int classid);
+
+	void SkillTree();
+	void ApplySkillEffects(int skillIndex);
+	void HandleSelection(int currentIndex);
 
 	bool playerDeadHud = false;
 	bool spacePressed = false;
@@ -76,12 +97,18 @@ public:
 	bool wasYPressed = false;
 	bool wasAPressed = false;
 
-	Slot inventorySlots[3];
+	Slot inventorySlots[4];
 	Item items[3];
+	int newItemId;
 
 	Slot shopSlots[3];
 	bool shop = false;
+	
+	int coin= 50;
+	char buffer[20];  // Suficientemente grande para almacenar el entero como cadena
 
+
+	int classid = 1;
 	
 private:
 
@@ -185,13 +212,26 @@ private:
 	SDL_Texture* inventoryItem1;
 	SDL_Texture* inventoryItem2;
 	SDL_Texture* inventoryItem3;
+	SDL_Texture* ObjectText1;
+	SDL_Texture* ObjectText2;
+	SDL_Texture* ObjectText3;
+	
+	
+	SDL_Texture* ObjectText1Shop;
+	SDL_Texture* ObjectText2Shop;
+	SDL_Texture* ObjectText3Shop;
+
+
+	
 	bool inventory = false;
 
 	//Shop
 	int itemId = 0;
 	SDL_Texture* shopTexture;
-	SDL_Texture* emptyslotTexture;
 	SDL_Texture* selectorItemTexture;
+
+	SDL_Texture* Coin;
+
 
 
 	GuiControlButton* exitButton;
@@ -248,10 +288,38 @@ private:
 	SDL_Texture* SkillTreeAtack_7_1;
 	SDL_Texture* SkillTreeAtack_7_2;
 	SDL_Texture* SkillTreeAtack_8_1;
-	SDL_Texture* SkillTreeAtack_8_2;
+	SDL_Texture* SkillTreeAtack_8_2;	
+	
+	SDL_Texture* Bloqueado1_1 = NULL;
+	SDL_Texture* Bloqueado1_2 = NULL;
+	SDL_Texture* Bloqueado2_1 = NULL;
+	SDL_Texture* Bloqueado2_2 = NULL;
+
+	SDL_Texture* Rama1_1 = NULL;
+	SDL_Texture* Rama1_2 = NULL;
+	SDL_Texture* Rama2_1 = NULL;
+	SDL_Texture* Rama2_2 = NULL;
+	SDL_Texture* Rama3_1 = NULL;
+	SDL_Texture* Rama3_2 = NULL;
+
+	SDL_Texture* Description;
+	SDL_Texture* DescAtackid = NULL;
+	SDL_Texture* DescAtackid2 = NULL;
+	SDL_Texture* DescTree;
+	SDL_Texture* DescLife;
+	SDL_Texture* DescSpeed;
+	SDL_Texture* DescAtack_1;
+	SDL_Texture* DescAtack_2;
+	SDL_Texture* DescAtack_3;
+	SDL_Texture* DescAtack_4;
+	SDL_Texture* DescAtack_5;
+	SDL_Texture* DescAtack_6;
+	SDL_Texture* DescAtack_7;
+	SDL_Texture* DescAtack_8;
 
 	SDL_Texture* Selection;
 
+	std::vector<Skill> skillTreenode;
 
 	//Talents
 	SDL_Texture* Talent1;
@@ -260,12 +328,7 @@ private:
 	SDL_Texture* Talent4;
 	SDL_Texture* Talent5;
 
-	SDL_Texture* Rama1_1 = NULL;
-	SDL_Texture* Rama1_2 = NULL;
-	SDL_Texture* Rama2_1 = NULL;
-	SDL_Texture* Rama2_2 = NULL;
-	SDL_Texture* Rama3_1 = NULL;
-	SDL_Texture* Rama3_2 = NULL;
+
 
 	//Talent 1
 	bool talent1selected = true;

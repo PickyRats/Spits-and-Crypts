@@ -3,7 +3,7 @@
 
 #include "EntityManager.h"
 #include "Entity.h"
-#include "Animation.h"
+//#include "Animation.h"
 #include "SDL/include/SDL.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 
