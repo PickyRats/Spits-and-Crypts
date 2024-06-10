@@ -830,7 +830,7 @@ void Hud::EquipItem(int inventorySlotId) {
 void Hud::Inventory() {
 	GamePad& pad = app->input->pads[0];
 
-	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN || pad.y == KEY_DOWN && !wasYPressed)
+	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN || (pad.y == KEY_DOWN && !wasYPressed))
 	{
 		inventory = !inventory;
 		wasYPressed = true;
@@ -840,6 +840,7 @@ void Hud::Inventory() {
 	{
 		wasYPressed = false;
 	}
+
 	if (inventory)
 	{
 		app->render->DrawTexture(inventoryTexture, 0, 0, NULL, SDL_FLIP_NONE, 0);
@@ -850,8 +851,8 @@ void Hud::Inventory() {
 		app->render->DrawText(Vida, 60, 580, 30, 18);
 
 		char Armour[20];
-		int daño = app->map->player->attackDamage;
-		snprintf(Armour, sizeof(Armour), "%02d", daño);
+		int dano = app->map->player->attackDamage;
+		snprintf(Armour, sizeof(Armour), "%02d", dano);
 		app->render->DrawText(Armour, 123, 580, 30, 18);
 
 		app->render->DrawTexture(Coin, 1100, 100, NULL, SDL_FLIP_NONE, 0);
@@ -912,32 +913,25 @@ void Hud::Shop() {
 		app->render->DrawTexture(selectorItemTexture, shopSlots[itemId].position.x-20, shopSlots[itemId].position.y-15, NULL, SDL_FLIP_NONE, 0);
 		app->render->DrawTexture(items[itemId].ObjectTextShop, 775, 200, NULL, SDL_FLIP_NONE, 0);
 
-		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || pad.left == KEY_DOWN && !wasLeftPressed && itemId > 0)
+		if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || (pad.left == KEY_DOWN && !wasLeftPressed)) && itemId > 0)
 		{
 			itemId--;
-			wasLeftPressed == true;
+			wasLeftPressed = true;
 
 		}
-		else if (pad.left != KEY_DOWN)
+		else if (pad.left != KEY_DOWN && wasLeftPressed)
 		{
 			wasLeftPressed = false;
 		}
 
-		else if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || pad.right == KEY_DOWN && !wasRightPressed && itemId < 2)
+		else if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || (pad.right == KEY_DOWN && !wasRightPressed)) && itemId < 2)
 		{
 			itemId++;
-			wasRightPressed == true;
+			wasRightPressed = true;
 		}
-		else if (pad.right != KEY_DOWN)
+		else if (pad.right != KEY_DOWN && wasRightPressed)
 		{
 			wasRightPressed = false;
-		}
-		
-		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && itemId > 0) {
-			itemId--;
-		}
-		else if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && itemId < 2) {
-			itemId++;
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN && !shopSlots[itemId].isBought ) {
