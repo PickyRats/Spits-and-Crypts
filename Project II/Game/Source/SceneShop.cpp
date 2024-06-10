@@ -74,19 +74,12 @@ bool SceneShop::Start()
 	app->map->Enable();
 	app->entityManager->Enable();
 	app->hud->Enable();
-	
-	shop = app->tex->Load("Assets/Textures/Screens/sHOP/Store.png");
+
 
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(96), PIXEL_TO_METERS(640)), 0);
 	
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
-
-	//Get the size of the texture
-	app->tex->GetSize(shop, texW, texH);
-
-	textPosX = (float)windowW / 2 - (float)texW / 2;
-	textPosY = (float)windowH / 2 - (float)texH / 2;
 
 	app->render->camera.x = -64;
 	app->render->camera.y = -45;

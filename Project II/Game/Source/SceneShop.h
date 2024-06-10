@@ -60,10 +60,6 @@ public:
 	int sceneNum = 3;
 	bool wasStartPressed = false;
 private:
-	SDL_Texture* shop;
-	SDL_Rect bg;
-	float textPosX, textPosY = 0;
-	uint texW, texH;
 	uint windowW, windowH;
 
 	float cameraSmoothingFactor = 0.04f;
