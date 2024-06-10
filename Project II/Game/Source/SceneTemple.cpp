@@ -77,7 +77,7 @@ bool SceneTemple::Start()
 
 	//Load the player in the map
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(96), PIXEL_TO_METERS(640)), 0);
-	ClampCamera();
+	//ClampCamera();
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
@@ -90,8 +90,8 @@ bool SceneTemple::Start()
 	temple = app->tex->Load("Assets/Textures/Screens/templo.png");
 
 
-	app->render->camera.x = 0;
-	app->render->camera.y = 0;
+	app->render->camera.x = -64;
+	app->render->camera.y = -45;
 
 	app->audio->PlayMusic(configNodeTemple.child("TempleMusic").attribute("path").as_string());
 	return true;
@@ -106,17 +106,13 @@ bool SceneTemple::PreUpdate()
 // Called each loop iteration
 bool SceneTemple::Update(float dt)
 {
-	app->render->DrawTexture(temple, 50, 50, NULL, SDL_FLIP_NONE, 1);
 
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;
 
-	SetCameraPosition(0, 0);
+	//SetCameraPosition(0, 64);
 
-	ClampCamera();
-
-	app->render->camera.x += (-cameraX - app->render->camera.x) * cameraSmoothingFactor;
-	app->render->camera.y += (-cameraY - app->render->camera.y) * cameraSmoothingFactor;
+	//ClampCamera();
 
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
