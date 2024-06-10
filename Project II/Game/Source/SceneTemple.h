@@ -58,6 +58,7 @@ public:
 	bool notUseChechPoint = false;
 	bool win = false;
 	int sceneNum = 2;
+	bool wasStartPressed = false;
 
 private:
 	SDL_Texture* backgroundTexture;

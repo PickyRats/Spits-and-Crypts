@@ -109,6 +109,12 @@ public:
 	Entity* enemies[5];	
 	
 	bool isPlayerTurn = true;
+	bool wasXPressed = false;
+	bool wasAPressed = false;
+	bool wasRightPressed = false;
+	bool wasLeftPressed = false;
+	bool wasUpPressed = false;
+	bool wasDownPressed = false;
 
 private:
 	SDL_Texture* backgroundTexture;

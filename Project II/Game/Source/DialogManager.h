@@ -88,7 +88,9 @@ private:
 	int indexText;
 	Timer charTimer;
 	int optionSelected = 0;
-
+	bool wasXPressed = false;
+	bool wasDownPressed = false;
+	bool wasUpPressed = false;
 };
 
 #endif // __DIALOGMANAGER_H__

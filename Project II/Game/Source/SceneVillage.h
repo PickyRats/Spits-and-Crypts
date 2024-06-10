@@ -62,7 +62,7 @@ public:
 	iPoint spawnPosition = { 0, 0 };
 	bool piedraHecha = false;
 	PhysBody* piedra = nullptr;
-
+	bool wasStartPressed = false;
 private:
 	SDL_Texture* backgroundTexture;
 	SDL_Texture* backgroundTexture2;

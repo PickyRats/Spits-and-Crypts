@@ -225,7 +225,7 @@ TTF_Font* DialogManager::FontSelector(const char* font)
 }
 
 bool DialogManager::Update(float dt) {
-
+	GamePad& pad = app->input->pads[0];
 	bool ret = true;
 
 	//Para saber si hay algun dialogo en funcionamiento
@@ -240,22 +240,32 @@ bool DialogManager::Update(float dt) {
 
 
 		//Gestionar la opcion seleccionada
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN || pad.up == KEY_DOWN && !wasDownPressed) {
 			optionSelected = 1;
 		}
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN|| pad.down == KEY_DOWN && !wasDownPressed){
 			optionSelected = 2;
+			wasDownPressed = true;
+		}
+		else if (pad.down != KEY_DOWN)
+		{
+			wasDownPressed = false;
+		}
+		else if (pad.up != KEY_DOWN)
+		{
+			wasUpPressed = false;
 		}
 
 
 		//Siguiente dialogo
-		if (dialogFinished && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && actualDialog->type != DialogType::CHOOSE) {
+		if (dialogFinished && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN ||(pad.x==KEY_DOWN && !wasXPressed) && actualDialog->type != DialogType::CHOOSE) {
 			indexText = 1;
 			dialogues.Del(dialogues.At(0));
-
+			wasXPressed = true;
 		}
+		
 		//Gestion de las opciones
-		else if (dialogFinished && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && optionSelected != 0 && actualDialog->type == DialogType::CHOOSE) {
+		else if (dialogFinished && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || (pad.x == KEY_DOWN && !wasXPressed) && optionSelected != 0 && actualDialog->type == DialogType::CHOOSE) {
 
 
 			if (optionSelected == 1) {
@@ -272,12 +282,16 @@ bool DialogManager::Update(float dt) {
 			dialogues.Del(dialogues.At(0));
 
 		}
+		
 		//Terminar el dialogo empezado
-		else if (!dialogFinished && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && indexText > 2) {
+		else if (!dialogFinished && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || (pad.x == KEY_DOWN && !wasXPressed) && indexText > 2) {
 			indexText = 999;
 		}
 
-
+		else if (pad.x != KEY_DOWN)
+		{
+			wasXPressed = false;
+		}
 
 	}
 	else {

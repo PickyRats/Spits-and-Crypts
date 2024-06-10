@@ -69,6 +69,7 @@ bool DialogTrigger::Start() {
 
 bool DialogTrigger::Update(float dt)
 {
+	GamePad& pad = app->input->pads[0];
 	if (app->sceneVillage->active && dialogScene== app->sceneVillage->sceneNum)
 	{
 		if (!physCreated) CreateCollider();
@@ -175,12 +176,18 @@ void DialogTrigger::PlayDialog()
 }
 
 void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
+	GamePad& pad = app->input->pads[0];
 	switch (physB->ctype)
 	{
 	case ColliderType::PLAYER:
 
-		if (!app->dialogManager->isPlaying && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+		if (!app->dialogManager->isPlaying && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN||pad.x==KEY_DOWN&& !wasXPressed) {
 			PlayDialog();
+			wasXPressed = true;
+		}
+		else if (pad.x!=KEY_DOWN)
+		{
+			wasXPressed = false;
 		}
 		break;
 	}

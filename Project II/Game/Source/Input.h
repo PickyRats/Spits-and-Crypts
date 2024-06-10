@@ -7,7 +7,7 @@
 //#define NUM_KEYS 352
 #define NUM_MOUSE_BUTTONS 5
 //#define LAST_KEYS_PRESSED_BUFFER 50
-#define MAX_PADS 4
+#define MAX_PADS 1
 
 struct _SDL_GameController;
 struct _SDL_Haptic;

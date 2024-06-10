@@ -87,6 +87,15 @@ public:
 	bool mission1Complete = false;
 
 	bool abilityTree = false;
+	bool wasSelectPressed = false;
+	bool wasDownPressed = false;
+	bool wasLeftPressed = false;
+	bool wasRightPressed = false;
+	bool wasUpPressed = false;
+	bool wasR1Pressed = false;
+	bool wasL1Pressed = false;
+	bool wasYPressed = false;
+	bool wasAPressed = false;
 
 	Slot inventorySlots[4];
 	Item items[3];

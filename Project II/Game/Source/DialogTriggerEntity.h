@@ -64,7 +64,7 @@ private:
 	bool physCreated = false;
 	int dialogScene;
 	int id;
-
+	bool wasXPressed = false;
 	uint dialogs[3];
 	
 	//Lista de dialogos a repetir

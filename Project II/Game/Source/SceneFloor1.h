@@ -56,6 +56,7 @@ public:
 	bool pause = false;
 	bool isTorchActive = false;
 	bool checkPoint = false;
+	bool wasStartPressed = false;
 	iPoint playerStartPosition = { 128,35*64 };
 	bool notUseChechPoint = false;
 	bool win = false;

@@ -153,7 +153,8 @@ bool Player::Update(float dt)
 							collisionActivated = false;
 						}
 					}
-					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+          
+					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 					{
 						DownMovement();
 						isClimbing = true;
@@ -169,6 +170,7 @@ bool Player::Update(float dt)
 						}
 						
 					}
+					
 					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE)
 					{
 						vel.y = 0;
