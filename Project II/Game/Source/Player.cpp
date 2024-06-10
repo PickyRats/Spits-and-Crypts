@@ -489,7 +489,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			app->fade->Fade((Module*)app->sceneTemple, (Module*)app->sceneVillage, 60.0f);
 		}
 		else if (app->sceneFloor1->active) {
-			app->sceneVillage->spawnPosition = { 2787, 675 };
+			app->sceneVillage->spawnPosition = { 5450, 675 };
 			app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
 		}
 		doorAldea = false;
