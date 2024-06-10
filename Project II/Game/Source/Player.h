@@ -112,6 +112,7 @@ public:
 	bool step = false;
 	bool walkingSoundPlaying = false;
 	bool jumpingSoundPlaying = false;
+	bool playJumpSound = false;
 	bool climbingSoundPlaying = false;
 	bool doorChoza = false;
 

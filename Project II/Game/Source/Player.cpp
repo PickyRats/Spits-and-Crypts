@@ -357,7 +357,7 @@ void Player::DownMovement()
 }
 void Player::SoundManager()
 {
-	if (isJumping)
+	if (playJumpSound)
 	{
 		if (!jumpingSoundPlaying)
 		{
@@ -406,6 +406,7 @@ void Player::Jump()
 	if (!isJumping)
 	{
 		isJumping = true;
+		playJumpSound = true;
 		currentAnim = &jumpAnim;
 		currentAnim->Reset();
 		vel.y = -speed * 1.5 * dt;
@@ -438,13 +439,29 @@ void Player::DrawPlayer()
 
 	if (isFacingRight)
 	{
-		if (id == 1) app->render->DrawTexture(texture, position.x - 30, position.y - 86, &rect);
-		else if (id == 2) app->render->DrawTexture(texture, position.x - 58, position.y - 64, &rect);
+		if (id == 1)
+		{
+			if (!app->sceneCombat->active) app->render->DrawTexture(texture, position.x - 30, position.y - 86, &rect);
+			else app->render->DrawTexture(texture, position.x - 55, position.y - 86, &rect);
+		}
+		else if (id == 2)
+		{
+			if (!app->sceneCombat->active) app->render->DrawTexture(texture, position.x - 58, position.y - 64, &rect);
+			else app->render->DrawTexture(texture, position.x - 70, position.y - 64, &rect);
+		}
 	}
 	else
 	{
-		if (id == 1) app->render->DrawTexture(texture, position.x - 30, position.y - 86, &rect, SDL_FLIP_HORIZONTAL);
-		else if (id == 2) app->render->DrawTexture(texture, position.x - 58, position.y - 64, &rect, SDL_FLIP_HORIZONTAL);
+		if (id == 1)
+		{
+			if (!app->sceneCombat->active) app->render->DrawTexture(texture, position.x - 30, position.y - 86, &rect, SDL_FLIP_HORIZONTAL);
+			else app->render->DrawTexture(texture, position.x - 55, position.y - 86, &rect, SDL_FLIP_HORIZONTAL);
+		}
+		else if (id == 2)
+		{
+			if (!app->sceneCombat->active) app->render->DrawTexture(texture, position.x - 58, position.y - 64, &rect, SDL_FLIP_HORIZONTAL);
+			else app->render->DrawTexture(texture, position.x - 70, position.y - 64, &rect, SDL_FLIP_HORIZONTAL);
+		}
 	}
 }
 
@@ -490,6 +507,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PLATFORM:
 		platformCollisionCount++;
 		isJumping = false;
+		playJumpSound = false;
 		isClimbing = false;
 		if (pbody->body->GetGravityScale() != 1.0f)
 		{
@@ -537,6 +555,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::TEMP_PLATFORM:
 		platformCollisionCount++;
 		isJumping = false;
+		playJumpSound = false;
 		if (pbody->body->GetGravityScale() != 1.0f)
 		{
 			pbody->body->SetGravityScale(1.0f);
