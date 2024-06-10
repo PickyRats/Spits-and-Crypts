@@ -249,14 +249,15 @@ bool Hud::Update(float dt)
 		abilityTree = !abilityTree;
 		wasSelectPressed = true;
 	}
-	if (abilityTree)
-	{
-		SkillTree();
-	}
 	else if (pad.back != KEY_DOWN)
 	{
 		wasSelectPressed = false;
 	}
+	if (abilityTree)
+	{
+		SkillTree();
+	}
+	
 	//Inventory
 	Inventory();
 
