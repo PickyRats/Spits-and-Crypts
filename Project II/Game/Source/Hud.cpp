@@ -112,6 +112,9 @@ bool Hud::Start()
 	mission1i1 = app->tex->Load(configNode3.child("mission1i1").attribute("texturepath").as_string());
 	mission1i2 = app->tex->Load(configNode3.child("mission1i2").attribute("texturepath").as_string());
 
+	mission2i0 = app->tex->Load(configNode3.child("mission2i0").attribute("texturepath").as_string());
+	mission2i1 = app->tex->Load(configNode3.child("mission2i1").attribute("texturepath").as_string());
+
 	mission3i0 = app->tex->Load(configNode3.child("mission3i0").attribute("texturepath").as_string());
 	mission3i1 = app->tex->Load(configNode3.child("mission3i1").attribute("texturepath").as_string());
 	mission3i2 = app->tex->Load(configNode3.child("mission3i2").attribute("texturepath").as_string());
@@ -742,6 +745,21 @@ bool Hud::Update(float dt)
 		app->tex->UnLoad(mission1i1);
 		app->tex->UnLoad(mission1i0);
 	}
+	else if (mission20Active)
+	{
+		Missions(2);
+	}
+	else if (mission21Active)
+	{
+		Missions(3);
+	}
+	else if (mission2Complete)
+	{
+		mission20Active = false;
+		mission21Active = false;
+		app->tex->UnLoad(mission2i1);
+		app->tex->UnLoad(mission2i0);
+	}
 	else if (mission30Active)
 	{
 		Missions(4);
@@ -779,6 +797,12 @@ void Hud::Missions(int mission1)
 	case 1:
 		app->render->DrawTexture(mission1i1, 0, 0, NULL, SDL_FLIP_NONE, 0);
 		//printf("Mission 1.1\n");
+		break;
+	case 2:
+		app->render->DrawTexture(mission2i0, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		break;
+	case 3:
+		app->render->DrawTexture(mission2i1, 0, 0, NULL, SDL_FLIP_NONE, 0);
 		break;
 	case 4:
 		app->render->DrawTexture(mission3i0, 0, 0, NULL, SDL_FLIP_NONE, 0);

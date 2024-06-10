@@ -289,6 +289,11 @@ void Player::EnterDoor()
 			app->hud->mission31Active = true;
 			app->hud->mission30Active = false;
 		}
+		if (app->hud->mission20Active)
+		{
+			app->hud->mission20Active = false;
+			app->hud->mission21Active = true;
+		}
 	}
 	else if (enterCombat)
 	{

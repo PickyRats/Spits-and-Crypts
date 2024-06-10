@@ -302,9 +302,19 @@ void DialogTrigger::GiveMission(int idMission)
 		break;
 	case 8:
 		printf(" Soy el tabernero\n");
+		if (!app->hud->mission2Complete)
+		{
+			app->hud->mission20Active = true;
+		}
+
 		break;
 	case 9:
 		printf(" Que haces pidiendome wishky con cereales \n");
+		if (app->hud->mission21Active)
+		{
+			app->hud->mission21Active = false;
+			app->hud->mission2Complete = true;
+		}
 		break;
 	default:
 		break;

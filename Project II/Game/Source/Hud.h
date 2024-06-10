@@ -78,6 +78,10 @@ public:
 	bool mission11Active = false;
 	bool mission1Complete = false;
 
+	bool mission20Active = false;
+	bool mission21Active = false;
+	bool mission2Complete = false;
+
 	bool mission30Active = false;
 	bool mission31Active = false;
 	bool mission32Active = false;
@@ -226,6 +230,9 @@ private:
 	SDL_Texture* mission1i0;
 	SDL_Texture* mission1i1;
 	SDL_Texture* mission1i2;
+
+	SDL_Texture* mission2i0;
+	SDL_Texture* mission2i1;
 
 	SDL_Texture* mission3i0;
 	SDL_Texture* mission3i1;
