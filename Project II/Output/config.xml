@@ -375,6 +375,11 @@
 		<ObjectText1 texturepath="Assets/Textures/Screens/Inventory/TextHabilityBlue.png"/>
 		<ObjectText2 texturepath="Assets/Textures/Screens/Inventory/TextHabilityTurquese.png"/>
 		<ObjectText3 texturepath="Assets/Textures/Screens/Inventory/TextHabilityRed.png"/>
+		
+		
+		<ObjectText1Shop texturepath="Assets/Textures/Screens/Shop/TextHabilityBlue-Shop.png"/>
+		<ObjectText2Shop texturepath="Assets/Textures/Screens/Shop/TextHabilityTurquese-Shop.png"/>
+		<ObjectText3Shop texturepath="Assets/Textures/Screens/Shop/TextHabilityRed-Shop.png"/>
 
 		<shopTexture texturepath="Assets/Textures/Screens/Shop/Store_UI_def.png"/>
 		<emptyslotTexture texturepath="Assets/Textures/Screens/Shop/emptyslot.png"/>
