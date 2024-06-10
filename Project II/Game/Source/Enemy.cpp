@@ -53,23 +53,27 @@ bool Enemy::Update(float dt)
 {
 	
 	this->dt = dt;
-	currentAnim->Update();
-	if (arrow)
+	if (isActive)
 	{
-		currentAttackAnim->Update();
-		if (isFacingRight) arrowPos.x += 5;
-		else arrowPos.x -= 5;
+		currentAnim->Update();
+		if (arrow)
+		{
+			currentAttackAnim->Update();
+			if (isFacingRight) arrowPos.x += 5;
+			else arrowPos.x -= 5;
+		}
+		/*position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 50;
+		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 42;*/
+		if (health <= 0 && !isDead)
+		{
+			if (AnimationFinished()) isDead = true;
+		}
+		if (app->sceneCombat->active && !isDead)
+		{
+			DrawEnemy();
+		}
 	}
-	/*position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 50;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 42;*/
-	if (health <= 0 && !isDead)
-	{
-		if (AnimationFinished()) isDead = true;
-	}
-	if (app->sceneCombat->active && !isDead)
-	{
-		DrawEnemy();
-	}
+	
 	return true;
 }
 

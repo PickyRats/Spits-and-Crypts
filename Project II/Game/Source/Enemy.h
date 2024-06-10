@@ -63,5 +63,6 @@ public:
 	SDL_Texture* tileTexture;
 
 	bool physCreated = false;
+	bool isActive = false;
 };
 

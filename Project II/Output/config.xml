@@ -24,7 +24,8 @@
 
 	<sceneCombat>
 		<!-- Scene -->
-		<map path="Assets/Maps/" name="Map_Combat.tmx"/>
+		<map1 path="Assets/Maps/" name="Map_Combat.tmx"/>
+		<map2 path="Assets/Maps/" name="Map_Combat_2.tmx"/>
 
 		<!-- Music -->
 		<music>
@@ -493,7 +494,7 @@
 				<animation x="510" y="912" w="170" h="152"/>
 			</walkAnim>
 			
-			<climbAnim loop="false" speed=" 0.4f">
+			<climbAnim loop="true" speed=" 0.4f">
 				<animation x="0" y="1064" w="170" h="152"/>
 				<animation x="0" y="1064" w="170" h="152"/>
 				
@@ -852,7 +853,7 @@
 				
 			</walkBattleAnim>
 			
-			<climbAnim loop="false" speed=" 0.4f">
+			<climbAnim loop="true" speed=" 0.4f">
 
 				<animation x="0" y="768" w="218" h="128"/>
 				<animation x="0" y="768" w="218" h="128"/>

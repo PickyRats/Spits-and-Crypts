@@ -119,6 +119,8 @@ public:
 	bool isPlayerTurn = true;	
 	bool useAbility = false;
 
+	int currentCombat = 0;
+
 private:
 	SDL_Texture* backgroundTexture;
 	SDL_Texture* backgroundTexture2;
