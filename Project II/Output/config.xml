@@ -417,11 +417,14 @@
 		<DescAtack_7 texturepath="Assets/Textures/SkillTree/DescAtack_7.png"/>
 		<DescAtack_8 texturepath="Assets/Textures/SkillTree/DescAtack_8.png"/>
 		
-		<mission1i0 texturepath="Assets/Textures/Screens/Missions/mission1i0.png"/>
-		<mission1i1 texturepath="Assets/Textures/Screens/Missions/mission1i1.png"/>
-		<mission1i2 texturepath="Assets/Textures/Screens/Missions/mission1i2.png"/>
+		<mission1i0 texturepath="Assets/Textures/Screens/Missions/Mision1/mission1i0.png"/>
+		<mission1i1 texturepath="Assets/Textures/Screens/Missions/Mision1/mission1i1.png"/>
+		<mission1i2 texturepath="Assets/Textures/Screens/Missions/Mision1/mission1i2.png"/>
+		<mission2i0 texturepath="Assets/Textures/Screens/Missions/Mision2/mision2-0.png"/>
+		<mission2i1 texturepath="Assets/Textures/Screens/Missions/Mision2/mision2-1.png"/>
 		
-		
+
+
 	</hud>
 
 	<animations>
