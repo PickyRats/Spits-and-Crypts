@@ -58,7 +58,7 @@ bool Puzzle::Update(float dt)
 
 	if (pieceCollected[0] && pieceCollected[1] && pieceCollected[2] && pieceCollected[3])
 	{
-		if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN ||(pad.l2 == KEY_DOWN && !wasUpPressed))
+		if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN ||(pad.l2 == KEY_DOWN && !wasL2Pressed))
 		{
 			SDL_JoystickSetLED(app->input->joy, 255, 255, 0);
 			if (!isSelecting && !pieceInSlot[0])
@@ -75,31 +75,39 @@ bool Puzzle::Update(float dt)
 				placedpiece = true;
 				isSelecting = false;
 			}
-			wasUpPressed = true;
+			wasL2Pressed = true;
 		}
 		else if (pad.l2 != KEY_DOWN)
 		{
-			wasUpPressed = false;
+			wasL2Pressed = false;
 		}
 
 
-		if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN || (pad.r2 == KEY_DOWN && !wasDownPressed))
+		if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN || (pad.r2 == KEY_DOWN && !wasR2Pressed))
 		{
-			if (app->input->GetKey(SDL_SCANCODE_1 + i) == KEY_DOWN)
+			SDL_JoystickSetLED(app->input->joy, 255, 255, 0);
+			if (!isSelecting && !pieceInSlot[1])
+			{
+				selectedPiece = 1;
+				isSelecting = true;
+
+				pieceInSlot[1] = true;
+			}
+			else if (isSelecting && slotOccupied[1] == -1)
 			{
 				slotOccupied[1] = selectedPiece;
 				piecePos[selectedPiece] = slotPos[1];
 				placedpiece = true;
 				isSelecting = false;
 			}
-			wasDownPressed = true;
+			wasR2Pressed = true;
 		}
 		else if (pad.r2 != KEY_DOWN)
 		{
-			wasDownPressed = false;
+			wasR2Pressed = false;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN || (pad.l1 == KEY_DOWN && !wasLeftPressed))
+		if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN || (pad.l1 == KEY_DOWN && !wasL1Pressed))
 		{
 			SDL_JoystickSetLED(app->input->joy, 255, 255, 0);
 			if (!isSelecting && !pieceInSlot[2])
@@ -116,14 +124,14 @@ bool Puzzle::Update(float dt)
 				placedpiece = true;
 				isSelecting = false;
 			}
-			wasLeftPressed = true;
+			wasL1Pressed = true;
 		}
 		else if (pad.l1 != KEY_DOWN)
 		{
-			wasLeftPressed = false;
+			wasL1Pressed = false;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN || (pad.r1 == KEY_DOWN && !wasRightPressed))
+		if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN || (pad.r1 == KEY_DOWN && !wasR1Pressed))
 		{
 			SDL_JoystickSetLED(app->input->joy, 255, 255, 0);
 			if (!isSelecting && !pieceInSlot[3])
@@ -140,11 +148,11 @@ bool Puzzle::Update(float dt)
 				placedpiece = true;
 				isSelecting = false;
 			}
-			wasRightPressed = true;
+			wasR1Pressed = true;
 		}
 		else if (pad.r1 != KEY_DOWN)
 		{
-			wasRightPressed = false;
+			wasR1Pressed = false;
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || (pad.b == KEY_DOWN && !wasBPressed))
