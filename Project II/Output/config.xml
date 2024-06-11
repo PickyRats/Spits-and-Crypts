@@ -146,7 +146,7 @@
 		<npc x="400" y="550" texturepath="Assets/Textures/Npcs/Anhuvihsh.png" id="8" scene="4" />
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="440" y="640"  name="Tabernero" repeat="true" mission="false" scene="4" id="8" audio_1="Assets/Audio/Fx/anubish/voz_anubish_1.wav" audio_2="Assets/Audio/Fx/anubish/voz_anubish_2.wav" audio_3="Assets/Audio/Fx/anubish/voz_anubish_3.wav">
+		<dialogTrigger x="440" y="640"  name="Tabernero" repeat="true" mission="true" scene="4" id="8" audio_1="Assets/Audio/Fx/anubish/voz_anubish_1.wav" audio_2="Assets/Audio/Fx/anubish/voz_anubish_2.wav" audio_3="Assets/Audio/Fx/anubish/voz_anubish_3.wav">
 			<sentences>
 				<sentence text="Bienvenido, vendemos todo tipo de productos"/>
 				<sentence text="Desde Arena del desierto hasta ratas disecadas"/>
@@ -155,6 +155,9 @@
 			<repeat_sentences>
 				<sentence text="Como era la canción esa, Tunak tunak..."/>
 			</repeat_sentences>
+			<fraseMision>
+				<sentence text="Soy el Tabernero, tu primera misión será la siguiente... "/>
+			</fraseMision>
 		</dialogTrigger>
     <!-- Music -->
 		<music>
@@ -187,6 +190,7 @@
 		<!-- Dialogos -->
 		<dialogTrigger x="320" y="540"  name="Maat" repeat="true" mission="true" scene="2" id="3" audio_1="Assets/Audio/Fx/maat/voz_maat_1.wav" audio_2="Assets/Audio/Fx/maat/voz_maat_2.wav" audio_3="Assets/Audio/Fx/maat/voz_maat_3.wav">
 			<sentences>
+				<sentence text="¡Gracias por completar la misión!"/>
 				<sentence text="Soy Maat, ¿Qué atributos quieres que te mejore?"/>
 				<sentence text="No seas tímido..."/>
 			</sentences>
@@ -200,6 +204,7 @@
 		
 		<dialogTrigger x="570" y="540"  name="Thoth" repeat="true" mission="true" scene="2" id="4" audio_1="Assets/Audio/Fx/toth/voz_toth_1.wav" audio_2="Assets/Audio/Fx/toth/voz_toth_2.wav" audio_3="Assets/Audio/Fx/toth/voz_toth_3.wav">
 			<sentences>
+				<sentence text="¡Gracias por completar la misión!"/>
 				<sentence text="Soy Thoth, puedo mejorar tus armas"/>
 				<sentence text="Selecciona la que quieras en el menú"/>
 			</sentences>
@@ -213,6 +218,7 @@
 		
 		<dialogTrigger x="820" y="540"  name="Isis" repeat="true" mission="true" scene="2" id="5" audio_1="Assets/Audio/Fx/isis/voz_isis_1.wav" audio_2="Assets/Audio/Fx/isis/voz_isis_2.wav" audio_3="Assets/Audio/Fx/isis/voz_isis_3.wav">
 			<sentences>
+				<sentence text="¡Gracias por completar la misión!"/>
 				<sentence text="Soy Isis, puedo mejorar tus armas"/>
 				<sentence text="Selecciona la que quieras en el menú"/>
 			</sentences>
@@ -223,6 +229,7 @@
 		
 		<dialogTrigger x="1070" y="540"  name="Horus" repeat="true" mission="true" scene="2" id="6" audio_1="Assets/Audio/Fx/horus/voz_horus_1.wav" audio_2="Assets/Audio/Fx/horus/voz_horus_2.wav" audio_3="Assets/Audio/Fx/horus/voz_horus_3.wav">
 			<sentences>
+				<sentence text="¡Gracias por completar la misión!"/>
 				<sentence text="Soy Horus, puedo mejorar tus armas"/>
 				<sentence text="Selecciona la que quieras en el menú"/>
 			</sentences>

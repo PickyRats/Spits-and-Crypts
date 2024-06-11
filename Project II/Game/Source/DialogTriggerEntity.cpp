@@ -111,6 +111,11 @@ bool DialogTrigger::Update(float dt)
     physCreated = false;
 	}
 
+	if (app->hud->mission11Active || app->hud->mission32Active)
+	{
+		DialogMission = false;
+	}
+
 	return true;
 }
 
@@ -161,7 +166,7 @@ bool DialogTrigger::CleanUp()
 
 void DialogTrigger::PlayDialog()
 {
-	if ((DialogMission)
+	if (DialogMission)
 	{
 		ListItem<Dialog*>* item;
 		Dialog* pDialog = nullptr;
@@ -172,9 +177,7 @@ void DialogTrigger::PlayDialog()
 			app->dialogManager->AddDialog(pDialog);
 		}
 		//DialogMission = false;
-	}else
-	//Play el dialogo normal
-	if ((played && !repeatDialog && !DialogMission) || !played) {
+	}else if ((played && !repeatDialog && !DialogMission) || !played) {
 		ListItem<Dialog*>* item;
 		Dialog* pDialog = nullptr;
 		app->audio->PlayFx(dialogs[rand() % 2]);
