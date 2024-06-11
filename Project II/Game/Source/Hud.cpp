@@ -293,6 +293,9 @@ bool Hud::Start()
 bool Hud::Update(float dt)
 {
 	GamePad& pad = app->input->pads[0];
+
+	if (app->sceneVillage->active) RenderStoredTiles();
+
 	//Ability Tree
 	if (app->sceneTemple->active && (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN || (pad.b == KEY_DOWN && !wasBPressed)))
 	{

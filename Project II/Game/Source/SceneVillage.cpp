@@ -118,11 +118,11 @@ bool SceneVillage::PreUpdate()
 // Called each loop iteration
 bool SceneVillage::Update(float dt)
 {
-	app->render->DrawTexture(aldea, -5, 0, NULL, SDL_FLIP_NONE, 1);
+	//app->render->DrawTexture(aldea, -5, 0, NULL, SDL_FLIP_NONE, 1);
 
 	int piedraX = METERS_TO_PIXELS(piedra->body->GetPosition().x);
 	int piedraY = METERS_TO_PIXELS(piedra->body->GetPosition().y);
-	app->render->DrawTexture(piedraTexture, piedraX - 50, piedraY - 50);
+	app->hud->DrawTile(piedraTexture, { piedraX - 50, piedraY - 50});
 
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;

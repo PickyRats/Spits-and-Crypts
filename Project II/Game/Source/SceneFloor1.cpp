@@ -146,9 +146,9 @@ bool SceneFloor1::Update(float dt)
 	}
 
 	//dibuja background
-	app->render->DrawTexture(floor1background, 0, 0, NULL, SDL_FLIP_NONE, 1);
-	app->render->DrawTexture(floor1background, 2940, 0, NULL, SDL_FLIP_NONE, 1);
-	app->render->DrawTexture(floor1background, 5880, 0, NULL, SDL_FLIP_NONE, 1);
+	//app->render->DrawTexture(floor1background, 0, 0, NULL, SDL_FLIP_NONE, 1);
+	//app->render->DrawTexture(floor1background, 2940, 0, NULL, SDL_FLIP_NONE, 1);
+	//app->render->DrawTexture(floor1background, 5880, 0, NULL, SDL_FLIP_NONE, 1);
 
 
 	playerX = app->map->player->position.x;
