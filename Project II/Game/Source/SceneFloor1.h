@@ -8,6 +8,7 @@
 #include "GuiControl.h"
 #include "SceneMenu.h"
 #include "GuiControlButton.h"
+#include "Puertas.h"
 #include <vector>
 
 struct SDL_Texture;
@@ -67,6 +68,7 @@ public:
 
 	bool combatFinished = false;
 	Npcs* paalaya;
+	Puertas* puertas[3];
 
 private:
 	SDL_Texture* backgroundTexture;

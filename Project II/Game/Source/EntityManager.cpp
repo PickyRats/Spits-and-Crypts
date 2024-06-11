@@ -7,6 +7,7 @@
 #include "Textures.h"
 #include "SceneVillage.h"
 #include "DialogTriggerEntity.h"
+#include "Puertas.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -101,6 +102,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::ENEMY:
 		entity = new Enemy();
+		break;
+	case EntityType::PUERTAS:
+		entity = new Puertas();
 		break;
 	default:
 		break;

@@ -15,7 +15,7 @@
 #include "Puzzle.h"
 #include "Puzzle2.h"
 #include "Player.h"
-
+#include "puertas.h"
 #include "Defs.h"
 #include "Log.h"
 
@@ -37,7 +37,7 @@ bool SceneFloor1::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
-
+	int i = 0;
 	//if (config.child("player")) {
 	//	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	//	player->parameters = config.child("player");
@@ -53,7 +53,12 @@ bool SceneFloor1::Awake(pugi::xml_node& config)
 		PiezasPuzle* pieces = (PiezasPuzle*)app->entityManager->CreateEntity(EntityType::PIEZAS);
 		pieces->parameters = itemNode;
 	}
-
+	for (pugi::xml_node itemNode = config.child("puerta"); itemNode; itemNode = itemNode.next_sibling("puerta"))
+	{
+		puertas[i] = (Puertas*)app->entityManager->CreateEntity(EntityType::PUERTAS);
+		puertas[i]->parameters = itemNode;
+		i++;
+	}
 	for (pugi::xml_node itemNode = config.child("dialogTrigger"); itemNode; itemNode = itemNode.next_sibling("dialogTrigger"))
 	{
 		DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER);
