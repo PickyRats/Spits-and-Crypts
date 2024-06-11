@@ -65,10 +65,6 @@ bool Npcs::Update(float dt)
 	{
 		DrawNpcs();
 	}
-	else if (app->sceneTemple->active && sceneTemple== npcScene)
-	{
-		DrawNpcs();
-	}
 	else if (app->sceneShop->active && sceneShop == npcScene)
 	{
 		DrawNpcs();

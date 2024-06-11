@@ -25,6 +25,7 @@ private:
 
 	bool canClick = true;
 	bool drawBasic = false;
+	bool wasAPressed = false;
 
 	SDL_Texture* textureDisabled;
 	SDL_Texture* textureNormal;

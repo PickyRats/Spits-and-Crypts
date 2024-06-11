@@ -109,6 +109,14 @@ public:
 	Entity* enemies[5];	
 	
 	bool isPlayerTurn = true;
+	bool wasXPressed = false;
+	bool wasAPressed = false;
+	bool wasRightPressed = false;
+	bool wasLeftPressed = false;
+	bool wasUpPressed = false;
+	bool wasDownPressed = false;
+
+	bool combatCompleted = false;
 
 private:
 	SDL_Texture* backgroundTexture;
@@ -144,6 +152,7 @@ private:
 	int enemyAttackIndex = 0;
 
 	bool startEnemyTurn = false;
+
 
 	int nearestPlayer = 0;
 

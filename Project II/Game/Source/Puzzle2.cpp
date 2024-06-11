@@ -1,5 +1,7 @@
 #include "Puzzle2.h"
 #include "App.h"
+#include "Map"
+#include "Player.h"
 #include "Textures.h"
 #include "Audio.h"
 #include "Input.h"
@@ -48,6 +50,7 @@ bool Puzzle2::Start() {
 
 bool Puzzle2::Update(float dt)
 {
+
 	DrawPieces();
 	PlaySounds();
 
@@ -180,16 +183,17 @@ bool Puzzle2::Update(float dt)
 
 void Puzzle2::DrawPieces()
 {
+	
 	for (int i = 3; i < 6; i++)
 	{
-		app->render->DrawTexture(texture[i], centerPosition.x, centerPosition.y, NULL, SDL_FLIP_NONE, 0.0f, rotation[i]);
+		app->render->DrawTexture(texture[i], centerPosition.x, centerPosition.y, NULL, SDL_FLIP_NONE, 1.0f, rotation[i]);
 	}
 	for (int i = 0; i < 3; i++)
 	{
-		app->render->DrawTexture(texture[i], piecePosition[i].x, piecePosition[i].y, NULL, SDL_FLIP_NONE, 0.0f, rotation[i]);
+		app->render->DrawTexture(texture[i], piecePosition[i].x, piecePosition[i].y, NULL, SDL_FLIP_NONE, 1.0f, rotation[i]);
 	}
 
-	app->render->DrawTexture(texture[6 + selection], piecePosition[selection].x, piecePosition[selection].y, NULL, SDL_FLIP_NONE, 0.0f, rotation[selection]);
+	app->render->DrawTexture(texture[6 + selection], piecePosition[selection].x, piecePosition[selection].y, NULL, SDL_FLIP_NONE, 1.0f, rotation[selection]);
 	
 }
 

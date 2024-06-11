@@ -121,17 +121,23 @@ bool SceneChoza::Update(float dt)
 // Called each loop iteration
 bool SceneChoza::PostUpdate()
 {
+
+	GamePad& pad = app->input->pads[0];
 	bool ret = true;
 
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.start == KEY_DOWN && !wasStartPressed) {
 		pause = !pause;
 		app->hud->onSettings = false;
 		if (!pause)
 		{
 			Mix_VolumeMusic(app->sceneMenu->percentageMusic);
 		};
+		wasStartPressed = true;
 	}
-
+	else if (pad.start != KEY_DOWN)
+	{
+		wasStartPressed = false;
+	}
 	return ret;
 }
 

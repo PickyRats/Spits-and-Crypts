@@ -24,6 +24,12 @@ public:
 
 	bool Update(float dt);
 
+	void OnSettings(GamePad& pad);
+
+	void InputSettings(GamePad& pad);
+
+	void OnCredits(GamePad& pad);
+
 	bool SaveState(pugi::xml_node node);
 
 	bool CleanUp();
@@ -34,8 +40,23 @@ public:
 	bool fxClickPlayed = false;
 	bool fullScreen = false;
 	bool vSync = true;
+
+	bool wasDownPressed = false;
+	bool wasUpPressed = false;
+	bool wasR1Pressed = false;
+	bool wasL1Pressed = false;
+	bool wasAPressed = false;
+
+	bool wasBPressed = false;
+	bool wasYPressed = false;
+	bool wasRightPressed = false;
+	bool wasLeftPressed = false;
+
 	int currentId= 1;
 	int percentageMusic;
+
+	float settingsMusicSlider = 0;
+
 	GuiControlButton* startButton;
 	GuiControlButton* loadGameButton;
 	GuiControlButton* settingsButton;
@@ -86,6 +107,10 @@ private:
 	SDL_Texture* settingsSlider;
 	SDL_Texture* settingsAudioPanel;
 	SDL_Texture* settingsOptionsPanel;
+	SDL_Texture* settingsOptionsFullScreenHover;
+	SDL_Texture* settingsOptionsVsyncHover;
+	SDL_Texture* settingsAudioMusicVolumeHover;
+	SDL_Texture* settingsSfxButtonHover;
 	SDL_Texture* settingsOptionsButtonNormal;
 	SDL_Texture* settingsOptionsButtonHover;
 	SDL_Texture* settingsAudioButtonNormal;
@@ -101,7 +126,7 @@ private:
 	GuiControlButton* settingsOptionsButton;
 	GuiControlButton* settingsAudioButton;
 	GuiControlButton* settingsControlsButton;
-	GuiControlButton* settingsFullScreenButton;
+	GuiControlCheckBox* settingsFullScreenButton;
 	GuiControlCheckBox* settingsVSyncButton;
 	GuiControlSlider* settingsMusicButton;
 	GuiControlSlider* settingsFxButton;
