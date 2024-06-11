@@ -124,6 +124,7 @@
     <ClCompile Include="Source\SceneChoza.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SceneSelection.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -287,6 +288,7 @@
     <ClInclude Include="Source\SceneChoza.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\SceneSelection.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
