@@ -259,7 +259,7 @@
 
   <map>
 		<!-- Player -->
-		<player x="64" y="576" texturepath1="Assets/Textures/MC_Sprites_red.png" texturepath2="Assets/Textures/MC_Sprites_green.png" texturepath3="Assets/Textures/MC_Sprites_blue.png" texturepath4="Assets/Textures/MC_Sprites_yellow.png" speed="0.2f" id="1"/>
+		<player x="64" y="576" texturepath1="Assets/Textures/MC_Sprites_red.png" texturepath2="Assets/Textures/MC_Sprites_yellow.png" texturepath3="Assets/Textures/MC_Sprites_green.png" texturepath4="Assets/Textures/MC_Sprites_blue.png" speed="0.2f" id="1"/>
 		<player2 x="0" y="576" texturepath1="Assets/Textures/Taila_Animation_sheet.png" speed="0.2f" id="2"/>
 	</map>
 	
@@ -429,10 +429,17 @@
 		<ObjectText2Shop texturepath="Assets/Textures/Screens/Shop/TextHabilityTurquese-Shop.png"/>
 		<ObjectText3Shop texturepath="Assets/Textures/Screens/Shop/TextHabilityRed-Shop.png"/>
 
+		<MC_Idle_1 texturepath="Assets/Textures/Screens/Inventory/MC_Idle_1.png"/>
+		<MC_Idle_2 texturepath="Assets/Textures/Screens/Inventory/MC_Idle_2.png"/>
+		<MC_Idle_3 texturepath="Assets/Textures/Screens/Inventory/MC_Idle_3.png"/>
+		<MC_Idle_4 texturepath="Assets/Textures/Screens/Inventory/MC_Idle_4.png"/>
+
+
 		<shopTexture texturepath="Assets/Textures/Screens/Shop/Store_UI_def.png"/>
 		<emptyslotTexture texturepath="Assets/Textures/Screens/Shop/emptyslot.png"/>
 		<selectorItemTexture texturepath="Assets/Textures/Screens/Shop/selectorItem.png"/>
 		<Coin texturepath="Assets/Textures/Screens/Shop/coin.png"/>
+		<Exp texturepath="Assets/Textures/Screens/Inventory/Orbe_XP.png"/>
 	
 		
 

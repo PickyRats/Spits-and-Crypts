@@ -13,6 +13,7 @@
 #include "Physics.h"
 #include "SceneShop.h"
 #include "SceneOasisFaraon.h"
+#include "SceneSelection.h"
 #include "SceneTemple.h"
 #include "SceneFloor1.h"
 #include "FadeToBlack.h"
@@ -294,12 +295,13 @@ void DialogTrigger::GiveMission(int idMission)
 		app->hud->mission11Active = false;
 		app->hud->mission1Complete = true;
 		app->hud->coin += 20;
+		app->hud->exp += 1;
 		app->fade->Fade((Module*)app->sceneChoza, (Module*)app->sceneVillage, 60.0f);
 		break;
 	case 3:
 		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoMaat;
 		printf(" Soy Maat \n");
-		if (app->hud->classid == 2)
+		if (app->sceneSelection->currentSelection == 0)
 		{
 			app->hud->abilityTree = true;
 		}
@@ -311,12 +313,13 @@ void DialogTrigger::GiveMission(int idMission)
 			app->hud->mission21Active = false;
 			app->hud->mission2Complete = true;
 			app->hud->coin += 20;
+			app->hud->exp += 1;
 			app->hud->mission30Active = true; 
 			PlayDialog();
 		}
 		else
 		{
-			if (app->hud->classid == 1 && app->hud->mission3Complete)
+			if (app->sceneSelection->currentSelection == 1 && app->hud->mission3Complete)
 			{
 				app->hud->abilityTree = true;
 			}
@@ -331,13 +334,14 @@ void DialogTrigger::GiveMission(int idMission)
 				DialogMission = false;
 				app->hud->mission3Complete = true;
 				app->hud->coin += 50;
+				app->hud->exp += 1;
 			}
 		}
 		break;
 	case 5:
 		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoIsis;
 		printf(" Soy Isis  \n");
-		if (app->hud->classid == 3)
+		if (app->sceneSelection->currentSelection == 3)
 		{
 			app->hud->abilityTree = true;
 		}
@@ -345,7 +349,7 @@ void DialogTrigger::GiveMission(int idMission)
 	case 6:
 		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoHorus;
 		printf(" Soy Horrus  \n");
-		if (app->hud->classid == 4)
+		if (app->sceneSelection->currentSelection == 2)
 		{
 			app->hud->abilityTree = true;
 		}
