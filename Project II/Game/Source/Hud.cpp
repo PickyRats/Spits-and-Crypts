@@ -855,10 +855,10 @@ void Hud::Inventory() {
 		snprintf(Armour, sizeof(Armour), "%02d", dano);
 		app->render->DrawText(Armour, 123, 580, 30, 18);
 
-		app->render->DrawTexture(Coin, 1100, 100, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(Coin, 1110, 100, NULL, SDL_FLIP_NONE, 0);
 		snprintf(buffer, sizeof(buffer), "%d", coin);
 		const char* miVariable = buffer;
-		app->render->DrawText(miVariable, 1075, 100, 40, 55);
+		app->render->DrawText(miVariable, 1050, 100, 50, 55);
 
 
 		for (int i = 0; i < 4; i++) {
