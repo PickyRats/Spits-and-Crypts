@@ -95,7 +95,6 @@ bool Npcs::Update(float dt)
 void Npcs::DrawNpcs()
 {
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
-	//SDL_Rect rect = currentAnim->GetCurrentFrame();
 
 	app->render->DrawTexture(texture, position.x, position.y, &rect);
 	
@@ -132,8 +131,7 @@ void Npcs::LoadAnimations()
 {
 	if (npcId == 1)
 	{
-		idleAnim.LoadAnimations("idleAnim", "Paalaya");
-		interactAnim.LoadAnimations("interactAnim", "Paalaya");
+		
 	}
 	else if (npcId == 2)
 	{
@@ -167,7 +165,8 @@ void Npcs::LoadAnimations()
 	}
 	else if (npcId == 9)
 	{
-		
+		idleAnim.LoadAnimations("idleAnim", "Paalaya");
+		interactAnim.LoadAnimations("interactAnim", "Paalaya");
 	}
 
 	

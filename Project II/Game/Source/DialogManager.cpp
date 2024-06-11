@@ -52,7 +52,7 @@ bool DialogManager::Start() {
 
 	background_tex_logoMercante = app->tex->Load(configNodeDialog.child("background_dialoglogoMercante").attribute("texturepath").as_string());
 	background_tex_logoTabernero = app->tex->Load(configNodeDialog.child("background_dialoglogoTebernero").attribute("texturepath").as_string());
-	background_tex_logoPalaya = app->tex->Load(configNodeDialog.child("background_dialoglogoPalaaya").attribute("texturepath").as_string());
+	background_tex_logoPalaya = app->tex->Load(configNodeDialog.child("background_dialoglogoPalaya").attribute("texturepath").as_string());
 	background_tex_logoMaat = app->tex->Load(configNodeDialog.child("background_dialoglogoMaat").attribute("texturepath").as_string());
 	background_tex_logoThoth = app->tex->Load(configNodeDialog.child("background_dialoglogoThoth").attribute("texturepath").as_string());
 	background_tex_logoIsis = app->tex->Load(configNodeDialog.child("background_dialoglogoIsis").attribute("texturepath").as_string());
@@ -123,7 +123,7 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 	//Mostrar fondo
 	app->render->DrawTexture(background_tex, 0, 0, NULL, SDL_FLIP_NONE, 0);
 
-	app->render->DrawTexture(background_tex_logo, 618, 512);
+	app->render->DrawTexture(background_tex_logo, 618, 512, NULL, SDL_FLIP_NONE, 0);
 
 	std::string actualText = dialog->sentence.substr(0, indexText);
 
