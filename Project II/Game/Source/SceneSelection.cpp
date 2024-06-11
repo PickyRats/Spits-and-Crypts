@@ -11,6 +11,7 @@
 #include "GuiManager.h"
 #include "Log.h"
 #include "SceneMenu.h"
+#include "CutscenePlayer.h"
 
 
 SceneSelection::SceneSelection(bool enabled) : Module(enabled)
@@ -44,6 +45,12 @@ bool SceneSelection::Start()
 	app->sceneMenu->creditsButton->state = GuiControlState::HIDDEN;
 	app->sceneMenu->exitButton->state = GuiControlState::HIDDEN;
 
+	
+	app->cutscenePlayer->file = "Assets/Video/Cinematica_01.mp4";
+	app->cutscenePlayer->Enable();
+	app->audio->PlayMusic("Assets/Video/Cinematica_01.ogg", 0);
+	app->cutscenePlayer->ConvertPixels(0, 1);
+
 	return true;
 }
 
@@ -61,6 +68,7 @@ bool SceneSelection::Update(float dt)
 	}
 	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 	{
+		app->cutscenePlayer->Disable();
 		app->fade->Fade(this, (Module*)app->sceneFloor1, 60.0f);
 	}
 
