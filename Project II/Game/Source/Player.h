@@ -106,7 +106,7 @@ public:
 	bool doorShop = false;
 	bool doorOasis = false;
 	bool doorTemple = false;
-	bool doorFlor1 = false;
+	bool doorFloor1 = false;
 	bool enterCombat = false;
 
 	bool step = false;

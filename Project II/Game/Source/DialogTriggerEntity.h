@@ -35,6 +35,8 @@ public:
 
 	void GiveMission(int idMission);
 
+	bool DialogMission = false;
+
 
 private:
 
@@ -69,6 +71,9 @@ private:
 	
 	//Lista de dialogos a repetir
 	List<Dialog*> dialoguesRepeat;
+
+	//Lista de dialogos de mision
+	List<Dialog*> dialoguesMission;
 
 	int npcid;
 

@@ -51,6 +51,15 @@ public:
 	bool isPlaying;
 	bool dialogFinished;
 
+	SDL_Texture* background_tex_logo;
+	SDL_Texture* background_tex_logoMercante;
+	SDL_Texture* background_tex_logoTabernero;
+	SDL_Texture* background_tex_logoPalaya;
+	SDL_Texture* background_tex_logoMaat;
+	SDL_Texture* background_tex_logoThoth;
+	SDL_Texture* background_tex_logoHorus;
+	SDL_Texture* background_tex_logoIsis;
+
 private:
 
 	//Colores

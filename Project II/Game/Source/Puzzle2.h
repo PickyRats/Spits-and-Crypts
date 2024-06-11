@@ -35,7 +35,7 @@ public:
 	int isPieceInserted[3] = { 1, 1, 1 };
 	int rotation[6] = { 0, 0, 0, 0, 0, 0 };
 	int selection = 0;
-	iPoint centerPosition = { 10400, 1010 };
+	iPoint centerPosition = { 10000, 1010 };
 	iPoint leftPosition[3] = { {centerPosition.x - 215, centerPosition.y},{centerPosition.x - 315, centerPosition.y},{centerPosition.x - 395, centerPosition.y}};
 	iPoint rightPosition[3] = { {centerPosition.x + 235, centerPosition.y},{centerPosition.x + 335, centerPosition.y},{centerPosition.x + 415, centerPosition.y} };
 	//{ 10218, 10378 };
