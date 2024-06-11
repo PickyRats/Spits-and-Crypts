@@ -189,7 +189,7 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 void DialogTrigger::CreateCollider()
 {
-	pbody = app->physics->CreateRectangleSensor(position.x, position.y, 80, 120, bodyType::KINEMATIC);
+	pbody = app->physics->CreateRectangleSensor(position.x, position.y, 200, 120, bodyType::KINEMATIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::DIALOG_TRIGGER;
 	physCreated = true;

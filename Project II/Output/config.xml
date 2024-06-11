@@ -56,7 +56,7 @@
 		<npc x="970" y="520" texturepath="Assets/Textures/Npcs/MercaderSpriteSheet.png" id="7" scene="3"/>
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="1024" y="576"  name="Mercante" repeat="true" scene="3" id="7" audio_1="Assets/Audio/Fx/tienda/voz_tienda_1.wav" audio_2="Assets/Audio/Fx/tienda/voz_tienda_2.wav" audio_3="Assets/Audio/Fx/tienda/voz_tienda_3.wav">
+		<dialogTrigger x="994" y="576"  name="Mercante" repeat="true" scene="3" id="7" audio_1="Assets/Audio/Fx/tienda/voz_tienda_1.wav" audio_2="Assets/Audio/Fx/tienda/voz_tienda_2.wav" audio_3="Assets/Audio/Fx/tienda/voz_tienda_3.wav">
 		  <sentences>
 			  <sentence text="Bienvenido a mi humilde rinconcillo"/>
 			  <sentence text="Si quieres algo, no lo robes"/>
@@ -143,10 +143,10 @@
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 		
 		<!-- Tabernero  -->
-		<npc x="900" y="510" texturepath="Assets/Textures/Npcs/TaberneroSpriteSheet.png" id="8" scene="4" />
+		<npc x="900" y="530" texturepath="Assets/Textures/Npcs/TaberneroSpriteSheet.png" id="8" scene="4" />
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="940" y="550"  name="Tabernero" repeat="true" scene="4" id="8" audio_1="Assets/Audio/Fx/anubish/voz_anubish_1.wav" audio_2="Assets/Audio/Fx/anubish/voz_anubish_2.wav" audio_3="Assets/Audio/Fx/anubish/voz_anubish_3.wav">
+		<dialogTrigger x="920" y="565"  name="Tabernero" repeat="true" scene="4" id="8" audio_1="Assets/Audio/Fx/anubish/voz_anubish_1.wav" audio_2="Assets/Audio/Fx/anubish/voz_anubish_2.wav" audio_3="Assets/Audio/Fx/anubish/voz_anubish_3.wav">
 			<sentences>
 				<sentence text="Bienvenido, vendemos todo tipo de productos"/>
 				<sentence text="Desde Arena del desierto hasta ratas disecadas"/>
@@ -248,7 +248,7 @@
 
 
 		<!-- Dialogo Talia -->
-		<dialogTrigger x="670" y="2170"  name="Paayla" repeat="true" scene="5" id="9" audio_1="Assets/Audio/Fx/paayla/voz_paayla_1.wav" audio_2="Assets/Audio/Fx/paayla/voz_paayla_2.wav" audio_3="Assets/Audio/Fx/paayla/voz_paayla_3.wav">
+		<dialogTrigger x="670" y="2170"  name="Paalaya" repeat="true" scene="5" id="9" audio_1="Assets/Audio/Fx/paayla/voz_paayla_1.wav" audio_2="Assets/Audio/Fx/paayla/voz_paayla_2.wav" audio_3="Assets/Audio/Fx/paayla/voz_paayla_3.wav">
 			<sentences>
 				<sentence text="Hola, veo que estas algo malherido."/>
 				<sentence text="Yo me encargaré de tus heridas, no te preocupes."/>

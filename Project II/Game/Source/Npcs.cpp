@@ -89,6 +89,8 @@ bool Npcs::Update(float dt)
 	currentAnim->Update();
 	if (currentAnim == &interactAnim && currentAnim->HasFinished())
 	{
+		currentAnim->Reset();
+		currentAnim->loopCount = 0;
 		currentAnim = &idleAnim;
 	} 
 	return true;
