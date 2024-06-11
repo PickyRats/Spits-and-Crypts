@@ -119,6 +119,7 @@
     <ClCompile Include="Source\Physics.cpp" />
     <ClCompile Include="Source\PiezasPuzle.cpp" />
     <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\Puertas.cpp" />
     <ClCompile Include="Source\Puzzle.cpp" />
     <ClCompile Include="Source\Puzzle2.cpp" />
     <ClCompile Include="Source\SceneChoza.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Source\PiezasPuzle.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\PQueue.h" />
+    <ClInclude Include="Source\Puertas.h" />
     <ClInclude Include="Source\Puzzle.h" />
     <ClInclude Include="Source\Puzzle2.h" />
     <ClInclude Include="Source\Queue.h" />

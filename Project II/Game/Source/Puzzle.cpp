@@ -9,6 +9,7 @@
 #include "Physics.h"
 #include "FadeToBlack.h"
 #include "SceneFloor1.h"
+#include "Puertas.h"
 
 Puzzle::Puzzle(bool enabled) : Module(enabled)
 {
@@ -182,6 +183,7 @@ bool Puzzle::Update(float dt)
 			LOG("PUZZLE COMPLETED");
 			SDL_JoystickSetLED(app->input->joy, 0, 255, 0);
 			app->sceneFloor1->levelWidth = 169 * 64;
+			app->sceneFloor1->puertas[1]->puzle1Completed = true;
 		
 		}
 	}

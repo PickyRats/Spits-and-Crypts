@@ -18,6 +18,7 @@
 #include "FadeToBlack.h"
 #include "SceneChoza.h"
 #include "Npcs.h"
+#include "Animation.h"
 
 #include <thread>
 #include <chrono>
@@ -229,7 +230,7 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 void DialogTrigger::CreateCollider()
 {
-	pbody = app->physics->CreateRectangleSensor(position.x, position.y, 80, 120, bodyType::KINEMATIC);
+	pbody = app->physics->CreateRectangleSensor(position.x, position.y, 200, 120, bodyType::KINEMATIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::DIALOG_TRIGGER;
 	physCreated = true;
@@ -289,7 +290,7 @@ void DialogTrigger::GiveMission(int idMission)
 		app->hud->mission10Active = true;
 		break;
 	case 2:
-		printf("  la nieta  \n");
+	/*	printf("  la nieta  \n");*/
 		app->hud->mission11Active = false;
 		app->hud->mission1Complete = true;
 		app->fade->Fade((Module*)app->sceneChoza, (Module*)app->sceneVillage, 60.0f);
@@ -321,7 +322,7 @@ void DialogTrigger::GiveMission(int idMission)
 			else if (!app->hud->mission3Complete && !app->hud->mission32Active && app->hud->mission2Complete)
 			{
 				app->hud->mission30Active = true;
-				app->hud->mission20Active = false; // Asegúrate de que la misión 2 se desactive
+				app->hud->mission20Active = false; // AsegÃºrate de que la misiÃ³n 2 se desactive
 				app->hud->mission21Active = false;
 			}
 			else if (!app->hud->mission3Complete && app->hud->mission32Active)
@@ -349,11 +350,13 @@ void DialogTrigger::GiveMission(int idMission)
 		}
 		break;
 	case 7:
+    app->sceneShop->mercante->currentAnim = &app->sceneShop->mercante->interactAnim;
 		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoMercante;
 		printf("  mi humilde tienda \n");
 		app->hud->shop = true;
 		break;
 	case 8:
+    app->sceneOasisFaraon->tabernero->currentAnim = &app->sceneOasisFaraon->tabernero->interactAnim;
 		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoTabernero;
 		printf(" Soy el tabernero\n");
 		if (!app->hud->mission2Complete)
@@ -362,6 +365,7 @@ void DialogTrigger::GiveMission(int idMission)
 		}
 		break;
 	case 9:
+    app->sceneFloor1->paalaya->currentAnim = &app->sceneFloor1->paalaya->interactAnim;
 		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoPalaya;
 		printf(" Que haces pidiendome whisky con cereales \n");
 		break;

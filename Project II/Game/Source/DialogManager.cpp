@@ -121,7 +121,7 @@ bool DialogManager::AddDialog(Dialog* dialog)
 bool DialogManager::ShowDialog(Dialog* dialog)
 {
 	//Mostrar fondo
-	app->render->DrawTexture(background_tex, 0, 0, 0);
+	app->render->DrawTexture(background_tex, 0, 0, NULL, SDL_FLIP_NONE, 0);
 
 	app->render->DrawTexture(background_tex_logo, 618, 512);
 
@@ -155,16 +155,16 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 
 	//Textura dialogo
 	textTexture = CreateTextTexture(dialog->font, actualText.c_str(), textColor, 450);
-	app->render->DrawTexture(textTexture, _dialogPosition.x, _dialogPosition.y, 0);
+	app->render->DrawTexture(textTexture, _dialogPosition.x, _dialogPosition.y, NULL, SDL_FLIP_NONE, 0);
 
 	//Imagen del personaje
 	if (dialog->face_tex != nullptr) {
-		app->render->DrawTexture(dialog->face_tex, dialogMargin[3] + dialogPosition.x, dialogMargin[0] + dialogPosition.y, 0);
+		app->render->DrawTexture(dialog->face_tex, dialogMargin[3] + dialogPosition.x, dialogMargin[0] + dialogPosition.y, NULL, SDL_FLIP_NONE, 0);
 	}
 
 	//Nombre personaje
 	textNameTexture = CreateTextTexture(app->render->font, dialog->name.c_str(), nameColor, textNameBoundWidth);
-	app->render->DrawTexture(textNameTexture, dialogMargin[3] + namePosition.x, dialogMargin[0] + namePosition.y);
+	app->render->DrawTexture(textNameTexture, dialogMargin[3] + namePosition.x, dialogMargin[0] + namePosition.y, NULL, SDL_FLIP_NONE, 0);
 
 
 	//Opciones
@@ -172,11 +172,11 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 
 		//Textura opcion1
 		options1NameTexture = CreateTextTexture(app->render->font, dialog->option1.c_str(), (optionSelected == 1) ? optionSelectedColor : optionColor, optionsBoundWidth);
-		app->render->DrawTexture(options1NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween, 0);
+		app->render->DrawTexture(options1NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween, NULL, SDL_FLIP_NONE, 0);
 
 		//Textura opcion2
 		options2NameTexture = CreateTextTexture(app->render->font, dialog->option2.c_str(), (optionSelected == 2) ? optionSelectedColor : optionColor, optionsBoundWidth);
-		app->render->DrawTexture(options2NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween * 2, 0);
+		app->render->DrawTexture(options2NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween * 2, NULL, SDL_FLIP_NONE, 0);
 	}
 
 
