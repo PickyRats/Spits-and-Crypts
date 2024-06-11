@@ -12,6 +12,9 @@
 #include "Hud.h"
 #include "DialogManager.h"
 #include "DialogTriggerEntity.h"
+#include "EntityManager.h"
+#include "Physics.h"
+#include "Entity.h"	
 
 #include "Defs.h"
 #include "Log.h"
@@ -79,6 +82,7 @@ bool SceneVillage::Start()
 
 	//Load the player in the map
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(spawnPosition.x), PIXEL_TO_METERS(spawnPosition.y)), 0);
+	app->map->player->inicio = true;
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -96,6 +100,8 @@ bool SceneVillage::Start()
 	if (!piedraHecha)
 	{
 		piedra = app->physics->CreateRectangle(200, 640, 100, 100, DYNAMIC);
+		piedra->ctype = ColliderType::ROCK;
+		
 		piedraHecha = true;
 	}
 
@@ -123,6 +129,16 @@ bool SceneVillage::Update(float dt)
 	int piedraX = METERS_TO_PIXELS(piedra->body->GetPosition().x);
 	int piedraY = METERS_TO_PIXELS(piedra->body->GetPosition().y);
 	app->hud->DrawTile(piedraTexture, { piedraX - 50, piedraY - 50});
+
+	if (piedraX>=400)
+	{
+		movement = true;
+		printf("CINEMATICA");
+	}
+	if (movement)
+	{
+		app->map->player->inicio = false;
+	}
 
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;

@@ -127,10 +127,10 @@
 		<villageAmbient path="Assets/Audio/Music/Village_ambient.ogg" fadeTime="2" fadeOutTime="2"/>
 
 		<!-- Abuela -->
-		<npc x="300" y="580" texturepath="Assets/Textures/Npcs/abuela.png" id="1" scene="1"/>
+		<npc x="200" y="580" texturepath="Assets/Textures/Npcs/abuela.png" id="1" scene="1"/>
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="350" y="640"  name="La abuela" repeat="true" mission="false" scene="1"  id="1">
+		<dialogTrigger x="200" y="640"  name="La abuela" repeat="true" mission="false" scene="1"  id="1">
 		  <sentences>
 			  <sentence text="Ayuda, mi nieta se ha quedado atrapada"/>
 			  <sentence text="Necesito alguien poderoso que la salve"/>
