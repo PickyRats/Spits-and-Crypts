@@ -273,7 +273,7 @@
 		<puerta x="6964" y="1792" texturepath="Assets/Maps/puerta_lateral.png" id="3"/>
 		<puerta x="10880" y="1216" texturepath="Assets/Maps/puerta_lateral.png" id="4"/>
 		<!-- Paayla -->
-		<npc x="650" y="2112" texturepath="Assets/Textures/Npcs/PaalayaSpriteSheet.png" id="1" scene="5"/>
+		<npc x="650" y="2112" texturepath="Assets/Textures/Npcs/PaalayaSpriteSheet.png" id="9" scene="5"/>
 
 
 		<!-- Dialogo Paalaya -->

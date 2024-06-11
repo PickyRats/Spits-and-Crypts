@@ -131,8 +131,7 @@ void Npcs::LoadAnimations()
 {
 	if (npcId == 1)
 	{
-		idleAnim.LoadAnimations("idleAnim", "Paalaya");
-		interactAnim.LoadAnimations("interactAnim", "Paalaya");
+		
 	}
 	else if (npcId == 2)
 	{
@@ -166,7 +165,8 @@ void Npcs::LoadAnimations()
 	}
 	else if (npcId == 9)
 	{
-		
+		idleAnim.LoadAnimations("idleAnim", "Paalaya");
+		interactAnim.LoadAnimations("interactAnim", "Paalaya");
 	}
 
 	
