@@ -22,9 +22,8 @@ public:
 	bool Update(float dt);
 
 	bool CleanUp();
-	
-	bool IsMouseOverRect(int mouseX, int mouseY, SDL_Rect rect);
 
+	int currentSelection = 0;
 
 private:
 
@@ -33,16 +32,6 @@ private:
 	SDL_Texture* char2;
 	SDL_Texture* char3;
 	SDL_Texture* char4;
-
-	SDL_Rect rect1 = { 0,100,320,600 };
-	SDL_Rect rect2 = { 320,100,320,600 };
-	SDL_Rect rect3 = { 640,100,320,600 };
-	SDL_Rect rect4 = { 960,100,320,600 };
-
-	bool isHover1 = false;
-	bool isHover2 = false;
-	bool isHover3 = false;
-	bool isHover4 = false;
 
 };
 

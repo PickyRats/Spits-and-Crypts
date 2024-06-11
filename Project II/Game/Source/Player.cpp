@@ -18,6 +18,7 @@
 #include "SceneLight.h"
 #include "SceneCombat.h"
 #include "Map.h"
+#include "SceneSelection.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -32,9 +33,11 @@ bool Player::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
-	texturePath = parameters.attribute("texturepath").as_string();
+	texturePath1 = parameters.attribute("texturepath1").as_string();
+	texturePath2 = parameters.attribute("texturepath2").as_string();
+	texturePath3 = parameters.attribute("texturepath3").as_string();
+	texturePath4 = parameters.attribute("texturepath4").as_string();
 	speed = parameters.attribute("speed").as_float();
-	classId = parameters.attribute("classId").as_int();
 	id = parameters.attribute("id").as_int();
 
 	return true;
@@ -43,7 +46,17 @@ bool Player::Awake() {
 bool Player::Start() {
 
 	//initilize texture
-	texture = app->tex->Load(texturePath);
+	if (id == 1)
+	{
+		if (app->sceneSelection->currentSelection == 0) texture = app->tex->Load(texturePath1);
+		else if (app->sceneSelection->currentSelection == 1) texture = app->tex->Load(texturePath2);
+		else if (app->sceneSelection->currentSelection == 2) texture = app->tex->Load(texturePath3);
+		else if (app->sceneSelection->currentSelection == 3) texture = app->tex->Load(texturePath4);
+	}
+	else
+	{
+		texture = app->tex->Load(texturePath1);
+	}
 
 	LoadAnimations();
 
@@ -53,7 +66,7 @@ bool Player::Start() {
 	jumpFx = app->audio->LoadFx("Assets/Audio/Fx/jump_FX.wav");
 	climbFx = app->audio->LoadFx("Assets/Audio/Fx/escaleras_Fx.wav");
 	doorFx = app->audio->LoadFx("Assets/Audio/Fx/trampilla.wav");
-	//ToggleGodMode();
+
 
 	if (id == 1)
 	{
@@ -644,22 +657,22 @@ void Player::LoadAnimations()
 	
 		walkBattleAnim.LoadAnimations("walkBattleAnim", "player");
 
-		if (classId == 0)
+		if (app->sceneSelection->currentSelection == 0)
 		{
 			attackAnim.LoadAnimations("attackAnim", "player");
 			abilityAnim.LoadAnimations("abilityAnim", "player");
 		}
-		else if (classId == 1)
+		else if (app->sceneSelection->currentSelection == 1)
 		{
 			attackAnim.LoadAnimations("attack1Anim", "player");
 			abilityAnim.LoadAnimations("ability1Anim", "player");
 		}
-		else if (classId == 2)
+		else if (app->sceneSelection->currentSelection == 2)
 		{
 			attackAnim.LoadAnimations("attack2Anim", "player");
 			abilityAnim.LoadAnimations("ability2Anim", "player");
 		}
-		else if (classId == 3)
+		else if (app->sceneSelection->currentSelection == 3)
 		{
 			attackAnim.LoadAnimations("attack3Anim", "player");
 			abilityAnim.LoadAnimations("ability3Anim", "player");

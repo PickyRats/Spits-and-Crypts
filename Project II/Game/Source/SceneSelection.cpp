@@ -50,30 +50,26 @@ bool SceneSelection::Start()
 bool SceneSelection::Update(float dt)
 {
 	app->render->DrawTexture(background, 0, 0);
-	int mouseX, mouseY;
-	SDL_GetMouseState(&mouseX, &mouseY);
 
-	isHover1 = IsMouseOverRect(mouseX, mouseY, rect1);
-	isHover2 = IsMouseOverRect(mouseX, mouseY, rect2);
-	isHover3 = IsMouseOverRect(mouseX, mouseY, rect3);
-	isHover4 = IsMouseOverRect(mouseX, mouseY, rect4);
-
-	if (isHover1) app->render->DrawTexture(char1, 0, 0);
-	else if (isHover2) app->render->DrawTexture(char2, 0, 0);
-	else if (isHover3) app->render->DrawTexture(char3, 0, 0);
-	else if (isHover4) app->render->DrawTexture(char4, 0, 0);
-
-	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && currentSelection > 0)
+	{
+		currentSelection--;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && currentSelection < 4)
+	{
+		currentSelection++;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 	{
 		app->fade->Fade(this, (Module*)app->sceneVillage, 60.0f);
 	}
+
+	if (currentSelection == 0) app->render->DrawTexture(char1, 0, 0);
+	if (currentSelection == 1) app->render->DrawTexture(char2, 0, 0);
+	if (currentSelection == 2) app->render->DrawTexture(char3, 0, 0);
+	if (currentSelection == 3) app->render->DrawTexture(char4, 0, 0);
 	
 	return true;
-}
-
-bool SceneSelection::IsMouseOverRect(int mouseX, int mouseY, SDL_Rect rect) {
-	return mouseX >= rect.x && mouseX <= rect.x + rect.w &&
-		mouseY >= rect.y && mouseY <= rect.y + rect.h;
 }
 
 bool SceneSelection::CleanUp()
