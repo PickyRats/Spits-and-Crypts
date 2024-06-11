@@ -351,13 +351,13 @@ void DialogTrigger::GiveMission(int idMission)
 		}
 		break;
 	case 7:
-    app->sceneShop->mercante->currentAnim = &app->sceneShop->mercante->interactAnim;
+		app->sceneShop->mercante->currentAnim = &app->sceneShop->mercante->interactAnim;
 		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoMercante;
 		printf("  mi humilde tienda \n");
 		app->hud->shop = true;
 		break;
 	case 8:
-    app->sceneOasisFaraon->tabernero->currentAnim = &app->sceneOasisFaraon->tabernero->interactAnim;
+		app->sceneOasisFaraon->tabernero->currentAnim = &app->sceneOasisFaraon->tabernero->interactAnim;
 		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoTabernero;
 		printf(" Soy el tabernero\n");
 		if (!app->hud->mission2Complete)
@@ -366,7 +366,7 @@ void DialogTrigger::GiveMission(int idMission)
 		}
 		break;
 	case 9:
-    app->sceneFloor1->paalaya->currentAnim = &app->sceneFloor1->paalaya->interactAnim;
+		app->sceneFloor1->paalaya->currentAnim = &app->sceneFloor1->paalaya->interactAnim;
 		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoPalaya;
 		printf(" Que haces pidiendome whisky con cereales \n");
 		break;
