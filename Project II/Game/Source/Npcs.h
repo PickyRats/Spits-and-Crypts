@@ -44,7 +44,8 @@ public:
 
 	Animation* currentAnim;
 	Animation idleAnim;
-
+	Animation interactAnim;
+	
 	float dt;
 
 

@@ -45,8 +45,8 @@ bool SceneFloor1::Awake(pugi::xml_node& config)
 
 	for (pugi::xml_node itemNode = config.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
 	{
-		Npcs* npc = (Npcs*)app->entityManager->CreateEntity(EntityType::NPCS);
-		npc->parameters = itemNode;
+		paalaya = (Npcs*)app->entityManager->CreateEntity(EntityType::NPCS);
+		paalaya->parameters = itemNode;
 	}
 	for (pugi::xml_node itemNode = config.child("Piece"); itemNode; itemNode = itemNode.next_sibling("Piece"))
 	{

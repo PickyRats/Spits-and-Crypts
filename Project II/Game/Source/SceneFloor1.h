@@ -66,7 +66,7 @@ public:
 	int levelHeight = 37 * 64;
 
 	bool combatFinished = false;
-
+	Npcs* paalaya;
 
 private:
 	SDL_Texture* backgroundTexture;

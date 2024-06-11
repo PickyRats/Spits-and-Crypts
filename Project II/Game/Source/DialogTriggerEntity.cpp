@@ -18,6 +18,7 @@
 #include "FadeToBlack.h"
 #include "SceneChoza.h"
 #include "Npcs.h"
+#include "Animation.h"
 
 #include <thread>
 #include <chrono>
@@ -245,52 +246,55 @@ void DialogTrigger::GiveMission(int idMission)
 	{
 	case 1:
 
-		printf(" La abuela  \n");
+		/*printf(" La abuela  \n");*/
 		app->hud->mission10Active = true;
 		break;
 	case 2:
-		printf("  la nieta  \n");
+	/*	printf("  la nieta  \n");*/
 		app->hud->mission11Active = false;
 		app->hud->mission1Complete = true;
 		app->fade->Fade((Module*)app->sceneChoza, (Module*)app->sceneVillage, 60.0f);
 		break;
 	case 3:
-		printf(" Soy Maat \n");
+		/*printf(" Soy Maat \n");*/
 		if (app->hud->classid == 2)
 		{
 			app->hud->abilityTree = true;
 		}
 		break;
 	case 4:
-		printf(" Soy Toth  \n");
+		/*printf(" Soy Toth  \n");*/
 		if (app->hud->classid == 1)
 		{
 			app->hud->abilityTree = true;
 		}
 		break;
 	case 5:
-		printf(" Soy Isis  \n");
+		/*printf(" Soy Isis  \n");*/
 		if (app->hud->classid==3)
 		{
 			app->hud->abilityTree = true;
 		}
 		break;
 	case 6:
-		printf(" Soy Horrus  \n");
+		/*printf(" Soy Horrus  \n");*/
 		if (app->hud->classid==4)
 		{
 			app->hud->abilityTree = true;
 		}
 		break;
 	case 7:
-		printf("  mi humilde tienda \n");
+		app->sceneShop->mercante->currentAnim = &app->sceneShop->mercante->interactAnim;
+		/*printf("  mi humilde tienda \n");*/
 		app->hud->shop = true;
 		break;
 	case 8:
-		printf(" Soy el tabernero\n");
+		app->sceneOasisFaraon->tabernero->currentAnim = &app->sceneOasisFaraon->tabernero->interactAnim;
+		/*printf(" Soy el tabernero\n");*/
 		break;
 	case 9:
-		printf(" Que haces pidiendome wishky con cereales \n");
+		app->sceneFloor1->paalaya->currentAnim = &app->sceneFloor1->paalaya->interactAnim;
+		/*printf(" Que haces pidiendome wishky con cereales \n");*/
 		break;
 	default:
 		break;

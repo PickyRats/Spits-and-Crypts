@@ -143,10 +143,10 @@
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 		
 		<!-- Tabernero  -->
-		<npc x="400" y="550" texturepath="Assets/Textures/Npcs/TaberneroSpriteSheet.png" id="8" scene="4" />
+		<npc x="900" y="510" texturepath="Assets/Textures/Npcs/TaberneroSpriteSheet.png" id="8" scene="4" />
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="440" y="640"  name="Tabernero" repeat="true" scene="4" id="8" audio_1="Assets/Audio/Fx/anubish/voz_anubish_1.wav" audio_2="Assets/Audio/Fx/anubish/voz_anubish_2.wav" audio_3="Assets/Audio/Fx/anubish/voz_anubish_3.wav">
+		<dialogTrigger x="940" y="550"  name="Tabernero" repeat="true" scene="4" id="8" audio_1="Assets/Audio/Fx/anubish/voz_anubish_1.wav" audio_2="Assets/Audio/Fx/anubish/voz_anubish_2.wav" audio_3="Assets/Audio/Fx/anubish/voz_anubish_3.wav">
 			<sentences>
 				<sentence text="Bienvenido, vendemos todo tipo de productos"/>
 				<sentence text="Desde Arena del desierto hasta ratas disecadas"/>
@@ -244,11 +244,11 @@
 		<floor1background texturepath="Assets/Textures/Screens/floor1background.png"/>
 
 		<!-- Paalaya -->
-		<npc x="600" y="2004" texturepath="Assets/Textures/Npcs/PaalayaSpriteSheet.png" id="1" scene="5"/>
+		<npc x="650" y="2112" texturepath="Assets/Textures/Npcs/PaalayaSpriteSheet.png" id="1" scene="5"/>
 
 
 		<!-- Dialogo Talia -->
-		<dialogTrigger x="670" y="585"  name="Paayla" repeat="true" scene="5" id="9" audio_1="Assets/Audio/Fx/paayla/voz_paayla_1.wav" audio_2="Assets/Audio/Fx/paayla/voz_paayla_2.wav" audio_3="Assets/Audio/Fx/paayla/voz_paayla_3.wav">
+		<dialogTrigger x="670" y="2170"  name="Paayla" repeat="true" scene="5" id="9" audio_1="Assets/Audio/Fx/paayla/voz_paayla_1.wav" audio_2="Assets/Audio/Fx/paayla/voz_paayla_2.wav" audio_3="Assets/Audio/Fx/paayla/voz_paayla_3.wav">
 			<sentences>
 				<sentence text="Hola, veo que estas algo malherido."/>
 				<sentence text="Yo me encargaré de tus heridas, no te preocupes."/>
@@ -1112,7 +1112,7 @@
 				<animation x="357" y="0" w="51" h="128"/>
 			</idleAnim>
 			
-			<interactAnim loop ="true" speed="0.4f">
+			<interactAnim loop ="false" speed="0.4f">
 				<animation x="0" y="128" w="51" h="128"/>
 				
 				<animation x="51" y="128" w="51" h="128"/>
@@ -1198,7 +1198,7 @@
 				<animation x="342" y="0" w="57" h="128"/>
 			</idleAnim>
 			
-			<interactAnim loop ="true" speed="0.4f">
+			<interactAnim loop ="false" speed="0.4f">
 				<animation x="0" y="128" w="57" h="128"/>
 				<animation x="0" y="128" w="57" h="128"/>
 				<animation x="0" y="128" w="57" h="128"/>
@@ -1258,7 +1258,7 @@
 				<animation x="312" y="0" w="52" h="112"/>			
 			</idleAnim>
 			
-			<interactAnim loop ="true" speed="0.4f">
+			<interactAnim loop ="false" speed="0.4f">
 				<animation x="0" y="112" w="52" h="112"/>
 				<animation x="0" y="112" w="52" h="112"/>
 				<animation x="0" y="112" w="52" h="112"/>

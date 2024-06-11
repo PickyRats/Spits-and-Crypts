@@ -7,6 +7,7 @@
 #include "GuiControl.h"
 #include "GuiControlButton.h"
 #include <vector>
+#include "Npcs.h"
 
 struct SDL_Texture;
 
@@ -58,7 +59,7 @@ public:
 	bool notUseChechPoint = false;
 	bool win = false;
 	int sceneNum = 3;
-
+	Npcs* mercante;
 private:
 	SDL_Texture* shop;
 	SDL_Rect bg;
