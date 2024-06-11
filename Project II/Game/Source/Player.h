@@ -115,6 +115,11 @@ public:
 	bool climbingSoundPlaying = false;
 	bool doorChoza = false;
 
+	bool wasDownPressed = false;
+	bool wasLeftPressed = false;
+	bool wasRightPressed = false;
+	bool wasUpPressed = false;
+
 	b2Transform initialTransform;
 
 	b2Vec2 vel;
