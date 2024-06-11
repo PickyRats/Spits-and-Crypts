@@ -42,6 +42,7 @@ bool DialogTrigger::Start() {
 	texturePath = parameters.attribute("texturepath").as_string();
 	faceTexturePath = parameters.attribute("facetexturepath").as_string("");
 	repeatDialog = parameters.attribute("repeat").as_bool(false);
+	DialogMission = parameters.attribute("mission").as_bool(false);
 	dialogScene = parameters.attribute("scene").as_int();
 	id = parameters.attribute("id").as_int();
 
@@ -59,6 +60,13 @@ bool DialogTrigger::Start() {
 		for (pugi::xml_node itemNode = parameters.child("repeat_sentences").child("sentence"); itemNode; itemNode = itemNode.next_sibling("sentence"))
 		{
 			dialoguesRepeat.Add(app->dialogManager->CreateDialog(itemNode, parameters.attribute("name").as_string(), faceTexturePath, fontTarget.c_str()));
+		}
+	}
+
+	if (DialogMission) {
+		for (pugi::xml_node itemNode = parameters.child("fraseMision").child("sentence"); itemNode; itemNode = itemNode.next_sibling("sentence"))
+		{
+			dialoguesMission.Add(app->dialogManager->CreateDialog(itemNode, parameters.attribute("name").as_string(), faceTexturePath, fontTarget.c_str()));
 		}
 	}
 	
@@ -104,6 +112,11 @@ bool DialogTrigger::Update(float dt)
     physCreated = false;
 	}
 
+	if (app->hud->mission11Active || app->hud->mission32Active)
+	{
+		DialogMission = false;
+	}
+
 	return true;
 }
 
@@ -138,13 +151,34 @@ bool DialogTrigger::CleanUp()
 
 	dialoguesRepeat.Clear();
 
+	pDialog = nullptr;
+
+	for (item = dialoguesMission.start; item != NULL; item = item->next)
+	{
+		pDialog = item->data;
+		pDialog->CleanUp();
+		SDL_DestroyTexture(pDialog->face_tex);
+	}
+
+	dialoguesMission.Clear();
+
 	return true;
 }
 
 void DialogTrigger::PlayDialog()
 {
-	//Play el dialogo normal
-	if ((played && !repeatDialog) || !played) {
+	if (DialogMission)
+	{
+		ListItem<Dialog*>* item;
+		Dialog* pDialog = nullptr;
+		app->audio->PlayFx(dialogs[rand() % 2]);;
+		for (item = dialoguesMission.start; item != NULL; item = item->next)
+		{
+			pDialog = item->data;
+			app->dialogManager->AddDialog(pDialog);
+		}
+		//DialogMission = false;
+	}else if ((played && !repeatDialog && !DialogMission) || !played) {
 		ListItem<Dialog*>* item;
 		Dialog* pDialog = nullptr;
 		app->audio->PlayFx(dialogs[rand() % 2]);
@@ -251,7 +285,6 @@ void DialogTrigger::GiveMission(int idMission)
 	switch (idMission)
 	{
 	case 1:
-
 		printf(" La abuela  \n");
 		app->hud->mission10Active = true;
 		break;
@@ -269,22 +302,45 @@ void DialogTrigger::GiveMission(int idMission)
 		}
 		break;
 	case 4:
-		printf(" Soy Toth  \n");
-		if (app->hud->classid == 1)
+		
+		if (app->hud->mission21Active)
 		{
-			app->hud->abilityTree = true;
+			app->hud->mission21Active = false;
+			app->hud->mission2Complete = true;
+			//darMonedas
+			app->hud->mission30Active = true; 
+			PlayDialog();
+		}
+		else
+		{
+			if (app->hud->classid == 1 && app->hud->mission3Complete)
+			{
+				app->hud->abilityTree = true;
+			}
+			else if (!app->hud->mission3Complete && !app->hud->mission32Active && app->hud->mission2Complete)
+			{
+				app->hud->mission30Active = true;
+				app->hud->mission20Active = false; // Asegúrate de que la misión 2 se desactive
+				app->hud->mission21Active = false;
+			}
+			else if (!app->hud->mission3Complete && app->hud->mission32Active)
+			{
+				DialogMission = false;
+				app->hud->mission3Complete = true;
+				// Dar monedas
+			}
 		}
 		break;
 	case 5:
 		printf(" Soy Isis  \n");
-		if (app->hud->classid==3)
+		if (app->hud->classid == 3)
 		{
 			app->hud->abilityTree = true;
 		}
 		break;
 	case 6:
 		printf(" Soy Horrus  \n");
-		if (app->hud->classid==4)
+		if (app->hud->classid == 4)
 		{
 			app->hud->abilityTree = true;
 		}
@@ -295,9 +351,13 @@ void DialogTrigger::GiveMission(int idMission)
 		break;
 	case 8:
 		printf(" Soy el tabernero\n");
+		if (!app->hud->mission2Complete)
+		{
+			app->hud->mission20Active = true;
+		}
 		break;
 	case 9:
-		printf(" Que haces pidiendome wishky con cereales \n");
+		printf(" Que haces pidiendome whisky con cereales \n");
 		break;
 	default:
 		break;
