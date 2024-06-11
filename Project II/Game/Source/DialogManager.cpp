@@ -28,8 +28,6 @@ bool DialogManager::Awake(pugi::xml_node& config)
 
 	configNodeDialog = config;
 
-	background_tex_path = config.child("textures").child("background_dialog").attribute("texturepath").as_string();
-
 
 	return ret;
 
@@ -49,7 +47,7 @@ bool DialogManager::Start() {
 	indexText = 1;
 
 
-	background_tex = app->tex->Load(background_tex_path.c_str());
+	background_tex = app->tex->Load(configNodeDialog.child("background_dialog").attribute("texturepath").as_string());
 	background_mission = app->tex->Load(background_mission_path.c_str());
 
 	background_tex_logoMercante = app->tex->Load(configNodeDialog.child("background_dialoglogoMercante").attribute("texturepath").as_string());
