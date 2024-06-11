@@ -74,7 +74,7 @@ bool SceneOasisFaraon::Start()
 	textPosY = (float)windowH / 2 - (float)texH / 2;
 
 	app->render->camera.x = 0;
-	app->render->camera.y = 0;
+	app->render->camera.y = -64;
 
 	//carga assets
 	taberna = app->tex->Load("Assets/Textures/Screens/Taberna_M.png");
@@ -98,12 +98,12 @@ bool SceneOasisFaraon::Update(float dt)
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;
 
-	SetCameraPosition(0, 0);
+	/*SetCameraPosition(0, 0);
 
 	ClampCamera();
 
 	app->render->camera.x += (-cameraX - app->render->camera.x) * cameraSmoothingFactor;
-	app->render->camera.y += (-cameraY - app->render->camera.y) * cameraSmoothingFactor;
+	app->render->camera.y += (-cameraY - app->render->camera.y) * cameraSmoothingFactor;*/
 
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();

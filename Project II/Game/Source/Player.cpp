@@ -264,18 +264,6 @@ void Player::EnterDoor()
 			app->hud->mission21Active = true;
 		}
 	}
-	else if (doorFloor1)
-	{
-		EnteringDoor();
-		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneFloor1, 60.0f);
-		doorFloor1 = false;
-		if (app->hud->mission30Active)
-		{
-			app->hud->mission31Active = true;
-			app->hud->mission30Active = false;
-		}
-		
-	}
 	else if (enterCombat)
 	{
 		EnteringDoor();
@@ -518,6 +506,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::DOOR_FLOOR_1:
 		doorFloor1 = true;
+		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneFloor1, 60.0f);
+		doorFloor1 = false;
+		if (app->hud->mission30Active)
+		{
+			app->hud->mission31Active = true;
+			app->hud->mission30Active = false;
+		}
 		break;
 	case ColliderType::TRAP:
 		isDead = true;
