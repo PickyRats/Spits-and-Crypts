@@ -46,6 +46,12 @@ public:
 	uint rotateRockFx;
 	uint placeRockFx;
 
+	bool wasL1Pressed = false;
+	bool wasR1Pressed = false;
+	bool wasL2Pressed = false;
+	bool wasR2Pressed = false;
+
+
 	bool rotated = false;
 	bool placed = false;
 };

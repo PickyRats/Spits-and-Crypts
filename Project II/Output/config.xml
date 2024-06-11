@@ -2069,6 +2069,17 @@
 				<animation x="130" y="0" w="129" h="191"/>
 			</abierta>
 		</puerta>
+		<nieta>
+			<idleAnim>
+				<animation x="0" y="0" w="63" h="127"/>
+			</idleAnim>
+		</nieta>
+		<abuela>
+			<idleAnim>
+				<animation x="0" y="0" w="98" h="128"/>
+			</idleAnim>
+		</abuela>
+		
 	</animations>
 	
 </config>
