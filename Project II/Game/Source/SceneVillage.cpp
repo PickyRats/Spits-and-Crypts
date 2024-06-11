@@ -146,7 +146,7 @@ bool SceneVillage::PostUpdate()
 	GamePad& pad = app->input->pads[0];
 	bool ret = true;
 
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.start == KEY_DOWN && !wasStartPressed) {
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || (pad.start == KEY_DOWN && !wasStartPressed)) {
 		pause = !pause;
 		app->hud->onSettings = false;
 		if (!pause)

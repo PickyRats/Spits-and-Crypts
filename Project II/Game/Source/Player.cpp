@@ -126,7 +126,7 @@ bool Player::Update(float dt)
 				}
 
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE
-					&& (pad.l_x < 0.2 && pad.l_x > -0.2))
+					&& (pad.l_x < 0.2 && pad.l_x > -0.2)&& (pad.l_y < 0.2 && pad.l_y > -0.2))
 				{
 					if (!isJumping && !isClimbing && !isEnteringDoor) currentAnim = &idleAnim;
 					isWalking = false;
@@ -152,9 +152,26 @@ bool Player::Update(float dt)
 							}
 							collisionActivated = false;
 						}
+						wasUpPressed = true;
 					}
-          
-					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+					if (pad.l_y <= -0.2)
+					{
+						UpMovement();
+						isClimbing = true;
+						pbody->body->SetGravityScale(0.0f);
+						if (collisionActivated)
+						{
+							for (int i = 0; i < app->map->tempColliders.Count(); i++)
+							{
+								PhysBody* temp = app->map->tempColliders.At(i)->data;
+								temp->body->SetActive(false);
+							}
+							collisionActivated = false;
+						}
+						wasUpPressed = true;
+					}
+
+					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT )
 					{
 						DownMovement();
 						isClimbing = true;
@@ -170,8 +187,26 @@ bool Player::Update(float dt)
 						}
 						
 					}
+					if (pad.l_y >= 0.2)
+					{
+						DownMovement();
+						isClimbing = true;
+						pbody->body->SetGravityScale(0.0f);
+						if (collisionActivated)
+						{
+							for (int i = 0; i < app->map->tempColliders.Count(); i++)
+							{
+								PhysBody* temp = app->map->tempColliders.At(i)->data;
+								temp->body->SetActive(false);
+							}
+							collisionActivated = false;
+						}
+
+					}
 					
-					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE)
+				
+					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE 
+						&& (pad.l_y < 0.2 && pad.l_y > -0.2))
 					{
 						vel.y = 0;
 					}

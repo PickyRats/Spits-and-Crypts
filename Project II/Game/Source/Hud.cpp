@@ -282,14 +282,14 @@ bool Hud::Update(float dt)
 {
 	GamePad& pad = app->input->pads[0];
 	//Ability Tree
-	if (app->sceneTemple->active && app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN || pad.back == KEY_DOWN && !wasSelectPressed)
+	if (app->sceneTemple->active && (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN || (pad.b == KEY_DOWN && !wasBPressed)))
 	{
 		abilityTree = !abilityTree;
-		wasSelectPressed = true;
+		wasBPressed = true;
 	}
-	else if (pad.back != KEY_DOWN)
+	else if (pad.b != KEY_DOWN)
 	{
-		wasSelectPressed = false;
+		wasBPressed = false;
 	}
 	if (abilityTree)
 	{
@@ -332,7 +332,7 @@ bool Hud::Update(float dt)
 			//Render pause
 			app->render->DrawTexture(pause, 0, 0, NULL, SDL_FLIP_NONE, 0);
 
-			if (pad.down == KEY_DOWN && !wasDownPressed && currentId != 8 && currentId != 11 && currentId != 12)
+			if ((pad.down == KEY_DOWN && !wasDownPressed) && currentId != 8 && currentId != 11 && currentId != 12)
 			{
 				app->sceneMenu->currentId++;
 				wasDownPressed = true;
@@ -341,7 +341,7 @@ bool Hud::Update(float dt)
 			{
 				wasDownPressed = false;
 			}
-			if (pad.up == KEY_DOWN && !wasUpPressed && currentId != 6 && currentId != 9 && currentId != 12)
+			if ((pad.up == KEY_DOWN && !wasUpPressed) && currentId != 6 && currentId != 9 && currentId != 12)
 			{
 				app->sceneMenu->currentId--;
 				wasUpPressed = true;
@@ -475,7 +475,7 @@ bool Hud::Update(float dt)
 		//Settings menu on pause
 		else if (onSettings)
 		{
-			if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || pad.r1 == KEY_DOWN && !wasR1Pressed)
+			if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || (pad.r1 == KEY_DOWN && !wasR1Pressed))
 			{
 				if (app->sceneMenu->currentId >= 9 && app->sceneMenu->currentId < 12)
 				{
@@ -491,7 +491,7 @@ bool Hud::Update(float dt)
 			{
 				wasR1Pressed = false;
 			}
-			if ((app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN || pad.l1 == KEY_DOWN && !wasL1Pressed))
+			if ((app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN || (pad.l1 == KEY_DOWN && !wasL1Pressed)))
 			{
 				if (app->sceneMenu->currentId >= 12)
 				{
@@ -546,7 +546,7 @@ bool Hud::Update(float dt)
 			}
 			else if (onSettingsOptions)
 			{
-				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.down == KEY_DOWN && !wasDownPressed && app->sceneMenu->currentId != 8)
+				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || (pad.down == KEY_DOWN && !wasDownPressed) && app->sceneMenu->currentId != 8)
 				{
 					app->sceneMenu->currentId++;
 					app->sceneMenu->fxHoverPlayed = false;
@@ -557,7 +557,7 @@ bool Hud::Update(float dt)
 				{
 					wasDownPressed = false;
 				}
-				else if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.up == KEY_DOWN && !wasUpPressed && app->sceneMenu->currentId != 6)
+				else if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || (pad.up == KEY_DOWN && !wasUpPressed) && app->sceneMenu->currentId != 6)
 				{
 					app->sceneMenu->currentId--;
 					app->sceneMenu->fxHoverPlayed = false;
@@ -938,11 +938,22 @@ void Hud::Inventory() {
 			app->render->DrawTexture(items[inventorySlots[itemId].itemId].ObjectText, 900, 300, NULL, SDL_FLIP_NONE, 0);
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && itemId > 0) {
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN||(pad.left==KEY_DOWN && !wasLeftPressed) && itemId > 0) {
 			itemId--;
+			wasLeftPressed = true;
 		}
-		else if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && itemId < 2) {
+		else if (pad.left != KEY_DOWN)
+		{
+			wasLeftPressed = false;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || (pad.right == KEY_DOWN && !wasRightPressed) && itemId < 2) {
 			itemId++;
+			wasRightPressed = true;
+		}
+		else if (pad.right != KEY_DOWN)
+		{
+			wasRightPressed = false;
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
@@ -956,8 +967,13 @@ void Hud::Inventory() {
 
 void Hud::Shop() {	
   GamePad& pad = app->input->pads[0];
-	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN||(pad.b==KEY_DOWN&&!wasBPressed)) {
 		shop = false;
+		wasBPressed = true;
+	}
+	else if (pad.b != KEY_DOWN)
+	{
+		wasBPressed = false;
 	}
 	if (shop) {
 		app->render->DrawTexture(shopTexture, 0, 0, NULL, SDL_FLIP_NONE, 0);
@@ -999,7 +1015,7 @@ void Hud::Shop() {
 			wasRightPressed = false;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN && !shopSlots[itemId].isBought ) {
+		if ((app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || (pad.a == KEY_DOWN && !wasAPressed)) && !shopSlots[itemId].isBought ) {
 			for (int i = 0; i < 3; i++) {
 				if (inventorySlots[i].isEmpty && (coin >= items[itemId].price))	{
 					inventorySlots[i].isEmpty = false;
@@ -1012,6 +1028,11 @@ void Hud::Shop() {
 					break;
 				}
 			}
+			wasAPressed = true;
+		}
+		else if (pad.a != KEY_DOWN )
+		{
+			wasAPressed = false;
 		}
 	}
 }
@@ -1019,10 +1040,14 @@ void Hud::Shop() {
 
 void Hud::SkillTree() {
 
+	GamePad& pad = app->input->pads[0];
+
+
 	if (app->sceneTemple->active && app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
 		abilityTree = false;
 	}
+
 	// Dibuja el fondo del �rbol de habilidades
 
 	app->render->DrawTexture(skillTree, 0, 0, NULL, SDL_FLIP_NONE, 0);
@@ -1052,13 +1077,17 @@ void Hud::SkillTree() {
 		auto& node = skillTreenode[i];
 
 		if (node.selected) {
-			if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && (node.unlockRequirement == -1 || !skillTreenode[node.unlockRequirement].locked)) {
+			if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN ||pad.a==KEY_DOWN && !wasAPressed && (node.unlockRequirement == -1 || !skillTreenode[node.unlockRequirement].locked)) {
 				app->audio->PlayFx(app->sceneMenu->FxButton1);
 				node.locked = false;
+				wasAPressed = true;
 				// Aplica efectos seg�n el tipo de habilidad desbloqueada
 				ApplySkillEffects(i);
 			}
-
+			else if (pad.a != KEY_DOWN)
+			{
+				wasAPressed = false;
+			}
 			// Maneja el movimiento de la selecci�n
 			HandleSelection(i);
 		}
@@ -1095,25 +1124,37 @@ void Hud::ApplySkillEffects(int skillIndex) {
 }
 
 void Hud::HandleSelection(int currentIndex) {
-	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
+	GamePad& pad = app->input->pads[0];
+	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN|| pad.right == KEY_DOWN && !wasRightPressed) {
 		if (currentIndex == 0) {
 			skillTreenode[1].selected = true;
 			skillTreenode[currentIndex].selected = false;
 			Description = DescLife;
+			wasRightPressed = true;
 		}
 	}
-	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {
+	else if (pad.right != KEY_DOWN)
+	{
+		wasRightPressed = false;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || pad.left == KEY_DOWN && !wasLeftPressed) {
 		if (currentIndex == 0) {
 			skillTreenode[3].selected = true;
 			skillTreenode[currentIndex].selected = false;
 			Description = DescAtackid;
+			wasLeftPressed = true;
 		}
 	}
-	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
+	else if (pad.left != KEY_DOWN)
+	{
+		wasLeftPressed = false;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.up == KEY_DOWN && !wasUpPressed) {
 		if (currentIndex == 2) {
 			skillTreenode[1].selected = true;
 			skillTreenode[currentIndex].selected = false;
 			Description = DescLife;
+			
 		}
 		else if (currentIndex == 4) {
 			skillTreenode[3].selected = true;
@@ -1125,8 +1166,13 @@ void Hud::HandleSelection(int currentIndex) {
 			skillTreenode[currentIndex].selected = false;
 			Description = DescTree;
 		}
+		wasUpPressed = true;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
+	else if (pad.up != KEY_DOWN)
+	{
+		wasUpPressed = false;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.down == KEY_DOWN && !wasDownPressed) {
 		if (currentIndex == 1) {
 			skillTreenode[2].selected = true;
 			skillTreenode[currentIndex].selected = false;
@@ -1137,6 +1183,12 @@ void Hud::HandleSelection(int currentIndex) {
 			skillTreenode[currentIndex].selected = false;
 			Description = DescAtackid2;
 		}
+		wasDownPressed = true;
+	}
+
+	else if (pad.down != KEY_DOWN)
+	{
+		wasDownPressed = false;
 	}
 }
 
