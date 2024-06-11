@@ -1278,7 +1278,7 @@ void Hud::SkillTreeclass(int classid) {
 		DescAtackid = DescAtack_1;
 		DescAtackid2 = DescAtack_2;
 		break;
-	case 2:
+	case 0:
 		Bloqueado1_1 = SkillTreeAtack_3_1;
 		Bloqueado1_2 = SkillTreeAtack_3_2;
 		Bloqueado2_1 = SkillTreeAtack_4_1;
@@ -1294,7 +1294,7 @@ void Hud::SkillTreeclass(int classid) {
 		Bloqueado2_1 = SkillTreeAtack_6_1;
 		Bloqueado2_2 = SkillTreeAtack_6_2;
 		break;
-	case 4:
+	case 2:
 		DescAtackid = DescAtack_7;
 		DescAtackid2 = DescAtack_8;
 		Bloqueado1_1 = SkillTreeAtack_7_1;

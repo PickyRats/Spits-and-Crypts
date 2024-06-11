@@ -13,6 +13,7 @@
 #include "Physics.h"
 #include "SceneShop.h"
 #include "SceneOasisFaraon.h"
+#include "SceneSelection.h"
 #include "SceneTemple.h"
 #include "SceneFloor1.h"
 #include "FadeToBlack.h"
@@ -299,7 +300,7 @@ void DialogTrigger::GiveMission(int idMission)
 	case 3:
 		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoMaat;
 		printf(" Soy Maat \n");
-		if (app->hud->classid == 2)
+		if (app->sceneSelection->currentSelection == 0)
 		{
 			app->hud->abilityTree = true;
 		}
@@ -316,7 +317,7 @@ void DialogTrigger::GiveMission(int idMission)
 		}
 		else
 		{
-			if (app->hud->classid == 1 && app->hud->mission3Complete)
+			if (app->sceneSelection->currentSelection == 1 && app->hud->mission3Complete)
 			{
 				app->hud->abilityTree = true;
 			}
@@ -337,7 +338,7 @@ void DialogTrigger::GiveMission(int idMission)
 	case 5:
 		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoIsis;
 		printf(" Soy Isis  \n");
-		if (app->hud->classid == 3)
+		if (app->sceneSelection->currentSelection == 3)
 		{
 			app->hud->abilityTree = true;
 		}
@@ -345,7 +346,7 @@ void DialogTrigger::GiveMission(int idMission)
 	case 6:
 		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoHorus;
 		printf(" Soy Horrus  \n");
-		if (app->hud->classid == 4)
+		if (app->sceneSelection->currentSelection == 2)
 		{
 			app->hud->abilityTree = true;
 		}
