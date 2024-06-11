@@ -89,7 +89,10 @@ bool SceneFloor1::Start()
 	app->hud->Enable();
   
   app->puzzle->Enable();
-	if(!combatFinished)app->sceneFloor1->wall = app->physics->CreateRectangle(37 * 64, 34 * 64, 10, 2 * 64, STATIC);
+	if(!combatFinished)wall = app->physics->CreateRectangle(37 * 64, 34 * 64, 10, 2 * 64, STATIC);
+
+	wall2 = app->physics->CreateRectangle(109*64, 28*64, 10, 3 * 64, STATIC);
+	wall2->ctype = ColliderType::WALL;
 
 	//Load the player in the map
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(playerStartPosition.x), PIXEL_TO_METERS(playerStartPosition.y)), 0);
@@ -154,7 +157,10 @@ bool SceneFloor1::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
-	
+	if (app->sceneFloor1->puertas[1]->puzle1Completed && canDelete)
+	{
+		DeleteWall();
+	}
 	return true;
 }
 
@@ -206,6 +212,12 @@ void SceneFloor1::ClampCamera()
 	
 	
 
+}
+
+void SceneFloor1::DeleteWall()
+{
+	wall2->body->SetActive(false);
+	canDelete = false;
 }
 
 bool SceneFloor1::LoadState(pugi::xml_node node)

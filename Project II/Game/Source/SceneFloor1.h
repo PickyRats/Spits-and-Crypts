@@ -49,14 +49,18 @@ public:
 
 	void ClampCamera();
 
+	void DeleteWall();
+
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
 	GuiControlButton* gcButtom;
 	PhysBody* wall;
+	PhysBody* wall2;
 	bool pause = false;
 	bool isTorchActive = false;
 	bool checkPoint = false;
+	bool canDelete = true;
 	iPoint playerStartPosition = { 128,35*64 };
 	bool notUseChechPoint = false;
 	bool win = false;
@@ -68,7 +72,7 @@ public:
 
 	bool combatFinished = false;
 	Npcs* paalaya;
-	Puertas* puertas[3];
+	Puertas* puertas[2];
 
 private:
 	SDL_Texture* backgroundTexture;

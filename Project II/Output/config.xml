@@ -243,9 +243,9 @@
 		
 		<floor1background texturepath="Assets/Textures/Screens/floor1background.png"/>
 		
-		<puerta x="64" y="2112" texturepath="Assets/Maps/puerta_lateral.png" id="1"/>
+		
 		<puerta x="2304" y="2112" texturepath="Assets/Maps/puerta_lateral.png" id="2"/>
-		<puerta x="6974" y="1792" texturepath="Assets/Maps/puerta_lateral.png" id="3"/>
+		<puerta x="6964" y="1792" texturepath="Assets/Maps/puerta_lateral.png" id="3"/>
 		<puerta x="10880" y="1216" texturepath="Assets/Maps/puerta_lateral.png" id="4"/>
 		<!-- Paalaya -->
 		<npc x="650" y="2112" texturepath="Assets/Textures/Npcs/PaalayaSpriteSheet.png" id="1" scene="5"/>
