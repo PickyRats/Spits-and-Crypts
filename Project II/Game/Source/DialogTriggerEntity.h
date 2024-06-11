@@ -35,10 +35,10 @@ public:
 
 	void GiveMission(int idMission);
 
+	bool DialogMission = false;
+
 
 private:
-
-
 
 	//En caso de querer añadirle una textura a la entidad
 	SDL_Texture* texture;
@@ -66,10 +66,15 @@ private:
 	bool physCreated = false;
 	int dialogScene;
 	int id;
-
+	bool wasXPressed = false;
 	uint dialogs[3];
 	
 	//Lista de dialogos a repetir
 	List<Dialog*> dialoguesRepeat;
+
+	//Lista de dialogos de mision
+	List<Dialog*> dialoguesMission;
+
+	int npcid;
 
 };

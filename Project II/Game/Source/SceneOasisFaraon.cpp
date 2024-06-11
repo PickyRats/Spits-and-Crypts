@@ -9,7 +9,6 @@
 #include "FadeToBlack.h"
 #include "GuiManager.h"
 #include "ParticleManager.h"
-#include "Npcs.h"
 #include "Hud.h"
 
 #include "Defs.h"
@@ -36,8 +35,8 @@ bool SceneOasisFaraon::Awake(pugi::xml_node& config)
 
 	for (pugi::xml_node itemNode = config.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
 	{
-		Npcs* npc = (Npcs*)app->entityManager->CreateEntity(EntityType::NPCS);
-		npc->parameters = itemNode;
+		tabernero = (Npcs*)app->entityManager->CreateEntity(EntityType::NPCS);
+		tabernero->parameters = itemNode;
 	}
 
 	for (pugi::xml_node itemNode = config.child("dialogTrigger"); itemNode; itemNode = itemNode.next_sibling("dialogTrigger"))
@@ -77,7 +76,7 @@ bool SceneOasisFaraon::Start()
 	app->render->camera.y = 0;
 
 	//carga assets
-	taberna = app->tex->Load("Assets/Textures/Screens/taberna.png");
+	taberna = app->tex->Load("Assets/Textures/Screens/Taberna_M.png");
 
 	app->audio->PlayMusic(configNodeOasis.child("OasisMusic").attribute("path").as_string());
 
@@ -93,7 +92,7 @@ bool SceneOasisFaraon::PreUpdate()
 // Called each loop iteration
 bool SceneOasisFaraon::Update(float dt)
 {
-	app->render->DrawTexture(taberna, 100, 400, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(taberna, 0, -5, NULL, SDL_FLIP_NONE, 0);
 
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;

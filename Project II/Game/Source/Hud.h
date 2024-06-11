@@ -10,22 +10,43 @@
 #include "GuiControl.h"
 #include "Timer.h"
 
+#include <vector>
+
 struct SDL_Texture;
+
+struct DrawTileCall
+{
+	SDL_Texture* texture;
+	iPoint tilePosition;
+};
+
 struct Slot {
 	iPoint position = { 0, 0 };
 	SDL_Texture* texture = nullptr;
 	bool isEmpty = true;
 	bool isBought = false;
+	int itemId = -1;	
+	bool isEquiped = false;
+
 };
 
 struct Item {
-	const char* name = nullptr;
-	const char* description = nullptr;
 	int health = 0;
 	int attack = 0;
 	int price = 0;
-
+	bool isInInventary = false;
 	SDL_Texture* texture = nullptr;
+	SDL_Texture* ObjectText = nullptr;
+	SDL_Texture* ObjectTextShop = nullptr;
+};
+
+struct Skill {
+	SDL_Texture* texture;
+	SDL_Rect position;
+	bool locked;
+	bool selected;
+	int unlockRequirement; // ID de la habilidad que debe estar desbloqueada para desbloquear esta
+	int id; // ID de la clase a la que pertenece
 };
 
 class Hud : public Module
@@ -50,9 +71,20 @@ public:
 
 	void DrawTimer();
 
-	void Missions(int mission1);
-	void SkillTree();
 
+
+	void Missions(int mission1);
+	void UpdatePlayerStats(Item& item, bool equip);
+	void EquipItem(int itemId);
+
+	void SkillTreeclass(int classid);
+
+	void SkillTree();
+	void ApplySkillEffects(int skillIndex);
+	void HandleSelection(int currentIndex);
+
+	void DrawTile(SDL_Texture* texture, iPoint position);
+	void RenderStoredTiles();
 
 	bool playerDeadHud = false;
 	bool spacePressed = false;
@@ -65,14 +97,41 @@ public:
 	bool mission11Active = false;
 	bool mission1Complete = false;
 
+	bool mission20Active = false;
+	bool mission21Active = false;
+	bool mission2Complete = false;
+
+	bool mission30Active = false;
+	bool mission31Active = false;
+	bool mission32Active = false;
+	bool mission3Complete = false;
+
 	bool abilityTree = false;
 
-	Slot inventorySlots[3];
+	bool wasSelectPressed = false;
+	bool wasDownPressed = false;
+	bool wasLeftPressed = false;
+	bool wasRightPressed = false;
+	bool wasUpPressed = false;
+	bool wasR1Pressed = false;
+	bool wasL1Pressed = false;
+	bool wasYPressed = false;
+	bool wasAPressed = false;
+	bool wasBPressed = false;
+
+	Slot inventorySlots[4];
+
 	Item items[3];
+	int newItemId;
 
 	Slot shopSlots[3];
 	bool shop = false;
+	
+	int coin= 0;
+	char buffer[20];  // Suficientemente grande para almacenar el entero como cadena
 
+
+	int classid = 1;
 	
 private:
 
@@ -94,8 +153,16 @@ private:
 	SDL_Rect pointsRects[6] = { {0, 0, 82, 121}, {82, 0, 82, 121}, {164, 0, 82, 121}, {246, 0, 82, 121}, {328, 0, 82, 121}, {410, 0, 82, 121} };
 	SDL_Rect numerosRects[9] = { {0, 0, 37, 37}, {37, 0, 37, 37}, {74, 0, 37, 37}, {111, 0, 37, 37}, {148, 0, 37, 37}, {185, 0, 37, 37}, {222, 0, 37, 37}, {259, 0, 37, 37}, {296, 0, 37, 37} };
 
-
-
+	SDL_Texture* attack1;
+	SDL_Texture* attack2;
+	SDL_Texture* attack3;
+	SDL_Texture* attack4;
+	SDL_Texture* attack5;
+	SDL_Texture* ability1;
+	SDL_Texture* ability2;
+	SDL_Texture* ability3;
+	SDL_Texture* ability4;
+	SDL_Texture* ability5;
 
 	SDL_Texture* exitNormal;
 	SDL_Texture* exitHover;
@@ -176,13 +243,26 @@ private:
 	SDL_Texture* inventoryItem1;
 	SDL_Texture* inventoryItem2;
 	SDL_Texture* inventoryItem3;
+	SDL_Texture* ObjectText1;
+	SDL_Texture* ObjectText2;
+	SDL_Texture* ObjectText3;
+	
+	
+	SDL_Texture* ObjectText1Shop;
+	SDL_Texture* ObjectText2Shop;
+	SDL_Texture* ObjectText3Shop;
+
+
+	
 	bool inventory = false;
 
 	//Shop
 	int itemId = 0;
 	SDL_Texture* shopTexture;
-	SDL_Texture* emptyslotTexture;
 	SDL_Texture* selectorItemTexture;
+
+	SDL_Texture* Coin;
+
 
 
 	GuiControlButton* exitButton;
@@ -207,6 +287,13 @@ private:
 	SDL_Texture* mission1i0;
 	SDL_Texture* mission1i1;
 	SDL_Texture* mission1i2;
+
+	SDL_Texture* mission2i0;
+	SDL_Texture* mission2i1;
+
+	SDL_Texture* mission3i0;
+	SDL_Texture* mission3i1;
+	SDL_Texture* mission3i2;
 
 	//HabilityTree
 
@@ -239,10 +326,38 @@ private:
 	SDL_Texture* SkillTreeAtack_7_1;
 	SDL_Texture* SkillTreeAtack_7_2;
 	SDL_Texture* SkillTreeAtack_8_1;
-	SDL_Texture* SkillTreeAtack_8_2;
+	SDL_Texture* SkillTreeAtack_8_2;	
+	
+	SDL_Texture* Bloqueado1_1 = NULL;
+	SDL_Texture* Bloqueado1_2 = NULL;
+	SDL_Texture* Bloqueado2_1 = NULL;
+	SDL_Texture* Bloqueado2_2 = NULL;
+
+	SDL_Texture* Rama1_1 = NULL;
+	SDL_Texture* Rama1_2 = NULL;
+	SDL_Texture* Rama2_1 = NULL;
+	SDL_Texture* Rama2_2 = NULL;
+	SDL_Texture* Rama3_1 = NULL;
+	SDL_Texture* Rama3_2 = NULL;
+
+	SDL_Texture* Description;
+	SDL_Texture* DescAtackid = NULL;
+	SDL_Texture* DescAtackid2 = NULL;
+	SDL_Texture* DescTree;
+	SDL_Texture* DescLife;
+	SDL_Texture* DescSpeed;
+	SDL_Texture* DescAtack_1;
+	SDL_Texture* DescAtack_2;
+	SDL_Texture* DescAtack_3;
+	SDL_Texture* DescAtack_4;
+	SDL_Texture* DescAtack_5;
+	SDL_Texture* DescAtack_6;
+	SDL_Texture* DescAtack_7;
+	SDL_Texture* DescAtack_8;
 
 	SDL_Texture* Selection;
 
+	std::vector<Skill> skillTreenode;
 
 	//Talents
 	SDL_Texture* Talent1;
@@ -251,12 +366,7 @@ private:
 	SDL_Texture* Talent4;
 	SDL_Texture* Talent5;
 
-	SDL_Texture* Rama1_1 = NULL;
-	SDL_Texture* Rama1_2 = NULL;
-	SDL_Texture* Rama2_1 = NULL;
-	SDL_Texture* Rama2_2 = NULL;
-	SDL_Texture* Rama3_1 = NULL;
-	SDL_Texture* Rama3_2 = NULL;
+
 
 	//Talent 1
 	bool talent1selected = true;
@@ -281,6 +391,8 @@ private:
 	bool onSettingsAudio = true;
 	bool onSettingsOptions = false;
 	bool buttonsActivated = false;
+
+	std::vector<DrawTileCall> drawTileCalls;
 };
 
 #endif // __HUD_H__

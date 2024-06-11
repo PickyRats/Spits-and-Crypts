@@ -34,7 +34,7 @@ enum class ColliderType {
 	DOOR_ALDEA,
 	DOOR_FLOOR_1,
 	DOOR_CHOZA,
-	COMBAT,
+	COMBAT1,
 	WALL,
 	DOOR,
 	DIALOG_TRIGGER,
@@ -47,6 +47,8 @@ enum class ColliderType {
 	LIGHT1,
 	LIGHT2,
 	ROCK,
+	SENSOR_ROCK,
+	TEMP_PLATFORM,
 	UNKNOWN
 	// ..
 };

@@ -10,7 +10,7 @@
 #include "GuiManager.h"
 #include "ParticleManager.h"
 #include "Hud.h"
-#include "Npcs.h"
+
 
 #include "Defs.h"
 #include "Log.h"
@@ -46,8 +46,8 @@ bool SceneShop::Awake(pugi::xml_node& config)
 	//}
 	for (pugi::xml_node itemNode = config.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
 	{
-		Npcs* npc = (Npcs*)app->entityManager->CreateEntity(EntityType::NPCS);
-		npc->parameters = itemNode;
+		mercante = (Npcs*)app->entityManager->CreateEntity(EntityType::NPCS);
+		mercante->parameters = itemNode;
 	}
 
 	for (pugi::xml_node itemNode = config.child("dialogTrigger"); itemNode; itemNode = itemNode.next_sibling("dialogTrigger"))
@@ -74,22 +74,15 @@ bool SceneShop::Start()
 	app->map->Enable();
 	app->entityManager->Enable();
 	app->hud->Enable();
-	
-	backgroundTexture = app->tex->Load("Assets/Textures/Screens/taberna.png");
+
 
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(96), PIXEL_TO_METERS(640)), 0);
 	
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
-	//Get the size of the texture
-	app->tex->GetSize(backgroundTexture, texW, texH);
-
-	textPosX = (float)windowW / 2 - (float)texW / 2;
-	textPosY = (float)windowH / 2 - (float)texH / 2;
-
-	app->render->camera.x = 0;
-	app->render->camera.y = 0;
+	app->render->camera.x = -64;
+	app->render->camera.y = -45;
 
 	return true;
 }
@@ -104,17 +97,9 @@ bool SceneShop::PreUpdate()
 // Called each loop iteration
 bool SceneShop::Update(float dt)
 {
-	app->render->DrawTexture(backgroundTexture, 300, 400, NULL, SDL_FLIP_NONE, 0.0f);
 
 	playerX = app->map->player->position.x;
   	playerY = app->map->player->position.y;
-
-	SetCameraPosition(0, 0);
-
-	ClampCamera();
-
-	app->render->camera.x += (-cameraX - app->render->camera.x) * cameraSmoothingFactor;
-	app->render->camera.y += (-cameraY - app->render->camera.y) * cameraSmoothingFactor;
 
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
@@ -125,17 +110,22 @@ bool SceneShop::Update(float dt)
 // Called each loop iteration
 bool SceneShop::PostUpdate()
 {
+	GamePad& pad = app->input->pads[0];
 	bool ret = true;
 
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.start == KEY_DOWN && !wasStartPressed) {
 		pause = !pause;
 		app->hud->onSettings = false;
 		if (!pause)
 		{
 			Mix_VolumeMusic(app->sceneMenu->percentageMusic);
 		};
+		wasStartPressed = true;
 	}
-	
+	else if (pad.start != KEY_DOWN)
+	{
+		wasStartPressed = false;
+	}
 	return ret;
 }
 

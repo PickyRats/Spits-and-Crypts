@@ -30,22 +30,39 @@ public:
 
 	void DrawEnemy();
 
+	void SetCombatAnimation(int animationIndex);
+
+	bool AnimationFinished();
+
+	void ShotArrow();
+
 public:
 
 	const char* texturePath;
 		
 	SDL_Texture* texture = NULL;
+	SDL_Texture* arrowTexture = NULL;
 	int enemyId;
 
 	PhysBody* pbody;
 
 	Animation* currentAnim;
-	Animation idleAnim;
+	Animation	idleAnim,
+				walkAnim,
+				climbAnim,
+				attackAnim,
+				abilityAnim,
+				hitAnim,
+				deathAnim;
+
+	Animation* currentAttackAnim;
+	Animation arrowAnim;
 
 	float dt;
 
 	SDL_Texture* tileTexture;
 
 	bool physCreated = false;
+	bool isActive = false;
 };
 

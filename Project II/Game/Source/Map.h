@@ -160,6 +160,7 @@ public:
 	SString path;
 	PathFinding* pathfinding;
 
+	List <PhysBody*> tempColliders;
 	int mapIdx = 1; //1= sceneVillage, 2 = sceneShop, 3 = sceneOasisFaraon, 4 = sceneTemple
 
 	List<PhysBody*> wallEndCollision;

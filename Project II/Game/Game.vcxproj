@@ -120,12 +120,14 @@
     <ClCompile Include="Source\Physics.cpp" />
     <ClCompile Include="Source\PiezasPuzle.cpp" />
     <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\Puertas.cpp" />
     <ClCompile Include="Source\Puzzle.cpp" />
     <ClCompile Include="Source\Puzzle2.cpp" />
     <ClCompile Include="Source\SceneChoza.cpp" />
     <ClCompile Include="Source\SceneEnding.cpp" />
     <ClCompile Include="Source\SceneFloor1.cpp" />
     <ClCompile Include="Source\SceneLight.cpp" />
+    <ClCompile Include="Source\SceneSelection.cpp" />
     <ClCompile Include="Source\SceneShop.cpp" />
     <ClCompile Include="Source\SceneOasisFaraon.cpp" />
     <ClCompile Include="Source\SceneTemple.cpp" />
@@ -163,6 +165,7 @@
     <ClInclude Include="Source\PiezasPuzle.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\PQueue.h" />
+    <ClInclude Include="Source\Puertas.h" />
     <ClInclude Include="Source\Puzzle.h" />
     <ClInclude Include="Source\Puzzle2.h" />
     <ClInclude Include="Source\Queue.h" />
@@ -170,6 +173,7 @@
     <ClInclude Include="Source\SceneEnding.h" />
     <ClInclude Include="Source\SceneFloor1.h" />
     <ClInclude Include="Source\SceneLight.h" />
+    <ClInclude Include="Source\SceneSelection.h" />
     <ClInclude Include="Source\SceneShop.h" />
     <ClInclude Include="Source\SceneOasisFaraon.h" />
     <ClInclude Include="Source\SceneTemple.h" />

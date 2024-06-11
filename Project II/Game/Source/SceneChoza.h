@@ -47,7 +47,7 @@ public:
 	bool SaveState(pugi::xml_node node);
 
 	GuiControlButton* gcButtom;
-
+	bool wasStartPressed = false;
 	bool pause = false;
 	bool isTorchActive = false;
 	bool checkPoint = false;

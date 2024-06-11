@@ -65,6 +65,8 @@ public:
 	bool isHover2 = false;
 
 	std::queue<AVPacket> audioBuffer;
+
+	char* file = nullptr;
 };
 
 #endif // __CUTSCENEPLAYER_H__

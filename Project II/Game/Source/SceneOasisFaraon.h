@@ -7,6 +7,7 @@
 #include "GuiControlButton.h"
 #include "SceneMenu.h"
 #include <vector>
+#include "Npcs.h"
 
 struct SDL_Texture;
 
@@ -58,7 +59,7 @@ public:
 	bool notUseChechPoint = false;
 	bool win = false;
 	int sceneNum = 4;
-
+	Npcs* tabernero;
 private:
 	SDL_Texture* backgroundTexture;
 	SDL_Texture* taberna;

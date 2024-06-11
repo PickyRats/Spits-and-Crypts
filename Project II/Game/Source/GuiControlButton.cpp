@@ -4,6 +4,7 @@
 #include "Audio.h"
 #include "GuiManager.h"
 #include "SceneMenu.h"
+#include "Log.h"
 
 GuiControlButton::GuiControlButton(uint32 id, SDL_Rect bounds, SDL_Texture* textureDisabled, SDL_Texture* textureNormal, SDL_Texture* textureFocused, SDL_Texture* texturePressed) : GuiControl(GuiControlType::BUTTON, id)
 {
@@ -39,6 +40,7 @@ bool GuiControlButton::Update(float dt)
 
 				if (/*app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN ||*/ (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || pad.a == KEY_DOWN)) {
 					state = GuiControlState::PRESSED;
+					LOG("Pressed");
 				}
 
 				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {

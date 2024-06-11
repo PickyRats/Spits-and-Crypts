@@ -1,5 +1,7 @@
 #include "Puzzle2.h"
 #include "App.h"
+#include "Map"
+#include "Player.h"
 #include "Textures.h"
 #include "Audio.h"
 #include "Input.h"
@@ -7,6 +9,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Puzzle.h"
 #include "FadeToBlack.h"
 
 Puzzle2::Puzzle2(bool enabled) : Module(enabled)
@@ -48,6 +51,7 @@ bool Puzzle2::Start() {
 
 bool Puzzle2::Update(float dt)
 {
+	GamePad& pad = app->input->pads[0];
 	DrawPieces();
 	PlaySounds();
 
@@ -55,10 +59,12 @@ bool Puzzle2::Update(float dt)
 		&& rotation[0] == 90 && rotation[1] == 90 && rotation[2] == 90)
 	{
 		if(!puzzleCompleted) LOG("PUZZLE 2 COMPLETE");
+		//app->sceneFloor1->levelWidth = 190 * 64;
 		puzzleCompleted = true;
+		
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN || (pad.l1 == KEY_DOWN && !wasL1Pressed) && (app->puzzle->isPuzzleCompleted=true))
 	{
 		for (int i = 0; i < 3; i++)
 		{
@@ -74,9 +80,14 @@ bool Puzzle2::Update(float dt)
 				}
 			}
 		}
+		wasL1Pressed = true;
+	}
+	else if (pad.l1 != KEY_DOWN)
+	{
+		wasL1Pressed = false;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN || (pad.r1 == KEY_DOWN && !wasR1Pressed) && (app->puzzle->isPuzzleCompleted = true))
 	{
 		for (int i = 0; i < 3; i++)
 		{
@@ -93,15 +104,25 @@ bool Puzzle2::Update(float dt)
 				}
 			}
 		}
+		wasR1Pressed = true;
+	}
+	else if (pad.r1 != KEY_DOWN)
+	{
+		wasR1Pressed = false;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN || (pad.l2 == KEY_DOWN && !wasL2Pressed) && (app->puzzle->isPuzzleCompleted = true))
 	{
 		if (selection < 2) selection++;
 		else selection = 0;
+		wasL2Pressed = true;
+	}
+	else if (pad.l2 != KEY_DOWN)
+	{
+		wasL2Pressed = false;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN|| (pad.r2 == KEY_DOWN && !wasR2Pressed) && (app->puzzle->isPuzzleCompleted = true))
 	{
 		if (selection == 0)
 		{
@@ -171,6 +192,11 @@ bool Puzzle2::Update(float dt)
 				}
 			}
 		}
+		wasR2Pressed = true;
+	}
+	else if (pad.r2 != KEY_DOWN)
+	{
+		wasR2Pressed = false;
 	}
 
 	return true;
@@ -178,16 +204,17 @@ bool Puzzle2::Update(float dt)
 
 void Puzzle2::DrawPieces()
 {
+	
 	for (int i = 3; i < 6; i++)
 	{
-		app->render->DrawTexture(texture[i], centerPosition.x, centerPosition.y, NULL, SDL_FLIP_NONE, 0.0f, rotation[i]);
+		app->render->DrawTexture(texture[i], centerPosition.x, centerPosition.y, NULL, SDL_FLIP_NONE, 1.0f, rotation[i]);
 	}
 	for (int i = 0; i < 3; i++)
 	{
-		app->render->DrawTexture(texture[i], piecePosition[i].x, piecePosition[i].y, NULL, SDL_FLIP_NONE, 0.0f, rotation[i]);
+		app->render->DrawTexture(texture[i], piecePosition[i].x, piecePosition[i].y, NULL, SDL_FLIP_NONE, 1.0f, rotation[i]);
 	}
 
-	app->render->DrawTexture(texture[6 + selection], piecePosition[selection].x, piecePosition[selection].y, NULL, SDL_FLIP_NONE, 0.0f, rotation[selection]);
+	app->render->DrawTexture(texture[6 + selection], piecePosition[selection].x, piecePosition[selection].y, NULL, SDL_FLIP_NONE, 1.0f, rotation[selection]);
 	
 }
 

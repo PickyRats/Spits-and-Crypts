@@ -12,6 +12,9 @@
 #include "Hud.h"
 #include "DialogManager.h"
 #include "DialogTriggerEntity.h"
+#include "EntityManager.h"
+#include "Physics.h"
+#include "Entity.h"	
 
 #include "Defs.h"
 #include "Log.h"
@@ -79,6 +82,7 @@ bool SceneVillage::Start()
 
 	//Load the player in the map
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(spawnPosition.x), PIXEL_TO_METERS(spawnPosition.y)), 0);
+	app->map->player->inicio = true;
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -96,6 +100,8 @@ bool SceneVillage::Start()
 	if (!piedraHecha)
 	{
 		piedra = app->physics->CreateRectangle(200, 640, 100, 100, DYNAMIC);
+		piedra->ctype = ColliderType::ROCK;
+		
 		piedraHecha = true;
 	}
 
@@ -118,11 +124,21 @@ bool SceneVillage::PreUpdate()
 // Called each loop iteration
 bool SceneVillage::Update(float dt)
 {
-	app->render->DrawTexture(aldea, -5, 0, NULL, SDL_FLIP_NONE, 1);
+	//app->render->DrawTexture(aldea, -5, 0, NULL, SDL_FLIP_NONE, 1);
 
 	int piedraX = METERS_TO_PIXELS(piedra->body->GetPosition().x);
 	int piedraY = METERS_TO_PIXELS(piedra->body->GetPosition().y);
-	app->render->DrawTexture(piedraTexture, piedraX - 50, piedraY - 50);
+	app->hud->DrawTile(piedraTexture, { piedraX - 50, piedraY - 50});
+
+	if (piedraX>=400)
+	{
+		movement = true;
+		printf("CINEMATICA");
+	}
+	if (movement)
+	{
+		app->map->player->inicio = false;
+	}
 
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;
@@ -143,17 +159,22 @@ bool SceneVillage::Update(float dt)
 // Called each loop iteration
 bool SceneVillage::PostUpdate()
 {
+	GamePad& pad = app->input->pads[0];
 	bool ret = true;
 
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || (pad.start == KEY_DOWN && !wasStartPressed)) {
 		pause = !pause;
 		app->hud->onSettings = false;
 		if (!pause)
 		{
 			Mix_VolumeMusic(app->sceneMenu->percentageMusic);
 		};
+		wasStartPressed = true;
 	}
-	
+	else if (pad.start != KEY_DOWN)
+	{
+		wasStartPressed = false;
+	}
 	return ret;
 }
 

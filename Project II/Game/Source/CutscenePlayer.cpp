@@ -29,9 +29,6 @@ bool CutscenePlayer::Awake(pugi::xml_node& config)
 
 bool CutscenePlayer::Start()
 {
-    // File path of the video to be played
-    char* file = "Assets/Video/credits.mp4";
-
     // Allocate memory for the format context
     formatContext = avformat_alloc_context();
 

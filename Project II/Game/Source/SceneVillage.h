@@ -47,6 +47,9 @@ public:
 
 	void ClampCamera();
 
+	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
+	void OnExitCollision(PhysBody* bodyA, PhysBody* bodyB);
+
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
@@ -62,7 +65,8 @@ public:
 	iPoint spawnPosition = { 0, 0 };
 	bool piedraHecha = false;
 	PhysBody* piedra = nullptr;
-
+	PhysBody* sensorPiedra = nullptr;
+	bool wasStartPressed = false;
 private:
 	SDL_Texture* backgroundTexture;
 	SDL_Texture* backgroundTexture2;
@@ -75,13 +79,15 @@ private:
 
 	float cameraSmoothingFactor = 0.04f;
 
-	int levelWidth = 45 * 64;
+	int levelWidth = 90 * 64;
 	int levelHeight = 12 * 64;
 
 
 	int playerX, playerY, cameraX, cameraY;
 	bool changingLevel = false;
 	bool isLoading = false;
+
+	bool movement;
 
 
 	int VillageMusic;

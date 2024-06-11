@@ -3,7 +3,7 @@
 
 #include "EntityManager.h"
 #include "Entity.h"
-#include "Animation.h"
+//#include "Animation.h"
 #include "SDL/include/SDL.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 
@@ -35,13 +35,22 @@ public:
 	int isPieceInserted[3] = { 1, 1, 1 };
 	int rotation[6] = { 0, 0, 0, 0, 0, 0 };
 	int selection = 0;
-	iPoint leftPosition[3] = { {250, 185},{150, 185},{70, 185}};
-	iPoint rightPosition[3] = { {700, 185},{800, 185},{880, 185} };
-	iPoint centerPosition = { 465, 185 };
+	iPoint centerPosition = { 10000, 1010 };
+	iPoint leftPosition[3] = { {centerPosition.x - 215, centerPosition.y},{centerPosition.x - 315, centerPosition.y},{centerPosition.x - 395, centerPosition.y}};
+	iPoint rightPosition[3] = { {centerPosition.x + 235, centerPosition.y},{centerPosition.x + 335, centerPosition.y},{centerPosition.x + 415, centerPosition.y} };
+	//{ 10218, 10378 };
+	//{ 465, 185 };
+	//900, 100
 	iPoint piecePosition[3] = { {0, 0},{ 0, 0 },{ 0, 0 } };
 	bool puzzleCompleted = false;
 	uint rotateRockFx;
 	uint placeRockFx;
+
+	bool wasL1Pressed = false;
+	bool wasR1Pressed = false;
+	bool wasL2Pressed = false;
+	bool wasR2Pressed = false;
+
 
 	bool rotated = false;
 	bool placed = false;

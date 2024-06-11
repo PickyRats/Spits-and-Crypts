@@ -16,7 +16,8 @@ enum class EntityType
 	PIEZAS,
 	ENEMY,
 	TRAP,
-	UNKNOWN
+	UNKNOWN,
+	PUERTAS
 };
 
 class Entity
@@ -83,6 +84,23 @@ public:
 		return currentPoints >= pointsCost;
 	}
 
+	virtual void SetCombatAnimation(int animationIndex) {
+		// 0 = idle
+		// 1 = walk
+		// 2 = climb
+		// 3 = attack
+		// 4 = ability
+		// 5 = hit
+		// 6 = death
+	};
+
+	virtual bool AnimationFinished() {
+		return true;
+	};
+
+	virtual void ShotArrow() {
+	};
+
 	virtual void OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	};
@@ -107,6 +125,8 @@ public:
 	iPoint position;       
 	bool renderable = true;
 
+	bool isFacingRight = true;
+
 	bool isDead = false;
 	int health = 100;
 	int totalPoints = 6;
@@ -114,6 +134,11 @@ public:
 	int attackRange = 3;
 	bool setLoadPosition = false;
 	int attackDamage = 40;
+	int abilityDamage = 20;
+	bool arrow = false;
+	bool useProjectile = false;
+	iPoint arrowPos = { 0,0 };
+	int id = 0;
 };
 
 #endif // __ENTITY_H__
