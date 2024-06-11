@@ -67,6 +67,14 @@ bool SceneCombat::Start()
 			app->map->path = configNodeCombat.child("map2").attribute("path").as_string();
 		}
 	}
+	else if (currentCombat == 2)
+	{
+		if (configNodeCombat.child("map3")) {
+			//Get the map name from the config file and assigns the value in the module
+			app->map->mapName = configNodeCombat.child("map3").attribute("name").as_string();
+			app->map->path = configNodeCombat.child("map3").attribute("path").as_string();
+		}
+	}
 
 	app->map->Enable();
 	app->entityManager->Enable();
@@ -136,6 +144,20 @@ bool SceneCombat::Start()
 		players[1]->SetCombatAnimation(0);
 		app->map->player2->isVisible = true;
 		app->map->player2->position = { 0, 576 };
+	}
+	else if (currentCombat == 2)
+	{
+		app->map->player->DestroyBody();
+		app->map->player->position = { 64, 576 };
+
+		tilePosition = { 64, 576 };
+
+		enemy[2]->isActive = true;
+		enemies[2] = enemy[2];
+		enemies[2]->SetCombatAnimation(0);
+
+		players[0] = app->map->player;
+		players[0]->SetCombatAnimation(0);
 	}
 
 	app->map->pathfinding->CreatePath(app->map->WorldToMap(app->map->player->position.x, app->map->player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
@@ -779,5 +801,6 @@ void SceneCombat::EndCombat()
 		app->sceneFloor1->levelWidth = 110 * 64;
 		app->fade->Fade((Module*)app->sceneCombat, (Module*)app->sceneFloor1, 60.0f);
 		combatCompleted = true;
+		currentCombat++;
 	}
 }
