@@ -18,11 +18,14 @@ DialogManager::DialogManager() : Module()
 DialogManager::~DialogManager()
 {}
 
+pugi::xml_node configNodeDialog;
+
 // Called before render is available
 bool DialogManager::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Dialog Manager");
 	bool ret = true;
+	configNodeDialog = config;
 
 	background_tex_path = config.child("textures").child("background_dialog").attribute("texturepath").as_string();
 
@@ -44,9 +47,16 @@ bool DialogManager::Start() {
 
 	indexText = 1;
 
-
 	background_tex = app->tex->Load(background_tex_path.c_str());
 	background_mission = app->tex->Load(background_mission_path.c_str());
+
+	background_tex_logoMercante = app->tex->Load(configNodeDialog.child("background_dialoglogoMercante").attribute("texturepath").as_string());
+	background_tex_logoTabernero = app->tex->Load(configNodeDialog.child("background_dialoglogoTebernero").attribute("texturepath").as_string());
+	background_tex_logoPalaya = app->tex->Load(configNodeDialog.child("background_dialoglogoPalaaya").attribute("texturepath").as_string());
+	background_tex_logoMaat = app->tex->Load(configNodeDialog.child("background_dialoglogoMaat").attribute("texturepath").as_string());
+	background_tex_logoThoth = app->tex->Load(configNodeDialog.child("background_dialoglogoThoth").attribute("texturepath").as_string());
+	background_tex_logoIsis = app->tex->Load(configNodeDialog.child("background_dialoglogoIsis").attribute("texturepath").as_string());
+	background_tex_logoHorus = app->tex->Load(configNodeDialog.child("background_dialoglogoHorus").attribute("texturepath").as_string());
 
 	return ret;
 }
@@ -112,6 +122,8 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 {
 	//Mostrar fondo
 	app->render->DrawTexture(background_tex, 0, 0, 0);
+
+	app->render->DrawTexture(background_tex_logoMercante, 0, 0);
 
 	std::string actualText = dialog->sentence.substr(0, indexText);
 

@@ -136,9 +136,9 @@ bool Hud::Start()
 
 	Coin = app->tex->Load(configNode3.child("Coin").attribute("texturepath").as_string());
 
-	items[0] = { 50, 0, 10, false, inventoryItem1 , ObjectText1 , ObjectText1Shop };
+	items[0] = { 50, 0, 20, false, inventoryItem1 , ObjectText1 , ObjectText1Shop };
 	items[1] = {  0, 10, 20, false, inventoryItem2 , ObjectText2 , ObjectText2Shop };
-	items[2] = { 10, 0, 30, false, inventoryItem3 , ObjectText3 , ObjectText3Shop };
+	items[2] = { 10, 0, 50, false, inventoryItem3 , ObjectText3 , ObjectText3Shop };
 
 	inventorySlots[0].position = { 442, 272 };
 	inventorySlots[1].position = { 532, 272 };
