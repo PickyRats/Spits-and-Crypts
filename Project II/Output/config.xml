@@ -279,7 +279,7 @@
 
 
 		<!-- Dialogo Paalaya -->
-		<dialogTrigger x="670" y="585"  name="Paayla" repeat="true" mission="false" scene="5" id="9" audio_1="Assets/Audio/Fx/paayla/voz_paayla_1.wav" audio_2="Assets/Audio/Fx/paayla/voz_paayla_2.wav" audio_3="Assets/Audio/Fx/paayla/voz_paayla_3.wav">
+		<dialogTrigger x="670" y="2178"  name="Paayla" repeat="true" mission="false" scene="5" id="9" audio_1="Assets/Audio/Fx/paayla/voz_paayla_1.wav" audio_2="Assets/Audio/Fx/paayla/voz_paayla_2.wav" audio_3="Assets/Audio/Fx/paayla/voz_paayla_3.wav">
 
 			<sentences>
 				<sentence text="Hola, veo que estas algo malherido."/>
