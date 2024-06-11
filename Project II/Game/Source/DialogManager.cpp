@@ -122,7 +122,7 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 	//Mostrar fondo
 	app->render->DrawTexture(background_tex, 0, 0, 0);
 
-	app->render->DrawTexture(background_tex_logo, 625, 515);
+	app->render->DrawTexture(background_tex_logo, 618, 512);
 
 	std::string actualText = dialog->sentence.substr(0, indexText);
 
@@ -139,7 +139,7 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 
 	if (dialog->face_tex != nullptr) {
 		_textBoundWidth = textBoundWidth - faceTextureSize.x;
-		_dialogPosition.x = dialogMargin[3] + dialogPosition.x + faceTextureSize.x;
+		_dialogPosition.x = dialogMargin[3	] + dialogPosition.x + faceTextureSize.x;
 		_dialogPosition.y = dialogMargin[0] + dialogPosition.y;
 	}
 	else {
