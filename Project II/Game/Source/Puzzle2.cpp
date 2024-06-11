@@ -9,6 +9,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Puzzle.h"
 #include "FadeToBlack.h"
 
 Puzzle2::Puzzle2(bool enabled) : Module(enabled)
@@ -50,7 +51,7 @@ bool Puzzle2::Start() {
 
 bool Puzzle2::Update(float dt)
 {
-
+	GamePad& pad = app->input->pads[0];
 	DrawPieces();
 	PlaySounds();
 
@@ -63,7 +64,7 @@ bool Puzzle2::Update(float dt)
 		
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN || (pad.l1 == KEY_DOWN && !wasL1Pressed) && (app->puzzle->isPuzzleCompleted=true))
 	{
 		for (int i = 0; i < 3; i++)
 		{
@@ -79,9 +80,14 @@ bool Puzzle2::Update(float dt)
 				}
 			}
 		}
+		wasL1Pressed = true;
+	}
+	else if (pad.l1 != KEY_DOWN)
+	{
+		wasL1Pressed = false;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN || (pad.r1 == KEY_DOWN && !wasR1Pressed) && (app->puzzle->isPuzzleCompleted = true))
 	{
 		for (int i = 0; i < 3; i++)
 		{
@@ -98,15 +104,25 @@ bool Puzzle2::Update(float dt)
 				}
 			}
 		}
+		wasR1Pressed = true;
+	}
+	else if (pad.r1 != KEY_DOWN)
+	{
+		wasR1Pressed = false;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN || (pad.l2 == KEY_DOWN && !wasL2Pressed) && (app->puzzle->isPuzzleCompleted = true))
 	{
 		if (selection < 2) selection++;
 		else selection = 0;
+		wasL2Pressed = true;
+	}
+	else if (pad.l2 != KEY_DOWN)
+	{
+		wasL2Pressed = false;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN|| (pad.r2 == KEY_DOWN && !wasR2Pressed) && (app->puzzle->isPuzzleCompleted = true))
 	{
 		if (selection == 0)
 		{
@@ -176,6 +192,11 @@ bool Puzzle2::Update(float dt)
 				}
 			}
 		}
+		wasR2Pressed = true;
+	}
+	else if (pad.r2 != KEY_DOWN)
+	{
+		wasR2Pressed = false;
 	}
 
 	return true;

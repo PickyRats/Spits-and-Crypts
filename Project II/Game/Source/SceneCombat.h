@@ -127,6 +127,7 @@ public:
 	bool wasLeftPressed = false;
 	bool wasUpPressed = false;
 	bool wasDownPressed = false;
+	bool wasStartPressed = false;
 
 	bool combatCompleted = false;
 

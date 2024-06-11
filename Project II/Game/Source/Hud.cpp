@@ -939,7 +939,7 @@ void Hud::EquipItem(int inventorySlotId) {
 void Hud::Inventory() {
 	GamePad& pad = app->input->pads[0];
 
-	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN || (pad.y == KEY_DOWN && !wasYPressed))
+	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN || (pad.y == KEY_DOWN && !wasYPressed) && !app->sceneCombat->active)
 	{
 		inventory = !inventory;
 		wasYPressed = true;
