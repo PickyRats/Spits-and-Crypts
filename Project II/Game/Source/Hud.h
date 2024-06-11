@@ -118,8 +118,16 @@ private:
 	SDL_Rect pointsRects[6] = { {0, 0, 82, 121}, {82, 0, 82, 121}, {164, 0, 82, 121}, {246, 0, 82, 121}, {328, 0, 82, 121}, {410, 0, 82, 121} };
 	SDL_Rect numerosRects[9] = { {0, 0, 37, 37}, {37, 0, 37, 37}, {74, 0, 37, 37}, {111, 0, 37, 37}, {148, 0, 37, 37}, {185, 0, 37, 37}, {222, 0, 37, 37}, {259, 0, 37, 37}, {296, 0, 37, 37} };
 
-
-
+	SDL_Texture* attack1;
+	SDL_Texture* attack2;
+	SDL_Texture* attack3;
+	SDL_Texture* attack4;
+	SDL_Texture* attack5;
+	SDL_Texture* ability1;
+	SDL_Texture* ability2;
+	SDL_Texture* ability3;
+	SDL_Texture* ability4;
+	SDL_Texture* ability5;
 
 	SDL_Texture* exitNormal;
 	SDL_Texture* exitHover;

@@ -65,7 +65,6 @@ public:
 
 public:
 	float speed = 0.2f;
-	int id = 0;
 	const char* texturePath1;
 	const char* texturePath2;
 	const char* texturePath3;

@@ -61,7 +61,7 @@ bool SceneSelection::Update(float dt)
 	}
 	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 	{
-		app->fade->Fade(this, (Module*)app->sceneVillage, 60.0f);
+		app->fade->Fade(this, (Module*)app->sceneFloor1, 60.0f);
 	}
 
 	if (currentSelection == 0) app->render->DrawTexture(char1, 0, 0);

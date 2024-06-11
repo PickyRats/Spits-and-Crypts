@@ -137,6 +137,7 @@ public:
 	bool arrow = false;
 	bool useProjectile = false;
 	iPoint arrowPos = { 0,0 };
+	int id = 0;
 };
 
 #endif // __ENTITY_H__
