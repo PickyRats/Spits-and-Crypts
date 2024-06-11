@@ -132,7 +132,7 @@ bool Puzzle::Update(float dt)
 			wasL1Pressed = false;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN || (pad.r1 == KEY_DOWN && !wasR1Pressed))
+		if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN || (pad.r1 == KEY_DOWN && !wasR1Pressed))
 		{
 			SDL_JoystickSetLED(app->input->joy, 255, 255, 0);
 			if (!isSelecting && !pieceInSlot[3])
