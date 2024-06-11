@@ -26,6 +26,7 @@
 		<!-- Scene -->
 		<map1 path="Assets/Maps/" name="Map_Combat.tmx"/>
 		<map2 path="Assets/Maps/" name="Map_Combat_2.tmx"/>
+		<map3 path="Assets/Maps/" name="Map_Combat_3.tmx"/>
 
 		<!-- Music -->
 		<music>

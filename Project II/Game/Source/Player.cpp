@@ -324,11 +324,11 @@ void Player::EnterDoor()
 		}
 		
 	}
-	else if (enterCombat)
+	else if (enterCombat1)
 	{
-		EnteringDoor();
+		//EnteringDoor();
 		app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneCombat, 60.0f);
-		enterCombat = false;
+		enterCombat1 = false;
 	}
 	else if (doorChoza)
 	{
@@ -588,8 +588,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::TRAP:
 		isDead = true;
 		break;
-	case ColliderType::COMBAT:
-		enterCombat = true;
+	case ColliderType::COMBAT1:
+		if (app->sceneCombat->currentCombat == 0) enterCombat1 = true;
 		break;
 	case ColliderType::STAIRS:
 		canClimb = true;
@@ -645,8 +645,8 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::DOOR_FLOOR_1:
 		doorFloor1 = false;
 		break;
-	case ColliderType::COMBAT:
-		enterCombat = false;
+	case ColliderType::COMBAT1:
+		enterCombat1 = false;
 		break;
 	case ColliderType::STAIRS:
 		canClimb = false;
