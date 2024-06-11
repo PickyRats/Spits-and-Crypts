@@ -181,7 +181,7 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::PLAYER:
 
-		if (!app->dialogManager->isPlaying && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN||pad.x==KEY_DOWN&& !wasXPressed) {
+		if (!app->dialogManager->isPlaying && (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN||(pad.x==KEY_DOWN&& !wasXPressed))) {
 			PlayDialog();
 			wasXPressed = true;
 		}

@@ -96,6 +96,7 @@ public:
 	bool wasL1Pressed = false;
 	bool wasYPressed = false;
 	bool wasAPressed = false;
+	bool wasBPressed = false;
 
 	Slot inventorySlots[4];
 	Item items[3];
