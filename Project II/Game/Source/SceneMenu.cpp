@@ -14,6 +14,7 @@
 #include "ParticleManager.h"
 #include "Hud.h"
 #include "CutscenePlayer.h"
+#include "SceneSelection.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -216,8 +217,7 @@ bool SceneMenu::Update(float dt)
 				fxClickPlayed = true;
 			}
 
-			app->fade->Fade(this, (Module*)app->sceneTemple, 60.0f);
-
+			app->fade->Fade(this, (Module*)app->sceneSelection, 60.0f);
 
 		}
 		else if (loadGameButton->state == GuiControlState::FOCUSED)

@@ -126,6 +126,7 @@
     <ClCompile Include="Source\SceneEnding.cpp" />
     <ClCompile Include="Source\SceneFloor1.cpp" />
     <ClCompile Include="Source\SceneLight.cpp" />
+    <ClCompile Include="Source\SceneSelection.cpp" />
     <ClCompile Include="Source\SceneShop.cpp" />
     <ClCompile Include="Source\SceneOasisFaraon.cpp" />
     <ClCompile Include="Source\SceneTemple.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Source\SceneEnding.h" />
     <ClInclude Include="Source\SceneFloor1.h" />
     <ClInclude Include="Source\SceneLight.h" />
+    <ClInclude Include="Source\SceneSelection.h" />
     <ClInclude Include="Source\SceneShop.h" />
     <ClInclude Include="Source\SceneOasisFaraon.h" />
     <ClInclude Include="Source\SceneTemple.h" />

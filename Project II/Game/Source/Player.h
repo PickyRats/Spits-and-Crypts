@@ -65,9 +65,10 @@ public:
 
 public:
 	float speed = 0.2f;
-	int id = 0;
-	int classId = 0;
-	const char* texturePath;
+	const char* texturePath1;
+	const char* texturePath2;
+	const char* texturePath3;
+	const char* texturePath4;
 	int platformCollisionCount = 0;
 
 	SDL_Texture* texture = NULL;
@@ -112,6 +113,7 @@ public:
 	bool step = false;
 	bool walkingSoundPlaying = false;
 	bool jumpingSoundPlaying = false;
+	bool playJumpSound = false;
 	bool climbingSoundPlaying = false;
 	bool doorChoza = false;
 

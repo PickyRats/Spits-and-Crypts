@@ -20,8 +20,8 @@
 #include "SceneMenu.h"
 #include "SceneCombat.h"
 #include "SceneTemple.h"
+#include "SceneSelection.h"
 #include "Player.h"
-
 
 #include <iostream>
 #include <iomanip>
@@ -63,6 +63,18 @@ bool Hud::Start()
 	Opacity = app->tex->Load(configNode3.child("Opacity").attribute("texturepath").as_string());
 	Cuadrojugador = app->tex->Load(configNode3.child("Cuadrojugador").attribute("texturepath").as_string());
 	numeros = app->tex->Load(configNode3.child("numeros").attribute("texturepath").as_string());
+
+	attack1 = app->tex->Load(configNode3.child("attack1").attribute("texturepath").as_string());
+	attack2 = app->tex->Load(configNode3.child("attack2").attribute("texturepath").as_string());
+	attack3 = app->tex->Load(configNode3.child("attack3").attribute("texturepath").as_string());
+	attack4 = app->tex->Load(configNode3.child("attack4").attribute("texturepath").as_string());
+	attack5 = app->tex->Load(configNode3.child("attack5").attribute("texturepath").as_string());
+
+	ability1 = app->tex->Load(configNode3.child("ability1").attribute("texturepath").as_string());
+	ability2 = app->tex->Load(configNode3.child("ability2").attribute("texturepath").as_string());
+	ability3 = app->tex->Load(configNode3.child("ability3").attribute("texturepath").as_string());
+	ability4 = app->tex->Load(configNode3.child("ability4").attribute("texturepath").as_string());
+	ability5 = app->tex->Load(configNode3.child("ability5").attribute("texturepath").as_string());
 
 
 	//
@@ -301,7 +313,6 @@ bool Hud::Update(float dt)
 
 	//Shop
 	Shop();
-
 
 	//Pause menu
 	if (app->sceneVillage->pause || app->sceneShop->pause || app->sceneOasisFaraon->pause || app->sceneTemple->pause || app->sceneFloor1->pause) {
@@ -753,13 +764,16 @@ bool Hud::Update(float dt)
 				);
 			}
 
+			RenderStoredTiles();
+
 			////
 			//
 			////botones abajo derecha
 			app->render->DrawTexture(Cuadrojugador, 1150, 660, NULL, SDL_FLIP_NONE, 0);
 			app->render->DrawTexture(Cuadrojugador, 1210, 660, NULL, SDL_FLIP_NONE, 0);
 
-			app->render->DrawTexture(Selectornaranja, 1210, 660, NULL, SDL_FLIP_NONE, 0);
+			if (app->sceneCombat->useAbility) app->render->DrawTexture(Selectornaranja, 1210, 660, NULL, SDL_FLIP_NONE, 0);
+			else app->render->DrawTexture(Selectornaranja, 1148, 660, NULL, SDL_FLIP_NONE, 0);
 			////
 			//
 			int currentPoints = app->sceneCombat->currentEntity->totalPoints - (app->sceneCombat->tilesCount - 1);
@@ -771,6 +785,34 @@ bool Hud::Update(float dt)
 				if (index > 0 && index <= 6) app->render->DrawTexture(points, 20, 20, &pointsRects[index-1]);
 				else app->render->DrawTexture(points, 20, 20, &pointsRects[0]);
 				app->render->DrawTexture(numeros, 38, 80, &numerosRects[currentPoints]);
+				if (app->sceneCombat->currentEntity->id == 1)
+				{
+					if (app->sceneSelection->currentSelection == 0)
+					{
+						app->render->DrawTexture(attack1, 1150, 660, NULL, SDL_FLIP_NONE, 0);
+						app->render->DrawTexture(ability1, 1210, 660, NULL, SDL_FLIP_NONE, 0);
+					}
+					else if (app->sceneSelection->currentSelection == 1)
+					{
+						app->render->DrawTexture(attack2, 1150, 660, NULL, SDL_FLIP_NONE, 0);
+						app->render->DrawTexture(ability2, 1210, 660, NULL, SDL_FLIP_NONE, 0);
+					}
+					else if (app->sceneSelection->currentSelection == 2)
+					{
+						app->render->DrawTexture(attack3, 1150, 660, NULL, SDL_FLIP_NONE, 0);
+						app->render->DrawTexture(ability3, 1210, 660, NULL, SDL_FLIP_NONE, 0);
+					}
+					else if (app->sceneSelection->currentSelection == 3)
+					{
+						app->render->DrawTexture(attack4, 1150, 660, NULL, SDL_FLIP_NONE, 0);
+						app->render->DrawTexture(ability4, 1210, 660, NULL, SDL_FLIP_NONE, 0);
+					}
+				}
+				else if (app->sceneCombat->currentEntity->id == 2)
+				{
+					app->render->DrawTexture(attack5, 1150, 660, NULL, SDL_FLIP_NONE, 0);
+					app->render->DrawTexture(ability5, 1210, 660, NULL, SDL_FLIP_NONE, 0);
+				}
 			}
 		}
 	}
@@ -1237,6 +1279,23 @@ void Hud::SkillTreeclass(int classid) {
 	{
 		skillTreenode[4].texture = Bloqueado2_1;
 	}
+}
+
+void Hud::DrawTile(SDL_Texture* texture, iPoint tilePosition)
+{
+	DrawTileCall call;
+	call.texture = texture;
+	call.tilePosition = tilePosition;
+	drawTileCalls.push_back(call);
+}
+
+void Hud::RenderStoredTiles()
+{
+	for (const auto& call : drawTileCalls)
+	{
+		app->render->DrawTexture(call.texture, call.tilePosition.x, call.tilePosition.y + 16);
+	}
+	drawTileCalls.clear();
 }
 
 bool Hud::CleanUp()

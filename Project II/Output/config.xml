@@ -24,7 +24,8 @@
 
 	<sceneCombat>
 		<!-- Scene -->
-		<map path="Assets/Maps/" name="Map_Combat.tmx"/>
+		<map1 path="Assets/Maps/" name="Map_Combat.tmx"/>
+		<map2 path="Assets/Maps/" name="Map_Combat_2.tmx"/>
 
 		<!-- Music -->
 		<music>
@@ -257,11 +258,8 @@
 
   <map>
 		<!-- Player -->
-		<player x="64" y="576" texturepath="Assets/Textures/MC_Sprites_red.png" speed="0.2f" classId="0" id="1"/>
-		<player x="64" y="576" texturepath="Assets/Textures/MC_Sprites_green.png" speed="0.2f" classId="1" id="1"/>
-		<player x="64" y="576" texturepath="Assets/Textures/MC_Sprites_blue.png" speed="0.2f" classId="2" id="1"/>
-		<player x="64" y="576" texturepath="Assets/Textures/MC_Sprites_yellow.png" speed="0.2f" classId="3" id="1"/>
-		<player2 x="0" y="576" texturepath="Assets/Textures/Taila_Animation_sheet.png" speed="0.2f" id="2"/>
+		<player x="64" y="576" texturepath1="Assets/Textures/MC_Sprites_red.png" texturepath2="Assets/Textures/MC_Sprites_green.png" texturepath3="Assets/Textures/MC_Sprites_blue.png" texturepath4="Assets/Textures/MC_Sprites_yellow.png" speed="0.2f" id="1"/>
+		<player2 x="0" y="576" texturepath1="Assets/Textures/Taila_Animation_sheet.png" speed="0.2f" id="2"/>
 	</map>
 	
 	<!-- sceneFloor1 -->
@@ -405,6 +403,18 @@
 		<Personaje2 texturepath="Assets/Textures/Screens/Combat/fotopersonatge2.png"/>
 		<numeros texturepath="Assets/Textures/Screens/Combat/numeros.png"/>
 
+		<attack1 texturepath="Assets/Textures/Screens/Combat/ABarco.png"/>
+		<attack2 texturepath="Assets/Textures/Screens/Combat/ABespasa.png"/>
+		<attack3 texturepath="Assets/Textures/Screens/Combat/ABlanza.png"/>
+		<attack4 texturepath="Assets/Textures/Screens/Combat/ABvaras.png"/>
+		<attack5 texturepath="Assets/Textures/Screens/Combat/ABpluma.png"/>
+		
+		<ability texturepath="Assets/Textures/Screens/Combat/HAarc.png"/>
+		<ability2 texturepath="Assets/Textures/Screens/Combat/HAespada.png"/>
+		<ability3 texturepath="Assets/Textures/Screens/Combat/HAlanza.png"/>
+		<ability4 texturepath="Assets/Textures/Screens/Combat/HAvaras.png"/>
+		<ability5 texturepath="Assets/Textures/Screens/Combat/HApluma.png"/>
+
 		<inventory texturepath="Assets/Textures/Screens/Inventory/Inventory.png"/>
 		<inventoryItem1 texturepath="Assets/Textures/Screens/Inventory/Amulet_Escarabat.png"/>
 		<inventoryItem2 texturepath="Assets/Textures/Screens/Inventory/Amulet_Serps.png"/>
@@ -547,7 +557,7 @@
 				<animation x="510" y="912" w="170" h="152"/>
 			</walkAnim>
 			
-			<climbAnim loop="false" speed=" 0.4f">
+			<climbAnim loop="true" speed=" 0.4f">
 				<animation x="0" y="1064" w="170" h="152"/>
 				<animation x="0" y="1064" w="170" h="152"/>
 				
@@ -906,7 +916,7 @@
 				
 			</walkBattleAnim>
 			
-			<climbAnim loop="false" speed=" 0.4f">
+			<climbAnim loop="true" speed=" 0.4f">
 
 				<animation x="0" y="768" w="218" h="128"/>
 				<animation x="0" y="768" w="218" h="128"/>
@@ -1772,6 +1782,18 @@
 
 				<animation x="1500" y="256" w="150" h="128"/>	
 			</deathAnim>
+
+			<arrowAnim loop="true" speed=" 0.4f">
+				<animation x="0" y="0" w="150" h="43"/>
+				
+				<animation x="150" y="0" w="150" h="43"/>
+				
+				<animation x="300" y="0" w="150" h="43"/>
+				
+				<animation x="450" y="0" w="150" h="43"/>
+				
+				<animation x="600" y="0" w="150" h="43"/>
+			</arrowAnim>
 
 		</enemy2>
 		<enemy3>
