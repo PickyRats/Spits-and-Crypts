@@ -908,6 +908,7 @@ void Hud::Inventory() {
 	if (inventory)
 	{
 		app->render->DrawTexture(inventoryTexture, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(Coin, 155, 500, NULL, SDL_FLIP_NONE, 0);
 
 		char Vida[20];
 		int vida = app->map->player->health;
