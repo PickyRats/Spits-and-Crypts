@@ -1701,7 +1701,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="24" name="Navigation" width="27" height="12">
+ <layer id="24" name="Navigation" width="27" height="12" visible="0">
   <properties>
    <property name="Draw" type="bool" value="false"/>
    <property name="Navigation" type="bool" value="true"/>

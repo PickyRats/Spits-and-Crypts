@@ -108,7 +108,7 @@ bool Player::Update(float dt)
 				SoundManager();
 
 				//player movement
-				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !inicio)
 				{
 					if (!isClimbing && !isEnteringDoor)
 					{
@@ -151,7 +151,7 @@ bool Player::Update(float dt)
 				{
 					
 					isWalking = false;
-					if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+					if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && !inicio)
 					{
 						UpMovement();
 						isClimbing = true;
@@ -184,7 +184,7 @@ bool Player::Update(float dt)
 						wasUpPressed = true;
 					}
 
-					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT )
+					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && !inicio)
 					{
 						DownMovement();
 						isClimbing = true;
@@ -227,9 +227,8 @@ bool Player::Update(float dt)
 					
 				}
 				//Jump
-				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN|| pad.a)
+				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN|| pad.a && !inicio)
 				{
-					
 					Jump();
 				}
 
@@ -242,19 +241,19 @@ bool Player::Update(float dt)
 				//god mode
 				vel.SetZero();
 
-				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && !inicio)
 				{
 					vel.y = -speed * 2 * dt;
 				}
-				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && !inicio)
 				{
 					vel.y = speed * 2 * dt;
 				}
-				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !inicio)
 				{
 					vel.x = -speed * 2 * dt;
 				}
-				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !inicio)
 				{
 					vel.x = speed * 2 * dt;
 				}
@@ -277,7 +276,7 @@ bool Player::Update(float dt)
 		//printf("\r playerX: %d playerY: %d", position.x, position.y);////////////
 		printf("\r tilecount %d", platformCollisionCount);////////////
 		currentAnim->Update();
-		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || pad.x==KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || pad.x==KEY_DOWN && !inicio)
 		{
 			EnterDoor();
 		}
@@ -324,11 +323,11 @@ void Player::EnterDoor()
 		}
 		
 	}
-	else if (enterCombat)
+	else if (enterCombat1)
 	{
-		EnteringDoor();
+		//EnteringDoor();
 		app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneCombat, 60.0f);
-		enterCombat = false;
+		enterCombat1 = false;
 	}
 	else if (doorChoza)
 	{
@@ -442,7 +441,7 @@ void Player::SoundManager()
 }
 void Player::Jump()
 {
-	if (!isJumping)
+	if (!isJumping && !inicio)
 	{
 		isJumping = true;
 		playJumpSound = true;
@@ -588,8 +587,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::TRAP:
 		isDead = true;
 		break;
-	case ColliderType::COMBAT:
-		enterCombat = true;
+	case ColliderType::COMBAT1:
+		if (app->sceneCombat->currentCombat == 0) enterCombat1 = true;
 		break;
 	case ColliderType::STAIRS:
 		canClimb = true;
@@ -645,8 +644,8 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::DOOR_FLOOR_1:
 		doorFloor1 = false;
 		break;
-	case ColliderType::COMBAT:
-		enterCombat = false;
+	case ColliderType::COMBAT1:
+		enterCombat1 = false;
 		break;
 	case ColliderType::STAIRS:
 		canClimb = false;

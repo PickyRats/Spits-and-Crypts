@@ -767,11 +767,11 @@ bool Hud::Update(float dt)
 			
 			app->render->DrawTexture(Cuadrojugador, 10, 660, NULL, SDL_FLIP_NONE, 0);
 			app->render->DrawTexture(Cuadrojugador, 70, 660, NULL, SDL_FLIP_NONE, 0);
-			if (app->sceneCombat->currentPlayerIndex == 0) app->render->DrawTexture(Selectorazul, 10, 660, NULL, SDL_FLIP_NONE, 0);
-			else if (app->sceneCombat->currentPlayerIndex == 1) app->render->DrawTexture(Selectorazul, 70, 660, NULL, SDL_FLIP_NONE, 0);
+			if (app->sceneCombat->currentPlayerIndex == 0) app->render->DrawTexture(Selectorazul, 9, 660, NULL, SDL_FLIP_NONE, 0);
+			else if (app->sceneCombat->currentPlayerIndex == 1) app->render->DrawTexture(Selectorazul, 69, 660, NULL, SDL_FLIP_NONE, 0);
 
 			app->render->DrawTexture(Personaje1, 20, 660, NULL, SDL_FLIP_NONE, 0);
-			app->render->DrawTexture(Personaje2, 80, 660, NULL, SDL_FLIP_NONE, 0);
+			app->render->DrawTexture(Personaje2, 75, 660, NULL, SDL_FLIP_NONE, 0);
 			////
 			// 
 			////barras vida
@@ -801,8 +801,8 @@ bool Hud::Update(float dt)
 			app->render->DrawTexture(Cuadrojugador, 1150, 660, NULL, SDL_FLIP_NONE, 0);
 			app->render->DrawTexture(Cuadrojugador, 1210, 660, NULL, SDL_FLIP_NONE, 0);
 
-			if (app->sceneCombat->useAbility) app->render->DrawTexture(Selectornaranja, 1210, 660, NULL, SDL_FLIP_NONE, 0);
-			else app->render->DrawTexture(Selectornaranja, 1148, 660, NULL, SDL_FLIP_NONE, 0);
+			if (app->sceneCombat->useAbility) app->render->DrawTexture(Selectornaranja, 1210, 658, NULL, SDL_FLIP_NONE, 0);
+			else app->render->DrawTexture(Selectornaranja, 1148, 658, NULL, SDL_FLIP_NONE, 0);
 			////
 			//
 			int currentPoints = app->sceneCombat->currentEntity->totalPoints - (app->sceneCombat->tilesCount - 1);
@@ -965,7 +965,7 @@ void Hud::EquipItem(int inventorySlotId) {
 void Hud::Inventory() {
 	GamePad& pad = app->input->pads[0];
 
-	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN || (pad.y == KEY_DOWN && !wasYPressed))
+	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN || (pad.y == KEY_DOWN && !wasYPressed) && !app->sceneCombat->active)
 	{
 		inventory = !inventory;
 		wasYPressed = true;

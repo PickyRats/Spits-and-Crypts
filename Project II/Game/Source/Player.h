@@ -92,6 +92,8 @@ public:
 
 	bool isWalking = false;
 
+	bool inicio;
+
 	bool isEnteringDoor = false;
 
 	bool godMode = false;
@@ -108,7 +110,7 @@ public:
 	bool doorOasis = false;
 	bool doorTemple = false;
 	bool doorFloor1 = false;
-	bool enterCombat = false;
+	bool enterCombat1 = false;
 
 	bool step = false;
 	bool walkingSoundPlaying = false;

@@ -131,12 +131,11 @@ void Npcs::LoadAnimations()
 {
 	if (npcId == 1)
 	{
-		idleAnim.LoadAnimations("idleAnim", "Paalaya");
-		interactAnim.LoadAnimations("interactAnim", "Paalaya");
+		idleAnim.LoadAnimations("idleAnim", "abuela");
 	}
 	else if (npcId == 2)
 	{
-		
+		idleAnim.LoadAnimations("idleAnim", "nieta");
 	}
 	else if (npcId == 3)
 	{
@@ -166,7 +165,8 @@ void Npcs::LoadAnimations()
 	}
 	else if (npcId == 9)
 	{
-		
+		idleAnim.LoadAnimations("idleAnim", "Paalaya");
+		interactAnim.LoadAnimations("interactAnim", "Paalaya");
 	}
 
 	
