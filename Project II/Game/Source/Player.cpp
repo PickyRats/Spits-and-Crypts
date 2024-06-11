@@ -278,6 +278,11 @@ void Player::EnterDoor()
 		EnteringDoor();
 		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneTemple, 60.0f);
 		doorTemple = false;
+		if (app->hud->mission20Active)
+		{
+			app->hud->mission20Active = false;
+			app->hud->mission21Active = true;
+		}
 	}
 	else if (doorFloor1)
 	{
@@ -289,11 +294,7 @@ void Player::EnterDoor()
 			app->hud->mission31Active = true;
 			app->hud->mission30Active = false;
 		}
-		if (app->hud->mission20Active)
-		{
-			app->hud->mission20Active = false;
-			app->hud->mission21Active = true;
-		}
+		
 	}
 	else if (enterCombat)
 	{

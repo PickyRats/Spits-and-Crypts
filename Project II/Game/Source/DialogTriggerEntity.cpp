@@ -304,6 +304,12 @@ void DialogTrigger::GiveMission(int idMission)
 			//antes de poder abrir el menú, te manda una misión para que completes el primer combate (Mission3) con la variable checkpoint de sceenFloor1
 			app->hud->abilityTree = true;
 		}
+		if (app->hud->mission21Active)
+		{
+			app->hud->mission21Active = false;
+			app->hud->mission2Complete = true;
+			DialogMission = false;
+		}
 		else if (!app->hud->mission3Complete && !app->hud->mission32Active)
 		{
 			app->hud->mission30Active = true;
@@ -345,12 +351,7 @@ void DialogTrigger::GiveMission(int idMission)
 		break;
 	case 9:
 		printf(" Que haces pidiendome wishky con cereales \n");
-		if (app->hud->mission21Active)
-		{
-			app->hud->mission21Active = false;
-			app->hud->mission2Complete = true;
-			DialogMission = false;
-		}
+		
 		break;
 	default:
 		break;

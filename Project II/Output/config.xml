@@ -156,7 +156,7 @@
 				<sentence text="Como era la canción esa, Tunak tunak..."/>
 			</repeat_sentences>
 			<fraseMision>
-				<sentence text="Soy el Tabernero, tu primera misión será la siguiente... "/>
+				<sentence text="deberias ir al templo a rendir tributo a tu dios "/>
 			</fraseMision>
 		</dialogTrigger>
     <!-- Music -->
