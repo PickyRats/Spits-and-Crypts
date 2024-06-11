@@ -438,6 +438,7 @@
 		<emptyslotTexture texturepath="Assets/Textures/Screens/Shop/emptyslot.png"/>
 		<selectorItemTexture texturepath="Assets/Textures/Screens/Shop/selectorItem.png"/>
 		<Coin texturepath="Assets/Textures/Screens/Shop/coin.png"/>
+		<Exp texturepath="Assets/Textures/Screens/Inventory/Orbe_XP.png"/>
 	
 		
 

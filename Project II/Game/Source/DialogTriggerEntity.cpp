@@ -295,6 +295,7 @@ void DialogTrigger::GiveMission(int idMission)
 		app->hud->mission11Active = false;
 		app->hud->mission1Complete = true;
 		app->hud->coin += 20;
+		app->hud->exp += 1;
 		app->fade->Fade((Module*)app->sceneChoza, (Module*)app->sceneVillage, 60.0f);
 		break;
 	case 3:
@@ -312,6 +313,7 @@ void DialogTrigger::GiveMission(int idMission)
 			app->hud->mission21Active = false;
 			app->hud->mission2Complete = true;
 			app->hud->coin += 20;
+			app->hud->exp += 1;
 			app->hud->mission30Active = true; 
 			PlayDialog();
 		}
@@ -332,6 +334,7 @@ void DialogTrigger::GiveMission(int idMission)
 				DialogMission = false;
 				app->hud->mission3Complete = true;
 				app->hud->coin += 50;
+				app->hud->exp += 1;
 			}
 		}
 		break;

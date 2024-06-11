@@ -160,6 +160,7 @@ bool Hud::Start()
 	ObjectText3Shop = app->tex->Load(configNode3.child("ObjectText3Shop").attribute("texturepath").as_string());
 
 	Coin = app->tex->Load(configNode3.child("Coin").attribute("texturepath").as_string());
+	Exp = app->tex->Load(configNode3.child("Exp").attribute("texturepath").as_string());
 
 	items[0] = { 50, 0, 10, false, inventoryItem1 , ObjectText1 , ObjectText1Shop };
 	items[1] = {  0, 10, 20, false, inventoryItem2 , ObjectText2 , ObjectText2Shop };
@@ -993,10 +994,15 @@ void Hud::Inventory() {
 		snprintf(Armour, sizeof(Armour), "%02d", dano);
 		app->render->DrawText(Armour, 185, 580, 30, 18);
 
-		app->render->DrawTexture(Coin, 1110, 100, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(Coin, 1050, 105, NULL, SDL_FLIP_NONE, 0);
 		snprintf(buffer, sizeof(buffer), "%d", coin);
 		const char* miVariable = buffer;
-		app->render->DrawText(miVariable, 1050, 100, 55, 55);
+		app->render->DrawText(miVariable, 1010, 100, 40, 45);
+
+		app->render->DrawTexture(Exp, 1170, 105, NULL, SDL_FLIP_NONE, 0);
+		snprintf(buffer, sizeof(buffer), "%d", exp);
+		const char* miVariableExp = buffer;
+		app->render->DrawText(miVariableExp, 1125, 100, 40, 45);
 
 
 		for (int i = 0; i < 4; i++) {
@@ -1150,7 +1156,7 @@ void Hud::SkillTree() {
 		auto& node = skillTreenode[i];
 
 		if (node.selected) {
-			if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN ||pad.a==KEY_DOWN && !wasAPressed && (node.unlockRequirement == -1 || !skillTreenode[node.unlockRequirement].locked)) {
+			if ((app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN ||(pad.a==KEY_DOWN && !wasAPressed)) && (node.unlockRequirement == -1 || !skillTreenode[node.unlockRequirement].locked) && exp >= 1) {
 				app->audio->PlayFx(app->sceneMenu->FxButton1);
 				node.locked = false;
 				wasAPressed = true;
@@ -1175,11 +1181,13 @@ void Hud::ApplySkillEffects(int skillIndex) {
 		Rama2_1 = skillTreerama_2_1;
 		Rama3_1 = skillTreerama_3_1;
 		app->map->player->health += 5;
+		exp = exp-1;
 		break;
 	case 2:
 		skillTreenode[2].texture = SkillTreeSpeed_2;
 		Rama2_1 = skillTreerama_2_2;
 		Rama3_1 = skillTreerama_3_2;
+		exp = exp - 1;
 		break;
 	case 3:
 		skillTreenode[3].texture = Bloqueado1_2;
@@ -1187,12 +1195,14 @@ void Hud::ApplySkillEffects(int skillIndex) {
 		Rama2_2 = skillTreerama_2_1;
 		Rama3_2 = skillTreerama_3_1;
 		app->map->player->attackDamage += 5;
+		exp = exp - 1;
 		Habilidad1 = Bloqueado1_2;
 		break;
 	case 4:
 		skillTreenode[4].texture = Bloqueado2_2;
 		Rama2_2 = skillTreerama_2_2;
 		Rama3_2 = skillTreerama_3_2;
+		exp = exp - 1;
 		Habilidad2 = Bloqueado2_2;
 		break;
 	}
