@@ -848,17 +848,17 @@ void Hud::Inventory() {
 		char Vida[20];
 		int vida = app->map->player->health;
 		snprintf(Vida, sizeof(Vida), "%02d", vida);
-		app->render->DrawText(Vida, 60, 580, 30, 18);
+		app->render->DrawText(Vida, 130, 580, 30, 18);
 
 		char Armour[20];
 		int dano = app->map->player->attackDamage;
 		snprintf(Armour, sizeof(Armour), "%02d", dano);
-		app->render->DrawText(Armour, 123, 580, 30, 18);
+		app->render->DrawText(Armour, 185, 580, 30, 18);
 
-		app->render->DrawTexture(Coin, 1100, 100, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(Coin, 1110, 100, NULL, SDL_FLIP_NONE, 0);
 		snprintf(buffer, sizeof(buffer), "%d", coin);
 		const char* miVariable = buffer;
-		app->render->DrawText(miVariable, 1075, 100, 40, 55);
+		app->render->DrawText(miVariable, 1050, 100, 55, 55);
 
 
 		for (int i = 0; i < 4; i++) {
@@ -900,7 +900,7 @@ void Hud::Shop() {
 		app->render->DrawTexture(Coin, 1100, 100, NULL, SDL_FLIP_NONE, 0);
 		snprintf(buffer, sizeof(buffer), "%d", coin);
 		const char* miVariable = buffer;
-		app->render->DrawText(miVariable, 1075, 100, 40, 55);
+		app->render->DrawText(miVariable, 1050, 100, 55, 55);
 
 		for (int i = 0; i < 3; i++) 
 		{
