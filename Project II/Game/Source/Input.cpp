@@ -152,6 +152,7 @@ bool Input::PreUpdate()
 				mouseX = event.motion.x / scale;
 				mouseY = event.motion.y / scale;
 				//LOG("Mouse motion x %d y %d", mouse_motion_x, mouse_motion_y);
+
 			break;
 		}
 	}
@@ -206,6 +207,7 @@ void Input::HandleDeviceConnection(int index)
 		}
 	}
 }
+
 void Input::HandleDeviceRemoval(int index)
 {
 	// If an existing gamepad has the given index, deactivate all SDL device functionallity
@@ -220,6 +222,7 @@ void Input::HandleDeviceRemoval(int index)
 		}
 	}
 }
+
 void Input::UpdateGamepadsInput()
 {
 	// Iterate through all active gamepads and update all input data
@@ -305,6 +308,7 @@ void Input::UpdateGamepadsInput()
 		}
 	}
 }
+
 bool Input::ShakeController(int id, int duration, float strength)
 {
 	bool ret = false;
@@ -337,6 +341,7 @@ bool Input::ShakeController(int id, int duration, float strength)
 
 	return ret;
 }
+
 const char* Input::GetControllerName(int id) const
 {
 	// Check if the given id has a valid controller
@@ -345,6 +350,7 @@ const char* Input::GetControllerName(int id) const
 
 	return "unplugged";
 }
+
 bool Input::GetWindowEvent(EventWindow ev)
 {
 	return windowEvents[ev];

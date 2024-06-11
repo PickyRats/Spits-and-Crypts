@@ -20,7 +20,8 @@
 #include "SceneMenu.h"
 #include "SceneCombat.h"
 #include "SceneTemple.h"
-#include "Map.h"
+#include "Player.h"
+
 
 #include <iostream>
 #include <iomanip>
@@ -133,24 +134,32 @@ bool Hud::Start()
 	inventoryItem1 = app->tex->Load(configNode3.child("inventoryItem1").attribute("texturepath").as_string());
 	inventoryItem2 = app->tex->Load(configNode3.child("inventoryItem2").attribute("texturepath").as_string());
 	inventoryItem3 = app->tex->Load(configNode3.child("inventoryItem3").attribute("texturepath").as_string());
+	ObjectText1 = app->tex->Load(configNode3.child("ObjectText1").attribute("texturepath").as_string());
+	ObjectText2 = app->tex->Load(configNode3.child("ObjectText2").attribute("texturepath").as_string());
+	ObjectText3 = app->tex->Load(configNode3.child("ObjectText3").attribute("texturepath").as_string());	
+	ObjectText1Shop = app->tex->Load(configNode3.child("ObjectText1Shop").attribute("texturepath").as_string());
+	ObjectText2Shop = app->tex->Load(configNode3.child("ObjectText2Shop").attribute("texturepath").as_string());
+	ObjectText3Shop = app->tex->Load(configNode3.child("ObjectText3Shop").attribute("texturepath").as_string());
 
-	items[0] = { "Pocion", "Heals 50 health points", 50, 0, 10, inventoryItem1 };
-	items[1] = { "Collar", "Increases attack by 10", 0, 10, 20, inventoryItem2 };
-	items[2] = { "Escudo", "Increases health by 10", 0, 0, 30, inventoryItem3 };
+	Coin = app->tex->Load(configNode3.child("Coin").attribute("texturepath").as_string());
+
+	items[0] = { 50, 0, 10, false, inventoryItem1 , ObjectText1 , ObjectText1Shop };
+	items[1] = {  0, 10, 20, false, inventoryItem2 , ObjectText2 , ObjectText2Shop };
+	items[2] = { 10, 0, 30, false, inventoryItem3 , ObjectText3 , ObjectText3Shop };
 
 	inventorySlots[0].position = { 442, 272 };
-	inventorySlots[1].position = { 534, 272 };
-	inventorySlots[2].position = { 629, 272 };
+	inventorySlots[1].position = { 532, 272 };
+	inventorySlots[2].position = { 625, 272 };
+	inventorySlots[3].position = { 320, 260 };
+
 
 	//SHOP
 	shopTexture = app->tex->Load(configNode3.child("shopTexture").attribute("texturepath").as_string());
 
-	shopSlots[0] = { {343, 120},items[0].texture, false };
-	shopSlots[1] = { {532, 246},items[1].texture, false };
-	shopSlots[2] = { {128, 375},items[2].texture, false };
+	shopSlots[0] = { {343, 120}, items[0].texture, false };
+	shopSlots[1] = { {532, 246}, items[1].texture, false };
+	shopSlots[2] = { {128, 375}, items[2].texture, false };
 
-
-	emptyslotTexture = app->tex->Load(configNode3.child("emptyslotTexture").attribute("texturepath").as_string());
 	selectorItemTexture = app->tex->Load(configNode3.child("selectorItemTexture").attribute("texturepath").as_string());
 
 	//Create Buttons
@@ -271,12 +280,22 @@ bool Hud::Start()
 
 bool Hud::Update(float dt)
 {
+	GamePad& pad = app->input->pads[0];
 	//Ability Tree
+	if (app->sceneTemple->active && app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN || pad.back == KEY_DOWN && !wasSelectPressed)
+	{
+		abilityTree = !abilityTree;
+		wasSelectPressed = true;
+	}
+	else if (pad.back != KEY_DOWN)
+	{
+		wasSelectPressed = false;
+	}
 	if (abilityTree)
 	{
 		SkillTree();
 	}
-
+	
 	//Inventory
 	Inventory();
 
@@ -313,14 +332,19 @@ bool Hud::Update(float dt)
 			//Render pause
 			app->render->DrawTexture(pause, 0, 0, NULL, SDL_FLIP_NONE, 0);
 
-			if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && app->sceneMenu->currentId < 4))
+			if (pad.down == KEY_DOWN && !wasDownPressed && currentId != 8 && currentId != 11 && currentId != 12)
 			{
 				app->sceneMenu->currentId++;
-
+				wasDownPressed = true;
 			}
-			if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && app->sceneMenu->currentId > 1))
+			else if (pad.down != KEY_DOWN)
+			{
+				wasDownPressed = false;
+			}
+			if (pad.up == KEY_DOWN && !wasUpPressed && currentId != 6 && currentId != 9 && currentId != 12)
 			{
 				app->sceneMenu->currentId--;
+				wasUpPressed = true;
 			}
 			//Check if buttons are focused or pressed. If pressed, do the action. With sound effects. 
 			if (resumeButton->state == GuiControlState::FOCUSED) {
@@ -451,7 +475,7 @@ bool Hud::Update(float dt)
 		//Settings menu on pause
 		else if (onSettings)
 		{
-			if ((app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN))
+			if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || pad.r1 == KEY_DOWN && !wasR1Pressed)
 			{
 				if (app->sceneMenu->currentId >= 9 && app->sceneMenu->currentId < 12)
 				{
@@ -461,8 +485,13 @@ bool Hud::Update(float dt)
 				{
 					app->sceneMenu->currentId = 9;
 				}
+				wasR1Pressed = true;
 			}
-			else if ((app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN))
+			else if (pad.r1 != KEY_DOWN)
+			{
+				wasR1Pressed = false;
+			}
+			if ((app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN || pad.l1 == KEY_DOWN && !wasL1Pressed))
 			{
 				if (app->sceneMenu->currentId >= 12)
 				{
@@ -472,6 +501,11 @@ bool Hud::Update(float dt)
 				{
 					app->sceneMenu->currentId = 6;
 				}
+				wasL1Pressed = true;
+			}
+			else if (pad.l1 != KEY_DOWN)
+			{
+				wasL1Pressed = false;
 			}
 			//Hide previous buttons
 			resumeButton->state = GuiControlState::HIDDEN;
@@ -512,17 +546,27 @@ bool Hud::Update(float dt)
 			}
 			else if (onSettingsOptions)
 			{
-				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && app->sceneMenu->currentId != 8)
+				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.down == KEY_DOWN && !wasDownPressed && app->sceneMenu->currentId != 8)
 				{
 					app->sceneMenu->currentId++;
 					app->sceneMenu->fxHoverPlayed = false;
 					app->sceneMenu->fxClickPlayed = false;
+					wasDownPressed = true;
 				}
-				else if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && app->sceneMenu->currentId != 6)
+				else if (pad.down != KEY_DOWN)
+				{
+					wasDownPressed = false;
+				}
+				else if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.up == KEY_DOWN && !wasUpPressed && app->sceneMenu->currentId != 6)
 				{
 					app->sceneMenu->currentId--;
 					app->sceneMenu->fxHoverPlayed = false;
 					app->sceneMenu->fxClickPlayed = false;
+					wasUpPressed = true;
+				}
+				else if (pad.up != KEY_DOWN)
+				{
+					wasUpPressed = false;
 				}
 				app->render->DrawTexture(settingsOptionsPanel, 0, 0, NULL, SDL_FLIP_NONE, 0);
 
@@ -536,7 +580,7 @@ bool Hud::Update(float dt)
 				}
 			}
 		}
-			if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+			if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || pad.b == KEY_DOWN)
 			{
 				app->sceneMenu->currentId = 1;
 				onSettings = false;
@@ -821,179 +865,156 @@ void Hud::Missions(int mission1)
 	}
 }
 
-void Hud::Inventory()
-{
-	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
+void Hud::UpdatePlayerStats(Item& item, bool equip) {
+	int multiplier = equip ? 1 : -1;
+	app->map->player->health += item.health * multiplier;
+	app->map->player->attackDamage += item.attack * multiplier;
+	
+	
+}
+
+void Hud::EquipItem(int inventorySlotId) {
+	if (!inventorySlots[3].isEmpty) {
+		for (int i = 0; i < 4; i++)
+		{
+			inventorySlots[i].isEquiped = false;
+		}
+		int equippedItemId = inventorySlots[3].itemId;
+		UpdatePlayerStats(items[equippedItemId], false);
+	}
+
+	newItemId = inventorySlots[inventorySlotId].itemId;
+	inventorySlots[itemId].isEquiped = true;
+	inventorySlots[3].isEmpty = false;
+	inventorySlots[3].texture = items[newItemId].texture;
+	inventorySlots[3].itemId = newItemId;
+	UpdatePlayerStats(items[newItemId], true);
+}
+
+void Hud::Inventory() {
+	GamePad& pad = app->input->pads[0];
+
+	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN || (pad.y == KEY_DOWN && !wasYPressed))
 	{
 		inventory = !inventory;
+		wasYPressed = true;
 
 	}
+	else if (pad.y != KEY_DOWN)
+	{
+		wasYPressed = false;
+	}
+
 	if (inventory)
 	{
 		app->render->DrawTexture(inventoryTexture, 0, 0, NULL, SDL_FLIP_NONE, 0);
 
-		for (int i = 0; i < 3; i++) {
+		char Vida[20];
+		int vida = app->map->player->health;
+		snprintf(Vida, sizeof(Vida), "%02d", vida);
+		app->render->DrawText(Vida, 130, 580, 30, 18);
+
+		char Armour[20];
+		int dano = app->map->player->attackDamage;
+		snprintf(Armour, sizeof(Armour), "%02d", dano);
+		app->render->DrawText(Armour, 185, 580, 30, 18);
+
+		app->render->DrawTexture(Coin, 1110, 100, NULL, SDL_FLIP_NONE, 0);
+		snprintf(buffer, sizeof(buffer), "%d", coin);
+		const char* miVariable = buffer;
+		app->render->DrawText(miVariable, 1050, 100, 55, 55);
+
+
+		for (int i = 0; i < 4; i++) {
 			if (!inventorySlots[i].isEmpty) {
 				app->render->DrawTexture(inventorySlots[i].texture, inventorySlots[i].position.x, inventorySlots[i].position.y, NULL, SDL_FLIP_NONE, 0);
 			}
 		}
-	}
 
+		app->render->DrawTexture(selectorItemTexture, inventorySlots[itemId].position.x - 20, inventorySlots[itemId].position.y - 15, NULL, SDL_FLIP_NONE, 0);
+		if (!inventorySlots[itemId].isEmpty)
+		{
+			app->render->DrawTexture(items[inventorySlots[itemId].itemId].ObjectText, 900, 300, NULL, SDL_FLIP_NONE, 0);
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && itemId > 0) {
+			itemId--;
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && itemId < 2) {
+			itemId++;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
+			if (!inventorySlots[itemId].isEmpty && !inventorySlots[itemId].isEquiped) {
+				EquipItem(itemId);
+
+			}
+		}
+	}
 }
 
-void Hud::Shop()
-	{
-	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN )
-	{
-		shop = !shop;
-
+void Hud::Shop() {	
+  GamePad& pad = app->input->pads[0];
+	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) {
+		shop = false;
 	}
-	if (shop)
-	{
+	if (shop) {
 		app->render->DrawTexture(shopTexture, 0, 0, NULL, SDL_FLIP_NONE, 0);
 
+		app->render->DrawTexture(Coin, 1100, 100, NULL, SDL_FLIP_NONE, 0);
+		snprintf(buffer, sizeof(buffer), "%d", coin);
+		const char* miVariable = buffer;
+		app->render->DrawText(miVariable, 1050, 100, 55, 55);
 
-		for (int i = 0; i < 4; i++) {
-			if (shopSlots[i].isEmpty) {
-				app->render->DrawTexture(emptyslotTexture, shopSlots[i].position.x, shopSlots[i].position.y, NULL, SDL_FLIP_NONE, 0);
-			}
-			else {
+		for (int i = 0; i < 3; i++) 
+		{
+			if (!shopSlots[i].isEmpty) 
+			{
 				app->render->DrawTexture(shopSlots[i].texture, shopSlots[i].position.x, shopSlots[i].position.y, NULL, SDL_FLIP_NONE, 0);
 			}
 		}
 
-		app->render->DrawTexture(selectorItemTexture, shopSlots[itemId].position.x, shopSlots[itemId].position.y, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(selectorItemTexture, shopSlots[itemId].position.x-20, shopSlots[itemId].position.y-15, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(items[itemId].ObjectTextShop, 775, 200, NULL, SDL_FLIP_NONE, 0);
 
-		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && itemId > 0)
+		if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || (pad.left == KEY_DOWN && !wasLeftPressed)) && itemId > 0)
 		{
 			itemId--;
+			wasLeftPressed = true;
 
 		}
-		else if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && itemId < 2)
+		else if (pad.left != KEY_DOWN && wasLeftPressed)
+		{
+			wasLeftPressed = false;
+		}
+
+		else if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || (pad.right == KEY_DOWN && !wasRightPressed)) && itemId < 2)
 		{
 			itemId++;
+			wasRightPressed = true;
+		}
+		else if (pad.right != KEY_DOWN && wasRightPressed)
+		{
+			wasRightPressed = false;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN && !shopSlots[itemId].isBought)
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				if (inventorySlots[i].isEmpty) {
+		if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN && !shopSlots[itemId].isBought ) {
+			for (int i = 0; i < 3; i++) {
+				if (inventorySlots[i].isEmpty && (coin >= items[itemId].price))	{
 					inventorySlots[i].isEmpty = false;
 					inventorySlots[i].texture = items[itemId].texture;
+					inventorySlots[i].itemId = itemId;
 					shopSlots[itemId].isEmpty = true;
 					shopSlots[itemId].isBought = true;
+					items[itemId].isInInventary = true;
+					coin = coin - items[itemId].price;
 					break;
 				}
-
-
 			}
-			
 		}
-		/*for (int i = 0; i < 3; i++) {
-			if (!slots[i].isEmpty) {
-				app->render->DrawTexture(slots[i].texture, slots[i].position.x, slots[i].position.y, NULL, SDL_FLIP_NONE, 0);
-			}
-		}*/
-
-
 	}
 }
-
-bool Hud::CleanUp()
-{
-	LOG("Freeing Hud");
-
-	app->tex->UnLoad(vidas);
-	app->tex->UnLoad(points);
-	app->tex->UnLoad(Personaje1);
-	app->tex->UnLoad(Personaje2);
-	app->tex->UnLoad(Selectorazul);
-	app->tex->UnLoad(Selectornaranja);
-	app->tex->UnLoad(Opacity);
-	app->tex->UnLoad(Cuadrojugador);
-	app->tex->UnLoad(numeros);
-	app->tex->UnLoad(pause);
-	app->tex->UnLoad(exitNormal);
-	app->tex->UnLoad(exitHover);
-	app->tex->UnLoad(exitClick);
-	app->tex->UnLoad(resumeNormal);
-	app->tex->UnLoad(resumeHover);
-	app->tex->UnLoad(resumeClick);
-	app->tex->UnLoad(settingsNormal);
-	app->tex->UnLoad(settingsHover);
-	app->tex->UnLoad(settingsClick);
-	app->tex->UnLoad(backToTitleNormal);
-	app->tex->UnLoad(backToTitleHover);
-	app->tex->UnLoad(backToTitleClick);
-	app->tex->UnLoad(settingsExitNormal);
-	app->tex->UnLoad(settingsExitHover);
-	app->tex->UnLoad(settingsExitClick);
-	app->tex->UnLoad(settingsReturnNormal);
-	app->tex->UnLoad(settingsReturnHover);
-	app->tex->UnLoad(settingsReturnClick);
-	app->tex->UnLoad(settingsTick);
-	app->tex->UnLoad(settingsSlider);
-	app->tex->UnLoad(settingsBoxNormal);
-	app->tex->UnLoad(settingsBoxHover);
-	app->tex->UnLoad(settings);
-	app->tex->UnLoad(settingsControls);
-	app->tex->UnLoad(settingsAudioPanel);
-	app->tex->UnLoad(settingsOptionsPanel);
-	app->tex->UnLoad(settingsControlsButtonNormal);
-	app->tex->UnLoad(settingsControlsButtonHover);
-	app->tex->UnLoad(settingsAudioButtonNormal);
-	app->tex->UnLoad(settingsAudioButtonHover);
-	app->tex->UnLoad(settingsOptionsButtonNormal);
-	app->tex->UnLoad(settingsOptionsButtonHover);
-	app->tex->UnLoad(inventoryTexture);
-	app->tex->UnLoad(inventoryItem1);
-	app->tex->UnLoad(inventoryItem2);
-	app->tex->UnLoad(inventoryItem3);
-	app->tex->UnLoad(shopTexture);
-	app->tex->UnLoad(emptyslotTexture);
-	app->tex->UnLoad(skillTree);
-	app->tex->UnLoad(skillTreerama_1);
-	app->tex->UnLoad(skillTreerama_2_1);
-	app->tex->UnLoad(skillTreerama_3_1);
-	app->tex->UnLoad(skillTreerama_2_2);
-	app->tex->UnLoad(skillTreerama_3_2);
-	app->tex->UnLoad(SkillTreeTalent);
-	app->tex->UnLoad(SkillTreeLife_1);
-	app->tex->UnLoad(SkillTreeLife_2);
-	app->tex->UnLoad(SkillTreeSpeed_1);
-	app->tex->UnLoad(SkillTreeSpeed_2);
-	app->tex->UnLoad(SkillTreeAtack_1_1);
-	app->tex->UnLoad(SkillTreeAtack_1_2);
-	app->tex->UnLoad(SkillTreeAtack_2_1);
-	app->tex->UnLoad(SkillTreeAtack_2_2);
-	app->tex->UnLoad(SkillTreeAtack_3_1);
-	app->tex->UnLoad(SkillTreeAtack_3_2);
-	app->tex->UnLoad(SkillTreeAtack_4_1);
-	app->tex->UnLoad(SkillTreeAtack_4_2);
-	app->tex->UnLoad(SkillTreeAtack_5_1);
-	app->tex->UnLoad(SkillTreeAtack_5_2);
-	app->tex->UnLoad(SkillTreeAtack_6_1);
-	app->tex->UnLoad(SkillTreeAtack_6_2);
-	app->tex->UnLoad(SkillTreeAtack_7_1);
-	app->tex->UnLoad(SkillTreeAtack_7_2);
-	app->tex->UnLoad(SkillTreeAtack_8_1);
-	app->tex->UnLoad(SkillTreeAtack_8_2);
-	app->tex->UnLoad(Selection);
-	app->tex->UnLoad(DescTree);
-	app->tex->UnLoad(DescLife);
-	app->tex->UnLoad(DescSpeed);
-	app->tex->UnLoad(DescAtack_1);
-	app->tex->UnLoad(DescAtack_2);
-	app->tex->UnLoad(DescAtack_3);
-	app->tex->UnLoad(DescAtack_4);
-	app->tex->UnLoad(DescAtack_5);
-	app->tex->UnLoad(DescAtack_6);
-	app->tex->UnLoad(DescAtack_7);
-	app->tex->UnLoad(DescAtack_8);
-
-	return true;
-}
+    
 
 void Hud::SkillTree() {
 
@@ -1001,7 +1022,8 @@ void Hud::SkillTree() {
 	{
 		abilityTree = false;
 	}
-	// Dibuja el fondo del árbol de habilidades
+	// Dibuja el fondo del ï¿½rbol de habilidades
+
 	app->render->DrawTexture(skillTree, 0, 0, NULL, SDL_FLIP_NONE, 0);
 	app->render->DrawTexture(Rama1_1, 405, 199, NULL, SDL_FLIP_HORIZONTAL, 0);
 	app->render->DrawTexture(Rama1_2, 252, 199, NULL, SDL_FLIP_NONE, 0);
@@ -1024,7 +1046,7 @@ void Hud::SkillTree() {
 		}
 	}
 
-	// Maneja la selección y el desbloqueo de habilidades
+	// Maneja la selecciï¿½n y el desbloqueo de habilidades
 	for (int i = 0; i < skillTreenode.size(); ++i) {
 		auto& node = skillTreenode[i];
 
@@ -1032,11 +1054,11 @@ void Hud::SkillTree() {
 			if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && (node.unlockRequirement == -1 || !skillTreenode[node.unlockRequirement].locked)) {
 				app->audio->PlayFx(app->sceneMenu->FxButton1);
 				node.locked = false;
-				// Aplica efectos según el tipo de habilidad desbloqueada
+				// Aplica efectos segï¿½n el tipo de habilidad desbloqueada
 				ApplySkillEffects(i);
 			}
 
-			// Maneja el movimiento de la selección
+			// Maneja el movimiento de la selecciï¿½n
 			HandleSelection(i);
 		}
 	}
@@ -1163,3 +1185,98 @@ void Hud::SkillTreeclass(int classid) {
 		skillTreenode[4].texture = Bloqueado2_1;
 	}
 }
+
+bool Hud::CleanUp()
+{
+	LOG("Freeing Hud");
+
+	app->tex->UnLoad(vidas);
+	app->tex->UnLoad(points);
+	app->tex->UnLoad(Personaje1);
+	app->tex->UnLoad(Personaje2);
+	app->tex->UnLoad(Selectorazul);
+	app->tex->UnLoad(Selectornaranja);
+	app->tex->UnLoad(Opacity);
+	app->tex->UnLoad(Cuadrojugador);
+	app->tex->UnLoad(numeros);
+	app->tex->UnLoad(pause);
+	app->tex->UnLoad(exitNormal);
+	app->tex->UnLoad(exitHover);
+	app->tex->UnLoad(exitClick);
+	app->tex->UnLoad(resumeNormal);
+	app->tex->UnLoad(resumeHover);
+	app->tex->UnLoad(resumeClick);
+	app->tex->UnLoad(settingsNormal);
+	app->tex->UnLoad(settingsHover);
+	app->tex->UnLoad(settingsClick);
+	app->tex->UnLoad(backToTitleNormal);
+	app->tex->UnLoad(backToTitleHover);
+	app->tex->UnLoad(backToTitleClick);
+	app->tex->UnLoad(settingsExitNormal);
+	app->tex->UnLoad(settingsExitHover);
+	app->tex->UnLoad(settingsExitClick);
+	app->tex->UnLoad(settingsReturnNormal);
+	app->tex->UnLoad(settingsReturnHover);
+	app->tex->UnLoad(settingsReturnClick);
+	app->tex->UnLoad(settingsTick);
+	app->tex->UnLoad(settingsSlider);
+	app->tex->UnLoad(settingsBoxNormal);
+	app->tex->UnLoad(settingsBoxHover);
+	app->tex->UnLoad(settings);
+	app->tex->UnLoad(settingsControls);
+	app->tex->UnLoad(settingsAudioPanel);
+	app->tex->UnLoad(settingsOptionsPanel);
+	app->tex->UnLoad(settingsControlsButtonNormal);
+	app->tex->UnLoad(settingsControlsButtonHover);
+	app->tex->UnLoad(settingsAudioButtonNormal);
+	app->tex->UnLoad(settingsAudioButtonHover);
+	app->tex->UnLoad(settingsOptionsButtonNormal);
+	app->tex->UnLoad(settingsOptionsButtonHover);
+	app->tex->UnLoad(inventoryTexture);
+	app->tex->UnLoad(inventoryItem1);
+	app->tex->UnLoad(inventoryItem2);
+	app->tex->UnLoad(inventoryItem3);
+	app->tex->UnLoad(shopTexture);
+	app->tex->UnLoad(skillTree);
+	app->tex->UnLoad(skillTreerama_1);
+	app->tex->UnLoad(skillTreerama_2_1);
+	app->tex->UnLoad(skillTreerama_3_1);
+	app->tex->UnLoad(skillTreerama_2_2);
+	app->tex->UnLoad(skillTreerama_3_2);
+	app->tex->UnLoad(SkillTreeTalent);
+	app->tex->UnLoad(SkillTreeLife_1);
+	app->tex->UnLoad(SkillTreeLife_2);
+	app->tex->UnLoad(SkillTreeSpeed_1);
+	app->tex->UnLoad(SkillTreeSpeed_2);
+	app->tex->UnLoad(SkillTreeAtack_1_1);
+	app->tex->UnLoad(SkillTreeAtack_1_2);
+	app->tex->UnLoad(SkillTreeAtack_2_1);
+	app->tex->UnLoad(SkillTreeAtack_2_2);
+	app->tex->UnLoad(SkillTreeAtack_3_1);
+	app->tex->UnLoad(SkillTreeAtack_3_2);
+	app->tex->UnLoad(SkillTreeAtack_4_1);
+	app->tex->UnLoad(SkillTreeAtack_4_2);
+	app->tex->UnLoad(SkillTreeAtack_5_1);
+	app->tex->UnLoad(SkillTreeAtack_5_2);
+	app->tex->UnLoad(SkillTreeAtack_6_1);
+	app->tex->UnLoad(SkillTreeAtack_6_2);
+	app->tex->UnLoad(SkillTreeAtack_7_1);
+	app->tex->UnLoad(SkillTreeAtack_7_2);
+	app->tex->UnLoad(SkillTreeAtack_8_1);
+	app->tex->UnLoad(SkillTreeAtack_8_2);
+	app->tex->UnLoad(Selection);
+	app->tex->UnLoad(DescTree);
+	app->tex->UnLoad(DescLife);
+	app->tex->UnLoad(DescSpeed);
+	app->tex->UnLoad(DescAtack_1);
+	app->tex->UnLoad(DescAtack_2);
+	app->tex->UnLoad(DescAtack_3);
+	app->tex->UnLoad(DescAtack_4);
+	app->tex->UnLoad(DescAtack_5);
+	app->tex->UnLoad(DescAtack_6);
+	app->tex->UnLoad(DescAtack_7);
+	app->tex->UnLoad(DescAtack_8);
+
+	return true;
+}
+

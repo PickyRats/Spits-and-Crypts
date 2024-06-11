@@ -18,16 +18,19 @@ struct Slot {
 	SDL_Texture* texture = nullptr;
 	bool isEmpty = true;
 	bool isBought = false;
+	int itemId = -1;	
+	bool isEquiped = false;
+
 };
 
 struct Item {
-	const char* name = nullptr;
-	const char* description = nullptr;
 	int health = 0;
 	int attack = 0;
 	int price = 0;
-
+	bool isInInventary = false;
 	SDL_Texture* texture = nullptr;
+	SDL_Texture* ObjectText = nullptr;
+	SDL_Texture* ObjectTextShop = nullptr;
 };
 
 struct Skill {
@@ -61,8 +64,14 @@ public:
 
 	void DrawTimer();
 
+
+
 	void Missions(int mission1);
+	void UpdatePlayerStats(Item& item, bool equip);
+	void EquipItem(int itemId);
+
 	void SkillTreeclass(int classid);
+
 	void SkillTree();
 	void ApplySkillEffects(int skillIndex);
 	void HandleSelection(int currentIndex);
@@ -89,12 +98,27 @@ public:
 
 	bool abilityTree = false;
 
+	bool wasSelectPressed = false;
+	bool wasDownPressed = false;
+	bool wasLeftPressed = false;
+	bool wasRightPressed = false;
+	bool wasUpPressed = false;
+	bool wasR1Pressed = false;
+	bool wasL1Pressed = false;
+	bool wasYPressed = false;
+	bool wasAPressed = false;
 
-	Slot inventorySlots[3];
+	Slot inventorySlots[4];
+
 	Item items[3];
+	int newItemId;
 
 	Slot shopSlots[3];
 	bool shop = false;
+	
+	int coin= 50;
+	char buffer[20];  // Suficientemente grande para almacenar el entero como cadena
+
 
 	int classid = 1;
 	
@@ -200,13 +224,26 @@ private:
 	SDL_Texture* inventoryItem1;
 	SDL_Texture* inventoryItem2;
 	SDL_Texture* inventoryItem3;
+	SDL_Texture* ObjectText1;
+	SDL_Texture* ObjectText2;
+	SDL_Texture* ObjectText3;
+	
+	
+	SDL_Texture* ObjectText1Shop;
+	SDL_Texture* ObjectText2Shop;
+	SDL_Texture* ObjectText3Shop;
+
+
+	
 	bool inventory = false;
 
 	//Shop
 	int itemId = 0;
 	SDL_Texture* shopTexture;
-	SDL_Texture* emptyslotTexture;
 	SDL_Texture* selectorItemTexture;
+
+	SDL_Texture* Coin;
+
 
 
 	GuiControlButton* exitButton;

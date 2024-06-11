@@ -45,7 +45,7 @@ public:
 	int slotOccupied[4] = { -1, -1, -1, -1 };
 	bool pieceInSlot[4] = { false, false, false, false };
 	bool pieceCollected[4] = { false, false, false, false };
-	int correctPieces[4] = { 2, 3, 1, 0 };
+	int correctPieces[4] = { 3, 2, 1, 0 };
 	float dt;
 	bool showUI = false;
 	bool isPuzzleCompleted = false;

@@ -118,11 +118,18 @@ bool SceneFloor1::PreUpdate()
 // Called each loop iteration
 bool SceneFloor1::Update(float dt)
 {
-
-	if (app->input->GetKey(SDL_SCANCODE_F1)==KEY_DOWN)
+	//activar puzzle 2 cuando el player llegue a la posicion X: 10281 Y 12790
+	if (app->map->player->position.x >= 9100)
 	{
 		app->puzzle2->Enable();
 	}
+	//una vez completado el puzzle 2, se desactiva y se activa el puzzle 3
+	if (app->puzzle2->puzzleCompleted)
+	{
+		app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneLight, 60.0f);
+		app->puzzle2->Disable();
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_F2)==KEY_DOWN)
 	{
 		//Hazme una fade a scenelight
@@ -156,17 +163,22 @@ bool SceneFloor1::Update(float dt)
 // Called each loop iteration
 bool SceneFloor1::PostUpdate()
 {
+	GamePad& pad = app->input->pads[0];
 	bool ret = true;
 
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN||pad.start==KEY_DOWN && !wasStartPressed) {
 		pause = !pause;
 		app->hud->onSettings = false;
 		if (!pause)
 		{
 			Mix_VolumeMusic(app->sceneMenu->percentageMusic);
 		};
+		wasStartPressed = true;
 	}
-	
+	else if (pad.start != KEY_DOWN)
+	{
+		wasStartPressed = false;
+	}
 
 
 

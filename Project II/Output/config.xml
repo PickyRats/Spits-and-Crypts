@@ -176,7 +176,7 @@
 		<TempleMusic path="Assets/Audio/Music/temple_Music.ogg" fadeTime="2" fadeOutTime="2"/>
 
 		<!-- Maat -->
-		<npc x="250" y="386" texturepath="Assets/Textures/Npcs/maat.png" id="3" scene="2"/>
+		<npc x="150" y="386" texturepath="Assets/Textures/Npcs/maat.png" id="3" scene="2"/>
 
 		<!-- Toth -->
 		<npc x="500" y="392" texturepath="Assets/Textures/Npcs/toth.png" id="4" scene="2"/>
@@ -188,7 +188,8 @@
 		<npc x="1000" y="386" texturepath="Assets/Textures/Npcs/horus.png" id="6" scene="2"/>
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="320" y="540"  name="Maat" repeat="true" mission="true" scene="2" id="3" audio_1="Assets/Audio/Fx/maat/voz_maat_1.wav" audio_2="Assets/Audio/Fx/maat/voz_maat_2.wav" audio_3="Assets/Audio/Fx/maat/voz_maat_3.wav">
+
+		<dialogTrigger x="275" y="540"  name="Maat" repeat="true" mission="true" scene="2" id="3" audio_1="Assets/Audio/Fx/maat/voz_maat_1.wav" audio_2="Assets/Audio/Fx/maat/voz_maat_2.wav" audio_3="Assets/Audio/Fx/maat/voz_maat_3.wav">
 			<sentences>
 				<sentence text="¡Gracias por completar la misión!"/>
 				<sentence text="Soy Maat, ¿Qué atributos quieres que te mejore?"/>
@@ -202,7 +203,7 @@
 			</fraseMision>
 		</dialogTrigger>
 		
-		<dialogTrigger x="570" y="540"  name="Thoth" repeat="true" mission="true" scene="2" id="4" audio_1="Assets/Audio/Fx/toth/voz_toth_1.wav" audio_2="Assets/Audio/Fx/toth/voz_toth_2.wav" audio_3="Assets/Audio/Fx/toth/voz_toth_3.wav">
+		<dialogTrigger x="530" y="540"  name="Thoth" repeat="true" mission="true" scene="2" id="4" audio_1="Assets/Audio/Fx/toth/voz_toth_1.wav" audio_2="Assets/Audio/Fx/toth/voz_toth_2.wav" audio_3="Assets/Audio/Fx/toth/voz_toth_3.wav">
 			<sentences>
 				<sentence text="¡Gracias por completar la misión!"/>
 				<sentence text="Soy Thoth, puedo mejorar tus armas"/>
@@ -216,7 +217,8 @@
 			</fraseMision>
 		</dialogTrigger>
 		
-		<dialogTrigger x="820" y="540"  name="Isis" repeat="true" mission="true" scene="2" id="5" audio_1="Assets/Audio/Fx/isis/voz_isis_1.wav" audio_2="Assets/Audio/Fx/isis/voz_isis_2.wav" audio_3="Assets/Audio/Fx/isis/voz_isis_3.wav">
+
+		<dialogTrigger x="850" y="540"  name="Isis" repeat="true" mission="true" scene="2" id="5" audio_1="Assets/Audio/Fx/isis/voz_isis_1.wav" audio_2="Assets/Audio/Fx/isis/voz_isis_2.wav" audio_3="Assets/Audio/Fx/isis/voz_isis_3.wav">
 			<sentences>
 				<sentence text="¡Gracias por completar la misión!"/>
 				<sentence text="Soy Isis, puedo mejorar tus armas"/>
@@ -230,7 +232,8 @@
 			</fraseMision>
 		</dialogTrigger>
 		
-		<dialogTrigger x="1070" y="540"  name="Horus" repeat="true" mission="true" scene="2" id="6" audio_1="Assets/Audio/Fx/horus/voz_horus_1.wav" audio_2="Assets/Audio/Fx/horus/voz_horus_2.wav" audio_3="Assets/Audio/Fx/horus/voz_horus_3.wav">
+
+		<dialogTrigger x="1100" y="540"  name="Horus" repeat="true" mission="true" scene="2" id="6" audio_1="Assets/Audio/Fx/horus/voz_horus_1.wav" audio_2="Assets/Audio/Fx/horus/voz_horus_2.wav" audio_3="Assets/Audio/Fx/horus/voz_horus_3.wav">
 			<sentences>
 				<sentence text="¡Gracias por completar la misión!"/>
 				<sentence text="Soy Horus, puedo mejorar tus armas"/>
@@ -321,12 +324,17 @@
 		<settingsTick texturepath="Assets/Textures/Screens/More/tick.png"/>
 		<settingsSlider texturepath="Assets/Textures/Screens/More/slider.png"/>
 		<settingsAudioPanel texturepath="Assets/Textures/Screens/More/settings_audio_panel.png"/>
-		<settingsOptionsPanel texturepath="Assets/Textures/Screens/More/settings_options_panel.png"/>
+		<settingsOptionsFullScreenHover texturepath="Assets/Textures/Screens/More/settings_options_fullscreen_hover.png"/>
+		<settingsOptionsVsyncHover texturepath="Assets/Textures/Screens/More/settings_options_vsync_hover.png"/>
+		<settingsAudioMusicVolumeHover texturepath="Assets/Textures/Screens/More/settings_audio_musicvolume_hover.png"/>
+    <settingsSfxButtonHover texturepath="Assets/Textures/Screens/More/settings_audio_sfxvolume_hover.png"/>
+    <settingsOptionsPanel texturepath="Assets/Textures/Screens/More/settings_options_panel.png"/>
 		<settingsOptionsButtonNormal texturepath="Assets/Textures/Screens/More/settings_options_button_normal.png"/>
 		<settingsOptionsButtonHover texturepath="Assets/Textures/Screens/More/settings_options_button_hover.png"/>
 		<settingsAudioButtonNormal texturepath="Assets/Textures/Screens/More/settings_audio_button_normal.png"/>
 		<settingsAudioButtonHover texturepath="Assets/Textures/Screens/More/settings_audio_button_hover.png"/>
-		<settingsControlsButtonNormal texturepath="Assets/Textures/Screens/More/settings_controls_button_normal.png"/>
+    
+    <settingsControlsButtonNormal texturepath="Assets/Textures/Screens/More/settings_controls_button_normal.png"/>
 		<settingsControlsButtonHover texturepath="Assets/Textures/Screens/More/settings_controls_button_hover.png"/>
 		<buttonFxHover path="Assets/Audio/Fx/button_hover.wav"/>
 		<buttonFxClick path="Assets/Audio/Fx/button_click.wav"/>
@@ -391,10 +399,21 @@
 		<inventoryItem1 texturepath="Assets/Textures/Screens/Inventory/Amulet_Escarabat.png"/>
 		<inventoryItem2 texturepath="Assets/Textures/Screens/Inventory/Amulet_Serps.png"/>
 		<inventoryItem3 texturepath="Assets/Textures/Screens/Inventory/Amulet_Ull.png"/>
+		<ObjectText1 texturepath="Assets/Textures/Screens/Inventory/TextHabilityBlue.png"/>
+		<ObjectText2 texturepath="Assets/Textures/Screens/Inventory/TextHabilityTurquese.png"/>
+		<ObjectText3 texturepath="Assets/Textures/Screens/Inventory/TextHabilityRed.png"/>
+		
+		
+		<ObjectText1Shop texturepath="Assets/Textures/Screens/Shop/TextHabilityBlue-Shop.png"/>
+		<ObjectText2Shop texturepath="Assets/Textures/Screens/Shop/TextHabilityTurquese-Shop.png"/>
+		<ObjectText3Shop texturepath="Assets/Textures/Screens/Shop/TextHabilityRed-Shop.png"/>
 
 		<shopTexture texturepath="Assets/Textures/Screens/Shop/Store_UI_def.png"/>
 		<emptyslotTexture texturepath="Assets/Textures/Screens/Shop/emptyslot.png"/>
 		<selectorItemTexture texturepath="Assets/Textures/Screens/Shop/selectorItem.png"/>
+		<Coin texturepath="Assets/Textures/Screens/Shop/coin.png"/>
+	
+		
 
 		<SkillTree texturepath="Assets/Textures/SkillTree/SkillTree.png"/>
 		<SkillTreeTalent texturepath="Assets/Textures/SkillTree/SkillTreeTalent.png"/>
