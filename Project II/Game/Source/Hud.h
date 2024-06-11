@@ -65,6 +65,7 @@ public:
 	void DrawTimer();
 
 
+
 	void Missions(int mission1);
 	void UpdatePlayerStats(Item& item, bool equip);
 	void EquipItem(int itemId);
@@ -86,7 +87,17 @@ public:
 	bool mission11Active = false;
 	bool mission1Complete = false;
 
+	bool mission20Active = false;
+	bool mission21Active = false;
+	bool mission2Complete = false;
+
+	bool mission30Active = false;
+	bool mission31Active = false;
+	bool mission32Active = false;
+	bool mission3Complete = false;
+
 	bool abilityTree = false;
+
 	bool wasSelectPressed = false;
 	bool wasDownPressed = false;
 	bool wasLeftPressed = false;
@@ -98,6 +109,7 @@ public:
 	bool wasAPressed = false;
 
 	Slot inventorySlots[4];
+
 	Item items[3];
 	int newItemId;
 
@@ -256,6 +268,13 @@ private:
 	SDL_Texture* mission1i0;
 	SDL_Texture* mission1i1;
 	SDL_Texture* mission1i2;
+
+	SDL_Texture* mission2i0;
+	SDL_Texture* mission2i1;
+
+	SDL_Texture* mission3i0;
+	SDL_Texture* mission3i1;
+	SDL_Texture* mission3i2;
 
 	//HabilityTree
 

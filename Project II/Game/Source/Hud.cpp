@@ -113,6 +113,13 @@ bool Hud::Start()
 	mission1i1 = app->tex->Load(configNode3.child("mission1i1").attribute("texturepath").as_string());
 	mission1i2 = app->tex->Load(configNode3.child("mission1i2").attribute("texturepath").as_string());
 
+	mission2i0 = app->tex->Load(configNode3.child("mission2i0").attribute("texturepath").as_string());
+	mission2i1 = app->tex->Load(configNode3.child("mission2i1").attribute("texturepath").as_string());
+
+	mission3i0 = app->tex->Load(configNode3.child("mission3i0").attribute("texturepath").as_string());
+	mission3i1 = app->tex->Load(configNode3.child("mission3i1").attribute("texturepath").as_string());
+	mission3i2 = app->tex->Load(configNode3.child("mission3i2").attribute("texturepath").as_string());
+
 
 	settingsControlsButtonNormal = app->tex->Load(configNode3.child("settingsControlsButtonNormal").attribute("texturepath").as_string());
 	settingsControlsButtonHover = app->tex->Load(configNode3.child("settingsControlsButtonHover").attribute("texturepath").as_string());
@@ -767,39 +774,96 @@ bool Hud::Update(float dt)
 			}
 		}
 	}
-	//if (mission10Active)
-	//{
-	//	Missions(0);
-	//}
-	//else if (mission11Active)
-	//{
-	//	Missions(1);
-	//}
-	//else if (mission1Complete)
-	//{
-	//	mission10Active = false;
-	//	mission11Active = false;
-	//	app->tex->UnLoad(mission1i1);
-	//	app->tex->UnLoad(mission1i0);
-	//}
+	if (mission10Active)
+	{
+		Missions(0);
+	}
+	if (mission11Active)
+	{
+		Missions(1);
+	}
+	if (mission1Complete)
+	{
+		mission10Active = false;
+		mission11Active = false;
+		app->tex->UnLoad(mission1i1);
+		app->tex->UnLoad(mission1i0);
+	}
+	if (mission20Active)
+	{
+		Missions(2);
+	}
+	if (mission21Active)
+	{
+		Missions(3);
+	}
+	if (mission2Complete)
+	{
+		mission20Active = false;
+		mission21Active = false;
+		app->tex->UnLoad(mission2i1);
+		app->tex->UnLoad(mission2i0);
+	}
+	if (mission30Active)
+	{
+		Missions(4);
+	}
+	if (mission31Active)
+	{
+		Missions(5);
+	}
+	if (mission32Active)
+	{
+		Missions(6);
+	}
+	if (mission3Complete)
+	{
+		mission30Active = false;
+		mission31Active = false;
+		mission32Active = false;
+		app->tex->UnLoad(mission3i1);
+		app->tex->UnLoad(mission3i0);
+		app->tex->UnLoad(mission3i2);
+	}
 	return true;
 }
+//Missions(0)-> mission 1.0
+//Missions(1)-> mission 1.1
 
-
-//void Hud::Missions(int mission1)
-//{
-//	switch (mission1)
-//	{
-//	case 0:
-//		app->render->DrawTexture(mission1i0, 0, 0, NULL, SDL_FLIP_NONE, 0);
-//		break;
-//	case 1:
-//		app->render->DrawTexture(mission1i1, 0, 0, NULL, SDL_FLIP_NONE, 0);
-//		break;
-//	default:
-//		break;
-//	}
-//}
+void Hud::Missions(int mission1)
+{
+	switch (mission1)
+	{
+	case 0:
+		app->render->DrawTexture(mission1i0, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		//printf("Mission 1.0\n");
+		break;
+	case 1:
+		app->render->DrawTexture(mission1i1, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		//printf("Mission 1.1\n");
+		break;
+	case 2:
+		app->render->DrawTexture(mission2i0, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		break;
+	case 3:
+		app->render->DrawTexture(mission2i1, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		break;
+	case 4:
+		app->render->DrawTexture(mission3i0, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		//printf("Mission 3.0\n");
+		break;
+	case 5:
+		app->render->DrawTexture(mission3i1, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		//printf("Mission 3.1\n");
+		break;
+	case 6:
+		app->render->DrawTexture(mission3i2, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		//printf("Mission 3.2\n");
+		break;
+	default:
+		break;
+	}
+}
 
 void Hud::UpdatePlayerStats(Item& item, bool equip) {
 	int multiplier = equip ? 1 : -1;
@@ -953,7 +1017,13 @@ void Hud::Shop() {
     
 
 void Hud::SkillTree() {
+
+	if (app->sceneTemple->active && app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+	{
+		abilityTree = false;
+	}
 	// Dibuja el fondo del �rbol de habilidades
+
 	app->render->DrawTexture(skillTree, 0, 0, NULL, SDL_FLIP_NONE, 0);
 	app->render->DrawTexture(Rama1_1, 405, 199, NULL, SDL_FLIP_HORIZONTAL, 0);
 	app->render->DrawTexture(Rama1_2, 252, 199, NULL, SDL_FLIP_NONE, 0);
@@ -972,7 +1042,7 @@ void Hud::SkillTree() {
 		app->render->DrawTexture(node.texture, node.position.x, node.position.y, NULL, SDL_FLIP_NONE, 0);
 
 		if (node.selected) {
-			app->render->DrawTexture(Selection, node.position.x, node.position.y);
+			app->render->DrawTexture(Selection, node.position.x+64, node.position.y+45);
 		}
 	}
 
