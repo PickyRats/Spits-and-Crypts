@@ -87,6 +87,8 @@ private:
 	bool changingLevel = false;
 	bool isLoading = false;
 
+	bool movement;
+
 
 	int VillageMusic;
 };

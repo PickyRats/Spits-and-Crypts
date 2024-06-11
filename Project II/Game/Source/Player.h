@@ -92,6 +92,8 @@ public:
 
 	bool isWalking = false;
 
+	bool inicio;
+
 	bool isEnteringDoor = false;
 
 	bool godMode = false;
