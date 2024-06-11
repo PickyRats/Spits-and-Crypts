@@ -295,6 +295,7 @@ void DialogTrigger::GiveMission(int idMission)
 		app->fade->Fade((Module*)app->sceneChoza, (Module*)app->sceneVillage, 60.0f);
 		break;
 	case 3:
+		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoMaat;
 		printf(" Soy Maat \n");
 		if (app->hud->classid == 2)
 		{
@@ -302,7 +303,7 @@ void DialogTrigger::GiveMission(int idMission)
 		}
 		break;
 	case 4:
-		
+		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoThoth;
 		if (app->hud->mission21Active)
 		{
 			app->hud->mission21Active = false;
@@ -332,6 +333,7 @@ void DialogTrigger::GiveMission(int idMission)
 		}
 		break;
 	case 5:
+		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoIsis;
 		printf(" Soy Isis  \n");
 		if (app->hud->classid == 3)
 		{
@@ -339,6 +341,7 @@ void DialogTrigger::GiveMission(int idMission)
 		}
 		break;
 	case 6:
+		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoHorus;
 		printf(" Soy Horrus  \n");
 		if (app->hud->classid == 4)
 		{
@@ -346,10 +349,12 @@ void DialogTrigger::GiveMission(int idMission)
 		}
 		break;
 	case 7:
+		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoMercante;
 		printf("  mi humilde tienda \n");
 		app->hud->shop = true;
 		break;
 	case 8:
+		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoTabernero;
 		printf(" Soy el tabernero\n");
 		if (!app->hud->mission2Complete)
 		{
@@ -357,6 +362,7 @@ void DialogTrigger::GiveMission(int idMission)
 		}
 		break;
 	case 9:
+		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoPalaya;
 		printf(" Que haces pidiendome whisky con cereales \n");
 		break;
 	default:

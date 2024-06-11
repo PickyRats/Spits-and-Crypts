@@ -69,9 +69,15 @@
 	</sceneShop>
   
 	<dialogmanager>
-		<textures>
-			<background_dialog texturepath="Assets/Textures/cuadroDialogo.png"/>
-		</textures>
+		<background_dialog texturepath="Assets/Textures/cuadroDialogo.png"/>
+		<background_dialog texturepath="Assets/Textures/cuadroDialogo.png"/>
+		<background_dialoglogoMercante texturepath="Assets/Textures/IconoMercante.png"/>
+		<background_dialoglogoTebernero texturepath="Assets/Textures/IconoTabernero.png"/>
+		<background_dialoglogoPalaya texturepath="Assets/Textures/IconoPaalaya.png"/>
+		<background_dialoglogoMaat texturepath="Assets/Textures/IconoMaat.png"/>
+		<background_dialoglogoThoth texturepath="Assets/Textures/IconoThoth.png"/>
+		<background_dialoglogoHorus texturepath="Assets/Textures/IconoHorus.png"/>
+		<background_dialoglogoIsis texturepath="Assets/Textures/IconoIsis.png"/>
 	</dialogmanager>
 
 	<!-- Intro -->
