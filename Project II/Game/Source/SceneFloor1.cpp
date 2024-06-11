@@ -15,7 +15,7 @@
 #include "Puzzle.h"
 #include "Puzzle2.h"
 #include "Player.h"
-
+#include "puertas.h"
 #include "Defs.h"
 #include "Log.h"
 
@@ -37,7 +37,7 @@ bool SceneFloor1::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
-
+	int i = 0;
 	//if (config.child("player")) {
 	//	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	//	player->parameters = config.child("player");
@@ -45,15 +45,20 @@ bool SceneFloor1::Awake(pugi::xml_node& config)
 
 	for (pugi::xml_node itemNode = config.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
 	{
-		Npcs* npc = (Npcs*)app->entityManager->CreateEntity(EntityType::NPCS);
-		npc->parameters = itemNode;
+		paalaya = (Npcs*)app->entityManager->CreateEntity(EntityType::NPCS);
+		paalaya->parameters = itemNode;
 	}
 	for (pugi::xml_node itemNode = config.child("Piece"); itemNode; itemNode = itemNode.next_sibling("Piece"))
 	{
 		PiezasPuzle* pieces = (PiezasPuzle*)app->entityManager->CreateEntity(EntityType::PIEZAS);
 		pieces->parameters = itemNode;
 	}
-
+	for (pugi::xml_node itemNode = config.child("puerta"); itemNode; itemNode = itemNode.next_sibling("puerta"))
+	{
+		puertas[i] = (Puertas*)app->entityManager->CreateEntity(EntityType::PUERTAS);
+		puertas[i]->parameters = itemNode;
+		i++;
+	}
 	for (pugi::xml_node itemNode = config.child("dialogTrigger"); itemNode; itemNode = itemNode.next_sibling("dialogTrigger"))
 	{
 		DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER);
@@ -84,7 +89,10 @@ bool SceneFloor1::Start()
 	app->hud->Enable();
   
   app->puzzle->Enable();
-	if(!combatFinished)app->sceneFloor1->wall = app->physics->CreateRectangle(37 * 64, 34 * 64, 10, 2 * 64, STATIC);
+	if(!combatFinished)wall = app->physics->CreateRectangle(37 * 64, 34 * 64, 10, 2 * 64, STATIC);
+
+	wall2 = app->physics->CreateRectangle(109*64, 28*64, 10, 3 * 64, STATIC);
+	wall2->ctype = ColliderType::WALL;
 
 	//Load the player in the map
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(playerStartPosition.x), PIXEL_TO_METERS(playerStartPosition.y)), 0);
@@ -118,11 +126,18 @@ bool SceneFloor1::PreUpdate()
 // Called each loop iteration
 bool SceneFloor1::Update(float dt)
 {
-
-	if (app->input->GetKey(SDL_SCANCODE_F1)==KEY_DOWN)
+	//activar puzzle 2 cuando el player llegue a la posicion X: 10281 Y 12790
+	if (app->map->player->position.x >= 9100)
 	{
 		app->puzzle2->Enable();
 	}
+	//una vez completado el puzzle 2, se desactiva y se activa el puzzle 3
+	if (app->puzzle2->puzzleCompleted)
+	{
+		app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneLight, 60.0f);
+		app->puzzle2->Disable();
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_F2)==KEY_DOWN)
 	{
 		//Hazme una fade a scenelight
@@ -149,24 +164,32 @@ bool SceneFloor1::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
-	
+	if (app->sceneFloor1->puertas[1]->puzle1Completed && canDelete)
+	{
+		DeleteWall();
+	}
 	return true;
 }
 
 // Called each loop iteration
 bool SceneFloor1::PostUpdate()
 {
+	GamePad& pad = app->input->pads[0];
 	bool ret = true;
 
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN||pad.start==KEY_DOWN && !wasStartPressed) {
 		pause = !pause;
 		app->hud->onSettings = false;
 		if (!pause)
 		{
 			Mix_VolumeMusic(app->sceneMenu->percentageMusic);
 		};
+		wasStartPressed = true;
 	}
-	
+	else if (pad.start != KEY_DOWN)
+	{
+		wasStartPressed = false;
+	}
 
 
 
@@ -201,6 +224,12 @@ void SceneFloor1::ClampCamera()
 	
 	
 
+}
+
+void SceneFloor1::DeleteWall()
+{
+	wall2->body->SetActive(false);
+	canDelete = false;
 }
 
 bool SceneFloor1::LoadState(pugi::xml_node node)

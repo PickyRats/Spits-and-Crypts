@@ -5,6 +5,7 @@
 #include "Log.h"
 #include "GuiManager.h"
 #include "SceneMenu.h"
+#include "Log.h"
 
 GuiControlCheckBox::GuiControlCheckBox(uint32 id, SDL_Rect bounds, SDL_Texture* textureDisabled, SDL_Texture* textureNormal, SDL_Texture* textureFocused, SDL_Texture* texturePressed) : GuiControl(GuiControlType::BUTTON, id)
 {
@@ -37,9 +38,15 @@ bool GuiControlCheckBox::Update(float dt)
 		
 			state = GuiControlState::FOCUSED;
 
-			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN || (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN||pad.a==KEY_DOWN)) {
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN || (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN||pad.a==KEY_DOWN && !wasAPressed)) {
 				state = GuiControlState::PRESSED;
+				LOG("Pressed");
 				pressed = !pressed;
+				wasAPressed = true;
+			}
+			else if (pad.a != KEY_DOWN)
+			{
+				wasAPressed = false;
 			}
 			
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {

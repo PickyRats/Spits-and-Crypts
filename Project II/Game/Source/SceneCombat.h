@@ -121,6 +121,15 @@ public:
 
 	int currentCombat = 0;
 
+	bool wasXPressed = false;
+	bool wasAPressed = false;
+	bool wasRightPressed = false;
+	bool wasLeftPressed = false;
+	bool wasUpPressed = false;
+	bool wasDownPressed = false;
+
+	bool combatCompleted = false;
+
 private:
 	SDL_Texture* backgroundTexture;
 	SDL_Texture* backgroundTexture2;
@@ -155,7 +164,6 @@ private:
 	int enemyAttackIndex = 0;
 
 	bool startEnemyTurn = false;
-
 
 
 	int nearestPlayer = 0;

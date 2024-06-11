@@ -139,7 +139,7 @@ bool Player::Update(float dt)
 				}
 
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE
-					&& (pad.l_x < 0.2 && pad.l_x > -0.2))
+					&& (pad.l_x < 0.2 && pad.l_x > -0.2)&& (pad.l_y < 0.2 && pad.l_y > -0.2))
 				{
 					if (!isJumping && !isClimbing && !isEnteringDoor) currentAnim = &idleAnim;
 					isWalking = false;
@@ -165,8 +165,26 @@ bool Player::Update(float dt)
 							}
 							collisionActivated = false;
 						}
+						wasUpPressed = true;
 					}
-					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+					if (pad.l_y <= -0.2)
+					{
+						UpMovement();
+						isClimbing = true;
+						pbody->body->SetGravityScale(0.0f);
+						if (collisionActivated)
+						{
+							for (int i = 0; i < app->map->tempColliders.Count(); i++)
+							{
+								PhysBody* temp = app->map->tempColliders.At(i)->data;
+								temp->body->SetActive(false);
+							}
+							collisionActivated = false;
+						}
+						wasUpPressed = true;
+					}
+
+					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT )
 					{
 						DownMovement();
 						isClimbing = true;
@@ -182,7 +200,26 @@ bool Player::Update(float dt)
 						}
 						
 					}
-					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE)
+					if (pad.l_y >= 0.2)
+					{
+						DownMovement();
+						isClimbing = true;
+						pbody->body->SetGravityScale(0.0f);
+						if (collisionActivated)
+						{
+							for (int i = 0; i < app->map->tempColliders.Count(); i++)
+							{
+								PhysBody* temp = app->map->tempColliders.At(i)->data;
+								temp->body->SetActive(false);
+							}
+							collisionActivated = false;
+						}
+
+					}
+					
+				
+					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE 
+						&& (pad.l_y < 0.2 && pad.l_y > -0.2))
 					{
 						vel.y = 0;
 					}
@@ -252,29 +289,7 @@ bool Player::Update(float dt)
 
 void Player::EnterDoor()
 {
-
-	if (doorAldea) {
-
-		EnteringDoor();
-		if (app->sceneShop->active) {
-			app->sceneVillage->spawnPosition = { 481, 675 };
-			app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
-		}
-		else if (app->sceneOasisFaraon->active) {
-			app->sceneVillage->spawnPosition = { 1380, 675 };
-			app->fade->Fade((Module*)app->sceneOasisFaraon, (Module*)app->sceneVillage, 60.0f);
-		}
-		else if (app->sceneTemple->active) {
-			app->sceneVillage->spawnPosition = { 2269, 675 };
-			app->fade->Fade((Module*)app->sceneTemple, (Module*)app->sceneVillage, 60.0f);
-		}
-		else if (app->sceneFloor1->active) {
-			app->sceneVillage->spawnPosition = { 2787, 675 };
-			app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
-		}
-		doorAldea = false;
-	}
-	else if (doorOasis)
+	if (doorOasis)
 	{
 		EnteringDoor();
 		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneOasisFaraon, 60.0f);
@@ -291,12 +306,23 @@ void Player::EnterDoor()
 		EnteringDoor();
 		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneTemple, 60.0f);
 		doorTemple = false;
+		if (app->hud->mission20Active)
+		{
+			app->hud->mission20Active = false;
+			app->hud->mission21Active = true;
+		}
 	}
-	else if (doorFlor1)
+	else if (doorFloor1)
 	{
 		EnteringDoor();
 		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneFloor1, 60.0f);
-		doorFlor1 = false;
+		doorFloor1 = false;
+		if (app->hud->mission30Active)
+		{
+			app->hud->mission31Active = true;
+			app->hud->mission30Active = false;
+		}
+		
 	}
 	else if (enterCombat)
 	{
@@ -529,6 +555,23 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::DOOR_ALDEA:
 		doorAldea = true;
+		if (app->sceneShop->active) {
+			app->sceneVillage->spawnPosition = { 1164, 675 };
+			app->fade->Fade((Module*)app->sceneShop, (Module*)app->sceneVillage, 60.0f);
+		}
+		else if (app->sceneOasisFaraon->active) {
+			app->sceneVillage->spawnPosition = { 1700, 675 };
+			app->fade->Fade((Module*)app->sceneOasisFaraon, (Module*)app->sceneVillage, 60.0f);
+		}
+		else if (app->sceneTemple->active) {
+			app->sceneVillage->spawnPosition = { 3264, 675 };
+			app->fade->Fade((Module*)app->sceneTemple, (Module*)app->sceneVillage, 60.0f);
+		}
+		else if (app->sceneFloor1->active) {
+			app->sceneVillage->spawnPosition = { 5450, 675 };
+			app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneVillage, 60.0f);
+		}
+		doorAldea = false;
 		break;
 	case ColliderType::DOOR_SHOP:
 		doorShop = true;
@@ -540,7 +583,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		doorTemple = true;
 		break;
 	case ColliderType::DOOR_FLOOR_1:
-		doorFlor1 = true;
+		doorFloor1 = true;
 		break;
 	case ColliderType::TRAP:
 		isDead = true;
@@ -600,7 +643,7 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 		doorTemple = false;
 		break;
 	case ColliderType::DOOR_FLOOR_1:
-		doorFlor1 = false;
+		doorFloor1 = false;
 		break;
 	case ColliderType::COMBAT:
 		enterCombat = false;

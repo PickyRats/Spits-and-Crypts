@@ -16,7 +16,8 @@ enum class EntityType
 	PIEZAS,
 	ENEMY,
 	TRAP,
-	UNKNOWN
+	UNKNOWN,
+	PUERTAS
 };
 
 class Entity

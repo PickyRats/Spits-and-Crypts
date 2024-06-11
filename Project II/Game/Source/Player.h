@@ -107,7 +107,7 @@ public:
 	bool doorShop = false;
 	bool doorOasis = false;
 	bool doorTemple = false;
-	bool doorFlor1 = false;
+	bool doorFloor1 = false;
 	bool enterCombat = false;
 
 	bool step = false;
@@ -116,6 +116,11 @@ public:
 	bool playJumpSound = false;
 	bool climbingSoundPlaying = false;
 	bool doorChoza = false;
+
+	bool wasDownPressed = false;
+	bool wasLeftPressed = false;
+	bool wasRightPressed = false;
+	bool wasUpPressed = false;
 
 	b2Transform initialTransform;
 

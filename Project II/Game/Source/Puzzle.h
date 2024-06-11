@@ -45,7 +45,7 @@ public:
 	int slotOccupied[4] = { -1, -1, -1, -1 };
 	bool pieceInSlot[4] = { false, false, false, false };
 	bool pieceCollected[4] = { false, false, false, false };
-	int correctPieces[4] = { 2, 3, 1, 0 };
+	int correctPieces[4] = { 3, 2, 1, 0 };
 	float dt;
 	bool showUI = false;
 	bool isPuzzleCompleted = false;
@@ -53,6 +53,12 @@ public:
 	bool placedpiece = false;
 	bool startPuzzle = false;
 	bool startSoundPlaying = false;
+	bool wasXPressed = false;
+	bool wasBPressed = false;
+	bool wasL2Pressed = false;
+	bool wasR2Pressed = false;
+	bool wasL1Pressed = false;
+	bool wasR1Pressed = false;
 	iPoint slotPos[4] = { {550, 200},{ 650, 200 },{ 550, 300 },{ 650, 300 } };
 
 	iPoint pieceInitialPos[4] = { {455, 485},{ 550, 485 },{ 645, 485 },{ 740, 485 } };

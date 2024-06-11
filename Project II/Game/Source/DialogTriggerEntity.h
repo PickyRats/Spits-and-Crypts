@@ -35,6 +35,8 @@ public:
 
 	void GiveMission(int idMission);
 
+	bool DialogMission = false;
+
 
 private:
 
@@ -64,11 +66,14 @@ private:
 	bool physCreated = false;
 	int dialogScene;
 	int id;
-
+	bool wasXPressed = false;
 	uint dialogs[3];
 	
 	//Lista de dialogos a repetir
 	List<Dialog*> dialoguesRepeat;
+
+	//Lista de dialogos de mision
+	List<Dialog*> dialoguesMission;
 
 	int npcid;
 
