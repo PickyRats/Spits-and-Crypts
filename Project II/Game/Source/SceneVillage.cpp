@@ -12,6 +12,9 @@
 #include "Hud.h"
 #include "DialogManager.h"
 #include "DialogTriggerEntity.h"
+#include "EntityManager.h"
+#include "Physics.h"
+#include "Entity.h"	
 
 #include "Defs.h"
 #include "Log.h"
@@ -96,6 +99,8 @@ bool SceneVillage::Start()
 	if (!piedraHecha)
 	{
 		piedra = app->physics->CreateRectangle(200, 640, 100, 100, DYNAMIC);
+		piedra->ctype = ColliderType::ROCK;
+		
 		piedraHecha = true;
 	}
 
@@ -123,6 +128,11 @@ bool SceneVillage::Update(float dt)
 	int piedraX = METERS_TO_PIXELS(piedra->body->GetPosition().x);
 	int piedraY = METERS_TO_PIXELS(piedra->body->GetPosition().y);
 	app->hud->DrawTile(piedraTexture, { piedraX - 50, piedraY - 50});
+
+	if (piedraX>=450)
+	{
+		printf("CINEMATICA");
+	}
 
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;

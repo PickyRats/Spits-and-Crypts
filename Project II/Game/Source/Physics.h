@@ -47,6 +47,7 @@ enum class ColliderType {
 	LIGHT1,
 	LIGHT2,
 	ROCK,
+	SENSOR_ROCK,
 	TEMP_PLATFORM,
 	UNKNOWN
 	// ..
