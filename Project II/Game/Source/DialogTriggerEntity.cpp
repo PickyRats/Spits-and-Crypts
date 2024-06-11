@@ -278,7 +278,6 @@ void DialogTrigger::GiveMission(int idMission)
 	switch (idMission)
 	{
 	case 1:
-
 		printf(" La abuela  \n");
 		app->hud->mission10Active = true;
 		break;
@@ -286,54 +285,56 @@ void DialogTrigger::GiveMission(int idMission)
 		printf("  la nieta  \n");
 		app->hud->mission11Active = false;
 		app->hud->mission1Complete = true;
-		//darMonedas
 		app->fade->Fade((Module*)app->sceneChoza, (Module*)app->sceneVillage, 60.0f);
 		break;
 	case 3:
 		printf(" Soy Maat \n");
-		if (app->hud->classid == 2 )
+		if (app->hud->classid == 2)
 		{
-			//antes de poder abrir el menú, te manda una misión para que completes el primer combate (Mission3) con la variable checkpoint de sceenFloor1
 			app->hud->abilityTree = true;
 		}
 		break;
 	case 4:
-		printf(" Soy Toth  \n");
-		if (app->hud->classid == 1 && app->hud->mission3Complete)
-		{
-			//antes de poder abrir el menú, te manda una misión para que completes el primer combate (Mission3) con la variable checkpoint de sceenFloor1
-			app->hud->abilityTree = true;
-		}
+		
 		if (app->hud->mission21Active)
 		{
 			app->hud->mission21Active = false;
 			app->hud->mission2Complete = true;
-			DialogMission = false;
-		}
-		else if (!app->hud->mission3Complete && !app->hud->mission32Active)
-		{
-			app->hud->mission30Active = true;
-		}
-		else if (!app->hud->mission3Complete && app->hud->mission32Active)
-		{
-			DialogMission = false;
-			app->hud->mission3Complete = true;
 			//darMonedas
+			app->hud->mission30Active = true; 
+			PlayDialog();
+		}
+		else
+		{
+			if (app->hud->classid == 1 && app->hud->mission3Complete)
+			{
+				app->hud->abilityTree = true;
+			}
+			else if (!app->hud->mission3Complete && !app->hud->mission32Active && app->hud->mission2Complete)
+			{
+				app->hud->mission30Active = true;
+				app->hud->mission20Active = false; // Asegúrate de que la misión 2 se desactive
+				app->hud->mission21Active = false;
+			}
+			else if (!app->hud->mission3Complete && app->hud->mission32Active)
+			{
+				DialogMission = false;
+				app->hud->mission3Complete = true;
+				// Dar monedas
+			}
 		}
 		break;
 	case 5:
 		printf(" Soy Isis  \n");
-		if (app->hud->classid==3)
+		if (app->hud->classid == 3)
 		{
-			//antes de poder abrir el menú, te manda una misión para que completes el primer combate (Mission3) con la variable checkpoint de sceenFloor1
 			app->hud->abilityTree = true;
 		}
 		break;
 	case 6:
 		printf(" Soy Horrus  \n");
-		if (app->hud->classid==4)
+		if (app->hud->classid == 4)
 		{
-			//antes de poder abrir el menú, te manda una misión para que completes el primer combate (Mission3) con la variable checkpoint de sceenFloor1
 			app->hud->abilityTree = true;
 		}
 		break;
@@ -347,11 +348,9 @@ void DialogTrigger::GiveMission(int idMission)
 		{
 			app->hud->mission20Active = true;
 		}
-
 		break;
 	case 9:
-		printf(" Que haces pidiendome wishky con cereales \n");
-		
+		printf(" Que haces pidiendome whisky con cereales \n");
 		break;
 	default:
 		break;

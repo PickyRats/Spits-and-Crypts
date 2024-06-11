@@ -734,7 +734,7 @@ bool Hud::Update(float dt)
 	{
 		Missions(0);
 	}
-	else if (mission11Active)
+	if (mission11Active)
 	{
 		Missions(1);
 	}
@@ -745,11 +745,11 @@ bool Hud::Update(float dt)
 		app->tex->UnLoad(mission1i1);
 		app->tex->UnLoad(mission1i0);
 	}
-	else if (mission20Active)
+	if (mission20Active)
 	{
 		Missions(2);
 	}
-	else if (mission21Active)
+	if (mission21Active)
 	{
 		Missions(3);
 	}
@@ -760,15 +760,15 @@ bool Hud::Update(float dt)
 		app->tex->UnLoad(mission2i1);
 		app->tex->UnLoad(mission2i0);
 	}
-	else if (mission30Active)
+	if (mission30Active)
 	{
 		Missions(4);
 	}
-	else if (mission31Active)
+	if (mission31Active)
 	{
 		Missions(5);
 	}
-	else if (mission32Active)
+	if (mission32Active)
 	{
 		Missions(6);
 	}

@@ -225,6 +225,9 @@
 			<repeat_sentences>
 				<sentence text="Vamos, no tengo todo el día"/>
 			</repeat_sentences>
+			<fraseMision>
+				<sentence text="Antes de mejorar tus habilidades, debes completar una mision... "/>
+			</fraseMision>
 		</dialogTrigger>
 		
 		<dialogTrigger x="1070" y="540"  name="Horus" repeat="true" mission="true" scene="2" id="6" audio_1="Assets/Audio/Fx/horus/voz_horus_1.wav" audio_2="Assets/Audio/Fx/horus/voz_horus_2.wav" audio_3="Assets/Audio/Fx/horus/voz_horus_3.wav">
@@ -236,6 +239,9 @@
 			<repeat_sentences>
 				<sentence text="Vamos, no tengo todo el día"/>
 			</repeat_sentences>
+			<fraseMision>
+				<sentence text="Antes de mejorar tus habilidades, debes completar una mision... "/>
+			</fraseMision>
 		</dialogTrigger>
 	
 	</sceneTemple>
