@@ -131,11 +131,11 @@ void Npcs::LoadAnimations()
 {
 	if (npcId == 1)
 	{
-		
+		idleAnim.LoadAnimations("idleAnim", "abuela");
 	}
 	else if (npcId == 2)
 	{
-		
+		idleAnim.LoadAnimations("idleAnim", "nieta");
 	}
 	else if (npcId == 3)
 	{
