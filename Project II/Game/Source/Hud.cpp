@@ -64,6 +64,12 @@ bool Hud::Start()
 	Cuadrojugador = app->tex->Load(configNode3.child("Cuadrojugador").attribute("texturepath").as_string());
 	numeros = app->tex->Load(configNode3.child("numeros").attribute("texturepath").as_string());
 
+	MC_Idle_1 = app->tex->Load(configNode3.child("MC_Idle_1").attribute("texturepath").as_string());
+	MC_Idle_2 = app->tex->Load(configNode3.child("MC_Idle_2").attribute("texturepath").as_string());
+	MC_Idle_3 = app->tex->Load(configNode3.child("MC_Idle_3").attribute("texturepath").as_string());
+	MC_Idle_4 = app->tex->Load(configNode3.child("MC_Idle_4").attribute("texturepath").as_string());
+
+
 	attack1 = app->tex->Load(configNode3.child("attack1").attribute("texturepath").as_string());
 	attack2 = app->tex->Load(configNode3.child("attack2").attribute("texturepath").as_string());
 	attack3 = app->tex->Load(configNode3.child("attack3").attribute("texturepath").as_string());
@@ -245,6 +251,8 @@ bool Hud::Start()
 
 	Selection = app->tex->Load(configNode3.child("Selection").attribute("texturepath").as_string());
 
+	classid = app->sceneSelection->currentSelection;
+
 	Description = DescTree;
 	Talent1 = SkillTreeTalent;
 	Talent2 = SkillTreeLife_1;
@@ -287,6 +295,23 @@ bool Hud::Start()
 		settingsVSyncButton->pressed = false;
 	}
 
+	if (app->sceneSelection->currentSelection == 0)
+	{
+		MC_Idle = MC_Idle_1;
+	}
+	if (app->sceneSelection->currentSelection == 1)
+	{
+		MC_Idle = MC_Idle_2;
+	}
+	if (app->sceneSelection->currentSelection == 2)
+	{
+		MC_Idle = MC_Idle_3;
+	}
+	if (app->sceneSelection->currentSelection == 3)
+	{
+		MC_Idle = MC_Idle_4;
+	}
+
 	return true;
 }
 
@@ -297,7 +322,7 @@ bool Hud::Update(float dt)
 	if (app->sceneVillage->active) RenderStoredTiles();
 
 	//Ability Tree
-	if (app->sceneTemple->active && (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN || (pad.b == KEY_DOWN && !wasBPressed)))
+	if (app->sceneTemple->active && (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN /*|| (pad.b == KEY_DOWN && !wasBPressed*//*)*/))
 	{
 		abilityTree = !abilityTree;
 		wasBPressed = true;
@@ -953,7 +978,10 @@ void Hud::Inventory() {
 	if (inventory)
 	{
 		app->render->DrawTexture(inventoryTexture, 0, 0, NULL, SDL_FLIP_NONE, 0);
-		app->render->DrawTexture(Coin, 155, 500, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(Habilidad1, 320, 376, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(Habilidad2, 320, 464, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(MC_Idle, 60, 236, NULL, SDL_FLIP_NONE, 0);
+		
 
 		char Vida[20];
 		int vida = app->map->player->health;
@@ -983,7 +1011,7 @@ void Hud::Inventory() {
 			app->render->DrawTexture(items[inventorySlots[itemId].itemId].ObjectText, 900, 300, NULL, SDL_FLIP_NONE, 0);
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN||(pad.left==KEY_DOWN && !wasLeftPressed) && itemId > 0) {
+		if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN||(pad.left==KEY_DOWN && !wasLeftPressed)) && itemId > 0) {
 			itemId--;
 			wasLeftPressed = true;
 		}
@@ -992,7 +1020,7 @@ void Hud::Inventory() {
 			wasLeftPressed = false;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || (pad.right == KEY_DOWN && !wasRightPressed) && itemId < 2) {
+		if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || (pad.right == KEY_DOWN && !wasRightPressed)) && itemId < 2) {
 			itemId++;
 			wasRightPressed = true;
 		}
@@ -1159,11 +1187,13 @@ void Hud::ApplySkillEffects(int skillIndex) {
 		Rama2_2 = skillTreerama_2_1;
 		Rama3_2 = skillTreerama_3_1;
 		app->map->player->attackDamage += 5;
+		Habilidad1 = Bloqueado1_2;
 		break;
 	case 4:
 		skillTreenode[4].texture = Bloqueado2_2;
 		Rama2_2 = skillTreerama_2_2;
 		Rama3_2 = skillTreerama_3_2;
+		Habilidad2 = Bloqueado2_2;
 		break;
 	}
 }

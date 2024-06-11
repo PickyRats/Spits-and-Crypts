@@ -428,6 +428,12 @@
 		<ObjectText2Shop texturepath="Assets/Textures/Screens/Shop/TextHabilityTurquese-Shop.png"/>
 		<ObjectText3Shop texturepath="Assets/Textures/Screens/Shop/TextHabilityRed-Shop.png"/>
 
+		<MC_Idle_1 texturepath="Assets/Textures/Screens/Inventory/MC_Idle_1.png"/>
+		<MC_Idle_2 texturepath="Assets/Textures/Screens/Inventory/MC_Idle_2.png"/>
+		<MC_Idle_3 texturepath="Assets/Textures/Screens/Inventory/MC_Idle_3.png"/>
+		<MC_Idle_4 texturepath="Assets/Textures/Screens/Inventory/MC_Idle_4.png"/>
+
+
 		<shopTexture texturepath="Assets/Textures/Screens/Shop/Store_UI_def.png"/>
 		<emptyslotTexture texturepath="Assets/Textures/Screens/Shop/emptyslot.png"/>
 		<selectorItemTexture texturepath="Assets/Textures/Screens/Shop/selectorItem.png"/>

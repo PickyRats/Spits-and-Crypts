@@ -127,11 +127,11 @@ public:
 	Slot shopSlots[3];
 	bool shop = false;
 	
-	int coin= 0;
+	int coin= 50;
 	char buffer[20];  // Suficientemente grande para almacenar el entero como cadena
 
 
-	int classid = 1;
+	int classid = 2;
 	
 private:
 
@@ -147,6 +147,14 @@ private:
 	SDL_Texture* Opacity;
 	SDL_Texture* Cuadrojugador;
 	SDL_Texture* numeros;
+
+
+	//Players
+	SDL_Texture* MC_Idle;
+	SDL_Texture* MC_Idle_1;
+	SDL_Texture* MC_Idle_2;
+	SDL_Texture* MC_Idle_3;
+	SDL_Texture* MC_Idle_4;
 
 	//SDL_Rect rect = { 0, 0, 9, 51 };
 	SDL_Rect lifeRects[11] = { {0, 0, 9, 51}, { 9, 0, 9, 51}, { 18, 0, 9, 51}, { 27, 0, 9, 51}, { 36, 0, 9, 51}, { 45, 0, 9, 51}, { 54, 0, 9, 51}, { 63, 0, 9, 51}, { 72, 0, 9, 51}, { 81, 0, 9, 51}, {90, 0, 9 ,51} };
@@ -251,6 +259,9 @@ private:
 	SDL_Texture* ObjectText1Shop;
 	SDL_Texture* ObjectText2Shop;
 	SDL_Texture* ObjectText3Shop;
+
+	SDL_Texture* Habilidad1;
+	SDL_Texture* Habilidad2;
 
 
 	
