@@ -115,8 +115,6 @@ bool SceneFloor1::Start()
 
 	//carga assets
 	floor1background = app->tex->Load("Assets/Textures/Screens/floor1background.png");
-
-	app->audio->PlayMusic(configNodeFloor1.child("Floor1Music").attribute("path").as_string());
 	
 	return true;
 }
@@ -273,4 +271,9 @@ bool SceneFloor1::OnGuiMouseClickEvent(GuiControl* control)
 	LOG("Press Gui Control: %d", control->id);
 
 	return true;
+}
+
+void SceneFloor1::PlayMusic()
+{
+	app->audio->PlayMusic(configNodeFloor1.child("Floor1Music").attribute("path").as_string());
 }
