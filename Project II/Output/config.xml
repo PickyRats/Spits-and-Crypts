@@ -410,7 +410,7 @@
 		<attack4 texturepath="Assets/Textures/Screens/Combat/ABvaras.png"/>
 		<attack5 texturepath="Assets/Textures/Screens/Combat/ABpluma.png"/>
 		
-		<ability texturepath="Assets/Textures/Screens/Combat/HAarc.png"/>
+		<ability1 texturepath="Assets/Textures/Screens/Combat/HAarc.png"/>
 		<ability2 texturepath="Assets/Textures/Screens/Combat/HAespada.png"/>
 		<ability3 texturepath="Assets/Textures/Screens/Combat/HAlanza.png"/>
 		<ability4 texturepath="Assets/Textures/Screens/Combat/HAvaras.png"/>

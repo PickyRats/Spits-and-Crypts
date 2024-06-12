@@ -130,6 +130,7 @@ public:
 	bool wasStartPressed = false;
 
 	bool combatCompleted = false;
+	bool combat2Completed = false;
 
 private:
 	SDL_Texture* backgroundTexture;

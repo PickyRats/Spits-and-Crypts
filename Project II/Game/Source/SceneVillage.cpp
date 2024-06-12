@@ -110,7 +110,7 @@ bool SceneVillage::Start()
 	piedra->body->SetGravityScale(15);
 
 	piedraTexture = app->tex->Load("Assets/Textures/Items/piedra.png");
-
+	rockfx = app->audio->LoadFx("Assets/Audio/Fx/RockFx.wav");
 	aldea = app->tex->Load("Assets/Textures/Screens/aldea.png");
 
 	app->audio->PlayMusic(configNode.child("villageAmbient").attribute("path").as_string());

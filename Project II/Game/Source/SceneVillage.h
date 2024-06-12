@@ -67,6 +67,7 @@ public:
 	PhysBody* piedra = nullptr;
 	PhysBody* sensorPiedra = nullptr;
 	bool wasStartPressed = false;
+	uint rockfx;
 private:
 	SDL_Texture* backgroundTexture;
 	SDL_Texture* backgroundTexture2;

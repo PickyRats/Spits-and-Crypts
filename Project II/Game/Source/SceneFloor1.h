@@ -51,6 +51,8 @@ public:
 
 	void DeleteWall();
 
+	void DeleteWall2();
+
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
@@ -61,6 +63,7 @@ public:
 	bool isTorchActive = false;
 	bool checkPoint = false;
 	bool canDelete = true;
+	bool canDelete2 = true;
 	bool wasStartPressed = false;
 	iPoint playerStartPosition = { 128,35*64 };
 	bool notUseChechPoint = false;

@@ -116,6 +116,7 @@ bool SceneCombat::Start()
 			enemies[i] = enemy[i];
 			enemies[i]->SetCombatAnimation(0);
 		}
+
 		players[0] = app->map->player;
 		players[0]->SetCombatAnimation(0);
 		players[1] = app->map->player2;
@@ -140,6 +141,9 @@ bool SceneCombat::Start()
 			enemies[i] = enemy[i];
 			enemies[i]->SetCombatAnimation(0);
 		}
+
+		enemies[0]->position = { 1024, 192 };
+		enemies[1]->position = { 448, 192 };
 		players[0] = app->map->player;
 		players[0]->SetCombatAnimation(0);
 		players[1] = app->map->player2;
@@ -868,6 +872,19 @@ void SceneCombat::EndCombat()
 		app->sceneFloor1->levelWidth = 110 * 64;
 		app->fade->Fade((Module*)app->sceneCombat, (Module*)app->sceneFloor1, 60.0f);
 		combatCompleted = true;
+		currentCombat++;
+	}
+	else if (currentCombat == 1)
+	{	
+		app->audio->PlayFx(victory);
+		app->map->player->isCombat = false;
+		app->map->player2->isCombat = false;
+		app->map->player2->isVisible = false;
+		app->sceneFloor1->playerStartPosition = { 118 * 64, 26 * 64 };
+		app->map->player->CreateBody();
+		app->fade->Fade((Module*)app->sceneCombat, (Module*)app->sceneFloor1, 60.0f);
+		app->sceneFloor1->levelWidth = 169 * 64;
+		combat2Completed = true;
 		currentCombat++;
 	}
 }

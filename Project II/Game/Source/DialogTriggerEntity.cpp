@@ -114,8 +114,7 @@ bool DialogTrigger::Update(float dt)
     physCreated = false;
 	}
 
-	if (app->hud->mission11Active || app->hud->mission32Active)
-	{
+	if (app->hud->mission32Active && !app->hud->mission3Complete) {
 		DialogMission = false;
 	}
 
@@ -169,6 +168,10 @@ bool DialogTrigger::CleanUp()
 
 void DialogTrigger::PlayDialog()
 {
+	if ((id==3 && app->sceneSelection->currentSelection!=0) || (id == 4 &&  app->sceneSelection->currentSelection != 1)|| (id == 5 && app->sceneSelection->currentSelection != 3)|| (id == 6 &&  app->sceneSelection->currentSelection != 2))
+	{
+		return;
+	}
 	if (DialogMission)
 
 	{
@@ -299,16 +302,42 @@ void DialogTrigger::GiveMission(int idMission)
 		app->hud->exp += 1;
 		break;
 	case 3:
+		//maat
 		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoMaat;
-		printf(" Soy Maat \n");
-		if (app->sceneSelection->currentSelection == 0)
+		if (app->hud->mission21Active && app->sceneSelection->currentSelection == 0)
 		{
-			app->hud->abilityTree = true;
+			app->hud->mission21Active = false;
+			app->hud->mission2Complete = true;
+			app->hud->coin += 20;
+			app->hud->exp += 1;
+			app->hud->mission30Active = true;
+			PlayDialog();
+		}
+		else
+		{
+			if (app->sceneSelection->currentSelection == 0 && app->hud->mission3Complete)
+			{
+				app->hud->abilityTree = true;
+			}
+			else if (!app->hud->mission3Complete && !app->hud->mission32Active && app->hud->mission2Complete && app->sceneSelection->currentSelection == 0)
+			{
+				app->hud->mission30Active = true;
+				app->hud->mission20Active = false;
+				app->hud->mission21Active = false;
+			}
+			else if (!app->hud->mission3Complete && app->hud->mission32Active)
+			{
+				DialogMission = false;
+				app->hud->mission3Complete = true;
+				app->hud->coin += 50;
+				app->hud->exp += 1;
+			}
 		}
 		break;
 	case 4:
+		//toth
 		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoThoth;
-		if (app->hud->mission21Active)
+		if (app->hud->mission21Active && app->sceneSelection->currentSelection == 1)
 		{
 			app->hud->mission21Active = false;
 			app->hud->mission2Complete = true;
@@ -323,10 +352,10 @@ void DialogTrigger::GiveMission(int idMission)
 			{
 				app->hud->abilityTree = true;
 			}
-			else if (!app->hud->mission3Complete && !app->hud->mission32Active && app->hud->mission2Complete)
+			else if (!app->hud->mission3Complete && !app->hud->mission32Active && app->hud->mission2Complete && app->sceneSelection->currentSelection == 1)
 			{
 				app->hud->mission30Active = true;
-				app->hud->mission20Active = false; // Asegúrate de que la misión 2 se desactive
+				app->hud->mission20Active = false;
 				app->hud->mission21Active = false;
 			}
 			else if (!app->hud->mission3Complete && app->hud->mission32Active)
@@ -339,19 +368,69 @@ void DialogTrigger::GiveMission(int idMission)
 		}
 		break;
 	case 5:
+		//isis
 		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoIsis;
-		printf(" Soy Isis  \n");
-		if (app->sceneSelection->currentSelection == 3)
+		if (app->hud->mission21Active && app->sceneSelection->currentSelection == 3)
 		{
-			app->hud->abilityTree = true;
+			app->hud->mission21Active = false;
+			app->hud->mission2Complete = true;
+			app->hud->coin += 20;
+			app->hud->exp += 1;
+			app->hud->mission30Active = true;
+			PlayDialog();
+		}
+		else
+		{
+			if (app->sceneSelection->currentSelection == 3 && app->hud->mission3Complete)
+			{
+				app->hud->abilityTree = true;
+			}
+			else if (!app->hud->mission3Complete && !app->hud->mission32Active && app->hud->mission2Complete && app->sceneSelection->currentSelection == 3)
+			{
+				app->hud->mission30Active = true;
+				app->hud->mission20Active = false; 
+				app->hud->mission21Active = false;
+			}
+			else if (!app->hud->mission3Complete && app->hud->mission32Active)
+			{
+				DialogMission = false;
+				app->hud->mission3Complete = true;
+				app->hud->coin += 50;
+				app->hud->exp += 1;
+			}
 		}
 		break;
 	case 6:
+		//Horrus
 		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoHorus;
-		printf(" Soy Horrus  \n");
-		if (app->sceneSelection->currentSelection == 2)
+		if (app->hud->mission21Active && app->sceneSelection->currentSelection == 2)
 		{
-			app->hud->abilityTree = true;
+			app->hud->mission21Active = false;
+			app->hud->mission2Complete = true;
+			app->hud->coin += 20;
+			app->hud->exp += 1;
+			app->hud->mission30Active = true;
+			PlayDialog();
+		}
+		else
+		{
+			if (app->sceneSelection->currentSelection == 2 && app->hud->mission3Complete)
+			{
+				app->hud->abilityTree = true;
+			}
+			else if (!app->hud->mission3Complete && !app->hud->mission32Active && app->hud->mission2Complete && app->sceneSelection->currentSelection == 2)
+			{
+				app->hud->mission30Active = true;
+				app->hud->mission20Active = false;
+				app->hud->mission21Active = false;
+			}
+			else if (!app->hud->mission3Complete && app->hud->mission32Active)
+			{
+				DialogMission = false;
+				app->hud->mission3Complete = true;
+				app->hud->coin += 50;
+				app->hud->exp += 1;
+			}
 		}
 		break;
 	case 7:
