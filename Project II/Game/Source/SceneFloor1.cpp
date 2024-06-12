@@ -5,6 +5,7 @@
 #include "Render.h"
 #include "Window.h"
 #include "SceneFloor1.h"
+#include "SceneCombat.h"
 #include "Map.h"
 #include "FadeToBlack.h"
 #include "GuiManager.h"
@@ -87,12 +88,15 @@ bool SceneFloor1::Start()
 	app->map->Enable();
 	app->entityManager->Enable();
 	app->hud->Enable();
+	app->particleManager->Enable();
   
-  app->puzzle->Enable();
-	if(!combatFinished)wall = app->physics->CreateRectangle(37 * 64, 34 * 64, 10, 2 * 64, STATIC);
-
+	app->puzzle->Enable();
+	wall = app->physics->CreateRectangle(37 * 64, 34 * 64, 10, 2 * 64, STATIC);
+	wall->ctype = ColliderType::WALL;
 	wall2 = app->physics->CreateRectangle(109*64, 28*64, 10, 3 * 64, STATIC);
 	wall2->ctype = ColliderType::WALL;
+	wall3 = app->physics->CreateRectangle(168 * 64, 20 * 64, 10, 3 * 64, STATIC);
+	wall3->ctype = ColliderType::WALL;
 
 	//Load the player in the map
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(playerStartPosition.x), PIXEL_TO_METERS(playerStartPosition.y)), 0);
@@ -111,8 +115,6 @@ bool SceneFloor1::Start()
 
 	//carga assets
 	floor1background = app->tex->Load("Assets/Textures/Screens/floor1background.png");
-
-	app->audio->PlayMusic(configNodeFloor1.child("Floor1Music").attribute("path").as_string());
 	
 	return true;
 }
@@ -134,7 +136,6 @@ bool SceneFloor1::Update(float dt)
 	//una vez completado el puzzle 2, se desactiva y se activa el puzzle 3
 	if (app->puzzle2->puzzleCompleted)
 	{
-		app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneLight, 60.0f);
 		app->puzzle2->Disable();
 	}
 
@@ -167,6 +168,14 @@ bool SceneFloor1::Update(float dt)
 	if (app->sceneFloor1->puertas[1]->puzle1Completed && canDelete)
 	{
 		DeleteWall();
+	}
+	if (app->sceneCombat->combatCompleted && canDelete2)
+	{
+		DeleteWall2();
+	}
+	if (app->sceneFloor1->puertas[2]->puzle1Completed && canDelete3)
+	{
+		DeleteWall3();
 	}
 	return true;
 }
@@ -231,7 +240,16 @@ void SceneFloor1::DeleteWall()
 	wall2->body->SetActive(false);
 	canDelete = false;
 }
-
+void SceneFloor1::DeleteWall2()
+{
+	wall->body->SetActive(false);
+	canDelete2 = false;
+}
+void SceneFloor1::DeleteWall3()
+{
+	wall3->body->SetActive(false);
+	canDelete2 = false;
+}
 bool SceneFloor1::LoadState(pugi::xml_node node)
 {
 	pugi::xml_node status = node.append_child("status");
@@ -253,4 +271,9 @@ bool SceneFloor1::OnGuiMouseClickEvent(GuiControl* control)
 	LOG("Press Gui Control: %d", control->id);
 
 	return true;
+}
+
+void SceneFloor1::PlayMusic()
+{
+	app->audio->PlayMusic(configNodeFloor1.child("Floor1Music").attribute("path").as_string());
 }

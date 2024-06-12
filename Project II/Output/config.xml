@@ -26,6 +26,7 @@
 		<!-- Scene -->
 		<map1 path="Assets/Maps/" name="Map_Combat.tmx"/>
 		<map2 path="Assets/Maps/" name="Map_Combat_2.tmx"/>
+		<map3 path="Assets/Maps/" name="Map_Combat_3.tmx"/>
 
 		<!-- Music -->
 		<music>
@@ -126,10 +127,10 @@
 		<villageAmbient path="Assets/Audio/Music/Village_ambient.ogg" fadeTime="2" fadeOutTime="2"/>
 
 		<!-- Abuela -->
-		<npc x="300" y="580" texturepath="Assets/Textures/Npcs/abuela.png" id="1" scene="1"/>
+		<npc x="150" y="580" texturepath="Assets/Textures/Npcs/Abuela_Sprites.png" id="1" scene="1"/>
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="350" y="640"  name="La abuela" repeat="true" mission="false" scene="1"  id="1">
+		<dialogTrigger x="200" y="640"  name="La abuela" repeat="true" mission="false" scene="1"  id="1">
 		  <sentences>
 			  <sentence text="Ayuda, mi nieta se ha quedado atrapada"/>
 			  <sentence text="Necesito alguien poderoso que la salve"/>
@@ -150,7 +151,7 @@
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 		
 		<!-- Tabernero  -->
-		<npc x="900" y="530" texturepath="Assets/Textures/Npcs/TaberneroSpriteSheet.png" id="8" scene="4" />
+		<npc x="900" y="594" texturepath="Assets/Textures/Npcs/TaberneroSpriteSheet.png" id="8" scene="4" />
 		
 		<!-- Dialogos -->
 		<dialogTrigger x="920" y="565"  name="Tabernero" repeat="true" mission="true" scene="4" id="8" audio_1="Assets/Audio/Fx/anubish/voz_anubish_1.wav" audio_2="Assets/Audio/Fx/anubish/voz_anubish_2.wav" audio_3="Assets/Audio/Fx/anubish/voz_anubish_3.wav">
@@ -258,7 +259,7 @@
 
   <map>
 		<!-- Player -->
-		<player x="64" y="576" texturepath1="Assets/Textures/MC_Sprites_red.png" texturepath2="Assets/Textures/MC_Sprites_green.png" texturepath3="Assets/Textures/MC_Sprites_blue.png" texturepath4="Assets/Textures/MC_Sprites_yellow.png" speed="0.2f" id="1"/>
+		<player x="64" y="576" texturepath1="Assets/Textures/MC_Sprites_red.png" texturepath2="Assets/Textures/MC_Sprites_yellow.png" texturepath3="Assets/Textures/MC_Sprites_green.png" texturepath4="Assets/Textures/MC_Sprites_blue.png" speed="0.2f" id="1"/>
 		<player2 x="0" y="576" texturepath1="Assets/Textures/Taila_Animation_sheet.png" speed="0.2f" id="2"/>
 	</map>
 	
@@ -271,7 +272,8 @@
 
     <puerta x="2304" y="2112" texturepath="Assets/Maps/puerta_lateral.png" id="2"/>
 		<puerta x="6964" y="1792" texturepath="Assets/Maps/puerta_lateral.png" id="3"/>
-		<puerta x="10880" y="1216" texturepath="Assets/Maps/puerta_lateral.png" id="4"/>
+		<puerta x="10752" y="1280" texturepath="Assets/Maps/puerta_lateral.png" id="4"/>
+		
 		<!-- Paayla -->
 		<npc x="650" y="2112" texturepath="Assets/Textures/Npcs/PaalayaSpriteSheet.png" id="9" scene="5"/>
 
@@ -409,7 +411,7 @@
 		<attack4 texturepath="Assets/Textures/Screens/Combat/ABvaras.png"/>
 		<attack5 texturepath="Assets/Textures/Screens/Combat/ABpluma.png"/>
 		
-		<ability texturepath="Assets/Textures/Screens/Combat/HAarc.png"/>
+		<ability1 texturepath="Assets/Textures/Screens/Combat/HAarc.png"/>
 		<ability2 texturepath="Assets/Textures/Screens/Combat/HAespada.png"/>
 		<ability3 texturepath="Assets/Textures/Screens/Combat/HAlanza.png"/>
 		<ability4 texturepath="Assets/Textures/Screens/Combat/HAvaras.png"/>
@@ -428,10 +430,17 @@
 		<ObjectText2Shop texturepath="Assets/Textures/Screens/Shop/TextHabilityTurquese-Shop.png"/>
 		<ObjectText3Shop texturepath="Assets/Textures/Screens/Shop/TextHabilityRed-Shop.png"/>
 
+		<MC_Idle_1 texturepath="Assets/Textures/Screens/Inventory/MC_Idle_1.png"/>
+		<MC_Idle_2 texturepath="Assets/Textures/Screens/Inventory/MC_Idle_2.png"/>
+		<MC_Idle_3 texturepath="Assets/Textures/Screens/Inventory/MC_Idle_3.png"/>
+		<MC_Idle_4 texturepath="Assets/Textures/Screens/Inventory/MC_Idle_4.png"/>
+
+
 		<shopTexture texturepath="Assets/Textures/Screens/Shop/Store_UI_def.png"/>
 		<emptyslotTexture texturepath="Assets/Textures/Screens/Shop/emptyslot.png"/>
 		<selectorItemTexture texturepath="Assets/Textures/Screens/Shop/selectorItem.png"/>
 		<Coin texturepath="Assets/Textures/Screens/Shop/coin.png"/>
+		<Exp texturepath="Assets/Textures/Screens/Inventory/Orbe_XP.png"/>
 	
 		
 
@@ -846,6 +855,58 @@
 				<animation x="510" y="2128" w="170" h="152"/>
 				<animation x="510" y="2128" w="170" h="152"/>
 			</walkBattleAnim>
+
+			<idleRockAnim loop="false" speed="0.4f">
+				<animation x="0" y="0" w="94" h="107"/>
+			</idleRockAnim>
+
+			<rockAnim loop="true" speed="0.4f">
+				<animation x="0" y="107" w="94" h="107"/>
+				<animation x="0" y="107" w="94" h="107"/>
+				<animation x="0" y="107" w="94" h="107"/>
+				<animation x="0" y="107" w="94" h="107"/>
+				
+				<animation x="94" y="107" w="94" h="107"/>
+				<animation x="94" y="107" w="94" h="107"/>
+				<animation x="94" y="107" w="94" h="107"/>
+				<animation x="94" y="107" w="94" h="107"/>
+				<animation x="94" y="107" w="94" h="107"/>
+				
+				<animation x="188" y="107" w="94" h="107"/>
+				<animation x="188" y="107" w="94" h="107"/>
+				<animation x="188" y="107" w="94" h="107"/>
+				<animation x="188" y="107" w="94" h="107"/>
+				<animation x="188" y="107" w="94" h="107"/>
+				<animation x="188" y="107" w="94" h="107"/>
+				
+				<animation x="282" y="107" w="94" h="107"/>
+				<animation x="282" y="107" w="94" h="107"/>
+				<animation x="282" y="107" w="94" h="107"/>
+				<animation x="282" y="107" w="94" h="107"/>
+				
+				<animation x="376" y="107" w="94" h="107"/>
+				<animation x="376" y="107" w="94" h="107"/>
+				<animation x="376" y="107" w="94" h="107"/>
+				<animation x="376" y="107" w="94" h="107"/>
+				
+				<animation x="470" y="107" w="94" h="107"/>
+				<animation x="470" y="107" w="94" h="107"/>
+				<animation x="470" y="107" w="94" h="107"/>
+				<animation x="470" y="107" w="94" h="107"/>
+				<animation x="470" y="107" w="94" h="107"/>
+				
+				<animation x="564" y="107" w="94" h="107"/>
+				<animation x="564" y="107" w="94" h="107"/>
+				<animation x="564" y="107" w="94" h="107"/>
+				<animation x="564" y="107" w="94" h="107"/>
+				<animation x="564" y="107" w="94" h="107"/>
+				<animation x="564" y="107" w="94" h="107"/>
+				
+				<animation x="658" y="107" w="94" h="107"/>
+				<animation x="658" y="107" w="94" h="107"/>
+				<animation x="658" y="107" w="94" h="107"/>
+				<animation x="658" y="107" w="94" h="107"/>
+			</rockAnim>
 		</player>
 
 		<!-- Taila Animations-->
@@ -1231,55 +1292,55 @@
 			<idleAnim loop ="true" speed="0.4f">
 				<animation x="0" y="0" w="57" h="128"/>
 				<animation x="0" y="0" w="57" h="128"/>
-				
+
 				<animation x="57" y="0" w="57" h="128"/>
 				<animation x="57" y="0" w="57" h="128"/>
-				
+
 				<animation x="114" y="0" w="57" h="128"/>
 				<animation x="114" y="0" w="57" h="128"/>
-				
+
 				<animation x="171" y="0" w="57" h="128"/>
 				<animation x="171" y="0" w="57" h="128"/>
-				
+
 				<animation x="228" y="0" w="57" h="128"/>
 				<animation x="228" y="0" w="57" h="128"/>
-				
+
 				<animation x="285" y="0" w="57" h="128"/>
 				<animation x="285" y="0" w="57" h="128"/>
-				
+
 				<animation x="342" y="0" w="57" h="128"/>
 				<animation x="342" y="0" w="57" h="128"/>
 			</idleAnim>
-			
+
 			<interactAnim loop ="false" speed="0.4f">
 				<animation x="0" y="128" w="57" h="128"/>
 				<animation x="0" y="128" w="57" h="128"/>
 				<animation x="0" y="128" w="57" h="128"/>
-				
+
 				<animation x="57" y="128" w="57" h="128"/>
 				<animation x="57" y="128" w="57" h="128"/>
 				<animation x="57" y="128" w="57" h="128"/>
-				
+
 				<animation x="114" y="128" w="57" h="128"/>
 				<animation x="114" y="128" w="57" h="128"/>
 				<animation x="114" y="128" w="57" h="128"/>
-				
+
 				<animation x="171" y="128" w="57" h="128"/>
 				<animation x="171" y="128" w="57" h="128"/>
 				<animation x="171" y="128" w="57" h="128"/>
-				
+
 				<animation x="228" y="128" w="57" h="128"/>
 				<animation x="228" y="128" w="57" h="128"/>
 				<animation x="228" y="128" w="57" h="128"/>
-				
+
 				<animation x="285" y="128" w="57" h="128"/>
 				<animation x="285" y="128" w="57" h="128"/>
 				<animation x="285" y="128" w="57" h="128"/>
-				
+
 				<animation x="342" y="128" w="57" h="128"/>
 				<animation x="342" y="128" w="57" h="128"/>
 				<animation x="342" y="128" w="57" h="128"/>
-				
+
 				<animation x="399" y="128" w="57" h="128"/>
 				<animation x="399" y="128" w="57" h="128"/>
 				<animation x="399" y="128" w="57" h="128"/>
@@ -2068,6 +2129,39 @@
 				<animation x="130" y="0" w="129" h="191"/>
 			</abierta>
 		</puerta>
+		<nieta>
+			<idleAnim>
+				<animation x="0" y="0" w="63" h="127"/>
+			</idleAnim>
+		</nieta>
+		<abuela>
+
+			<idleAnim loop="true" speed=" 0.4f">
+				
+				<animation x="0" y="111" w="94" h="125"/>
+				<animation x="0" y="111" w="94" h="125"/>
+				<animation x="0" y="111" w="94" h="125"/>
+				<animation x="0" y="111" w="94" h="125"/>
+				<animation x="0" y="111" w="94" h="125"/>
+				<animation x="95" y="111" w="94" h="125"/>
+				<animation x="95" y="111" w="94" h="125"/>
+				<animation x="95" y="111" w="94" h="125"/>
+				<animation x="95" y="111" w="94" h="125"/>
+				<animation x="95" y="111" w="94" h="125"/>
+				<animation x="95" y="111" w="94" h="125"/>
+				<animation x="95" y="111" w="94" h="125"/>
+				<animation x="190" y="111" w="94" h="125"/>
+				<animation x="190" y="111" w="94" h="125"/>
+				<animation x="190" y="111" w="94" h="125"/>
+				<animation x="190" y="111" w="94" h="125"/>
+				<animation x="190" y="111" w="94" h="125"/>
+				<animation x="190" y="111" w="94" h="125"/>
+				<animation x="190" y="111" w="94" h="125"/>
+			</idleAnim>
+			
+			
+		</abuela>
+		
 	</animations>
 	
 </config>

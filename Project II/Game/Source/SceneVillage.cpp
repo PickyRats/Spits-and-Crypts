@@ -12,6 +12,12 @@
 #include "Hud.h"
 #include "DialogManager.h"
 #include "DialogTriggerEntity.h"
+#include "EntityManager.h"
+#include "Physics.h"
+#include "Entity.h"	
+#include "Puzzle2.h"
+#include "CutscenePlayer.h"
+
 
 #include "Defs.h"
 #include "Log.h"
@@ -76,9 +82,11 @@ bool SceneVillage::Start()
 	app->map->Enable();
 	app->entityManager->Enable();
 	app->hud->Enable();
+	app->particleManager->Enable();
 
 	//Load the player in the map
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(spawnPosition.x), PIXEL_TO_METERS(spawnPosition.y)), 0);
+	app->map->player->inicio = true;
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -95,14 +103,16 @@ bool SceneVillage::Start()
 	int i = 1;
 	if (!piedraHecha)
 	{
-		piedra = app->physics->CreateRectangle(200, 640, 100, 100, DYNAMIC);
+		piedra = app->physics->CreateRectangle(320, 640, 100, 100, DYNAMIC);
+		piedra->ctype = ColliderType::ROCK;
+		
 		piedraHecha = true;
 	}
 
 	piedra->body->SetGravityScale(15);
 
 	piedraTexture = app->tex->Load("Assets/Textures/Items/piedra.png");
-
+	rockfx = app->audio->LoadFx("Assets/Audio/Fx/RockFx.wav");
 	aldea = app->tex->Load("Assets/Textures/Screens/aldea.png");
 
 	app->audio->PlayMusic(configNode.child("villageAmbient").attribute("path").as_string());
@@ -122,7 +132,33 @@ bool SceneVillage::Update(float dt)
 
 	int piedraX = METERS_TO_PIXELS(piedra->body->GetPosition().x);
 	int piedraY = METERS_TO_PIXELS(piedra->body->GetPosition().y);
-	app->hud->DrawTile(piedraTexture, { piedraX - 50, piedraY - 50});
+	if (!cutsceneStarted) app->hud->DrawTile(piedraTexture, { piedraX - 50, piedraY - 64});
+
+	if (piedraX>=400 && !cutsceneStarted)
+	{
+		cutsceneStarted = true;
+		movement = true;
+		piedra->body->SetActive(false);
+		app->physics->world->DestroyBody(piedra->body);
+		app->map->player->isWalking = false;
+		app->audio->PauseFx(app->map->player->stepsFx);
+		app->cutscenePlayer->file = "Assets/Video/Cinematica_03.mp4";
+		app->cutscenePlayer->Enable();
+		app->audio->PlayMusic("Assets/Video/Cinematica_03.ogg", 0);
+		app->cutscenePlayer->ConvertPixels(0, 1);
+		app->audio->PlayMusic(configNode.child("villageAmbient").attribute("path").as_string());
+		app->cutscenePlayer->Disable();
+		app->hud->mission1Complete = true;
+		if (!app->hud->mission2Complete)
+		{
+			app->hud->mission20Active = true;
+		}
+		app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(27*64), PIXEL_TO_METERS(spawnPosition.y)), 0);
+	}
+	if (movement)
+	{
+		app->map->player->inicio = false;
+	}
 
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;

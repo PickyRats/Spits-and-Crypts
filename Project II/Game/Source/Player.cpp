@@ -19,6 +19,7 @@
 #include "SceneCombat.h"
 #include "Map.h"
 #include "SceneSelection.h"
+#include "CutscenePlayer.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -52,6 +53,8 @@ bool Player::Start() {
 		else if (app->sceneSelection->currentSelection == 1) texture = app->tex->Load(texturePath2);
 		else if (app->sceneSelection->currentSelection == 2) texture = app->tex->Load(texturePath3);
 		else if (app->sceneSelection->currentSelection == 3) texture = app->tex->Load(texturePath4);
+
+		texture1 = app->tex->Load("Assets/Textures/MC_Sprites_Esclavo.png");
 	}
 	else
 	{
@@ -108,7 +111,7 @@ bool Player::Update(float dt)
 				SoundManager();
 
 				//player movement
-				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !inicio)
 				{
 					if (!isClimbing && !isEnteringDoor)
 					{
@@ -141,7 +144,11 @@ bool Player::Update(float dt)
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE
 					&& (pad.l_x < 0.2 && pad.l_x > -0.2)&& (pad.l_y < 0.2 && pad.l_y > -0.2))
 				{
-					if (!isJumping && !isClimbing && !isEnteringDoor) currentAnim = &idleAnim;
+					if (!isJumping && !isClimbing && !isEnteringDoor)
+					{
+						if (!inicio) currentAnim = &idleAnim;
+						else currentAnim = &idleRockAnim;
+					}
 					isWalking = false;
 					vel.x = 0;
 				}
@@ -151,7 +158,7 @@ bool Player::Update(float dt)
 				{
 					
 					isWalking = false;
-					if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+					if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && !inicio)
 					{
 						UpMovement();
 						isClimbing = true;
@@ -184,7 +191,7 @@ bool Player::Update(float dt)
 						wasUpPressed = true;
 					}
 
-					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT )
+					if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && !inicio)
 					{
 						DownMovement();
 						isClimbing = true;
@@ -227,9 +234,8 @@ bool Player::Update(float dt)
 					
 				}
 				//Jump
-				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN|| pad.a)
+				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN|| pad.a && !inicio)
 				{
-					
 					Jump();
 				}
 
@@ -242,19 +248,19 @@ bool Player::Update(float dt)
 				//god mode
 				vel.SetZero();
 
-				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+				if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && !inicio)
 				{
 					vel.y = -speed * 2 * dt;
 				}
-				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+				if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && !inicio)
 				{
 					vel.y = speed * 2 * dt;
 				}
-				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !inicio)
 				{
 					vel.x = -speed * 2 * dt;
 				}
-				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !inicio)
 				{
 					vel.x = speed * 2 * dt;
 				}
@@ -275,9 +281,9 @@ bool Player::Update(float dt)
 
 		DrawPlayer();
 		//printf("\r playerX: %d playerY: %d", position.x, position.y);////////////
-		printf("\r tilecount %d", platformCollisionCount);////////////
+		//printf("\r tilecount %d", platformCollisionCount);////////////
 		currentAnim->Update();
-		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || pad.x==KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || pad.x==KEY_DOWN && !inicio)
 		{
 			EnterDoor();
 		}
@@ -314,7 +320,7 @@ void Player::EnterDoor()
 	}
 	else if (doorFloor1)
 	{
-		EnteringDoor();
+		//EnteringDoor();
 		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneFloor1, 60.0f);
 		doorFloor1 = false;
 		if (app->hud->mission30Active)
@@ -324,11 +330,20 @@ void Player::EnterDoor()
 		}
 		
 	}
-	else if (enterCombat)
+	else if (enterCombat1)
 	{
-		EnteringDoor();
 		app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneCombat, 60.0f);
-		enterCombat = false;
+		enterCombat1 = false;
+	}
+	else if (enterCombat2)
+	{
+		app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneCombat, 60.0f);
+		enterCombat2 = false;
+	}
+	else if (enterCombat3)
+	{
+		app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneCombat, 60.0f);
+		enterCombat3 = false;
 	}
 	else if (doorChoza)
 	{
@@ -342,6 +357,12 @@ void Player::EnterDoor()
 		}
 		doorChoza = false;
 	}
+	else if (enterPuzle3)
+	{
+		app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneLight, 60.0f);
+		enterCombat3 = false;
+	}
+	
 }
 
 void Player::EnteringDoor()
@@ -365,7 +386,8 @@ void Player::LeftMovement()
 
 void Player::RightMovement()
 {
-	if (!isJumping) currentAnim = &walkAnim;
+	if (!isJumping && !inicio) currentAnim = &walkAnim;
+	else if (inicio) currentAnim = &rockAnim;
 
 	isFacingRight = true;
 	if (!canClimb) isWalking = true;
@@ -442,7 +464,7 @@ void Player::SoundManager()
 }
 void Player::Jump()
 {
-	if (!isJumping)
+	if (!isJumping && !inicio)
 	{
 		isJumping = true;
 		playJumpSound = true;
@@ -480,8 +502,13 @@ void Player::DrawPlayer()
 	{
 		if (id == 1)
 		{
-			if (!app->sceneCombat->active) app->render->DrawTexture(texture, position.x - 30, position.y - 86, &rect);
-			else app->render->DrawTexture(texture, position.x - 55, position.y - 86, &rect);
+			if (!inicio)
+			{
+				if (!app->sceneCombat->active) app->render->DrawTexture(texture, position.x - 30, position.y - 86, &rect);
+				else app->render->DrawTexture(texture, position.x - 55, position.y - 86, &rect);
+			}
+			else app->render->DrawTexture(texture1, position.x, position.y - 40, &rect);
+			
 		}
 		else if (id == 2)
 		{
@@ -514,7 +541,7 @@ void Player::ToggleGodMode()
 		{
 			pbody->body->GetFixtureList()->SetSensor(true);
 			pbody->body->SetGravityScale(0.0f);
-			pbody->body->SetLinearVelocity({ 0, 0 });
+			pbody->body->SetLinearVelocity({ 0, - 0.165f });
 			currentAnim = &idleAnim;
 		}
 		else
@@ -584,12 +611,38 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::DOOR_FLOOR_1:
 		doorFloor1 = true;
+		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneFloor1, 60.0f);
+		doorFloor1 = false;
+		if (app->hud->mission30Active)
+		{
+			app->hud->mission31Active = true;
+			app->hud->mission30Active = false;
+		}
+
+		if (!cutsceneStarted)
+		{
+			cutsceneStarted = true;
+			isWalking = false;
+			app->audio->PauseFx(stepsFx);
+			app->cutscenePlayer->file = "Assets/Video/Cinematica_04.mp4";
+			app->cutscenePlayer->Enable();
+			app->audio->PlayMusic("Assets/Video/Cinematica_04.ogg", 0);
+			app->cutscenePlayer->ConvertPixels(0, 1);
+			app->cutscenePlayer->Disable();
+			app->sceneFloor1->PlayMusic();
+		}
 		break;
 	case ColliderType::TRAP:
 		isDead = true;
 		break;
-	case ColliderType::COMBAT:
-		enterCombat = true;
+	case ColliderType::COMBAT1:
+		if (app->sceneCombat->currentCombat == 0) enterCombat1 = true;
+		break;
+	case ColliderType::COMBAT2:
+		if (app->sceneCombat->currentCombat == 1) enterCombat2 = true;
+		break;
+	case ColliderType::COMBAT3:
+		if (app->sceneCombat->currentCombat == 2) enterCombat3 = true;
 		break;
 	case ColliderType::STAIRS:
 		canClimb = true;
@@ -616,6 +669,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		{
 			pbody->body->SetGravityScale(1.0f);
 		}
+		break;
+	case ColliderType::ROCK:
+		app->audio->PlayFx(app->sceneVillage->rockfx, -1);
+		break;
+	case ColliderType::DOOR_PUZLE_2:
+		if (app->sceneFloor1->puertas[2]->puzle1Completed) enterPuzle3 = true;
+		break;
 	}
 
 }
@@ -645,8 +705,8 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::DOOR_FLOOR_1:
 		doorFloor1 = false;
 		break;
-	case ColliderType::COMBAT:
-		enterCombat = false;
+	case ColliderType::COMBAT1:
+		enterCombat1 = false;
 		break;
 	case ColliderType::STAIRS:
 		canClimb = false;
@@ -678,6 +738,10 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::DOOR_CHOZA:
 		doorChoza = false;
 		break;
+	case ColliderType::ROCK:
+		app->audio->UnloadFx(app->sceneVillage->rockfx);
+		app->audio->LoadFx("Assets/Audio/Fx/RockFx.wav");
+		break;
 	}
 
 }
@@ -699,6 +763,9 @@ void Player::LoadAnimations()
 		idleBattleAnim.LoadAnimations("idleBattleAnim", "player");
 	
 		walkBattleAnim.LoadAnimations("walkBattleAnim", "player");
+
+		idleRockAnim.LoadAnimations("idleRockAnim", "player");
+		rockAnim.LoadAnimations("rockAnim", "player");
 
 		if (app->sceneSelection->currentSelection == 0)
 		{

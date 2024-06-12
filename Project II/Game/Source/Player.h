@@ -72,6 +72,7 @@ public:
 	int platformCollisionCount = 0;
 
 	SDL_Texture* texture = NULL;
+	SDL_Texture* texture1 = NULL;
 
 	PhysBody* pbody;
 	PhysBody* playerPbody;
@@ -88,9 +89,13 @@ public:
 				deathAnim,
 				idleBattleAnim,
 				abilityAnim,
-				walkBattleAnim;
+				walkBattleAnim,
+				idleRockAnim,
+				rockAnim;
 
 	bool isWalking = false;
+
+	bool inicio = true;
 
 	bool isEnteringDoor = false;
 
@@ -108,7 +113,10 @@ public:
 	bool doorOasis = false;
 	bool doorTemple = false;
 	bool doorFloor1 = false;
-	bool enterCombat = false;
+	bool enterCombat1 = false;
+	bool enterCombat2 = false;
+	bool enterCombat3 = false;
+	bool enterPuzle3 = false;
 
 	bool step = false;
 	bool walkingSoundPlaying = false;
@@ -140,7 +148,8 @@ public:
 
 
 	bool isDead = false;
-
+	
+	bool cutsceneStarted = false;
 };
 
 #endif // __PLAYER_H__

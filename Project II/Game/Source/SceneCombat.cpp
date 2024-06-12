@@ -67,6 +67,14 @@ bool SceneCombat::Start()
 			app->map->path = configNodeCombat.child("map2").attribute("path").as_string();
 		}
 	}
+	else if (currentCombat == 2)
+	{
+		if (configNodeCombat.child("map3")) {
+			//Get the map name from the config file and assigns the value in the module
+			app->map->mapName = configNodeCombat.child("map3").attribute("name").as_string();
+			app->map->path = configNodeCombat.child("map3").attribute("path").as_string();
+		}
+	}
 
 	app->map->Enable();
 	app->entityManager->Enable();
@@ -95,7 +103,7 @@ bool SceneCombat::Start()
 	//carga assets
 	if (currentCombat == 0)
 	{
-		floor1background = app->tex->Load("Assets/Textures/Screens/floor1background.png");
+		//floor1background = app->tex->Load("Assets/Textures/Screens/floor1background.png");
 
 		app->map->player->DestroyBody();
 		app->map->player->position = { 64, 576 };
@@ -108,6 +116,7 @@ bool SceneCombat::Start()
 			enemies[i] = enemy[i];
 			enemies[i]->SetCombatAnimation(0);
 		}
+
 		players[0] = app->map->player;
 		players[0]->SetCombatAnimation(0);
 		players[1] = app->map->player2;
@@ -117,7 +126,7 @@ bool SceneCombat::Start()
 	}
 	else if (currentCombat == 1)
 	{
-		floor1background = app->tex->Load("Assets/Textures/Screens/floor1background.png");
+		//floor1background = app->tex->Load("Assets/Textures/Screens/floor1background.png");
 
 		app->map->player->DestroyBody();
 		app->map->player->position = { 64, 576 };
@@ -127,15 +136,34 @@ bool SceneCombat::Start()
 		for (int i = 0; i < 2; i++)
 		{
 			enemy[i]->isActive = true;
+			enemy[i]->health = 100;
+			enemy[i]->isDead = false;
 			enemies[i] = enemy[i];
 			enemies[i]->SetCombatAnimation(0);
 		}
+
+		enemies[0]->position = { 1024, 192 };
+		enemies[1]->position = { 448, 192 };
 		players[0] = app->map->player;
 		players[0]->SetCombatAnimation(0);
 		players[1] = app->map->player2;
 		players[1]->SetCombatAnimation(0);
 		app->map->player2->isVisible = true;
 		app->map->player2->position = { 0, 576 };
+	}
+	else if (currentCombat == 2)
+	{
+		app->map->player->DestroyBody();
+		app->map->player->position = { 64, 576 };
+
+		tilePosition = { 64, 576 };
+
+		enemy[2]->isActive = true;
+		enemies[2] = enemy[2];
+		enemies[2]->SetCombatAnimation(0);
+
+		players[0] = app->map->player;
+		players[0]->SetCombatAnimation(0);
 	}
 
 	app->map->pathfinding->CreatePath(app->map->WorldToMap(app->map->player->position.x, app->map->player->position.y), app->map->WorldToMap(tilePosition.x, tilePosition.y));
@@ -163,8 +191,8 @@ bool SceneCombat::PreUpdate()
 bool SceneCombat::Update(float dt)
 {
 	GamePad& pad = app->input->pads[0];
-	printf("\r Player 1 life: %d Player 2 life: %d Enemy 1 life: %d Enemy 2 life: %d", players[0]->health, players[1]->health, enemies[0]->health, enemies[1]->health);
-	app->render->DrawTexture(floor1background, 0, 0, NULL, SDL_FLIP_NONE, 1);
+	//printf("\r Player 1 life: %d Player 2 life: %d Enemy 1 life: %d Enemy 2 life: %d", players[0]->health, players[1]->health, enemies[0]->health, enemies[1]->health);
+	//app->render->DrawTexture(floor1background, 0, 0, NULL, SDL_FLIP_NONE, 1);
 
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;
@@ -844,5 +872,19 @@ void SceneCombat::EndCombat()
 		app->sceneFloor1->levelWidth = 110 * 64;
 		app->fade->Fade((Module*)app->sceneCombat, (Module*)app->sceneFloor1, 60.0f);
 		combatCompleted = true;
+		currentCombat++;
+	}
+	else if (currentCombat == 1)
+	{	
+		app->audio->PlayFx(victory);
+		app->map->player->isCombat = false;
+		app->map->player2->isCombat = false;
+		app->map->player2->isVisible = false;
+		app->sceneFloor1->playerStartPosition = { 118 * 64, 26 * 64 };
+		app->map->player->CreateBody();
+		app->fade->Fade((Module*)app->sceneCombat, (Module*)app->sceneFloor1, 60.0f);
+		app->sceneFloor1->levelWidth = 169 * 64;
+		combat2Completed = true;
+		currentCombat++;
 	}
 }

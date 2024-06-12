@@ -101,7 +101,7 @@ bool SceneMenu::Start()
 	pugi::xml_parse_result result = saveFile.load_file("save_game.xml");
 	if(saveFile.child("game_state"))
 	{
-		loadGameButton->state = GuiControlState::NORMAL;
+		//loadGameButton->state = GuiControlState::NORMAL;
 	}
 	settingsButton->state = GuiControlState::NORMAL;
 	creditsButton->state = GuiControlState::NORMAL;
@@ -217,7 +217,9 @@ bool SceneMenu::Update(float dt)
 				fxClickPlayed = true;
 			}
 
-			app->fade->Fade(this, (Module*)app->sceneTemple, 60.0f);
+
+			app->fade->Fade(this, (Module*)app->sceneVillage, 60.0f);
+
 
 		}
 		else if (loadGameButton->state == GuiControlState::FOCUSED)

@@ -44,7 +44,7 @@ bool Enemy::Start() {
 
 	isFacingRight = false;
 
-	attackDamage = 30;
+	attackDamage = 20;
 
 	return true;
 }
@@ -66,7 +66,12 @@ bool Enemy::Update(float dt)
 		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 42;*/
 		if (health <= 0 && !isDead)
 		{
-			if (AnimationFinished()) isDead = true;
+			if (AnimationFinished())
+			{
+				isDead = true;
+				currentAnim->ResetLoopCount();
+				currentAnim->Reset();
+			}
 		}
 		if (app->sceneCombat->active && !isDead)
 		{
