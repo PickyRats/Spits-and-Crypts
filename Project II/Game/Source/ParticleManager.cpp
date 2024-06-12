@@ -87,10 +87,10 @@ void ParticleManager::UpdateParticles(float dt, float time) {
     
 	if (app->sceneFloor1->active)
     {
-		CreateParticles(dt, 512, 1980, 500.0f, 1, 0);
-		CreateParticles(dt, 1088, 2040, 500.0f, 2, 0);
-		CreateParticles(dt, 5696, 1787, 500.0f, 3, 0);
-		CreateParticles(dt, 9472, 1216, 500.0f, 3, 0);
+		CreateParticles(dt, 512, 1985, 500.0f, 1, 0);
+		CreateParticles(dt, 1088, 2045, 500.0f, 2, 0);
+		CreateParticles(dt, 5696, 1790, 500.0f, 3, 0);
+		CreateParticles(dt, 9472, 1221, 500.0f, 4, 0);
 	} 
 
     // Update existing particles

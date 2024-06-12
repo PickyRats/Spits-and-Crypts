@@ -127,7 +127,7 @@
 		<villageAmbient path="Assets/Audio/Music/Village_ambient.ogg" fadeTime="2" fadeOutTime="2"/>
 
 		<!-- Abuela -->
-		<npc x="200" y="580" texturepath="Assets/Textures/Npcs/abuela.png" id="1" scene="1"/>
+		<npc x="200" y="580" texturepath="Assets/Textures/Npcs/Abuela_Sprites.png" id="1" scene="1"/>
 		
 		<!-- Dialogos -->
 		<dialogTrigger x="200" y="640"  name="La abuela" repeat="true" mission="false" scene="1"  id="1">
@@ -1291,55 +1291,55 @@
 			<idleAnim loop ="true" speed="0.4f">
 				<animation x="0" y="0" w="57" h="128"/>
 				<animation x="0" y="0" w="57" h="128"/>
-				
+
 				<animation x="57" y="0" w="57" h="128"/>
 				<animation x="57" y="0" w="57" h="128"/>
-				
+
 				<animation x="114" y="0" w="57" h="128"/>
 				<animation x="114" y="0" w="57" h="128"/>
-				
+
 				<animation x="171" y="0" w="57" h="128"/>
 				<animation x="171" y="0" w="57" h="128"/>
-				
+
 				<animation x="228" y="0" w="57" h="128"/>
 				<animation x="228" y="0" w="57" h="128"/>
-				
+
 				<animation x="285" y="0" w="57" h="128"/>
 				<animation x="285" y="0" w="57" h="128"/>
-				
+
 				<animation x="342" y="0" w="57" h="128"/>
 				<animation x="342" y="0" w="57" h="128"/>
 			</idleAnim>
-			
+
 			<interactAnim loop ="false" speed="0.4f">
 				<animation x="0" y="128" w="57" h="128"/>
 				<animation x="0" y="128" w="57" h="128"/>
 				<animation x="0" y="128" w="57" h="128"/>
-				
+
 				<animation x="57" y="128" w="57" h="128"/>
 				<animation x="57" y="128" w="57" h="128"/>
 				<animation x="57" y="128" w="57" h="128"/>
-				
+
 				<animation x="114" y="128" w="57" h="128"/>
 				<animation x="114" y="128" w="57" h="128"/>
 				<animation x="114" y="128" w="57" h="128"/>
-				
+
 				<animation x="171" y="128" w="57" h="128"/>
 				<animation x="171" y="128" w="57" h="128"/>
 				<animation x="171" y="128" w="57" h="128"/>
-				
+
 				<animation x="228" y="128" w="57" h="128"/>
 				<animation x="228" y="128" w="57" h="128"/>
 				<animation x="228" y="128" w="57" h="128"/>
-				
+
 				<animation x="285" y="128" w="57" h="128"/>
 				<animation x="285" y="128" w="57" h="128"/>
 				<animation x="285" y="128" w="57" h="128"/>
-				
+
 				<animation x="342" y="128" w="57" h="128"/>
 				<animation x="342" y="128" w="57" h="128"/>
 				<animation x="342" y="128" w="57" h="128"/>
-				
+
 				<animation x="399" y="128" w="57" h="128"/>
 				<animation x="399" y="128" w="57" h="128"/>
 				<animation x="399" y="128" w="57" h="128"/>
@@ -2134,9 +2134,31 @@
 			</idleAnim>
 		</nieta>
 		<abuela>
-			<idleAnim>
-				<animation x="0" y="0" w="98" h="128"/>
+
+			<idleAnim loop="true" speed=" 0.4f">
+				
+				<animation x="0" y="111" w="94" h="125"/>
+				<animation x="0" y="111" w="94" h="125"/>
+				<animation x="0" y="111" w="94" h="125"/>
+				<animation x="0" y="111" w="94" h="125"/>
+				<animation x="0" y="111" w="94" h="125"/>
+				<animation x="95" y="111" w="94" h="125"/>
+				<animation x="95" y="111" w="94" h="125"/>
+				<animation x="95" y="111" w="94" h="125"/>
+				<animation x="95" y="111" w="94" h="125"/>
+				<animation x="95" y="111" w="94" h="125"/>
+				<animation x="95" y="111" w="94" h="125"/>
+				<animation x="95" y="111" w="94" h="125"/>
+				<animation x="190" y="111" w="94" h="125"/>
+				<animation x="190" y="111" w="94" h="125"/>
+				<animation x="190" y="111" w="94" h="125"/>
+				<animation x="190" y="111" w="94" h="125"/>
+				<animation x="190" y="111" w="94" h="125"/>
+				<animation x="190" y="111" w="94" h="125"/>
+				<animation x="190" y="111" w="94" h="125"/>
 			</idleAnim>
+			
+			
 		</abuela>
 		
 	</animations>
