@@ -112,6 +112,9 @@
  <tileset firstgid="6677" name="Entre_Sala6_i_7" tilewidth="64" tileheight="64" tilecount="44" columns="4">
   <image source="Entre_Sala6_i_7.png" width="278" height="720"/>
  </tileset>
+ <tileset firstgid="6721" name="torch" tilewidth="64" tileheight="64" tilecount="1" columns="1">
+  <image source="torch.png" width="64" height="64"/>
+ </tileset>
  <layer id="16" name="Fondo" width="230" height="37">
   <properties>
    <property name="Draw" type="bool" value="true"/>
@@ -38700,7 +38703,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="6721"/>
    <tile/>
    <tile/>
    <tile/>
@@ -40711,7 +40714,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="6721"/>
    <tile/>
    <tile/>
    <tile/>
@@ -41320,7 +41323,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="6721"/>
    <tile/>
    <tile/>
    <tile/>
@@ -41559,7 +41562,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="6721"/>
    <tile/>
    <tile/>
    <tile/>
@@ -54568,21 +54571,21 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
    <tile/>
    <tile/>
    <tile/>
@@ -54799,19 +54802,19 @@
    <tile/>
    <tile/>
    <tile gid="3"/>
-   <tile gid="3"/>
-   <tile gid="3"/>
-   <tile gid="3"/>
-   <tile gid="3"/>
-   <tile gid="3"/>
-   <tile gid="3"/>
-   <tile gid="3"/>
-   <tile gid="3"/>
-   <tile gid="3"/>
-   <tile gid="3"/>
-   <tile gid="3"/>
-   <tile gid="3"/>
-   <tile gid="3"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile gid="3"/>
    <tile/>
    <tile/>

@@ -78,6 +78,8 @@ private:
 	uint texW, texH;
 	uint windowW, windowH;
 
+	bool cutsceneStarted = false;
+
 	float cameraSmoothingFactor = 0.04f;
 
 	int levelWidth = 90 * 64;
