@@ -56,20 +56,36 @@ bool SceneSelection::Start()
 
 bool SceneSelection::Update(float dt)
 {
+	GamePad& pad = app->input->pads[0];
 	app->render->DrawTexture(background, 0, 0);
 
-	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && currentSelection > 0)
+	if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN|| (pad.left == KEY_DOWN && !wasLeftPressed)) && currentSelection > 0)
 	{
 		currentSelection--;
+		wasLeftPressed = true;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && currentSelection < 4)
+	else if (pad.left != KEY_DOWN)
+	{
+		wasLeftPressed = false;
+	}
+	if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || (pad.right == KEY_DOWN && !wasRightPressed)) && currentSelection < 4)
 	{
 		currentSelection++;
+		wasRightPressed = true;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+	else if (pad.right != KEY_DOWN)
+	{
+		wasRightPressed = false;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || (pad.a == KEY_DOWN && !wasAPressed))
 	{
 		app->cutscenePlayer->Disable();
-		app->fade->Fade(this, (Module*)app->sceneFloor1, 60.0f);
+		app->fade->Fade(this, (Module*)app->sceneVillage, 60.0f);
+		wasAPressed = true;
+	}
+	else if (pad.a != KEY_DOWN)
+	{
+		wasAPressed = false;
 	}
 
 	if (currentSelection == 0) app->render->DrawTexture(char1, 0, 0);

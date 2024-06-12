@@ -24,6 +24,9 @@ public:
 	bool CleanUp();
 
 	int currentSelection = 0;
+	bool wasAPressed = false;
+	bool wasRightPressed = false;
+	bool wasLeftPressed = false;
 
 private:
 
