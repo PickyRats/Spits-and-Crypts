@@ -53,17 +53,21 @@ public:
 
 	void DeleteWall2();
 
+	void DeleteWall3();
+
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
 	GuiControlButton* gcButtom;
 	PhysBody* wall;
 	PhysBody* wall2;
+	PhysBody* wall3;
 	bool pause = false;
 	bool isTorchActive = false;
 	bool checkPoint = false;
 	bool canDelete = true;
 	bool canDelete2 = true;
+	bool canDelete3 = true;
 	bool wasStartPressed = false;
 	iPoint playerStartPosition = { 128,35*64 };
 	bool notUseChechPoint = false;

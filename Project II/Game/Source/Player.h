@@ -116,6 +116,7 @@ public:
 	bool enterCombat1 = false;
 	bool enterCombat2 = false;
 	bool enterCombat3 = false;
+	bool enterPuzle3 = false;
 
 	bool step = false;
 	bool walkingSoundPlaying = false;

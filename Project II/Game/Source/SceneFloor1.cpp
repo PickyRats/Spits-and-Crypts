@@ -95,6 +95,8 @@ bool SceneFloor1::Start()
 	wall->ctype = ColliderType::WALL;
 	wall2 = app->physics->CreateRectangle(109*64, 28*64, 10, 3 * 64, STATIC);
 	wall2->ctype = ColliderType::WALL;
+	wall3 = app->physics->CreateRectangle(168 * 64, 20 * 64, 10, 3 * 64, STATIC);
+	wall3->ctype = ColliderType::WALL;
 
 	//Load the player in the map
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(playerStartPosition.x), PIXEL_TO_METERS(playerStartPosition.y)), 0);
@@ -136,7 +138,6 @@ bool SceneFloor1::Update(float dt)
 	//una vez completado el puzzle 2, se desactiva y se activa el puzzle 3
 	if (app->puzzle2->puzzleCompleted)
 	{
-		app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneLight, 60.0f);
 		app->puzzle2->Disable();
 	}
 
@@ -173,6 +174,10 @@ bool SceneFloor1::Update(float dt)
 	if (app->sceneCombat->combatCompleted && canDelete2)
 	{
 		DeleteWall2();
+	}
+	if (app->sceneFloor1->puertas[2]->puzle1Completed && canDelete3)
+	{
+		DeleteWall3();
 	}
 	return true;
 }
@@ -240,6 +245,11 @@ void SceneFloor1::DeleteWall()
 void SceneFloor1::DeleteWall2()
 {
 	wall->body->SetActive(false);
+	canDelete2 = false;
+}
+void SceneFloor1::DeleteWall3()
+{
+	wall3->body->SetActive(false);
 	canDelete2 = false;
 }
 bool SceneFloor1::LoadState(pugi::xml_node node)
