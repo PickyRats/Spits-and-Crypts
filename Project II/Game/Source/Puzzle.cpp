@@ -51,7 +51,10 @@ bool Puzzle::Start() {
 
 bool Puzzle::Update(float dt)
 {
-
+	if (isPuzzleCompleted)
+	{
+		this->Disable();
+	}
 
 	
 	GamePad& pad = app->input->pads[0];
