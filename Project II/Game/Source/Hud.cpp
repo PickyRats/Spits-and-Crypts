@@ -360,6 +360,10 @@ bool Hud::Update(float dt)
 				app->sceneMenu->currentId--;
 				wasUpPressed = true;
 			}
+			else if (pad.up != KEY_DOWN)
+			{
+				wasUpPressed = false;
+			}
 			//Check if buttons are focused or pressed. If pressed, do the action. With sound effects. 
 			if (resumeButton->state == GuiControlState::FOCUSED) {
 				if (app->sceneMenu->fxHoverPlayed == false)
@@ -593,8 +597,8 @@ bool Hud::Update(float dt)
 					settingsMusicButton->state = GuiControlState::HIDDEN;
 				}
 			}
-		}
-			if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || (pad.b == KEY_DOWN && !wasBPressed))
+
+			if ((pad.b == KEY_DOWN && wasBPressed == false) || app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 			{
 				app->sceneMenu->currentId = 1;
 				onSettings = false;
@@ -606,7 +610,7 @@ bool Hud::Update(float dt)
 				exitButton->state = GuiControlState::NORMAL;
 				wasBPressed = true;
 			}
-			else if (pad.b != KEY_DOWN)
+			if (pad.b != KEY_DOWN)
 			{
 				wasBPressed = false;
 			}
@@ -638,6 +642,7 @@ bool Hud::Update(float dt)
 					app->audio->PlayFx(app->sceneMenu->FxButton1);
 					app->sceneMenu->fxHoverPlayed = true;
 				}
+
 			}
 			else if (settingsAudioButton->state == GuiControlState::PRESSED)
 			{
@@ -718,7 +723,7 @@ bool Hud::Update(float dt)
 
 			if (app->sceneMenu->vSync)	app->render->vsync = true;
 			else	app->render->vsync = false;
-				
+		}
 	}		
 	else
 	{
