@@ -649,6 +649,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		{
 			pbody->body->SetGravityScale(1.0f);
 		}
+	case ColliderType::ROCK:
+		app->audio->PlayFx(app->sceneVillage->rockfx, -1);
+		break;
 	}
 
 }
@@ -710,6 +713,10 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::DOOR_CHOZA:
 		doorChoza = false;
+		break;
+	case ColliderType::ROCK:
+		app->audio->UnloadFx(app->sceneVillage->rockfx);
+		app->audio->LoadFx("Assets/Audio/Fx/RockFx.wav");
 		break;
 	}
 
