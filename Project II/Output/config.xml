@@ -151,7 +151,7 @@
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 		
 		<!-- Tabernero  -->
-		<npc x="900" y="530" texturepath="Assets/Textures/Npcs/TaberneroSpriteSheet.png" id="8" scene="4" />
+		<npc x="900" y="594" texturepath="Assets/Textures/Npcs/TaberneroSpriteSheet.png" id="8" scene="4" />
 		
 		<!-- Dialogos -->
 		<dialogTrigger x="920" y="565"  name="Tabernero" repeat="true" mission="true" scene="4" id="8" audio_1="Assets/Audio/Fx/anubish/voz_anubish_1.wav" audio_2="Assets/Audio/Fx/anubish/voz_anubish_2.wav" audio_3="Assets/Audio/Fx/anubish/voz_anubish_3.wav">
