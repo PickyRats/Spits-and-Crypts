@@ -116,6 +116,7 @@ bool SceneCombat::Start()
 			enemies[i] = enemy[i];
 			enemies[i]->SetCombatAnimation(0);
 		}
+
 		players[0] = app->map->player;
 		players[0]->SetCombatAnimation(0);
 		players[1] = app->map->player2;
@@ -140,6 +141,9 @@ bool SceneCombat::Start()
 			enemies[i] = enemy[i];
 			enemies[i]->SetCombatAnimation(0);
 		}
+
+		enemies[0]->position = { 1024, 192 };
+		enemies[1]->position = { 448, 192 };
 		players[0] = app->map->player;
 		players[0]->SetCombatAnimation(0);
 		players[1] = app->map->player2;
