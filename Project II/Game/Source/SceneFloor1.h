@@ -58,6 +58,8 @@ public:
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
+	void PlayMusic();
+
 	GuiControlButton* gcButtom;
 	PhysBody* wall;
 	PhysBody* wall2;
@@ -81,7 +83,7 @@ public:
 	bool combatFinished = false;
 	Npcs* paalaya;
 	Puertas* puertas[2];
-
+	
 private:
 	SDL_Texture* backgroundTexture;
 	SDL_Texture* backgroundTexture2;

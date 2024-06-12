@@ -629,6 +629,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			app->audio->PlayMusic("Assets/Video/Cinematica_04.ogg", 0);
 			app->cutscenePlayer->ConvertPixels(0, 1);
 			app->cutscenePlayer->Disable();
+			app->sceneFloor1->PlayMusic();
 		}
 		break;
 	case ColliderType::TRAP:
