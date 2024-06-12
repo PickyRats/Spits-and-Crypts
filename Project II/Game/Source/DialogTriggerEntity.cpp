@@ -443,10 +443,6 @@ void DialogTrigger::GiveMission(int idMission)
 		app->sceneOasisFaraon->tabernero->currentAnim = &app->sceneOasisFaraon->tabernero->interactAnim;
 		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoTabernero;
 		printf(" Soy el tabernero\n");
-		if (!app->hud->mission2Complete)
-		{
-			app->hud->mission20Active = true;
-		}
 		break;
 	case 9:
 		app->sceneFloor1->paalaya->currentAnim = &app->sceneFloor1->paalaya->interactAnim;
