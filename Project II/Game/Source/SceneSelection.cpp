@@ -80,6 +80,15 @@ bool SceneSelection::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || (pad.a == KEY_DOWN && !wasAPressed))
 	{
 		app->cutscenePlayer->Disable();
+
+		if (currentSelection == 0) app->cutscenePlayer->file = "Assets/Video/Cinematica_02_Maat.mp4";
+		else if (currentSelection == 1) app->cutscenePlayer->file = "Assets/Video/Cinematica_02_Thoth.mp4";
+		else if (currentSelection == 2) app->cutscenePlayer->file = "Assets/Video/Cinematica_02_Orus.mp4";
+		else if (currentSelection == 3) app->cutscenePlayer->file = "Assets/Video/Cinematica_02_Isis.mp4";
+		
+		app->cutscenePlayer->Enable();
+		app->audio->PlayMusic("Assets/Video/Cinematica_02.ogg", 0);
+		app->cutscenePlayer->ConvertPixels(0, 1);
 		app->fade->Fade(this, (Module*)app->sceneVillage, 60.0f);
 		wasAPressed = true;
 	}

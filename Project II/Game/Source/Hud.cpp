@@ -930,15 +930,15 @@ void Hud::Missions(int mission1)
 		app->render->DrawTexture(mission2i1, 0, 0, NULL, SDL_FLIP_NONE, 0);
 		break;
 	case 4:
-		app->render->DrawTexture(mission3i0, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		if (!app->sceneCombat->active) app->render->DrawTexture(mission3i0, 0, 0, NULL, SDL_FLIP_NONE, 0);
 		//printf("Mission 3.0\n");
 		break;
 	case 5:
-		app->render->DrawTexture(mission3i1, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		if (!app->sceneCombat->active) app->render->DrawTexture(mission3i1, 0, 0, NULL, SDL_FLIP_NONE, 0);
 		//printf("Mission 3.1\n");
 		break;
 	case 6:
-		app->render->DrawTexture(mission3i2, 0, 0, NULL, SDL_FLIP_NONE, 0);
+		if (!app->sceneCombat->active) app->render->DrawTexture(mission3i2, 0, 0, NULL, SDL_FLIP_NONE, 0);
 		//printf("Mission 3.2\n");
 		break;
 	default:

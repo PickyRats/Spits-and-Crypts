@@ -83,6 +83,7 @@ bool SceneVillage::Start()
 	app->entityManager->Enable();
 	app->hud->Enable();
 	app->particleManager->Enable();
+	app->cutscenePlayer->Disable();
 
 	//Load the player in the map
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(spawnPosition.x), PIXEL_TO_METERS(spawnPosition.y)), 0);
@@ -116,6 +117,8 @@ bool SceneVillage::Start()
 	aldea = app->tex->Load("Assets/Textures/Screens/aldea.png");
 
 	app->audio->PlayMusic(configNode.child("villageAmbient").attribute("path").as_string());
+
+	app->hud->mission10Active = true;
 	return true;
 }
 

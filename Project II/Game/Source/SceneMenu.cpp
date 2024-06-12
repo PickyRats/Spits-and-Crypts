@@ -277,6 +277,7 @@ bool SceneMenu::Update(float dt)
 				app->audio->PlayFx(FxButton2);
 				fxClickPlayed = true;
 				onCredits = true;
+				app->cutscenePlayer->file = "Assets/Video/credits.mp4";
 				app->cutscenePlayer->Enable();
 				app->cutscenePlayer->ConvertPixels(0, 1);
 			}

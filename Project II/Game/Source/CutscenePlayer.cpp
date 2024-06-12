@@ -129,7 +129,7 @@ bool CutscenePlayer::OpenVideoCodecContext(int videoIndex)
         return true;
     }
 
-    system("cls");
+    //system("cls");
     return false;
 }
 
@@ -209,7 +209,7 @@ bool CutscenePlayer::OpenAudioCodecContext(int audioIndex)
 	// Start audio playback
     SDL_PauseAudioDevice(audioDevice, 0);
 
-    system("cls");
+    //system("cls");
     return false;
 }
 

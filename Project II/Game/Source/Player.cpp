@@ -337,7 +337,7 @@ void Player::EnterDoor()
 	}
 	else if (enterCombat2)
 	{
-		app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneCombat, 60.0f);
+		if (app->hud->mission3Complete) app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneCombat, 60.0f);
 		enterCombat2 = false;
 	}
 	else if (enterCombat3)

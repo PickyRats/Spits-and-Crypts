@@ -1,6 +1,6 @@
 <config>
 	<app>
-		<title>Project II</title>
+		<title>Spits and Crypts</title>
 		<initialMaxFrameDuration value="16"/>
 		<capMaxFrameDuration value="32"/>
 	</app>
@@ -129,16 +129,6 @@
 		<!-- Abuela -->
 		<npc x="150" y="580" texturepath="Assets/Textures/Npcs/Abuela_Sprites.png" id="1" scene="1"/>
 		
-		<!-- Dialogos -->
-		<dialogTrigger x="200" y="640"  name="La abuela" repeat="true" mission="false" scene="1"  id="1">
-		  <sentences>
-			  <sentence text="Ayuda, mi nieta se ha quedado atrapada"/>
-			  <sentence text="Necesito alguien poderoso que la salve"/>
-		  </sentences>
-		  <repeat_sentences>
-			  <sentence text="Basta de chachara, ¡date prisa!"/>
-		  </repeat_sentences>
-	  </dialogTrigger>
 	</sceneVillage>
 
 	<!-- sceneOasis -->
@@ -154,7 +144,7 @@
 		<npc x="900" y="594" texturepath="Assets/Textures/Npcs/TaberneroSpriteSheet.png" id="8" scene="4" />
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="920" y="565"  name="Tabernero" repeat="true" mission="true" scene="4" id="8" audio_1="Assets/Audio/Fx/anubish/voz_anubish_1.wav" audio_2="Assets/Audio/Fx/anubish/voz_anubish_2.wav" audio_3="Assets/Audio/Fx/anubish/voz_anubish_3.wav">
+		<dialogTrigger x="920" y="594"  name="Tabernero" repeat="true" mission="true" scene="4" id="8" audio_1="Assets/Audio/Fx/anubish/voz_anubish_1.wav" audio_2="Assets/Audio/Fx/anubish/voz_anubish_2.wav" audio_3="Assets/Audio/Fx/anubish/voz_anubish_3.wav">
 			<sentences>
 				<sentence text="Bienvenido, vendemos todo tipo de productos"/>
 				<sentence text="Desde Arena del desierto hasta ratas disecadas"/>
@@ -190,10 +180,10 @@
 		<npc x="500" y="392" texturepath="Assets/Textures/Npcs/toth.png" id="4" scene="2"/>
 		
 		<!-- Isis -->
-		<npc x="750" y="386" texturepath="Assets/Textures/Npcs/isis.png" id="5" scene="2"/>
+		<npc x="1000" y="386" texturepath="Assets/Textures/Npcs/isis.png" id="5" scene="2"/>
 
 		<!-- Horus -->
-		<npc x="1000" y="386" texturepath="Assets/Textures/Npcs/horus.png" id="6" scene="2"/>
+		<npc x="750" y="386" texturepath="Assets/Textures/Npcs/horus.png" id="6" scene="2"/>
 		
 		<!-- Dialogos -->
 
@@ -405,15 +395,15 @@
 		<Personaje2 texturepath="Assets/Textures/Screens/Combat/fotopersonatge2.png"/>
 		<numeros texturepath="Assets/Textures/Screens/Combat/numeros.png"/>
 
-		<attack1 texturepath="Assets/Textures/Screens/Combat/ABarco.png"/>
-		<attack2 texturepath="Assets/Textures/Screens/Combat/ABespasa.png"/>
-		<attack3 texturepath="Assets/Textures/Screens/Combat/ABlanza.png"/>
+		<attack1 texturepath="Assets/Textures/Screens/Combat/ABlanza.png"/>
+		<attack2 texturepath="Assets/Textures/Screens/Combat/ABarco.png"/>
+		<attack3 texturepath="Assets/Textures/Screens/Combat/ABespasa.png"/>
 		<attack4 texturepath="Assets/Textures/Screens/Combat/ABvaras.png"/>
 		<attack5 texturepath="Assets/Textures/Screens/Combat/ABpluma.png"/>
 		
-		<ability1 texturepath="Assets/Textures/Screens/Combat/HAarc.png"/>
-		<ability2 texturepath="Assets/Textures/Screens/Combat/HAespada.png"/>
-		<ability3 texturepath="Assets/Textures/Screens/Combat/HAlanza.png"/>
+		<ability1 texturepath="Assets/Textures/Screens/Combat/HAlanza.png"/>
+		<ability2 texturepath="Assets/Textures/Screens/Combat/HAarc.png"/>
+		<ability3 texturepath="Assets/Textures/Screens/Combat/HAespada.png"/>
 		<ability4 texturepath="Assets/Textures/Screens/Combat/HAvaras.png"/>
 		<ability5 texturepath="Assets/Textures/Screens/Combat/HApluma.png"/>
 
