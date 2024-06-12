@@ -30,7 +30,9 @@ public:
     // Additional methods
     void CreateParticles();
     void UpdateParticles(float dt, float time);
-    void TorchParticles(float dt, int initialPositionX, int initialPositionY, float lifeTime, int index, int type);
+
+    // 0 = torch, 1 = water
+    void CreateParticles(float dt, int initialPositionX, int initialPositionY, float lifeTime, int index, int type);
     void DrawParticles();
 
 private:

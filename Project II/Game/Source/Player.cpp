@@ -313,7 +313,7 @@ void Player::EnterDoor()
 	}
 	else if (doorFloor1)
 	{
-		EnteringDoor();
+		//EnteringDoor();
 		app->fade->Fade((Module*)app->sceneVillage, (Module*)app->sceneFloor1, 60.0f);
 		doorFloor1 = false;
 		if (app->hud->mission30Active)

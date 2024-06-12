@@ -4,6 +4,9 @@
 #include "Defs.h"
 #include "Log.h"
 
+#include "SceneVillage.h"
+#include "SceneFloor1.h"
+
 ParticleManager::ParticleManager(bool enabled) : Module(enabled)
 {
     name.Create("particlemanager");
@@ -76,10 +79,18 @@ void ParticleManager::UpdateParticles(float dt, float time) {
 
 
     // Create new particle
-    TorchParticles(dt, 180, 395, 500.0f, 0, 0);
-    TorchParticles(dt, 300, 395, 500.0f, 1, 0);
-    TorchParticles(dt, 420, 395, 500.0f, 2, 0);
-    TorchParticles(dt, 600, 395, 600.0f, 3, 1);
+
+    if (app->sceneVillage->active)
+    {
+        CreateParticles(dt, 4700, 530, 600.0f, 0, 1);
+    }
+    
+	if (app->sceneFloor1->active)
+    {
+		CreateParticles(dt, 180, 2000, 500.0f, 1, 0);
+		CreateParticles(dt, 300, 2000, 500.0f, 2, 0);
+		CreateParticles(dt, 420, 2000, 500.0f, 3, 0);
+	} 
 
     // Update existing particles
     for (auto it = particles.begin(); it != particles.end();) {
@@ -95,7 +106,7 @@ void ParticleManager::UpdateParticles(float dt, float time) {
     }
 }
 
-void ParticleManager::TorchParticles(float dt, int initialPositionX, int initialPositionY, float lifeTime, int index, int type)
+void ParticleManager::CreateParticles(float dt, int initialPositionX, int initialPositionY, float lifeTime, int index, int type)
 {
     timeAccumulator[index] += dt;
 

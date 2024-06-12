@@ -81,7 +81,8 @@ void Particle::Draw(SDL_Renderer* renderer) {
         }
         
         SDL_SetTextureAlphaMod(texture, (Uint8)alpha);
-        SDL_RenderCopy(renderer, texture, NULL, &destRect);
+		app->render->DrawTexture(texture, destRect.x, destRect.y, NULL);
+       // SDL_RenderCopy(renderer, texture, NULL, &destRect);
     }
 }
 

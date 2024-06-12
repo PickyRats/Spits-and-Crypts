@@ -79,6 +79,7 @@ bool SceneVillage::Start()
 	app->map->Enable();
 	app->entityManager->Enable();
 	app->hud->Enable();
+	app->particleManager->Enable();
 
 	//Load the player in the map
 	app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(spawnPosition.x), PIXEL_TO_METERS(spawnPosition.y)), 0);
