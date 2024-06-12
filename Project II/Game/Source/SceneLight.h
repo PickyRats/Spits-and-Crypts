@@ -79,7 +79,12 @@ public:
 	
 	bool isInteractingMirror = false;
 	bool isInteractingTrapdoor = false;
-
+	bool wasUpPressed = false;
+	bool wasDownPressed = false;
+	bool wasL1Pressed = false;
+	bool wasR1Pressed = false;
+	bool wasL2Pressed = false;
+	bool wasR2Pressed = false;
 private:
 
 	bool cameraInitialized = false;
