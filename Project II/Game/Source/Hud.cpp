@@ -1045,10 +1045,14 @@ void Hud::Inventory() {
 			wasRightPressed = false;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
+		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN || (pad.x == KEY_DOWN && !wasXPressed)) {
+			wasXPressed = true;
 			if (!inventorySlots[itemId].isEmpty && !inventorySlots[itemId].isEquiped) {
 				EquipItem(itemId);
-
+			}
+			else if (pad.right != KEY_DOWN)
+			{
+				wasXPressed = false;
 			}
 		}
 	}
