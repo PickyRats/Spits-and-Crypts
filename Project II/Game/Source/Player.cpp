@@ -274,7 +274,7 @@ bool Player::Update(float dt)
 
 		DrawPlayer();
 		//printf("\r playerX: %d playerY: %d", position.x, position.y);////////////
-		printf("\r tilecount %d", platformCollisionCount);////////////
+		//printf("\r tilecount %d", platformCollisionCount);////////////
 		currentAnim->Update();
 		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || pad.x==KEY_DOWN && !inicio)
 		{
@@ -325,9 +325,18 @@ void Player::EnterDoor()
 	}
 	else if (enterCombat1)
 	{
-		//EnteringDoor();
 		app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneCombat, 60.0f);
 		enterCombat1 = false;
+	}
+	else if (enterCombat2)
+	{
+		app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneCombat, 60.0f);
+		enterCombat2 = false;
+	}
+	else if (enterCombat3)
+	{
+		app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneCombat, 60.0f);
+		enterCombat3 = false;
 	}
 	else if (doorChoza)
 	{
@@ -589,6 +598,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::COMBAT1:
 		if (app->sceneCombat->currentCombat == 0) enterCombat1 = true;
+		break;
+	case ColliderType::COMBAT2:
+		if (app->sceneCombat->currentCombat == 1) enterCombat2 = true;
+		break;
+	case ColliderType::COMBAT3:
+		if (app->sceneCombat->currentCombat == 2) enterCombat3 = true;
 		break;
 	case ColliderType::STAIRS:
 		canClimb = true;

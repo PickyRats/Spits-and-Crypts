@@ -111,6 +111,8 @@ public:
 	bool doorTemple = false;
 	bool doorFloor1 = false;
 	bool enterCombat1 = false;
+	bool enterCombat2 = false;
+	bool enterCombat3 = false;
 
 	bool step = false;
 	bool walkingSoundPlaying = false;

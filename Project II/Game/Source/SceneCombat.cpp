@@ -103,7 +103,7 @@ bool SceneCombat::Start()
 	//carga assets
 	if (currentCombat == 0)
 	{
-		floor1background = app->tex->Load("Assets/Textures/Screens/floor1background.png");
+		//floor1background = app->tex->Load("Assets/Textures/Screens/floor1background.png");
 
 		app->map->player->DestroyBody();
 		app->map->player->position = { 64, 576 };
@@ -125,7 +125,7 @@ bool SceneCombat::Start()
 	}
 	else if (currentCombat == 1)
 	{
-		floor1background = app->tex->Load("Assets/Textures/Screens/floor1background.png");
+		//floor1background = app->tex->Load("Assets/Textures/Screens/floor1background.png");
 
 		app->map->player->DestroyBody();
 		app->map->player->position = { 64, 576 };
@@ -135,6 +135,8 @@ bool SceneCombat::Start()
 		for (int i = 0; i < 2; i++)
 		{
 			enemy[i]->isActive = true;
+			enemy[i]->health = 100;
+			enemy[i]->isDead = false;
 			enemies[i] = enemy[i];
 			enemies[i]->SetCombatAnimation(0);
 		}
@@ -185,8 +187,8 @@ bool SceneCombat::PreUpdate()
 bool SceneCombat::Update(float dt)
 {
 	GamePad& pad = app->input->pads[0];
-	printf("\r Player 1 life: %d Player 2 life: %d Enemy 1 life: %d Enemy 2 life: %d", players[0]->health, players[1]->health, enemies[0]->health, enemies[1]->health);
-	app->render->DrawTexture(floor1background, 0, 0, NULL, SDL_FLIP_NONE, 1);
+	//printf("\r Player 1 life: %d Player 2 life: %d Enemy 1 life: %d Enemy 2 life: %d", players[0]->health, players[1]->health, enemies[0]->health, enemies[1]->health);
+	//app->render->DrawTexture(floor1background, 0, 0, NULL, SDL_FLIP_NONE, 1);
 
 	playerX = app->map->player->position.x;
 	playerY = app->map->player->position.y;
