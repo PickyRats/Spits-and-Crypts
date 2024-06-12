@@ -15,6 +15,7 @@
 #include "EntityManager.h"
 #include "Physics.h"
 #include "Entity.h"	
+#include "Puzzle2.h"
 
 #include "Defs.h"
 #include "Log.h"
