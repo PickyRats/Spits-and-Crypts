@@ -127,7 +127,7 @@
 		<villageAmbient path="Assets/Audio/Music/Village_ambient.ogg" fadeTime="2" fadeOutTime="2"/>
 
 		<!-- Abuela -->
-		<npc x="200" y="580" texturepath="Assets/Textures/Npcs/Abuela_Sprites.png" id="1" scene="1"/>
+		<npc x="150" y="580" texturepath="Assets/Textures/Npcs/Abuela_Sprites.png" id="1" scene="1"/>
 		
 		<!-- Dialogos -->
 		<dialogTrigger x="200" y="640"  name="La abuela" repeat="true" mission="false" scene="1"  id="1">

@@ -19,6 +19,7 @@
 #include "SceneCombat.h"
 #include "Map.h"
 #include "SceneSelection.h"
+#include "CutscenePlayer.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -616,6 +617,18 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		{
 			app->hud->mission31Active = true;
 			app->hud->mission30Active = false;
+		}
+
+		if (!cutsceneStarted)
+		{
+			cutsceneStarted = true;
+			isWalking = false;
+			app->audio->PauseFx(stepsFx);
+			app->cutscenePlayer->file = "Assets/Video/Cinematica_04.mp4";
+			app->cutscenePlayer->Enable();
+			app->audio->PlayMusic("Assets/Video/Cinematica_04.ogg", 0);
+			app->cutscenePlayer->ConvertPixels(0, 1);
+			app->cutscenePlayer->Disable();
 		}
 		break;
 	case ColliderType::TRAP:

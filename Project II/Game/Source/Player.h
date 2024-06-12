@@ -148,7 +148,8 @@ public:
 
 
 	bool isDead = false;
-
+	
+	bool cutsceneStarted = false;
 };
 
 #endif // __PLAYER_H__
