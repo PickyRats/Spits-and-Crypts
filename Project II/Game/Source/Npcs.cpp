@@ -96,7 +96,7 @@ void Npcs::DrawNpcs()
 {
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
 
-	app->render->DrawTexture(texture, position.x, position.y, &rect);
+	app->render->DrawTexture(texture, position.x, position.y, &rect, SDL_FLIP_HORIZONTAL);
 	
 
 }
@@ -165,6 +165,7 @@ void Npcs::LoadAnimations()
 	}
 	else if (npcId == 9)
 	{
+		
 		idleAnim.LoadAnimations("idleAnim", "Paalaya");
 		interactAnim.LoadAnimations("interactAnim", "Paalaya");
 	}
