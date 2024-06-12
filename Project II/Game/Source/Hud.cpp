@@ -299,7 +299,7 @@ bool Hud::Update(float dt)
 	//Ability Tree
 	if (app->sceneTemple->active && (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN || (pad.b == KEY_DOWN && !wasBPressed)))
 	{
-		abilityTree = !abilityTree;
+		abilityTree = false;
 		wasBPressed = true;
 	}
 	else if (pad.b != KEY_DOWN)
@@ -594,7 +594,7 @@ bool Hud::Update(float dt)
 				}
 			}
 		}
-			if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || pad.b == KEY_DOWN)
+			if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || (pad.b == KEY_DOWN && !wasBPressed))
 			{
 				app->sceneMenu->currentId = 1;
 				onSettings = false;
@@ -604,7 +604,11 @@ bool Hud::Update(float dt)
 				backToTitleButton->state = GuiControlState::NORMAL;
 				saveButton->state = GuiControlState::NORMAL;
 				exitButton->state = GuiControlState::NORMAL;
-
+				wasBPressed = true;
+			}
+			else if (pad.b != KEY_DOWN)
+			{
+				wasBPressed = false;
 			}
 			else if (settingsOptionsButton->state == GuiControlState::FOCUSED)
 			{
@@ -1012,7 +1016,7 @@ void Hud::Inventory() {
 
 void Hud::Shop() {	
   GamePad& pad = app->input->pads[0];
-	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN||(pad.b==KEY_DOWN&&!wasBPressed)) {
+	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN||(pad.b==KEY_DOWN && !wasBPressed)) {
 		shop = false;
 		wasBPressed = true;
 	}
@@ -1122,7 +1126,7 @@ void Hud::SkillTree() {
 		auto& node = skillTreenode[i];
 
 		if (node.selected) {
-			if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN ||pad.a==KEY_DOWN && !wasAPressed && (node.unlockRequirement == -1 || !skillTreenode[node.unlockRequirement].locked)) {
+			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN ||pad.a==KEY_DOWN && !wasAPressed && (node.unlockRequirement == -1 || !skillTreenode[node.unlockRequirement].locked)) {
 				app->audio->PlayFx(app->sceneMenu->FxButton1);
 				node.locked = false;
 				wasAPressed = true;

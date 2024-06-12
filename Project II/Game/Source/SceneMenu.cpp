@@ -364,10 +364,10 @@ void SceneMenu::OnSettings(GamePad& pad)
 			app->render->DrawTexture(settingsAudioPanel, 0, 0);
 			//app->render->DrawTexture(settingsAudioPanel, 0, 0, NULL, SDL_FLIP_NONE, 0);
 
-			/*settingsFxButton->state = GuiControlState::NORMAL;
+			settingsFxButton->state = GuiControlState::NORMAL;
 			settingsMusicButton->state = GuiControlState::NORMAL;
 			settingsFullScreenButton->state = GuiControlState::HIDDEN;
-			settingsVSyncButton->state = GuiControlState::HIDDEN;*/
+			settingsVSyncButton->state = GuiControlState::HIDDEN;
 			if (currentId == 10)//Fullscreen selected
 			{
 				app->render->DrawTexture(settingsAudioMusicVolumeHover, 420, 193);
@@ -539,10 +539,15 @@ void SceneMenu::InputSettings(GamePad& pad)
 		wasL1Pressed = false;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || pad.b == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || (pad.b == KEY_DOWN && !wasBPressed ))
 	{
 		currentId = 3;
 		onSettings = false;
+		wasBPressed = false;
+	}
+	else if (pad.b != KEY_DOWN)
+	{
+		wasBPressed = false;
 	}
 }
 
@@ -563,7 +568,7 @@ void SceneMenu::OnCredits(GamePad& pad)
 		//app->render->DrawTexture(controlsHint, 30, 670, NULL, SDL_FLIP_NONE, 0);
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || pad.b == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || pad.b == KEY_DOWN && !wasBPressed)
 	{
 		if (onCredits)
 		{
@@ -577,6 +582,11 @@ void SceneMenu::OnCredits(GamePad& pad)
 		settingsButton->state = GuiControlState::NORMAL;
 		creditsButton->state = GuiControlState::NORMAL;
 		exitButton->state = GuiControlState::NORMAL;
+		wasBPressed = true;
+	}
+	else if (pad.b != KEY_DOWN)
+	{
+		wasBPressed = false;
 	}
 	else
 	{
