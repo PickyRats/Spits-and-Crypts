@@ -5,6 +5,7 @@
 #include "Render.h"
 #include "Window.h"
 #include "SceneFloor1.h"
+#include "SceneCombat.h"
 #include "Map.h"
 #include "FadeToBlack.h"
 #include "GuiManager.h"
@@ -89,9 +90,9 @@ bool SceneFloor1::Start()
 	app->hud->Enable();
 	app->particleManager->Enable();
   
-  app->puzzle->Enable();
-	if(!combatFinished)wall = app->physics->CreateRectangle(37 * 64, 34 * 64, 10, 2 * 64, STATIC);
-
+	app->puzzle->Enable();
+	wall = app->physics->CreateRectangle(37 * 64, 34 * 64, 10, 2 * 64, STATIC);
+	wall->ctype = ColliderType::WALL;
 	wall2 = app->physics->CreateRectangle(109*64, 28*64, 10, 3 * 64, STATIC);
 	wall2->ctype = ColliderType::WALL;
 
@@ -169,6 +170,10 @@ bool SceneFloor1::Update(float dt)
 	{
 		DeleteWall();
 	}
+	if (app->sceneCombat->combatCompleted && canDelete2)
+	{
+		DeleteWall2();
+	}
 	return true;
 }
 
@@ -232,7 +237,11 @@ void SceneFloor1::DeleteWall()
 	wall2->body->SetActive(false);
 	canDelete = false;
 }
-
+void SceneFloor1::DeleteWall2()
+{
+	wall->body->SetActive(false);
+	canDelete2 = false;
+}
 bool SceneFloor1::LoadState(pugi::xml_node node)
 {
 	pugi::xml_node status = node.append_child("status");
