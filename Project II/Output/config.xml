@@ -60,8 +60,8 @@
 		<!-- Dialogos -->
 		<dialogTrigger x="1024" y="576"  name="Mercante" repeat="true" mission="false" scene="3" id="7" audio_1="Assets/Audio/Fx/tienda/voz_tienda_1.wav" audio_2="Assets/Audio/Fx/tienda/voz_tienda_2.wav" audio_3="Assets/Audio/Fx/tienda/voz_tienda_3.wav">
 		  <sentences>
-			  <sentence text="Bienvenido a mi humilde rinconcillo"/>
-			  <sentence text="Si quieres algo, no lo robes"/>
+			  <sentence text="Bienvenido a mi humilde rinconcillo!"/>
+			  <sentence text="Si quieres algo, no lo robes."/>
 		  </sentences>
 		  <repeat_sentences>
 			  <sentence text="Te estoy vigilando..."/>
@@ -104,8 +104,8 @@
 		<!-- Dialogos  -->
 		<dialogTrigger x="580" y="640"  name="La nieta" repeat="true" mission="false" scene="6" id="2">
 			<sentences>
-				<sentence text="Ayuda, necesito alguien fuerte que me ayude"/>
-				<sentence text="Por favor, estoy asustada"/>
+				<sentence text="Ayuda, necesito alguien fuerte que me ayude!"/>
+				<sentence text="Por favor, estoy asustada!"/>
 			</sentences>
 		</dialogTrigger>
 		
@@ -132,11 +132,11 @@
 		<!-- Dialogos -->
 		<dialogTrigger x="200" y="640"  name="La abuela" repeat="true" mission="false" scene="1"  id="1">
 		  <sentences>
-			  <sentence text="Ayuda, mi nieta se ha quedado atrapada"/>
-			  <sentence text="Necesito alguien poderoso que la salve"/>
+			  <sentence text="Ayuda, mi nieta se ha quedado atrapada!"/>
+			  <sentence text="Necesito alguien poderoso que la salve, porfavor!"/>
 		  </sentences>
 		  <repeat_sentences>
-			  <sentence text="Basta de chachara, ¡date prisa!"/>
+			  <sentence text="Basta de chachara, ¡Date prisa!"/>
 		  </repeat_sentences>
 	  </dialogTrigger>
 	</sceneVillage>
@@ -156,15 +156,15 @@
 		<!-- Dialogos -->
 		<dialogTrigger x="920" y="565"  name="Tabernero" repeat="true" mission="true" scene="4" id="8" audio_1="Assets/Audio/Fx/anubish/voz_anubish_1.wav" audio_2="Assets/Audio/Fx/anubish/voz_anubish_2.wav" audio_3="Assets/Audio/Fx/anubish/voz_anubish_3.wav">
 			<sentences>
-				<sentence text="Bienvenido, vendemos todo tipo de productos"/>
-				<sentence text="Desde Arena del desierto hasta ratas disecadas"/>
-				<sentence text="Y a buen precio jeje"/>
+				<sentence text="Bienvenido, vendemos todo tipo de productos!"/>
+				<sentence text="Desde arena del desierto hasta ratas disecadas!"/>
+				<sentence text="Y a buen precio, jejeje..."/>
 			</sentences>
 			<repeat_sentences>
-				<sentence text="Como era la canción esa, Tunak tunak..."/>
+				<sentence text="¿Como era la canción esa? Tunak tunaaak..."/>
 			</repeat_sentences>
 			<fraseMision>
-				<sentence text="deberias ir al templo a rendir tributo a tu dios "/>
+				<sentence text="Deberias ir al templo a rendir tributo a tu Dios... "/>
 			</fraseMision>
 		</dialogTrigger>
     <!-- Music -->
@@ -214,11 +214,11 @@
 		<dialogTrigger x="530" y="540"  name="Thoth" repeat="true" mission="true" scene="2" id="4" audio_1="Assets/Audio/Fx/toth/voz_toth_1.wav" audio_2="Assets/Audio/Fx/toth/voz_toth_2.wav" audio_3="Assets/Audio/Fx/toth/voz_toth_3.wav">
 			<sentences>
 				<sentence text="¡Gracias por completar la misión!"/>
-				<sentence text="Soy Thoth, puedo mejorar tus armas"/>
-				<sentence text="Selecciona la que quieras en el menú"/>
+				<sentence text="Soy Thoth, puedo mejorar tus armas."/>
+				<sentence text="Selecciona la que quieras en el menú."/>
 			</sentences>
 			<repeat_sentences>
-				<sentence text="Vamos, no tengo todo el día"/>
+				<sentence text="Vamos, no tengo todo el día..."/>
 			</repeat_sentences>
 			<fraseMision>
 				<sentence text="Antes de mejorar tus habilidades, debes completar una misión... "/>
@@ -229,11 +229,11 @@
 		<dialogTrigger x="850" y="540"  name="Isis" repeat="true" mission="true" scene="2" id="5" audio_1="Assets/Audio/Fx/isis/voz_isis_1.wav" audio_2="Assets/Audio/Fx/isis/voz_isis_2.wav" audio_3="Assets/Audio/Fx/isis/voz_isis_3.wav">
 			<sentences>
 				<sentence text="¡Gracias por completar la misión!"/>
-				<sentence text="Soy Isis, puedo mejorar tus armas"/>
-				<sentence text="Selecciona la que quieras en el menú"/>
+				<sentence text="Soy Isis, puedo mejorar tus armas."/>
+				<sentence text="Selecciona la que quieras en el menú."/>
 			</sentences>
 			<repeat_sentences>
-				<sentence text="Vamos, no tengo todo el día"/>
+				<sentence text="Vamos, no tengo todo el día..."/>
 			</repeat_sentences>
 			<fraseMision>
 				<sentence text="Antes de mejorar tus habilidades, debes completar una mision... "/>
@@ -244,11 +244,11 @@
 		<dialogTrigger x="1100" y="540"  name="Horus" repeat="true" mission="true" scene="2" id="6" audio_1="Assets/Audio/Fx/horus/voz_horus_1.wav" audio_2="Assets/Audio/Fx/horus/voz_horus_2.wav" audio_3="Assets/Audio/Fx/horus/voz_horus_3.wav">
 			<sentences>
 				<sentence text="¡Gracias por completar la misión!"/>
-				<sentence text="Soy Horus, puedo mejorar tus armas"/>
-				<sentence text="Selecciona la que quieras en el menú"/>
+				<sentence text="Soy Horus, puedo mejorar tus armas."/>
+				<sentence text="Selecciona la que quieras en el menú."/>
 			</sentences>
 			<repeat_sentences>
-				<sentence text="Vamos, no tengo todo el día"/>
+				<sentence text="Vamos, no tengo todo el día..."/>
 			</repeat_sentences>
 			<fraseMision>
 				<sentence text="Antes de mejorar tus habilidades, debes completar una mision... "/>
@@ -282,11 +282,11 @@
 		<dialogTrigger x="670" y="2178"  name="Paayla" repeat="true" mission="false" scene="5" id="9" audio_1="Assets/Audio/Fx/paayla/voz_paayla_1.wav" audio_2="Assets/Audio/Fx/paayla/voz_paayla_2.wav" audio_3="Assets/Audio/Fx/paayla/voz_paayla_3.wav">
 
 			<sentences>
-				<sentence text="Hola, veo que estas algo malherido."/>
+				<sentence text="Hola aventurero, soy la curandera."/>
 				<sentence text="Yo me encargaré de tus heridas, no te preocupes."/>
 			</sentences>
 			<repeat_sentences>
-				<sentence text="Vuelve cuando necesites que sane tus heridas."/>
+				<sentence text="¡Vuelve cuando necesites que sane tus heridas!"/>
 			</repeat_sentences>
 		</dialogTrigger>
 		
