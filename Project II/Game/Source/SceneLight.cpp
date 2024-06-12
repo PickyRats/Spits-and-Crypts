@@ -53,7 +53,7 @@ bool SceneLight::Start()
 	notificationTexture = app->tex->Load("Assets/Textures/Puzzle/triangulo.png");
 	lightMirrorTexture = app->tex->Load("Assets/Textures/Puzzle/light_mirror.png");
 	lightRayTexture = app->tex->Load("Assets/Textures/Puzzle/light_ray.png");
-	backgroundTexture = app->tex->Load("Assets/Textures/Screens/floor1background.png");
+	backgroundTexture = app->tex->Load("Assets/Maps/Fondo_Sala6.png");
 
 	//load audios
 	trampillafx = app->audio->LoadFx("Assets/Audio/Fx/trampilla.wav");
@@ -162,7 +162,8 @@ bool SceneLight::PreUpdate()
 // Called each loop iteration
 bool SceneLight::Update(float dt)
 {
-	app->render->DrawTexture(backgroundTexture, 0, 0, NULL, SDL_FLIP_NONE, 0);
+	app->render->DrawTexture(backgroundTexture, 0, 0, NULL, SDL_FLIP_NONE);
+	app->render->DrawTexture(backgroundTexture, 64, 0, NULL, SDL_FLIP_NONE);
 	playerX = app->map->player->position.x;
 	//playerY = app->map->player->position.y;
 
