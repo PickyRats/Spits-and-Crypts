@@ -170,6 +170,7 @@ bool DialogTrigger::CleanUp()
 void DialogTrigger::PlayDialog()
 {
 	if (DialogMission)
+
 	{
 		ListItem<Dialog*>* item;
 		Dialog* pDialog = nullptr;
@@ -294,9 +295,8 @@ void DialogTrigger::GiveMission(int idMission)
 	/*	printf("  la nieta  \n");*/
 		app->hud->mission11Active = false;
 		app->hud->mission1Complete = true;
-		app->hud->coin += 20;
-		app->hud->exp += 1;
 		app->fade->Fade((Module*)app->sceneChoza, (Module*)app->sceneVillage, 60.0f);
+		app->hud->exp += 1;
 		break;
 	case 3:
 		app->dialogManager->background_tex_logo = app->dialogManager->background_tex_logoMaat;

@@ -128,7 +128,7 @@ public:
 	bool shop = false;
 	
 	int coin= 0;
-	int exp = 1;
+	int exp = 0;
 	char buffer[20];  // Suficientemente grande para almacenar el entero como cadena
 
 
