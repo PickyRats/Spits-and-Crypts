@@ -534,7 +534,7 @@ void Player::ToggleGodMode()
 		{
 			pbody->body->GetFixtureList()->SetSensor(true);
 			pbody->body->SetGravityScale(0.0f);
-			pbody->body->SetLinearVelocity({ 0, 0 });
+			pbody->body->SetLinearVelocity({ 0, - 0.165f });
 			currentAnim = &idleAnim;
 		}
 		else
