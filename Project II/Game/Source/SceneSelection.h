@@ -23,7 +23,7 @@ public:
 
 	bool CleanUp();
 
-	int currentSelection = 2;
+	int currentSelection = 0;
 
 private:
 
