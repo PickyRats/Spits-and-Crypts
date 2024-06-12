@@ -1058,7 +1058,7 @@ void Hud::Shop() {
 	if (shop) {
 		app->render->DrawTexture(shopTexture, 0, 0, NULL, SDL_FLIP_NONE, 0);
 
-		app->render->DrawTexture(Coin, 1100, 100, NULL, SDL_FLIP_NONE, 0);
+		app->render->DrawTexture(Coin, 1100, 105, NULL, SDL_FLIP_NONE, 0);
 		snprintf(buffer, sizeof(buffer), "%d", coin);
 		const char* miVariable = buffer;
 		app->render->DrawText(miVariable, 1050, 100, 55, 55);

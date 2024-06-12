@@ -14,19 +14,19 @@
   <image source="puerta.png" width="209" height="219"/>
  </tileset>
  <tileset firstgid="160" name="Fondo ALDEA_v2" tilewidth="64" tileheight="64" tilecount="1001" columns="91">
-  <image source="Fondo ALDEA_v4.png" width="5859" height="720"/>
+  <image source="Fondo ALDEA_v6.png" width="5859" height="720"/>
  </tileset>
  <tileset firstgid="1161" name="Fondo ALDEA_v3" tilewidth="64" tileheight="64" tilecount="1001" columns="91">
-  <image source="Fondo ALDEA_v3.png" width="5859" height="720"/>
+  <image source="Fondo ALDEA_v6.png" width="5859" height="720"/>
  </tileset>
  <tileset firstgid="2162" name="Fondo ALDEA_v4" tilewidth="64" tileheight="64" tilecount="1001" columns="91">
-  <image source="Fondo ALDEA_v4.png" width="5859" height="720"/>
+  <image source="Fondo ALDEA_v6.png" width="5859" height="720"/>
  </tileset>
  <tileset firstgid="3163" name="Fondo ALDEA_v4" tilewidth="64" tileheight="64" tilecount="1001" columns="91">
-  <image source="Fondo ALDEA_v4.png" width="5859" height="720"/>
+  <image source="Fondo ALDEA_v6.png" width="5859" height="720"/>
  </tileset>
  <tileset firstgid="4164" name="Fondo ALDEA_v5" tilewidth="64" tileheight="64" tilecount="1001" columns="91">
-  <image source="Fondo ALDEA_v5.png" width="5859" height="720"/>
+  <image source="Fondo ALDEA_v6.png" width="5859" height="720"/>
  </tileset>
  <tileset firstgid="5165" name="Fondo ALDEA_v6" tilewidth="64" tileheight="64" tilecount="1001" columns="91">
   <image source="Fondo ALDEA_v6.png" width="5859" height="720"/>

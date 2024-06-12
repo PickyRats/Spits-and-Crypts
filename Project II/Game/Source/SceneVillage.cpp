@@ -16,6 +16,8 @@
 #include "Physics.h"
 #include "Entity.h"	
 #include "Puzzle2.h"
+#include "CutscenePlayer.h"
+
 
 #include "Defs.h"
 #include "Log.h"
@@ -130,11 +132,22 @@ bool SceneVillage::Update(float dt)
 
 	int piedraX = METERS_TO_PIXELS(piedra->body->GetPosition().x);
 	int piedraY = METERS_TO_PIXELS(piedra->body->GetPosition().y);
-	app->hud->DrawTile(piedraTexture, { piedraX - 50, piedraY - 64});
+	if (!cutsceneStarted) app->hud->DrawTile(piedraTexture, { piedraX - 50, piedraY - 64});
 
-	if (piedraX>=400)
+	if (piedraX>=400 && !cutsceneStarted)
 	{
+		cutsceneStarted = true;
 		movement = true;
+		piedra->body->SetActive(false);
+		app->physics->world->DestroyBody(piedra->body);
+		app->map->player->isWalking = false;
+		app->audio->PauseFx(app->map->player->stepsFx);
+		app->cutscenePlayer->file = "Assets/Video/Cinematica_03.mp4";
+		app->cutscenePlayer->Enable();
+		app->audio->PlayMusic("Assets/Video/Cinematica_03.ogg", 0);
+		app->cutscenePlayer->ConvertPixels(0, 1);
+		app->audio->PlayMusic(configNode.child("villageAmbient").attribute("path").as_string());
+		app->cutscenePlayer->Disable();
 	}
 	if (movement)
 	{
