@@ -53,6 +53,12 @@ public:
 	bool placedpiece = false;
 	bool startPuzzle = false;
 	bool startSoundPlaying = false;
+	bool wasXPressed = false;
+	bool wasBPressed = false;
+	bool wasL2Pressed = false;
+	bool wasR2Pressed = false;
+	bool wasL1Pressed = false;
+	bool wasR1Pressed = false;
 	iPoint slotPos[4] = { {550, 200},{ 650, 200 },{ 550, 300 },{ 650, 300 } };
 
 	iPoint pieceInitialPos[4] = { {455, 485},{ 550, 485 },{ 645, 485 },{ 740, 485 } };

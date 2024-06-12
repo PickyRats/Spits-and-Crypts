@@ -9,6 +9,7 @@
 #include "Physics.h"
 #include "FadeToBlack.h"
 #include "SceneFloor1.h"
+#include "Puertas.h"
 
 Puzzle::Puzzle(bool enabled) : Module(enabled)
 {
@@ -50,31 +51,119 @@ bool Puzzle::Start() {
 
 bool Puzzle::Update(float dt)
 {
+
+
+	
+	GamePad& pad = app->input->pads[0];
 	PlaySounds();
+
 	if (pieceCollected[0] && pieceCollected[1] && pieceCollected[2] && pieceCollected[3])
 	{
-		for (int i = 0; i < 4; ++i)
+		if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN ||(pad.l2 == KEY_DOWN && !wasL2Pressed))
 		{
-			if (app->input->GetKey(SDL_SCANCODE_1 + i) == KEY_DOWN)
+			SDL_JoystickSetLED(app->input->joy, 255, 255, 0);
+			if (!isSelecting && !pieceInSlot[0])
 			{
-				SDL_JoystickSetLED(app->input->joy, 255, 255, 0);
-				if (!isSelecting && !pieceInSlot[i])
-				{
-					selectedPiece = i;
-					isSelecting = true;
-					
-					pieceInSlot[i] = true;
-				}
-				else if (isSelecting && slotOccupied[i] == -1)
-				{
-					slotOccupied[i] = selectedPiece;
-					piecePos[selectedPiece] = slotPos[i];
-					placedpiece = true;
-					isSelecting = false;
-				}
+				selectedPiece = 0;
+				isSelecting = true;
+
+				pieceInSlot[0] = true;
 			}
+			else if (isSelecting && slotOccupied[0] == -1)
+			{
+				slotOccupied[0] = selectedPiece;
+				piecePos[selectedPiece] = slotPos[0];
+				placedpiece = true;
+				isSelecting = false;
+			}
+			wasL2Pressed = true;
 		}
-		if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) ResetPuzzle();
+		else if (pad.l2 != KEY_DOWN)
+		{
+			wasL2Pressed = false;
+		}
+
+
+		if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN || (pad.r2 == KEY_DOWN && !wasR2Pressed))
+		{
+			SDL_JoystickSetLED(app->input->joy, 255, 255, 0);
+			if (!isSelecting && !pieceInSlot[1])
+			{
+				selectedPiece = 1;
+				isSelecting = true;
+
+				pieceInSlot[1] = true;
+			}
+			else if (isSelecting && slotOccupied[1] == -1)
+			{
+				slotOccupied[1] = selectedPiece;
+				piecePos[selectedPiece] = slotPos[1];
+				placedpiece = true;
+				isSelecting = false;
+			}
+			wasR2Pressed = true;
+		}
+		else if (pad.r2 != KEY_DOWN)
+		{
+			wasR2Pressed = false;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN || (pad.l1 == KEY_DOWN && !wasL1Pressed))
+		{
+			SDL_JoystickSetLED(app->input->joy, 255, 255, 0);
+			if (!isSelecting && !pieceInSlot[2])
+			{
+				selectedPiece = 2;
+				isSelecting = true;
+
+				pieceInSlot[2] = true;
+			}
+			else if (isSelecting && slotOccupied[2] == -1)
+			{
+				slotOccupied[2] = selectedPiece;
+				piecePos[selectedPiece] = slotPos[2];
+				placedpiece = true;
+				isSelecting = false;
+			}
+			wasL1Pressed = true;
+		}
+		else if (pad.l1 != KEY_DOWN)
+		{
+			wasL1Pressed = false;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN || (pad.r1 == KEY_DOWN && !wasR1Pressed))
+		{
+			SDL_JoystickSetLED(app->input->joy, 255, 255, 0);
+			if (!isSelecting && !pieceInSlot[3])
+			{
+				selectedPiece = 3;
+				isSelecting = true;
+
+				pieceInSlot[3] = true;
+			}
+			else if (isSelecting && slotOccupied[3] == -1)
+			{
+				slotOccupied[3] = selectedPiece;
+				piecePos[selectedPiece] = slotPos[3];
+				placedpiece = true;
+				isSelecting = false;
+			}
+			wasR1Pressed = true;
+		}
+		else if (pad.r1 != KEY_DOWN)
+		{
+			wasR1Pressed = false;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || (pad.b == KEY_DOWN && !wasBPressed))
+		{
+			ResetPuzzle();
+		}
+		else if (pad.b != KEY_DOWN)
+		{
+			wasBPressed = false;
+		}
 	}
 
 	if (slotOccupied[0] != -1 && slotOccupied[1] != -1 && slotOccupied[2] != -1 && slotOccupied[3] != -1 && !isPuzzleCompleted)
@@ -94,14 +183,20 @@ bool Puzzle::Update(float dt)
 			LOG("PUZZLE COMPLETED");
 			SDL_JoystickSetLED(app->input->joy, 0, 255, 0);
 			app->sceneFloor1->levelWidth = 169 * 64;
+			app->sceneFloor1->puertas[1]->puzle1Completed = true;
 		
 		}
 	}
 
-	if (canInteract && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	if (canInteract && (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN||(pad.x==KEY_DOWN && !wasXPressed)))
 	{
 		startPuzzle = true;
 		showUI = !showUI;
+		wasXPressed=true;
+	}
+	else if (pad.x != KEY_DOWN)
+	{
+		wasXPressed = false;
 	}
 	if (showUI) DrawPieces();
 

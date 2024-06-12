@@ -22,6 +22,24 @@
  <tileset firstgid="265" name="Tile_Sheet_Variaciones" tilewidth="64" tileheight="64" tilecount="77" columns="11">
   <image source="Tile_Sheet_Variaciones.png" width="704" height="448"/>
  </tileset>
+ <tileset firstgid="342" name="Sala5" tilewidth="64" tileheight="64" tilecount="495" columns="45">
+  <image source="Sala5.png" width="2940" height="720"/>
+ </tileset>
+ <tileset firstgid="837" name="Fondo_Sala6" tilewidth="64" tileheight="64" tilecount="361" columns="19">
+  <image source="Fondo_Sala6.png" width="1220" height="1216"/>
+ </tileset>
+ <tileset firstgid="1198" name="Fondo_Sala 5" tilewidth="64" tileheight="64" tilecount="495" columns="45">
+  <image source="Fondo_Sala 5.png" width="2940" height="720"/>
+ </tileset>
+ <tileset firstgid="1693" name="Sala6" tilewidth="64" tileheight="64" tilecount="361" columns="19">
+  <image source="Sala6.png" width="1220" height="1216"/>
+ </tileset>
+ <tileset firstgid="2054" name="Tile_Sheet_1" tilewidth="64" tileheight="64" tilecount="77" columns="11">
+  <image source="Tile_Sheet_1.png" width="704" height="448"/>
+ </tileset>
+ <tileset firstgid="2131" name="Tile_Sheet_Detalles" tilewidth="64" tileheight="64" tilecount="77" columns="11">
+  <image source="Tile_Sheet_Detalles.png" width="704" height="448"/>
+ </tileset>
  <layer id="16" name="Fondo" width="20" height="19" opacity="0.48">
   <properties>
    <property name="Draw" type="bool" value="true"/>
@@ -106,6 +124,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="200"/>
    <tile/>
    <tile/>
    <tile/>
@@ -386,13 +405,12 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="2143"/>
+   <tile gid="201"/>
+   <tile gid="278"/>
+   <tile gid="201"/>
+   <tile gid="201"/>
+   <tile gid="278"/>
    <tile/>
    <tile/>
    <tile/>

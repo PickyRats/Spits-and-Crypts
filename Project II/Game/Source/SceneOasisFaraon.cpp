@@ -9,7 +9,6 @@
 #include "FadeToBlack.h"
 #include "GuiManager.h"
 #include "ParticleManager.h"
-#include "Npcs.h"
 #include "Hud.h"
 
 #include "Defs.h"
@@ -36,8 +35,8 @@ bool SceneOasisFaraon::Awake(pugi::xml_node& config)
 
 	for (pugi::xml_node itemNode = config.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
 	{
-		Npcs* npc = (Npcs*)app->entityManager->CreateEntity(EntityType::NPCS);
-		npc->parameters = itemNode;
+		tabernero = (Npcs*)app->entityManager->CreateEntity(EntityType::NPCS);
+		tabernero->parameters = itemNode;
 	}
 
 	for (pugi::xml_node itemNode = config.child("dialogTrigger"); itemNode; itemNode = itemNode.next_sibling("dialogTrigger"))

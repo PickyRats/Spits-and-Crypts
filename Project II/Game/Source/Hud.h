@@ -13,6 +13,13 @@
 #include <vector>
 
 struct SDL_Texture;
+
+struct DrawTileCall
+{
+	SDL_Texture* texture;
+	iPoint tilePosition;
+};
+
 struct Slot {
 	iPoint position = { 0, 0 };
 	SDL_Texture* texture = nullptr;
@@ -76,6 +83,9 @@ public:
 	void ApplySkillEffects(int skillIndex);
 	void HandleSelection(int currentIndex);
 
+	void DrawTile(SDL_Texture* texture, iPoint position);
+	void RenderStoredTiles();
+
 	bool playerDeadHud = false;
 	bool spacePressed = false;
 	bool onSettings = false;
@@ -107,6 +117,7 @@ public:
 	bool wasL1Pressed = false;
 	bool wasYPressed = false;
 	bool wasAPressed = false;
+	bool wasBPressed = false;
 
 	Slot inventorySlots[4];
 
@@ -116,11 +127,12 @@ public:
 	Slot shopSlots[3];
 	bool shop = false;
 	
-	int coin= 50;
+	int coin= 0;
+	int exp = 1;
 	char buffer[20];  // Suficientemente grande para almacenar el entero como cadena
 
 
-	int classid = 1;
+	int classid = 2;
 	
 private:
 
@@ -137,13 +149,29 @@ private:
 	SDL_Texture* Cuadrojugador;
 	SDL_Texture* numeros;
 
+
+	//Players
+	SDL_Texture* MC_Idle;
+	SDL_Texture* MC_Idle_1;
+	SDL_Texture* MC_Idle_2;
+	SDL_Texture* MC_Idle_3;
+	SDL_Texture* MC_Idle_4;
+
 	//SDL_Rect rect = { 0, 0, 9, 51 };
 	SDL_Rect lifeRects[11] = { {0, 0, 9, 51}, { 9, 0, 9, 51}, { 18, 0, 9, 51}, { 27, 0, 9, 51}, { 36, 0, 9, 51}, { 45, 0, 9, 51}, { 54, 0, 9, 51}, { 63, 0, 9, 51}, { 72, 0, 9, 51}, { 81, 0, 9, 51}, {90, 0, 9 ,51} };
 	SDL_Rect pointsRects[6] = { {0, 0, 82, 121}, {82, 0, 82, 121}, {164, 0, 82, 121}, {246, 0, 82, 121}, {328, 0, 82, 121}, {410, 0, 82, 121} };
 	SDL_Rect numerosRects[9] = { {0, 0, 37, 37}, {37, 0, 37, 37}, {74, 0, 37, 37}, {111, 0, 37, 37}, {148, 0, 37, 37}, {185, 0, 37, 37}, {222, 0, 37, 37}, {259, 0, 37, 37}, {296, 0, 37, 37} };
 
-
-
+	SDL_Texture* attack1;
+	SDL_Texture* attack2;
+	SDL_Texture* attack3;
+	SDL_Texture* attack4;
+	SDL_Texture* attack5;
+	SDL_Texture* ability1;
+	SDL_Texture* ability2;
+	SDL_Texture* ability3;
+	SDL_Texture* ability4;
+	SDL_Texture* ability5;
 
 	SDL_Texture* exitNormal;
 	SDL_Texture* exitHover;
@@ -233,6 +261,9 @@ private:
 	SDL_Texture* ObjectText2Shop;
 	SDL_Texture* ObjectText3Shop;
 
+	SDL_Texture* Habilidad1;
+	SDL_Texture* Habilidad2;
+
 
 	
 	bool inventory = false;
@@ -243,6 +274,7 @@ private:
 	SDL_Texture* selectorItemTexture;
 
 	SDL_Texture* Coin;
+	SDL_Texture* Exp;
 
 
 
@@ -372,6 +404,8 @@ private:
 	bool onSettingsAudio = true;
 	bool onSettingsOptions = false;
 	bool buttonsActivated = false;
+
+	std::vector<DrawTileCall> drawTileCalls;
 };
 
 #endif // __HUD_H__

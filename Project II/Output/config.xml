@@ -24,7 +24,9 @@
 
 	<sceneCombat>
 		<!-- Scene -->
-		<map path="Assets/Maps/" name="Map_Combat.tmx"/>
+		<map1 path="Assets/Maps/" name="Map_Combat.tmx"/>
+		<map2 path="Assets/Maps/" name="Map_Combat_2.tmx"/>
+		<map3 path="Assets/Maps/" name="Map_Combat_3.tmx"/>
 
 		<!-- Music -->
 		<music>
@@ -53,7 +55,7 @@
 		<!-- Player -->
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 		<!-- Mercante  -->
-		<npc x="970" y="520" texturepath="Assets/Textures/Npcs/mercante.png" id="7" scene="3"/>
+		<npc x="970" y="520" texturepath="Assets/Textures/Npcs/MercaderSpriteSheet.png" id="7" scene="3"/>
 		
 		<!-- Dialogos -->
 		<dialogTrigger x="1024" y="576"  name="Mercante" repeat="true" mission="false" scene="3" id="7" audio_1="Assets/Audio/Fx/tienda/voz_tienda_1.wav" audio_2="Assets/Audio/Fx/tienda/voz_tienda_2.wav" audio_3="Assets/Audio/Fx/tienda/voz_tienda_3.wav">
@@ -69,9 +71,15 @@
 	</sceneShop>
   
 	<dialogmanager>
-		<textures>
-			<background_dialog texturepath="Assets/Textures/cuadroDialogo.png"/>
-		</textures>
+		<background_dialog texturepath="Assets/Textures/cuadroDialogo.png"/>
+		<background_dialog texturepath="Assets/Textures/cuadroDialogo.png"/>
+		<background_dialoglogoMercante texturepath="Assets/Textures/IconoMercante.png"/>
+		<background_dialoglogoTebernero texturepath="Assets/Textures/IconoTabernero.png"/>
+		<background_dialoglogoPalaya texturepath="Assets/Textures/IconoPaalaya.png"/>
+		<background_dialoglogoMaat texturepath="Assets/Textures/IconoMaat.png"/>
+		<background_dialoglogoThoth texturepath="Assets/Textures/IconoThoth.png"/>
+		<background_dialoglogoHorus texturepath="Assets/Textures/IconoHorus.png"/>
+		<background_dialoglogoIsis texturepath="Assets/Textures/IconoIsis.png"/>
 	</dialogmanager>
 
 	<!-- Intro -->
@@ -119,10 +127,10 @@
 		<villageAmbient path="Assets/Audio/Music/Village_ambient.ogg" fadeTime="2" fadeOutTime="2"/>
 
 		<!-- Abuela -->
-		<npc x="300" y="580" texturepath="Assets/Textures/Npcs/abuela.png" id="1" scene="1"/>
+		<npc x="200" y="580" texturepath="Assets/Textures/Npcs/abuela.png" id="1" scene="1"/>
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="350" y="640"  name="La abuela" repeat="true" mission="false" scene="1"  id="1">
+		<dialogTrigger x="200" y="640"  name="La abuela" repeat="true" mission="false" scene="1"  id="1">
 		  <sentences>
 			  <sentence text="Ayuda, mi nieta se ha quedado atrapada"/>
 			  <sentence text="Necesito alguien poderoso que la salve"/>
@@ -143,10 +151,10 @@
 		<player x="50" y="50" texturepath="Assets/Textures/player.png" speed="0.2f"/>
 		
 		<!-- Tabernero  -->
-		<npc x="400" y="550" texturepath="Assets/Textures/Npcs/Anhuvihsh.png" id="8" scene="4" />
+		<npc x="900" y="530" texturepath="Assets/Textures/Npcs/TaberneroSpriteSheet.png" id="8" scene="4" />
 		
 		<!-- Dialogos -->
-		<dialogTrigger x="440" y="640"  name="Tabernero" repeat="true" mission="true" scene="4" id="8" audio_1="Assets/Audio/Fx/anubish/voz_anubish_1.wav" audio_2="Assets/Audio/Fx/anubish/voz_anubish_2.wav" audio_3="Assets/Audio/Fx/anubish/voz_anubish_3.wav">
+		<dialogTrigger x="920" y="565"  name="Tabernero" repeat="true" mission="true" scene="4" id="8" audio_1="Assets/Audio/Fx/anubish/voz_anubish_1.wav" audio_2="Assets/Audio/Fx/anubish/voz_anubish_2.wav" audio_3="Assets/Audio/Fx/anubish/voz_anubish_3.wav">
 			<sentences>
 				<sentence text="Bienvenido, vendemos todo tipo de productos"/>
 				<sentence text="Desde Arena del desierto hasta ratas disecadas"/>
@@ -251,11 +259,8 @@
 
   <map>
 		<!-- Player -->
-		<player x="64" y="576" texturepath="Assets/Textures/MC_Sprites_red.png" speed="0.2f" classId="0" id="1"/>
-		<player x="64" y="576" texturepath="Assets/Textures/MC_Sprites_green.png" speed="0.2f" classId="1" id="1"/>
-		<player x="64" y="576" texturepath="Assets/Textures/MC_Sprites_blue.png" speed="0.2f" classId="2" id="1"/>
-		<player x="64" y="576" texturepath="Assets/Textures/MC_Sprites_yellow.png" speed="0.2f" classId="3" id="1"/>
-		<player2 x="0" y="576" texturepath="Assets/Textures/Taila_Animation_sheet.png" speed="0.2f" id="2"/>
+		<player x="64" y="576" texturepath1="Assets/Textures/MC_Sprites_red.png" texturepath2="Assets/Textures/MC_Sprites_yellow.png" texturepath3="Assets/Textures/MC_Sprites_green.png" texturepath4="Assets/Textures/MC_Sprites_blue.png" speed="0.2f" id="1"/>
+		<player2 x="0" y="576" texturepath1="Assets/Textures/Taila_Animation_sheet.png" speed="0.2f" id="2"/>
 	</map>
 	
 	<!-- sceneFloor1 -->
@@ -265,12 +270,16 @@
 		
 		<floor1background texturepath="Assets/Textures/Screens/floor1background.png"/>
 
+    <puerta x="2304" y="2112" texturepath="Assets/Maps/puerta_lateral.png" id="2"/>
+		<puerta x="6964" y="1792" texturepath="Assets/Maps/puerta_lateral.png" id="3"/>
+		<puerta x="10880" y="1216" texturepath="Assets/Maps/puerta_lateral.png" id="4"/>
 		<!-- Paayla -->
-		<npc x="600" y="2004" texturepath="Assets/Textures/Npcs/Talia.png" id="1" scene="5"/>
+		<npc x="650" y="2112" texturepath="Assets/Textures/Npcs/PaalayaSpriteSheet.png" id="9" scene="5"/>
 
 
-		<!-- Dialogo Paayla -->
-		<dialogTrigger x="670" y="585"  name="Paayla" repeat="true" mission="false" scene="5" id="9" audio_1="Assets/Audio/Fx/paayla/voz_paayla_1.wav" audio_2="Assets/Audio/Fx/paayla/voz_paayla_2.wav" audio_3="Assets/Audio/Fx/paayla/voz_paayla_3.wav">
+		<!-- Dialogo Paalaya -->
+		<dialogTrigger x="670" y="2178"  name="Paayla" repeat="true" mission="false" scene="5" id="9" audio_1="Assets/Audio/Fx/paayla/voz_paayla_1.wav" audio_2="Assets/Audio/Fx/paayla/voz_paayla_2.wav" audio_3="Assets/Audio/Fx/paayla/voz_paayla_3.wav">
+
 			<sentences>
 				<sentence text="Hola, veo que estas algo malherido."/>
 				<sentence text="Yo me encargaré de tus heridas, no te preocupes."/>
@@ -395,6 +404,18 @@
 		<Personaje2 texturepath="Assets/Textures/Screens/Combat/fotopersonatge2.png"/>
 		<numeros texturepath="Assets/Textures/Screens/Combat/numeros.png"/>
 
+		<attack1 texturepath="Assets/Textures/Screens/Combat/ABarco.png"/>
+		<attack2 texturepath="Assets/Textures/Screens/Combat/ABespasa.png"/>
+		<attack3 texturepath="Assets/Textures/Screens/Combat/ABlanza.png"/>
+		<attack4 texturepath="Assets/Textures/Screens/Combat/ABvaras.png"/>
+		<attack5 texturepath="Assets/Textures/Screens/Combat/ABpluma.png"/>
+		
+		<ability texturepath="Assets/Textures/Screens/Combat/HAarc.png"/>
+		<ability2 texturepath="Assets/Textures/Screens/Combat/HAespada.png"/>
+		<ability3 texturepath="Assets/Textures/Screens/Combat/HAlanza.png"/>
+		<ability4 texturepath="Assets/Textures/Screens/Combat/HAvaras.png"/>
+		<ability5 texturepath="Assets/Textures/Screens/Combat/HApluma.png"/>
+
 		<inventory texturepath="Assets/Textures/Screens/Inventory/Inventory.png"/>
 		<inventoryItem1 texturepath="Assets/Textures/Screens/Inventory/Amulet_Escarabat.png"/>
 		<inventoryItem2 texturepath="Assets/Textures/Screens/Inventory/Amulet_Serps.png"/>
@@ -408,10 +429,17 @@
 		<ObjectText2Shop texturepath="Assets/Textures/Screens/Shop/TextHabilityTurquese-Shop.png"/>
 		<ObjectText3Shop texturepath="Assets/Textures/Screens/Shop/TextHabilityRed-Shop.png"/>
 
+		<MC_Idle_1 texturepath="Assets/Textures/Screens/Inventory/MC_Idle_1.png"/>
+		<MC_Idle_2 texturepath="Assets/Textures/Screens/Inventory/MC_Idle_2.png"/>
+		<MC_Idle_3 texturepath="Assets/Textures/Screens/Inventory/MC_Idle_3.png"/>
+		<MC_Idle_4 texturepath="Assets/Textures/Screens/Inventory/MC_Idle_4.png"/>
+
+
 		<shopTexture texturepath="Assets/Textures/Screens/Shop/Store_UI_def.png"/>
 		<emptyslotTexture texturepath="Assets/Textures/Screens/Shop/emptyslot.png"/>
 		<selectorItemTexture texturepath="Assets/Textures/Screens/Shop/selectorItem.png"/>
 		<Coin texturepath="Assets/Textures/Screens/Shop/coin.png"/>
+		<Exp texturepath="Assets/Textures/Screens/Inventory/Orbe_XP.png"/>
 	
 		
 
@@ -537,7 +565,7 @@
 				<animation x="510" y="912" w="170" h="152"/>
 			</walkAnim>
 			
-			<climbAnim loop="false" speed=" 0.4f">
+			<climbAnim loop="true" speed=" 0.4f">
 				<animation x="0" y="1064" w="170" h="152"/>
 				<animation x="0" y="1064" w="170" h="152"/>
 				
@@ -826,6 +854,58 @@
 				<animation x="510" y="2128" w="170" h="152"/>
 				<animation x="510" y="2128" w="170" h="152"/>
 			</walkBattleAnim>
+
+			<idleRockAnim loop="false" speed="0.4f">
+				<animation x="0" y="0" w="94" h="107"/>
+			</idleRockAnim>
+
+			<rockAnim loop="true" speed="0.4f">
+				<animation x="0" y="107" w="94" h="107"/>
+				<animation x="0" y="107" w="94" h="107"/>
+				<animation x="0" y="107" w="94" h="107"/>
+				<animation x="0" y="107" w="94" h="107"/>
+				
+				<animation x="94" y="107" w="94" h="107"/>
+				<animation x="94" y="107" w="94" h="107"/>
+				<animation x="94" y="107" w="94" h="107"/>
+				<animation x="94" y="107" w="94" h="107"/>
+				<animation x="94" y="107" w="94" h="107"/>
+				
+				<animation x="188" y="107" w="94" h="107"/>
+				<animation x="188" y="107" w="94" h="107"/>
+				<animation x="188" y="107" w="94" h="107"/>
+				<animation x="188" y="107" w="94" h="107"/>
+				<animation x="188" y="107" w="94" h="107"/>
+				<animation x="188" y="107" w="94" h="107"/>
+				
+				<animation x="282" y="107" w="94" h="107"/>
+				<animation x="282" y="107" w="94" h="107"/>
+				<animation x="282" y="107" w="94" h="107"/>
+				<animation x="282" y="107" w="94" h="107"/>
+				
+				<animation x="376" y="107" w="94" h="107"/>
+				<animation x="376" y="107" w="94" h="107"/>
+				<animation x="376" y="107" w="94" h="107"/>
+				<animation x="376" y="107" w="94" h="107"/>
+				
+				<animation x="470" y="107" w="94" h="107"/>
+				<animation x="470" y="107" w="94" h="107"/>
+				<animation x="470" y="107" w="94" h="107"/>
+				<animation x="470" y="107" w="94" h="107"/>
+				<animation x="470" y="107" w="94" h="107"/>
+				
+				<animation x="564" y="107" w="94" h="107"/>
+				<animation x="564" y="107" w="94" h="107"/>
+				<animation x="564" y="107" w="94" h="107"/>
+				<animation x="564" y="107" w="94" h="107"/>
+				<animation x="564" y="107" w="94" h="107"/>
+				<animation x="564" y="107" w="94" h="107"/>
+				
+				<animation x="658" y="107" w="94" h="107"/>
+				<animation x="658" y="107" w="94" h="107"/>
+				<animation x="658" y="107" w="94" h="107"/>
+				<animation x="658" y="107" w="94" h="107"/>
+			</rockAnim>
 		</player>
 
 		<!-- Taila Animations-->
@@ -896,7 +976,7 @@
 				
 			</walkBattleAnim>
 			
-			<climbAnim loop="false" speed=" 0.4f">
+			<climbAnim loop="true" speed=" 0.4f">
 
 				<animation x="0" y="768" w="218" h="128"/>
 				<animation x="0" y="768" w="218" h="128"/>
@@ -1108,6 +1188,239 @@
 			</deathAnim>
 		
 		</player2>
+
+		<!-- Paalaya Animations-->
+		<Paalaya>
+			<idleAnim loop ="true" speed="0.4f">
+				<animation x="0" y="0" w="51" h="128"/>
+				<animation x="0" y="0" w="51" h="128"/>
+				<animation x="0" y="0" w="51" h="128"/>
+				
+				<animation x="51" y="0" w="51" h="128"/>
+				<animation x="51" y="0" w="51" h="128"/>
+				<animation x="51" y="0" w="51" h="128"/>
+				
+				<animation x="102" y="0" w="51" h="128"/>
+				<animation x="102" y="0" w="51" h="128"/>
+				<animation x="102" y="0" w="51" h="128"/>
+				
+				<animation x="153" y="0" w="51" h="128"/>
+				<animation x="153" y="0" w="51" h="128"/>
+				<animation x="153" y="0" w="51" h="128"/>
+				
+				<animation x="204" y="0" w="51" h="128"/>
+				<animation x="204" y="0" w="51" h="128"/>
+				<animation x="204" y="0" w="51" h="128"/>
+				
+				<animation x="255" y="0" w="51" h="128"/>
+				<animation x="255" y="0" w="51" h="128"/>
+				<animation x="255" y="0" w="51" h="128"/>
+				
+				<animation x="306" y="0" w="51" h="128"/>
+				<animation x="306" y="0" w="51" h="128"/>
+				<animation x="306" y="0" w="51" h="128"/>
+				
+				<animation x="357" y="0" w="51" h="128"/>
+				<animation x="357" y="0" w="51" h="128"/>
+				<animation x="357" y="0" w="51" h="128"/>
+			</idleAnim>
+			
+			<interactAnim loop ="false" speed="0.4f">
+				<animation x="0" y="128" w="51" h="128"/>
+				
+				<animation x="51" y="128" w="51" h="128"/>
+				
+				<animation x="102" y="128" w="51" h="128"/>
+				<animation x="102" y="128" w="51" h="128"/>
+				
+				<animation x="153" y="128" w="51" h="128"/>
+				
+				<animation x="204" y="128" w="51" h="128"/>
+				
+				<animation x="255" y="128" w="51" h="128"/>
+				<animation x="255" y="128" w="51" h="128"/>
+				<animation x="255" y="128" w="51" h="128"/>
+				<animation x="255" y="128" w="51" h="128"/>
+				
+				<animation x="306" y="128" w="51" h="128"/>
+				<animation x="306" y="128" w="51" h="128"/>
+				
+				<animation x="357" y="128" w="51" h="128"/>
+				
+				<animation x="408" y="128" w="51" h="128"/>
+				
+				<animation x="459" y="128" w="51" h="128"/>
+				<animation x="459" y="128" w="51" h="128"/>
+				
+				<animation x="0" y="256" w="51" h="128"/>
+				
+				<animation x="51" y="256" w="51" h="128"/>
+				
+				<animation x="102" y="256" w="51" h="128"/>
+				<animation x="102" y="256" w="51" h="128"/>
+				<animation x="102" y="256" w="51" h="128"/>
+				<animation x="102" y="256" w="51" h="128"/>
+				
+				<animation x="153" y="256" w="51" h="128"/>
+				<animation x="153" y="256" w="51" h="128"/>
+				
+				<animation x="204" y="256" w="51" h="128"/>
+				
+				<animation x="255" y="256" w="51" h="128"/>
+				
+				<animation x="306" y="256" w="51" h="128"/>
+				
+				<animation x="357" y="256" w="51" h="128"/>
+				<animation x="357" y="256" w="51" h="128"/>
+				<animation x="357" y="256" w="51" h="128"/>
+				<animation x="357" y="256" w="51" h="128"/>
+				<animation x="357" y="256" w="51" h="128"/>
+				<animation x="357" y="256" w="51" h="128"/>
+				<animation x="357" y="256" w="51" h="128"/>
+				<animation x="357" y="256" w="51" h="128"/>
+				<animation x="357" y="256" w="51" h="128"/>
+
+				<animation x="408" y="256" w="51" h="128"/>
+				<animation x="408" y="256" w="51" h="128"/>
+				<animation x="408" y="256" w="51" h="128"/>
+			</interactAnim>
+		</Paalaya>
+
+		<!-- Mercante Animations-->
+		<Mercante>
+			<idleAnim loop ="true" speed="0.4f">
+				<animation x="0" y="0" w="57" h="128"/>
+				<animation x="0" y="0" w="57" h="128"/>
+				
+				<animation x="57" y="0" w="57" h="128"/>
+				<animation x="57" y="0" w="57" h="128"/>
+				
+				<animation x="114" y="0" w="57" h="128"/>
+				<animation x="114" y="0" w="57" h="128"/>
+				
+				<animation x="171" y="0" w="57" h="128"/>
+				<animation x="171" y="0" w="57" h="128"/>
+				
+				<animation x="228" y="0" w="57" h="128"/>
+				<animation x="228" y="0" w="57" h="128"/>
+				
+				<animation x="285" y="0" w="57" h="128"/>
+				<animation x="285" y="0" w="57" h="128"/>
+				
+				<animation x="342" y="0" w="57" h="128"/>
+				<animation x="342" y="0" w="57" h="128"/>
+			</idleAnim>
+			
+			<interactAnim loop ="false" speed="0.4f">
+				<animation x="0" y="128" w="57" h="128"/>
+				<animation x="0" y="128" w="57" h="128"/>
+				<animation x="0" y="128" w="57" h="128"/>
+				
+				<animation x="57" y="128" w="57" h="128"/>
+				<animation x="57" y="128" w="57" h="128"/>
+				<animation x="57" y="128" w="57" h="128"/>
+				
+				<animation x="114" y="128" w="57" h="128"/>
+				<animation x="114" y="128" w="57" h="128"/>
+				<animation x="114" y="128" w="57" h="128"/>
+				
+				<animation x="171" y="128" w="57" h="128"/>
+				<animation x="171" y="128" w="57" h="128"/>
+				<animation x="171" y="128" w="57" h="128"/>
+				
+				<animation x="228" y="128" w="57" h="128"/>
+				<animation x="228" y="128" w="57" h="128"/>
+				<animation x="228" y="128" w="57" h="128"/>
+				
+				<animation x="285" y="128" w="57" h="128"/>
+				<animation x="285" y="128" w="57" h="128"/>
+				<animation x="285" y="128" w="57" h="128"/>
+				
+				<animation x="342" y="128" w="57" h="128"/>
+				<animation x="342" y="128" w="57" h="128"/>
+				<animation x="342" y="128" w="57" h="128"/>
+				
+				<animation x="399" y="128" w="57" h="128"/>
+				<animation x="399" y="128" w="57" h="128"/>
+				<animation x="399" y="128" w="57" h="128"/>
+			</interactAnim>
+		</Mercante>
+
+		<!-- Anhuvihsh Animations-->
+		<tabernero>
+			<idleAnim loop ="true" speed="0.4f">
+				<animation x="0" y="0" w="52" h="112"/>
+				<animation x="0" y="0" w="52" h="112"/>
+				
+				<animation x="52" y="0" w="52" h="112"/>
+				<animation x="52" y="0" w="52" h="112"/>
+				
+				<animation x="104" y="0" w="52" h="112"/>
+				<animation x="104" y="0" w="52" h="112"/>
+				
+				<animation x="156" y="0" w="52" h="112"/>
+				<animation x="156" y="0" w="52" h="112"/>
+				
+				<animation x="208" y="0" w="52" h="112"/>
+				<animation x="208" y="0" w="52" h="112"/>
+				
+				<animation x="260" y="0" w="52" h="112"/>
+				<animation x="260" y="0" w="52" h="112"/>
+				
+				<animation x="312" y="0" w="52" h="112"/>
+				<animation x="312" y="0" w="52" h="112"/>			
+			</idleAnim>
+			
+			<interactAnim loop ="false" speed="0.4f">
+				<animation x="0" y="112" w="52" h="112"/>
+				<animation x="0" y="112" w="52" h="112"/>
+				<animation x="0" y="112" w="52" h="112"/>
+				
+				<animation x="52" y="112" w="52" h="112"/>
+				<animation x="52" y="112" w="52" h="112"/>
+				<animation x="52" y="112" w="52" h="112"/>
+				
+				<animation x="104" y="112" w="52" h="112"/>
+				<animation x="104" y="112" w="52" h="112"/>
+				<animation x="104" y="112" w="52" h="112"/>
+				
+				<animation x="156" y="112" w="52" h="112"/>
+				<animation x="156" y="112" w="52" h="112"/>
+				<animation x="156" y="112" w="52" h="112"/>
+				
+				<animation x="208" y="112" w="52" h="112"/>
+				<animation x="208" y="112" w="52" h="112"/>
+				<animation x="208" y="112" w="52" h="112"/>
+				
+				<animation x="260" y="112" w="52" h="112"/>
+				<animation x="260" y="112" w="52" h="112"/>
+				<animation x="260" y="112" w="52" h="112"/>
+				
+				<animation x="312" y="112" w="52" h="112"/>
+				<animation x="312" y="112" w="52" h="112"/>
+				<animation x="312" y="112" w="52" h="112"/>
+				
+				<animation x="364" y="112" w="52" h="112"/>
+				<animation x="364" y="112" w="52" h="112"/>
+				<animation x="364" y="112" w="52" h="112"/>
+				
+				<animation x="416" y="112" w="52" h="112"/>
+				<animation x="416" y="112" w="52" h="112"/>
+				<animation x="416" y="112" w="52" h="112"/>
+				
+				<animation x="468" y="112" w="52" h="112"/>
+				<animation x="468" y="112" w="52" h="112"/>
+				<animation x="468" y="112" w="52" h="112"/>
+				
+				<animation x="520" y="112" w="52" h="112"/>
+				<animation x="520" y="112" w="52" h="112"/>
+				<animation x="520" y="112" w="52" h="112"/>
+				
+				<animation x="572" y="112" w="52" h="112"/>
+				<animation x="572" y="112" w="52" h="112"/>
+				<animation x="572" y="112" w="52" h="112"/>
+			</interactAnim>
+		</tabernero>
 		
 		<!-- Guardian Animations-->
 		<enemy1>
@@ -1530,8 +1843,302 @@
 				<animation x="1500" y="256" w="150" h="128"/>	
 			</deathAnim>
 
-		</enemy2>
+			<arrowAnim loop="true" speed=" 0.4f">
+				<animation x="0" y="0" w="150" h="43"/>
+				
+				<animation x="150" y="0" w="150" h="43"/>
+				
+				<animation x="300" y="0" w="150" h="43"/>
+				
+				<animation x="450" y="0" w="150" h="43"/>
+				
+				<animation x="600" y="0" w="150" h="43"/>
+			</arrowAnim>
 
+		</enemy2>
+		<enemy3>
+			<hitAnim loop="false" speed=" 0.4f">
+				<animation x="0" y="0" w="227" h="128"/>
+				<animation x="0" y="0" w="227" h="128"/>
+				<animation x="0" y="0" w="227" h="128"/>
+				
+				<animation x="227" y="0" w="227" h="128"/>
+				<animation x="227" y="0" w="227" h="128"/>
+				<animation x="227" y="0" w="227" h="128"/>
+				
+				<animation x="454" y="0" w="227" h="128"/>
+				<animation x="454" y="0" w="227" h="128"/>
+				<animation x="454" y="0" w="227" h="128"/>
+				
+				<animation x="681" y="0" w="227" h="128"/>
+				<animation x="681" y="0" w="227" h="128"/>
+				<animation x="681" y="0" w="227" h="128"/>
+				
+				<animation x="908" y="0" w="227" h="128"/>
+				<animation x="908" y="0" w="227" h="128"/>
+				<animation x="908" y="0" w="227" h="128"/>
+				
+				<animation x="1135" y="0" w="227" h="128"/>
+				<animation x="1135" y="0" w="227" h="128"/>
+				<animation x="1135" y="0" w="227" h="128"/>
+				
+				<animation x="1362" y="0" w="227" h="128"/>
+				<animation x="1362" y="0" w="227" h="128"/>
+				<animation x="1362" y="0" w="227" h="128"/>
+				
+				<animation x="1589" y="0" w="227" h="128"/>
+				<animation x="1589" y="0" w="227" h="128"/>
+				<animation x="1589" y="0" w="227" h="128"/>
+			</hitAnim>
+
+			<deathAnim loop="false" speed=" 0.4f">
+				<animation x="0" y="128" w="227" h="128"/>
+				<animation x="0" y="128" w="227" h="128"/>
+				<animation x="0" y="128" w="227" h="128"/>
+				
+				<animation x="227" y="128" w="227" h="128"/>
+				<animation x="227" y="128" w="227" h="128"/>
+				<animation x="227" y="128" w="227" h="128"/>
+				
+				<animation x="454" y="128" w="227" h="128"/>
+				<animation x="454" y="128" w="227" h="128"/>
+				<animation x="454" y="128" w="227" h="128"/>
+				
+				<animation x="681" y="128" w="227" h="128"/>
+				<animation x="681" y="128" w="227" h="128"/>
+				<animation x="681" y="128" w="227" h="128"/>
+				
+				<animation x="908" y="128" w="227" h="128"/>
+				<animation x="908" y="128" w="227" h="128"/>
+				<animation x="908" y="128" w="227" h="128"/>
+				
+				<animation x="1135" y="128" w="227" h="128"/>
+				<animation x="1135" y="128" w="227" h="128"/>
+				<animation x="1135" y="128" w="227" h="128"/>
+				
+				<animation x="1362" y="128" w="227" h="128"/>
+				<animation x="1362" y="128" w="227" h="128"/>
+				<animation x="1362" y="128" w="227" h="128"/>
+				
+				<animation x="1589" y="128" w="227" h="128"/>
+				<animation x="1589" y="128" w="227" h="128"/>
+				<animation x="1589" y="128" w="227" h="128"/>
+				
+				<animation x="1816" y="128" w="227" h="128"/>
+				<animation x="1816" y="128" w="227" h="128"/>
+				
+				<animation x="2043" y="128" w="227" h="128"/>
+				<animation x="2043" y="128" w="227" h="128"/>
+				
+				<animation x="2270" y="128" w="227" h="128"/>
+				<animation x="2270" y="128" w="227" h="128"/>
+				<animation x="2270" y="128" w="227" h="128"/>
+				
+				<animation x="0" y="256" w="227" h="128"/>
+				<animation x="0" y="256" w="227" h="128"/>
+				<animation x="0" y="256" w="227" h="128"/>
+				
+				<animation x="227" y="256" w="227" h="128"/>
+				<animation x="227" y="256" w="227" h="128"/>
+				<animation x="227" y="256" w="227" h="128"/>
+				
+				<animation x="454" y="256" w="227" h="128"/>
+				<animation x="454" y="256" w="227" h="128"/>
+				<animation x="454" y="256" w="227" h="128"/>
+				
+				<animation x="681" y="256" w="227" h="128"/>
+				<animation x="681" y="256" w="227" h="128"/>
+				<animation x="681" y="256" w="227" h="128"/>
+				
+				<animation x="908" y="256" w="227" h="128"/>
+				<animation x="908" y="256" w="227" h="128"/>
+				<animation x="908" y="256" w="227" h="128"/>
+				
+				<animation x="1135" y="256" w="227" h="128"/>
+				<animation x="1135" y="256" w="227" h="128"/>
+				<animation x="1135" y="256" w="227" h="128"/>
+				
+				<animation x="1362" y="256" w="227" h="128"/>
+				<animation x="1362" y="256" w="227" h="128"/>
+				<animation x="1362" y="256" w="227" h="128"/>
+				
+				<animation x="1589" y="256" w="227" h="128"/>
+				<animation x="1589" y="256" w="227" h="128"/>
+				<animation x="1589" y="256" w="227" h="128"/>
+				
+				<animation x="1816" y="256" w="227" h="128"/>
+				<animation x="1816" y="256" w="227" h="128"/>
+				<animation x="1816" y="256" w="227" h="128"/>				
+			</deathAnim>
+
+			<attackAnim loop="false" speed=" 0.4f">
+				<animation x="0" y="384" w="227" h="128"/>
+				<animation x="0" y="384" w="227" h="128"/>
+				<animation x="0" y="384" w="227" h="128"/>
+				
+				<animation x="227" y="384" w="227" h="128"/>
+				<animation x="227" y="384" w="227" h="128"/>
+				<animation x="227" y="384" w="227" h="128"/>
+				
+				<animation x="454" y="384" w="227" h="128"/>
+				<animation x="454" y="384" w="227" h="128"/>
+				<animation x="454" y="384" w="227" h="128"/>
+				
+				<animation x="681" y="384" w="227" h="128"/>
+				<animation x="681" y="384" w="227" h="128"/>
+				<animation x="681" y="384" w="227" h="128"/>
+				
+				<animation x="908" y="384" w="227" h="128"/>
+				<animation x="908" y="384" w="227" h="128"/>
+				<animation x="908" y="384" w="227" h="128"/>
+				
+				<animation x="1135" y="384" w="227" h="128"/>
+				<animation x="1135" y="384" w="227" h="128"/>
+				<animation x="1135" y="384" w="227" h="128"/>
+				
+				<animation x="1362" y="384" w="227" h="128"/>
+				<animation x="1362" y="384" w="227" h="128"/>
+				<animation x="1362" y="384" w="227" h="128"/>
+				
+				<animation x="1589" y="384" w="227" h="128"/>
+				<animation x="1589" y="384" w="227" h="128"/>
+				<animation x="1589" y="384" w="227" h="128"/>
+				
+				<animation x="1816" y="384" w="227" h="128"/>
+				<animation x="1816" y="384" w="227" h="128"/>
+				<animation x="1816" y="384" w="227" h="128"/>
+				
+				<animation x="2043" y="384" w="227" h="128"/>
+				<animation x="2043" y="384" w="227" h="128"/>
+				<animation x="2043" y="384" w="227" h="128"/>	
+			</attackAnim>
+
+			<attackBugsAnim loop="false" speed=" 0.4f">
+				<animation x="0" y="512" w="227" h="128"/>
+				<animation x="0" y="512" w="227" h="128"/>
+				<animation x="0" y="512" w="227" h="128"/>
+
+				<animation x="227" y="512" w="227" h="128"/>
+				<animation x="227" y="512" w="227" h="128"/>
+				<animation x="227" y="512" w="227" h="128"/>
+
+				<animation x="454" y="512" w="227" h="128"/>
+				<animation x="454" y="512" w="227" h="128"/>
+				<animation x="454" y="512" w="227" h="128"/>
+
+				<animation x="681" y="512" w="227" h="128"/>
+				<animation x="681" y="512" w="227" h="128"/>
+				<animation x="681" y="512" w="227" h="128"/>
+
+				<animation x="908" y="512" w="227" h="128"/>
+				<animation x="908" y="512" w="227" h="128"/>
+				<animation x="908" y="512" w="227" h="128"/>
+
+				<animation x="1135" y="512" w="227" h="128"/>
+				<animation x="1135" y="512" w="227" h="128"/>
+				<animation x="1135" y="512" w="227" h="128"/>
+
+				<animation x="1362" y="512" w="227" h="128"/>
+				<animation x="1362" y="512" w="227" h="128"/>
+				<animation x="1362" y="512" w="227" h="128"/>
+
+				<animation x="1589" y="512" w="227" h="128"/>
+				<animation x="1589" y="512" w="227" h="128"/>
+				<animation x="1589" y="512" w="227" h="128"/>
+
+				<animation x="1816" y="512" w="227" h="128"/>
+				<animation x="1816" y="512" w="227" h="128"/>
+				<animation x="1816" y="512" w="227" h="128"/>
+			</attackBugsAnim>
+
+			<walkAnim loop="true" speed=" 0.4f">
+				<animation x="0" y="640" w="227" h="128"/>
+				<animation x="0" y="640" w="227" h="128"/>
+				<animation x="0" y="640" w="227" h="128"/>
+				
+				<animation x="227" y="640" w="227" h="128"/>
+				<animation x="227" y="640" w="227" h="128"/>
+				<animation x="227" y="640" w="227" h="128"/>
+				
+				<animation x="454" y="640" w="227" h="128"/>
+				<animation x="454" y="640" w="227" h="128"/>
+				<animation x="454" y="640" w="227" h="128"/>
+				
+				<animation x="681" y="640" w="227" h="128"/>
+				<animation x="681" y="640" w="227" h="128"/>
+				<animation x="681" y="640" w="227" h="128"/>
+				
+				<animation x="908" y="640" w="227" h="128"/>
+				<animation x="908" y="640" w="227" h="128"/>
+				<animation x="908" y="640" w="227" h="128"/>
+				
+				<animation x="1135" y="640" w="227" h="128"/>
+				<animation x="1135" y="640" w="227" h="128"/>
+				<animation x="1135" y="640" w="227" h="128"/>
+				
+				<animation x="1362" y="640" w="227" h="128"/>
+				<animation x="1362" y="640" w="227" h="128"/>
+				<animation x="1362" y="640" w="227" h="128"/>
+				
+				<animation x="1589" y="640" w="227" h="128"/>
+				<animation x="1589" y="640" w="227" h="128"/>
+				<animation x="1589" y="640" w="227" h="128"/>
+			</walkAnim>
+
+			<idleAnim loop="true" speed=" 0.4f">
+				<animation x="0" y="768" w="227" h="128"/>
+				<animation x="0" y="768" w="227" h="128"/>
+				<animation x="0" y="768" w="227" h="128"/>
+
+				<animation x="227" y="768" w="227" h="128"/>
+				<animation x="227" y="768" w="227" h="128"/>
+				<animation x="227" y="768" w="227" h="128"/>
+
+				<animation x="454" y="768" w="227" h="128"/>
+				<animation x="454" y="768" w="227" h="128"/>
+				<animation x="454" y="768" w="227" h="128"/>
+
+				<animation x="681" y="768" w="227" h="128"/>
+				<animation x="681" y="768" w="227" h="128"/>
+				<animation x="681" y="768" w="227" h="128"/>
+
+				<animation x="908" y="768" w="227" h="128"/>
+				<animation x="908" y="768" w="227" h="128"/>
+				<animation x="908" y="768" w="227" h="128"/>
+
+				<animation x="1135" y="768" w="227" h="128"/>
+				<animation x="1135" y="768" w="227" h="128"/>
+				<animation x="1135" y="768" w="227" h="128"/>
+
+				<animation x="1362" y="768" w="227" h="128"/>
+				<animation x="1362" y="768" w="227" h="128"/>
+				<animation x="1362" y="768" w="227" h="128"/>
+
+				<animation x="1589" y="768" w="227" h="128"/>
+				<animation x="1589" y="768" w="227" h="128"/>
+				<animation x="1589" y="768" w="227" h="128"/>
+			</idleAnim>
+		</enemy3>
+
+		<puerta>
+			<cerrada loop="false">
+				<animation x="0" y="0" w="129" h="191"/>
+			</cerrada>
+			<abierta loop="false">
+				<animation x="130" y="0" w="129" h="191"/>
+			</abierta>
+		</puerta>
+		<nieta>
+			<idleAnim>
+				<animation x="0" y="0" w="63" h="127"/>
+			</idleAnim>
+		</nieta>
+		<abuela>
+			<idleAnim>
+				<animation x="0" y="0" w="98" h="128"/>
+			</idleAnim>
+		</abuela>
+		
 	</animations>
 	
 </config>

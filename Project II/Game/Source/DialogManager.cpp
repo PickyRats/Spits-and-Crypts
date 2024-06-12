@@ -18,13 +18,15 @@ DialogManager::DialogManager() : Module()
 DialogManager::~DialogManager()
 {}
 
+pugi::xml_node configNodeDialog;
+
 // Called before render is available
 bool DialogManager::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Dialog Manager");
 	bool ret = true;
 
-	background_tex_path = config.child("textures").child("background_dialog").attribute("texturepath").as_string();
+	configNodeDialog = config;
 
 
 	return ret;
@@ -45,8 +47,16 @@ bool DialogManager::Start() {
 	indexText = 1;
 
 
-	background_tex = app->tex->Load(background_tex_path.c_str());
+	background_tex = app->tex->Load(configNodeDialog.child("background_dialog").attribute("texturepath").as_string());
 	background_mission = app->tex->Load(background_mission_path.c_str());
+
+	background_tex_logoMercante = app->tex->Load(configNodeDialog.child("background_dialoglogoMercante").attribute("texturepath").as_string());
+	background_tex_logoTabernero = app->tex->Load(configNodeDialog.child("background_dialoglogoTebernero").attribute("texturepath").as_string());
+	background_tex_logoPalaya = app->tex->Load(configNodeDialog.child("background_dialoglogoPalaya").attribute("texturepath").as_string());
+	background_tex_logoMaat = app->tex->Load(configNodeDialog.child("background_dialoglogoMaat").attribute("texturepath").as_string());
+	background_tex_logoThoth = app->tex->Load(configNodeDialog.child("background_dialoglogoThoth").attribute("texturepath").as_string());
+	background_tex_logoIsis = app->tex->Load(configNodeDialog.child("background_dialoglogoIsis").attribute("texturepath").as_string());
+	background_tex_logoHorus = app->tex->Load(configNodeDialog.child("background_dialoglogoHorus").attribute("texturepath").as_string());
 
 	return ret;
 }
@@ -111,7 +121,9 @@ bool DialogManager::AddDialog(Dialog* dialog)
 bool DialogManager::ShowDialog(Dialog* dialog)
 {
 	//Mostrar fondo
-	app->render->DrawTexture(background_tex, 0, 0, 0);
+	app->render->DrawTexture(background_tex, 0, 0, NULL, SDL_FLIP_NONE, 0);
+
+	app->render->DrawTexture(background_tex_logo, 618, 512, NULL, SDL_FLIP_NONE, 0);
 
 	std::string actualText = dialog->sentence.substr(0, indexText);
 
@@ -143,16 +155,16 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 
 	//Textura dialogo
 	textTexture = CreateTextTexture(dialog->font, actualText.c_str(), textColor, 450);
-	app->render->DrawTexture(textTexture, _dialogPosition.x, _dialogPosition.y, 0);
+	app->render->DrawTexture(textTexture, _dialogPosition.x, _dialogPosition.y, NULL, SDL_FLIP_NONE, 0);
 
 	//Imagen del personaje
 	if (dialog->face_tex != nullptr) {
-		app->render->DrawTexture(dialog->face_tex, dialogMargin[3] + dialogPosition.x, dialogMargin[0] + dialogPosition.y, 0);
+		app->render->DrawTexture(dialog->face_tex, dialogMargin[3] + dialogPosition.x, dialogMargin[0] + dialogPosition.y, NULL, SDL_FLIP_NONE, 0);
 	}
 
 	//Nombre personaje
 	textNameTexture = CreateTextTexture(app->render->font, dialog->name.c_str(), nameColor, textNameBoundWidth);
-	app->render->DrawTexture(textNameTexture, dialogMargin[3] + namePosition.x, dialogMargin[0] + namePosition.y);
+	app->render->DrawTexture(textNameTexture, dialogMargin[3] + namePosition.x, dialogMargin[0] + namePosition.y, NULL, SDL_FLIP_NONE, 0);
 
 
 	//Opciones
@@ -160,11 +172,11 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 
 		//Textura opcion1
 		options1NameTexture = CreateTextTexture(app->render->font, dialog->option1.c_str(), (optionSelected == 1) ? optionSelectedColor : optionColor, optionsBoundWidth);
-		app->render->DrawTexture(options1NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween, 0);
+		app->render->DrawTexture(options1NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween, NULL, SDL_FLIP_NONE, 0);
 
 		//Textura opcion2
 		options2NameTexture = CreateTextTexture(app->render->font, dialog->option2.c_str(), (optionSelected == 2) ? optionSelectedColor : optionColor, optionsBoundWidth);
-		app->render->DrawTexture(options2NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween * 2, 0);
+		app->render->DrawTexture(options2NameTexture, dialogMargin[3] + dialogPosition.x + optionsPosition.x, dialogMargin[0] + dialogPosition.y + optionsDistanceBetween * 2, NULL, SDL_FLIP_NONE, 0);
 	}
 
 

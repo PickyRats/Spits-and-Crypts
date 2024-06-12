@@ -25,6 +25,7 @@
 #include "Puzzle.h"
 #include "Puzzle2.h"
 #include "CutscenePlayer.h"
+#include "SceneSelection.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -69,6 +70,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	puzzle = new Puzzle(false);
 	puzzle2 = new Puzzle2(false);
 	cutscenePlayer = new CutscenePlayer(false);
+	sceneSelection = new SceneSelection(false);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -99,6 +101,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(guiManager);
 	AddModule(fade);
 	AddModule(dialogManager);
+	AddModule(sceneSelection);
 	// Render last to swap buffer
 	AddModule(render);
 	AddModule(cutscenePlayer);

@@ -14,6 +14,7 @@
 #include "ParticleManager.h"
 #include "Hud.h"
 #include "CutscenePlayer.h"
+#include "SceneSelection.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -216,7 +217,8 @@ bool SceneMenu::Update(float dt)
 				fxClickPlayed = true;
 			}
 
-			app->fade->Fade(this, (Module*)app->sceneTemple, 60.0f);
+
+			app->fade->Fade(this, (Module*)app->sceneVillage, 60.0f);
 
 
 		}

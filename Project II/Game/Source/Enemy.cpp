@@ -36,6 +36,7 @@ bool Enemy::Start() {
 
 	//initilize texture
 	texture = app->tex->Load(texturePath);
+	arrowTexture = app->tex->Load("Assets/Textures/ArrowSpriteSheet.png");
 
 	LoadAnimations();
 
@@ -43,7 +44,7 @@ bool Enemy::Start() {
 
 	isFacingRight = false;
 
-	attackDamage = 10;
+	attackDamage = 20;
 
 	return true;
 }
@@ -52,17 +53,32 @@ bool Enemy::Update(float dt)
 {
 	
 	this->dt = dt;
-	currentAnim->Update();
-	/*position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 50;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 42;*/
-	if (health <= 0 && !isDead)
+	if (isActive)
 	{
-		isDead = true;
+		currentAnim->Update();
+		if (arrow)
+		{
+			currentAttackAnim->Update();
+			if (isFacingRight) arrowPos.x += 5;
+			else arrowPos.x -= 5;
+		}
+		/*position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 50;
+		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 42;*/
+		if (health <= 0 && !isDead)
+		{
+			if (AnimationFinished())
+			{
+				isDead = true;
+				currentAnim->ResetLoopCount();
+				currentAnim->Reset();
+			}
+		}
+		if (app->sceneCombat->active && !isDead)
+		{
+			DrawEnemy();
+		}
 	}
-	if (app->sceneCombat->active && !isDead)
-	{
-		DrawEnemy();
-	}
+	
 	return true;
 }
 
@@ -73,6 +89,14 @@ void Enemy::DrawEnemy()
 
 	if (isFacingRight) app->render->DrawTexture(texture, position.x - 30, position.y - 62, &rect);
 	else app->render->DrawTexture(texture, position.x - 30, position.y - 62, &rect, SDL_FLIP_HORIZONTAL);
+
+	if (arrow)
+	{
+		SDL_Rect arrowRect = currentAttackAnim->GetCurrentFrame();
+
+		if (isFacingRight) app->render->DrawTexture(arrowTexture, arrowPos.x, position.y - 25, &arrowRect);
+		else app->render->DrawTexture(arrowTexture, arrowPos.x - 100, position.y - 25, &arrowRect, SDL_FLIP_HORIZONTAL);
+	}
 
 }
 
@@ -118,6 +142,9 @@ void Enemy::LoadAnimations()
 		abilityAnim.LoadAnimations("abilityAnim", "enemy2");
 		hitAnim.LoadAnimations("hitAnim", "enemy2");
 		deathAnim.LoadAnimations("deathAnim", "enemy2");
+		arrowAnim.LoadAnimations("arrowAnim", "enemy2");
+		useProjectile = true;
+		currentAttackAnim = &arrowAnim;
 	}
 }
 
@@ -159,4 +186,13 @@ void Enemy::SetCombatAnimation(int animationIndex)
 bool Enemy::AnimationFinished()
 {
 	return currentAnim->HasFinished();
+}
+
+void Enemy::ShotArrow()
+{
+	if (!arrow && currentAnim->GetCurrentFrameCount() >= 24)
+	{
+		arrow = true;
+		arrowPos.x = position.x;
+	}
 }

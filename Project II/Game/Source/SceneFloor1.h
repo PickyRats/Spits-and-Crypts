@@ -8,6 +8,7 @@
 #include "GuiControl.h"
 #include "SceneMenu.h"
 #include "GuiControlButton.h"
+#include "Puertas.h"
 #include <vector>
 
 struct SDL_Texture;
@@ -48,14 +49,18 @@ public:
 
 	void ClampCamera();
 
+	void DeleteWall();
+
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
 	GuiControlButton* gcButtom;
 	PhysBody* wall;
+	PhysBody* wall2;
 	bool pause = false;
 	bool isTorchActive = false;
 	bool checkPoint = false;
+	bool canDelete = true;
 	bool wasStartPressed = false;
 	iPoint playerStartPosition = { 128,35*64 };
 	bool notUseChechPoint = false;
@@ -67,7 +72,8 @@ public:
 	int levelHeight = 37 * 64;
 
 	bool combatFinished = false;
-
+	Npcs* paalaya;
+	Puertas* puertas[2];
 
 private:
 	SDL_Texture* backgroundTexture;

@@ -42,9 +42,9 @@ bool Npcs::Start() {
 	//initilize texture
 	texture = app->tex->Load(texturePath);
 
-	//LoadAnimations();
+	LoadAnimations();
 
-	//currentAnim = &idleAnim;
+	currentAnim = &idleAnim;
 
 	return true;
 }
@@ -81,16 +81,23 @@ bool Npcs::Update(float dt)
 	{
 		DrawNpcs();
 	}
-
+	
+	currentAnim->Update();
+	if (currentAnim == &interactAnim && currentAnim->HasFinished())
+	{
+		currentAnim->Reset();
+		currentAnim->loopCount = 0;
+		currentAnim = &idleAnim;
+	} 
 	return true;
 }
 
 void Npcs::DrawNpcs()
 {
+	SDL_Rect rect = currentAnim->GetCurrentFrame();
 
-	//SDL_Rect rect = currentAnim->GetCurrentFrame();
-
-	app->render->DrawTexture(texture, position.x, position.y);
+	app->render->DrawTexture(texture, position.x, position.y, &rect);
+	
 
 }
 
@@ -122,5 +129,45 @@ void Npcs::OnCollision(PhysBody* physA, PhysBody* physB) {
 // Loads the animations
 void Npcs::LoadAnimations()
 {
-	idleAnim.LoadAnimations("idleAnim", "npc");
+	if (npcId == 1)
+	{
+		idleAnim.LoadAnimations("idleAnim", "abuela");
+	}
+	else if (npcId == 2)
+	{
+		idleAnim.LoadAnimations("idleAnim", "nieta");
+	}
+	else if (npcId == 3)
+	{
+		
+	}
+	else if (npcId == 4)
+	{
+		
+	}
+	else if (npcId == 5)
+	{
+		
+	}
+	else if (npcId == 6)
+	{
+		
+	}
+	else if (npcId == 7)
+	{
+		idleAnim.LoadAnimations("idleAnim", "Mercante");
+		interactAnim.LoadAnimations("interactAnim", "Mercante");
+	}
+	else if (npcId == 8)
+	{
+		idleAnim.LoadAnimations("idleAnim", "tabernero");
+		interactAnim.LoadAnimations("interactAnim", "tabernero");
+	}
+	else if (npcId == 9)
+	{
+		idleAnim.LoadAnimations("idleAnim", "Paalaya");
+		interactAnim.LoadAnimations("interactAnim", "Paalaya");
+	}
+
+	
 }

@@ -38,6 +38,14 @@ public:
 	// Called each loop iteration
 	bool Update(float dt);
 
+	void VerifyAnimation();
+
+	void PlayerTurn();
+
+	void EnemyTurn();
+
+	float CalculateDistance(iPoint pos1, iPoint pos2);
+
 	void EndCombat();
 
 	// Enemy attack
@@ -108,13 +116,18 @@ public:
 	Entity* players[5];
 	Entity* enemies[5];	
 	
-	bool isPlayerTurn = true;
+	bool isPlayerTurn = true;	
+	bool useAbility = false;
+
+	int currentCombat = 0;
+
 	bool wasXPressed = false;
 	bool wasAPressed = false;
 	bool wasRightPressed = false;
 	bool wasLeftPressed = false;
 	bool wasUpPressed = false;
 	bool wasDownPressed = false;
+	bool wasStartPressed = false;
 
 	bool combatCompleted = false;
 

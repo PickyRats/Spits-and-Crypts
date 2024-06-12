@@ -65,12 +65,14 @@ public:
 
 public:
 	float speed = 0.2f;
-	int id = 0;
-	int classId = 0;
-	const char* texturePath;
+	const char* texturePath1;
+	const char* texturePath2;
+	const char* texturePath3;
+	const char* texturePath4;
 	int platformCollisionCount = 0;
 
 	SDL_Texture* texture = NULL;
+	SDL_Texture* texture1 = NULL;
 
 	PhysBody* pbody;
 	PhysBody* playerPbody;
@@ -87,9 +89,13 @@ public:
 				deathAnim,
 				idleBattleAnim,
 				abilityAnim,
-				walkBattleAnim;
+				walkBattleAnim,
+				idleRockAnim,
+				rockAnim;
 
 	bool isWalking = false;
+
+	bool inicio = true;
 
 	bool isEnteringDoor = false;
 
@@ -107,13 +113,21 @@ public:
 	bool doorOasis = false;
 	bool doorTemple = false;
 	bool doorFloor1 = false;
-	bool enterCombat = false;
+	bool enterCombat1 = false;
+	bool enterCombat2 = false;
+	bool enterCombat3 = false;
 
 	bool step = false;
 	bool walkingSoundPlaying = false;
 	bool jumpingSoundPlaying = false;
+	bool playJumpSound = false;
 	bool climbingSoundPlaying = false;
 	bool doorChoza = false;
+
+	bool wasDownPressed = false;
+	bool wasLeftPressed = false;
+	bool wasRightPressed = false;
+	bool wasUpPressed = false;
 
 	b2Transform initialTransform;
 

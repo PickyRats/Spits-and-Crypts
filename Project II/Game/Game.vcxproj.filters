@@ -124,6 +124,11 @@
     <ClCompile Include="Source\SceneChoza.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Particle.cpp" />
+    <ClCompile Include="Source\SceneSelection.cpp" />
+    <ClCompile Include="Source\Puertas.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -286,6 +291,11 @@
     <ClInclude Include="Source\CutscenePlayer.h" />
     <ClInclude Include="Source\SceneChoza.h">
       <Filter>Modules\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Particle.h" />
+    <ClInclude Include="Source\SceneSelection.h" />
+    <ClInclude Include="Source\Puertas.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
