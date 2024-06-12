@@ -148,6 +148,12 @@ bool SceneVillage::Update(float dt)
 		app->cutscenePlayer->ConvertPixels(0, 1);
 		app->audio->PlayMusic(configNode.child("villageAmbient").attribute("path").as_string());
 		app->cutscenePlayer->Disable();
+		app->hud->mission1Complete = true;
+		if (!app->hud->mission2Complete)
+		{
+			app->hud->mission20Active = true;
+		}
+		app->map->player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(27*64), PIXEL_TO_METERS(spawnPosition.y)), 0);
 	}
 	if (movement)
 	{
