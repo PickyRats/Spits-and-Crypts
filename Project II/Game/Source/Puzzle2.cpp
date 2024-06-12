@@ -11,6 +11,8 @@
 #include "Physics.h"
 #include "Puzzle.h"
 #include "FadeToBlack.h"
+#include "Puertas.h"
+#include "SceneFloor1.h"
 
 Puzzle2::Puzzle2(bool enabled) : Module(enabled)
 {
@@ -59,8 +61,8 @@ bool Puzzle2::Update(float dt)
 		&& rotation[0] == 90 && rotation[1] == 90 && rotation[2] == 90)
 	{
 		if(!puzzleCompleted) LOG("PUZZLE 2 COMPLETE");
-		//app->sceneFloor1->levelWidth = 190 * 64;
 		puzzleCompleted = true;
+		app->sceneFloor1->puertas[2]->puzle1Completed = true;
 		
 	}
 

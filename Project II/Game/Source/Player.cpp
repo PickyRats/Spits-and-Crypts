@@ -356,6 +356,12 @@ void Player::EnterDoor()
 		}
 		doorChoza = false;
 	}
+	else if (enterPuzle3)
+	{
+		app->fade->Fade((Module*)app->sceneFloor1, (Module*)app->sceneLight, 60.0f);
+		enterCombat3 = false;
+	}
+	
 }
 
 void Player::EnteringDoor()
@@ -649,8 +655,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		{
 			pbody->body->SetGravityScale(1.0f);
 		}
+		break;
 	case ColliderType::ROCK:
 		app->audio->PlayFx(app->sceneVillage->rockfx, -1);
+		break;
+	case ColliderType::DOOR_PUZLE_2:
+		if (app->sceneFloor1->puertas[2]->puzle1Completed) enterPuzle3 = true;
 		break;
 	}
 
