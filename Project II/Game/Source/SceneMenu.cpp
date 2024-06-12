@@ -339,9 +339,9 @@ void SceneMenu::OnSettings(GamePad& pad)
 		//Controls tab
 		if (currentId == 12)
 		{
-			/*settingsFxButton->state = GuiControlState::HIDDEN;
+			settingsFxButton->state = GuiControlState::HIDDEN;
 			settingsMusicButton->state = GuiControlState::HIDDEN;
-			settingsVSyncButton->state = GuiControlState::HIDDEN;*/
+			settingsVSyncButton->state = GuiControlState::HIDDEN;
 			settingsFullScreenButton->state = GuiControlState::HIDDEN;
 			settingsVSyncButton->state = GuiControlState::HIDDEN;
 
