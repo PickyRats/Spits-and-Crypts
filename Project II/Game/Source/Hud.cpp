@@ -326,7 +326,7 @@ bool Hud::Update(float dt)
 	//Ability Tree
 	if (app->sceneTemple->active && (app->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN /*|| (pad.b == KEY_DOWN && !wasBPressed*//*)*/))
 	{
-		abilityTree = !abilityTree;
+		abilityTree = false;
 		wasBPressed = true;
 	}
 	else if (pad.b != KEY_DOWN)
@@ -386,6 +386,10 @@ bool Hud::Update(float dt)
 			{
 				app->sceneMenu->currentId--;
 				wasUpPressed = true;
+			}
+			else if (pad.up != KEY_DOWN)
+			{
+				wasUpPressed = false;
 			}
 			//Check if buttons are focused or pressed. If pressed, do the action. With sound effects. 
 			if (resumeButton->state == GuiControlState::FOCUSED) {
@@ -620,8 +624,8 @@ bool Hud::Update(float dt)
 					settingsMusicButton->state = GuiControlState::HIDDEN;
 				}
 			}
-		}
-			if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || pad.b == KEY_DOWN)
+
+			if ((pad.b == KEY_DOWN && wasBPressed == false) || app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 			{
 				app->sceneMenu->currentId = 1;
 				onSettings = false;
@@ -631,7 +635,11 @@ bool Hud::Update(float dt)
 				backToTitleButton->state = GuiControlState::NORMAL;
 				saveButton->state = GuiControlState::NORMAL;
 				exitButton->state = GuiControlState::NORMAL;
-
+				wasBPressed = true;
+			}
+			if (pad.b != KEY_DOWN)
+			{
+				wasBPressed = false;
 			}
 			else if (settingsOptionsButton->state == GuiControlState::FOCUSED)
 			{
@@ -661,6 +669,7 @@ bool Hud::Update(float dt)
 					app->audio->PlayFx(app->sceneMenu->FxButton1);
 					app->sceneMenu->fxHoverPlayed = true;
 				}
+
 			}
 			else if (settingsAudioButton->state == GuiControlState::PRESSED)
 			{
@@ -741,7 +750,7 @@ bool Hud::Update(float dt)
 
 			if (app->sceneMenu->vSync)	app->render->vsync = true;
 			else	app->render->vsync = false;
-				
+		}
 	}		
 	else
 	{
@@ -966,7 +975,7 @@ void Hud::EquipItem(int inventorySlotId) {
 void Hud::Inventory() {
 	GamePad& pad = app->input->pads[0];
 
-	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN || (pad.y == KEY_DOWN && !wasYPressed) && !app->sceneCombat->active && !app->sceneLight->active)
+	if ((app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN || (pad.y == KEY_DOWN && !wasYPressed)) && !app->sceneCombat->active && !app->sceneLight->active)
 	{
 		inventory = !inventory;
 		wasYPressed = true;
@@ -1036,10 +1045,14 @@ void Hud::Inventory() {
 			wasRightPressed = false;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN) {
+		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN || (pad.x == KEY_DOWN && !wasXPressed)) {
+			wasXPressed = true;
 			if (!inventorySlots[itemId].isEmpty && !inventorySlots[itemId].isEquiped) {
 				EquipItem(itemId);
-
+			}
+			else if (pad.right != KEY_DOWN)
+			{
+				wasXPressed = false;
 			}
 		}
 	}
@@ -1047,7 +1060,7 @@ void Hud::Inventory() {
 
 void Hud::Shop() {	
   GamePad& pad = app->input->pads[0];
-	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN||(pad.b==KEY_DOWN&&!wasBPressed)) {
+	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN||(pad.b==KEY_DOWN && !wasBPressed)) {
 		shop = false;
 		wasBPressed = true;
 	}
@@ -1157,7 +1170,8 @@ void Hud::SkillTree() {
 		auto& node = skillTreenode[i];
 
 		if (node.selected) {
-			if ((app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN ||(pad.a==KEY_DOWN && !wasAPressed)) && (node.unlockRequirement == -1 || !skillTreenode[node.unlockRequirement].locked) && exp >= 1) {
+			if ((app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN ||(pad.a==KEY_DOWN && !wasAPressed)) && (node.unlockRequirement == -1 || !skillTreenode[node.unlockRequirement].locked) && exp >= 1) {
+
 				app->audio->PlayFx(app->sceneMenu->FxButton1);
 				node.locked = false;
 				wasAPressed = true;
