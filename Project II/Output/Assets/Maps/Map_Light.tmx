@@ -7780,7 +7780,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="51" name="Espejo5_1" width="20" height="19" visible="0">
+ <layer id="51" name="Espejo5_1" width="20" height="19">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -8095,7 +8095,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="160"/>
+   <tile gid="184"/>
    <tile/>
    <tile/>
    <tile/>
@@ -8167,7 +8167,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="52" name="Espejo5_2" width="20" height="19">
+ <layer id="52" name="Espejo5_2" width="20" height="19" visible="0">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>

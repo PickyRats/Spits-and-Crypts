@@ -162,14 +162,23 @@ bool SceneLight::PreUpdate()
 // Called each loop iteration
 bool SceneLight::Update(float dt)
 {
+	GamePad& pad = app->input->pads[0];
 	app->render->DrawTexture(backgroundTexture, 0, 0, NULL, SDL_FLIP_NONE);
 	app->render->DrawTexture(backgroundTexture, 64, 0, NULL, SDL_FLIP_NONE);
 	playerX = app->map->player->position.x;
 	//playerY = app->map->player->position.y;
+	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT||(pad.up==KEY_DOWN ))
+	{
+		playerY -= 10;
+		
+	}
 
-	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT) playerY-=10;
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) playerY+=10;
-
+	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || (pad.down == KEY_DOWN ))
+	{
+		playerY += 10;
+	
+	}
+	
 	SetCameraPosition(playerX - 550, playerY);
 
 	ClampCamera();
@@ -186,16 +195,21 @@ bool SceneLight::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 
-	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || (pad.l1 == KEY_DOWN && !wasL1Pressed))
 	{
 		isInteractingMirror = false;
 		isInteractingTrapdoor = false;
 		if (interactMirror) isInteractingMirror = true;
 		else if (interactTrapdoor) isInteractingTrapdoor = true;
+		wasL1Pressed = true;
+	}
+	else if (pad.l1 != KEY_DOWN)
+	{
+		wasL1Pressed = false;
 	}
 
 	// Change mirror and trapdoor
-	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN || (pad.r1 == KEY_DOWN && !wasR1Pressed))
 	{
 		if (isInteractingMirror)
 		{
@@ -207,8 +221,13 @@ bool SceneLight::Update(float dt)
 			if (trapdoorIndex > 0) trapdoorIndex--;
 			else trapdoorIndex = 1;
 		}
+		wasR1Pressed = true;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_Y) == KEY_DOWN)
+	else if (pad.r1 != KEY_DOWN)
+	{
+		wasR1Pressed = false;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_Y) == KEY_DOWN || (pad.l2 == KEY_DOWN && !wasL2Pressed))
 	{
 		if (isInteractingMirror)
 		{
@@ -220,10 +239,15 @@ bool SceneLight::Update(float dt)
 			if (trapdoorIndex < 1) trapdoorIndex++;
 			else trapdoorIndex = 0;
 		}
+		wasL2Pressed = true;
+	}
+	else if (pad.l2 != KEY_DOWN)
+	{
+		wasL2Pressed = false;
 	}
 
 	// Rotate mirror
-	if (app->input->GetKey(SDL_SCANCODE_U) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_U) == KEY_DOWN|| (pad.r2 == KEY_DOWN && !wasR2Pressed))
 	{
 		if (isInteractingMirror)
 		{
@@ -296,6 +320,7 @@ bool SceneLight::Update(float dt)
 				}
 			}
 			app->audio->PlayFx(mirror_rotationFx);
+			
 		}
 		else if (isInteractingTrapdoor)
 		{
@@ -314,10 +339,15 @@ bool SceneLight::Update(float dt)
 			app->audio->PlayFx(trampillafx);
 		}
 		SetRays();
+		wasR2Pressed = true;
 	}
+	else if (pad.r2 != KEY_DOWN)
+	{
+		wasR2Pressed = false;
 
+	}
 	ShowNotification();
-
+	
 	return true;
 }
 
