@@ -874,4 +874,17 @@ void SceneCombat::EndCombat()
 		combatCompleted = true;
 		currentCombat++;
 	}
+	else if (currentCombat == 1)
+	{	
+		app->audio->PlayFx(victory);
+		app->map->player->isCombat = false;
+		app->map->player2->isCombat = false;
+		app->map->player2->isVisible = false;
+		app->sceneFloor1->playerStartPosition = { 118 * 64, 26 * 64 };
+		app->map->player->CreateBody();
+		app->fade->Fade((Module*)app->sceneCombat, (Module*)app->sceneFloor1, 60.0f);
+		app->sceneFloor1->levelWidth = 169 * 64;
+		combat2Completed = true;
+		currentCombat++;
+	}
 }

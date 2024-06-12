@@ -34,6 +34,7 @@ enum class ColliderType {
 	DOOR_ALDEA,
 	DOOR_FLOOR_1,
 	DOOR_CHOZA,
+	DOOR_PUZLE_2,
 	COMBAT1,
 	COMBAT2,
 	COMBAT3,
