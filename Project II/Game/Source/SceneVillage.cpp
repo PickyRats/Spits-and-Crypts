@@ -134,7 +134,6 @@ bool SceneVillage::Update(float dt)
 	if (piedraX>=400)
 	{
 		movement = true;
-		printf("CINEMATICA");
 	}
 	if (movement)
 	{
