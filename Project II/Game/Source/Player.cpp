@@ -52,6 +52,8 @@ bool Player::Start() {
 		else if (app->sceneSelection->currentSelection == 1) texture = app->tex->Load(texturePath2);
 		else if (app->sceneSelection->currentSelection == 2) texture = app->tex->Load(texturePath3);
 		else if (app->sceneSelection->currentSelection == 3) texture = app->tex->Load(texturePath4);
+
+		texture1 = app->tex->Load("Assets/Textures/MC_Sprites_Esclavo.png");
 	}
 	else
 	{
@@ -141,7 +143,11 @@ bool Player::Update(float dt)
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE
 					&& (pad.l_x < 0.2 && pad.l_x > -0.2)&& (pad.l_y < 0.2 && pad.l_y > -0.2))
 				{
-					if (!isJumping && !isClimbing && !isEnteringDoor) currentAnim = &idleAnim;
+					if (!isJumping && !isClimbing && !isEnteringDoor)
+					{
+						if (!inicio) currentAnim = &idleAnim;
+						else currentAnim = &idleRockAnim;
+					}
 					isWalking = false;
 					vel.x = 0;
 				}
@@ -373,7 +379,8 @@ void Player::LeftMovement()
 
 void Player::RightMovement()
 {
-	if (!isJumping) currentAnim = &walkAnim;
+	if (!isJumping && !inicio) currentAnim = &walkAnim;
+	else if (inicio) currentAnim = &rockAnim;
 
 	isFacingRight = true;
 	if (!canClimb) isWalking = true;
@@ -488,8 +495,13 @@ void Player::DrawPlayer()
 	{
 		if (id == 1)
 		{
-			if (!app->sceneCombat->active) app->render->DrawTexture(texture, position.x - 30, position.y - 86, &rect);
-			else app->render->DrawTexture(texture, position.x - 55, position.y - 86, &rect);
+			if (!inicio)
+			{
+				if (!app->sceneCombat->active) app->render->DrawTexture(texture, position.x - 30, position.y - 86, &rect);
+				else app->render->DrawTexture(texture, position.x - 55, position.y - 86, &rect);
+			}
+			else app->render->DrawTexture(texture1, position.x, position.y - 40, &rect);
+			
 		}
 		else if (id == 2)
 		{
@@ -713,6 +725,9 @@ void Player::LoadAnimations()
 		idleBattleAnim.LoadAnimations("idleBattleAnim", "player");
 	
 		walkBattleAnim.LoadAnimations("walkBattleAnim", "player");
+
+		idleRockAnim.LoadAnimations("idleRockAnim", "player");
+		rockAnim.LoadAnimations("rockAnim", "player");
 
 		if (app->sceneSelection->currentSelection == 0)
 		{

@@ -100,7 +100,7 @@ bool SceneVillage::Start()
 	int i = 1;
 	if (!piedraHecha)
 	{
-		piedra = app->physics->CreateRectangle(200, 640, 100, 100, DYNAMIC);
+		piedra = app->physics->CreateRectangle(320, 640, 100, 100, DYNAMIC);
 		piedra->ctype = ColliderType::ROCK;
 		
 		piedraHecha = true;
@@ -129,7 +129,7 @@ bool SceneVillage::Update(float dt)
 
 	int piedraX = METERS_TO_PIXELS(piedra->body->GetPosition().x);
 	int piedraY = METERS_TO_PIXELS(piedra->body->GetPosition().y);
-	app->hud->DrawTile(piedraTexture, { piedraX - 50, piedraY - 50});
+	app->hud->DrawTile(piedraTexture, { piedraX - 50, piedraY - 64});
 
 	if (piedraX>=400)
 	{

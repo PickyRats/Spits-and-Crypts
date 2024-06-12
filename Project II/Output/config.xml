@@ -854,6 +854,58 @@
 				<animation x="510" y="2128" w="170" h="152"/>
 				<animation x="510" y="2128" w="170" h="152"/>
 			</walkBattleAnim>
+
+			<idleRockAnim loop="false" speed="0.4f">
+				<animation x="0" y="0" w="94" h="107"/>
+			</idleRockAnim>
+
+			<rockAnim loop="true" speed="0.4f">
+				<animation x="0" y="107" w="94" h="107"/>
+				<animation x="0" y="107" w="94" h="107"/>
+				<animation x="0" y="107" w="94" h="107"/>
+				<animation x="0" y="107" w="94" h="107"/>
+				
+				<animation x="94" y="107" w="94" h="107"/>
+				<animation x="94" y="107" w="94" h="107"/>
+				<animation x="94" y="107" w="94" h="107"/>
+				<animation x="94" y="107" w="94" h="107"/>
+				<animation x="94" y="107" w="94" h="107"/>
+				
+				<animation x="188" y="107" w="94" h="107"/>
+				<animation x="188" y="107" w="94" h="107"/>
+				<animation x="188" y="107" w="94" h="107"/>
+				<animation x="188" y="107" w="94" h="107"/>
+				<animation x="188" y="107" w="94" h="107"/>
+				<animation x="188" y="107" w="94" h="107"/>
+				
+				<animation x="282" y="107" w="94" h="107"/>
+				<animation x="282" y="107" w="94" h="107"/>
+				<animation x="282" y="107" w="94" h="107"/>
+				<animation x="282" y="107" w="94" h="107"/>
+				
+				<animation x="376" y="107" w="94" h="107"/>
+				<animation x="376" y="107" w="94" h="107"/>
+				<animation x="376" y="107" w="94" h="107"/>
+				<animation x="376" y="107" w="94" h="107"/>
+				
+				<animation x="470" y="107" w="94" h="107"/>
+				<animation x="470" y="107" w="94" h="107"/>
+				<animation x="470" y="107" w="94" h="107"/>
+				<animation x="470" y="107" w="94" h="107"/>
+				<animation x="470" y="107" w="94" h="107"/>
+				
+				<animation x="564" y="107" w="94" h="107"/>
+				<animation x="564" y="107" w="94" h="107"/>
+				<animation x="564" y="107" w="94" h="107"/>
+				<animation x="564" y="107" w="94" h="107"/>
+				<animation x="564" y="107" w="94" h="107"/>
+				<animation x="564" y="107" w="94" h="107"/>
+				
+				<animation x="658" y="107" w="94" h="107"/>
+				<animation x="658" y="107" w="94" h="107"/>
+				<animation x="658" y="107" w="94" h="107"/>
+				<animation x="658" y="107" w="94" h="107"/>
+			</rockAnim>
 		</player>
 
 		<!-- Taila Animations-->

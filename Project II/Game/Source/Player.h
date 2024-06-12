@@ -72,6 +72,7 @@ public:
 	int platformCollisionCount = 0;
 
 	SDL_Texture* texture = NULL;
+	SDL_Texture* texture1 = NULL;
 
 	PhysBody* pbody;
 	PhysBody* playerPbody;
@@ -88,11 +89,13 @@ public:
 				deathAnim,
 				idleBattleAnim,
 				abilityAnim,
-				walkBattleAnim;
+				walkBattleAnim,
+				idleRockAnim,
+				rockAnim;
 
 	bool isWalking = false;
 
-	bool inicio;
+	bool inicio = true;
 
 	bool isEnteringDoor = false;
 

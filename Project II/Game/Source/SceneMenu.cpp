@@ -218,7 +218,7 @@ bool SceneMenu::Update(float dt)
 			}
 
 
-			app->fade->Fade(this, (Module*)app->sceneShop, 60.0f);
+			app->fade->Fade(this, (Module*)app->sceneVillage, 60.0f);
 
 
 		}
