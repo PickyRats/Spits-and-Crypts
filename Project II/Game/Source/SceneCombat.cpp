@@ -442,7 +442,7 @@ void SceneCombat::EnemyTurn()
 	{
 		// Draw the path
 		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-		app->hud->DrawTile(tileEnemyTexture, pos);
+		//app->hud->DrawTile(tileEnemyTexture, pos);
 
 		// Set the direction of the tiles
 		if (pos.x > tiles[i - 1].position.x) tiles[i] = { pos, 1 };
@@ -477,7 +477,7 @@ void SceneCombat::EnemyTurn()
 			{
 				// Draw the path
 				iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-				app->hud->DrawTile(tileEnemyTexture, pos);
+				//app->hud->DrawTile(tileEnemyTexture, pos);
 
 				// Set the direction of the tiles
 				if (pos.x > tiles[i - 1].position.x) tiles[i] = { pos, 1 };

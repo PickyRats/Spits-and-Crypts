@@ -10,7 +10,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "FadeToBlack.h"
-#include "Hud.h""
+#include "Hud.h"
 
 Enemy::Enemy() : Entity(EntityType::ENEMY)
 {
