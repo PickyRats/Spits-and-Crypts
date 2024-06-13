@@ -109,6 +109,16 @@ header .nav-links {
   font-size: 22px;
 }
 
+.photo-gallery {
+  display: flex;
+  justify-content: space-between;
+}
+
+.photo-gallery img {
+  width: 32%;
+  height: auto;
+}
+
 .container {
     position: relative;
     z-index: 1;
